@@ -15,9 +15,10 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
-	{
-		return View::make('hello');
+	
+	public function index(){
+		$turmas = Aluno::find(Auth::user()->id)->turmas()->get()->all();
+		return View::make('index')->with('turmas', $turmas);
 	}
 
 }

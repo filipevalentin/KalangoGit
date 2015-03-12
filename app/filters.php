@@ -67,8 +67,36 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+	if (!Auth::check()) return Redirect::to('login'); // se não estiver logado manda pra pagina de login
 });
+
+
+// Filtro de Admin:
+
+Route::filter('admin', function()
+{
+	if (!Auth::check() || Auth::user()->tipo != 3){
+
+		return Redirect::to('/');	
+	}
+});
+
+Route::filter('professor', function()
+{
+	if (!Auth::check() || Auth::user()->tipo != 2){
+
+		return Redirect::to('/');	
+	}
+});
+
+Route::filter('aluno', function()
+{
+	if (!Auth::check() || Auth::user()->tipo != 1){
+
+		return Redirect::to('/');	
+	}
+});
+
 
 /*
 |--------------------------------------------------------------------------

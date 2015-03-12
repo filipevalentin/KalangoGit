@@ -1,24 +1,69 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-  <head>
-    <title>Pagoda Box Speak PHP-Laravel-MySQL</title>
-    <meta content="text/html; charset=UTF-8" http-equiv="content-type"/>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/styles.css" media="all" />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
-    <script src="javascripts/application.js" type="text/javascript"></script>
-    <!-- pagodabox meta info -->
-    <link rel="stylesheet" type="text/css" href="/javascripts/pagoda-speak-meta/rel/main.css" media="all" />
-    <script src="/javascripts/handlebars/handlebars.min.js" type="text/javascript"></script>
-    <script src="/javascripts/pagoda-speak-meta/rel/app.js" type="text/javascript"></script>
-  </head>
-  <body>
-    @yield('content')
-    
-  <script src="https://use.typekit.net/daj6bxq.js" type="text/javascript"></script>
-  <script>
-    
-    try{Typekit.load();}catch(e){}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
 
-  </script>
-  </body>
+    <title>Project name</title> 
+
+    <meta charset="utf-8">
+
+	{{ HTML::style('css/style.css"') }}
+	{{ HTML::style('css/bootstrap.min.css') }}
+
+	{{ HTML::script('js/jquery-1.11.0.js') }}
+	{{ HTML::script('js/bootstrap.min.js') }}
+
+	{{ HTML::style('css/jquery.dataTables.css') }}
+	{{ HTML::style('css/dataTables.bootstrap.css') }}
+
+	{{ HTML::script('js/jquery.dataTables.min.js') }}
+	{{ HTML::script('js/dataTables.bootstrap.js') }}
+    
+</head>
+
+<body>
+
+	<div class="navbar navbar-default navbar-static-top" role="navigation">
+
+	    <div class="container">
+
+	        <div class="navbar-header">
+
+	            <a class="navbar-brand" href="{{ URL::to('/admin') }}">Projeto</a>
+
+	        </div>
+
+	        <div class="navbar-collapse collapse">
+	            
+	            <ul class="nav navbar-nav navbar-right">
+	                @include('layouts.sidebar')
+	            </ul>
+
+	        </div>
+
+	    </div>
+
+	</div>
+
+	<div class="container-mensagens" style="width: 1170px; margin-right: auto;margin-left: auto;">
+	    @if (Session::has('message'))
+			<div class="alert alert-info">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+	        	<h5><strong>{{ Session::get('message') }}</strong></h5>
+			</div>
+		@endif
+	</div>
+
+	<div class="container">
+		<div style="padding:20px 0px 0px 0px;"></div>
+
+	   	{{ $content }}
+	</div>
+
+	<div style="position: fixed; bottom: 10px;  width: 100%; text-align: center;">© 2014, Rizer. Todos os direitos reservados</div>
+
+	<script type="text/javascript">
+		$(".close").click(function(){$(".alert").show().hide("slow");});
+	</script>
+
+</body>
 </html>
