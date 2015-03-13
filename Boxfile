@@ -18,6 +18,10 @@ build:
 
 web1:
   type: php
+  shared_writable_dirs:
+    - public/files
+    - public/img
+    - app/storage/*
   name: laravel
   httpd_document_root: public
   php_extensions:
