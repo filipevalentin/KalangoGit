@@ -255,7 +255,6 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 	});
 
-	//copiar essa rota para os outros tipo de users e arrumar os links do master layout de cada um
 	Route::get('perfil', function(){
 		if(Session::has('mensagem')){
 			$mensagem = Session::get('mensagem');
@@ -265,18 +264,16 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 		
 	});
 
-	//copiar essa rota para os outros tipo de users e arrumar os links do master layout de cada um
 	Route::post('atualizaSenha', function(){
 
 		$user = User::find(Input::get('id'));
 
-		$user->password = Input::get('senha');
+		$user->password = Hash::make(Input::get('senha'));
 		$user->save();
 		return Redirect::to('aluno/perfil')->with('mensagem', 'Sua senha foi alterada!');
 
 	});
 
-	//copiar essa rota para os outros tipo de users e arrumar os links do master layout de cada um
 	Route::post('atualizaCadastro', function(){
 		$user = User::find(Input::get('id'));
 		$user->nome       = Input::get('nome');
@@ -388,7 +385,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		$user = User::find(Input::get('id'));
 
-		$user->password = Input::get('senha');
+		$user->password = Hash::make(Input::get('senha'));
 		$user->save();
 		return Redirect::to('professor/perfil')->with('mensagem', 'Sua senha foi alterada!');
 
@@ -408,8 +405,6 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		if(Input::file('urlImagem')!=NULL){
 			$filename = $imagem->getClientOriginalName();
-
-			$professor->urlImagem = 'img/'.$filename;
 
 			$user->urlImagem = 'img/'.$filename;
 			
@@ -459,7 +454,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		return View::make('atividade/professorView')->with('atividades',$atividade);
 	});
 
-	Route::get('atividade/{idAtividade}/{idTurma}', function($idAtividade, $idTurma){
+	Route::get('atividade/turma/{idAtividade}/{idTurma}', function($idAtividade, $idTurma){
 		$atividade = Atividade::find($idAtividade);
 		$turma = Turma::find($idTurma);
 		$alunos = $turma->alunos;
@@ -505,15 +500,14 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 									                          ->with('alunos',$alunos);
 	});
 	
-	//Não será necessária, atividae já é atividade extra
-	Route::get('professorVisualizarAtividadeExtra/{idExercicio}', function($idExercicio){
+	Route::get('atividade/extra/{idAtividade}', function($idAtividade){
 		$atividade = Atividade::find($idAtividade);
-		$turmas = Turma::where('idProfessor', '=', '2')->get();
+		$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->get();
 		foreach ($turmas as $turma) {
 			$turma->alunosTurma = $turma->alunos;
 		}
 		$alunos;
-		$questoes = $exercicio->questoesRU->combine($exercicio->questoesME)->sortBy('numero');
+		$questoes = $atividade->questoes->sortBy('numero');
 
 		$i;
 		$j;
@@ -524,39 +518,27 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				$alunos[$i]->respostas = array();
 
 				for ($j = 0; $j < sizeof($questoes); $j++) {
-					if(get_class($questoes[$j]) == "QuestaoMultiplaEscolha"){
-						$resposta = RespostasMultiplaEscolha::where('idAluno', '=', $alunos[$i]->id )->where('idQuestao', '=', $questoes[$j]->numero)->pluck('respostaAluno');
-						if($resposta == $questoes[$j]->respostaCerta){
-							$r = $alunos[$i]->respostas;
-							$r[] = "1";
-							$alunos[$i]->respostas = $r;
-						}else{
-							$r = $alunos[$i]->respostas;
-							$r[] = "0";
-							$alunos[$i]->respostas = $r;
-						}
+					
+					$resposta = Resposta::where('idAluno', '=', $alunos[$i]->id )->where('idQuestao', '=', $questoes[$j]->numero)->pluck('respostaAluno');
+					if($resposta == $questoes[$j]->respostaCerta){
+						$r = $alunos[$i]->respostas;
+						$r[] = "1";
+						$alunos[$i]->respostas = $r;
 					}else{
-						$resposta = RespostasRespostaUnica::where('idAluno', '=', $alunos[$i]->id )->where('idQuestao', '=', $questoes[$j]->numero)->pluck('respostaAluno');
-						if($resposta == $questoes[$j]->respostaCerta){
-							$r = $alunos[$i]->respostas;
-							$r[] = "1";
-							$alunos[$i]->respostas = $r;
-						}else{
-							$r = $alunos[$i]->respostas;
-							$r[] = "0";
-							$alunos[$i]->respostas = $r;
-						}
-
+						$r = $alunos[$i]->respostas;
+						$r[] = "0";
+						$alunos[$i]->respostas = $r;
 					}
 				}
+
 			}
 			$turmas[$k]->alunosTurma = $alunos;
 		}
 			
 
-		$exercicio = Atividade::find($idExercicio);			 
+		$atividade = Atividade::find($idAtividade);			 
 
-		return View::make('professorVisualizarAtividadeExtra')->with('exercicio',$exercicio)
+		return View::make('atividade/extraProfessorView')->with('exercicio',$atividade)
 															  ->with('turmas',$turmas)
 															  ->with('turmasArray',$turmas->toArray());
 	});
@@ -564,7 +546,13 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	Route::get('atividadesExtras', function(){
 		$modulos = Modulo::all();
 
-		$categorias = $modulos->combine(Categoria::all());
+		$categorias = Categorial::all();
+
+		foreach ($modulos as $modulo) {
+			$categoria->push($modulo);
+		}
+
+		//$categorias = $modulos->combine(Categoria::all());
 
 		$atividadesExtras = Atividade::where('tipo', '=', '2')->where('idUsuario', '=', Auth::user()->id)->get(); // trocar por Auth::User
 
@@ -611,9 +599,10 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	Route::post('criarAtividadeExtra', function(){
 		$atividadeExtra = new Atividade;
 		$atividadeExtra->nome = Input::get('nome');
-		$AtividadesExtra->tipo = 2;
+		$atividadeExtra->tipo = 2;
 		$idModulo = Input::get('idModulo');
 		$idCategoria = Input::get('idCategoria');
+		$atividadeExtra->idUsuario = Auth::user()->id;
 
 		if($idModulo!=""){
 			$atividadeExtra->idModulo = Input::get('idModulo');
@@ -626,7 +615,109 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		// redirect
 		Session::flash('message', 'Atividade Extra criado com sucesso!');
-		return Redirect::to('admin/atividadeExtra/'.$atividadeExtra->id.'/editar');
+		return Redirect::to('professor/atividade/'.$atividadeExtra->id.'/editar');
+	});
+
+	Route::post('criarQuestaoRU', function(){
+			$questao = new Questao;
+			$pergunta = Input::get('pergunta');
+
+			$questao->textopergunta = Input::get('textopergunta');
+
+			if($pergunta!=1){
+				$arquivo = Input::file('arquivo');
+				$filename = $arquivo->getClientOriginalName();
+
+				$questao->urlMidia = 'files/'.$filename;
+				
+				$arquivo->move('files/', $filename);
+			}
+
+	        $questao->idAtividade = Input::get('idatividade');
+
+			$questao->categoria = Input::get('pergunta');
+
+			$questao->tipo=2;
+
+			$questao->respostaCerta = Input::get('respostaCerta');
+			$questao->save();
+
+			$questao->numero = $questao->id;
+			$questao->save();
+
+			Session::flash('message', 'Questao criada com sucesso!');
+			return Redirect::back();
+
+	});
+
+	Route::post('criarQuestaoME', function(){
+		$questao = new Questao;
+		$pergunta = Input::get('pergunta');
+		$resposta = Input::get('resposta');
+
+		$questao->textopergunta = Input::get('textopergunta');
+
+		$questao->tipo=1;
+
+		if($pergunta!=1){
+			$arquivo = Input::file('arquivo');
+			$filename = $arquivo->getClientOriginalName();
+
+			$questao->urlMidia = 'files/'.$filename;
+			
+			$arquivo->move('files/', $filename);
+		}
+
+		if($resposta==1){
+
+			$questao->alternativaA = Input::get('a');
+			$questao->alternativaB = Input::get('b');
+			$questao->alternativaC = Input::get('c');
+			$questao->alternativaD = Input::get('d');
+
+		}else{
+
+			//#A
+			
+			$alternativaA = Input::file('a');
+			$filenameA = $alternativaA->getClientOriginalName();
+			$questao->alternativaA = 'files/'.$filenameA;
+			$alternativaA->move('files/', $filenameA);
+
+			//#B
+
+			$alternativaB = Input::file('b');
+			$filenameB = $alternativaB->getClientOriginalName();
+			$questao->alternativaB = 'files/'.$filenameB;
+			$alternativaB->move('files/', $filenameB);
+
+			//C
+
+			$alternativaC = Input::file('c');
+			$filenameC = $alternativaC->getClientOriginalName();
+			$questao->alternativaC = 'files/'.$filenameC;
+			$alternativaC->move('files/', $filenameC);
+
+			//#D
+			$alternativaD = Input::file('d');
+			$filenameD = $alternativaD->getClientOriginalName();
+			$questao->alternativaD = 'files/'.$filenameD;
+			$alternativaD->move('files/', $filenameD);
+		}
+
+		$questao->respostaCerta = Input::get('respostaCerta');
+		$questao->idAtividade = Input::get('idatividade');
+
+		$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
+
+		$questao->save();
+
+		$questao->numero = $questao->id;
+		$questao->save();
+
+		// redirect
+		Session::flash('message', 'Questao criada com sucesso!');
+		return Redirect::back();
 	});
 
 	Route::post('atualizarAtividadeExtra', function(){
@@ -680,10 +771,17 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
-	Route::get('home', function(){
-		$cursos = Curso::all();
-		$cursosArray = $cursos->toArray();
-		return View::make('administrador/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray));
+	Route::get('home/{idioma?}', function($idioma = null){
+		if($idioma == null){
+			$cursos = Curso::all();
+			$cursosArray = $cursos->toArray();
+			return View::make('administrador/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray));	
+		}else{
+			$cursos = Curso::where('idIdioma','=',Idioma::where('nome','=', $idioma)->first()->id)->get();
+			$cursosArray = $cursos->toArray();
+			return View::make('administrador/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray));
+		}
+		
 	});
 
 	Route::get('perfil', function(){
@@ -698,7 +796,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	Route::get('atividadesExtras', function(){
 		$modulos = Modulo::all();
 
-		$categorias = $modulos->combine(Categoria::all());
+		$categorias = Categorial::all();
+
+		foreach ($modulos as $modulo) {
+			$categoria->push($modulo);
+		}
+
+		//$categorias = $modulos->combine(Categoria::all());
 
 		$atividadesExtras = Atividade::where('tipo', '=', '2')->get();
 
@@ -988,7 +1092,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		});
 
-		//Mudar
 		Route::post('criarQuestaoME', function(){
 			$questao = new Questao;
 			$pergunta = Input::get('pergunta');
@@ -1058,6 +1161,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			Session::flash('message', 'Questao criada com sucesso!');
 			return Redirect::back();
 		});
+
+		//Mudar
+		
 
 		Route::post('atualizarRespostaUnica', function(){
 			$questao 			    = Questao::find(Input::get('id')); 
@@ -1336,8 +1442,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if(Input::file('urlImagem')!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$professor->urlImagem = 'img/'.$filename;
-
 				$user->urlImagem = 'img/'.$filename;
 				
 				$imagem->move('img/', $filename);
@@ -1346,7 +1450,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->save();
 
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
-			$professor->sobreMim = Input::get('sobreMim');
+			$professor->sobreMim = Input::get('sobremim');
 			$professor->codRegistro       = Input::get('codRegistro');
 
 			$professor->save();

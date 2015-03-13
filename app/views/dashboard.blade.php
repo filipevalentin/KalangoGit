@@ -78,13 +78,14 @@
 
 <section class="content">
 
+	<!-- Dados Gerais -->
     <div class="row">
-    	<div class="col-md-8">
-    		<div class="box box-solid bg-green">
+    	<div class="col-lg-7">
+    		<div class="box box-solid" style="background: #B6703D; color: black;">
     			<div class="box-header">
-    				<h3 class="box-title">Meus pontos</h3>
+    				<h3 class="box-title" style="color: white;">Meus Desempenho</h3>
     			</div> 
-    			<div class="box-body">
+    			<div class="box-body" style="background: rgb(236, 236, 236)">
     				<div class="row">
         				<div class="col-xs-12 col-sm-3 center" style="text-align: center">
                             <span class="profile-picture">
@@ -97,8 +98,9 @@
                         		<li style="font-size: large;font-weight: 500;">{{Auth::user()->aluno->turmas->first()->nome}}</li>
                         		<li style="font-size: large;font-weight: 500;">Ranking: Turma: 5º / Módulo: 10º</li>
                         		<li style="font-size: large;font-weight: 500;">Medalha:
-	                        		<div class="progress" style="margin-top:5px; height: 20px;background: rgb(0, 134, 73);">
-	                                    <div class="progress-bar" style="width: 70%;background-color: white;">
+                        			<small class="pull-right">90%</small>
+	                        		<div class="progress" style="margin-top:5px; height: 20px;background: white;">
+	                                    <div class="progress-bar" style="width: 90%;background-color: silver;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
 	                                    </div>
 	                                </div>
                                 </li>
@@ -108,19 +110,127 @@
     			</div> 
     		</div> 
     	</div>
-    	<div class="col-md-4">
-    		<div class="box box-solid bg-green">
+    	<div class="col-lg-5">
+    		<div class="box box-solid " style="background: #3F74D3; color: black;">
     			<div class="box-header">
-    				<h3 class="box-title">Estatísticas</h3>
+    				<h3 class="box-title" style="color: white;">Estatísticas</h3>
     			</div> 
-    			<div class="box-body">
+    			<div class="box-body" style="background: rgb(236, 236, 236)">
     				<div class="row">
-        				<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-        					<input type="text" class="dial" data-width="150"data-fgColor="#ffec03"data-skin="tron"data-thickness=".2"data-displayPrevious=true>
+        				<div class="col-xs-4 center">
+        					<p> Respostas Corretas </p>
+        					<input type="text" class="knob" data-fgColor="green" data-bgColor="white" data-inputColor="black" data-width="96" data-height="96" data-skin="tron" value="35" data-readOnly="true">
+						</div>
+						<div class="col-xs-4 center">
+							<p> Respostas Erradas </p>
+        					<input type="text" class="knob" data-fgColor="tomato" data-bgColor="white" data-inputColor="black" data-width="96" data-height="96" data-skin="tron" value="35" data-readOnly="true">
+						</div>
+						<div class="col-xs-4 center">
+							<p> Respostas Total </p>
+        					<input type="text" class="knob" data-fgColor="orange" data-bgColor="white" data-inputColor="black" data-width="96" data-height="96" data-skin="tron" value="70" data-readOnly="true">
 						</div>
                   	</div>
     			</div> 
     		</div> 
+    	</div>
+    </div>
+
+	<!-- Skills -->
+    <div class="row">
+    	<div class="col-lg-6">
+    		<div class="box box-solid " style="background: limegreen; color: black;">
+    			<div class="box-header">
+    				<h3 class="box-title" style="color: white;">Skills</h3>
+    			</div> 
+    			<div class="box-body" style="background: rgb(236, 236, 236)">
+    				<ul style="padding:0px; list-style: none;">
+                		<li style="font-size:larger; font-weight: 500;">Verbos:
+                			<small class="pull-right">90%</small>
+                    		<div class="progress" style="margin-top:5px; height: 15px;background: white;">
+                                <div class="progress-bar" style="width: 30%;background-color: gold;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                </div>
+                            </div>
+                        </li>
+                        <li style="font-size:larger; font-weight: 500;">Adjetivos:
+                        	<small class="pull-right">90%</small>
+                    		<div class="progress" style="margin-top:5px; height: 15px;background: white;">
+                                <div class="progress-bar" style="width: 70%;background-color: darkgoldenrod;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                </div>
+                            </div>
+                        </li>
+                        <li style="font-size:larger; font-weight: 500;">Present Perfect:
+                        	<small class="pull-right">90%</small>
+                    		<div class="progress" style="margin-top:5px; height: 15px;background: white;">
+                                <div class="progress-bar" style="width: 50%;background-color: gold;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                </div>
+                            </div>
+                        </li>
+                        <li style="font-size:larger; font-weight: 500;">Vocabulário:
+                        	<small class="pull-right">90%</small>
+                    		<div class="progress" style="margin-top:5px; height: 15px;background: white;">
+                                <div class="progress-bar" style="width: 86%;background-color: silver;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                </div>
+                            </div>
+                        </li>
+                	</ul>
+    			</div> 
+    		</div>
+    	</div>
+    	<div class="col-lg-6">
+	    	<div class="box box-solid " style="background: darkgrey; color: black;">
+    			<div class="box-header">
+    				<h3 class="box-title" style="color: white;">Top Skills</h3>
+    			</div> 
+    			<div class="box-body" style="background: rgb(236, 236, 236)">
+
+	    			<div class="row">
+	    				<div class="info-box bg-green" style="margin: 10px 20px" >
+			                <span class="info-box-icon" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-up"></i></span>
+			                <div class="info-box-content">
+			                    <span class="info-box-text" style="display: block;">Likes</span>
+			                    <span class="info-box-number">41,410</span>
+			                    <small class="pull-right" style="display: block;">90%</small>
+			                    <div class="progress" style="height: 15px;background: rgb(0, 134, 73);">
+			                        <div class="progress-bar" style="width: 50%;background-color: white;">
+			                        </div>
+			                    </div>
+			                    <span class="progress-description">
+			                        70% Increase in 30 Days
+			                    </span>
+			                </div><!-- /.info-box-content -->
+			            </div>
+			        </div>
+
+			        <div class="row">
+			            <div class="info-box bg-red" style="margin: 10px 20px">
+			                <span class="info-box-icon" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-down"></i></span>
+			                <div class="info-box-content">
+			                    <span class="info-box-text" style="display: block;">Likes</span>
+			                    <span class="info-box-number">41,410</span>
+			                    <small class="pull-right" style="display: block;">90%</small>
+			                    <div class="progress" style="height: 15px;background: rgb(0, 134, 73);">
+			                        <div class="progress-bar" style="width: 10%;background-color: white;">
+			                        </div>
+			                    </div>
+			                    <span class="progress-description">
+			                        70% Increase in 30 Days
+			                    </span>
+			                </div><!-- /.info-box-content -->
+			            </div>
+			        </div>
+				       
+    			</div> 
+    		</div>
+    	</div>
+    </div>
+
+	<!-- Rankings -->
+    <div class="row">
+    	<div class="col-lg-6">
+    		
+    	</div>
+    	<div class="col-lg-6">
+
     	</div>
     </div>
 
@@ -131,8 +241,7 @@
 @section('scripts')
 
 <script>
-	
-	
+	$(".knob").knob();
 </script>
 
 @endsection

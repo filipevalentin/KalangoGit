@@ -131,8 +131,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/professorBuscarAlunos" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Aluno</a></li>
-                                <li><a href="/professorBuscarProfessores" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Professor</a></li>
+                                <li><a href="#/professorBuscarAlunos" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Aluno</a></li>
+                                <li><a href="#/professorBuscarProfessores" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Professor</a></li>
                             </ul>
                         </li>
 

@@ -18,19 +18,65 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="box box-solid">
+
+                <div class="box-header">
+                    <h3 class="box-title">Turmas</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+
+                        @for($i=0; $i <= (int)(count($turmasArray)/5); $i++)
+        
+                            <div class="item">
+
+                            @for($j=4*$i; $j<4*$i+4 && $j<(count($turmasArray)); $j++)
+
+
+                                <div class="col-sm-3">
+                                    <div class="box-body">
+                                        <div class="small-box bg-blue">
+                                            <div class="inner">
+                                                <div class="turma" style="cursor:pointer;" data-idTurma="{{$turmasArray[$j]['id']}}">
+                                                    <h4 style="font-size: 20px;">{{$turmasArray[$j]['nome']}}</h4>
+                                                    <p style="margin:0px;">{{$turmasArray[$j]['alunosTurma']->count()}} Alunos</p>
+                                                </div>
+                                            </div>
+
+                                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            @endfor
+
+                            </div>
+                        @endfor
+
+                        </div>
+                    
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" style="background-image:none; width:3%;"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                        
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next" style="background-image:none; width:3%;"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                    </div>
+                </div> <!-- /.box-body -->
+            </div>
 
             <h2 class="page-header">Inglês - Teens - Módulo 1 - Aula 2</h2>
 
             <div class="col-md-8">
                 <div class="box box-solid">
                     <div class="box-header">
-                        <h3 class="box-title">{{$atividades->nome}}</h3>
+                        <h3 class="box-title">{{$exercicio->nome}}</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <div class="box-group" id="accordion">
+                        <div class="box-group " id="accordion">
                         <?php $aux = 1;
-                            $questoes = $atividades->questoes->sortBy('id');
+                            $questoes = $exercicio->questoes->sortBy('numero');
                         ?>
+
                             
                             @if($questoes->count() == 0)
 
@@ -41,12 +87,12 @@
                             @endif
 
                             @foreach($questoes as $questao)
-                                @if($questao->tipo == "1") <!-- multipla escolha -->
+                                @if($questao->tipo == 1)
 
                                 <div class="panel box box-primary">
                                     <div class="box-header">
                                         <h4 class="box-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#ME{{$questao->id}}" class="">Questão {{$aux++}}</a>
+                                            <a data-toggle="collapse" data-questao="{{$aux-1}}" data-parent="#accordion" href="#ME{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
                                     </div>
                                     <div id="ME{{$questao->id}}" class="panel-collapse collapse">
@@ -54,23 +100,23 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->titulo}}</h3>
                                                     </div>
                                                     <div class="box-body">
-                                                    <?php $categoria = (string)($questao->categoria);?>
+                                                        <?php $categoria = (string)($questao->categoria); ?>
 
-                                                    @if(substr($categoria, 0, 1)==2)
-                                                        <img src="/{{$questao->urlMidia}}" class="img-responsive center" alt="Responsive image" style="display: initial; max-height: 300px;">
-                                                    @elseif(substr($categoria, 0, 1)==3)
-                                                        <audio id="audio" controls="controls" style="display:none;">  
-                                                            <source src="/{{$questao->urlMidia}}" />
-                                                        </audio>
-                                                        <div id="playParent" class="row">
-                                                            <div class="small-box bg-aqua" style="width: 100px; margin:auto; font-size: -webkit-xxx-large;">
-                                                                <i id="play" class="ion ion-play" style=""></i>
+                                                        @if(substr($categoria, 0, 1)==2)
+                                                            <img src="/{{$questao->urlMidia}}" class="img-responsive center" alt="Responsive image" style="display: initial; max-height: 300px;">
+                                                        @elseif(substr($categoria, 0, 1)==3)
+                                                            <audio id="audio" controls="controls" style="display:none;">  
+                                                                <source src="/{{$questao->urlMidia}}" />
+                                                            </audio>
+                                                            <div id="playParent" class="row">
+                                                                <div class="small-box bg-aqua" style="width: 100px; margin:auto; font-size: -webkit-xxx-large;">
+                                                                    <i id="play" class="ion ion-play" style=""></i>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    @endif
+                                                        @endif
                                                     
                                                     </div>
                                                     
@@ -203,12 +249,12 @@
                                 </div>
                                 @endif
 
-                                @if($questao->tipo == "2") <!-- Dissertativa -->
+                                @if($questao->tipo == 2)
 
-                                <div class="panel box box-primary">
+                                <div class="panel box box-primary ">
                                     <div class="box-header">
                                         <h4 class="box-title">
-                                            <a data-toggle="collapse" data-parent="#accordion" href="#RU{{$questao->id}}" class="">Questão {{$aux++}}</a>
+                                            <a data-toggle="collapse" data-parent="#accordion" data-questao="{{$aux-1}}" href="#RU{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
                                     </div>
                                     <div id="RU{{$questao->id}}" class="panel-collapse collapse">
@@ -216,7 +262,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->titulo}}</h3>
                                                     </div>
                                                     <div class="box-body">
 
@@ -260,6 +306,49 @@
                 </div>
             </div>
 
+            @foreach($turmas as $turma)
+
+                <?php $alunos = $turma->alunosTurma; ?>
+
+                <div class="col-md-4 alunosTurma" id="{{$turma->id}}" style="display: none;">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Relatório de Acesso - Turma {{$turma->nome}} </h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body no-padding">
+                            <table class="table table">
+                                <tbody>
+                                    <tr>
+                                        <th style="/* width: 10px */ display:none;">#</th>
+                                        <th>Nome</th>
+                                        <th>Desempenho</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                    @foreach($alunos as $aluno)
+                                    <tr id="aluno" data-respostas="<?php
+                                        for ($i=0; $i <sizeof($aluno->respostas) ; $i++) { 
+                                            echo $aluno->respostas[$i];
+                                        }
+
+                                     ?>">
+                                        <td style="display: none;">{{$aluno->matricula}}</td>
+                                        <td>{{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</td>
+                                        <td>90%</td>
+                                        <td>
+                                            <div class="box-tools" style="padding:0px">
+                                                <button>Enviar feedback</button>
+                                            </div>
+                                        </td> 
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div>
+                </div>
+
+            @endforeach
+
         </div>
     </div> 
 </section>
@@ -290,5 +379,52 @@
 
 </script>
 
+<script>
+
+    $('div.turma').on('click', (function(event) {
+        var idTurma = $(this).data('idturma');
+        $('div.alunosTurma').fadeOut();
+        $('div.alunosTurma#'+idTurma).fadeIn();
+        
+        //$("div.conteudocurso[id="+id+"]").delay(401).fadeIn();
+    }));
+
+    $('.item').first().addClass("active");
+
+</script>
+
+<script>
+    // *Inserir lógica na rota:-> adicionar a cada obejto aluno a info se ele respondeu um exercicio ou nao, buscando no banco
+    // ao carregar a página colocar os alunos que não respondeu com um destaque, e por no fim da lista
+    // Escutar quando uma questão é clicada
+
+    $('a[data-questao]').on('click', (function(event) {
+        var button = $(this);
+        var questao = button.data('questao');
+        //console.log(questao);
+        var alunos = $('tr#aluno');
+        //console.log(alunos);
+
+        $.each(alunos, function(index, val) {
+            var texto = $(val).data('respostas');
+            if($.type(texto) == "number"){
+                texto = texto.toString();
+            }
+            console.log(texto[questao]);
+            if(texto[questao] == 1){
+                $(val).css("background-color","blue");
+                console.log('Mudando cor para azul');
+            }else{
+                $(val).css("background-color","red");
+                console.log('Mudando cor para vermelho');
+            }
+        });
+
+    }));
+    // buscar todos os alunos que responderam todas as questoes
+    // adicionar uma classe data-respostas="" conforme o resultado -Acertou ou Errou
+
+</script>
 @endsection
-           <!-- Scripts import -->
+
+<!-- Scripts import -->

@@ -247,7 +247,7 @@
                                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarAtividadeExtra" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" data-idModulo="{{$atividade->idModulo}}" data-idCategoria="{{$atividade->idCategoria}}"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                     </div>
-                                    <a href="/editarAtividadeExtra/{{$atividade->id}}">
+                                    <a href="/admin/atividade/{{$atividade->id}}/editar">
 
                                         <span style="color:#FFF;font-size:30px;"><b>{{$atividade->nome}}</b></span><br>
                                     </a>
@@ -327,19 +327,12 @@
                 modal.find('#idmodulo').val(dataidmodulo)
                 })
 
-            $('div.curso').on('click', (function(event) {
-                var id = $(this).attr('id');
-                $("div.conteudocurso").fadeOut();
-                
-                $("div.conteudocurso[id="+id+"]").delay(401).fadeIn();
-            }));
 
             $('div.curso').on('click', (function(event) {
                 var atividades = $(this).data('atividades');
-                var id = $(this).attr('id');
                 $('div.atividade').fadeOut();
                 $.each(atividades, function(index, val) {
-                    $('div.atividade#'+val).fadeIn();
+                    $('div.atividade#'+val).delay(900).fadeIn();
                 });
                 var tipo = $(this).data('tipo');
                 if(tipo == "Modulo"){

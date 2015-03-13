@@ -155,26 +155,30 @@
                                                 </div>
 
                                                 <div class="col-sm-9 col-xs-12">
-                                                    <input type="text" name="id" class="form-control" style="display:none;" value={{$professor->id}}>
+                                                    <input type="text" name="id" class="form-control" style="display:none;" value="{{$professor->id}}">
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="nome"><i class="fa fa-check"></i></label> <b>Nome</b>
-                                                        <input type="text" name="nome" class="form-control" required="" value={{$professor->nome}}>
+                                                        <input type="text" name="nome" class="form-control" required="" value="{{$professor->nome}}">
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="sobrenome"><i class="fa fa-check"></i></label> <b>Sobrenome</b>
-                                                        <input type="text" name="sobrenome" class="form-control" required="" value={{$professor->sobrenome}}>
+                                                        <input type="text" name="sobrenome" class="form-control" required="" value="{{$professor->sobrenome}}">
                                                     </div>
                                                     <div class="form-group has-warning margin">
                                                         <label class="control-label" for="email"><i class="fa fa-warning"></i></label> <b>E-mail</b>
-                                                        <input type="text" name="email" class="form-control" required="" value={{$professor->email}}>
+                                                        <input type="text" name="email" class="form-control" required="" value="{{$professor->email}}">
+                                                    </div>
+                                                    <div class="form-group has-warning margin">
+                                                        <label class="control-label" for="sobremim"><i class="fa fa-warning"></i></label> <b>Sobre mim</b>
+                                                        <input type="text" name="sobremim" class="form-control" required="" value="{{$professor->sobreMim}}">
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Formação Acadêmica</b>
-                                                        <input type="text" name="formacaoAcademica" class="form-control" required="" value={{$professor->formacaoAcademica}}>
+                                                        <input type="text" name="formacaoAcademica" class="form-control" required="" value="{{$professor->formacaoAcademica}}">
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Código Registro</b>
-                                                        <input type="text" name="codRegistro" class="form-control" required="" value={{$professor->codRegistro}}>
+                                                        <input type="text" name="codRegistro" class="form-control" required="" value="{{$professor->codRegistro}}">
                                                     </div>
                                                     <div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block">Salvar</button>

@@ -160,34 +160,34 @@
                                                 </div>
 
                                                 <div class="col-sm-9 col-xs-12">
-                                                    <input type="text" name="id" class="form-control" style="display:none;" value={{$aluno->id}}>
+                                                    <input type="text" name="id" class="form-control" style="display:none;" value="{{$aluno->id}}">
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="nome"><i class="fa fa-check"></i></label> <b>Nome</b>
-                                                        <input type="text" name="nome" class="form-control" required="" value={{$aluno->nome}}>
+                                                        <input type="text" name="nome" class="form-control" required="" value="{{$aluno->nome}}">
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="sobrenome"><i class="fa fa-check"></i></label> <b>Sobrenome</b>
-                                                        <input type="text" name="sobrenome" class="form-control" required="" value={{$aluno->sobrenome}}>
+                                                        <input type="text" name="sobrenome" class="form-control" required="" value="{{$aluno->sobrenome}}">
                                                     </div>
                                                     <div class="form-group has-warning margin">
                                                         <label class="control-label" for="email"><i class="fa fa-warning"></i></label> <b>E-mail</b>
-                                                        <input type="text" name="email" class="form-control" required="" value={{$aluno->email}}>
+                                                        <input type="text" name="email" class="form-control" required="" value="{{$aluno->email}}">
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Data de nascimento</b>
-                                                        <input type="text" name="dataNascimento" class="form-control" required="" value={{$aluno->dataNascimento}}>
+                                                        <input type="text" name="dataNascimento" class="form-control" required="" value="{{$aluno->dataNascimento}}">
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="matricula"><i class="fa fa-check"></i></label> <b>Matrícula</b>
-                                                        <input type="text" name="matricula" class="form-control" required="" value={{$aluno->matricula}}>
+                                                        <input type="text" name="matricula" class="form-control" required="" value="{{$aluno->matricula}}">
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="dataVencimentoBoleto"><i class="fa fa-check"></i></label> <b>Data de Vencimento do Boleto</b>
-                                                        <input type="text" name="dataVencimentoBoleto" class="form-control" required="" value={{$aluno->dataVencimentoBoleto}}>
+                                                        <input type="text" name="dataVencimentoBoleto" class="form-control" required="" value="{{$aluno->dataVencimentoBoleto}}">
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="sobreMim"><i class="fa fa-check"></i></label> <b>Sobre mim</b>
-                                                        <input type="text" class="form-control" name="sobreMim" style="height: 80px;" {{'value="'.$aluno->sobreMim.'"'}}>
+                                                        <input type="text" class="form-control" name="sobreMim" style="height: 80px;" value="{{$aluno->sobreMim}}">
                                                     </div>
                                                     <div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block">Salvar</button>

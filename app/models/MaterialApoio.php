@@ -1,7 +1,7 @@
 <?php 
 	class MaterialApoio extends Eloquent{
 
-		protected $table = 'materialApoio';
+		protected $table = 'materialapoio';
 		public $timestamps = false;
 
 		public function aula(){
