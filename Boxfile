@@ -21,7 +21,11 @@ web1:
   shared_writable_dirs:
     - public/files
     - public/img
-    - app/storage/*
+    - app/storage/cache
+    - app/storage/logs
+    - app/storage/meta
+    - app/storage/sessions
+    - app/storage/views  
   name: laravel
   httpd_document_root: public
   php_extensions:
@@ -29,6 +33,8 @@ web1:
     - pdo_mysql
   network_dirs:
     storage1:
+      - public/files
+      - public/img
       - app/storage/cache
       - app/storage/logs
       - app/storage/meta
