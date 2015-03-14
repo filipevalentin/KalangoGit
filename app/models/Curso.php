@@ -13,7 +13,7 @@
 
 
 		public function idioma(){
-			return $this->belongsTo('idioma',"idIdioma");
+			return $this->belongsTo('Idioma',"idIdioma");
 		}
 
 	}
