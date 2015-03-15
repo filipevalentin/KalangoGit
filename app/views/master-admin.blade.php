@@ -94,7 +94,7 @@
             </nav>
         </header>
 
-        <div class="wrapper row-offcanvas row-offcanvas-left" style="min-height: 681px; max-width: 1300px; margin: auto; padding-top: 50px;">
+        <div class="wrapper row-offcanvas row-offcanvas-left active relative" style="min-height: 681px; max-width: 1300px; margin: auto; padding-top: 50px;">
             
             <aside class="left-side sidebar-offcanvas" style="min-height: 2323px; top: 50px;">
 
@@ -118,9 +118,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                            @foreach(Idioma::all() as $idioma)
-                                <li><a href="/admin/home/{{$idioma->nome}}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> {{$idioma->nome}}</a></li>
-                            @endforeach 
+                                <li><a href="/admin/home" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Inglês</a></li>
+                                <li><a href="#" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Espanhol</a></li>
                             </ul>
                         </li>
 

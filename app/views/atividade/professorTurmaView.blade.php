@@ -29,7 +29,7 @@
                     <div class="box-body">
                         <div class="box-group " id="accordion">
                         <?php $aux = 1;
-                            $questoes = $atividade->questoes->sortBy('id');
+                            $questoes = $atividade->questoesRU->combine($atividade->questoesME)->sortBy('numero');
                         ?>
 
                             

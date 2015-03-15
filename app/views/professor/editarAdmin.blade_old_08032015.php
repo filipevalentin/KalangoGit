@@ -42,7 +42,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-3 center" style="text-align: center">  <!-- FotoPerfil+Botões -->
                                         <span class="profile-picture">
-                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="height: 200px;" {{'src="'.$administrador->urlImagem.'"'}} >
+                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="height: 200px;" {{'src="'.$professor->urlImagem.'"'}} >
                                         </span>
 
                                         <div class="space space-4"></div></br>
@@ -56,7 +56,7 @@
 
                                     <div class="col-xs-12 col-sm-9">
                                         <h4 class="blue">
-                                            <span class="middle">{{$administrador->nome}} {{" "}} {{$administrador->sobrenome}}</span>
+                                            <span class="middle">{{$professor->nome}} {{" "}} {{$professor->sobrenome}}</span>
                                         </h4> <!-- Fim Nome -->
 
                                         <div class="profile-user-info">     <!-- Conjunto de Info do Usuário -->
@@ -65,7 +65,7 @@
                                                 <div class="profile-info-name">Nome</div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{$administrador->nome}}</span>
+                                                    <span>{{$professor->nome}}</span>
                                                 </div>
                                             </div>
 
@@ -73,7 +73,7 @@
                                                 <div class="profile-info-name">Sobrenome</div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{$administrador->sobrenome}}</span>
+                                                    <span>{{$professor->sobrenome}}</span>
                                                 </div>
                                             </div>
 
@@ -81,7 +81,7 @@
                                                 <div class="profile-info-name">Código Registro</div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{$administrador->codRegistro}}</span>
+                                                    <span>{{$professor->codRegistro}}</span>
                                                 </div>
                                             </div>
 
@@ -89,7 +89,15 @@
                                                 <div class="profile-info-name">E-mail</div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{$administrador->email}}</span>
+                                                    <span>{{$professor->email}}</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name">Formação Acadêmica</div>
+
+                                                <div class="profile-info-value">
+                                                    <span>{{$professor->formacaoAcademica}}</span>
                                                 </div>
                                             </div>
 
@@ -102,20 +110,40 @@
 
                                 </br>
 
+                                <div class="row">                                       
+                                    <div class="col-xs-12 col-sm-6">        <!-- Texto do Usuário -->
+                                        <div class="widget-box transparent">
+                                            <div class="widget-header widget-header-small">
+                                                <h4 class="widget-title smaller">
+                                                    <i class="ace-icon fa fa-check-square-o bigger-110"></i>
+                                                    Sobre Mim
+                                                </h4>
+                                            </div>
+
+                                            <div class="widget-body">
+                                                <div class="widget-main">
+                                                    <p>{{$professor->sobreMim}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                                  <!-- Fim Texto do Usuário -->
+                                               <!-- Fim Habilidades -->
+                                </div>
+
                                 <p>Colocar Coisas adicionais aqui para o Admin</p>
 
                             </div><!-- /#home -->
                             
                             <div id="editar" class="tab-pane"> <!-- Aba "editar" -->
                                 <div id="edit-basic" class="tab-pane active">
-                                    {{ Form::open(array('url'=>'atualizarAdministrador', 'files'=>true)) }}
+                                    {{ Form::open(array('url'=>'/admin/atualizarProfessor', 'files'=>true)) }}
                                         <h4 class="header">Perfil</h4>
                                         <hr>
                                         <div class="box box-primary">
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-3 center" style="text-align: center; padding: 30px 0 0 30px;">  <!-- FotoPerfil+Botões -->
                                                     <span class="profile-picture">
-                                                        <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" {{'src="'.$administrador->urlImagem.'"'}}>
+                                                        <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" {{'src="'.$professor->urlImagem.'"'}}>
                                                     </span>
 
                                                     <div class="space space-4"></div><br>
@@ -127,26 +155,26 @@
                                                 </div>
 
                                                 <div class="col-sm-9 col-xs-12">
-                                                    <input type="text" name="id" class="form-control" style="display:none;" value={{$administrador->id}}>
+                                                    <input type="text" name="id" class="form-control" style="display:none;" value={{$professor->id}}>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="nome"><i class="fa fa-check"></i></label> <b>Nome</b>
-                                                        <input type="text" name="nome" class="form-control" required="" value={{$administrador->nome}}>
+                                                        <input type="text" name="nome" class="form-control" required="" value={{$professor->nome}}>
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="sobrenome"><i class="fa fa-check"></i></label> <b>Sobrenome</b>
-                                                        <input type="text" name="sobrenome" class="form-control" required="" value={{$administrador->sobrenome}}>
+                                                        <input type="text" name="sobrenome" class="form-control" required="" value={{$professor->sobrenome}}>
                                                     </div>
                                                     <div class="form-group has-warning margin">
                                                         <label class="control-label" for="email"><i class="fa fa-warning"></i></label> <b>E-mail</b>
-                                                        <input type="text" name="email" class="form-control" required="" value={{$administrador->email}}>
+                                                        <input type="text" name="email" class="form-control" required="" value={{$professor->email}}>
+                                                    </div>
+                                                    <div class="form-group has-success margin">
+                                                        <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Formação Acadêmica</b>
+                                                        <input type="text" name="formacaoAcademica" class="form-control" required="" value={{$professor->formacaoAcademica}}>
                                                     </div>
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Código Registro</b>
-                                                        <input type="text" name="codRegistro" class="form-control" required="" value={{$administrador->codRegistro}}>
-                                                    </div>
-                                                    <div class="form-group has-warning margin">
-                                                        <label class="control-label" for="email"><i class="fa fa-warning"></i></label> <b>Resposta Secreta</b>
-                                                        <input type="text" name="respostaSecreta" class="form-control" required="" value={{$administrador->respostaSecreta}}>
+                                                        <input type="text" name="codRegistro" class="form-control" required="" value={{$professor->codRegistro}}>
                                                     </div>
                                                     <div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block">Salvar</button>
@@ -157,7 +185,7 @@
                                     {{Form::close()}}
                                     
                                     <form action="atualizaSenha" method="POST" role="form">
-                                        <input type="text" name="id" class="form-control" style="display:none;" value={{$administrador->id}}>
+                                        <input type="text" name="id" class="form-control" style="display:none;" value={{$professor}}>
                                         <h4 class="header">Acesso</h4>
                                         <hr>
                                         <div class="box box-primary">

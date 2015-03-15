@@ -19,13 +19,13 @@
                         <input type="hidden" id="id" name="id" class="form-control"></textarea>
                     </div>
 
-                    <div id="div_nome-editar-categoria" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome-editar-categoria" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarCategoria();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-editar-categoria"></textarea>
+                    <div class="form-group">
+                        <label for="nome" class="control-label">Nome</label>
+                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar-editar-categoria" value="Salvar">
+                        <input type="submit" class="btn btn-primary" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -42,13 +42,13 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/criarCategoria">
-                    <div id="div_nome-nova-categoria" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome-nova-categoria" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaCategoria();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-nova-categoria"></textarea>
+                    <div class="form-group">
+                        <label for="nome" class="control-label">Nome</label>
+                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar-nova-categoria" value="Salvar">
+                        <input type="submit" class="btn btn-primary" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -65,21 +65,21 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/criarAtividadeExtra">
-                    <div id="div_nome-nova-atividadeExtra" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome-nova-atividadeExtra" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAtividadeExtra();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-nova-atividadeExtra"></textarea>
+                    <div class="form-group">
+                        <label for="nome" class="control-label">Nome</label>
+                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
                     </div>
-                    <div id="div_curso-nova-atividadeExtra" class="form-group">
-                        <label class="control-label" for="idModulo"><i id="icone_curso-nova-atividadeExtra" class="fa"></i> Módulo</label>
-                        <select id="idModulo" name="idModulo" onblur="fcn_recarregaCoresNovaAtividadeExtra();" class="form-control cursoObrigatorio-nova-atividadeExtra">
+                    <div class="form-group">
+                        <label for="idModulo" class="control-label">Selecione o Módulo</label>
+                        <select id="idModulo" name="idModulo" class="form-control">
                             @foreach(Modulo::all() as $modulo)
                                 <option value="{{$modulo->id}}">{{$modulo->nome}}-{{$modulo->curso->nome}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div id="div_categoria-nova-atividadeExtra" class="form-group">
-                        <label class="control-label" for="idCategoria"><i id="icone_categoria-nova-atividadeExtra" class="fa"></i> Categoria</label>
-                        <select id="idCategoria" name="idCategoria" onblur="fcn_recarregaCoresNovaAtividadeExtra();" class="form-control categoriaObrigatoria-nova-atividadeExtra">
+                    <div class="form-group">
+                        <label for="idCategoria" class="control-label">Categoria</label>
+                        <select id="idCategoria" name="idCategoria" class="form-control">
                             <option value="">Atribua uma categoria - Sem categoria</option>
                             @foreach(Categoria::all() as $categoria)
                                 <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
@@ -88,7 +88,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar-nova-atividadeExtra" value="Salvar">
+                        <input type="submit" class="btn btn-primary" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -109,21 +109,21 @@
                         <input type="hidden" id="id" name="id" class="form-control"></textarea>
                     </div>
 
-                    <div id="div_nome-editar-atividadeExtra" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome-editar-atividadeExtra" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAtividadeExtra();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-editar-atividadeExtra"></textarea>
+                    <div class="form-group">
+                        <label for="nome" class="control-label">Nome</label>
+                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
                     </div>
-                    <div id="div_curso-editar-atividadeExtra" class="form-group">
-                        <label class="control-label" for="idModulo"><i id="icone_curso-editar-atividadeExtra" class="fa"></i> Módulo</label>
-                        <select id="idModulo" name="idModulo" onblur="fcn_recarregaCoresEditarAtividadeExtra();" class="form-control cursoObrigatorio-editar-atividadeExtra">
+                    <div class="form-group">
+                        <label for="idModulo" class="control-label">Selecione o Módulo</label>
+                        <select id="idModulo" name="idModulo" class="form-control">
                             @foreach(Modulo::all() as $modulo)
                                 <option value="{{$modulo->id}}">{{$modulo->nome}}-{{$modulo->curso->nome}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div id="div_categoria-editar-atividadeExtra" class="form-group">
-                        <label class="control-label" for="idCategoria"><i id="icone_categoria-editar-atividadeExtra" class="fa"></i> Categoria</label>
-                        <select id="idCategoria" name="idCategoria" onblur="fcn_recarregaCoresEditarAtividadeExtra();" class="form-control categoriaObrigatoria-editar-atividadeExtra">
+                    <div class="form-group">
+                        <label for="idCategoria" class="control-label">Categoria</label>
+                        <select id="idCategoria" name="idCategoria" class="form-control">
                             @foreach(Categoria::all() as $categoria)
                                 <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
                             @endforeach
@@ -131,7 +131,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar-editar-atividadeExtra" value="Salvar">
+                        <input type="submit" class="btn btn-primary" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -353,277 +353,6 @@
             $('.item').first().addClass("active")
 
         </script>
-		
-		<script> //Validações
-			$( ".somenteLetras" ).keyup(function() {
-				//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
-				if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
-					var valor = $(this).val().replace(/[^a-zA-ZãÃáÁàÀâÂéÉèÈêÊíÍìÌîÎõÕóÓòÒôÔúÚùÙûÛÇç ]+/g,'');
-					$(this).val(valor);
-				}
-			});
-			
-			$(".btn-salvar-editar-categoria").click(function(event){
-			
-				var obrigatorioPendente = 0;
-			
-				if($(".nomeObrigatorio-editar-categoria").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_nome-editar-categoria" ).removeClass("has-success");
-					$( "#icone_nome-editar-categoria" ).removeClass("fa-check");
-					$( "#div_nome-editar-categoria" ).addClass("has-error");
-					$( "#icone_nome-editar-categoria" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_nome-editar-categoria" ).removeClass("has-error");
-					$( "#icone_nome-editar-categoria" ).removeClass("fa-times-circle-o");
-					$( "#div_nome-editar-categoria" ).addClass("has-success");
-					$( "#icone_nome-editar-categoria" ).addClass("fa-check");
-				}
-				
-				if(obrigatorioPendente == 1){
-					alert("É necessário preencher todos os campos obrigatórios!");
-					return false;
-				}
-				
-			})
-			
-			$(".btn-salvar-nova-categoria").click(function(event){
-			
-				var obrigatorioPendente = 0;
-			
-				if($(".nomeObrigatorio-nova-categoria").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_nome-nova-categoria" ).removeClass("has-success");
-					$( "#icone_nome-nova-categoria" ).removeClass("fa-check");
-					$( "#div_nome-nova-categoria" ).addClass("has-error");
-					$( "#icone_nome-nova-categoria" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_nome-nova-categoria" ).removeClass("has-error");
-					$( "#icone_nome-nova-categoria" ).removeClass("fa-times-circle-o");
-					$( "#div_nome-nova-categoria" ).addClass("has-success");
-					$( "#icone_nome-nova-categoria" ).addClass("fa-check");
-				}
-				
-				if(obrigatorioPendente == 1){
-					alert("É necessário preencher todos os campos obrigatórios!");
-					return false;
-				}
-				
-			})
-			
-			$(".btn-salvar-nova-atividadeExtra").click(function(event){
-			
-				var obrigatorioPendente = 0;
-			
-				if($(".nomeObrigatorio-nova-atividadeExtra").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_nome-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_nome-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_nome-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_nome-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_nome-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_nome-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_nome-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_nome-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".cursoObrigatorio-nova-atividadeExtra").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_curso-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_curso-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_curso-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_curso-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_curso-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_curso-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".categoriaObrigatoria-nova-atividadeExtra").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_categoria-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_categoria-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_categoria-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_categoria-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_categoria-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_categoria-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_categoria-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_categoria-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if(obrigatorioPendente == 1){
-					alert("É necessário preencher todos os campos obrigatórios!");
-					return false;
-				}
-				
-			})
-			
-			$(".btn-salvar-editar-atividadeExtra").click(function(event){
-			
-				var obrigatorioPendente = 0;
-			
-				if($(".nomeObrigatorio-editar-atividadeExtra").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_nome-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_nome-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_nome-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_nome-editar-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_nome-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_nome-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_nome-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_nome-editar-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".cursoObrigatorio-editar-atividadeExtra").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_curso-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_curso-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_curso-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_curso-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_curso-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_curso-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".categoriaObrigatoria-editar-atividadeExtra").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_categoria-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_categoria-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_categoria-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_categoria-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_categoria-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_categoria-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if(obrigatorioPendente == 1){
-					alert("É necessário preencher todos os campos obrigatórios!");
-					return false;
-				}
-				
-			})
-			
-			function fcn_recarregaCoresEditarCategoria(){
-				
-				if($(".nomeObrigatorio-editar-categoria").val() == ""){
-					$( "#div_nome-editar-categoria" ).removeClass("has-success");
-					$( "#icone_nome-editar-categoria" ).removeClass("fa-check");
-					$( "#div_nome-editar-categoria" ).addClass("has-error");
-					$( "#icone_nome-editar-categoria" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_nome-editar-categoria" ).removeClass("has-error");
-					$( "#icone_nome-editar-categoria" ).removeClass("fa-times-circle-o");
-					$( "#div_nome-editar-categoria" ).addClass("has-success");
-					$( "#icone_nome-editar-categoria" ).addClass("fa-check");
-				}
-				
-			}
-			
-			function fcn_recarregaCoresNovaCategoria(){
-				
-				if($(".nomeObrigatorio-nova-categoria").val() == ""){
-					$( "#div_nome-nova-categoria" ).removeClass("has-success");
-					$( "#icone_nome-nova-categoria" ).removeClass("fa-check");
-					$( "#div_nome-nova-categoria" ).addClass("has-error");
-					$( "#icone_nome-nova-categoria" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_nome-nova-categoria" ).removeClass("has-error");
-					$( "#icone_nome-nova-categoria" ).removeClass("fa-times-circle-o");
-					$( "#div_nome-nova-categoria" ).addClass("has-success");
-					$( "#icone_nome-nova-categoria" ).addClass("fa-check");
-				}
-				
-			}
-			
-			function fcn_recarregaCoresNovaAtividadeExtra(){
-				
-				if($(".nomeObrigatorio-nova-atividadeExtra").val() == ""){
-					$( "#div_nome-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_nome-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_nome-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_nome-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_nome-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_nome-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_nome-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_nome-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".cursoObrigatorio-nova-atividadeExtra").val() == ""){
-					$( "#div_curso-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_curso-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_curso-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_curso-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_curso-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_curso-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".categoriaObrigatoria-nova-atividadeExtra").val() == ""){
-					$( "#div_categoria-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_categoria-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_categoria-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_categoria-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_categoria-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_categoria-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_categoria-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_categoria-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
-			}
-			
-			function fcn_recarregaCoresEditarAtividadeExtra(){
-				
-				if($(".nomeObrigatorio-editar-atividadeExtra").val() == ""){
-					$( "#div_nome-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_nome-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_nome-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_nome-editar-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_nome-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_nome-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_nome-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_nome-editar-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".cursoObrigatorio-editar-atividadeExtra").val() == ""){
-					$( "#div_curso-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_curso-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_curso-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_curso-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_curso-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_curso-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".categoriaObrigatoria-editar-atividadeExtra").val() == ""){
-					$( "#div_categoria-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_categoria-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_categoria-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_categoria-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_categoria-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_categoria-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-check");
-				}
-				
-			}
-			
-		</script>
     @endsection
 
 @endsection

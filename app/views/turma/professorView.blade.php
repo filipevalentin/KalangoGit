@@ -1,4 +1,4 @@
-@extends('master-prof')
+@extends('master-admin')
 
 @section('modals')
 

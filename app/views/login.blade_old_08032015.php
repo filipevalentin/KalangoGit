@@ -34,9 +34,9 @@
                             <!-- LOGIN -->
                             <!-- Pode colocar #Id's nos elementosque ainda não tem um para funcionar no seu código, se já tiver um id é melhor mudar o seu para não dar erro no form aqui-->
                             <form class="form-signin" action="" method="POST">
-                                <input type="text" autocomplete="off" class="form-control usuarioObrigatorio" maxlength="50" placeholder="Usuário" name="usuario" >
-                                <input type="password" class="form-control senhaObrigatoria" maxlength="12" placeholder="Senha" name="senha" >
-                                <input type="submit" class="btn btn-lg btn-default btn-block btn-entrar" value="Entrar">
+                                <input type="text" class="form-control" placeholder="Usuário" name="usuario" required="" autofocus="">
+                                <input type="password" class="form-control" placeholder="Senha" name="senha" required="">
+                                <input type="submit" class="btn btn-lg btn-default btn-block" value="Entrar">
                             </form>
 
                             <!-- LOGIN -->
@@ -54,8 +54,8 @@
                             <!-- Ativar conta -->
 
                             <form class="form-signin" action="{{ action('RemindersController@postRemind') }}" method="POST">
-                                <input class="form-control emailObrigatorio" type="email" maxlength="50" autocomplete="off" name="email" onblur="fcn_validaEmail(this);" placeholder="E-mail" >
-                                <input class="form-control btn-recuperaSenha" type="submit" value="Mandar e-mail de recuperação">
+                                <input class="form-control" type="email" name="email" placeholder="E-mail">
+                                <input class="form-control" type="submit" value="Mandar e-mail de recuperação">
 
                             <!-- Ativar conta ### Nao terá mais isso !!-->
 
@@ -128,46 +128,6 @@ $( document ).ready(function() {
 });
 </script>
 
-<script>
-	
-	$(".btn-entrar").click(function(event){
-			
-		if($(".usuarioObrigatorio").val() == ""){
-			alert("É necessário preencher o Usuário!");
-			$(".usuarioObrigatorio").focus();
-			return false;
-		} 
-		
-		if($(".senhaObrigatoria").val() == ""){
-			alert("É necessário preencher a Senha!");
-			$(".senhaObrigatoria").focus();
-			return false;
-		} 
-		
-	})
-	
-	$(".btn-recuperaSenha").click(function(event){
-	
-		if($(".emailObrigatorio").val() == ""){
-			alert("É necessário preencher o E-mail!");
-			$(".emailObrigatorio").focus();
-			return false;
-		} 
-		
-	})
-	
-	function fcn_validaEmail(pstr_email){
-		if (pstr_email.value != '') {	
-			er = /^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/;
-			if (!er.exec(pstr_email.value)) {
-				alert("É necessário o preenchimento de um endereço de e-mail válido.");
-				$(".emailObrigatorio").focus();
-				return false;
-			}
-		}
-	}
-	
-</script>
 
-</body>
-</html>
+
+</body></html>

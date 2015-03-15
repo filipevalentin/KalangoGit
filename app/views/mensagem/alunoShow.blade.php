@@ -6,7 +6,7 @@
 			$re = $mensagem->emResposta;
  ?>
 	<div id="anteriores" style="display: none;">
-		<div class="">
+		<div class="box-body no-padding">
 			<div class="mailbox-read-info" style="padding:10px;">
 				<h3>{{$re->titulo}}</h3>
 				<h5>De: {{$re->usuarioOrigem->nome}}<span class="mailbox-read-time pull-right">{{$re->data}}</span></h5><hr>
@@ -76,7 +76,7 @@
 						<div class="input-group">
 							<span class="input-group-addon">Para:</span>
 							<input class="form-control" type="text" id="nomeDestino" value="" disabled>
-							<input type="hidden" id="idUsuarioDestino" name="idUsuarioDestino" value="">
+							<input type="hidden" id="idUsuarioDestino" value="" disabled>
 						</div>
 					</div>
 					<div class="form-group">
@@ -126,47 +126,39 @@
 								<div style="margin-top: 15px;">
 									<ul class="nav nav-pills nav-stacked">
 										<li class="header">Pastas</li>
-										<?php global $count; 
-											$inbox= Mensagem::where('idUsuarioDestino', '=', Auth::user()->id)->get(); 
-										?> 
-										<?php $inbox->each(function($mensagem){
-											global $count;
-											if($mensagem->lida!=1){
-												$count++;
-											}
-										}) ?>
-										@if($count==0)
 										<li class=""><a href="/aluno/mensagens/entrada"><i class="fa fa-inbox"></i> Inbox</a></li>
-										@else
-										<li class=""><a href="/aluno/mensagens/entrada"><i class="fa fa-inbox"></i> Inbox ({{$count}})</a></li>
-										@endif
 										<li class=""><a href="/aluno/mensagens/enviados"><i class="fa fa-mail-forward"></i> Enviados</a></li>
 									</ul>
 								</div>
 							</div> 
-							<div class="col-md-9 col-sm-8">
-								<div class="mailbox-read-info" style="padding:10px;">
-									<h3>{{$mensagem->titulo}}</h3>
-									<h5>De: {{$mensagem->usuarioOrigem->nome}}<span class="mailbox-read-time pull-right">{{$mensagem->data}}</span></h5><hr>
-								</div><!-- /.mailbox-read-info -->
-								<!-- /.mailbox-controls -->
-								<div class="mailbox-read-message" style="padding:10px;">
-									{{$mensagem->conteudo}}
-								</div><!-- /.mailbox-read-message -->
-								<br><hr><!-- /.box-body -->
+							<div class="col-md-9">
+								<div class="box box-primary">
+									<div class="box-header with-border">
+									</div><!-- /.box-header -->
+									<div class="box-body no-padding">
+										<div class="mailbox-read-info" style="padding:10px;">
+											<h3>{{$mensagem->titulo}}</h3>
+											<h5>De: {{$mensagem->usuarioOrigem->nome}}<span class="mailbox-read-time pull-right">{{$mensagem->data}}</span></h5><hr>
+										</div><!-- /.mailbox-read-info -->
+										<!-- /.mailbox-controls -->
+										<div class="mailbox-read-message" style="padding:10px;">
+											{{$mensagem->conteudo}}
+										</div><!-- /.mailbox-read-message -->
+									</div><br><hr><!-- /.box-body -->
 
-								@if($mensagem->idRE != null)
-									<div class="mensagensAnteriores">
-									<h4 style="padding-left:10px; cursor:pointer;">Mensagens anteriores</h4><hr>
-										<?php resposta($mensagem) ?>
-									</div>
-								@endif
-								<!-- /.box-footer -->
-								<div class="box-footer">
-									<div class="pull-right">
-										<button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idUsuarioDestino="{{$mensagem->idUsuarioOrgiem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrgiem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
-									</div>
-								</div><!-- /.box-footer -->
+									@if($mensagem->idRE != null)
+										<div class="mensagensAnteriores">
+										<h4 style="padding-left:10px; cursor:pointer;">Mensagens anteriores</h4><hr>
+											<?php resposta($mensagem) ?>
+										</div>
+									@endif
+									<!-- /.box-footer -->
+									<div class="box-footer">
+										<div class="pull-right">
+											<button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idDestino="{{$mensagem->idUsuarioOrgiem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrgiem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
+										</div>
+									</div><!-- /.box-footer -->
+								</div><!-- /. box -->
 							</div>
 						</div> 
 					</div> 
@@ -199,14 +191,14 @@
 
     $('#responder').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        var idUsuarioDestino = button.data('idusuariodestino');
+        var idUsuarioDestino = button.data('iddestino');
         var nomeDestino = button.data('nomedestino');
         var idRE = button.data('idre');
         var titulo = button.data('titulo');
 
         var modal = $(this);
 
-        modal.find('#idUsuarioDestino').val(idUsuarioDestino);
+        modal.find('#idDestino').val(idUsuarioDestino);
         modal.find('#idRE').val(idRE);
         modal.find('#titulo').val(titulo);
         modal.find('#nomeDestino').val(nomeDestino);

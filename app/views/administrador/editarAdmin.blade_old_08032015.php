@@ -1,3 +1,4 @@
+
 @extends('master-admin')
 
 @section('maincontent')
@@ -108,7 +109,7 @@
                             
                             <div id="editar" class="tab-pane"> <!-- Aba "editar" -->
                                 <div id="edit-basic" class="tab-pane active">
-                                    {{ Form::open(array('url'=>'atualizarAdministrador', 'files'=>true)) }}
+                                    {{ Form::open(array('url'=>'/admin/atualizarAdministrador', 'files'=>true)) }}
                                         <h4 class="header">Perfil</h4>
                                         <hr>
                                         <div class="box box-primary">
@@ -143,10 +144,6 @@
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Código Registro</b>
                                                         <input type="text" name="codRegistro" class="form-control" required="" value={{$administrador->codRegistro}}>
-                                                    </div>
-                                                    <div class="form-group has-warning margin">
-                                                        <label class="control-label" for="email"><i class="fa fa-warning"></i></label> <b>Resposta Secreta</b>
-                                                        <input type="text" name="respostaSecreta" class="form-control" required="" value={{$administrador->respostaSecreta}}>
                                                     </div>
                                                     <div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block">Salvar</button>

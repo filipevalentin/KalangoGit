@@ -13,13 +13,13 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="id" name="id">
                         </div>
-                        <div class="form-group">
-                            <label for="nome" class="control-label">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control"></input>
+                        <div id="div_nome-editar-aula" class="form-group">
+                            <label class="control-label" for="nome"><i id="icone_nome-editar-aula" class="fa"></i> Nome</label>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAula();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-aula"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" value="Salvar">
+                            <input type="submit" class="btn btn-primary btn-salvar-editar-aula" value="Salvar">
                         </div>
                     </form>
                 </div>
@@ -39,13 +39,13 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="id" name="id">
                         </div>
-                        <div class="form-group">
-                            <label for="nome" class="control-label">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control"></input>
+                        <div id="div_nome-editar-exercicio" class="form-group">
+                            <label class="control-label" for="nome"><i id="icone_nome-editar-exercicio" class="fa"></i> Nome</label>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarExercicio();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-exercicio"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" value="Salvar">
+                            <input type="submit" class="btn btn-primary btn-salvar-editar-exercicio" value="Salvar">
                         </div>
                     </form>
                 </div>
@@ -65,17 +65,17 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="id" name="id">
                         </div>
-                        <div class="form-group">
-                            <label for="nome" class="control-label">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control"></input>
+                        <div id="div_nome-editar-material" class="form-group">
+                            <label class="control-label" for="nome"><i id="icone_nome-editar-material" class="fa"></i> Nome</label>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarMaterial();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-material"></input>
                         </div>
-                        <div class="form-group">
-                            <label for="arquivo" class="control-label">Arquivo</label>
-                            <input type="file" id="arquivo" name="arquivo" class="form-control"></input>
+                        <div id="div_arquivo-editar-material" class="form-group">
+                            <label class="control-label" for="arquivo"><i id="icone_arquivo-editar-material" class="fa"></i> Arquivo</label>
+                            <input type="file" id="arquivo" name="arquivo" onblur="fcn_recarregaCoresEditarMaterial();fcn_validaArquivo(this.form, this.form.arquivo.value)" class="form-control arquivoObrigatorio-editar-material"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" value="Salvar">
+                            <input type="submit" class="btn btn-primary btn-salvar-editar-material" value="Salvar">
                         </div>
                     </form>
                 </div>
@@ -95,13 +95,13 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="idmodulo" name="idModulo">
                         </div>
-                        <div class="form-group">
-                            <label for="nome" class="control-label">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control"></textarea>
+                        <div id="div_nome-nova-aula" class="form-group">
+                            <label class="control-label" for="nome"><i id="icone_nome-nova-aula" class="fa"></i> Nome</label>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAula();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-nova-aula"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" value="Salvar">
+                            <input type="submit" class="btn btn-primary btn-salvar-nova-aula" value="Salvar">
                         </div>
                     </form>
                 </div>
@@ -127,17 +127,17 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="idaula" name="idAula">
                         </div>
-                        <div class="form-group">
-                            <label for="nome" class="control-label">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control"></input>
+                        <div id="div_nome-novoConteudo-material" class="form-group">
+                            <label class="control-label" for="nome"><i id="icone_nome-novoConteudo-material" class="fa"></i> Nome</label>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoConteudoMaterial();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-novoConteudo-material"></input>
                         </div>
-                        <div class="form-group">
-                            <label for="arquivo" class="control-label">Arquivo</label>
-                            <input type="file" id="arquivo" name="arquivo" class="form-control"></input>
+                        <div id="div_arquivo-novoConteudo-material" class="form-group">
+                            <label class="control-label" for="arquivo"><i id="icone_arquivo-novoConteudo-material" class="fa"></i> Arquivo</label>
+                            <input type="file" id="arquivo" name="arquivo" onblur="fcn_recarregaCoresNovoConteudoMaterial();fcn_validaArquivo(this.form, this.form.arquivo.value)" class="form-control arquivoObrigatorio-novoConteudo-material"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" value="Salvar">
+                            <input type="submit" class="btn btn-primary btn-salvar-novoConteudo-material" value="Salvar">
                         </div>
                     </form>
 
@@ -145,13 +145,13 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="idaula" name="idAula">
                         </div>
-                        <div class="form-group">
-                            <label for="nome" class="control-label">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control"></input>
+                        <div id="div_nome-novoConteudo-exercicio" class="form-group">
+                            <label class="control-label" for="nome"><i id="icone_nome-novoConteudo-exercicio" class="fa"></i> Nome</label>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoConteudoExercicio();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-novoConteudo-exercicio"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" value="Salvar">
+                            <input type="submit" class="btn btn-primary btn-salvar-novoConteudo-exercicio" value="Salvar">
                         </div>
                     </form>
 
@@ -210,7 +210,7 @@
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
                                                     <p style="float:left;">{{$material->nome}}</p>
                                                     <div class="box-tools pull-right">
-                                                        <a href="/Viewer#/{{$material->url}}"><button class="btn btn-primary btn-xs"><i class="fa fa-external-link"></i></button></a>
+                                                        <a href="http://tcc.teste/Viewer#/{{$material->url}}"><button class="btn btn-primary btn-xs"><i class="fa fa-external-link"></i></button></a>
                                                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarmaterial" data-id="{{$material->id}}" data-nome="{{$material->nome}}"><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                                     </div>
@@ -319,4 +319,331 @@
          })
 
     </script>
+	
+	<script>//Validações
+		
+		$( ".somenteLetras" ).keyup(function() {
+			//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
+			if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
+				var valor = $(this).val().replace(/[^a-zA-ZãÃáÁàÀâÂéÉèÈêÊíÍìÌîÎõÕóÓòÒôÔúÚùÙûÛÇç ]+/g,'');
+				$(this).val(valor);
+			}
+		});
+		
+		$(".btn-salvar-editar-aula").click(function(event){
+			
+			var obrigatorioPendente = 0;
+		
+			if($(".nomeObrigatorio-editar-aula").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_nome-editar-aula" ).removeClass("has-success");
+				$( "#icone_nome-editar-aula" ).removeClass("fa-check");
+				$( "#div_nome-editar-aula" ).addClass("has-error");
+				$( "#icone_nome-editar-aula" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-editar-aula" ).removeClass("has-error");
+				$( "#icone_nome-editar-aula" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-editar-aula" ).addClass("has-success");
+				$( "#icone_nome-editar-aula" ).addClass("fa-check");
+			}
+			
+			if(obrigatorioPendente == 1){
+				alert("É necessário preencher todos os campos obrigatórios!");
+				return false;
+			}
+			
+		})
+		
+		$(".btn-salvar-nova-aula").click(function(event){
+			
+			var obrigatorioPendente = 0;
+		
+			if($(".nomeObrigatorio-nova-aula").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_nome-nova-aula" ).removeClass("has-success");
+				$( "#icone_nome-nova-aula" ).removeClass("fa-check");
+				$( "#div_nome-nova-aula" ).addClass("has-error");
+				$( "#icone_nome-nova-aula" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-nova-aula" ).removeClass("has-error");
+				$( "#icone_nome-nova-aula" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-nova-aula" ).addClass("has-success");
+				$( "#icone_nome-nova-aula" ).addClass("fa-check");
+			}
+			
+			if(obrigatorioPendente == 1){
+				alert("É necessário preencher todos os campos obrigatórios!");
+				return false;
+			}
+			
+		})
+		
+		$(".btn-salvar-novoConteudo-material").click(function(event){
+			
+			var obrigatorioPendente = 0;
+		
+			if($(".nomeObrigatorio-novoConteudo-material").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_nome-novoConteudo-material" ).removeClass("has-success");
+				$( "#icone_nome-novoConteudo-material" ).removeClass("fa-check");
+				$( "#div_nome-novoConteudo-material" ).addClass("has-error");
+				$( "#icone_nome-novoConteudo-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-novoConteudo-material" ).removeClass("has-error");
+				$( "#icone_nome-novoConteudo-material" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-novoConteudo-material" ).addClass("has-success");
+				$( "#icone_nome-novoConteudo-material" ).addClass("fa-check");
+			}
+			
+			if($(".arquivoObrigatorio-novoConteudo-material").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_arquivo-novoConteudo-material" ).removeClass("has-success");
+				$( "#icone_arquivo-novoConteudo-material" ).removeClass("fa-check");
+				$( "#div_arquivo-novoConteudo-material" ).addClass("has-error");
+				$( "#icone_arquivo-novoConteudo-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_arquivo-novoConteudo-material" ).removeClass("has-error");
+				$( "#icone_arquivo-novoConteudo-material" ).removeClass("fa-times-circle-o");
+				$( "#div_arquivo-novoConteudo-material" ).addClass("has-success");
+				$( "#icone_arquivo-novoConteudo-material" ).addClass("fa-check");
+			}
+			
+			if(obrigatorioPendente == 1){
+				alert("É necessário preencher todos os campos obrigatórios!");
+				return false;
+			}
+			
+		})
+		
+		$(".btn-salvar-novoConteudo-exercicio").click(function(event){
+			
+			var obrigatorioPendente = 0;
+		
+			if($(".nomeObrigatorio-novoConteudo-exercicio").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_nome-novoConteudo-exercicio" ).removeClass("has-success");
+				$( "#icone_nome-novoConteudo-exercicio" ).removeClass("fa-check");
+				$( "#div_nome-novoConteudo-exercicio" ).addClass("has-error");
+				$( "#icone_nome-novoConteudo-exercicio" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-novoConteudo-exercicio" ).removeClass("has-error");
+				$( "#icone_nome-novoConteudo-exercicio" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-novoConteudo-exercicio" ).addClass("has-success");
+				$( "#icone_nome-novoConteudo-exercicio" ).addClass("fa-check");
+			}
+			
+			if(obrigatorioPendente == 1){
+				alert("É necessário preencher todos os campos obrigatórios!");
+				return false;
+			}
+			
+		})
+		
+		$(".btn-salvar-editar-material").click(function(event){
+			
+			var obrigatorioPendente = 0;
+		
+			if($(".nomeObrigatorio-editar-material").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_nome-editar-material" ).removeClass("has-success");
+				$( "#icone_nome-editar-material" ).removeClass("fa-check");
+				$( "#div_nome-editar-material" ).addClass("has-error");
+				$( "#icone_nome-editar-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-editar-material" ).removeClass("has-error");
+				$( "#icone_nome-editar-material" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-editar-material" ).addClass("has-success");
+				$( "#icone_nome-editar-material" ).addClass("fa-check");
+			}
+			
+			if($(".arquivoObrigatorio-editar-material").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_arquivo-editar-material" ).removeClass("has-success");
+				$( "#icone_arquivo-editar-material" ).removeClass("fa-check");
+				$( "#div_arquivo-editar-material" ).addClass("has-error");
+				$( "#icone_arquivo-editar-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_arquivo-editar-material" ).removeClass("has-error");
+				$( "#icone_arquivo-editar-material" ).removeClass("fa-times-circle-o");
+				$( "#div_arquivo-editar-material" ).addClass("has-success");
+				$( "#icone_arquivo-editar-material" ).addClass("fa-check");
+			}
+			
+			if(obrigatorioPendente == 1){
+				alert("É necessário preencher todos os campos obrigatórios!");
+				return false;
+			}
+			
+		})
+		
+		$(".btn-salvar-editar-exercicio").click(function(event){
+			
+			var obrigatorioPendente = 0;
+		
+			if($(".nomeObrigatorio-editar-exercicio").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_nome-editar-exercicio" ).removeClass("has-success");
+				$( "#icone_nome-editar-exercicio" ).removeClass("fa-check");
+				$( "#div_nome-editar-exercicio" ).addClass("has-error");
+				$( "#icone_nome-editar-exercicio" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-editar-exercicio" ).removeClass("has-error");
+				$( "#icone_nome-editar-exercicio" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-editar-exercicio" ).addClass("has-success");
+				$( "#icone_nome-editar-exercicio" ).addClass("fa-check");
+			}
+			
+			if(obrigatorioPendente == 1){
+				alert("É necessário preencher todos os campos obrigatórios!");
+				return false;
+			}
+			
+		})
+		
+		function fcn_recarregaCoresEditarAula(){
+			
+			if($(".nomeObrigatorio-editar-aula").val() == ""){
+				$( "#div_nome-editar-aula" ).removeClass("has-success");
+				$( "#icone_nome-editar-aula" ).removeClass("fa-check");
+				$( "#div_nome-editar-aula" ).addClass("has-error");
+				$( "#icone_nome-editar-aula" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-editar-aula" ).removeClass("has-error");
+				$( "#icone_nome-editar-aula" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-editar-aula" ).addClass("has-success");
+				$( "#icone_nome-editar-aula" ).addClass("fa-check");
+			}
+			
+		}
+		
+		function fcn_recarregaCoresNovaAula(){
+			
+			if($(".nomeObrigatorio-nova-aula").val() == ""){
+				$( "#div_nome-nova-aula" ).removeClass("has-success");
+				$( "#icone_nome-nova-aula" ).removeClass("fa-check");
+				$( "#div_nome-nova-aula" ).addClass("has-error");
+				$( "#icone_nome-nova-aula" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-nova-aula" ).removeClass("has-error");
+				$( "#icone_nome-nova-aula" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-nova-aula" ).addClass("has-success");
+				$( "#icone_nome-nova-aula" ).addClass("fa-check");
+			}
+			
+		}
+		
+		function fcn_recarregaCoresNovoConteudoMaterial(){
+			
+			if($(".nomeObrigatorio-novoConteudo-material").val() == ""){
+				$( "#div_nome-novoConteudo-material" ).removeClass("has-success");
+				$( "#icone_nome-novoConteudo-material" ).removeClass("fa-check");
+				$( "#div_nome-novoConteudo-material" ).addClass("has-error");
+				$( "#icone_nome-novoConteudo-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-novoConteudo-material" ).removeClass("has-error");
+				$( "#icone_nome-novoConteudo-material" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-novoConteudo-material" ).addClass("has-success");
+				$( "#icone_nome-novoConteudo-material" ).addClass("fa-check");
+			}
+			
+			if($(".arquivoObrigatorio-novoConteudo-material").val() == ""){
+				$( "#div_arquivo-novoConteudo-material" ).removeClass("has-success");
+				$( "#icone_arquivo-novoConteudo-material" ).removeClass("fa-check");
+				$( "#div_arquivo-novoConteudo-material" ).addClass("has-error");
+				$( "#icone_arquivo-novoConteudo-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_arquivo-novoConteudo-material" ).removeClass("has-error");
+				$( "#icone_arquivo-novoConteudo-material" ).removeClass("fa-times-circle-o");
+				$( "#div_arquivo-novoConteudo-material" ).addClass("has-success");
+				$( "#icone_arquivo-novoConteudo-material" ).addClass("fa-check");
+			}
+			
+		}
+		
+		function fcn_recarregaCoresNovoConteudoExercicio(){
+		
+			if($(".nomeObrigatorio-novoConteudo-exercicio").val() == ""){
+				$( "#div_nome-novoConteudo-exercicio" ).removeClass("has-success");
+				$( "#icone_nome-novoConteudo-exercicio" ).removeClass("fa-check");
+				$( "#div_nome-novoConteudo-exercicio" ).addClass("has-error");
+				$( "#icone_nome-novoConteudo-exercicio" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-novoConteudo-exercicio" ).removeClass("has-error");
+				$( "#icone_nome-novoConteudo-exercicio" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-novoConteudo-exercicio" ).addClass("has-success");
+				$( "#icone_nome-novoConteudo-exercicio" ).addClass("fa-check");
+			}
+		
+		}
+		
+		function fcn_recarregaCoresEditarMaterial(){
+			
+			if($(".nomeObrigatorio-editar-material").val() == ""){
+				$( "#div_nome-editar-material" ).removeClass("has-success");
+				$( "#icone_nome-editar-material" ).removeClass("fa-check");
+				$( "#div_nome-editar-material" ).addClass("has-error");
+				$( "#icone_nome-editar-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-editar-material" ).removeClass("has-error");
+				$( "#icone_nome-editar-material" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-editar-material" ).addClass("has-success");
+				$( "#icone_nome-editar-material" ).addClass("fa-check");
+			}
+			
+			if($(".arquivoObrigatorio-editar-material").val() == ""){
+				$( "#div_arquivo-editar-material" ).removeClass("has-success");
+				$( "#icone_arquivo-editar-material" ).removeClass("fa-check");
+				$( "#div_arquivo-editar-material" ).addClass("has-error");
+				$( "#icone_arquivo-editar-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_arquivo-editar-material" ).removeClass("has-error");
+				$( "#icone_arquivo-editar-material" ).removeClass("fa-times-circle-o");
+				$( "#div_arquivo-editar-material" ).addClass("has-success");
+				$( "#icone_arquivo-editar-material" ).addClass("fa-check");
+			}
+			
+		}
+		
+		function fcn_validaArquivo(formulario, arquivo) { 
+		   
+			if(arquivo != ""){
+				extensoes_permitidas = new Array(".pdf"); 
+				meuerro = ""; 
+				 
+				extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase(); 
+				permitida = false; 
+				for (var i = 0; i < extensoes_permitidas.length; i++) { 
+					if (extensoes_permitidas[i] == extensao) { 
+						permitida = true; 
+						break; 
+					} 
+				} 
+				
+				if (permitida == false) { 
+					alert("Verifique a extensão do arquivo anexado. \n\nAs extensões permitidas são: " + extensoes_permitidas.join()); 
+					document.getElementById('arquivo').value = "";
+					return 1;
+				}
+				 
+				return 0; 
+			}
+		}
+		
+		function fcn_recarregaCoresEditarExercicio(){
+			
+			if($(".nomeObrigatorio-editar-exercicio").val() == ""){
+				$( "#div_nome-editar-exercicio" ).removeClass("has-success");
+				$( "#icone_nome-editar-exercicio" ).removeClass("fa-check");
+				$( "#div_nome-editar-exercicio" ).addClass("has-error");
+				$( "#icone_nome-editar-exercicio" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-editar-exercicio" ).removeClass("has-error");
+				$( "#icone_nome-editar-exercicio" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-editar-exercicio" ).addClass("has-success");
+				$( "#icone_nome-editar-exercicio" ).addClass("fa-check");
+			}
+			
+		}
+		
+	</script>
 @endsection

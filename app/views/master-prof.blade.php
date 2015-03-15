@@ -38,7 +38,7 @@
 
         <div id="barra" style="height: 50px; width: 100%; background: #089F01; position: fixed;"></div>
         <header class="header" style="max-width: 1300px; height: 50px; margin: auto; position=fixed;">
-            <a href="/professor/home/" class="logo">
+            <a href="/professor/home/Ingles" class="logo">
                 Kalango
             </a>
 
@@ -94,7 +94,7 @@
             </nav>
         </header>
 
-        <div class="wrapper row-offcanvas row-offcanvas-left" style="min-height: 681px; max-width: 1300px; margin: auto; padding-top: 50px;">
+        <div class="wrapper row-offcanvas row-offcanvas-left active relative" style="min-height: 681px; max-width: 1300px; margin: auto; padding-top: 50px;">
             
             <aside class="left-side sidebar-offcanvas" style="min-height: 2323px; top: 50px;">
 
@@ -118,9 +118,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                @foreach(Idioma::all() as $idioma)
-                                <li><a href="/professor/home/{{$idioma->nome}}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> {{$idioma->nome}}</a></li>
-                            	@endforeach
+                                <li><a href="/professor/home/Ingles" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Inglês</a></li>
+                                <li><a href="/professor/home/Espanhol" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Espanhol</a></li>
                             </ul>
                         </li>
 
@@ -131,8 +130,8 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="#/professorBuscarAlunos" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Aluno</a></li>
-                                <li><a href="#/professorBuscarProfessores" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Professor</a></li>
+                                <li><a href="/professorBuscarAlunos" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Aluno</a></li>
+                                <li><a href="/professorBuscarProfessores" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Professor</a></li>
                             </ul>
                         </li>
 

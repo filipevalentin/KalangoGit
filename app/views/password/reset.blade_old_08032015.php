@@ -35,9 +35,9 @@
                             <!-- Pode colocar #Id's nos elementosque ainda não tem um para funcionar no seu código, se já tiver um id é melhor mudar o seu para não dar erro no form aqui-->
                             <form class="form-signin" action="{{ action('RemindersController@postReset') }}" method="POST">
                                 <input class="form-control" type="hidden" name="token" value="{{ $token }}">
-                                <input class="form-control" placeholder="E-mail" type="email" name="email" autocomplete="off" required>
-                                <input class="form-control" placeholder="Nova Senha" type="password" name="password" required>
-                                <input class="form-control" placeholder="Confirme a Nova Senha" type="password" name="password_confirmation">
+                                <input class="form-control" placeholder="email" type="email" name="email">
+                                <input class="form-control" placeholder="nova senha" type="password" name="password">
+                                <input class="form-control" placeholder="confirme a senha" type="password" name="password_confirmation">
                                 <input class="form-control" type="submit" value="Resetar Senha">
                             </form>
 
@@ -70,5 +70,7 @@ $( document ).ready(function() {
     });
 });
 </script>
-</body>
-</html>
+
+
+
+</body></html>

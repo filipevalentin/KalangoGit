@@ -38,22 +38,16 @@
 			                            <div class="box-body">
 			                        
 			                                	@foreach ($aula->materialApoio as $material)
-				                                	<div class="alert alert-success alert-dismissable" style="min-height: 55px;">
+				                                	<div class="alert alert-success alert-dismissable">
 				                                        <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
-				                                        <p style="float:left;">{{$material->nome}}</p>
-				                                        <div class="box-tools pull-right">
-                                                        	<a href="/Viewer#/{{$material->url}}"><button class="btn btn-primary btn-xs"><i class="fa fa-external-link"></i></button></a>
-                                                        </div>
+				                                        <p>{{$material->nome}}</p>
 				                                    </div>
 			                                	@endforeach
 
-			                                	@foreach ($aula->atividades as $atividade)
-			                                		<div class="alert alert-info alert-dismissable" style="min-height: 55px;">
+			                                	@foreach ($aula->exercicios as $exercicio)
+			                                		<div class="alert alert-info alert-dismissable">
 				                                        <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
-				                                        <p style="float:left;">{{$atividade->nome}}</p>
-				                                        <div class="box-tools pull-right">
-                                                        	<a href="/aluno/atividade/{{$atividade->id}}"><button class="btn btn-primary btn-xs"><i class="fa fa-external-link"></i></button></a>
-                                                        </div>
+				                                        <p>{{$exercicio->nome}}</p>
 				                                    </div>
 			                                	@endforeach
 

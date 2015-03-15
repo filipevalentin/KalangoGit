@@ -1,4 +1,4 @@
-@extends('master-prof')
+@extends('master-admin')
 
 @section('maincontent')
     <section class="content-header">
@@ -42,7 +42,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-3 center" style="text-align: center">  <!-- FotoPerfil+Botões -->
                                         <span class="profile-picture">
-                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" {{'src="'.$professor->urlImagem.'"'}} >
+                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="height: 200px;" {{'src="'.$professor->urlImagem.'"'}} >
                                         </span>
 
                                         <div class="space space-4"></div></br>

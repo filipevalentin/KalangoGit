@@ -1,4 +1,4 @@
-@extends('master-prof')
+@extends('master-admin')
 
 @section('modals')
 
@@ -12,17 +12,13 @@
                 <h4 class="modal-title" id="exampleModalLabel">Editar Módulo</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/atualizarModulo">
+                <form method="POST" action="/admin/atualizarModulo">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
                     <div class="form-group">
                         <label for="nome" class="control-label">Nome</label>
                         <input type="text" id="nome" name="nome" class="form-control"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao" class="control-label">Descrição</label>
-                        <input type="text" id="descricao" name="descricao" class="form-control"></input>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -43,7 +39,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Editar Turma</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form method="POST" action="/admin/atualizarTurma">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
@@ -81,7 +77,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Editar Curso</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/atualizarCurso">
+                <form method="POST" action="/admin/atualizarCurso">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
@@ -90,12 +86,12 @@
                         <input type="text" id="nome" name="nome" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="descricao" class="control-label">Descrição</label>
-                        <input type="text" id="descricao" name="descricao" class="form-control"></input>
-                    </div>
-                    <div class="form-group">
                         <label for="idioma" class="control-label">Idioma</label>
-                        <input type="text" id="idioma" name="idioma" class="form-control"></input>
+                        <select id="idioma" name="idioma" class="form-control">
+                          @foreach(Idioma::all() as $idioma)
+                            <option value={{$idioma->id}}>{{$idioma->nome}}</option>
+                          @endforeach
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -116,7 +112,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Novo Curso</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/criarCurso">
+                <form method="POST" action="/admin/criarCurso">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
@@ -125,14 +121,11 @@
                         <input type="text" id="nome" name="nome" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="descricao" class="control-label">Descrição</label>
-                        <input type="text" id="descricao" name="descricao" class="form-control"></input>
-                    </div>
-                    <div class="form-group">
                         <label for="idioma" class="control-label">Idioma</label>
                         <select id="idioma" name="idioma" class="form-control">
-                          <option value="Inglês">Inglês</option>
-                          <option value="Espanhol">Espanhol</option>
+                          @foreach(Idioma::all() as $idioma)
+                            <option value={{$idioma->id}}>{{$idioma->nome}}</option>
+                          @endforeach
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -154,7 +147,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Nova Turma</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/criarTurma">
+                <form method="POST" action="/admin/criarTurma">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="idmodulo" name="idModulo">
                     </div>
@@ -189,17 +182,13 @@
                 <h4 class="modal-title" id="exampleModalLabel">Novo Módulo</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/criarModulo">
+                <form method="POST" action="/admin/criarModulo">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="idcurso" name="idCurso">
                     </div>
                     <div class="form-group">
                         <label for="nome" class="control-label">Nome</label>
                         <input type="text" id="nome" name="nome" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao" class="control-label">Descrição</label>
-                        <input type="text" id="descricao" name="descricao" class="form-control"></input>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -231,6 +220,9 @@
             <div class="box box-solid">
                 <div class="box-header">
                     <h3 class="box-title">Cursos</h3>
+                    <div class="box-tools pull-right" style="padding: 10px 20px 5px 5px;">
+                        <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarcurso" ><i class="fa fa-plus"></i></button>
+                    </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -247,9 +239,14 @@
                                     <div class="box-body">
                                         <div class="small-box bg-blue">
                                             <div class="inner">
+                                                <div class="box-tools pull-right" style="padding-top: 8px;">
+                                
+                                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarcurso" data-id="{{$cursosArray[$j]['id']}}" data-nome="{{$cursosArray[$j]['nome']}}" data-idioma="{{$cursosArray[$j]['idIdioma']}}"><i class="fa fa-pencil"></i></button>
+                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+                                                </div>
                                                 <div class="curso" style="cursor:pointer;" id="{{$cursosArray[$j]['id']}}">
                                                     <h4 style="font-size: 20px;">{{$cursosArray[$j]['nome']}}</h4>
-                                                    <p style="margin:0px;">{{$turmas->count()}} Turmas</p>
+                                                    <p style="margin:0px;">{{$cursos->find($cursosArray[$j]['id'])->turmas->count()}} Turmas</p>
                                                 </div>
                                             </div>
 
@@ -282,41 +279,57 @@
                 <div class="box box-solid">
                     <div class="box-header">
                         <h3 class="box-title">Módulos</h3>
+                        <div class="box-tools pull-right" style="padding: 10px 20px 5px 5px;">
+                            <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarmodulo" data-idcurso="{{$curso->id}}"><i class="fa fa-plus"></i></button>
+                        </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="box-group" id="accordion">
                             <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
 
-                        @foreach($turmas as $turma)
+                        @foreach($curso->modulos as $modulo)    
                             <div class="panel box box-primary">
                                 <div class="box-header">
                                     <h4 class="box-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#Modulo{{$turma->modulo->id}}">
-                                            {{$turma->modulo->nome}}
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#Modulo{{$modulo->id}}">
+                                            {{$modulo->nome}}
                                         </a>
                                     </h4>
                                     <div class="box-tools pull-right" style="padding-top: 8px;">
-                                        <a href="/professor/modulo/{{$turma->modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
+                                        <a href="modulo/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
+                                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarmodulo" data-id="{{$modulo->id}}" data-nome="{{$modulo->nome}}"><i class="fa fa-pencil"></i></button>
+                                        <button class="btn btn-danger btn-sm" ><i class="fa fa-times"></i></button>
                                     </div>
                                 </div>
-                                <div id="Modulo{{$turma->modulo->id}}" class="panel-collapse collapse">
+                                <div id="Modulo{{$modulo->id}}" class="panel-collapse collapse">
                                     <div class="row">
 
+                                    @foreach($modulo->turmas as $turma)
                                         <div class="col-md-3">
                                             <div class="box-body">
                                                 <div class="small-box bg-blue">
                                                     <div class="inner">
-                                                        <a href="/professor/moduloTurma/{{$turma->modulo->id}}/{{$turma->id}}" style="color: inherit;" class="turma">
+                                                        <div class="box-tools pull-right" style="padding-top: 8px;">
+                                        
+                                                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarturma" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" data-professor="{{User::find($turma->professor->id)->nome}}" data-idprofessor="{{$turma->professor->id}}"><i class="fa fa-pencil"></i></button>
+                                                            <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+                                                        </div>
+                                                        <a href="turma/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">
                                                             <h4 style="font-size: 20px;">{{$turma->nome}}</h4>
-                                                            <p>{{$turma->alunos->count()." Alunos"}}</p>
+                                                            <p>{{TurmasAluno::where('idTurma', '=', $turma->id)->count()." Alunos"}}</p>
                                                             <p style="margin:0px;">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</p>
                                                         </a>
                                                     </div>
-                                                    <a href="/professor/turma/{{$turma->id}}" class="small-box-footer">Ver Alunos <i class="fa fa-arrow-circle-right"></i></a>
+
+                                                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
+                                    @endforeach
 
+                                        <div class="box-tools pull-right" style="padding: 100px 25px 5px 5px;">
+                                            <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarturma" data-idmodulo="{{$modulo->id}}"><i class="fa fa-plus"></i></button>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -341,14 +354,12 @@
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var dataid = button.data('id')
                 var datanome = button.data('nome')
-                var datadescricao = button.data('descricao') // Extract info from data-* attributes
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                 var modal = $(this)
                 modal.find('.modal-title').text('Editar Módulo ' + dataid)
                 modal.find('#id').val(dataid)
                 modal.find('#nome').val(datanome)
-                modal.find('#descricao').val(datadescricao)
                 })
 
             $('#editarturma').on('show.bs.modal', function (event) {
@@ -369,7 +380,6 @@
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var dataid = button.data('id')
                 var datanome = button.data('nome')
-                var datadescricao = button.data('descricao')
                 var dataidioma = button.data('idioma') // Extract info from data-* attributes
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -377,7 +387,6 @@
                 modal.find('.modal-title').text('Editar Curso ' + datanome)
                 modal.find('#id').val(dataid)
                 modal.find('#nome').val(datanome)
-                modal.find('#descricao').val(datadescricao)
                 modal.find('#idioma').val(dataidioma)
                 })
 
