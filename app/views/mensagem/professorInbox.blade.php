@@ -54,7 +54,7 @@
 						<div class="input-group">
 							<span class="input-group-addon">Para:</span>
 							<input class="form-control" type="text" id="nomeDestino" value="" disabled>
-							<input type="hidden" id="idUsuarioDestino" value="" disabled>
+							<input type="hidden" id="idUsuarioDestino" value="">
 						</div>
 					</div>
 					<div class="form-group">
