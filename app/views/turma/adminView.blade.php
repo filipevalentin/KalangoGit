@@ -16,9 +16,9 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="idTurma" name="idTurma" value="{{$turma->id}}">
                     </div>
-                    <div class="form-group">
-                        <label for="Aluno" class="control-label">Selecione o Aluno:</label>
-                        <select name="idAluno" id="idAluno" class="form-control">
+                    <div id="div_aluno" class="form-group">
+                        <label class="control-label" for="Aluno"><i id="icone_aluno" class="fa"></i> Selecione o Aluno:</label>
+                        <select name="idAluno" id="idAluno" onblur="fcn_recarregaCores();" class="form-control alunoObrigatorio">
                         @foreach(Aluno::all() as $aluno)
                           <option value="{{$aluno->id}}">{{$aluno->matricula}} - {{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</option>
                         @endforeach
@@ -26,7 +26,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
+                        <input type="submit" class="btn btn-primary btn-salvar" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -101,10 +101,53 @@
 
         <script>
            
-
             $('.item').first().addClass("active")
-
+			
         </script>
+		
+		<script> //Validações
+			
+			$(".btn-salvar").click(function(event){
+				
+				var obrigatorioPendente = 0;
+	
+				if($(".alunoObrigatorio").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_aluno" ).removeClass("has-success");
+					$( "#icone_aluno" ).removeClass("fa-check");
+					$( "#div_aluno" ).addClass("has-error");
+					$( "#icone_aluno" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_aluno" ).removeClass("has-error");
+					$( "#icone_aluno" ).removeClass("fa-times-circle-o");
+					$( "#div_aluno" ).addClass("has-success");
+					$( "#icone_aluno" ).addClass("fa-check");
+				}
+				
+				if(obrigatorioPendente == 1){
+					alert("É necessário preencher todos os campos obrigatórios!");
+					return false;
+				}
+				
+			})
+			
+			function fcn_recarregaCores(){
+				
+				if($(".alunoObrigatorio").val() == ""){
+					$( "#div_aluno" ).removeClass("has-success");
+					$( "#icone_aluno" ).removeClass("fa-check");
+					$( "#div_aluno" ).addClass("has-error");
+					$( "#icone_aluno" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_aluno" ).removeClass("has-error");
+					$( "#icone_aluno" ).removeClass("fa-times-circle-o");
+					$( "#div_aluno" ).addClass("has-success");
+					$( "#icone_aluno" ).addClass("fa-check");
+				}
+				
+			}
+			
+		</script>
     @endsection
 
 @endsection
