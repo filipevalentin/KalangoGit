@@ -87,7 +87,11 @@
                     </div>
                     <div id="div_idioma-editar-curso" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_idioma-editar-curso" class="fa"></i> Idioma</label>
-                        <input type="text" autocomplete="off" id="idioma" name="idioma" maxlength="50" onblur="fcn_recarregaCoresEditarCurso();" class="form-control idiomaObrigatorio-editar-idioma"></input>
+                        <select id="idioma" name="idioma" class="form-control">
+                            @foreach(Idioma::all() as $idioma)
+                                <option value={{$idioma->id}}>{{$idioma->nome}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -118,9 +122,10 @@
                     </div>
                     <div id="div_idioma-novo-curso" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_idioma-novo-curso" class="fa"></i> Idioma</label>
-                        <select id="idioma" name="idioma" onblur="fcn_recarregaCoresNovoCurso();" class="form-control idiomaObrigatorio-novo-curso">
-                          <option value="Inglês">Inglês</option>
-                          <option value="Espanhol">Espanhol</option>
+                        <select id="idioma" name="idioma" class="form-control">
+                          @foreach(Idioma::all() as $idioma)
+                            <option value={{$idioma->id}}>{{$idioma->nome}}</option>
+                          @endforeach
                         </select>
                     </div>
                     <div class="modal-footer">

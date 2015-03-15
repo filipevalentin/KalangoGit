@@ -161,7 +161,7 @@
 												</td>
 												<td class="subject"> <!-- Assunto -->
 													<div class="box-tools pull-right" style="padding-top: 8px;">
-	                                                    <button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idDestino="{{$mensagem->idUsuarioOrgiem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrgiem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
+	                                                    <button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idUsuarioDestino="{{$mensagem->idUsuarioOrgiem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrgiem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
 	                                                </div>
 												</td>
 											</tr></a>
@@ -203,14 +203,14 @@
 
     $('#responder').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        var idUsuarioDestino = button.data('iddestino');
+        var idUsuarioDestino = button.data('idusuariodestino');
         var nomeDestino = button.data('nomedestino');
         var idRE = button.data('idre');
         var titulo = button.data('titulo');
 
         var modal = $(this);
 
-        modal.find('#idDestino').val(idUsuarioDestino);
+        modal.find('#idUsuarioDestino').val(idUsuarioDestino);
         modal.find('#idRE').val(idRE);
         modal.find('#titulo').val(titulo);
         modal.find('#nomeDestino').val(nomeDestino);

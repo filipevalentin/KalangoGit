@@ -32,7 +32,7 @@
                     </div>
                     <div id="div_texto-multipla-editar-questao" class="form-group">
                         <label class="control-label" for="textopergunta"><i id="icone_texto-multipla-editar-questao" class="fa"></i> Texto da Pergunta</label>
-                        <textarea id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control textoPerguntaObrigatoria-multipla-editar-questao" rows="3" ></textarea>
+                        <nput id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control textoPerguntaObrigatoria-multipla-editar-questao" rows="3" >
                     </div>
                     <div id="div_arquivoPergunta-multipla-editar-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-multipla-editar-questao" class="fa"></i> Arquivo</label>
@@ -112,7 +112,7 @@
                     </div>
                     <div id="div_texto-dissertativa-editar-questao" class="form-group">
                         <label class="control-label" for="textoPergunta"><i id="icone_texto-dissertativa-editar-questao" class="fa"></i> Texto da Pergunta</label>
-                        <textarea id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control textoPerguntaObrigatoria-dissertativa-editar-questao" rows="3" ></textarea>
+                        <input id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control textoPerguntaObrigatoria-dissertativa-editar-questao" rows="3" >
                     </div>
                     <div id="div_arquivoPergunta-dissertativa-editar-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-dissertativa-editar-questao" class="fa"></i> Arquivo</label>
@@ -171,7 +171,7 @@
                     </div>
                     <div id="div_texto-multipla-nova-questao" class="form-group">
                         <label class="control-label" for="textoPergunta"><i id="icone_texto-multipla-nova-questao" class="fa"></i> Texto da Pergunta</label>
-                        <textarea id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresMultiplaNovaQuestao();" class="form-control textoPerguntaObrigatoria-multipla-nova-questao"></textarea>
+                        <input id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresMultiplaNovaQuestao();" class="form-control textoPerguntaObrigatoria-multipla-nova-questao">
                     </div>
                     <div id="div_arquivoPergunta-multipla-nova-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-multipla-nova-questao" class="fa"></i> Arquivo</label>
@@ -242,7 +242,7 @@
                     </div>
                     <div id="div_texto-dissertativa-nova-questao" class="form-group">
                         <label class="control-label" for="textoPergunta"><i id="icone_texto-dissertativa-nova-questao" class="fa"></i> Texto da Pergunta</label>
-                        <textarea id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control textoPerguntaObrigatoria-dissertativa-nova-questao" rows="3" ></textarea>
+                        <input id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control textoPerguntaObrigatoria-dissertativa-nova-questao" rows="3" >
                     </div>
                     <div id="div_arquivoPergunta-dissertativa-nova-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-dissertativa-nova-questao" class="fa"></i> Arquivo</label>

@@ -54,7 +54,7 @@
 						<div class="input-group">
 							<span class="input-group-addon">Para:</span>
 							<input class="form-control" type="text" id="nomeDestino" value="" disabled>
-							<input type="hidden" id="idUsuarioDestino" value="" disabled>
+							<input type="hidden" id="idUsuarioDestino" name="idUsuarioDestino" value="" disabled>
 						</div>
 					</div>
 					<div class="form-group">
@@ -105,10 +105,12 @@
 								<div style="margin-top: 15px;">
 									<ul class="nav nav-pills nav-stacked">
 										<li class="header">Pastas</li>
-										<?php global $count; ?> 
-										<?php $mensagens->each(function($mensagem){
+										<?php global $count; 
+											$inbox= Mensagem::where('idUsuarioDestino', '=', Auth::user()->id)->get(); 
+										?> 
+										<?php $inbox->each(function($mensagem){
 											global $count;
-											if($mensagem->lida==0){
+											if($mensagem->lida!=1){
 												$count++;
 											}
 										}) ?>
@@ -145,26 +147,22 @@
 									<table class="table table-mailbox">
 										<tbody>
 										@foreach($mensagens as $mensagem)
-											@if($mensagem->lida!="1")
-												<tr class="unread">
-											@else
-												<tr>
-											@endif
+											<tr>
 												<td class="small-col"> <!-- Checkbox -->
-													De:
+													Para:
 												</td>
 												<td class="name"> <!-- Remetente -->
-													<a href="/professor/mensagem/{{$mensagem->id}}">{{User::find($mensagem->idUsuarioOrgiem)->nome}}</a>
+													<a href="/professor/mensagem/{{$mensagem->id}}">{{User::find($mensagem->idUsuarioDestino)->nome}}</a>
 												</td>
 												<td class="subject"> <!-- Assunto -->
 													<a href="/professor/mensagem/{{$mensagem->id}}">{{$mensagem->titulo}}</a>
 												</td>
 												<td>
 													<div class="box-tools pull-right" style="padding-top: 8px;">
-	                                                    <button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idDestino="{{$mensagem->idUsuarioOrgiem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrgiem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
+	                                                    <button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idUsuarioDestino="{{$mensagem->idUsuarioOrgiem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrgiem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
 	                                                </div>
 												</td>
-											</tr></a>
+											</tr>
 										@endforeach
 
 										</tbody>
@@ -203,14 +201,14 @@
 
     $('#responder').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        var idUsuarioDestino = button.data('iddestino');
+        var idUsuarioDestino = button.data('idusuariodestino');
         var nomeDestino = button.data('nomedestino');
         var idRE = button.data('idre');
         var titulo = button.data('titulo');
 
         var modal = $(this);
 
-        modal.find('#idDestino').val(idUsuarioDestino);
+        modal.find('#idUsuarioDestino').val(idUsuarioDestino);
         modal.find('#idRE').val(idRE);
         modal.find('#titulo').val(titulo);
         modal.find('#nomeDestino').val(nomeDestino);
