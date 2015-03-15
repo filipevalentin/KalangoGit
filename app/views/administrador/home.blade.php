@@ -16,13 +16,13 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></input>
+                    <div id="div_nome-editar-modulo" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome-editar-modulo" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" maxlength="50" id="nome" name="nome" onblur="fcn_recarregaCoresEditarModulo();" class="form-control somenteLetras nomeObrigatorio-editar-modulo" onblur="fcn_recarregaCoresEditarModulo();" >
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
+                        <input type="submit" class="btn btn-primary btn-salvar-editar-modulo" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -46,13 +46,13 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="idprofessor" name="idprofessor">
                     </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
+                    <div id="div_nome-editar-turma" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome-editar-turma" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresEditarTurma();" class="form-control nomeObrigatorio-editar-turma"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="professor" class="control-label">Professor</label>
-                        <select id="idprofessor" name="idprofessor" class="form-control">
+                    <div id="div_professor-editar-turma" class="form-group">
+                        <label class="control-label" for="professor"><i id="icone_professor-editar-turma" class="fa"></i> Professor</label>
+                        <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresEditarTurma();" class="form-control professorObrigatorio-editar-turma">
                         @foreach(Professor::all() as $professor)
                             <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
                         @endforeach
@@ -60,7 +60,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
+                        <input type="submit" class="btn btn-primary btn-salvar-editar-turma" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -81,21 +81,21 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
+                    <div id="div_nome-editar-curso" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome-editar-curso" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarCurso();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-editar-curso" ></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="idioma" class="control-label">Idioma</label>
+                    <div id="div_idioma-editar-curso" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_idioma-editar-curso" class="fa"></i> Idioma</label>
                         <select id="idioma" name="idioma" class="form-control">
-                          @foreach(Idioma::all() as $idioma)
-                            <option value={{$idioma->id}}>{{$idioma->nome}}</option>
-                          @endforeach
+                            @foreach(Idioma::all() as $idioma)
+                                <option value={{$idioma->id}}>{{$idioma->nome}}</option>
+                            @endforeach
                         </select>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
+                        <input type="submit" class="btn btn-primary btn-salvar-editar-curso" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -116,12 +116,12 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
+                    <div id="div_nome-novo-curso" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome-novo-curso" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoCurso();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-novo-curso">
                     </div>
-                    <div class="form-group">
-                        <label for="idioma" class="control-label">Idioma</label>
+                    <div id="div_idioma-novo-curso" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_idioma-novo-curso" class="fa"></i> Idioma</label>
                         <select id="idioma" name="idioma" class="form-control">
                           @foreach(Idioma::all() as $idioma)
                             <option value={{$idioma->id}}>{{$idioma->nome}}</option>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
+                        <input type="submit" class="btn btn-primary btn-salvar-novo-curso" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -151,13 +151,13 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="idmodulo" name="idModulo">
                     </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
+                    <div id="div_nome-nova-turma" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome-nova-turma" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresNovaTurma();" class="form-control nomeObrigatorio-nova-turma"></textarea>
                     </div>
-                    <div class="form-group">
-                        <label for="professor" class="control-label">Professor</label>
-                        <select id="idprofessor" name="idprofessor" class="form-control">
+                    <div id="div_professor-nova-turma" class="form-group">
+                        <label class="control-label" for="professor"><i id="icone_professor-nova-turma" class="fa"></i> Professor</label>
+                        <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresNovaTurma();" class="form-control professorObrigatorio-nova-turma">
                             <option value="" disabled>Selecione um Professor</option>
                         @foreach(Professor::all() as $professor)
                             <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
@@ -166,7 +166,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
+                        <input type="submit" class="btn btn-primary btn-salvar-nova-turma" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -186,13 +186,13 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="idcurso" name="idCurso">
                     </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
+                    <div id="div_nome-novo-modulo" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome-novo-modulo" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50"onblur="fcn_recarregaCoresNovoModulo();" class="form-control somenteLetras nomeObrigatorio-novo-modulo"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
+                        <input type="submit" class="btn btn-primary btn-salvar-novo-modulo" value="Salvar">
                     </div>
                 </form>
             </div>
@@ -421,6 +421,357 @@
             $('.item').first().addClass("active")
 
         </script>
+		
+		<script> //Validações
+			$( ".somenteLetras" ).keyup(function() {
+				//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
+				if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
+					var valor = $(this).val().replace(/[^a-zA-ZãÃáÁàÀâÂéÉèÈêÊíÍìÌîÎõÕóÓòÒôÔúÚùÙûÛÇç ]+/g,'');
+					$(this).val(valor);
+				}
+			});
+			
+			$(".btn-salvar-editar-modulo").click(function(event){
+			
+				var obrigatorioPendente = 0;
+			
+				if($(".nomeObrigatorio-editar-modulo").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_nome-editar-modulo" ).removeClass("has-success");
+					$( "#icone_nome-editar-modulo" ).removeClass("fa-check");
+					$( "#div_nome-editar-modulo" ).addClass("has-error");
+					$( "#icone_nome-editar-modulo" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-editar-modulo" ).removeClass("has-error");
+					$( "#icone_nome-editar-modulo" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-editar-modulo" ).addClass("has-success");
+					$( "#icone_nome-editar-modulo" ).addClass("fa-check");
+				}
+				
+				if(obrigatorioPendente == 1){
+					alert("É necessário preencher todos os campos obrigatórios!");
+					return false;
+				}
+				
+			})
+			
+			$(".btn-salvar-editar-turma").click(function(event){
+			
+				var obrigatorioPendente = 0;
+			
+				if($(".nomeObrigatorio-editar-turma").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_nome-editar-turma" ).removeClass("has-success");
+					$( "#icone_nome-editar-turma" ).removeClass("fa-check");
+					$( "#div_nome-editar-turma" ).addClass("has-error");
+					$( "#icone_nome-editar-turma" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-editar-turma" ).removeClass("has-error");
+					$( "#icone_nome-editar-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-editar-turma" ).addClass("has-success");
+					$( "#icone_nome-editar-turma" ).addClass("fa-check");
+				}
+				
+				if($(".professorObrigatorio-editar-turma").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_professor-editar-turma" ).removeClass("has-success");
+					$( "#icone_professor-editar-turma" ).removeClass("fa-check");
+					$( "#div_professor-editar-turma" ).addClass("has-error");
+					$( "#icone_professor-editar-turma" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_professor-editar-turma" ).removeClass("has-error");
+					$( "#icone_professor-editar-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_professor-editar-turma" ).addClass("has-success");
+					$( "#icone_professor-editar-turma" ).addClass("fa-check");
+				}
+				
+				if(obrigatorioPendente == 1){
+					alert("É necessário preencher todos os campos obrigatórios!");
+					return false;
+				}
+				
+			})
+			
+			$(".btn-salvar-editar-curso").click(function(event){
+			
+				var obrigatorioPendente = 0;
+			
+				if($(".nomeObrigatorio-editar-curso").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_nome-editar-curso" ).removeClass("has-success");
+					$( "#icone_nome-editar-curso" ).removeClass("fa-check");
+					$( "#div_nome-editar-curso" ).addClass("has-error");
+					$( "#icone_nome-editar-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-editar-curso" ).removeClass("has-error");
+					$( "#icone_nome-editar-curso" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-editar-curso" ).addClass("has-success");
+					$( "#icone_nome-editar-curso" ).addClass("fa-check");
+				}
+				
+				if($(".idiomaObrigatorio-editar-idioma").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_idioma-editar-curso" ).removeClass("has-success");
+					$( "#icone_idioma-editar-curso" ).removeClass("fa-check");
+					$( "#div_idioma-editar-curso" ).addClass("has-error");
+					$( "#icone_idioma-editar-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_idioma-editar-curso" ).removeClass("has-error");
+					$( "#icone_idioma-editar-curso" ).removeClass("fa-times-circle-o");
+					$( "#div_idioma-editar-curso" ).addClass("has-success");
+					$( "#icone_idioma-editar-curso" ).addClass("fa-check");
+				}
+				
+				if(obrigatorioPendente == 1){
+					alert("É necessário preencher todos os campos obrigatórios!");
+					return false;
+				}
+				
+			})
+			
+			$(".btn-salvar-novo-curso").click(function(event){
+			
+				var obrigatorioPendente = 0;
+			
+				if($(".nomeObrigatorio-novo-curso").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_nome-novo-curso" ).removeClass("has-success");
+					$( "#icone_nome-novo-curso" ).removeClass("fa-check");
+					$( "#div_nome-novo-curso" ).addClass("has-error");
+					$( "#icone_nome-novo-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-novo-curso" ).removeClass("has-error");
+					$( "#icone_nome-novo-curso" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-novo-curso" ).addClass("has-success");
+					$( "#icone_nome-novo-curso" ).addClass("fa-check");
+				}
+				
+				if($(".idiomaObrigatorio-novo-curso").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_idioma-novo-curso" ).removeClass("has-success");
+					$( "#icone_idioma-novo-curso" ).removeClass("fa-check");
+					$( "#div_idioma-novo-curso" ).addClass("has-error");
+					$( "#icone_idioma-novo-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_idioma-novo-curso" ).removeClass("has-error");
+					$( "#icone_idioma-novo-curso" ).removeClass("fa-times-circle-o");
+					$( "#div_idioma-novo-curso" ).addClass("has-success");
+					$( "#icone_idioma-novo-curso" ).addClass("fa-check");
+				}
+				
+				if(obrigatorioPendente == 1){
+					alert("É necessário preencher todos os campos obrigatórios!");
+					return false;
+				}
+				
+			})
+			
+			$(".btn-salvar-nova-turma").click(function(event){
+			
+				var obrigatorioPendente = 0;
+			
+				if($(".nomeObrigatorio-nova-turma").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_nome-nova-turma" ).removeClass("has-success");
+					$( "#icone_nome-nova-turma" ).removeClass("fa-check");
+					$( "#div_nome-nova-turma" ).addClass("has-error");
+					$( "#icone_nome-nova-turma" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-nova-turma" ).removeClass("has-error");
+					$( "#icone_nome-nova-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-nova-turma" ).addClass("has-success");
+					$( "#icone_nome-nova-turma" ).addClass("fa-check");
+				}
+				
+				if($(".professorObrigatorio-nova-turma").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_professor-nova-turma" ).removeClass("has-success");
+					$( "#icone_idioma-novo-curso" ).removeClass("fa-check");
+					$( "#div_professor-nova-turma" ).addClass("has-error");
+					$( "#icone_idioma-novo-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_professor-nova-turma" ).removeClass("has-error");
+					$( "#icone_professor-nova-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_professor-nova-turma" ).addClass("has-success");
+					$( "#icone_professor-nova-turma" ).addClass("fa-check");
+				}
+				
+				if(obrigatorioPendente == 1){
+					alert("É necessário preencher todos os campos obrigatórios!");
+					return false;
+				}
+				
+			})
+			
+			$(".btn-salvar-novo-modulo").click(function(event){
+			
+				var obrigatorioPendente = 0;
+			
+				if($(".nomeObrigatorio-novo-modulo").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_nome-novo-modulo" ).removeClass("has-success");
+					$( "#icone_nome-novo-modulo" ).removeClass("fa-check");
+					$( "#div_nome-novo-modulo" ).addClass("has-error");
+					$( "#icone_nome-novo-modulo" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-novo-modulo" ).removeClass("has-error");
+					$( "#icone_nome-novo-modulo" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-novo-modulo" ).addClass("has-success");
+					$( "#icone_nome-novo-modulo" ).addClass("fa-check");
+				}
+				
+				if(obrigatorioPendente == 1){
+					alert("É necessário preencher todos os campos obrigatórios!");
+					return false;
+				}
+				
+			})
+			
+			function fcn_recarregaCoresEditarModulo(){
+				
+				if($(".nomeObrigatorio-editar-modulo").val() == ""){
+					$( "#div_nome-editar-modulo" ).removeClass("has-success");
+					$( "#icone_nome-editar-modulo" ).removeClass("fa-check");
+					$( "#div_nome-editar-modulo" ).addClass("has-error");
+					$( "#icone_nome-editar-modulo" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-editar-modulo" ).removeClass("has-error");
+					$( "#icone_nome-editar-modulo" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-editar-modulo" ).addClass("has-success");
+					$( "#icone_nome-editar-modulo" ).addClass("fa-check");
+				}
+				
+			}
+			
+			function fcn_recarregaCoresEditarTurma(){
+				
+				if($(".nomeObrigatorio-editar-turma").val() == ""){
+					$( "#div_nome-editar-turma" ).removeClass("has-success");
+					$( "#icone_nome-editar-turma" ).removeClass("fa-check");
+					$( "#div_nome-editar-turma" ).addClass("has-error");
+					$( "#icone_nome-editar-turma" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-editar-turma" ).removeClass("has-error");
+					$( "#icone_nome-editar-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-editar-turma" ).addClass("has-success");
+					$( "#icone_nome-editar-turma" ).addClass("fa-check");
+				}
+				
+				if($(".professorObrigatorio-editar-turma").val() == ""){
+					$( "#div_professor-editar-turma" ).removeClass("has-success");
+					$( "#icone_professor-editar-turma" ).removeClass("fa-check");
+					$( "#div_professor-editar-turma" ).addClass("has-error");
+					$( "#icone_professor-editar-turma" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_professor-editar-turma" ).removeClass("has-error");
+					$( "#icone_professor-editar-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_professor-editar-turma" ).addClass("has-success");
+					$( "#icone_professor-editar-turma" ).addClass("fa-check");
+				}
+				
+			}
+			
+			function fcn_recarregaCoresEditarCurso(){
+				
+				if($(".nomeObrigatorio-editar-curso").val() == ""){
+					$( "#div_nome-editar-curso" ).removeClass("has-success");
+					$( "#icone_nome-editar-curso" ).removeClass("fa-check");
+					$( "#div_nome-editar-curso" ).addClass("has-error");
+					$( "#icone_nome-editar-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-editar-curso" ).removeClass("has-error");
+					$( "#icone_nome-editar-curso" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-editar-curso" ).addClass("has-success");
+					$( "#icone_nome-editar-curso" ).addClass("fa-check");
+				}
+				
+				if($(".idiomaObrigatorio-editar-idioma").val() == ""){
+					$( "#div_idioma-editar-curso" ).removeClass("has-success");
+					$( "#icone_idioma-editar-curso" ).removeClass("fa-check");
+					$( "#div_idioma-editar-curso" ).addClass("has-error");
+					$( "#icone_idioma-editar-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_idioma-editar-curso" ).removeClass("has-error");
+					$( "#icone_idioma-editar-curso" ).removeClass("fa-times-circle-o");
+					$( "#div_idioma-editar-curso" ).addClass("has-success");
+					$( "#icone_idioma-editar-curso" ).addClass("fa-check");
+				}
+				
+			}
+			
+			function fcn_recarregaCoresNovoCurso(){
+			
+				if($(".nomeObrigatorio-novo-curso").val() == ""){
+					$( "#div_nome-novo-curso" ).removeClass("has-success");
+					$( "#icone_nome-novo-curso" ).removeClass("fa-check");
+					$( "#div_nome-novo-curso" ).addClass("has-error");
+					$( "#icone_nome-novo-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-novo-curso" ).removeClass("has-error");
+					$( "#icone_nome-novo-curso" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-novo-curso" ).addClass("has-success");
+					$( "#icone_nome-novo-curso" ).addClass("fa-check");
+				}
+				
+				if($(".idiomaObrigatorio-novo-curso").val() == ""){
+					$( "#div_idioma-novo-curso" ).removeClass("has-success");
+					$( "#icone_idioma-novo-curso" ).removeClass("fa-check");
+					$( "#div_idioma-novo-curso" ).addClass("has-error");
+					$( "#icone_idioma-novo-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_idioma-novo-curso" ).removeClass("has-error");
+					$( "#icone_idioma-novo-curso" ).removeClass("fa-times-circle-o");
+					$( "#div_idioma-novo-curso" ).addClass("has-success");
+					$( "#icone_idioma-novo-curso" ).addClass("fa-check");
+				}
+			
+			}
+			
+			function fcn_recarregaCoresNovaTurma(){
+				
+				if($(".nomeObrigatorio-nova-turma").val() == ""){
+					$( "#div_nome-nova-turma" ).removeClass("has-success");
+					$( "#icone_nome-nova-turma" ).removeClass("fa-check");
+					$( "#div_nome-nova-turma" ).addClass("has-error");
+					$( "#icone_nome-nova-turma" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-nova-turma" ).removeClass("has-error");
+					$( "#icone_nome-nova-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-nova-turma" ).addClass("has-success");
+					$( "#icone_nome-nova-turma" ).addClass("fa-check");
+				}
+				
+				if($(".professorObrigatorio-nova-turma").val() == ""){
+					$( "#div_professor-nova-turma" ).removeClass("has-success");
+					$( "#icone_idioma-novo-curso" ).removeClass("fa-check");
+					$( "#div_professor-nova-turma" ).addClass("has-error");
+					$( "#icone_idioma-novo-curso" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_professor-nova-turma" ).removeClass("has-error");
+					$( "#icone_professor-nova-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_professor-nova-turma" ).addClass("has-success");
+					$( "#icone_professor-nova-turma" ).addClass("fa-check");
+				}
+				
+			}
+			
+			function fcn_recarregaCoresNovoModulo(){
+				
+				if($(".nomeObrigatorio-novo-modulo").val() == ""){
+					$( "#div_nome-novo-modulo" ).removeClass("has-success");
+					$( "#icone_nome-novo-modulo" ).removeClass("fa-check");
+					$( "#div_nome-novo-modulo" ).addClass("has-error");
+					$( "#icone_nome-novo-modulo" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_nome-novo-modulo" ).removeClass("has-error");
+					$( "#icone_nome-novo-modulo" ).removeClass("fa-times-circle-o");
+					$( "#div_nome-novo-modulo" ).addClass("has-success");
+					$( "#icone_nome-novo-modulo" ).addClass("fa-check");
+				}
+				
+			}
+			
+		</script>
     @endsection
 
 @endsection
