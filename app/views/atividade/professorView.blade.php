@@ -24,12 +24,12 @@
             <div class="col-md-8">
                 <div class="box box-solid">
                     <div class="box-header">
-                        <h3 class="box-title">{{$atividade->nome}}</h3>
+                        <h3 class="box-title">{{$atividades->nome}}</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="box-group" id="accordion">
                         <?php $aux = 1;
-                            $questoes = $atividade->questoes->sortBy('id');
+                            $questoes = $atividades->questoes->sortBy('id');
                         ?>
                             
                             @if($questoes->count() == 0)

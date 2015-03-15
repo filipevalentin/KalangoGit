@@ -4,213 +4,6 @@
 
 <!--  ### MODALS ### -->
 
-<div class="modal fade" id="editarmodulo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar Módulo</h4>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="/atualizarModulo">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="id" name="id">
-                    </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao" class="control-label">Descrição</label>
-                        <input type="text" id="descricao" name="descricao" class="form-control"></input>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
-                    </div>
-                </form>
-            </div>
-            
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="editarturma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar Turma</h4>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="id" name="id">
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="idprofessor" name="idprofessor">
-                    </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="professor" class="control-label">Professor</label>
-                        <select id="idprofessor" name="idprofessor" class="form-control">
-                        @foreach(Professor::all() as $professor)
-                            <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
-                        @endforeach
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
-                    </div>
-                </form>
-            </div>
-            
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="editarcurso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar Curso</h4>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="/atualizarCurso">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="id" name="id">
-                    </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao" class="control-label">Descrição</label>
-                        <input type="text" id="descricao" name="descricao" class="form-control"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="idioma" class="control-label">Idioma</label>
-                        <input type="text" id="idioma" name="idioma" class="form-control"></input>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
-                    </div>
-                </form>
-            </div>
-            
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="criarcurso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Novo Curso</h4>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="/criarCurso">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="id" name="id">
-                    </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao" class="control-label">Descrição</label>
-                        <input type="text" id="descricao" name="descricao" class="form-control"></input>
-                    </div>
-                    <div class="form-group">
-                        <label for="idioma" class="control-label">Idioma</label>
-                        <select id="idioma" name="idioma" class="form-control">
-                          <option value="Inglês">Inglês</option>
-                          <option value="Espanhol">Espanhol</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
-                    </div>
-                </form>
-            </div>
-            
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="criarturma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Nova Turma</h4>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="/criarTurma">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="idmodulo" name="idModulo">
-                    </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="professor" class="control-label">Professor</label>
-                        <select id="idprofessor" name="idprofessor" class="form-control">
-                            <option value="" disabled>Selecione um Professor</option>
-                        @foreach(Professor::all() as $professor)
-                            <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
-                        @endforeach
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="criarmodulo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Novo Módulo</h4>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="/criarModulo">
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="idcurso" name="idCurso">
-                    </div>
-                    <div class="form-group">
-                        <label for="nome" class="control-label">Nome</label>
-                        <input type="text" id="nome" name="nome" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="descricao" class="control-label">Descrição</label>
-                        <input type="text" id="descricao" name="descricao" class="form-control"></input>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary" value="Salvar">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 @endsection
 
 
@@ -287,36 +80,42 @@
                         <div class="box-group" id="accordion">
                             <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
 
-                        @foreach($turmas as $turma)
+                        @foreach($curso->modulos as $modulo)    
                             <div class="panel box box-primary">
                                 <div class="box-header">
                                     <h4 class="box-title">
-                                        <a data-toggle="collapse" data-parent="#accordion" href="#Modulo{{$turma->modulo->id}}">
-                                            {{$turma->modulo->nome}}
+                                        <a data-toggle="collapse" data-parent="#accordion" href="#Modulo{{$modulo->id}}">
+                                            {{$modulo->nome}}
                                         </a>
                                     </h4>
                                     <div class="box-tools pull-right" style="padding-top: 8px;">
-                                        <a href="/professor/modulo/{{$turma->modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
+                                        <a href="/professor/modulo/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
                                     </div>
                                 </div>
-                                <div id="Modulo{{$turma->modulo->id}}" class="panel-collapse collapse">
+                                <div id="Modulo{{$modulo->id}}" class="panel-collapse collapse">
                                     <div class="row">
 
+                                    @foreach($modulo->turmas as $turma)
                                         <div class="col-md-3">
                                             <div class="box-body">
                                                 <div class="small-box bg-blue">
                                                     <div class="inner">
-                                                        <a href="/professor/moduloTurma/{{$turma->modulo->id}}/{{$turma->id}}" style="color: inherit;" class="turma">
+                                                        <a href="/professor/modulo/{{$modulo->id}}/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">
                                                             <h4 style="font-size: 20px;">{{$turma->nome}}</h4>
-                                                            <p>{{$turma->alunos->count()." Alunos"}}</p>
-                                                            <p style="margin:0px;">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</p>
+                                                            <p>{{TurmasAluno::where('idTurma', '=', $turma->id)->count()." Alunos"}}</p>
+                                                            <p style="margin:0px;">{{User::find($turma->professor->id)->nome . " " . User::find($turma->professor->id)->sobrenome }}</p>
                                                         </a>
                                                     </div>
-                                                    <a href="/professor/turma/{{$turma->id}}" class="small-box-footer">Ver Alunos <i class="fa fa-arrow-circle-right"></i></a>
+
+                                                    <a href="/professor/turma/{{$turma->id}}" class="small-box-footer">Ver lista de Alunos <i class="fa fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
+                                    @endforeach
 
+                                        <div class="box-tools pull-right" style="padding: 100px 25px 5px 5px;">
+                                            <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarturma" data-idmodulo="{{$modulo->id}}"><i class="fa fa-plus"></i></button>
+                                        </div>
 
                                     </div>
                                 </div>

@@ -14,8 +14,8 @@
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon">Para:</span>
-							<select class="form-control alunoObrigatorio" name="idUsuarioDestino" id="idUsuarioDestino">
-								<option value="">Selecionar Aluno</option>
+							<select class="form-control" name="idUsuarioDestino" id="idUsuarioDestino">
+								<option disabled>Selecionar Aluno</option>
 								@foreach(Auth::user()->professor->turmas as $turma)
 									<option disabled>--Turma: {{$turma->nome}} --</option>
 									@foreach($turma->alunos as $aluno)
@@ -26,14 +26,14 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo">
+						<input class="form-control" type="text" id="titulo" name="titulo" placeholder="Titulo">
 					</div>
 					<div class="form-group">
-						<textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
+						<textarea name="conteudo" id="email_message" class="form-control" placeholder="Mensagem" style="height: 120px;"></textarea>
 					</div>
 				</div>
 				<div class="modal-footer clearfix">
-					<button type="submit" class="btn btn-primary pull-right btn-enviar"><i class="fa fa-envelope"></i> Enviar</button>
+					<button type="submit" class="btn btn-primary pull-right"><i class="fa fa-envelope"></i> Enviar</button>
 					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Descartar</button>
 				</div>
 			</form>
@@ -54,21 +54,21 @@
 						<div class="input-group">
 							<span class="input-group-addon">Para:</span>
 							<input class="form-control" type="text" id="nomeDestino" value="" disabled>
-							<input type="hidden" id="idUsuarioDestino" value="" disabled>
+							<input type="hidden" id="idUsuarioDestino" name="idUsuarioDestino" value="">
 						</div>
 					</div>
 					<div class="form-group">
-						<input class="form-control tituloRespostaObrigatorio" type="text" id="titulo" name="titulo" maxlength="100" placeholder="">
+						<input class="form-control" type="text" id="titulo" name="titulo" placeholder="">
 					</div>
 					<div class="form-group">
-						<textarea name="conteudo" id="email_message" class="form-control mensagemRespostaObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
+						<textarea name="conteudo" id="email_message" class="form-control" placeholder="Mensagem" style="height: 120px;"></textarea>
 					</div>
 					<div class="form-group">
 						<input name="idRE" type="hidden" id="idRE" class="form-control" style="height: 120px;">
 					</div>
 				</div>
 				<div class="modal-footer clearfix">
-					<button type="submit" class="btn btn-primary pull-right btn-enviarResposta"><i class="fa fa-envelope"></i> Enviar</button>
+					<button type="submit" class="btn btn-primary pull-right"><i class="fa fa-envelope"></i> Enviar</button>
 					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Descartar</button>
 				</div>
 			</form>
@@ -161,7 +161,7 @@
 												</td>
 												<td class="subject"> <!-- Assunto -->
 													<div class="box-tools pull-right" style="padding-top: 8px;">
-	                                                    <button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idDestino="{{$mensagem->idUsuarioOrgiem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrgiem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
+	                                                    <button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idUsuarioDestino="{{$mensagem->idUsuarioOrgiem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrgiem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
 	                                                </div>
 												</td>
 											</tr></a>
@@ -203,60 +203,18 @@
 
     $('#responder').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
-        var idUsuarioDestino = button.data('iddestino');
+        var idUsuarioDestino = button.data('idusuariodestino');
         var nomeDestino = button.data('nomedestino');
         var idRE = button.data('idre');
         var titulo = button.data('titulo');
 
         var modal = $(this);
 
-        modal.find('#idDestino').val(idUsuarioDestino);
+        modal.find('#idUsuarioDestino').val(idUsuarioDestino);
         modal.find('#idRE').val(idRE);
         modal.find('#titulo').val(titulo);
         modal.find('#nomeDestino').val(nomeDestino);
     });
 	</script>
-	
-	<script>
-	
-		$(".btn-enviar").click(function(event){
-				
-			if($(".alunoObrigatorio").val() == ""){
-				alert("É necessário preencher o Aluno que deverá receber a mensagem!");
-				$(".alunoObrigatorio").focus();
-				return false;
-			} 
-			
-			if($(".tituloObrigatorio").val() == ""){
-				alert("É necessário preencher o Título da Mensagem!");
-				$(".tituloObrigatorio").focus();
-				return false;
-			}
 
-			if($(".mensagemObrigatoria").val() == ""){
-				alert("É necessário preencher a Mensagem!");
-				$(".mensagemObrigatoria").focus();
-				return false;
-			}			
-			
-		})
-		
-		$(".btn-enviarResposta").click(function(event){
-				
-			if($(".tituloRespostaObrigatorio").val() == ""){
-				alert("É necessário preencher o Título da Mensagem!");
-				$(".tituloRespostaObrigatorio").focus();
-				return false;
-			}
-
-			if($(".mensagemRespostaObrigatoria").val() == ""){
-				alert("É necessário preencher a Mensagem!");
-				$(".mensagemRespostaObrigatoria").focus();
-				return false;
-			}			
-			
-		})
-				
-	</script>
-	
 @endsection

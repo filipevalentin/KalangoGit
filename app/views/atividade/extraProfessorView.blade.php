@@ -18,18 +18,63 @@
 
     <div class="row">
         <div class="col-md-12">
+            <div class="box box-solid">
+
+                <div class="box-header">
+                    <h3 class="box-title">Turmas</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+
+                        @for($i=0; $i <= (int)(count($turmasArray)/5); $i++)
+        
+                            <div class="item">
+
+                            @for($j=4*$i; $j<4*$i+4 && $j<(count($turmasArray)); $j++)
+
+
+                                <div class="col-sm-3">
+                                    <div class="box-body">
+                                        <div class="small-box bg-blue">
+                                            <div class="inner">
+                                                <div class="turma" style="cursor:pointer;" data-idTurma="{{$turmasArray[$j]['id']}}">
+                                                    <h4 style="font-size: 20px;">{{$turmasArray[$j]['nome']}}</h4>
+                                                    <p style="margin:0px;">{{$turmasArray[$j]['alunosTurma']->count()}} Alunos</p>
+                                                </div>
+                                            </div>
+
+                                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            @endfor
+
+                            </div>
+                        @endfor
+
+                        </div>
+                    
+                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" style="background-image:none; width:3%;"><span class="glyphicon glyphicon-chevron-left"></span></a>
+                        
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next" style="background-image:none; width:3%;"><span class="glyphicon glyphicon-chevron-right"></span></a>
+
+                    </div>
+                </div> <!-- /.box-body -->
+            </div>
 
             <h2 class="page-header">Inglês - Teens - Módulo 1 - Aula 2</h2>
 
             <div class="col-md-8">
                 <div class="box box-solid">
                     <div class="box-header">
-                        <h3 class="box-title">{{$atividade->nome}}</h3>
+                        <h3 class="box-title">{{$exercicio->nome}}</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="box-group " id="accordion">
                         <?php $aux = 1;
-                            $questoes = $atividade->questoes->sortBy('id');
+                            $questoes = $exercicio->questoes->sortBy('numero');
                         ?>
 
                             
@@ -42,7 +87,7 @@
                             @endif
 
                             @foreach($questoes as $questao)
-                                @if($questao->tipo == "1")
+                                @if($questao->tipo == 1)
 
                                 <div class="panel box box-primary">
                                     <div class="box-header">
@@ -55,7 +100,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->titulo}}</h3>
                                                     </div>
                                                     <div class="box-body">
                                                         <?php $categoria = (string)($questao->categoria); ?>
@@ -204,7 +249,7 @@
                                 </div>
                                 @endif
 
-                                @if($questao->tipo == "2")
+                                @if($questao->tipo == 2)
 
                                 <div class="panel box box-primary ">
                                     <div class="box-header">
@@ -217,7 +262,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->titulo}}</h3>
                                                     </div>
                                                     <div class="box-body">
 
@@ -261,42 +306,48 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Relatório de Acesso - Turma {{$turma->nome}} </h3>
-                    </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <table class="table table">
-                            <tbody>
-                                <tr>
-                                    <th style="/* width: 10px */ display:none;">#</th>
-                                    <th>Nome</th>
-                                    <th>Desempenho</th>
-                                    <th>Ação</th>
-                                </tr>
-                                @foreach($alunos as $aluno)
-                                <tr id="aluno" data-respostas="<?php
-                                    for ($i=0; $i <sizeof($aluno->respostas) ; $i++) { 
-                                        echo $aluno->respostas[$i];
-                                    }
+            @foreach($turmas as $turma)
 
-                                 ?>">
-                                    <td style="display: none;">{{$aluno->matricula}}</td>
-                                    <td>{{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</td>
-                                    <td>90%</td>
-                                    <td>
-                                        <div class="box-tools" style="padding:0px">
-                                            <button>Enviar feedback</button>
-                                        </div>
-                                    </td> 
-                                </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div><!-- /.box-body -->
+                <?php $alunos = $turma->alunosTurma; ?>
+
+                <div class="col-md-4 alunosTurma" id="{{$turma->id}}" style="display: none;">
+                    <div class="box">
+                        <div class="box-header">
+                            <h3 class="box-title">Relatório de Acesso - Turma {{$turma->nome}} </h3>
+                        </div><!-- /.box-header -->
+                        <div class="box-body no-padding">
+                            <table class="table table">
+                                <tbody>
+                                    <tr>
+                                        <th style="/* width: 10px */ display:none;">#</th>
+                                        <th>Nome</th>
+                                        <th>Desempenho</th>
+                                        <th>Ação</th>
+                                    </tr>
+                                    @foreach($alunos as $aluno)
+                                    <tr id="aluno" data-respostas="<?php
+                                        for ($i=0; $i <sizeof($aluno->respostas) ; $i++) { 
+                                            echo $aluno->respostas[$i];
+                                        }
+
+                                     ?>">
+                                        <td style="display: none;">{{$aluno->matricula}}</td>
+                                        <td>{{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</td>
+                                        <td>90%</td>
+                                        <td>
+                                            <div class="box-tools" style="padding:0px">
+                                                <button>Enviar feedback</button>
+                                            </div>
+                                        </td> 
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div><!-- /.box-body -->
+                    </div>
                 </div>
-            </div>
+
+            @endforeach
 
         </div>
     </div> 
@@ -329,7 +380,21 @@
 </script>
 
 <script>
-    // *Inserir lógica na rota:-> adicionar a cada obejto aluno a info se ele respondeu um atividade ou nao, buscando no banco
+
+    $('div.turma').on('click', (function(event) {
+        var idTurma = $(this).data('idturma');
+        $('div.alunosTurma').fadeOut();
+        $('div.alunosTurma#'+idTurma).fadeIn();
+        
+        //$("div.conteudocurso[id="+id+"]").delay(401).fadeIn();
+    }));
+
+    $('.item').first().addClass("active");
+
+</script>
+
+<script>
+    // *Inserir lógica na rota:-> adicionar a cada obejto aluno a info se ele respondeu um exercicio ou nao, buscando no banco
     // ao carregar a página colocar os alunos que não respondeu com um destaque, e por no fim da lista
     // Escutar quando uma questão é clicada
 

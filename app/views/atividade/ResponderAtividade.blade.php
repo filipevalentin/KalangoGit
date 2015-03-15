@@ -302,30 +302,38 @@
 			var idAtividade = botao.parents('.respostas').data('idatividade');
 			$(this).parents('.respostas').find('button').attr("disabled","disabled");
 
-			// corrigir a questão e dar feedback: colorir a TAB conforme a correção
-			if(resposta == respostaCerta){
-				alert('Parabéns, Resposta Certa!')
-			}else{
-				alert('Opa, você errou :/')
-			}
 
-			$.get('/aluno/responder/'+numeroQuestao+'/'+idAluno+'/'+resposta, function(data){
-				console.log(data);
+			$.get('/aluno/responder/'+numeroQuestao+'/'+resposta, function(data){
+				if(data == 'negado'){
+					alert("Você já concluiu essa atividade.\nVocê será redirecionado para a página inicial");
+					window.location.href = '/aluno/home';
+				}else{
+					// corrigir a questão e dar feedback: colorir a TAB conforme a correção
+					if(resposta == respostaCerta){
+						alert('Parabéns, Resposta Certa!')
+					}else{
+						alert('Opa, você errou :/')
+					}
+					if(atual != total){
+						console.log('Questao numero '+'atual');
+						// atualiza a última questao respondida
+						$.get('/aluno/registrarAcesso/'+idAtividade+'/'+numeroQuestao);
+					}else{
+						console.log('Última Questao');
+						// se for a última questão, mudar o status do atividade para o aluno como "concluido" e redirecionar a página para a lista de atividades
+						$.get('/aluno/registrarConclusao/'+idAtividade, function(data){
+							window.history.back();
+						})
+					}
+
+					$('li.next').click();
+
+				}
 			});
 
-			// se for a primeira pergunta, mudar o status do atividade para o aluno como "Respondendo"
-			if(atual==0){
-
-			}
-
-			if(atual==total){
-
-			}
-			// se for a última questão, mudar o status do atividade para o aluno como "concluido" e redirecionar a página para a lista de atividades
-
-			$('li.next').click();
-
 		});
+
+		//$('#rootwizard').bootstrapWizard('show',;{{$questao}});
 
 		$('button.resposta').click(function() {
 
@@ -343,13 +351,6 @@
 			var idAtividade = botao.parents('.respostas').data('idatividade');
 			$(this).parents('.respostas').find('button').attr("disabled","disabled");
 
-			// corrigir a questão e dar feedback: colorir a TAB conforme a correção
-			if(resposta == respostaCerta){
-				alert('Parabéns, Resposta Certa!')
-			}else{
-				alert('Opa, você errou :/')
-			}
-
 			//substitui resposta vazias por "null" para não dar erro ao montar a url para o ajax
 			resposta = resposta.trim();
 
@@ -357,21 +358,34 @@
 				resposta = 'null';
 			}
 
-			$.get('/aluno/responder/'+numeroQuestao+'/'+idAluno+'/'+resposta, function(data){
-				console.log(data);
+			$.get('/aluno/responder/'+numeroQuestao+'/'+resposta, function(data){
+				if(data == 'negado'){
+					alert("Você já concluiu essa atividade.\nVocê será redirecionado para a página inicial");
+					window.location.href = '/aluno/home';
+				}else{
+					// corrigir a questão e dar feedback: colorir a TAB conforme a correção
+					if(resposta == respostaCerta){
+						alert('Parabéns, Resposta Certa!')
+					}else{
+						alert('Opa, você errou :/')
+					}
+					if(atual != total){
+						console.log('Questao numero '+'atual');
+						// atualiza a última questao respondida
+						$.get('/aluno/registrarAcesso/'+idAtividade+'/'+numeroQuestao);
+					}else{
+						console.log('Última Questao');
+						// se for a última questão, mudar o status do atividade para o aluno como "concluido" e redirecionar a página para a lista de atividades
+						$.get('/aluno/registrarConclusao/'+idAtividade, function(data){
+							window.history.back();
+						})
+					}
+
+					$('li.next').click();
+
+				}
 			});
 
-			// se for a primeira pergunta, mudar o status do atividade para o aluno como "Respondendo"
-			if(atual==0){
-
-			}
-
-			if(atual==total){
-
-			}
-			// se for a última questão, mudar o status do atividade para o aluno como "concluido" e redirecionar a página para a lista de atividades
-
-			$('li.next').click();
 		});
 
 		

@@ -14,7 +14,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Nova Atividade Extra</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/criarAtividadeExtra">
+                <form method="POST" action="/professor/criarAtividadeExtra">
                     <div class="form-group">
                         <label for="nome" class="control-label">Nome</label>
                         <input type="text" id="nome" name="nome" class="form-control"></textarea>
@@ -54,7 +54,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Editar Atividade Extra</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/atualizarAtividadeExtra">
+                <form method="POST" action="/professor/atualizarAtividadeExtra">
                     <div class="form-group">
                         <input type="hidden" id="id" name="id" class="form-control"></textarea>
                     </div>
@@ -183,15 +183,15 @@
                                 <div style="padding: 10px;" class="inner">
 
                                 <div class="box-tools pull-right" style="padding-top: 8px;">
-                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarAtividadeExtra" data-id="{{$atividade->id}}" data-nome="{{$atividade->titulo}}" data-idModulo="{{$atividade->idModulo}}" data-idCategoria="{{$atividade->idCategoria}}"><i class="fa fa-pencil"></i></button>
+                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarAtividadeExtra" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" data-idModulo="{{$atividade->idModulo}}" data-idCategoria="{{$atividade->idCategoria}}"><i class="fa fa-pencil"></i></button>
                                     <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                 </div>
-                                <a href="/professorVisualizarAtividadeExtra/{{$atividade->exercicio->id}}">
-                                    <span style="color:#FFF;font-size:30px;"><b>{{$atividade->titulo}}</b></span><br>
+                                <a href="/professor/atividade/extra/{{$atividade->id}}">
+                                    <span style="color:#FFF;font-size:30px;"><b>{{$atividade->nome}}</b></span><br>
                                 </a>
                                                     
                                 </div>
-                                <a href="/professorEditarAtividadeExtra/{{$atividade->id}}" class="small-box-footer">
+                                <a href="/professor/atividade/{{$atividade->id}}/editar" class="small-box-footer">
                                     Editar Questões <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
@@ -237,10 +237,10 @@
 
             $('div.curso').on('click', (function(event) {
                 var atividades = $(this).data('atividades');
-                var id = $(this).attr('id');
+                console.log("Mostar atividades: "+atividades);
                 $('div.atividade').fadeOut();
                 $.each(atividades, function(index, val) {
-                    $('div.atividade#'+val).fadeIn();
+                    $('div.atividade#'+val).delay(900).fadeIn();
                 });
                 var tipo = $(this).data('tipo');
                 if(tipo == "Modulo"){
