@@ -14,8 +14,14 @@
         }
 
         public function alunos(){
-        	return $this->belongsToMany('Aluno', 'turmasalunos', 'idTurma', 'idAluno');	
+        	return $this->belongsToMany('Aluno', 'turmasalunos', 'idTurma', 'idAluno')->withPivot('status', 'pontuacao');	
         }
+
+        //foreach ($turma->alunos as $aluno)
+		// {
+		//     echo $aluno->pivot->pontuacao;
+		// }
+
 
 	}
 

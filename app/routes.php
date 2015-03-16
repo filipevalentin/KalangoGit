@@ -51,6 +51,11 @@ Route::get('admin', function(){
 	return View::make('hello');
 });
 
+Route::get('teste3', function(){
+	$aluno = Aluno::find(13);
+	return $aluno->respostas;
+});
+
 Route::get('pergunta', function(){
 	return View::make('pergunta');
 });

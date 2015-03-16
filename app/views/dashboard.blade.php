@@ -227,10 +227,60 @@
 	<!-- Rankings -->
     <div class="row">
     	<div class="col-lg-6">
-    		
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Ranking Módulo</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th style="/* width: 10px */">#</th>
+                                <th>Nome</th>
+                                <th>Sobrenome</th>
+                                <th style="/* width: 40px */">E-mail</th>
+                                <th>Ação</th>
+                            </tr>
+                            <!-- foreach -->
+                            <tr>
+                                <td>1</td>
+                                <td>Aluno 2</td>
+                                <td>da Silva Costa</td>
+                                <td>Medalha</td> 
+                            </tr>
+                            
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+            </div>
     	</div>
-    	<div class="col-lg-6">
 
+    	<div class="col-lg-6">
+             <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Ranking Turma</h3>
+                </div><!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <th style="/* width: 10px */">#</th>
+                                <th>Nome</th>
+                                <th>Sobrenome</th>
+                                <th style="/* width: 40px */">E-mail</th>
+                                <th>Ação</th>
+                            </tr>
+                            <!-- foreach -->
+                            <tr>
+                                <td>1</td>
+                                <td>Aluno 2</td>
+                                <td>da Silva Costa</td>
+                                <td>Medalha</td> 
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+            </div>
     	</div>
     </div>
 
