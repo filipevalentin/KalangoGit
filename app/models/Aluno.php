@@ -13,17 +13,15 @@
 		//     echo $turma->pivot->pontuacao;
 		// }
 
-        public function usuario(){
-        	return $this->belongsTo('User', 'id');
-        }
+                public function usuario(){
+                	return $this->belongsTo('User', 'id');
+                }
 
-        public function respostas(){
-        	return $this->belongsToMany('Questao', 'respostas', 'idAluno', 'idQuestao')->withPivot('correcao','respostaAluno');
-        }
-
-        public function
+                public function respostas(){
+                	return $this->belongsToMany('Questao', 'respostas', 'idAluno', 'idQuestao')->withPivot('correcao','respostaAluno');
+                }
         
 
-	}
+        }
 
  ?>

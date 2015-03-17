@@ -65,37 +65,99 @@ Route::get('pergunta', function(){
 
 Route::get('dashboard', function(){
 	$turmas = Auth::user()->aluno->turmas->filter(function($turma){
-	    return ($turma->status == "1") // filtra só os com status ativo;
+	    return ($turma->pivot->status == "1"); // filtra só os com status ativo;
 	});
 
-	// aqui separamos as questoes respondidas pelo aluno em cada modulo/turma, para saber as estatisticas por cada turma/modulo
+
+	$certas=0;
+	$erradas=0;
+
+	// aqui separamos as informações do dashboard relativa a cada modulo/turma que o aluno cursa. Ex: respostas certas/erradas de atividades do curso inglês(turma A) e outro de espanhol(turmaB)
 	foreach ($turmas as $turma) {
 		//pega todas as questoes relativas a um modulo
 		$aux = $turma->modulo->questoes;
 		//filtra só as questoes do modulo que o aluno já respondeu, atraves de intersecção entre as funções aluno->questoes e $aux
-		$aux = Auth::->user()->aluno->questoes->intersect($aux);
+		$aux = Auth::user()->aluno->respostas->intersect($aux);
 		// adiciona a coleção de questoes que o aluno já respondeu para a turma/modulo correspondende da questão
 		$turma->questoes = $aux;
+
+		//Pontos por Skills
+		$skills = array();
+		foreach($turma->questoes as $resposta){
+			//se o skill ainda não está na lista, add ele na lista, com sua chave sendo seu id, e inicia seu attr "pontos" como 0.
+			if (!(@in_array($resposta->idSkill, $skills)) ){
+				$skill = Skill::find($resposta->idSkill);
+				$skill->pontos = 0;
+				$skills[$resposta->idSkill] = $skill;
+			}
+			// se a resposta em questao foi acertada pelo aluno, adicionamos os pontos ao skill condizente e incrementamos o contador de acertos
+			// caso contrário só incrementamos o contador de erros
+			if($resposta->pivot->correcao == '1'){
+				$skills[$resposta->idSkill]->pontos += $resposta->pontos;
+				$certas++;
+			}else{
+				$erradas++;
+			}
+
+		};
+
+		//ranking modulo
+		$rankingModulo = new \Illuminate\Database\Eloquent\Collection;
+		//pega todas as turmas do modulo e da um merge nos alunos;
+		$turmasModulo = $turma->modulo->turmas;
+		foreach ($turmasModulo as $turmaM) {
+			foreach ($turmaM->alunos as $aluno) {
+				$rankingModulo->push($aluno);
+			}
+		}
+
+		 $rankingModulo->sort(function($a, $b){
+	        $a = $a->pivot->pontuacao;
+	        $b = $b->pivot->pontuacao;
+	        if ($a === $b) {
+	            return 0;
+	        }
+	        return ($a > $b) ? 1 : -1;
+	    });
+
+		//ranking turma
+		$rankingTurma = $turma->alunos;
+
+		 $rankingTurma->sort(function($a, $b){
+	        $a = $a->pivot->pontuacao;
+	        $b = $b->pivot->pontuacao;
+	        if ($a === $b) {
+	            return 0;
+	        }
+	        return ($a > $b) ? 1 : -1;
+	    });
+
+		//pega as posiçoes do rank para o aluno atual
+		$meuRanking = array();
+		$meuRanking['modulo'] = array_search(Auth::user()->id, $rankingModulo->keyBy('id')->keys());
+		$meuRanking['turma'] = array_search(Auth::user()->id, $rankingTurma->keyBy('id')->keys());
+
+		//topSkills
+		$topSkills = $skills;
+		arsort($topSkills);
+		$melhorSkill = reset($topSkills);
+		$piorSkill = end($topSkills);
+		$topSkills = array();
+		$topSkills['melhor'] = $melhorSkill;
+		$topSkills['pior'] = $piorSkill;
+
+		// adiciona as informações do dashboard no objeto turma;
+		$turma->meuRanking = $meuRanking;
+		$turma->acertos = $certas;
+		$turma->erros = $erradas;
+		$turma->skills = $skills;
+		$turma->topSkills = $topSkills;
+		$turma->rankingTurma = $rankingTurma;
+		$turma->rankingModulo = $rankingModulo;
+
 	}
 
-	//pontuação do aluno -> vai com o objeto turmas->pivot->pontuação
-
-	//respostas certas/erradas/total;
-	// Na View - > respostas = $turma->questoes -> if(questao->pivot->correcao == "1") correta
-	
-	//Pontos por Skills
-	$skills = array();
-	foreach($turma->questoes as resposta){
-		if ( !in_array($skills, $resposta->idSkill) ){
-			$skills[] = $resposta->idSkill;
-		}	
-	};
-	// - > Na view-> Foreach $skills as $skill -> foreach $turma->questoes as resposta -> if resposta->idSkill == skill and resposta->pivot->correcao =="acertou"  -> pontos++; 
-
-	// Ranking turma
-	// - > 
-
-	return View::make('dashboard');
+	return View::make('dashboard')->with('turmas', $turmas);
 });
 
 

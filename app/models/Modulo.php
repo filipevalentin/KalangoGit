@@ -23,6 +23,10 @@
 			return $this->hasManyThrough('Questao', 'Atividade', 'idModulo', 'idAtividade');
 		}
 
+		public function alunos(){
+			return $this->hasManyThrough('Aluno', 'Turma', 'idModulo', 'idTurma');
+		}
+
 	}
 
  ?>
