@@ -20,6 +20,8 @@
         public function respostas(){
         	return $this->belongsToMany('Questao', 'respostas', 'idAluno', 'idQuestao')->withPivot('correcao','respostaAluno');
         }
+
+        public function
         
 
 	}
