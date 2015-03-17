@@ -19,6 +19,10 @@
 			return $this-> hasMany('Atividade','idModulo');
 		}
 
+		public function questoes(){
+			return $this->hasManyThrough('Questao', 'Atividade', 'idModulo', 'idAtividade');
+		}
+
 	}
 
  ?>

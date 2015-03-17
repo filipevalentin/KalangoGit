@@ -52,8 +52,11 @@ Route::get('admin', function(){
 });
 
 Route::get('teste3', function(){
-	$aluno = Aluno::find(13);
-	return $aluno->respostas;
+	// $aluno = Aluno::find(13);
+	// return $aluno->respostas;
+
+	$modulo = Modulo::find(1);
+	return $modulo->questoes;
 });
 
 Route::get('pergunta', function(){
@@ -61,6 +64,37 @@ Route::get('pergunta', function(){
 });
 
 Route::get('dashboard', function(){
+	$turmas = Auth::user()->aluno->turmas->filter(function($turma){
+	    return ($turma->status == "1") // filtra só os com status ativo;
+	});
+
+	// aqui separamos as questoes respondidas pelo aluno em cada modulo/turma, para saber as estatisticas por cada turma/modulo
+	foreach ($turmas as $turma) {
+		//pega todas as questoes relativas a um modulo
+		$aux = $turma->modulo->questoes;
+		//filtra só as questoes do modulo que o aluno já respondeu, atraves de intersecção entre as funções aluno->questoes e $aux
+		$aux = Auth::->user()->aluno->questoes->intersect($aux);
+		// adiciona a coleção de questoes que o aluno já respondeu para a turma/modulo correspondende da questão
+		$turma->questoes = $aux;
+	}
+
+	//pontuação do aluno -> vai com o objeto turmas->pivot->pontuação
+
+	//respostas certas/erradas/total;
+	// Na View - > respostas = $turma->questoes -> if(questao->pivot->correcao == "1") correta
+	
+	//Pontos por Skills
+	$skills = array();
+	foreach($turma->questoes as resposta){
+		if ( !in_array($skills, $resposta->idSkill) ){
+			$skills[] = $resposta->idSkill;
+		}	
+	};
+	// - > Na view-> Foreach $skills as $skill -> foreach $turma->questoes as resposta -> if resposta->idSkill == skill and resposta->pivot->correcao =="acertou"  -> pontos++; 
+
+	// Ranking turma
+	// - > 
+
 	return View::make('dashboard');
 });
 
