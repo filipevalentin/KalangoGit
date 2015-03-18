@@ -650,7 +650,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		$categorias = Categoria::all();
 
 		foreach ($modulos as $modulo) {
-			$categoria->push($modulo);
+			$categorias->push($modulo);
 		}
 
 		//$categorias = $modulos->combine(Categoria::all());
@@ -900,7 +900,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		$categorias = Categoria::all();
 
 		foreach ($modulos as $modulo) {
-			$categoria->push($modulo);
+			$categorias->push($modulo);
 		}
 
 		//$categorias = $modulos->combine(Categoria::all());
