@@ -113,10 +113,6 @@
                                         </div>
                                     @endforeach
 
-                                        <div class="box-tools pull-right" style="padding: 100px 25px 5px 5px;">
-                                            <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarturma" data-idmodulo="{{$modulo->id}}"><i class="fa fa-plus"></i></button>
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
