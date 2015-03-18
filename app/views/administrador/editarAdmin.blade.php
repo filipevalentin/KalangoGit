@@ -78,7 +78,9 @@
                                                 </div>
                                             </div>
 
-                                            <div class="profile-info-name">Código Registro</div>
+                                            <div class="profile-info-row">
+
+                                            	<div class="profile-info-name">Código Registro</div>
 
                                                 <div class="profile-info-value">
                                                     <span>{{$administrador->codRegistro}}</span>
