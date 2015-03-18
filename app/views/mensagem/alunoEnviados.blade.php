@@ -17,7 +17,7 @@
 							<select class="form-control alunoObrigatorio" name="idUsuarioDestino" id="idUsuarioDestino">
 								<option value="">Selecionar Professor</option>
 								@foreach(Auth::user()->aluno->turmas as $turma)
-									<option value="{{$turma->aluno}}">{{User::find($turma->aluno)->nome}}</option>
+									<option value="{{$turma->idProfessor}}">{{User::find($turma->idProfessor)->nome}}</option>
 								@endforeach
 							</select>
 						</div>
