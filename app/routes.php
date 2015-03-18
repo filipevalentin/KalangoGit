@@ -65,7 +65,7 @@ Route::get('pergunta', function(){
 
 Route::get('dashboard', function(){
 	$turmas = Auth::user()->aluno->turmas->filter(function($turma){
-	    return ($turma->pivot->status == "1"); // filtra só os com status ativo;
+	    return ($turma->status == "1"); // filtra só os com status ativo;
 	});
 
 
@@ -667,21 +667,21 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		if($idioma !=null){
 			global $idioma;
-			$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->get(); //!*## substituir por Auth::user (no caso o professor que acessou);
+			$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->where('status','=','1')->get();
 			$cursos = Curso::whereHas('turmas', function($q)
 				{
 					global $idioma;
-					$q->where('idProfessor', '=', Auth::user()->id)->where('idIdioma', '=', Idioma::where('nome','=', $idioma)->first()); //Substituir por Auth::user depois
+					$q->where('idProfessor', '=', Auth::user()->id)->where('idIdioma', '=', Idioma::where('nome','=', $idioma)->first())->->where('status','=','1');
 				})->get();
 
 			$cursosArray = $cursos->toArray();
 
 			return View::make('professor/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray, 'turmas'=>$turmas));
 		}else{
-			$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->get(); //!*## substituir por Auth::user (no caso o professor que acessou);
+			$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->where('status','=','1')->get();
 			$cursos = Curso::whereHas('turmas', function($q)
 				{
-					$q->where('idProfessor', '=', Auth::user()->id); //Substituir por Auth::user depois
+					$q->where('idProfessor', '=', Auth::user()->id)->where('status','=','1');
 				})->get();
 
 			$cursosArray = $cursos->toArray();

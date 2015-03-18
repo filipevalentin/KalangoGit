@@ -84,21 +84,21 @@
                     </div>
                 </div>
 
-                <!-- Skills -->
+                <!-- Tópicos -->
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="box box-solid " style="background: limegreen; color: black;">
                             <div class="box-header">
-                                <h3 class="box-title" style="color: white;">Skills</h3>
+                                <h3 class="box-title" style="color: white;">Tópicos</h3>
                             </div> 
                             <div class="box-body" style="background: rgb(236, 236, 236)">
                                 <ul style="padding:0px; list-style: none;">
-                                @foreach($turma->skills as $skill)
-                                    <li style="font-size:larger; font-weight: 500;">{{$skill->nome}}:
+                                @foreach($turma->topicos as $topico)
+                                    <li style="font-size:larger; font-weight: 500;">{{$topico->nome}}:
                                         <small class="pull-right">90%</small>
                                         <div class="progress" style="margin-top:5px; height: 15px;background: white;">
                                             <div class="progress-bar" style="width: 30%;background-color: gold; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
-                                            {{$skill->pontos}} pontos
+                                            {{$topico->pontos}} pontos
                                             </div>
                                         </div>
                                     </li>
@@ -132,7 +132,7 @@
                     <div class="col-lg-6">
                         <div class="box box-solid " style="background: darkgrey; color: black;">
                             <div class="box-header">
-                                <h3 class="box-title" style="color: white;">Top Skills</h3>
+                                <h3 class="box-title" style="color: white;">Top Tópicos</h3>
                             </div> 
                             <div class="box-body" style="background: rgb(236, 236, 236)">
 
@@ -140,8 +140,8 @@
                                     <div class="info-box bg-green" style="margin: 10px 20px" >
                                         <span class="info-box-icon" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-up"></i></span>
                                         <div class="info-box-content">
-                                            <span class="info-box-text" style="display: block;">{{$turma->topSkills['melhor']->nome}}</span>
-                                            <span class="info-box-number">{{$turma->topSkills['melhor']->pontos}} pontos</span>
+                                            <span class="info-box-text" style="display: block;">{{$turma->topTopicos['melhor']->nome}}</span>
+                                            <span class="info-box-number">{{$turma->topTopicos['melhor']->pontos}} pontos</span>
                                             <small class="pull-right" style="display: block;">90%</small>
                                             <div class="progress" style="height: 15px;background: rgb(0, 134, 73);">
                                                 <div class="progress-bar" style="width: 50%;background-color: white;">
@@ -158,8 +158,8 @@
                                     <div class="info-box bg-red" style="margin: 10px 20px">
                                         <span class="info-box-icon" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-down"></i></span>
                                         <div class="info-box-content">
-                                            <span class="info-box-text" style="display: block;">{{$turma->topSkills['melhor']->nome}}</span>
-                                            <span class="info-box-number">{{$turma->topSkills['melhor']->pontos}} pontos</span>
+                                            <span class="info-box-text" style="display: block;">{{$turma->topTopicos['melhor']->nome}}</span>
+                                            <span class="info-box-number">{{$turma->topTopicos['melhor']->pontos}} pontos</span>
                                             <small class="pull-right" style="display: block;">90%</small>
                                             <div class="progress" style="height: 15px;background: rgb(0, 134, 73);">
                                                 <div class="progress-bar" style="width: 10%;background-color: white;">
