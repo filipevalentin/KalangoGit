@@ -9,7 +9,7 @@ create table usuarios(
 	urlImagem varchar(500),
 	confirmed int(1),
 	confirmation_code varchar(255),
-	tipo int(11) /* 1 - Aluno  2 - Professor  3 - Admin */
+	tipo int(11) COMMENT '1 - Aluno  2 - Professor  3 - Admin'
 );
 
 create table alunos(
@@ -77,8 +77,8 @@ create table aulas(
 create table atividades(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	nome varchar(255),
-	tipo int(1),  -- 1: Conteudo de aula, 2: extra
-	status int(1), -- 0: inativo, 1:ativo
+	tipo int(1) COMMENT '1: Conteudo de aula, 2: extra',
+	status int(1) COMMENT '0: inativo, 1:ativo',
 	idAula int(11),
 	CONSTRAINT FOREIGN KEY(idAula) REFERENCES aulas(id),
 	idCategoria int(11),
@@ -86,7 +86,7 @@ create table atividades(
 	idModulo int(11),
 	CONSTRAINT FOREIGN KEY(idModulo) REFERENCES modulos(id),
 	idUsuario int(11),
-	CONSTRAINT FOREIGN KEY(idUsuario) REFERENCES usuarios(id),
+	CONSTRAINT FOREIGN KEY(idUsuario) REFERENCES usuarios(id)
 
 );
 
@@ -102,17 +102,17 @@ create table topicos(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	nome varchar(255),
 	idUsuario int(11),
-	FOREIGN KEY (idUsuario) REFERENCES usuarios(id),
+	FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 );
 
 
 create table questoes(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	textoPergunta varchar(255),
-	urlMidia varchar(255),,
-	numero int(10),  COMMENT 'indica a posição/ordem da questao dentro de uma atividade'
-	tipo int(1), -- 1-Multipla Escolha, 2-Dissertativa
-	categoria int(2), -- 1:texto, 2:imagem, 3:audio - Mult.Esc:2 dígitos (pergunta/resposta: 12 = texto/imagem)
+	urlMidia varchar(255),
+	numero int(10) COMMENT 'indica a posicao/ordem da questao dentro de uma atividade',
+	tipo int(1) COMMENT '1-Multipla Escolha, 2-Dissertativa',
+	categoria int(2) COMMENT '1:texto, 2:imagem, 3:audio - Mult.Esc:2 digitos (pergunta/resposta: 12 = texto/imagem)',
 	alternativaA varchar(255),
 	alternativaB varchar(255),
 	alternativaC varchar(255),
@@ -126,9 +126,9 @@ create table questoes(
 );
 
 create table mensagens(
-	int id(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	titulo varchar(255),
-	Conteudo varchar(1500),
+	conteudo varchar(1500),
 	lida int(1),
 	data varchar(20),
 	idUsuarioOrigem int(11),
@@ -152,10 +152,10 @@ create table propagandas(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	titulo varchar(100),
 	imagem1 varchar(255),
-	imagem1 varchar(255),
-	imagem1 varchar(255),
-	imagem1 varchar(255),
-	imagem1 varchar(255),
+	imagem2 varchar(255),
+	imagem3 varchar(255),
+	imagem4 varchar(255),
+	imagem5 varchar(255),
 	idUsuario int(11),
 	FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 );
