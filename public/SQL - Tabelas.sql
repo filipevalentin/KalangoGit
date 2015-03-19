@@ -7,9 +7,9 @@ create table usuarios(
 	password varchar(255),
 	email varchar(255),
 	urlImagem varchar(500),
-	confirmed int(1) COMMENT 'Indica se o usuario confirmou o registro atraves do email enviado',
-	confirmation_code varchar(255) COMMENT 'Codigo enviado por email ao se cadastrar um novo usuario',
-	tipo int(11) COMMENT '1:Aluno  2:Professor  3:Admin'
+	confirmed int(1),
+	confirmation_code varchar(255),
+	tipo int(11) COMMENT '1 - Aluno  2 - Professor  3 - Admin'
 );
 
 create table alunos(
@@ -135,7 +135,7 @@ create table mensagens(
 	FOREIGN KEY (idUsuarioOrigem) REFERENCES usuarios(id),
 	idUsuarioDestino int(11),
 	FOREIGN KEY (idUsuarioDestino) REFERENCES usuarios(id),
-	idRE int(11) COMMENT 'Indica o id da mensagem em resposta, caso exista', 
+	idRE int(11),
 	FOREIGN KEY (idRE) REFERENCES mensagens(id)
 );
 
