@@ -671,7 +671,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$cursos = Curso::whereHas('turmas', function($q)
 				{
 					global $idioma;
-					$q->where('idProfessor', '=', Auth::user()->id)->where('idIdioma', '=', Idioma::where('nome','=', $idioma)->first())->->where('status','=','1');
+					$q->where('idProfessor', '=', Auth::user()->id)->where('idIdioma', '=', Idioma::where('nome','=', $idioma)->first())->where('status','=','1');
 				})->get();
 
 			$cursosArray = $cursos->toArray();
