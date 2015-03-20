@@ -14,26 +14,26 @@ Route::get('criarUsuariosTeste', function(){
 	$a->id = $u->id;
 	$a->save();
 
-	$u = new User;
-	$u->nome = "Professor 1";
-	$u->login = "456";
-	$u->tipo = "2";
-	$u->password= Hash::make(456);
-	$u->save();
+	$u2 = new User;
+	$u2->nome = "Professor 1";
+	$u2->login = "456";
+	$u2->tipo = "2";
+	$u2->password= Hash::make(456);
+	$u2->save();
 
 	$a = new Professor;
-	$a->id = $u->id;
+	$a->id = $u2->id;
 	$a->save();
 
-	$u = new User;
-	$u->nome = "Administrador 1";
-	$u->login = "789";
-	$u->tipo = "3";
-	$u->password= Hash::make(789);
-	$u->save();
+	$u3 = new User;
+	$u3->nome = "Administrador 1";
+	$u3->login = "789";
+	$u3->tipo = "3";
+	$u3->password= Hash::make(789);
+	$u3->save();
 
 	$a = new Administrador;
-	$a->id = $u->id;
+	$a->id = $u3->id;
 	$a->save();
 });
 
