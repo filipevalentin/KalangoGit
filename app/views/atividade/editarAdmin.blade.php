@@ -32,7 +32,7 @@
                     </div>
                     <div id="div_texto-multipla-editar-questao" class="form-group">
                         <label class="control-label" for="textopergunta"><i id="icone_texto-multipla-editar-questao" class="fa"></i> Texto da Pergunta</label>
-                        <nput id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control textoPerguntaObrigatoria-multipla-editar-questao" rows="3" >
+                        <input id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control textoPerguntaObrigatoria-multipla-editar-questao" rows="3" >
                     </div>
                     <div id="div_arquivoPergunta-multipla-editar-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-multipla-editar-questao" class="fa"></i> Arquivo</label>
