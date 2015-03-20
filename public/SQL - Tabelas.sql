@@ -12,13 +12,10 @@ create table usuarios(
 	respostaSecreta varchar(255),
 	urlImagem varchar(500),
 <<<<<<< HEAD
-<<<<<<< HEAD
 	confirmed int(1),
 	confirmation_code varchar(255),
 	tipo int(11) COMMENT '1 - Aluno  2 - Professor  3 - Admin'
 =======
-=======
->>>>>>> parent of 93dc774... Atualização Para o novo banco
 	remember_token varchar(255), /* Laravel: Usado para permanecer logado */
 	tipo int(11) /* 1 - Aluno  2 - Professor  3 - Admin */
 >>>>>>> parent of 93dc774... Atualização Para o novo banco
@@ -92,7 +89,6 @@ create table atividadesExtras(
 create table aulas(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 <<<<<<< HEAD
-<<<<<<< HEAD
 	nome varchar(255),
 	tipo int(1) COMMENT '1: Conteudo de aula, 2: extra',
 	status int(1) COMMENT '0: inativo, 1:ativo',
@@ -105,11 +101,6 @@ create table aulas(
 	idUsuario int(11),
 	CONSTRAINT FOREIGN KEY(idUsuario) REFERENCES usuarios(id)
 
-=======
-	titulo varchar(255),
-	idModulo int(11),
-	CONSTRAINT FOREIGN KEY(idModulo) REFERENCES modulos(id)
->>>>>>> parent of 93dc774... Atualização Para o novo banco
 =======
 	titulo varchar(255),
 	idModulo int(11),
@@ -129,21 +120,15 @@ create table exercicios(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	nome varchar(255),
 <<<<<<< HEAD
-<<<<<<< HEAD
 	idUsuario int(11),
 	FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 =======
-=======
->>>>>>> parent of 93dc774... Atualização Para o novo banco
 	descricao varchar(255),
 	tipo int(11),  /* 1 - Quiz   Obs:Por enquanto só existe um tipo: "quiz"*/
 	idAtividadesExtras int,
 	CONSTRAINT FOREIGN KEY(idAtividadesExtras) REFERENCES atividadesExtras(id),
 	idAula int,
 	CONSTRAINT FOREIGN KEY(idAula) REFERENCES aulas(id)
-<<<<<<< HEAD
->>>>>>> parent of 93dc774... Atualização Para o novo banco
-=======
 >>>>>>> parent of 93dc774... Atualização Para o novo banco
 );
 
@@ -152,7 +137,6 @@ create table exercicios(
 
 create table questaoMultiplaEscolha(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-<<<<<<< HEAD
 <<<<<<< HEAD
 	textoPergunta varchar(255),
 	urlMidia varchar(255),
@@ -163,16 +147,11 @@ create table questaoMultiplaEscolha(
 	titulo varchar(255),
 	urlMidia varchar(255),
 >>>>>>> parent of 93dc774... Atualização Para o novo banco
-=======
-	titulo varchar(255),
-	urlMidia varchar(255),
->>>>>>> parent of 93dc774... Atualização Para o novo banco
 	alternativaA varchar(255),
 	alternativaB varchar(255),
 	alternativaC varchar(255),
 	alternativaD varchar(255),
 	respostaCerta varchar(255),
-<<<<<<< HEAD
 <<<<<<< HEAD
 	pontos int(10),
 	idAtividade int(11),
@@ -207,16 +186,10 @@ create table avisos(
 	idExercicio int(11),
 	CONSTRAINT FOREIGN KEY(idExercicio) REFERENCES exercicios(id)
 >>>>>>> parent of 93dc774... Atualização Para o novo banco
-=======
-	categoria varchar(70), /*("Pergunta-Resposta": Audio-Audio, Imagem-Audio, Texto-Imagem, etc....)*/
-	idExercicio int(11),
-	CONSTRAINT FOREIGN KEY(idExercicio) REFERENCES exercicios(id)
->>>>>>> parent of 93dc774... Atualização Para o novo banco
 );
 
 create table questaoRespostaUnica(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-<<<<<<< HEAD
 <<<<<<< HEAD
 	titulo varchar(100),
 	imagem1 varchar(255),
@@ -227,17 +200,12 @@ create table questaoRespostaUnica(
 	idUsuario int(11),
 	FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 =======
-=======
->>>>>>> parent of 93dc774... Atualização Para o novo banco
 	titulo varchar(255),
 	urlMidia varchar(255),
 	respostaCerta varchar(255),
 	categoria varchar(70), /*("Pergunta-Resposta": Audio-Audio, Imagem-Audio, Texto-Imagem, etc....)*/
 	idExercicio int(11),
 	CONSTRAINT FOREIGN KEY(idExercicio) REFERENCES exercicios(id)
-<<<<<<< HEAD
->>>>>>> parent of 93dc774... Atualização Para o novo banco
-=======
 >>>>>>> parent of 93dc774... Atualização Para o novo banco
 );
 

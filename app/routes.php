@@ -672,11 +672,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				{
 					global $idioma;
 <<<<<<< HEAD
-<<<<<<< HEAD
 					$q->where('idProfessor', '=', Auth::user()->id)->where('idIdioma', '=', Idioma::where('nome','=', $idioma)->first())->where('status','=','1');
-=======
-					$q->where('idProfessor', '=', Auth::user()->id)->where('idIdioma', '=', Idioma::where('nome','=', $idioma)->first()); //Substituir por Auth::user depois
->>>>>>> parent of 93dc774... Atualização Para o novo banco
 =======
 					$q->where('idProfessor', '=', Auth::user()->id)->where('idIdioma', '=', Idioma::where('nome','=', $idioma)->first()); //Substituir por Auth::user depois
 >>>>>>> parent of 93dc774... Atualização Para o novo banco
