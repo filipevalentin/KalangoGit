@@ -164,9 +164,9 @@
                                                         <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i></label> <b>Sobrenome</b>
                                                         <input type="text" autocomplete="off" name="sobrenome" id="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio" value={{$professor->sobrenome}}>
                                                     </div>
-                                                    <div id="div_formacaoAcademica" class="form-group margin">
-                                                        <label class="control-label" for="dataNascimento"><i id="icone_formacaoAcademica" class="fa"></i></label> <b>Formação Acadêmica</b>
-                                                        <input type="text" autocomplete="off" name="formacaoAcademica" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="100" class="form-control formacaoAcademicaObrigatoria" value={{$professor->formacaoAcademica}}>
+                                                    <div class="form-group margin">
+                                                        <label class="control-label" for="dataNascimento"></label> <b>Formação Acadêmica</b>
+                                                        <textarea name="formacaoAcademica" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" rows="3" >{{$professor->formacaoAcademica}}</textarea>
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i></label> <b>E-mail</b>
@@ -279,19 +279,6 @@
 				$( "#icone_sobrenome" ).removeClass("fa-times-circle-o");
 				$( "#div_sobrenome" ).addClass("has-success");
 				$( "#icone_sobrenome" ).addClass("fa-check");
-			}
-			
-			if($(".formacaoAcademicaObrigatoria").val() == ""){
-				obrigatorioPendente = 1;
-				$( "#div_formacaoAcademica" ).removeClass("has-success");
-				$( "#icone_formacaoAcademica" ).removeClass("fa-check");
-				$( "#div_formacaoAcademica" ).addClass("has-error");
-				$( "#icone_formacaoAcademica" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_formacaoAcademica" ).removeClass("has-error");
-				$( "#icone_formacaoAcademica" ).removeClass("fa-times-circle-o");
-				$( "#div_formacaoAcademica" ).addClass("has-success");
-				$( "#icone_formacaoAcademica" ).addClass("fa-check");
 			}
 			
 			if($(".emailObrigatorio").val() == ""){
@@ -416,18 +403,6 @@
 				$( "#icone_sobrenome" ).removeClass("fa-times-circle-o");
 				$( "#div_sobrenome" ).addClass("has-success");
 				$( "#icone_sobrenome" ).addClass("fa-check");
-			}
-			
-			if($(".formacaoAcademicaObrigatoria").val() == ""){
-				$( "#div_formacaoAcademica" ).removeClass("has-success");
-				$( "#icone_formacaoAcademica" ).removeClass("fa-check");
-				$( "#div_formacaoAcademica" ).addClass("has-error");
-				$( "#icone_formacaoAcademica" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_formacaoAcademica" ).removeClass("has-error");
-				$( "#icone_formacaoAcademica" ).removeClass("fa-times-circle-o");
-				$( "#div_formacaoAcademica" ).addClass("has-success");
-				$( "#icone_formacaoAcademica" ).addClass("fa-check");
 			}
 			
 			if($(".emailObrigatorio").val() == ""){
