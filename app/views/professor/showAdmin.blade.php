@@ -382,6 +382,7 @@ function fcn_validaEmail(pstr_email){
 			$( "#div_email" ).addClass("has-error");
 			$( "#icone_email" ).addClass("fa-times-circle-o");
 			
+			pstr_email.focus();
 			alert("É necessário o preenchimento de um endereço de e-mail válido.");
 			pstr_email.focus();
 			return false;
