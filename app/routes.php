@@ -61,19 +61,19 @@ Route::get('dashboard', function(){
 		// adiciona a coleção de questoes que o aluno já respondeu para a turma/modulo correspondende da questão
 		$turma->questoes = $aux;
 
-		//Pontos por Skills
-		$skills = array();
+		//Pontos por Topicos
+		$topicos = array();
 		foreach($turma->questoes as $resposta){
-			//se o skill ainda não está na lista, add ele na lista, com sua chave sendo seu id, e inicia seu attr "pontos" como 0.
-			if (!(@in_array($resposta->idSkill, $skills)) ){
-				$skill = Skill::find($resposta->idSkill);
-				$skill->pontos = 0;
-				$skills[$resposta->idSkill] = $skill;
+			//se o topico ainda não está na lista, add ele na lista, com sua chave sendo seu id, e inicia seu attr "pontos" como 0.
+			if (!(@in_array($resposta->idTopico, $topicos)) ){
+				$topico = Topico::find($resposta->idTopico);
+				$topico->pontos = 0;
+				$topicos[$resposta->idTopico] = $topico;
 			}
-			// se a resposta em questao foi acertada pelo aluno, adicionamos os pontos ao skill condizente e incrementamos o contador de acertos
+			// se a resposta em questao foi acertada pelo aluno, adicionamos os pontos ao topico condizente e incrementamos o contador de acertos
 			// caso contrário só incrementamos o contador de erros
 			if($resposta->pivot->correcao == '1'){
-				$skills[$resposta->idSkill]->pontos += $resposta->pontos;
+				$topicos[$resposta->idTopico]->pontos += $resposta->pontos;
 				$certas++;
 			}else{
 				$erradas++;
@@ -117,21 +117,21 @@ Route::get('dashboard', function(){
 		$meuRanking['modulo'] = array_search(Auth::user()->id, $rankingModulo->keyBy('id')->keys());
 		$meuRanking['turma'] = array_search(Auth::user()->id, $rankingTurma->keyBy('id')->keys());
 
-		//topSkills
-		$topSkills = $skills;
-		arsort($topSkills);
-		$melhorSkill = reset($topSkills);
-		$piorSkill = end($topSkills);
-		$topSkills = array();
-		$topSkills['melhor'] = $melhorSkill;
-		$topSkills['pior'] = $piorSkill;
+		//topTopicos
+		$topTopicos = $topicos;
+		arsort($topTopicos);
+		$melhorTopico = reset($topTopicos);
+		$piorTopico = end($topTopicos);
+		$topTopicos = array();
+		$topTopicos['melhor'] = $melhorTopico;
+		$topTopicos['pior'] = $piorTopico;
 
 		// adiciona as informações do dashboard no objeto turma;
 		$turma->meuRanking = $meuRanking;
 		$turma->acertos = $certas;
 		$turma->erros = $erradas;
-		$turma->skills = $skills;
-		$turma->topSkills = $topSkills;
+		$turma->topicos = $topicos;
+		$turma->topTopicos = $topTopicos;
 		$turma->rankingTurma = $rankingTurma;
 		$turma->rankingModulo = $rankingModulo;
 

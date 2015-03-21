@@ -140,8 +140,8 @@
                                     <div class="info-box bg-green" style="margin: 10px 20px" >
                                         <span class="info-box-icon" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-up"></i></span>
                                         <div class="info-box-content">
-                                            <span class="info-box-text" style="display: block;">{{$turma->topTopicos['melhor']->nome}}</span>
-                                            <span class="info-box-number">{{$turma->topTopicos['melhor']->pontos}} pontos</span>
+                                            <span class="info-box-text" style="display: block;"><?php if($turma->topTopicos['melhor'] != null)echo $turma->topTopicos['melhor']->nome; ?></span>
+                                            <span class="info-box-number"><?php if($turma->topTopicos['melhor'] != null) echo $turma->topTopicos['melhor']->nome; ?> pontos</span>
                                             <small class="pull-right" style="display: block;">90%</small>
                                             <div class="progress" style="height: 15px;background: rgb(0, 134, 73);">
                                                 <div class="progress-bar" style="width: 50%;background-color: white;">
@@ -158,8 +158,8 @@
                                     <div class="info-box bg-red" style="margin: 10px 20px">
                                         <span class="info-box-icon" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-down"></i></span>
                                         <div class="info-box-content">
-                                            <span class="info-box-text" style="display: block;">{{$turma->topTopicos['melhor']->nome}}</span>
-                                            <span class="info-box-number">{{$turma->topTopicos['melhor']->pontos}} pontos</span>
+                                            <span class="info-box-text" style="display: block;"><?php if($turma->topTopicos['pior'] != null)echo $turma->topTopicos['pior']->nome; ?></span>
+                                            <span class="info-box-number"><?php if($turma->topTopicos['pior'] != null) echo $turma->topTopicos['pior']->nome; ?> pontos</span>
                                             <small class="pull-right" style="display: block;">90%</small>
                                             <div class="progress" style="height: 15px;background: rgb(0, 134, 73);">
                                                 <div class="progress-bar" style="width: 10%;background-color: white;">
@@ -225,7 +225,7 @@
                                             <th>Medalha</th>
                                         </tr>
                                         <?php $count=1; ?>
-                                        @foreach($turma->rankingModulo as $aluno)
+                                        @foreach($turma->rankingTurma as $aluno)
                                         <tr>
                                             <td>{{$count++}}º</td>
                                             <td>{{$aluno->usuario->nome}} {{$aluno->usuario->sobrenome}}</td>
