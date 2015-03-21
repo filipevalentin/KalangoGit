@@ -2,6 +2,16 @@
 
 class AlunoSeeder extends Seeder{
 
+	public function conf_code(){
+		$confirmation_code = str_random(30);
+		foreach(User::all() as $u){
+			if($u->confirmation_code = $confirmation_code){
+				$confirmation_code = str_random(30);
+			}
+		}
+		return $confirmation_code;
+	}
+
 	public function run(){
 		Eloquent::unguard();
 
@@ -12,6 +22,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2544'),
 		  'email' => 'eduardo.minazuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -29,6 +40,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1926'),
 		  'email' => 'rafaela.ishida@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -46,6 +58,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4787'),
 		  'email' => 'caio.macedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -63,6 +76,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4018'),
 		  'email' => 'kitana.peixoto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -80,6 +94,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9275'),
 		  'email' => 'morpheu.villablanca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -97,6 +112,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5807'),
 		  'email' => 'chunli.neves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -114,6 +130,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8745'),
 		  'email' => 'caroline.neves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -131,6 +148,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5030'),
 		  'email' => 'caroline.da silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -148,6 +166,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8129'),
 		  'email' => 'cleber.sato@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -165,6 +184,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4507'),
 		  'email' => 'irene.salgueiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -182,6 +202,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7502'),
 		  'email' => 'filipe.neto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -199,6 +220,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7508'),
 		  'email' => 'filipe.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -216,6 +238,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6599'),
 		  'email' => 'barbara.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -233,6 +256,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6314'),
 		  'email' => 'sarah.ishida silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -250,6 +274,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2349'),
 		  'email' => 'akemi.semedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -267,6 +292,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6821'),
 		  'email' => 'milena.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -284,6 +310,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3001'),
 		  'email' => 'milena.castanheira@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -301,6 +328,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9096'),
 		  'email' => 'cleber.freire@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -318,6 +346,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3634'),
 		  'email' => 'cleber.leal@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -335,6 +364,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7255'),
 		  'email' => 'jonas.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -352,6 +382,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7935'),
 		  'email' => 'filipe.monteiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -369,6 +400,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6521'),
 		  'email' => 'otavio.dos santos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -386,6 +418,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8001'),
 		  'email' => 'jaime.valverde@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -403,6 +436,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2734'),
 		  'email' => 'xerxes.rocha@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -420,6 +454,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1878'),
 		  'email' => 'alexandra.pinheiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -437,6 +472,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5117'),
 		  'email' => 'sarah.carvalho@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -454,6 +490,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2985'),
 		  'email' => 'sonia.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -471,6 +508,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1791'),
 		  'email' => 'caio.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -488,6 +526,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4089'),
 		  'email' => 'jaime.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -505,6 +544,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5490'),
 		  'email' => 'akemi.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -522,6 +562,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3641'),
 		  'email' => 'peterson.torres@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -539,6 +580,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5460'),
 		  'email' => 'simao.alves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -556,6 +598,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3056'),
 		  'email' => 'sonia.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -573,6 +616,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8385'),
 		  'email' => 'fernando.hernandes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -590,6 +634,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1487'),
 		  'email' => 'claudio.severo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -607,6 +652,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4196'),
 		  'email' => 'milena.matos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -624,6 +670,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7113'),
 		  'email' => 'caue.carvalho@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -641,6 +688,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1023'),
 		  'email' => 'simao.freire@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -658,6 +706,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1285'),
 		  'email' => 'leonidas.semedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -675,6 +724,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1409'),
 		  'email' => 'peterson.neto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -692,6 +742,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9516'),
 		  'email' => 'fernando.costa@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -709,6 +760,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6692'),
 		  'email' => 'andreia.jordao@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -726,6 +778,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8148'),
 		  'email' => 'caroline.rocha@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -743,6 +796,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5932'),
 		  'email' => 'chunli.carvalho@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -760,6 +814,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9277'),
 		  'email' => 'eric.ishida silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -777,6 +832,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7605'),
 		  'email' => 'akemi.redfield@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -794,6 +850,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2312'),
 		  'email' => 'rafaela.tanaka@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -811,6 +868,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4036'),
 		  'email' => 'trinity.neto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -828,6 +886,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4663'),
 		  'email' => 'jessica.freire@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -845,6 +904,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8773'),
 		  'email' => 'otavio.padua@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -862,6 +922,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2347'),
 		  'email' => 'xerxes.matos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -879,6 +940,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4867'),
 		  'email' => 'dante.minazuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -896,6 +958,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3715'),
 		  'email' => 'milena.batista@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -913,6 +976,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9348'),
 		  'email' => 'eric.alves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -930,6 +994,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4776'),
 		  'email' => 'dante.macedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -947,6 +1012,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1702'),
 		  'email' => 'jade.villablanca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -964,6 +1030,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2722'),
 		  'email' => 'daniela.monteiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -981,6 +1048,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1501'),
 		  'email' => 'morpheu.matos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -998,6 +1066,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7815'),
 		  'email' => 'rafaela.alves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1015,6 +1084,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4804'),
 		  'email' => 'fernando.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1032,6 +1102,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7148'),
 		  'email' => 'jaime.pinheiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1049,6 +1120,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4622'),
 		  'email' => 'xerxes.torres@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1066,6 +1138,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1582'),
 		  'email' => 'camila.dos santos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1083,6 +1156,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1365'),
 		  'email' => 'bruna.faria@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1100,6 +1174,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7025'),
 		  'email' => 'odete.salgueiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1117,6 +1192,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7617'),
 		  'email' => 'sarah.castanheira@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1134,6 +1210,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6606'),
 		  'email' => 'doulgas.gouveia@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1151,6 +1228,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9210'),
 		  'email' => 'caio.costa@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1168,6 +1246,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9643'),
 		  'email' => 'xerxes.minazuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1185,6 +1264,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3809'),
 		  'email' => 'jade.lopes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1202,6 +1282,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8586'),
 		  'email' => 'dante.camilo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1219,6 +1300,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2385'),
 		  'email' => 'akemi.valentine@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1236,6 +1318,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7985'),
 		  'email' => 'jill.castanheira@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1253,6 +1336,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8730'),
 		  'email' => 'trinity.redfield@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1270,6 +1354,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8480'),
 		  'email' => 'sonia.padua@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1287,6 +1372,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7909'),
 		  'email' => 'augusto.castanheira@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1304,6 +1390,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7344'),
 		  'email' => 'yoko.alves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1321,6 +1408,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4368'),
 		  'email' => 'michele.macedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1338,6 +1426,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9074'),
 		  'email' => 'peterson.costa@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1355,6 +1444,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6180'),
 		  'email' => 'bruno.monteiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1372,6 +1462,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9653'),
 		  'email' => 'jonas.matos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1389,6 +1480,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3738'),
 		  'email' => 'jade.franca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1406,6 +1498,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4685'),
 		  'email' => 'peterson.redfield@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1423,6 +1516,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1458'),
 		  'email' => 'filipe.neves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1440,6 +1534,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2063'),
 		  'email' => 'jill.dos santos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1457,6 +1552,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1316'),
 		  'email' => 'caue.minazuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1474,6 +1570,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6061'),
 		  'email' => 'jonas.valentine@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1491,6 +1588,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6295'),
 		  'email' => 'irene.camilo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1508,6 +1606,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5337'),
 		  'email' => 'doulgas.tanaka@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1525,6 +1624,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5403'),
 		  'email' => 'angelina.valentine@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1542,6 +1642,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9171'),
 		  'email' => 'monica.suzuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1559,6 +1660,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3523'),
 		  'email' => 'peterson.faria@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1576,6 +1678,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4723'),
 		  'email' => 'leonidas.severo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1593,6 +1696,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8450'),
 		  'email' => 'augusto.neto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1610,6 +1714,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8261'),
 		  'email' => 'leonidas.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1627,6 +1732,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3519'),
 		  'email' => 'eric.hernandes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1644,6 +1750,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9654'),
 		  'email' => 'chunli.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1661,6 +1768,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9473'),
 		  'email' => 'doulgas.castanheira@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1678,6 +1786,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2957'),
 		  'email' => 'jessica.franca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1695,6 +1804,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5694'),
 		  'email' => 'jaime.villablanca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1712,6 +1822,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3068'),
 		  'email' => 'peterson.minazuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1729,6 +1840,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8712'),
 		  'email' => 'caue.gomes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1746,6 +1858,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8234'),
 		  'email' => 'leonidas.yamada silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1763,6 +1876,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3977'),
 		  'email' => 'leonidas.matos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1780,6 +1894,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5317'),
 		  'email' => 'michele.valentine@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1797,6 +1912,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7146'),
 		  'email' => 'doulgas.sato@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1814,6 +1930,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3428'),
 		  'email' => 'doulgas.rocha@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1831,6 +1948,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6404'),
 		  'email' => 'dante.lins@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1848,6 +1966,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3117'),
 		  'email' => 'caue.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1865,6 +1984,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6798'),
 		  'email' => 'michele.rocha@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1882,6 +2002,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2909'),
 		  'email' => 'tamires.matos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1899,6 +2020,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4774'),
 		  'email' => 'aline.lins@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1916,6 +2038,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3786'),
 		  'email' => 'monica.batista@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1933,6 +2056,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2209'),
 		  'email' => 'caio.hato@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1950,6 +2074,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5768'),
 		  'email' => 'eric.sato@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1967,6 +2092,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1718'),
 		  'email' => 'akemi.costa@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -1984,6 +2110,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2721'),
 		  'email' => 'milena.neves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2001,6 +2128,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8182'),
 		  'email' => 'bruno.semedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2018,6 +2146,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3920'),
 		  'email' => 'odete.dos santos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2035,6 +2164,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5097'),
 		  'email' => 'jaime.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2052,6 +2182,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7016'),
 		  'email' => 'michele.castanheira@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2069,6 +2200,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9003'),
 		  'email' => 'caroline.minazuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2086,6 +2218,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5413'),
 		  'email' => 'sonia.macedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2103,6 +2236,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6896'),
 		  'email' => 'kitana.lins@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2120,6 +2254,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9640'),
 		  'email' => 'dante.faria@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2137,6 +2272,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3020'),
 		  'email' => 'claudio.faria@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2154,6 +2290,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3321'),
 		  'email' => 'sarah.peixoto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2171,6 +2308,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6752'),
 		  'email' => 'eduardo.padua@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2188,6 +2326,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1639'),
 		  'email' => 'otavio.franca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2205,6 +2344,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6610'),
 		  'email' => 'jill.salgueiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2222,6 +2362,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9642'),
 		  'email' => 'camila.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2239,6 +2380,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1631'),
 		  'email' => 'camila.lopes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2256,6 +2398,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3116'),
 		  'email' => 'lara.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2273,6 +2416,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1555'),
 		  'email' => 'andreia.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2290,6 +2434,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6337'),
 		  'email' => 'yoko.franca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2307,6 +2452,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8110'),
 		  'email' => 'claudio.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2324,6 +2470,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9031'),
 		  'email' => 'barbara.tanaka@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2341,6 +2488,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5607'),
 		  'email' => 'jonas.lopes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2358,6 +2506,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8016'),
 		  'email' => 'fernando.castanheira@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2375,6 +2524,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9836'),
 		  'email' => 'jade.costa@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2392,6 +2542,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4785'),
 		  'email' => 'peterson.sato@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2409,6 +2560,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8571'),
 		  'email' => 'dante.lopes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2426,6 +2578,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3405'),
 		  'email' => 'eduardo.freire@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2443,6 +2596,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2620'),
 		  'email' => 'odete.lins@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2460,6 +2614,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9802'),
 		  'email' => 'simao.franca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2477,6 +2632,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6767'),
 		  'email' => 'yori.yamada silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2494,6 +2650,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9057'),
 		  'email' => 'dante.leal@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2511,6 +2668,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6601'),
 		  'email' => 'xerxes.monteiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2528,6 +2686,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7089'),
 		  'email' => 'augusto.leal@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2545,6 +2704,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8707'),
 		  'email' => 'simao.padua@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2562,6 +2722,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8133'),
 		  'email' => 'caue.dos santos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2579,6 +2740,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1299'),
 		  'email' => 'claudio.salgueiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2596,6 +2758,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2484'),
 		  'email' => 'bruno.redfield@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2613,6 +2776,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2796'),
 		  'email' => 'akemi.hernandes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2630,6 +2794,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8602'),
 		  'email' => 'rafaela.valentine@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2647,6 +2812,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8078'),
 		  'email' => 'sheeva.padua@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2664,6 +2830,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5012'),
 		  'email' => 'jade.batista@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2681,6 +2848,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5062'),
 		  'email' => 'peterson.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2698,6 +2866,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6325'),
 		  'email' => 'fernanda.yamada silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2715,6 +2884,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2519'),
 		  'email' => 'jill.severo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2732,6 +2902,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6575'),
 		  'email' => 'augusto.valentine@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2749,6 +2920,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4226'),
 		  'email' => 'filipe.faria@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2766,6 +2938,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6371'),
 		  'email' => 'morpheu.faria@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2783,6 +2956,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1142'),
 		  'email' => 'cleber.torres@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2800,6 +2974,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1544'),
 		  'email' => 'eduardo.ishida silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2817,6 +2992,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4651'),
 		  'email' => 'angelina.suzuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2834,6 +3010,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2968'),
 		  'email' => 'barbara.rocha@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2851,6 +3028,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8357'),
 		  'email' => 'lara.valentine@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2868,6 +3046,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6907'),
 		  'email' => 'bruno.padua@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2885,6 +3064,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4331'),
 		  'email' => 'jade.alves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2902,6 +3082,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1404'),
 		  'email' => 'jonas.faria@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2919,6 +3100,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6269'),
 		  'email' => 'fernando.suzuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2936,6 +3118,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5591'),
 		  'email' => 'rafaela.da silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2953,6 +3136,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4702'),
 		  'email' => 'tamires.faria@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2970,6 +3154,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3458'),
 		  'email' => 'eric.castanheira@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -2987,6 +3172,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6963'),
 		  'email' => 'dante.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3004,6 +3190,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5024'),
 		  'email' => 'cleber.peixoto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3021,6 +3208,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2128'),
 		  'email' => 'caio.da silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3038,6 +3226,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1246'),
 		  'email' => 'kitana.camilo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3055,6 +3244,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8183'),
 		  'email' => 'yoko.lins@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3072,6 +3262,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6682'),
 		  'email' => 'alexandra.torres@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3089,6 +3280,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8919'),
 		  'email' => 'andreia.monteiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3106,6 +3298,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8553'),
 		  'email' => 'jonas.da silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3123,6 +3316,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1636'),
 		  'email' => 'doulgas.monteiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3140,6 +3334,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8900'),
 		  'email' => 'sheeva.da mata@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3157,6 +3352,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5937'),
 		  'email' => 'xerxes.peixoto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3174,6 +3370,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3814'),
 		  'email' => 'filipe.franca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3191,6 +3388,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1561'),
 		  'email' => 'aline.neto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3208,6 +3406,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9245'),
 		  'email' => 'doulgas.torres@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3225,6 +3424,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4139'),
 		  'email' => 'sarah.valverde@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3242,6 +3442,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5042'),
 		  'email' => 'sheeva.macedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3259,6 +3460,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2550'),
 		  'email' => 'andreia.porta@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3276,6 +3478,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1121'),
 		  'email' => 'chunli.neto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3293,6 +3496,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4452'),
 		  'email' => 'bruno.nazario@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3310,6 +3514,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9380'),
 		  'email' => 'otavio.monteiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3327,6 +3532,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7210'),
 		  'email' => 'jill.batista@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3344,6 +3550,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5163'),
 		  'email' => 'filipe.torres@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3361,6 +3568,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6095'),
 		  'email' => 'filipe.ishida silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3378,6 +3586,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9767'),
 		  'email' => 'xerxes.severo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3395,6 +3604,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9138'),
 		  'email' => 'camila.suzuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3412,6 +3622,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5181'),
 		  'email' => 'fernanda.minazuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3429,6 +3640,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5936'),
 		  'email' => 'dante.salgueiro@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3446,6 +3658,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4582'),
 		  'email' => 'doulgas.lopes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3463,6 +3676,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9826'),
 		  'email' => 'filipe.carvalho@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3480,6 +3694,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4376'),
 		  'email' => 'augusto.hernandes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3497,6 +3712,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4975'),
 		  'email' => 'doulgas.yamada silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3514,6 +3730,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3997'),
 		  'email' => 'caio.leal@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3531,6 +3748,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7101'),
 		  'email' => 'angelina.batista@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3548,6 +3766,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5086'),
 		  'email' => 'caue.sato@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3565,6 +3784,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6591'),
 		  'email' => 'trinity.minazuki@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3582,6 +3802,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6623'),
 		  'email' => 'filipe.macedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3599,6 +3820,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8609'),
 		  'email' => 'morpheu.peixoto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3616,6 +3838,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8020'),
 		  'email' => 'caroline.franca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3633,6 +3856,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9819'),
 		  'email' => 'fernando.alves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3650,6 +3874,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8269'),
 		  'email' => 'cleber.franca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3667,6 +3892,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5026'),
 		  'email' => 'cleber.matos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3684,6 +3910,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8592'),
 		  'email' => 'dante.peixoto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3701,6 +3928,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2274'),
 		  'email' => 'leonidas.hernandes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3718,6 +3946,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6710'),
 		  'email' => 'otavio.alves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3735,6 +3964,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2271'),
 		  'email' => 'yoko.valverde@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3752,6 +3982,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4791'),
 		  'email' => 'alexandra.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3769,6 +4000,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('9449'),
 		  'email' => 'dante.tanaka@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3786,6 +4018,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5698'),
 		  'email' => 'cleber.valverde@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3803,6 +4036,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3118'),
 		  'email' => 'caroline.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3820,6 +4054,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('7352'),
 		  'email' => 'jill.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3837,6 +4072,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8084'),
 		  'email' => 'peterson.alves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3854,6 +4090,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5381'),
 		  'email' => 'filipe.tanaka@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3871,6 +4108,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8926'),
 		  'email' => 'fernanda.camilo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3888,6 +4126,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1947'),
 		  'email' => 'odete.carvalho@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3905,6 +4144,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1104'),
 		  'email' => 'xerxes.costa@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3922,6 +4162,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8212'),
 		  'email' => 'cleber.augusto@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3939,6 +4180,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2899'),
 		  'email' => 'michele.yamada silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3956,6 +4198,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4459'),
 		  'email' => 'alexandra.vieira@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3973,6 +4216,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6302'),
 		  'email' => 'camila.alves@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -3990,6 +4234,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6237'),
 		  'email' => 'michele.redfield@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4007,6 +4252,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6223'),
 		  'email' => 'jonas.batista@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4024,6 +4270,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('2963'),
 		  'email' => 'fernanda.carvalho@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4041,6 +4288,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6039'),
 		  'email' => 'otavio.sato@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4058,6 +4306,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1004'),
 		  'email' => 'rafaela.ishida silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4075,6 +4324,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5283'),
 		  'email' => 'kitana.sato@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4092,6 +4342,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5424'),
 		  'email' => 'sheeva.jordao@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4109,6 +4360,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1880'),
 		  'email' => 'caue.da silva@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4126,6 +4378,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3716'),
 		  'email' => 'michele.franca@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4143,6 +4396,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3728'),
 		  'email' => 'irene.takahashi@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4160,6 +4414,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('1535'),
 		  'email' => 'andreia.gouveia@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4177,6 +4432,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6032'),
 		  'email' => 'dante.hernandes@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4194,6 +4450,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('8418'),
 		  'email' => 'trinity.macedo@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4211,6 +4468,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('6184'),
 		  'email' => 'jade.freire@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4228,6 +4486,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('5265'),
 		  'email' => 'caio.padua@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4245,6 +4504,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('4367'),
 		  'email' => 'doulgas.faria@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
@@ -4262,6 +4522,7 @@ class AlunoSeeder extends Seeder{
 		 'password' => Hash::make('3344'),
 		  'email' => 'akemi.matos@gmail.com',
 		 'confirmed' => '1',
+		 'confirmation_code' => conf_code();
 		 'tipo' => '1'
 		));
 		$Aluno = Aluno::create(array(
