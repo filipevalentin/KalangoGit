@@ -1540,6 +1540,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('criarProfessor', function(){
+			$user = new User;
 			$user->nome       = Input::get('nome');
 			$user->sobrenome       = Input::get('sobrenome');
 			$user->email       = Input::get('email');
