@@ -681,6 +681,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		$atividadeExtra = new Atividade;
 		$atividadeExtra->nome = Input::get('nome');
 		$atividadeExtra->tipo = 2;
+		$atividadeExtra->status = 0;
 		$idModulo = Input::get('idModulo');
 		$idCategoria = Input::get('idCategoria');
 		$atividadeExtra->idUsuario = Auth::user()->id;
@@ -917,6 +918,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	Route::get('atividade/{id}/editar', function($id){
 		$atividade = Atividade::find($id);
 
+		if($atividade->status == '1'){
+			Session::flash('message', 'Primeiro inative a Atividade para poder editá-la!');
+			return Redirect::back();
+		}
+
 		return View::make('atividade/editarAdmin')->with('atividade',$atividade);
 	});
 
@@ -1109,6 +1115,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('criarAtividade', function(){
 			$Atividade = new Atividade;
 			$Atividade->nome = Input::get('nome');
+			$Atividade->status = 0;
 			$Atividade->idAula = Input::get('idAula');
 			$Atividade->idUsuario = Auth::user()->id;
 
@@ -1384,6 +1391,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('atualizarAtividade', function(){
 			$Atividade 			    = Atividade::find(Input::get('id')); 
 			$Atividade->nome       	= Input::get('nome');
+			$Atividade->status 		= Input::get('status');
 			
 			$Atividade->save();
 
@@ -1667,6 +1675,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$atividadeExtra = new Atividade;
 			$atividadeExtra->nome = Input::get('nome');
 			$atividadeExtra->tipo = 2;
+			$atividadeExtra->status = 0;
 			$idModulo = Input::get('idModulo');
 			$idCategoria = Input::get('idCategoria');
 			$atividadeExtra->idUsuario = Auth::user()->id;
@@ -1690,6 +1699,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$atividadeExtra->nome = Input::get('nome');
 			$idModulo = Input::get('idModulo');
 			$idCategoria = Input::get('idCategoria');
+			$atividadeExtra->status = Input::get('status');
 
 			if(isset($idModulo)){
 				$atividadeExtra->idModulo = Input::get('idModulo');

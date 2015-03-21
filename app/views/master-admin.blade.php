@@ -162,15 +162,15 @@
             </aside>
 
             <aside class="right-side">
-
-                @yield('maincontent')
-
+                
                 @if (Session::has('message'))
                     <div style="margin:21px;" class="alert alert-success">
                         <button type="button" class="close" data-dismiss="alert">×</button>
                         <h5><strong>{{ Session::get('message') }}</strong></h5>
                     </div>
                 @endif
+
+                @yield('maincontent')
 
             </aside>
         </div>

@@ -333,8 +333,6 @@
 
 		});
 
-		//$('#rootwizard').bootstrapWizard('show',;{{$questao}});
-
 		$('button.resposta').click(function() {
 
 			var atual = $('#rootwizard').bootstrapWizard('currentIndex');

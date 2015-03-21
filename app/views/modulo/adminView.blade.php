@@ -43,6 +43,13 @@
                             <label class="control-label" for="nome"><i id="icone_nome-editar-exercicio" class="fa"></i> Nome</label>
                             <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarExercicio();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-exercicio"></input>
                         </div>
+                        <div id="" class="form-group">
+                            <label class="control-label" for="status"><i id="icone_nome-editar-exercicio" class="fa"></i> Status</label>
+                            <select type="text" autocomplete="off" id="status" name="status" class="form-control">
+                                <option value="0"> Desativado</option>
+                                <option value="1"> Ativado</option>
+                            </select>
+                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                             <input type="submit" class="btn btn-primary btn-salvar-editar-exercicio" value="Salvar">
@@ -218,12 +225,17 @@
                                             @endforeach
 
                                             @foreach ($aula->atividades as $atividade)
+                                                @if($atividade->status == '0')
+                                                    <div class="alert alert-info alert-dismissable" style="min-height: 55px; background-color: white;">
+                                                    <b style="color: red;"> Inativa</b>
+                                                @else
                                                 <div class="alert alert-info alert-dismissable" style="min-height: 55px;">
+                                                @endif
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
                                                     <p style="float:left;">{{$atividade->nome}}</p>
                                                     <div class="box-tools pull-right">
                                                         <a href="/admin/atividade/{{$atividade->id}}/editar"><button class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button></a>
-                                                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editaratividade" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" ><i class="fa fa-pencil"></i></button>
+                                                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editaratividade" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" data-status="{{$atividade->status}}" ><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                                     </div>
                                                 </div>
@@ -266,11 +278,13 @@
             var button = $(event.relatedTarget) // Button that triggered the modal
             var dataid = button.data('id')
             var datanome = button.data('nome')
+            var datastatus = button.data('status');
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
             modal.find('#id').val(dataid)
             modal.find('#nome').val(datanome)
+            modal.find('#status').val(datastatus);
             })
 
         $('#editarmaterial').on('show.bs.modal', function (event) {

@@ -79,6 +79,13 @@
                             @endforeach
                         </select>
                     </div>
+                    <div id="" class="form-group">
+                        <label class="control-label" for="status"><i id="icone_nome-editar-exercicio" class="fa"></i> Status</label>
+                        <select type="text" autocomplete="off" id="status" name="status" class="form-control">
+                            <option value="0"> Desativado</option>
+                            <option value="1"> Ativado</option>
+                        </select>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                         <input type="submit" class="btn btn-primary" value="Salvar">
@@ -134,10 +141,17 @@
                                     <div class="box-body">
                                         <div class="small-box bg-blue">
                                             <div class="inner">
+                                                @if(get_class($categorias[$j])!="Modulo")
                                                 <div class="curso" style="cursor:pointer;" id="{{$categorias[$j]->id}}" data-tipo="{{get_class($categorias[$j])}}" data-atividades="{{$atividades}}">
                                                     <h4 style="font-size: 20px;">{{$categorias[$j]->nome}}</h4>
                                                     <p style="margin:0px;">  </p>
                                                 </div>
+                                                @else
+                                                <div class="curso" style="cursor:pointer;" id="{{$categorias[$j]->id}}" data-tipo="{{get_class($categorias[$j])}}" data-atividades="{{$atividades}}">
+                                                    <h4 style="font-size: 20px;">{{$categorias[$j]->nome}}-{{$categorias[$j]->curso->nome}}</h4>
+                                                    <p style="margin:0px;">  </p>
+                                                </div>
+                                                @endif
                                             </div>
 
                                             <a href="#" class="small-box-footer"></a>
@@ -178,7 +192,12 @@
 
                     <div class="row">
                         @foreach($atividadesExtras as $atividade)
-                        <div class="col-lg-3 atividade" id="{{$atividade->id}}"> <!-- usar o id da ativ para apagar o card, ao selecionar uma categoria-->
+                         @if($atividade->status == '0')
+                            <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="background-color: white;">
+                            <b style="color: red;"> Inativa</b>
+                        @else
+                            <div class="col-lg-3 atividade" id="{{$atividade->id}}">
+                        @endif
                             <div id="div_card_4" class="small-box bg-fuchsia card">
                                 <div style="padding: 10px;" class="inner">
 
@@ -214,7 +233,8 @@
                 var dataid = button.data('id')
                 var datanome = button.data('nome')
                 var dataidModulo = button.data('idmodulo')
-                var dataidCategoria = button.data('idcategoria') // Extract info from data-* attributes
+                var dataidCategoria = button.data('idcategoria')
+                var datastatus = button.data('status') // Extract info from data-* attributes
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
                 // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
                 var modal = $(this)
@@ -222,6 +242,7 @@
                 modal.find('#nome').val(datanome)
                 modal.find('#idModulo').val(dataidModulo)
                 modal.find('#idCategoria').val(dataidCategoria)
+                modal.find('#status').val(datastatus);
             });
 
             $('#criarAtividadeExtra').on('show.bs.modal', function (event) {
