@@ -9,7 +9,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Adicionar Aluno à turma</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Atribuir Aluno à turma</h4>
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/matricularAluno">
@@ -81,7 +81,7 @@
                                 <td>{{User::find($aluno->id)->email}}</td>
                                 <td>
                                     <div class="box-tools" style="padding:0px">
-                                        <a href="/admin/aluno/{{$aluno->id}}"><button class="btn btn-success btn-xs"><i class="fa fa-external-link"></i></button></a>
+                                        <a href="/admin/aluno/{{$aluno->id}}"><button class="btn btn-primary btn-xs"><i class="fa fa-user"></i></button></a>
                                         <a href="/admin/desmatricularAluno/{{$aluno->id}}/{{$turma->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                     </div>
                                 </td> 
