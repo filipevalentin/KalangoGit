@@ -383,6 +383,7 @@ function fcn_validaEmail(pstr_email){
 			$( "#icone_email" ).addClass("fa-times-circle-o");
 			
 			alert("É necessário o preenchimento de um endereço de e-mail válido.");
+			pstr_email.focus();
 			return false;
 		}
 	}
@@ -407,6 +408,7 @@ function fcn_validaSenha(minimo, maximo, pstr_valor){
 				$( "#icone_senha" ).addClass("fa-times-circle-o");
 				
 				alert("A senha deve ter entre 6 e 12 caracteres.");
+				document.getElementById('senha').focus();
 				return false;
 			}
 			
@@ -430,6 +432,7 @@ function fcn_validaSenha(minimo, maximo, pstr_valor){
 			$( "#icone_senha" ).addClass("fa-times-circle-o");
 			
 			alert("A senha deve ter pelo menos 1 caracter especial.");
+			document.getElementById('senha').focus();
 			return false;
 		}
 		
