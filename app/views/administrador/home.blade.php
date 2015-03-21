@@ -296,7 +296,7 @@
                                         </a>
                                     </h4>
                                     <div class="box-tools pull-right" style="padding-top: 8px;">
-                                        <a href="modulo/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
+                                        <a href="/admin/modulo/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
                                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarmodulo" data-id="{{$modulo->id}}" data-nome="{{$modulo->nome}}"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger btn-sm" ><i class="fa fa-times"></i></button>
                                     </div>
@@ -314,7 +314,7 @@
                                                             <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarturma" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" data-professor="{{User::find($turma->professor->id)->nome}}" data-idprofessor="{{$turma->professor->id}}"><i class="fa fa-pencil"></i></button>
                                                             <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                                         </div>
-                                                        <a href="turma/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">
+                                                        <a href="/admin/turma/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">
                                                             <h4 style="font-size: 20px;">{{$turma->nome}}</h4>
                                                             <p>{{TurmasAluno::where('idTurma', '=', $turma->id)->count()." Alunos"}}</p>
                                                             <p style="margin:0px;">{{$turma->professor->usuario->nome . " " . $turma->professor->usuario->sobrenome }}</p>
