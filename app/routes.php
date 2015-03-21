@@ -1546,6 +1546,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->email       = Input::get('email');
 			$user->login = Input::get('codRegistro');
 
+			$confirmation_code = str_random(30);
+			foreach(User::all() as $u){
+				if($u->confirmation_code = $confirmation_code){
+					$confirmation_code = str_random(30);
+				}
+			}
+			$user->confirmation_code = $confirmation_code;
+
 			$imagem = Input::file('urlImagem');
 			$filename="";
 
@@ -1565,6 +1573,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$professor->codRegistro       = Input::get('codRegistro');
 
 			$professor->save();
+
+			Mail::send('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+	            $message->to(Input::get('email'), Input::get('nome'))
+	                ->subject('KalanGO! - Verifique sua conta');
+	        });
 
 			return Redirect::back();
 		});
