@@ -317,7 +317,7 @@
                                                         <a href="turma/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">
                                                             <h4 style="font-size: 20px;">{{$turma->nome}}</h4>
                                                             <p>{{TurmasAluno::where('idTurma', '=', $turma->id)->count()." Alunos"}}</p>
-                                                            <p style="margin:0px;">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</p>
+                                                            <p style="margin:0px;">{{$turma->professor->usuario->nome . " " . $turma->professor->usuario->sobrenome }}</p>
                                                         </a>
                                                     </div>
 

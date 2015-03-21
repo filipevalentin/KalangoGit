@@ -81,7 +81,7 @@
                                 <td>{{User::find($aluno->id)->email}}</td>
                                 <td>
                                     <div class="box-tools" style="padding:0px">
-                                        <a href="/admin/perfilAluno/{{$aluno->id}}"><button class="btn btn-success btn-xs"><i class="fa fa-external-link"></i></button></a>
+                                        <a href="/admin/aluno/{{$aluno->id}}"><button class="btn btn-success btn-xs"><i class="fa fa-external-link"></i></button></a>
                                         <a href="/admin/desmatricularAluno/{{$aluno->id}}/{{$turma->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                     </div>
                                 </td> 
