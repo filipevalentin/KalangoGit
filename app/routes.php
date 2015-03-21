@@ -1559,7 +1559,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$user->save();
 			$professor->id= $user->id;
-			$professor->urlImagem = $user->urlImagem;
 
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
 			$professor->sobreMim = Input::get('sobreMim');
@@ -1602,6 +1601,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('criarAdministrador', function(){
+			$user = new User;
 			$user->nome       = Input::get('nome');
 			$user->sobrenome       = Input::get('sobrenome');
 			$user->email       = Input::get('email');
