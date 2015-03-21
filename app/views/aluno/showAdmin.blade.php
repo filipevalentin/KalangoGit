@@ -65,8 +65,8 @@
 						</select>
                     </div>
                     <div id="div_matricula" class="form-group">
-                        <label class="control-label" for="codRegistro"><i id="icone_matricula" class="fa"></i> Matrícula</label>
-                        <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" onblur="fcn_recarregaCores();" maxlength="10" class="form-control somenteNumeros matriculaObrigatoria">
+                        <label class="control-label" for="matricula"><i id="icone_matricula" class="fa"></i> Matrícula</label>
+                        <input type="text" autocomplete="off" id="matricula" name="matricula" onblur="fcn_recarregaCores();" maxlength="10" class="form-control somenteNumeros matriculaObrigatoria">
                     </div>
                     <div id="div_senha" class="form-group">
 						<label class="control-label" for="senha"><i id="icone_senha" class="fa"></i> Senha</label>
