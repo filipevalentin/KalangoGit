@@ -32,7 +32,7 @@
                     </div>
                     <div class="form-group">
                         <label for="dataVencimentoBoleto" class="control-label">Dia do Vencimento do Boleto</label>
-                        <select name="diaVencimentoBoleto" id="diaVencimentoBoleto" class="form-control">
+                        <select name="dataVencimentoBoleto" id="diaVencimentoBoleto" class="form-control">
 							<option value="" >Selecione</option>
 							<option value="1" >1</option>
 							<option value="2" >2</option>
