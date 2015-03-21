@@ -64,7 +64,7 @@
     <h1>Gerenciar Professores</h1>
     <ol class="breadcrumb">
         <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Widgets</li>
+        <li class="active">Gerenciar Professores</li>
     </ol>
 </section>
 
