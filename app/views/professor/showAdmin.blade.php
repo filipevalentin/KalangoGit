@@ -22,9 +22,9 @@
                         <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i> Sobrenome</label>
                         <input type="text" autocomplete="off" id="sobrenome" name="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio">
                     </div>
-                    <div id="div_formacaoAcademica" class="form-group">
-                         <label class="control-label" for="formacaoAcademica"><i id="icone_formacaoAcademica" class="fa"></i> Formação Acadêmica</label>
-                        <input type="text" autocomplete="off" id="formacaoAcademica" name="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="100" class="form-control formacaoAcademicaObrigatoria">
+                    <div class="form-group">
+                         <label class="control-label" for="formacaoAcademica"> Formação Acadêmica</label>
+                        <textarea id="formacaoAcademica" name="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" rows="3"></textarea>
                     </div>
                     <div id="div_email" class="form-group">
                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
@@ -38,9 +38,9 @@
 						<label class="control-label" for="senha"><i id="icone_senha" class="fa"></i> Senha</label>
 						<input type="password" autocomplete="off" id="senha" name="password" maxlength="12" class="form-control senhaObrigatoria" onblur="fcn_recarregaCores();fcn_validaSenha(6, 12, this.value);" >
 					</div>	
-                    <div id="div_sobreMim" class="form-group">
-                        <label class="control-label" for="sobreMim"><i id="icone_sobreMim" class="fa"></i> Sobre Mim</label>
-                        <textarea id="sobreMim" name="sobreMim" maxlength="8000" onblur="fcn_recarregaCores();" class="form-control sobreMimObrigatorio" rows="3"></textarea>
+                    <div class="form-group">
+                        <label class="control-label" for="sobreMim"> Sobre Mim</label>
+                        <textarea id="sobreMim" name="sobreMim" maxlength="8000" onblur="fcn_recarregaCores();" class="form-control" rows="3"></textarea>
                     </div>
 					<div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem Perfil</label>
@@ -264,19 +264,6 @@ $(".btn-salvar").click(function(event){
 		$( "#icone_senha" ).addClass("fa-check");
 	}
 	
-	if($(".sobreMimObrigatorio").val() == ""){
-		obrigatorioPendente = 1;
-		$( "#div_sobreMim" ).removeClass("has-success");
-		$( "#icone_sobreMim" ).removeClass("fa-check");
-		$( "#div_sobreMim" ).addClass("has-error");
-		$( "#icone_sobreMim" ).addClass("fa-times-circle-o");
-	}else{
-		$( "#div_sobreMim" ).removeClass("has-error");
-		$( "#icone_sobreMim" ).removeClass("fa-times-circle-o");
-		$( "#div_sobreMim" ).addClass("has-success");
-		$( "#icone_sobreMim" ).addClass("fa-check");
-	}
-	
 	if(obrigatorioPendente == 1){
 		alert("É necessário preencher todos os campos obrigatórios!");
 		return false;
@@ -356,18 +343,6 @@ function fcn_recarregaCores(){
 		$( "#icone_senha" ).removeClass("fa-times-circle-o");
 		$( "#div_senha" ).addClass("has-success");
 		$( "#icone_senha" ).addClass("fa-check");
-	}
-	
-	if($(".sobreMimObrigatorio").val() == ""){
-		$( "#div_sobreMim" ).removeClass("has-success");
-		$( "#icone_sobreMim" ).removeClass("fa-check");
-		$( "#div_sobreMim" ).addClass("has-error");
-		$( "#icone_sobreMim" ).addClass("fa-times-circle-o");
-	}else{
-		$( "#div_sobreMim" ).removeClass("has-error");
-		$( "#icone_sobreMim" ).removeClass("fa-times-circle-o");
-		$( "#div_sobreMim" ).addClass("has-success");
-		$( "#icone_sobreMim" ).addClass("fa-check");
 	}
 				
 }
