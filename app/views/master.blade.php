@@ -6,7 +6,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Kalango v2.1</title>
+        <title>KalanGO!</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -25,6 +25,7 @@
         <!-- Theme style -->
         <link href="/css/AdminLTE.css" rel="stylesheet" type="text/css" />
 		<link href="/css/Custom.css" rel="stylesheet" type="text/css" />
+		<link rel="shortcut icon" href="../img/favicon.ico">
         @yield('css')
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -47,7 +48,7 @@
                 <div class="logo1">
                     <a href="/" class="logo">
                         <!-- Logo Kalango -->
-                        Kalango V2.1
+                        KalanGO!
                         <img style="width:80px;" src="/img/KalangoBranco.png">
                     </a>
                 </div> <!-- Logo link para home page -->
@@ -121,7 +122,7 @@
         <footer class="footer">
           <div class="" style="padding: 0% 10% 0% 10%;">
             <p class="center" style="color: white; margin:display: block;-webkit-margin-before: 1em;-webkit-margin-after: 1em;-webkit-margin-start: 0px; -webkit-margin-end: 0px;">
-                Kalango V2.1
+                KalanGO!
             </p>
           </div>
         </footer>
