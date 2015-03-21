@@ -9,6 +9,7 @@ create table usuarios(
 	urlImagem varchar(500),
 	confirmed int(1) COMMENT 'Indica se o usuario confirmou o registro atraves do email enviado',
 	confirmation_code varchar(255) COMMENT 'Codigo enviado por email ao se cadastrar um novo usuario',
+	remember_token varchar(255) COMMENT 'Funcao "manter conectado"',
 	tipo int(11) COMMENT '1:Aluno  2:Professor  3:Admin'
 );
 
