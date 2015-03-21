@@ -3,27 +3,6 @@
 $layout = 'layouts.master';
 
 Route::get('criarUsuariosTeste', function(){
-	$u = new User;
-	$u->nome = "Aluno 1";
-	$u->login = "123";
-	$u->tipo = "1";
-	$u->password= Hash::make(123);
-	$u->save();
-
-	$a = new Aluno;
-	$a->id = $u->id;
-	$a->save();
-
-	$u2 = new User;
-	$u2->nome = "Professor 1";
-	$u2->login = "456";
-	$u2->tipo = "2";
-	$u2->password= Hash::make(456);
-	$u2->save();
-
-	$a = new Professor;
-	$a->id = $u2->id;
-	$a->save();
 
 	$u3 = new User;
 	$u3->nome = "Administrador 1";
