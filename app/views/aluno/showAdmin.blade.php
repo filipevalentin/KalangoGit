@@ -422,6 +422,7 @@
 				$( "#icone_dataNascimento" ).addClass("fa-times-circle-o");
 				
 				alert("Data de Nascimento inválida!");
+				document.getElementById('dataNascimento').focus();
 				return false;
 			}
 			
@@ -439,6 +440,7 @@
 				$( "#icone_dataNascimento" ).addClass("fa-times-circle-o");
 				
 				alert("A data de nascimento deve ser menor ou igual à data atual.");
+				document.getElementById('dataNascimento').focus();
 				return false;
 			}
 			
@@ -456,6 +458,7 @@
 				$( "#icone_email" ).addClass("fa-times-circle-o");
 				
 				alert("É necessário o preenchimento de um endereço de e-mail válido.");
+				pstr_email.focus();
 				return false;
 			}
 		}
@@ -480,6 +483,7 @@
 					$( "#icone_senha" ).addClass("fa-times-circle-o");
 					
 					alert("A senha deve ter entre 6 e 12 caracteres.");
+					document.getElementById('senha').focus();
 					return false;
 				}
 				
@@ -503,6 +507,7 @@
 				$( "#icone_senha" ).addClass("fa-times-circle-o");
 				
 				alert("A senha deve ter pelo menos 1 caracter especial.");
+				document.getElementById('senha').focus();
 				return false;
 			}
 			
