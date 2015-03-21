@@ -9,6 +9,7 @@ Route::get('criarUsuariosTeste', function(){
 	$u3->login = "789";
 	$u3->tipo = "3";
 	$u3->password= Hash::make(789);
+	$u3->confirmed = '1';
 	$u3->save();
 
 	$a = new Administrador;
