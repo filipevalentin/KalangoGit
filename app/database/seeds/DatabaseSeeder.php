@@ -9,12 +9,15 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-		Eloquent::unguard();
-
-		$this->command->info("\nPlease wait while The Universe prepares itself...\n");
-		$this->command->info("The Universe knows all...\n");
-
-		$this->call('AnswerSeeder');
+		
+		$this->call('IdiomaSeeder');
+		$this->call('CursoSeeder');
+		$this->call('ModuloSeeder');
+		$this->call('ProfessorSeeder');
+		$this->call('AulaSeeder');
+		$this->call('AtividadeSeeder');
+		$this->call('TurmaSeeder');
+		$this->call('AlunoSeeder');
 
 		$this->command->info("\nThe Universe is prepared!\n");
 	}

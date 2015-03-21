@@ -21,7 +21,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39543',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(1);
+		$user->aluno->turmas()->attach(1);
 		$user = User::create(array(
 		  'nome' => 'Rafaela',
 		  'sobrenome' => 'Ishida',
@@ -38,7 +38,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39633',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(1);
+		$user->aluno->turmas()->attach(1);
 		$user = User::create(array(
 		  'nome' => 'Caio',
 		  'sobrenome' => 'Macedo',
@@ -55,7 +55,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39620',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(1);
+		$user->aluno->turmas()->attach(1);
 		$user = User::create(array(
 		  'nome' => 'Kitana',
 		  'sobrenome' => 'Peixoto',
@@ -72,7 +72,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39291',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(1);
+		$user->aluno->turmas()->attach(1);
 		$user = User::create(array(
 		  'nome' => 'Morpheu',
 		  'sobrenome' => 'Villablanca',
@@ -89,7 +89,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39807',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(1);
+		$user->aluno->turmas()->attach(1);
 		$user = User::create(array(
 		  'nome' => 'Chunli',
 		  'sobrenome' => 'Neves',
@@ -106,7 +106,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38804',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(1);
+		$user->aluno->turmas()->attach(1);
 		$user = User::create(array(
 		  'nome' => 'Caroline',
 		  'sobrenome' => 'Neves',
@@ -123,7 +123,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38463',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(2);
+		$user->aluno->turmas()->attach(2);
 		$user = User::create(array(
 		  'nome' => 'Caroline',
 		  'sobrenome' => 'da Silva',
@@ -140,7 +140,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39293',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(2);
+		$user->aluno->turmas()->attach(2);
 		$user = User::create(array(
 		  'nome' => 'Cleber',
 		  'sobrenome' => 'Sato',
@@ -157,7 +157,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39807',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(2);
+		$user->aluno->turmas()->attach(2);
 		$user = User::create(array(
 		  'nome' => 'Irene',
 		  'sobrenome' => 'Salgueiro',
@@ -174,7 +174,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39723',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(2);
+		$user->aluno->turmas()->attach(2);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Neto',
@@ -191,7 +191,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39223',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(2);
+		$user->aluno->turmas()->attach(2);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Nazário',
@@ -208,7 +208,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38679',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(2);
+		$user->aluno->turmas()->attach(2);
 		$user = User::create(array(
 		  'nome' => 'Barbara',
 		  'sobrenome' => 'Nazário',
@@ -225,7 +225,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39643',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(3);
+		$user->aluno->turmas()->attach(3);
 		$user = User::create(array(
 		  'nome' => 'Sarah',
 		  'sobrenome' => 'Ishida Silva',
@@ -242,7 +242,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39239',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(3);
+		$user->aluno->turmas()->attach(3);
 		$user = User::create(array(
 		  'nome' => 'Akemi',
 		  'sobrenome' => 'Semedo',
@@ -259,7 +259,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39120',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(3);
+		$user->aluno->turmas()->attach(3);
 		$user = User::create(array(
 		  'nome' => 'Milena',
 		  'sobrenome' => 'Nazário',
@@ -276,7 +276,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39715',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(3);
+		$user->aluno->turmas()->attach(3);
 		$user = User::create(array(
 		  'nome' => 'Milena',
 		  'sobrenome' => 'Castanheira',
@@ -293,7 +293,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39755',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(3);
+		$user->aluno->turmas()->attach(3);
 		$user = User::create(array(
 		  'nome' => 'Cleber',
 		  'sobrenome' => 'Freire',
@@ -310,7 +310,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39077',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(3);
+		$user->aluno->turmas()->attach(3);
 		$user = User::create(array(
 		  'nome' => 'Cleber',
 		  'sobrenome' => 'Leal',
@@ -327,7 +327,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38819',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(4);
+		$user->aluno->turmas()->attach(4);
 		$user = User::create(array(
 		  'nome' => 'Jonas',
 		  'sobrenome' => 'Nazário',
@@ -344,7 +344,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39742',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(4);
+		$user->aluno->turmas()->attach(4);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Monteiro',
@@ -361,7 +361,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38506',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(4);
+		$user->aluno->turmas()->attach(4);
 		$user = User::create(array(
 		  'nome' => 'Otavio',
 		  'sobrenome' => 'dos Santos',
@@ -378,7 +378,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39559',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(4);
+		$user->aluno->turmas()->attach(4);
 		$user = User::create(array(
 		  'nome' => 'Jaime',
 		  'sobrenome' => 'Valverde',
@@ -395,7 +395,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39306',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(4);
+		$user->aluno->turmas()->attach(4);
 		$user = User::create(array(
 		  'nome' => 'Xerxes',
 		  'sobrenome' => 'Rocha',
@@ -412,7 +412,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39749',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(5);
+		$user->aluno->turmas()->attach(5);
 		$user = User::create(array(
 		  'nome' => 'Alexandra',
 		  'sobrenome' => 'Pinheiro',
@@ -429,7 +429,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38913',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(5);
+		$user->aluno->turmas()->attach(5);
 		$user = User::create(array(
 		  'nome' => 'Sarah',
 		  'sobrenome' => 'Carvalho',
@@ -446,7 +446,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39051',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(5);
+		$user->aluno->turmas()->attach(5);
 		$user = User::create(array(
 		  'nome' => 'Sonia',
 		  'sobrenome' => 'Takahashi',
@@ -463,7 +463,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38408',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(5);
+		$user->aluno->turmas()->attach(5);
 		$user = User::create(array(
 		  'nome' => 'Caio',
 		  'sobrenome' => 'Nazário',
@@ -480,7 +480,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38580',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(6);
+		$user->aluno->turmas()->attach(6);
 		$user = User::create(array(
 		  'nome' => 'Jaime',
 		  'sobrenome' => 'Takahashi',
@@ -497,7 +497,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38910',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(6);
+		$user->aluno->turmas()->attach(6);
 		$user = User::create(array(
 		  'nome' => 'Akemi',
 		  'sobrenome' => 'Takahashi',
@@ -514,7 +514,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39081',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(6);
+		$user->aluno->turmas()->attach(6);
 		$user = User::create(array(
 		  'nome' => 'Peterson',
 		  'sobrenome' => 'Torres',
@@ -531,7 +531,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39173',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(6);
+		$user->aluno->turmas()->attach(6);
 		$user = User::create(array(
 		  'nome' => 'Simão',
 		  'sobrenome' => 'Alves',
@@ -548,7 +548,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39446',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(7);
+		$user->aluno->turmas()->attach(7);
 		$user = User::create(array(
 		  'nome' => 'Sonia',
 		  'sobrenome' => 'Nazário',
@@ -565,7 +565,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39315',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(7);
+		$user->aluno->turmas()->attach(7);
 		$user = User::create(array(
 		  'nome' => 'Fernando',
 		  'sobrenome' => 'Hernandes',
@@ -582,7 +582,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39770',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(7);
+		$user->aluno->turmas()->attach(7);
 		$user = User::create(array(
 		  'nome' => 'Claudio',
 		  'sobrenome' => 'Severo',
@@ -599,7 +599,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39609',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(7);
+		$user->aluno->turmas()->attach(7);
 		$user = User::create(array(
 		  'nome' => 'Milena',
 		  'sobrenome' => 'Matos',
@@ -616,7 +616,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38533',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(8);
+		$user->aluno->turmas()->attach(8);
 		$user = User::create(array(
 		  'nome' => 'Cauê',
 		  'sobrenome' => 'Carvalho',
@@ -633,7 +633,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38798',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(8);
+		$user->aluno->turmas()->attach(8);
 		$user = User::create(array(
 		  'nome' => 'Simão',
 		  'sobrenome' => 'Freire',
@@ -650,7 +650,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39742',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(8);
+		$user->aluno->turmas()->attach(8);
 		$user = User::create(array(
 		  'nome' => 'Leonidas',
 		  'sobrenome' => 'Semedo',
@@ -667,7 +667,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39769',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(8);
+		$user->aluno->turmas()->attach(8);
 		$user = User::create(array(
 		  'nome' => 'Peterson',
 		  'sobrenome' => 'Neto',
@@ -684,7 +684,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39232',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(9);
+		$user->aluno->turmas()->attach(9);
 		$user = User::create(array(
 		  'nome' => 'Fernando',
 		  'sobrenome' => 'Costa',
@@ -701,7 +701,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39750',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(9);
+		$user->aluno->turmas()->attach(9);
 		$user = User::create(array(
 		  'nome' => 'Andreia',
 		  'sobrenome' => 'Jordão',
@@ -718,7 +718,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39586',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(9);
+		$user->aluno->turmas()->attach(9);
 		$user = User::create(array(
 		  'nome' => 'Caroline',
 		  'sobrenome' => 'Rocha',
@@ -735,7 +735,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38803',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(9);
+		$user->aluno->turmas()->attach(9);
 		$user = User::create(array(
 		  'nome' => 'Chunli',
 		  'sobrenome' => 'Carvalho',
@@ -752,7 +752,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38928',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(10);
+		$user->aluno->turmas()->attach(10);
 		$user = User::create(array(
 		  'nome' => 'Eric',
 		  'sobrenome' => 'Ishida Silva',
@@ -769,7 +769,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38498',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(10);
+		$user->aluno->turmas()->attach(10);
 		$user = User::create(array(
 		  'nome' => 'Akemi',
 		  'sobrenome' => 'Redfield',
@@ -786,7 +786,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39438',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(10);
+		$user->aluno->turmas()->attach(10);
 		$user = User::create(array(
 		  'nome' => 'Rafaela',
 		  'sobrenome' => 'Tanaka',
@@ -803,7 +803,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38703',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(10);
+		$user->aluno->turmas()->attach(10);
 		$user = User::create(array(
 		  'nome' => 'Trinity',
 		  'sobrenome' => 'Neto',
@@ -820,7 +820,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38588',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(11);
+		$user->aluno->turmas()->attach(11);
 		$user = User::create(array(
 		  'nome' => 'Jéssica',
 		  'sobrenome' => 'Freire',
@@ -837,7 +837,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38562',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(11);
+		$user->aluno->turmas()->attach(11);
 		$user = User::create(array(
 		  'nome' => 'Otavio',
 		  'sobrenome' => 'Pádua',
@@ -854,7 +854,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38621',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(11);
+		$user->aluno->turmas()->attach(11);
 		$user = User::create(array(
 		  'nome' => 'Xerxes',
 		  'sobrenome' => 'Matos',
@@ -871,7 +871,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38505',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(11);
+		$user->aluno->turmas()->attach(11);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Minazuki',
@@ -888,7 +888,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38552',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(12);
+		$user->aluno->turmas()->attach(12);
 		$user = User::create(array(
 		  'nome' => 'Milena',
 		  'sobrenome' => 'Batista',
@@ -905,7 +905,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38790',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(12);
+		$user->aluno->turmas()->attach(12);
 		$user = User::create(array(
 		  'nome' => 'Eric',
 		  'sobrenome' => 'Alves',
@@ -922,7 +922,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39430',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(12);
+		$user->aluno->turmas()->attach(12);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Macedo',
@@ -939,7 +939,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39453',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(12);
+		$user->aluno->turmas()->attach(12);
 		$user = User::create(array(
 		  'nome' => 'Jade',
 		  'sobrenome' => 'Villablanca',
@@ -956,7 +956,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39325',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(13);
+		$user->aluno->turmas()->attach(13);
 		$user = User::create(array(
 		  'nome' => 'Daniela',
 		  'sobrenome' => 'Monteiro',
@@ -973,7 +973,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38674',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(13);
+		$user->aluno->turmas()->attach(13);
 		$user = User::create(array(
 		  'nome' => 'Morpheu',
 		  'sobrenome' => 'Matos',
@@ -990,7 +990,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38857',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(13);
+		$user->aluno->turmas()->attach(13);
 		$user = User::create(array(
 		  'nome' => 'Rafaela',
 		  'sobrenome' => 'Alves',
@@ -1007,7 +1007,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39160',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(13);
+		$user->aluno->turmas()->attach(13);
 		$user = User::create(array(
 		  'nome' => 'Fernando',
 		  'sobrenome' => 'Takahashi',
@@ -1024,7 +1024,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39223',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(14);
+		$user->aluno->turmas()->attach(14);
 		$user = User::create(array(
 		  'nome' => 'Jaime',
 		  'sobrenome' => 'Pinheiro',
@@ -1041,7 +1041,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39290',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(14);
+		$user->aluno->turmas()->attach(14);
 		$user = User::create(array(
 		  'nome' => 'Xerxes',
 		  'sobrenome' => 'Torres',
@@ -1058,7 +1058,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38878',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(14);
+		$user->aluno->turmas()->attach(14);
 		$user = User::create(array(
 		  'nome' => 'Camila',
 		  'sobrenome' => 'dos Santos',
@@ -1075,7 +1075,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38932',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(14);
+		$user->aluno->turmas()->attach(14);
 		$user = User::create(array(
 		  'nome' => 'Bruna',
 		  'sobrenome' => 'Faria',
@@ -1092,7 +1092,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39753',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(15);
+		$user->aluno->turmas()->attach(15);
 		$user = User::create(array(
 		  'nome' => 'Odete',
 		  'sobrenome' => 'Salgueiro',
@@ -1109,7 +1109,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39068',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(15);
+		$user->aluno->turmas()->attach(15);
 		$user = User::create(array(
 		  'nome' => 'Sarah',
 		  'sobrenome' => 'Castanheira',
@@ -1126,7 +1126,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38853',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(15);
+		$user->aluno->turmas()->attach(15);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Gouveia',
@@ -1143,7 +1143,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39448',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(15);
+		$user->aluno->turmas()->attach(15);
 		$user = User::create(array(
 		  'nome' => 'Caio',
 		  'sobrenome' => 'Costa',
@@ -1160,7 +1160,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39260',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(16);
+		$user->aluno->turmas()->attach(16);
 		$user = User::create(array(
 		  'nome' => 'Xerxes',
 		  'sobrenome' => 'Minazuki',
@@ -1177,7 +1177,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38482',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(16);
+		$user->aluno->turmas()->attach(16);
 		$user = User::create(array(
 		  'nome' => 'Jade',
 		  'sobrenome' => 'Lopes',
@@ -1194,7 +1194,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38406',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(16);
+		$user->aluno->turmas()->attach(16);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Camilo',
@@ -1211,7 +1211,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38980',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(16);
+		$user->aluno->turmas()->attach(16);
 		$user = User::create(array(
 		  'nome' => 'Akemi',
 		  'sobrenome' => 'Valentine',
@@ -1228,7 +1228,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39725',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(17);
+		$user->aluno->turmas()->attach(17);
 		$user = User::create(array(
 		  'nome' => 'Jill',
 		  'sobrenome' => 'Castanheira',
@@ -1245,7 +1245,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38505',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(17);
+		$user->aluno->turmas()->attach(17);
 		$user = User::create(array(
 		  'nome' => 'Trinity',
 		  'sobrenome' => 'Redfield',
@@ -1262,7 +1262,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38707',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(17);
+		$user->aluno->turmas()->attach(17);
 		$user = User::create(array(
 		  'nome' => 'Sonia',
 		  'sobrenome' => 'Pádua',
@@ -1279,7 +1279,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38453',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(17);
+		$user->aluno->turmas()->attach(17);
 		$user = User::create(array(
 		  'nome' => 'Augusto',
 		  'sobrenome' => 'Castanheira',
@@ -1296,7 +1296,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39462',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(18);
+		$user->aluno->turmas()->attach(18);
 		$user = User::create(array(
 		  'nome' => 'Yoko',
 		  'sobrenome' => 'Alves',
@@ -1313,7 +1313,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38509',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(18);
+		$user->aluno->turmas()->attach(18);
 		$user = User::create(array(
 		  'nome' => 'Michele',
 		  'sobrenome' => 'Macedo',
@@ -1330,7 +1330,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39575',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(18);
+		$user->aluno->turmas()->attach(18);
 		$user = User::create(array(
 		  'nome' => 'Peterson',
 		  'sobrenome' => 'Costa',
@@ -1347,7 +1347,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39513',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(18);
+		$user->aluno->turmas()->attach(18);
 		$user = User::create(array(
 		  'nome' => 'Bruno',
 		  'sobrenome' => 'Monteiro',
@@ -1364,7 +1364,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39198',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(19);
+		$user->aluno->turmas()->attach(19);
 		$user = User::create(array(
 		  'nome' => 'Jonas',
 		  'sobrenome' => 'Matos',
@@ -1381,7 +1381,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38864',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(19);
+		$user->aluno->turmas()->attach(19);
 		$user = User::create(array(
 		  'nome' => 'Jade',
 		  'sobrenome' => 'Franca',
@@ -1398,7 +1398,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39541',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(19);
+		$user->aluno->turmas()->attach(19);
 		$user = User::create(array(
 		  'nome' => 'Peterson',
 		  'sobrenome' => 'Redfield',
@@ -1415,7 +1415,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38704',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(19);
+		$user->aluno->turmas()->attach(19);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Neves',
@@ -1432,7 +1432,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39773',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(20);
+		$user->aluno->turmas()->attach(20);
 		$user = User::create(array(
 		  'nome' => 'Jill',
 		  'sobrenome' => 'dos Santos',
@@ -1449,7 +1449,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39068',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(20);
+		$user->aluno->turmas()->attach(20);
 		$user = User::create(array(
 		  'nome' => 'Cauê',
 		  'sobrenome' => 'Minazuki',
@@ -1466,7 +1466,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39481',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(20);
+		$user->aluno->turmas()->attach(20);
 		$user = User::create(array(
 		  'nome' => 'Jonas',
 		  'sobrenome' => 'Valentine',
@@ -1483,7 +1483,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '39743',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(20);
+		$user->aluno->turmas()->attach(20);
 		$user = User::create(array(
 		  'nome' => 'Irene',
 		  'sobrenome' => 'Camilo',
@@ -1500,7 +1500,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37693',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(21);
+		$user->aluno->turmas()->attach(21);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Tanaka',
@@ -1517,7 +1517,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37756',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(21);
+		$user->aluno->turmas()->attach(21);
 		$user = User::create(array(
 		  'nome' => 'Angelina',
 		  'sobrenome' => 'Valentine',
@@ -1534,7 +1534,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37364',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(21);
+		$user->aluno->turmas()->attach(21);
 		$user = User::create(array(
 		  'nome' => 'Monica',
 		  'sobrenome' => 'Suzuki',
@@ -1551,7 +1551,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37580',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(21);
+		$user->aluno->turmas()->attach(21);
 		$user = User::create(array(
 		  'nome' => 'Peterson',
 		  'sobrenome' => 'Faria',
@@ -1568,7 +1568,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38081',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(22);
+		$user->aluno->turmas()->attach(22);
 		$user = User::create(array(
 		  'nome' => 'Leonidas',
 		  'sobrenome' => 'Severo',
@@ -1585,7 +1585,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37847',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(22);
+		$user->aluno->turmas()->attach(22);
 		$user = User::create(array(
 		  'nome' => 'Augusto',
 		  'sobrenome' => 'Neto',
@@ -1602,7 +1602,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37991',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(22);
+		$user->aluno->turmas()->attach(22);
 		$user = User::create(array(
 		  'nome' => 'Leonidas',
 		  'sobrenome' => 'Nazário',
@@ -1619,7 +1619,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36910',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(22);
+		$user->aluno->turmas()->attach(22);
 		$user = User::create(array(
 		  'nome' => 'Eric',
 		  'sobrenome' => 'Hernandes',
@@ -1636,7 +1636,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37982',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(23);
+		$user->aluno->turmas()->attach(23);
 		$user = User::create(array(
 		  'nome' => 'Chunli',
 		  'sobrenome' => 'Nazário',
@@ -1653,7 +1653,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37562',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(23);
+		$user->aluno->turmas()->attach(23);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Castanheira',
@@ -1670,7 +1670,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37625',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(23);
+		$user->aluno->turmas()->attach(23);
 		$user = User::create(array(
 		  'nome' => 'Jéssica',
 		  'sobrenome' => 'Franca',
@@ -1687,7 +1687,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38199',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(23);
+		$user->aluno->turmas()->attach(23);
 		$user = User::create(array(
 		  'nome' => 'Jaime',
 		  'sobrenome' => 'Villablanca',
@@ -1704,7 +1704,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37296',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(24);
+		$user->aluno->turmas()->attach(24);
 		$user = User::create(array(
 		  'nome' => 'Peterson',
 		  'sobrenome' => 'Minazuki',
@@ -1721,7 +1721,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36887',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(24);
+		$user->aluno->turmas()->attach(24);
 		$user = User::create(array(
 		  'nome' => 'Cauê',
 		  'sobrenome' => 'Gomes',
@@ -1738,7 +1738,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36833',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(24);
+		$user->aluno->turmas()->attach(24);
 		$user = User::create(array(
 		  'nome' => 'Leonidas',
 		  'sobrenome' => 'Yamada Silva',
@@ -1755,7 +1755,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37590',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(24);
+		$user->aluno->turmas()->attach(24);
 		$user = User::create(array(
 		  'nome' => 'Leonidas',
 		  'sobrenome' => 'Matos',
@@ -1772,7 +1772,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36483',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(25);
+		$user->aluno->turmas()->attach(25);
 		$user = User::create(array(
 		  'nome' => 'Michele',
 		  'sobrenome' => 'Valentine',
@@ -1789,7 +1789,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37000',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(25);
+		$user->aluno->turmas()->attach(25);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Sato',
@@ -1806,7 +1806,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37114',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(25);
+		$user->aluno->turmas()->attach(25);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Rocha',
@@ -1823,7 +1823,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36875',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(25);
+		$user->aluno->turmas()->attach(25);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Lins',
@@ -1840,7 +1840,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37204',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(26);
+		$user->aluno->turmas()->attach(26);
 		$user = User::create(array(
 		  'nome' => 'Cauê',
 		  'sobrenome' => 'Takahashi',
@@ -1857,7 +1857,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37221',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(26);
+		$user->aluno->turmas()->attach(26);
 		$user = User::create(array(
 		  'nome' => 'Michele',
 		  'sobrenome' => 'Rocha',
@@ -1874,7 +1874,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37281',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(26);
+		$user->aluno->turmas()->attach(26);
 		$user = User::create(array(
 		  'nome' => 'Tamires',
 		  'sobrenome' => 'Matos',
@@ -1891,7 +1891,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37177',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(26);
+		$user->aluno->turmas()->attach(26);
 		$user = User::create(array(
 		  'nome' => 'Aline',
 		  'sobrenome' => 'Lins',
@@ -1908,7 +1908,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38050',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(27);
+		$user->aluno->turmas()->attach(27);
 		$user = User::create(array(
 		  'nome' => 'Monica',
 		  'sobrenome' => 'Batista',
@@ -1925,7 +1925,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38133',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(27);
+		$user->aluno->turmas()->attach(27);
 		$user = User::create(array(
 		  'nome' => 'Caio',
 		  'sobrenome' => 'Hato',
@@ -1942,7 +1942,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37310',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(27);
+		$user->aluno->turmas()->attach(27);
 		$user = User::create(array(
 		  'nome' => 'Eric',
 		  'sobrenome' => 'Sato',
@@ -1959,7 +1959,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37552',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(27);
+		$user->aluno->turmas()->attach(27);
 		$user = User::create(array(
 		  'nome' => 'Akemi',
 		  'sobrenome' => 'Costa',
@@ -1976,7 +1976,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37786',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(28);
+		$user->aluno->turmas()->attach(28);
 		$user = User::create(array(
 		  'nome' => 'Milena',
 		  'sobrenome' => 'Neves',
@@ -1993,7 +1993,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36828',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(28);
+		$user->aluno->turmas()->attach(28);
 		$user = User::create(array(
 		  'nome' => 'Bruno',
 		  'sobrenome' => 'Semedo',
@@ -2010,7 +2010,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37733',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(28);
+		$user->aluno->turmas()->attach(28);
 		$user = User::create(array(
 		  'nome' => 'Odete',
 		  'sobrenome' => 'dos Santos',
@@ -2027,7 +2027,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37142',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(28);
+		$user->aluno->turmas()->attach(28);
 		$user = User::create(array(
 		  'nome' => 'Jaime',
 		  'sobrenome' => 'Nazário',
@@ -2044,7 +2044,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37303',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(29);
+		$user->aluno->turmas()->attach(29);
 		$user = User::create(array(
 		  'nome' => 'Michele',
 		  'sobrenome' => 'Castanheira',
@@ -2061,7 +2061,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38186',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(29);
+		$user->aluno->turmas()->attach(29);
 		$user = User::create(array(
 		  'nome' => 'Caroline',
 		  'sobrenome' => 'Minazuki',
@@ -2078,7 +2078,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37776',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(29);
+		$user->aluno->turmas()->attach(29);
 		$user = User::create(array(
 		  'nome' => 'Sonia',
 		  'sobrenome' => 'Macedo',
@@ -2095,7 +2095,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37224',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(29);
+		$user->aluno->turmas()->attach(29);
 		$user = User::create(array(
 		  'nome' => 'Kitana',
 		  'sobrenome' => 'Lins',
@@ -2112,7 +2112,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37918',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(30);
+		$user->aluno->turmas()->attach(30);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Faria',
@@ -2129,7 +2129,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37570',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(30);
+		$user->aluno->turmas()->attach(30);
 		$user = User::create(array(
 		  'nome' => 'Claudio',
 		  'sobrenome' => 'Faria',
@@ -2146,7 +2146,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36560',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(30);
+		$user->aluno->turmas()->attach(30);
 		$user = User::create(array(
 		  'nome' => 'Sarah',
 		  'sobrenome' => 'Peixoto',
@@ -2163,7 +2163,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37796',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(30);
+		$user->aluno->turmas()->attach(30);
 		$user = User::create(array(
 		  'nome' => 'Eduardo',
 		  'sobrenome' => 'Pádua',
@@ -2180,7 +2180,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37426',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(31);
+		$user->aluno->turmas()->attach(31);
 		$user = User::create(array(
 		  'nome' => 'Otavio',
 		  'sobrenome' => 'Franca',
@@ -2197,7 +2197,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38105',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(31);
+		$user->aluno->turmas()->attach(31);
 		$user = User::create(array(
 		  'nome' => 'Jill',
 		  'sobrenome' => 'Salgueiro',
@@ -2214,7 +2214,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37847',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(31);
+		$user->aluno->turmas()->attach(31);
 		$user = User::create(array(
 		  'nome' => 'Camila',
 		  'sobrenome' => 'Nazário',
@@ -2231,7 +2231,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37695',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(31);
+		$user->aluno->turmas()->attach(31);
 		$user = User::create(array(
 		  'nome' => 'Camila',
 		  'sobrenome' => 'Lopes',
@@ -2248,7 +2248,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37571',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(32);
+		$user->aluno->turmas()->attach(32);
 		$user = User::create(array(
 		  'nome' => 'Lara',
 		  'sobrenome' => 'Nazário',
@@ -2265,7 +2265,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37136',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(32);
+		$user->aluno->turmas()->attach(32);
 		$user = User::create(array(
 		  'nome' => 'Andreia',
 		  'sobrenome' => 'Takahashi',
@@ -2282,7 +2282,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38162',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(32);
+		$user->aluno->turmas()->attach(32);
 		$user = User::create(array(
 		  'nome' => 'Yoko',
 		  'sobrenome' => 'Franca',
@@ -2299,7 +2299,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38165',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(32);
+		$user->aluno->turmas()->attach(32);
 		$user = User::create(array(
 		  'nome' => 'Claudio',
 		  'sobrenome' => 'Nazário',
@@ -2316,7 +2316,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37754',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(32);
+		$user->aluno->turmas()->attach(32);
 		$user = User::create(array(
 		  'nome' => 'Barbara',
 		  'sobrenome' => 'Tanaka',
@@ -2333,7 +2333,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37525',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(33);
+		$user->aluno->turmas()->attach(33);
 		$user = User::create(array(
 		  'nome' => 'Jonas',
 		  'sobrenome' => 'Lopes',
@@ -2350,7 +2350,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38041',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(33);
+		$user->aluno->turmas()->attach(33);
 		$user = User::create(array(
 		  'nome' => 'Fernando',
 		  'sobrenome' => 'Castanheira',
@@ -2367,7 +2367,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37573',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(33);
+		$user->aluno->turmas()->attach(33);
 		$user = User::create(array(
 		  'nome' => 'Jade',
 		  'sobrenome' => 'Costa',
@@ -2384,7 +2384,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37960',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(33);
+		$user->aluno->turmas()->attach(33);
 		$user = User::create(array(
 		  'nome' => 'Peterson',
 		  'sobrenome' => 'Sato',
@@ -2401,7 +2401,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36828',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(33);
+		$user->aluno->turmas()->attach(33);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Lopes',
@@ -2418,7 +2418,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36856',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(33);
+		$user->aluno->turmas()->attach(33);
 		$user = User::create(array(
 		  'nome' => 'Eduardo',
 		  'sobrenome' => 'Freire',
@@ -2435,7 +2435,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37797',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(33);
+		$user->aluno->turmas()->attach(33);
 		$user = User::create(array(
 		  'nome' => 'Odete',
 		  'sobrenome' => 'Lins',
@@ -2452,7 +2452,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37160',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(34);
+		$user->aluno->turmas()->attach(34);
 		$user = User::create(array(
 		  'nome' => 'Simão',
 		  'sobrenome' => 'Franca',
@@ -2469,7 +2469,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37686',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(34);
+		$user->aluno->turmas()->attach(34);
 		$user = User::create(array(
 		  'nome' => 'Yori',
 		  'sobrenome' => 'Yamada Silva',
@@ -2486,7 +2486,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37742',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(34);
+		$user->aluno->turmas()->attach(34);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Leal',
@@ -2503,7 +2503,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37221',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(34);
+		$user->aluno->turmas()->attach(34);
 		$user = User::create(array(
 		  'nome' => 'Xerxes',
 		  'sobrenome' => 'Monteiro',
@@ -2520,7 +2520,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37660',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(35);
+		$user->aluno->turmas()->attach(35);
 		$user = User::create(array(
 		  'nome' => 'Augusto',
 		  'sobrenome' => 'Leal',
@@ -2537,7 +2537,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38118',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(35);
+		$user->aluno->turmas()->attach(35);
 		$user = User::create(array(
 		  'nome' => 'Simão',
 		  'sobrenome' => 'Pádua',
@@ -2554,7 +2554,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37251',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(35);
+		$user->aluno->turmas()->attach(35);
 		$user = User::create(array(
 		  'nome' => 'Cauê',
 		  'sobrenome' => 'dos Santos',
@@ -2571,7 +2571,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37976',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(35);
+		$user->aluno->turmas()->attach(35);
 		$user = User::create(array(
 		  'nome' => 'Claudio',
 		  'sobrenome' => 'Salgueiro',
@@ -2588,7 +2588,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36614',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(36);
+		$user->aluno->turmas()->attach(36);
 		$user = User::create(array(
 		  'nome' => 'Bruno',
 		  'sobrenome' => 'Redfield',
@@ -2605,7 +2605,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36622',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(36);
+		$user->aluno->turmas()->attach(36);
 		$user = User::create(array(
 		  'nome' => 'Akemi',
 		  'sobrenome' => 'Hernandes',
@@ -2622,7 +2622,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37047',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(36);
+		$user->aluno->turmas()->attach(36);
 		$user = User::create(array(
 		  'nome' => 'Rafaela',
 		  'sobrenome' => 'Valentine',
@@ -2639,7 +2639,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36509',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(36);
+		$user->aluno->turmas()->attach(36);
 		$user = User::create(array(
 		  'nome' => 'Sheeva',
 		  'sobrenome' => 'Pádua',
@@ -2656,7 +2656,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36836',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(37);
+		$user->aluno->turmas()->attach(37);
 		$user = User::create(array(
 		  'nome' => 'Jade',
 		  'sobrenome' => 'Batista',
@@ -2673,7 +2673,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36826',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(37);
+		$user->aluno->turmas()->attach(37);
 		$user = User::create(array(
 		  'nome' => 'Peterson',
 		  'sobrenome' => 'Takahashi',
@@ -2690,7 +2690,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38114',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(37);
+		$user->aluno->turmas()->attach(37);
 		$user = User::create(array(
 		  'nome' => 'Fernanda',
 		  'sobrenome' => 'Yamada Silva',
@@ -2707,7 +2707,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37143',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(38);
+		$user->aluno->turmas()->attach(38);
 		$user = User::create(array(
 		  'nome' => 'Jill',
 		  'sobrenome' => 'Severo',
@@ -2724,7 +2724,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37697',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(38);
+		$user->aluno->turmas()->attach(38);
 		$user = User::create(array(
 		  'nome' => 'Augusto',
 		  'sobrenome' => 'Valentine',
@@ -2741,7 +2741,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37969',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(38);
+		$user->aluno->turmas()->attach(38);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Faria',
@@ -2758,7 +2758,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37909',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(38);
+		$user->aluno->turmas()->attach(38);
 		$user = User::create(array(
 		  'nome' => 'Morpheu',
 		  'sobrenome' => 'Faria',
@@ -2775,7 +2775,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37347',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(39);
+		$user->aluno->turmas()->attach(39);
 		$user = User::create(array(
 		  'nome' => 'Cleber',
 		  'sobrenome' => 'Torres',
@@ -2792,7 +2792,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37264',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(39);
+		$user->aluno->turmas()->attach(39);
 		$user = User::create(array(
 		  'nome' => 'Eduardo',
 		  'sobrenome' => 'Ishida Silva',
@@ -2809,7 +2809,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37731',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(39);
+		$user->aluno->turmas()->attach(39);
 		$user = User::create(array(
 		  'nome' => 'Angelina',
 		  'sobrenome' => 'Suzuki',
@@ -2826,7 +2826,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37221',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(39);
+		$user->aluno->turmas()->attach(39);
 		$user = User::create(array(
 		  'nome' => 'Barbara',
 		  'sobrenome' => 'Rocha',
@@ -2843,7 +2843,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '36929',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(40);
+		$user->aluno->turmas()->attach(40);
 		$user = User::create(array(
 		  'nome' => 'Lara',
 		  'sobrenome' => 'Valentine',
@@ -2860,7 +2860,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38033',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(40);
+		$user->aluno->turmas()->attach(40);
 		$user = User::create(array(
 		  'nome' => 'Bruno',
 		  'sobrenome' => 'Pádua',
@@ -2877,7 +2877,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38183',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(40);
+		$user->aluno->turmas()->attach(40);
 		$user = User::create(array(
 		  'nome' => 'Jade',
 		  'sobrenome' => 'Alves',
@@ -2894,7 +2894,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '38005',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(40);
+		$user->aluno->turmas()->attach(40);
 		$user = User::create(array(
 		  'nome' => 'Jonas',
 		  'sobrenome' => 'Faria',
@@ -2911,7 +2911,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '37686',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(40);
+		$user->aluno->turmas()->attach(40);
 		$user = User::create(array(
 		  'nome' => 'Fernando',
 		  'sobrenome' => 'Suzuki',
@@ -2928,7 +2928,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '29955',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(41);
+		$user->aluno->turmas()->attach(41);
 		$user = User::create(array(
 		  'nome' => 'Rafaela',
 		  'sobrenome' => 'da Silva',
@@ -2945,7 +2945,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '27601',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(41);
+		$user->aluno->turmas()->attach(41);
 		$user = User::create(array(
 		  'nome' => 'Tamires',
 		  'sobrenome' => 'Faria',
@@ -2962,7 +2962,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '33586',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(41);
+		$user->aluno->turmas()->attach(41);
 		$user = User::create(array(
 		  'nome' => 'Eric',
 		  'sobrenome' => 'Castanheira',
@@ -2979,7 +2979,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '27041',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(41);
+		$user->aluno->turmas()->attach(41);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Takahashi',
@@ -2996,7 +2996,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '22204',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(42);
+		$user->aluno->turmas()->attach(42);
 		$user = User::create(array(
 		  'nome' => 'Cleber',
 		  'sobrenome' => 'Peixoto',
@@ -3013,7 +3013,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '22271',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(42);
+		$user->aluno->turmas()->attach(42);
 		$user = User::create(array(
 		  'nome' => 'Caio',
 		  'sobrenome' => 'da Silva',
@@ -3030,7 +3030,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '29661',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(42);
+		$user->aluno->turmas()->attach(42);
 		$user = User::create(array(
 		  'nome' => 'Kitana',
 		  'sobrenome' => 'Camilo',
@@ -3047,7 +3047,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '28722',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(42);
+		$user->aluno->turmas()->attach(42);
 		$user = User::create(array(
 		  'nome' => 'Yoko',
 		  'sobrenome' => 'Lins',
@@ -3064,7 +3064,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '22487',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(43);
+		$user->aluno->turmas()->attach(43);
 		$user = User::create(array(
 		  'nome' => 'Alexandra',
 		  'sobrenome' => 'Torres',
@@ -3081,7 +3081,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '35477',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(43);
+		$user->aluno->turmas()->attach(43);
 		$user = User::create(array(
 		  'nome' => 'Andreia',
 		  'sobrenome' => 'Monteiro',
@@ -3098,7 +3098,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '21176',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(43);
+		$user->aluno->turmas()->attach(43);
 		$user = User::create(array(
 		  'nome' => 'Jonas',
 		  'sobrenome' => 'da Silva',
@@ -3115,7 +3115,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '28605',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(43);
+		$user->aluno->turmas()->attach(43);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Monteiro',
@@ -3132,7 +3132,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '29777',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(44);
+		$user->aluno->turmas()->attach(44);
 		$user = User::create(array(
 		  'nome' => 'Sheeva',
 		  'sobrenome' => 'da Mata',
@@ -3149,7 +3149,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '32820',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(44);
+		$user->aluno->turmas()->attach(44);
 		$user = User::create(array(
 		  'nome' => 'Xerxes',
 		  'sobrenome' => 'Peixoto',
@@ -3166,7 +3166,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '35759',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(44);
+		$user->aluno->turmas()->attach(44);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Franca',
@@ -3183,7 +3183,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '23815',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(44);
+		$user->aluno->turmas()->attach(44);
 		$user = User::create(array(
 		  'nome' => 'Aline',
 		  'sobrenome' => 'Neto',
@@ -3200,7 +3200,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '24066',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(45);
+		$user->aluno->turmas()->attach(45);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Torres',
@@ -3217,7 +3217,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '28128',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(45);
+		$user->aluno->turmas()->attach(45);
 		$user = User::create(array(
 		  'nome' => 'Sarah',
 		  'sobrenome' => 'Valverde',
@@ -3234,7 +3234,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '32559',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(45);
+		$user->aluno->turmas()->attach(45);
 		$user = User::create(array(
 		  'nome' => 'Sheeva',
 		  'sobrenome' => 'Macedo',
@@ -3251,7 +3251,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '20116',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(45);
+		$user->aluno->turmas()->attach(45);
 		$user = User::create(array(
 		  'nome' => 'Andreia',
 		  'sobrenome' => 'Porta',
@@ -3268,7 +3268,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '28587',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(46);
+		$user->aluno->turmas()->attach(46);
 		$user = User::create(array(
 		  'nome' => 'Chunli',
 		  'sobrenome' => 'Neto',
@@ -3285,7 +3285,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '26217',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(46);
+		$user->aluno->turmas()->attach(46);
 		$user = User::create(array(
 		  'nome' => 'Bruno',
 		  'sobrenome' => 'Nazário',
@@ -3302,7 +3302,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '27731',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(46);
+		$user->aluno->turmas()->attach(46);
 		$user = User::create(array(
 		  'nome' => 'Otavio',
 		  'sobrenome' => 'Monteiro',
@@ -3319,7 +3319,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '22025',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(46);
+		$user->aluno->turmas()->attach(46);
 		$user = User::create(array(
 		  'nome' => 'Jill',
 		  'sobrenome' => 'Batista',
@@ -3336,7 +3336,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '35142',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(47);
+		$user->aluno->turmas()->attach(47);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Torres',
@@ -3353,7 +3353,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '24437',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(47);
+		$user->aluno->turmas()->attach(47);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Ishida Silva',
@@ -3370,7 +3370,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '32740',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(47);
+		$user->aluno->turmas()->attach(47);
 		$user = User::create(array(
 		  'nome' => 'Xerxes',
 		  'sobrenome' => 'Severo',
@@ -3387,7 +3387,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '35784',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(47);
+		$user->aluno->turmas()->attach(47);
 		$user = User::create(array(
 		  'nome' => 'Camila',
 		  'sobrenome' => 'Suzuki',
@@ -3404,7 +3404,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '35474',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(48);
+		$user->aluno->turmas()->attach(48);
 		$user = User::create(array(
 		  'nome' => 'Fernanda',
 		  'sobrenome' => 'Minazuki',
@@ -3421,7 +3421,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '30717',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(48);
+		$user->aluno->turmas()->attach(48);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Salgueiro',
@@ -3438,7 +3438,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '27857',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(48);
+		$user->aluno->turmas()->attach(48);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Lopes',
@@ -3455,7 +3455,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '33619',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(48);
+		$user->aluno->turmas()->attach(48);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Carvalho',
@@ -3472,7 +3472,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '28893',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(49);
+		$user->aluno->turmas()->attach(49);
 		$user = User::create(array(
 		  'nome' => 'Augusto',
 		  'sobrenome' => 'Hernandes',
@@ -3489,7 +3489,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '30293',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(49);
+		$user->aluno->turmas()->attach(49);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Yamada Silva',
@@ -3506,7 +3506,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '35290',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(49);
+		$user->aluno->turmas()->attach(49);
 		$user = User::create(array(
 		  'nome' => 'Caio',
 		  'sobrenome' => 'Leal',
@@ -3523,7 +3523,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '33802',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(49);
+		$user->aluno->turmas()->attach(49);
 		$user = User::create(array(
 		  'nome' => 'Angelina',
 		  'sobrenome' => 'Batista',
@@ -3540,7 +3540,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '27661',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(50);
+		$user->aluno->turmas()->attach(50);
 		$user = User::create(array(
 		  'nome' => 'Cauê',
 		  'sobrenome' => 'Sato',
@@ -3557,7 +3557,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '25268',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(50);
+		$user->aluno->turmas()->attach(50);
 		$user = User::create(array(
 		  'nome' => 'Trinity',
 		  'sobrenome' => 'Minazuki',
@@ -3574,7 +3574,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '32128',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(50);
+		$user->aluno->turmas()->attach(50);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Macedo',
@@ -3591,7 +3591,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '20046',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(50);
+		$user->aluno->turmas()->attach(50);
 		$user = User::create(array(
 		  'nome' => 'Morpheu',
 		  'sobrenome' => 'Peixoto',
@@ -3608,7 +3608,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '35631',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(51);
+		$user->aluno->turmas()->attach(51);
 		$user = User::create(array(
 		  'nome' => 'Caroline',
 		  'sobrenome' => 'Franca',
@@ -3625,7 +3625,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '29717',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(51);
+		$user->aluno->turmas()->attach(51);
 		$user = User::create(array(
 		  'nome' => 'Fernando',
 		  'sobrenome' => 'Alves',
@@ -3642,7 +3642,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '22872',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(51);
+		$user->aluno->turmas()->attach(51);
 		$user = User::create(array(
 		  'nome' => 'Cleber',
 		  'sobrenome' => 'Franca',
@@ -3659,7 +3659,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '26191',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(51);
+		$user->aluno->turmas()->attach(51);
 		$user = User::create(array(
 		  'nome' => 'Cleber',
 		  'sobrenome' => 'Matos',
@@ -3676,7 +3676,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '22988',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(52);
+		$user->aluno->turmas()->attach(52);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Peixoto',
@@ -3693,7 +3693,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '34415',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(52);
+		$user->aluno->turmas()->attach(52);
 		$user = User::create(array(
 		  'nome' => 'Leonidas',
 		  'sobrenome' => 'Hernandes',
@@ -3710,7 +3710,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '20920',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(52);
+		$user->aluno->turmas()->attach(52);
 		$user = User::create(array(
 		  'nome' => 'Otavio',
 		  'sobrenome' => 'Alves',
@@ -3727,7 +3727,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '23499',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(52);
+		$user->aluno->turmas()->attach(52);
 		$user = User::create(array(
 		  'nome' => 'Yoko',
 		  'sobrenome' => 'Valverde',
@@ -3744,7 +3744,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '30633',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(53);
+		$user->aluno->turmas()->attach(53);
 		$user = User::create(array(
 		  'nome' => 'Alexandra',
 		  'sobrenome' => 'Takahashi',
@@ -3761,7 +3761,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '31969',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(53);
+		$user->aluno->turmas()->attach(53);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Tanaka',
@@ -3778,7 +3778,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '34105',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(53);
+		$user->aluno->turmas()->attach(53);
 		$user = User::create(array(
 		  'nome' => 'Cleber',
 		  'sobrenome' => 'Valverde',
@@ -3795,7 +3795,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '34769',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(53);
+		$user->aluno->turmas()->attach(53);
 		$user = User::create(array(
 		  'nome' => 'Caroline',
 		  'sobrenome' => 'Takahashi',
@@ -3812,7 +3812,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '26664',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(54);
+		$user->aluno->turmas()->attach(54);
 		$user = User::create(array(
 		  'nome' => 'Jill',
 		  'sobrenome' => 'Takahashi',
@@ -3829,7 +3829,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '33033',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(54);
+		$user->aluno->turmas()->attach(54);
 		$user = User::create(array(
 		  'nome' => 'Peterson',
 		  'sobrenome' => 'Alves',
@@ -3846,7 +3846,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '28430',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(54);
+		$user->aluno->turmas()->attach(54);
 		$user = User::create(array(
 		  'nome' => 'Filipe',
 		  'sobrenome' => 'Tanaka',
@@ -3863,7 +3863,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '23378',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(54);
+		$user->aluno->turmas()->attach(54);
 		$user = User::create(array(
 		  'nome' => 'Fernanda',
 		  'sobrenome' => 'Camilo',
@@ -3880,7 +3880,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '26434',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(55);
+		$user->aluno->turmas()->attach(55);
 		$user = User::create(array(
 		  'nome' => 'Odete',
 		  'sobrenome' => 'Carvalho',
@@ -3897,7 +3897,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '28856',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(55);
+		$user->aluno->turmas()->attach(55);
 		$user = User::create(array(
 		  'nome' => 'Xerxes',
 		  'sobrenome' => 'Costa',
@@ -3914,7 +3914,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '21217',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(55);
+		$user->aluno->turmas()->attach(55);
 		$user = User::create(array(
 		  'nome' => 'Cleber',
 		  'sobrenome' => 'Augusto',
@@ -3931,7 +3931,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '31200',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(55);
+		$user->aluno->turmas()->attach(55);
 		$user = User::create(array(
 		  'nome' => 'Michele',
 		  'sobrenome' => 'Yamada Silva',
@@ -3948,7 +3948,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '23488',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(56);
+		$user->aluno->turmas()->attach(56);
 		$user = User::create(array(
 		  'nome' => 'Alexandra',
 		  'sobrenome' => 'Vieira',
@@ -3965,7 +3965,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '33329',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(56);
+		$user->aluno->turmas()->attach(56);
 		$user = User::create(array(
 		  'nome' => 'Camila',
 		  'sobrenome' => 'Alves',
@@ -3982,7 +3982,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '30563',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(56);
+		$user->aluno->turmas()->attach(56);
 		$user = User::create(array(
 		  'nome' => 'Michele',
 		  'sobrenome' => 'Redfield',
@@ -3999,7 +3999,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '22518',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(56);
+		$user->aluno->turmas()->attach(56);
 		$user = User::create(array(
 		  'nome' => 'Jonas',
 		  'sobrenome' => 'Batista',
@@ -4016,7 +4016,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '21931',
 		'dataVencimentoBoleto' => '02'
 		));
-		$user->turmas()->attach(57);
+		$user->aluno->turmas()->attach(57);
 		$user = User::create(array(
 		  'nome' => 'Fernanda',
 		  'sobrenome' => 'Carvalho',
@@ -4033,7 +4033,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '29661',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(57);
+		$user->aluno->turmas()->attach(57);
 		$user = User::create(array(
 		  'nome' => 'Otavio',
 		  'sobrenome' => 'Sato',
@@ -4050,7 +4050,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '27622',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(57);
+		$user->aluno->turmas()->attach(57);
 		$user = User::create(array(
 		  'nome' => 'Rafaela',
 		  'sobrenome' => 'Ishida Silva',
@@ -4067,7 +4067,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '26026',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(57);
+		$user->aluno->turmas()->attach(57);
 		$user = User::create(array(
 		  'nome' => 'Kitana',
 		  'sobrenome' => 'Sato',
@@ -4084,7 +4084,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '26543',
 		'dataVencimentoBoleto' => '11'
 		));
-		$user->turmas()->attach(58);
+		$user->aluno->turmas()->attach(58);
 		$user = User::create(array(
 		  'nome' => 'Sheeva',
 		  'sobrenome' => 'Jordão',
@@ -4101,7 +4101,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '29620',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(58);
+		$user->aluno->turmas()->attach(58);
 		$user = User::create(array(
 		  'nome' => 'Cauê',
 		  'sobrenome' => 'da Silva',
@@ -4118,7 +4118,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '23542',
 		'dataVencimentoBoleto' => '01'
 		));
-		$user->turmas()->attach(58);
+		$user->aluno->turmas()->attach(58);
 		$user = User::create(array(
 		  'nome' => 'Michele',
 		  'sobrenome' => 'Franca',
@@ -4135,7 +4135,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '23188',
 		'dataVencimentoBoleto' => '06'
 		));
-		$user->turmas()->attach(58);
+		$user->aluno->turmas()->attach(58);
 		$user = User::create(array(
 		  'nome' => 'Irene',
 		  'sobrenome' => 'Takahashi',
@@ -4152,7 +4152,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '21804',
 		'dataVencimentoBoleto' => '08'
 		));
-		$user->turmas()->attach(59);
+		$user->aluno->turmas()->attach(59);
 		$user = User::create(array(
 		  'nome' => 'Andreia',
 		  'sobrenome' => 'Gouveia',
@@ -4169,7 +4169,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '24439',
 		'dataVencimentoBoleto' => '10'
 		));
-		$user->turmas()->attach(59);
+		$user->aluno->turmas()->attach(59);
 		$user = User::create(array(
 		  'nome' => 'Dante',
 		  'sobrenome' => 'Hernandes',
@@ -4186,7 +4186,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '29304',
 		'dataVencimentoBoleto' => '07'
 		));
-		$user->turmas()->attach(59);
+		$user->aluno->turmas()->attach(59);
 		$user = User::create(array(
 		  'nome' => 'Trinity',
 		  'sobrenome' => 'Macedo',
@@ -4203,7 +4203,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '28221',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(59);
+		$user->aluno->turmas()->attach(59);
 		$user = User::create(array(
 		  'nome' => 'Jade',
 		  'sobrenome' => 'Freire',
@@ -4220,7 +4220,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '32772',
 		'dataVencimentoBoleto' => '05'
 		));
-		$user->turmas()->attach(60);
+		$user->aluno->turmas()->attach(60);
 		$user = User::create(array(
 		  'nome' => 'Caio',
 		  'sobrenome' => 'Pádua',
@@ -4237,7 +4237,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '25609',
 		'dataVencimentoBoleto' => '09'
 		));
-		$user->turmas()->attach(60);
+		$user->aluno->turmas()->attach(60);
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
 		  'sobrenome' => 'Faria',
@@ -4254,7 +4254,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '28056',
 		'dataVencimentoBoleto' => '04'
 		));
-		$user->turmas()->attach(60);
+		$user->aluno->turmas()->attach(60);
 		$user = User::create(array(
 		  'nome' => 'Akemi',
 		  'sobrenome' => 'Matos',
@@ -4271,7 +4271,7 @@ class AlunoSeeder extends Seeder{
 		 'dataNascimento' => '27916',
 		'dataVencimentoBoleto' => '03'
 		));
-		$user->turmas()->attach(60);
+		$user->aluno->turmas()->attach(60);
 
 
 	}

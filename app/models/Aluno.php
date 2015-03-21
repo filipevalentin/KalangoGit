@@ -5,7 +5,7 @@
 		public $timestamps = false;
 
 		public function turmas(){
-        	return $this->belongsToMany('Turma', 'turmasalunos', 'idAluno', 'idTurma')->withPivot('status', 'pontuacao');	
+        	return $this->belongsToMany('Turma', 'turmasalunos', 'idAluno', 'idTurma')->withPivot('pontuacao');	
         }
 
  		//foreach ($aluno->turmas as $turma)
