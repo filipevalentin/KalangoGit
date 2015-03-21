@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="tipo" name="tipo" value="3">
                     </div>
-                    <div id="div_nome" class="form-group">
+                    <div id="div_nome"  class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome" class="fa"></i> Nome</label>
                         <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras nomeObrigatorio">
                     </div>
