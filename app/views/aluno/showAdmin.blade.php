@@ -30,9 +30,9 @@
                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
                         <input type="text" autocomplete="off" id="email" name="email" class="form-control emailObrigatorio" maxlength="50" onblur="fcn_recarregaCores();fcn_validaEmail(this);" >
                     </div>
-                    <div class="form-group">
-                        <label for="dataVencimentoBoleto" class="control-label">Dia do Vencimento do Boleto</label>
-                        <select name="dataVencimentoBoleto" id="diaVencimentoBoleto" class="form-control">
+                    <div id="div_diaVencimentoBoleto" class="form-group">
+                        <label class="control-label" for="dataVencimentoBoleto"><i id="icone_diaVencimentoBoleto" class="fa"></i> Dia do Vencimento do Boleto</label>
+						<select name="dataVencimentoBoleto" id="diaVencimentoBoleto" onblur="fcn_recarregaCores();" class="form-control diaVencimentoObrigatorio">
 							<option value="" >Selecione</option>
 							<option value="1" >1</option>
 							<option value="2" >2</option>
@@ -76,9 +76,9 @@
                         <label for="urlImagem" class="control-label">Imagem Perfil</label>
                         <input type="file" id="urlImagem" name="urlImagem" onblur="fcn_validaArquivo(this.form, this.form.urlImagem.value)" class="form-control">
                     </div>
-					<div id="div_sobreMim" class="form-group">
-                        <label class="control-label" for="sobreMim"><i id="icone_sobreMim" class="fa"></i> Sobre Mim</label>
-                        <textarea id="sobreMim" name="sobreMim" maxlength="8000" onblur="fcn_recarregaCores();" class="form-control sobreMimObrigatorio" rows="3"></textarea>
+					<div class="form-group">
+                        <label class="control-label" for="sobreMim">Sobre Mim</label>
+                        <textarea id="sobreMim" name="sobreMim" maxlength="8000" onblur="fcn_recarregaCores();" class="form-control" rows="3"></textarea>
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -274,6 +274,19 @@
 			$( "#icone_email" ).addClass("fa-check");
 		}
 		
+		if($(".diaVencimentoObrigatorio").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_diaVencimentoBoleto" ).removeClass("has-success");
+			$( "#icone_diaVencimentoBoleto" ).removeClass("fa-check");
+			$( "#div_diaVencimentoBoleto" ).addClass("has-error");
+			$( "#icone_diaVencimentoBoleto" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_diaVencimentoBoleto" ).removeClass("has-error");
+			$( "#icone_diaVencimentoBoleto" ).removeClass("fa-times-circle-o");
+			$( "#div_diaVencimentoBoleto" ).addClass("has-success");
+			$( "#icone_diaVencimentoBoleto" ).addClass("fa-check");
+		}
+		
 		if($(".matriculaObrigatoria").val() == ""){
 			obrigatorioPendente = 1;
 			$( "#div_matricula" ).removeClass("has-success");
@@ -298,19 +311,6 @@
 			$( "#icone_senha" ).removeClass("fa-times-circle-o");
 			$( "#div_senha" ).addClass("has-success");
 			$( "#icone_senha" ).addClass("fa-check");
-		}
-		
-		if($(".sobreMimObrigatorio").val() == ""){
-			obrigatorioPendente = 1;
-			$( "#div_sobreMim" ).removeClass("has-success");
-			$( "#icone_sobreMim" ).removeClass("fa-check");
-			$( "#div_sobreMim" ).addClass("has-error");
-			$( "#icone_sobreMim" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_sobreMim" ).removeClass("has-error");
-			$( "#icone_sobreMim" ).removeClass("fa-times-circle-o");
-			$( "#div_sobreMim" ).addClass("has-success");
-			$( "#icone_sobreMim" ).addClass("fa-check");
 		}
 		
 		if(obrigatorioPendente == 1){
@@ -370,6 +370,18 @@
 			$( "#icone_email" ).addClass("fa-check");
 		}
 		
+		if($(".diaVencimentoObrigatorio").val() == ""){
+			$( "#div_diaVencimentoBoleto" ).removeClass("has-success");
+			$( "#icone_diaVencimentoBoleto" ).removeClass("fa-check");
+			$( "#div_diaVencimentoBoleto" ).addClass("has-error");
+			$( "#icone_diaVencimentoBoleto" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_diaVencimentoBoleto" ).removeClass("has-error");
+			$( "#icone_diaVencimentoBoleto" ).removeClass("fa-times-circle-o");
+			$( "#div_diaVencimentoBoleto" ).addClass("has-success");
+			$( "#icone_diaVencimentoBoleto" ).addClass("fa-check");
+		}
+		
 		if($(".matriculaObrigatoria").val() == ""){
 			$( "#div_matricula" ).removeClass("has-success");
 			$( "#icone_matricula" ).removeClass("fa-check");
@@ -392,18 +404,6 @@
 			$( "#icone_senha" ).removeClass("fa-times-circle-o");
 			$( "#div_senha" ).addClass("has-success");
 			$( "#icone_senha" ).addClass("fa-check");
-		}
-		
-		if($(".sobreMimObrigatorio").val() == ""){
-			$( "#div_sobreMim" ).removeClass("has-success");
-			$( "#icone_sobreMim" ).removeClass("fa-check");
-			$( "#div_sobreMim" ).addClass("has-error");
-			$( "#icone_sobreMim" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_sobreMim" ).removeClass("has-error");
-			$( "#icone_sobreMim" ).removeClass("fa-times-circle-o");
-			$( "#div_sobreMim" ).addClass("has-success");
-			$( "#icone_sobreMim" ).addClass("fa-check");
 		}
 					
 	}
