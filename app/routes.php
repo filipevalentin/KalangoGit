@@ -1469,8 +1469,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->password = Hash::make(Input::get('password'));
 			$user->tipo = 1;
 
-			dd($user);
-
 			$confirmation_code = str_random(30);
 			foreach(User::all() as $u){
 				if($u->confirmation_code = $confirmation_code){
