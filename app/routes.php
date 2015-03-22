@@ -1070,6 +1070,104 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		
 	});
 
+	//Avisos
+	Route::get('avisos', function(){
+		$avisos = Aviso::all();
+		return View::make('aviso/viewAdmin')->with('avisos',$avisos);
+	});
+
+	Route::get('aviso/{id}', function($id){
+		$aviso = Aviso::find($id);
+		return View::make('aviso/showAdmin')->with('aviso',$aviso);
+	});
+
+	Route::post('avisos', function(){
+		$aviso = new Aviso;
+		$aviso->titulo = Input::get('titulo');
+		$aviso->descricao = Input::get('descricao');
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+		if($imagem!=NULL){
+			$filename = $imagem->getClientOriginalName();
+
+			$aviso->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
+		}
+		$aviso->dataExpiracao = Input::get('dataExpiracao');
+		$aviso->idUsuario = Auth::user()->id;
+		$aviso->idCurso = Input::get('idCurso');
+		$aviso->save();
+
+		return Redirect::back();
+	});
+
+	Route::get('avisos/deletar/{id}', function($id){
+		$aviso = Aviso::find($id);
+		$aviso->delete();
+		return Redirect::back();
+	});
+
+	Route::post('avisos/atualizar/{id}', function($id){
+		$aviso = Aviso::find($id);
+		$aviso->titulo = Input::get('titulo');
+		$aviso->descricao = Input::get('descricao');
+		$aviso->dataExpiracao = Input::get('dataExpiracao');
+		$aviso->idUsuario = Auth::user()->id;
+		$aviso->idCurso = Input::get('idCurso');
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+		if($imagem!=NULL){
+			$filename = $imagem->getClientOriginalName();
+
+			$aviso->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
+		}
+
+		$aviso->save();
+		return Redirect::back();
+	});
+
+	//Tópicos
+
+	Route::get('topicos', function(){
+		$topicos = Topico::all();
+		return View::make('topico/viewAdmin')->with('topicos',$topicos);
+	});
+
+	Route::get('topico/{id}', function($id){
+		$topico = Topico::find($id);
+		return View::make('topico/showAdmin')->with('topico',$topico);
+	});
+
+	Route::post('topicos', function(){
+		$topico = new Topico;
+		$topico->nome = Input::get('nome');
+		$topico->idUsuario = Auth::user()->id;
+
+		$topico->save();
+
+		return Redirect::back();
+	});
+
+	Route::get('topicos/deletar/{id}', function($id){
+		$topico = Topico::find($id);
+		$topico->delete();
+		return Redirect::back();
+	});
+
+	Route::post('topicos/atualizar/{id}', function($id){
+		$topico = Topico::find($id);
+		$topico->nome = Input::get('nome');
+		$topico->idUsuario = Auth::user()->id;
+
+		$topico->save();
+		return Redirect::back();
+	});
+
 	// CRUD
 
 		Route::post('criarCurso', function(){

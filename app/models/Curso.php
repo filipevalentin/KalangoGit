@@ -7,6 +7,10 @@
 			return $this->hasMany('Modulo', "idCurso");
 		}
 
+		public function avisos(){
+			return $this->hasMany('Aviso', "idCurso");
+		}
+
 		public function turmas(){
 	        return $this->hasManyThrough('Turma', 'Modulo', 'idCurso', 'idModulo');
 	    }

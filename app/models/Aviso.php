@@ -9,6 +9,10 @@
         	return $this->belongsTo("User", "idUsuario");
         }
 
+        public function curso(){
+        	return $this->belongsTo("Curso", "idCurso");
+        }
+
 
 	}
 
