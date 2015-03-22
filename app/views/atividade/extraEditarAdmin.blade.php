@@ -695,6 +695,7 @@
         var resposta = String(datacategoria).substring(1,2)
         var respostacerta = button.data('respostacerta');
         var topico = button.data('topico');
+        var dificuldade = button.data('dificuldade');
          // Extract info from data-* attributes
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -706,6 +707,7 @@
         modal.find('#resposta').val(resposta)
         modal.find('#respostacerta').val(respostacerta);
         modal.find('#topico').val(topico);
+        modal.find('#dificuldade').val(dificuldade);
 
         if(modal.find('select#resposta').val()!=1){
                 modal.find('#a, #b, #c, #d').attr("type", "file")
@@ -740,6 +742,7 @@
         var pergunta = datacategoria
         var respostaCerta = button.data('respostacerta')
         var topico = button.data('topico');
+        var dificuldade = button.data('dificuldade');
          // Extract info from data-* attributes
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -750,6 +753,7 @@
         modal.find('#pergunta').val(pergunta)
         modal.find('#respostaCerta').val(respostaCerta)
         modal.find('#topico').val(topico);
+        modal.find('#dificuldade').val(dificuldade);
 
 
         if(modal.find('select#pergunta').val()==1){
