@@ -156,7 +156,7 @@
 												</td>
 												<td>
 													<div class="box-tools pull-right" style="padding-top: 8px;">
-	                                                    <button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idUsuarioDestino="{{$mensagem->idUsuarioOrgiem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrgiem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
+	                                                    <button class="btn btn-default" data-toggle="modal" data-target="#responder" data-idRE="{{$mensagem->id}}" data-idUsuarioDestino="{{$mensagem->idUsuarioOrigem}}" data-nomeDestino="{{User::find($mensagem->idUsuarioOrigem)->nome}}" data-titulo="RE: {{$mensagem->titulo}}"><i class="fa fa-reply" ></i> Responder</button>
 	                                                </div>
 												</td>
 											</tr>

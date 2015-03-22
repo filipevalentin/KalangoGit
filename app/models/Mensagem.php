@@ -9,7 +9,7 @@
         }
 
         public function usuarioOrigem(){
-        	return $this->belongsTo('User', 'idUsuarioOrgiem');
+        	return $this->belongsTo('User', 'idUsuarioOrigem');
         }
 
      	public function emResposta(){
