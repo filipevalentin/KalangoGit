@@ -1159,6 +1159,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `urlImagem` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `confirmed` int(1) DEFAULT NULL COMMENT 'Indica se o usuario confirmou o registro atraves do email enviado',
   `confirmation_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Codigo enviado por email ao se cadastrar um novo usuario',
+  `remember_token` varchar(255) COMMENT 'Funcao "manter conectado"',
   `tipo` int(11) DEFAULT NULL COMMENT '1:Aluno  2:Professor  3:Admin'
 ) ENGINE=InnoDB AUTO_INCREMENT=277 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
