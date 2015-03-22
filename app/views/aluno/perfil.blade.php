@@ -3,13 +3,13 @@
 @section('maincontent')
     <section class="content-header">
         <h1>
-            Bem vindo ao KalanGO!
-            <small>Meus Cursos</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Meus Cursos</li>
-        </ol>
+	        Perfil
+	    </h1>
+	    <ol class="breadcrumb">
+	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+	        <li class="active">Comunicação</li>
+			<li class="active">Perfil</li>
+	    </ol>
     </section>
 
     <!-- Main content -->
@@ -23,14 +23,14 @@
                         <ul class="nav nav-tabs padding-18">    <!-- Abas - Menu -->
                             <li class="active">
                                 <a data-toggle="tab" href="#home">
-                                    <i class="green ace-icon fa fa-user bigger-120"></i>
-                                    Profile
+                                    <i class="green ace-icon fa fa-user bigger-120">&nbsp;</i>
+                                    Perfil
                                 </a>
                             </li>
 
                             <li class="">
                                 <a data-toggle="tab" href="#editar">
-                                    <i class="orange ace-icon fa fa-pencil bigger-120"></i>
+                                    <i class="orange ace-icon fa fa-pencil bigger-120">&nbsp;</i>
                                     Editar
                                 </a>
                             </li>
