@@ -78,9 +78,15 @@
 
 @section('maincontent')
 	<section class="content-header no-margin">
-		<h1 class="text-center">
-			Caixa de Mensagens
-		</h1>
+		<h1>
+	        Mensagens
+			<small>Inbox</small>
+	    </h1>
+	    <ol class="breadcrumb">
+	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+	        <li class="active">Comunicação</li>
+			<li class="active">Mensagens</li>
+	    </ol>
 	</section>
 
 	<section class="content">
@@ -97,7 +103,7 @@
 									<h3 class="box-title">Caixa de Entrada</h3>
 								</div>
 
-								<a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil"></i>Nova Mensagem</a>
+								<a class="btn btn-block btn-primary" data-toggle="modal" data-target="#compose-modal"><i class="fa fa-pencil">&nbsp;</i>Nova Mensagem</a>
 
 								<div style="margin-top: 15px;">
 									<ul class="nav nav-pills nav-stacked">
@@ -129,7 +135,7 @@
 									<div class="col-sm-6 search-form">
 										<form action="#" class="text-right">
 											<div class="input-group">
-												<input type="text" class="form-control input-sm" placeholder="Search">
+												<input type="text" class="form-control input-sm" placeholder="Busca">
 												<div class="input-group-btn">
 													<button type="submit" name="q" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
 												</div>
