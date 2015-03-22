@@ -4,12 +4,12 @@
 
 	<section class="content-header">
 	    <h1>
-	        Bem vindo ao KalanGO!
-	        <small>Meus Cursos</small>
+	        Aulas
 	    </h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 	        <li class="active">Meus Cursos</li>
+			<li class="active">Aulas</li>
 	    </ol>
 	</section>
 
