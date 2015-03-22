@@ -719,6 +719,9 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			$questao->categoria = Input::get('pergunta');
 
+			$questao->idTopico = Input::get('topico');
+			$questao->pontos = Input::get('dificuldade');
+
 			$questao->tipo=2;
 
 			$questao->respostaCerta = Input::get('respostaCerta');
@@ -789,6 +792,8 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		$questao->respostaCerta = Input::get('respostaCerta');
 		$questao->idAtividade = Input::get('idatividade');
+		$questao->idTopico = Input::get('topico');
+		$questao->pontos = Input::get('dificuldade');
 
 		$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
 
@@ -807,6 +812,8 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		$atividadeExtra->nome = Input::get('nome');
 		$idModulo = Input::get('idModulo');
 		$idCategoria = Input::get('idCategoria');
+		$atividadeExtra->idTopico = Input::get('topico');
+		$atividadeExtra->pontos = Input::get('dificuldade');
 
 		if(isset($idModulo)){
 			$atividadeExtra->idModulo = Input::get('idModulo');
@@ -1270,6 +1277,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$questao->categoria = $pergunta;
 
+			$questao->idTopico = Input::get('topico');
+			$questao->pontos = Input::get('dificuldade');
+
 			$questao->respostaCerta = Input::get('respostaCerta');
 			$questao->save();
 
@@ -1350,6 +1360,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$questao->respostaCerta = Input::get('respostacerta');
 			
 			$questao->categoria = $pergunta. $resposta;
+
+			$questao->idTopico = Input::get('topico');
+			$questao->pontos = Input::get('dificuldade');
 
 			$questao->save();
 

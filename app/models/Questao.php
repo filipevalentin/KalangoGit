@@ -11,7 +11,7 @@
 
         // Agora a questao terá só um skill atrelado, então será hasOne
         public function topico(){
-        	return $this->hasOne('Topico','idTopico');	
+        	return $this->belongsTo('Topico', 'idTopico');	
         }
 
         public function respostas(){
