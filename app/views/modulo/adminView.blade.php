@@ -172,7 +172,7 @@
     <section class="content-header">
         <h1>Gerenciar Turmas - Inglês Kids</h1>
         <ol class="breadcrumb">
-            <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><i class="fa fa-dashboard"></i> Home</li>
             <li class="active">Widgets</li>
         </ol>
     </section>
@@ -217,7 +217,7 @@
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
                                                     <p style="float:left;">{{$material->nome}}</p>
                                                     <div class="box-tools pull-right">
-                                                        <a href="/Viewer#/{{$material->url}}"><button class="btn btn-primary btn-xs"><i class="fa fa-external-link"></i></button></a>
+                                                        <a href="/Viewer#/{{$material->url}}"><button class="btn btn-primary btn-xs"><i class="fa fa-file-pdf-o"></i></button></a>
                                                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarmaterial" data-id="{{$material->id}}" data-nome="{{$material->nome}}"><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                                     </div>
@@ -227,14 +227,14 @@
                                             @foreach ($aula->atividades as $atividade)
                                                 @if($atividade->status == '0')
                                                     <div class="alert alert-info alert-dismissable" style="min-height: 55px; background-color: white;">
-                                                    <b style="color: red;"> Inativa</b>
+                                                    <b style="color: red;">&nbsp;(Inativa)</b>
                                                 @else
                                                 <div class="alert alert-info alert-dismissable" style="min-height: 55px;">
                                                 @endif
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
                                                     <p style="float:left;">{{$atividade->nome}}</p>
                                                     <div class="box-tools pull-right">
-                                                        <a href="/admin/atividade/{{$atividade->id}}/editar"><button class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button></a>
+                                                        <a href="/admin/atividade/{{$atividade->id}}/editar"><button class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button></a>
                                                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editaratividade" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" data-status="{{$atividade->status}}" ><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                                     </div>

@@ -23,6 +23,7 @@
         <!-- Theme style -->
         <link href="/css/AdminLTE-Admin.css" rel="stylesheet" type="text/css" />
         <link href="/css/Custom-Admin.css" rel="stylesheet" type="text/css" />
+		<link rel="shortcut icon" href="../img/favicon.ico">
         
 
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->

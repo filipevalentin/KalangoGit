@@ -62,7 +62,6 @@
 	    </h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Meus Cursos</li>
 	    </ol>
 	</section>
 
@@ -71,7 +70,7 @@
 	<section class="content">
 	    <div class="row">
 	        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	        	<h2 class="page-header">Meu Curso</h2>
+	        	<h2 class="page-header">Meus Cursos</h2>
 
                 <div class="row">
 

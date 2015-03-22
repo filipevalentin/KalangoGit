@@ -41,7 +41,7 @@
 
                             <!-- LOGIN -->
                             <div id="tabs" data-tabs="tabs">
-                                <p class="text-center"><a href="#esqueci" data-toggle="tab">Esqueci a senha :/</a></p>
+                                <p class="text-center"><a href="#esqueci" data-toggle="tab">Esqueci a senha</a></p>
                             </div>
 
                         </div>
