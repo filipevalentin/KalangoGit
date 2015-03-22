@@ -7,32 +7,36 @@ Alterações mecessárias:
 		<li>Atividade - Questoes</li>
 			<div name= "Página editarAdmin">
 
-				#View-Layout
+				#View-Layout - OK
 					- adicionar uma tag ao lado esquerdo do "tool-box" de botões com uma tag indicando o nome do tópico 
 					  relativo a questão
 
 				#Cadastro
-					- atualizar modal com novos campos: "select-dificuldade" e "select-tópico"
-					- atualizar rota pra setar a dificuldade
+					- atualizar modal com novos campos: "select-dificuldade" e "select-tópico" - OK
+					- atualizar rota pra setar a dificuldade - OK
 
-				#Update
-					- atualizar modal com novos campos
-					- atualizar botão "lápis" com attr dificuldade e tópico
-					- atualizar javascript
+				#Update - OK
+					- atualizar modal com novos campos - OK
+					- atualizar botão "lápis" com attr dificuldade e tópico - OK
+					- atualizar javascript - OK
 
 			</div>
 			
 		<li>Atividade Extra - Questoes</li>
 			<div name= "Página extraEditarAdmin">
 
-				#Cadastro
-					- atualizar modal com novos campos: "select-dificuldade" e "select-tópico"
-					- atualizar rota pra setar a dificuldade
+				#View-Layout - OK
+					- adicionar uma tag ao lado esquerdo do "tool-box" de botões com uma tag indicando o nome do tópico 
+					  relativo a questão
 
-				#Update
-					- atualizar modal com novos campos
-					- atualizar botão "lápis" com attr dificuldade e tópico
-					- atualizar javascript
+				#Cadastro
+					- atualizar modal com novos campos: "select-dificuldade" e "select-tópico" - OK
+					- atualizar rota pra setar a dificuldade - OK
+
+				#Update - OK
+					- atualizar modal com novos campos - OK
+					- atualizar botão "lápis" com attr dificuldade e tópico - OK
+					- atualizar javascript - OK
 
 			</div>
 	</li>
@@ -40,27 +44,27 @@ Alterações mecessárias:
 	<p>professor</p>
 	<li>
 		<li>Atividade - Questoes</li>
-			<div name= "Página professorView e professorTurmaView">
+			<div name= "Página professorView e professorTurmaView extraProfessorView">
 
-				#View-Layout
+				#View-Layout - OK
 					- adicionar uma tag ao lado esquerdo do "tool-box" de botões com uma tag indicando o nome do tópico 
 					  relativo a questão
 
 		<li>Atividade Extra - Questoes</li>
 			<div name= "Página editarAdmin">
 
-				#Display-Layout
+				#Display-Layout - OK
 					- adicionar uma tag ao lado esquerdo do "tool-box" de botões com uma tag indicando o nome do tópico 
 					  relativo a questão
 
 				#Cadastro
-					- atualizar modal com novos campos: "select-dificuldade" e "select-tópico"
-					- atualizar rota pra setar a dificuldade
+					- atualizar modal com novos campos: "select-dificuldade" e "select-tópico" - OK
+					- atualizar rota pra setar a dificuldade - OK
 
-				#Update
-					- atualizar modal com novos campos
-					- atualizar botão "lápis" com attr dificuldade e tópico
-					- atualizar javascript
+				#Update - OK
+					- atualizar modal com novos campos - OK
+					- atualizar botão "lápis" com attr dificuldade e tópico - OK
+					- atualizar javascript - OK
 
 			</div>
 	</li>
@@ -69,7 +73,7 @@ Alterações mecessárias:
 		<li>Responder Atividade</li>
 			<div name="Pagina responderAtividade">
 				#View
-					- Adicionar uma tag com  nome do tópico relacionado
+					- Adicionar uma tag com  nome do tópico relacionado - OK
 			</div>
 
 </h1>

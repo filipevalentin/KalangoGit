@@ -48,6 +48,7 @@
 		                                
 		                                    <div class="box text-center">
 		                                        <div class="box-header">
+		                                        	<small class="badge pull-right bg-green" style="margin: 12px 10px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
 		                                            <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
 		                                        </div>
 		                                        <div class="box-body">
@@ -177,6 +178,7 @@
 	                                        <div class="row" style="margin:0px;">
 	                                            <div class="box text-center">
 	                                                <div class="box-header">
+	                                                <small class="badge pull-right bg-green" style="margin: 12px 10px 0px 5px;"><?php if($questao->topico != null) echo $questao->topico->nome ?></small>
 	                                                    <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
 	                                                </div>
 	                                                <div class="box-body">

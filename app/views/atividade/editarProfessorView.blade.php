@@ -38,6 +38,22 @@
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-multipla-editar-questao" class="fa"></i> Arquivo</label>
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-multipla-editar-questao" onblur="fcn_recarregaCoresMultiplaEditarQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'editar-questao-multipla');" ></input>
                     </div>
+                    <div id="" class="form-group">
+                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Tópico</label>
+                        <select id="topico" name="topico" onblur="" class="form-control">
+                        @foreach(Topico::all() as $topico)
+                          <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div id="" class="form-group">
+                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Dificuldade</label>
+                        <select id="dificuldade" name="dificuldade" onblur="" class="form-control">
+                          <option id="texto" value="200"> fácil</option>
+                          <option id="texto" value="300"> médio</option>
+                          <option id="texto" value="400"> difícil</option>
+                        </select>
+                    </div>
                     
                     <h3>Alternativas</h3><hr>
 
@@ -118,6 +134,23 @@
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-dissertativa-editar-questao" class="fa"></i> Arquivo</label>
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-dissertativa-editar-questao" onblur="fcn_recarregaCoresDissertativaEditarQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'editar-questao-dissertativa');" ></input>
                     </div>
+
+                    <div id="" class="form-group">
+                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Tópico</label>
+                        <select id="topico" name="topico" onblur="" class="form-control">
+                        @foreach(Topico::all() as $topico)
+                          <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div id="" class="form-group">
+                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Dificuldade</label>
+                        <select id="dificuldade" name="dificuldade" onblur="" class="form-control">
+                          <option id="texto" value="200"> fácil</option>
+                          <option id="texto" value="300"> médio</option>
+                          <option id="texto" value="400"> difícil</option>
+                        </select>
+                    </div>
                     
                     <h3>Resposta Correta</h3><hr>
 
@@ -176,6 +209,23 @@
                     <div id="div_arquivoPergunta-multipla-nova-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-multipla-nova-questao" class="fa"></i> Arquivo</label>
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-multipla-nova-questao" onblur="fcn_recarregaCoresMultiplaNovaQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'nova-questao-multipla');"></input>
+                    </div>
+
+                    <div id="" class="form-group">
+                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Tópico</label>
+                        <select id="topico" name="topico" onblur="" class="form-control">
+                        @foreach(Topico::all() as $topico)
+                          <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div id="" class="form-group">
+                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Dificuldade</label>
+                        <select id="dificuldade" name="dificuldade" onblur="" class="form-control">
+                          <option id="texto" value="200"> fácil</option>
+                          <option id="texto" value="300"> médio</option>
+                          <option id="texto" value="400"> difícil</option>
+                        </select>
                     </div>
                     
                     <h3>Alternativas</h3><hr>
@@ -248,6 +298,23 @@
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-dissertativa-nova-questao" class="fa"></i> Arquivo</label>
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-dissertativa-nova-questao" onblur="fcn_recarregaCoresDissertativaNovaQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'nova-questao-dissertativa');"></input>
                     </div>
+
+                    <div id="" class="form-group">
+                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Tópico</label>
+                        <select id="topico" name="topico" onblur="" class="form-control">
+                        @foreach(Topico::all() as $topico)
+                          <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
+                        @endforeach
+                        </select>
+                    </div>
+                    <div id="" class="form-group">
+                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Dificuldade</label>
+                        <select id="dificuldade" name="dificuldade" onblur="" class="form-control">
+                          <option id="texto" value="200"> fácil</option>
+                          <option id="texto" value="300"> médio</option>
+                          <option id="texto" value="400"> difícil</option>
+                        </select>
+                    </div>
                     
                     <h3>Resposta Correta</h3><hr>
 
@@ -315,9 +382,10 @@
                                             <a data-toggle="collapse" data-parent="#accordion" href="#ME{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
                                         <div class="box-tools pull-right" style="padding-top: 8px;">
-                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textopergunta}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textopergunta}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>
+                                        <small class="badge pull-right bg-green" style="margin: 12px 10px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                     </div>
                                     <div id="ME{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">
@@ -451,8 +519,9 @@
                                             <a data-toggle="collapse" data-parent="#accordion" href="#RU{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
                                         <div class="box-tools pull-right" style="padding-top: 8px;">
-                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textopergunta}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textopergunta}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
+                                            <small class="badge pull-right bg-green" style="margin: 12px 10px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                         </div>
                                     </div>
                                     <div id="RU{{$questao->id}}" class="panel-collapse collapse">
@@ -595,6 +664,8 @@
         var pergunta = String(datacategoria).substring(0,1)
         var resposta = String(datacategoria).substring(1,2)
         var respostacerta = button.data('respostacerta');
+        var topico = button.data('topico');
+        var dificuldade = button.data('dificuldade');
          // Extract info from data-* attributes
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -605,6 +676,8 @@
         modal.find('#pergunta').val(pergunta)
         modal.find('#resposta').val(resposta)
         modal.find('#respostacerta').val(respostacerta);
+        modal.find('#topico').val(topico);
+        modal.find('#dificuldade').val(dificuldade);
 
         if(modal.find('select#resposta').val()!=1){
                 modal.find('#a, #b, #c, #d').attr("type", "file")
@@ -638,6 +711,8 @@
         var datacategoria = button.data('categoria')
         var pergunta = datacategoria
         var respostaCerta = button.data('respostacerta')
+        var topico = button.data('topico');
+        var dificuldade = button.data('dificuldade');
          // Extract info from data-* attributes
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -647,6 +722,8 @@
         modal.find('#categoria').val(datacategoria)
         modal.find('#pergunta').val(pergunta)
         modal.find('#respostaCerta').val(respostaCerta)
+        modal.find('#topico').val(topico);
+        modal.find('#dificuldade').val(dificuldade);
 
 
         if(modal.find('select#pergunta').val()==1){
