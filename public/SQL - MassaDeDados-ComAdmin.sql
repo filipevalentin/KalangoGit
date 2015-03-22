@@ -553,8 +553,10 @@ INSERT INTO `aulas` (`id`, `titulo`, `idModulo`) VALUES
 CREATE TABLE IF NOT EXISTS `avisos` (
 `id` int(11) NOT NULL,
   `titulo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `descricao` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `urlImagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dataExpiracao` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `idCurso` int(11) DEFAULT NULL
   `idUsuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1710,6 +1712,7 @@ ADD CONSTRAINT `aulas_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`id
 --
 ALTER TABLE `avisos`
 ADD CONSTRAINT `avisos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
+ADD CONSTRAINT `avisos_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `cursos` (`id`);
 
 --
 -- Limitadores para a tabela `materialapoio`

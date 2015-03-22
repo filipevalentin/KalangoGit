@@ -143,10 +143,13 @@ create table mensagens(
 create table avisos(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	titulo varchar(100),
+	descricao varchar(500),
 	urlImagem varchar(255),
 	dataExpiracao varchar(8),
 	idUsuario int(11),
-	FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
+	idCurso int(11),
+	FOREIGN KEY (idUsuario) REFERENCES usuarios(id),
+	FOREIGN KEY (idCurso) REFERENCES cursos(id)
 );
 
 create table propagandas(
