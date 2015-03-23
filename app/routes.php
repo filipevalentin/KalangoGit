@@ -1071,9 +1071,32 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	});
 
 	//Avisos
+
+	//ajax - tabela
+	Route::get('listarAvisos/{idCurso?}', function($idCurso = null){
+		$avisos;
+		if($idCurso != null){
+			$avisos = Aviso::where('idCurso','=',$idCurso)->get();
+		}else{
+			$avisos = Aviso::all();
+		}
+
+		foreach ($avisos as $aviso) {
+			$aviso->criadoPor = User::find($aviso->idUsuario)->nome;
+			$aviso->action = "<a style='color:white;' href='/admin/aviso/$aviso->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-external-link'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$aviso->id' data-titulo='$aviso->titulo' data-descricao='$aviso->descricao' data-urlImagem='$aviso->urlImagem' data-dataExpiracao='$aviso->dataExpiracao' data-idCurso='$aviso->idCurso' data-toggle='modal' data-target='#editarAviso'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+		}
+
+		$response = array(
+				"data" => $avisos,
+				"iTotalRecords" => count($avisos),
+				"iTotalDisplayRecords" => count($avisos)
+			);
+		return Response::json($response);
+	});
+
 	Route::get('avisos', function(){
-		$avisos = Aviso::all();
-		return View::make('aviso/viewAdmin')->with('avisos',$avisos);
+		$categorias = Curso::all();
+		return View::make('aviso/viewAdmin')->with('categorias', $categorias);
 	});
 
 	Route::get('aviso/{id}', function($id){
@@ -1081,7 +1104,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return View::make('aviso/showAdmin')->with('aviso',$aviso);
 	});
 
-	Route::post('avisos', function(){
+	Route::post('criarAviso', function(){
 		$aviso = new Aviso;
 		$aviso->titulo = Input::get('titulo');
 		$aviso->descricao = Input::get('descricao');
@@ -1109,8 +1132,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Redirect::back();
 	});
 
-	Route::post('avisos/atualizar/{id}', function($id){
-		$aviso = Aviso::find($id);
+	Route::post('atualizarAviso', function($id){
+		$aviso = Aviso::find(Input::get('id'));
 		$aviso->titulo = Input::get('titulo');
 		$aviso->descricao = Input::get('descricao');
 		$aviso->dataExpiracao = Input::get('dataExpiracao');
@@ -1143,7 +1166,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return View::make('topico/showAdmin')->with('topico',$topico);
 	});
 
-	Route::post('topicos', function(){
+	Route::post('criarTopico', function(){
 		$topico = new Topico;
 		$topico->nome = Input::get('nome');
 		$topico->idUsuario = Auth::user()->id;

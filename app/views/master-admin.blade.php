@@ -146,7 +146,7 @@
                         </li>
 
                         <li>
-                            <a href="#">
+                            <a href="/admin/avisos">
                                 <i class="fa fa-calendar"></i> <span>Avisos</span>
                             </a>
                         </li>
