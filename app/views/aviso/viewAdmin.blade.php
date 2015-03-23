@@ -31,10 +31,11 @@
                         <input type="text" autocomplete="off" id="dataExpiracao" name="dataExpiracao" class="form-control">
 					</div>
 					<div id="idCurso" class="form-group">
-                        <label class="control-label" for="idCurso"><i id="icone_idCurso" class="fa"></i> Curso</label>
+                        <label class="control-label" for="idCurso"><i id="icone_idCurso" class="fa"></i> Enviar para:</label>
                         <select type="text" autocomplete="off" id="idCurso" name="idCurso" class="form-control">
+                        	<option value="">Todos os alunos</option>
 							@foreach(Curso::all() as $curso)
-                        		<option value="{{$curso->id}}">{{$curso->nome}}-{{$curso->idioma->nome}}</option>
+                        		<option value="{{$curso->id}}">Curso: {{$curso->nome}}-{{$curso->idioma->nome}}</option>
                         	@endforeach
                         </select>
 					</div>
@@ -79,8 +80,9 @@
 					<div id="idCurso" class="form-group">
                         <label class="control-label" for="idCurso"><i id="icone_idCurso" class="fa"></i> Curso</label>
                         <select type="text" autocomplete="off" id="idCurso" name="idCurso" class="form-control">
+							<option value="">Todos os alunos</option>
 							@foreach(Curso::all() as $curso)
-                        		<option value="{{$curso->id}}">{{$curso->nome}}-{{$curso->idioma->nome}}</option>
+                        		<option value="{{$curso->id}}">Curso: {{$curso->nome}}-{{$curso->idioma->nome}}</option>
                         	@endforeach
                         </select>
 					</div>
@@ -110,7 +112,7 @@
 			<div class="col-md-12">
 				<div class="box box-solid">
 	                <div class="box-header">
-	                    <h3 class="box-title">Curso</h3>
+	                    <h3 class="box-title">Filtre os avisos por Curso</h3>
 	                </div><!-- /.box-header -->
 	                <div class="box-body">
 	                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -160,6 +162,7 @@
 			                <th>#</th>
 			                <th>Titulo</th>
 			                <th>Data Expiração</th>
+			                <th>Enviado para</th>
 			                <th>Criado Por</th>
 			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAviso" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
@@ -170,6 +173,7 @@
 			                <th>#</th>
 			                <th>Titulo</th>
 			                <th>Data Expiração</th>
+			                 <th>Enviado para</th>
 			                <th>Criado Por</th>
 			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAviso" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
@@ -219,6 +223,7 @@
 	        { data: 'id' },
 	        { data: 'titulo' },
 	        { data: 'dataExpiracao' },
+	        { data: 'enviadoPara'},
 	        { data: 'criadoPor' },
 	        { data: 'action' }
 	    ],
