@@ -738,11 +738,7 @@ INSERT INTO `professores` (`id`, `codRegistro`, `sobreMim`, `formacaoAcademica`)
 CREATE TABLE IF NOT EXISTS `propagandas` (
 `id` int(11) NOT NULL,
   `titulo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `imagem1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `imagem2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `imagem3` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `imagem4` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `imagem5` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `imagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

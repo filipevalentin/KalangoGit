@@ -155,11 +155,7 @@ create table avisos(
 create table propagandas(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	titulo varchar(100),
-	imagem1 varchar(255),
-	imagem2 varchar(255),
-	imagem3 varchar(255),
-	imagem4 varchar(255),
-	imagem5 varchar(255),
+	imagem varchar(255),
 	idUsuario int(11),
 	FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 );
