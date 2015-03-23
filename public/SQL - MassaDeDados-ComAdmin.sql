@@ -739,6 +739,7 @@ CREATE TABLE IF NOT EXISTS `propagandas` (
 `id` int(11) NOT NULL,
   `titulo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `imagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `link` varchar(350) COLLATE utf8_unicode_ci DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

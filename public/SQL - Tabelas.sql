@@ -156,6 +156,7 @@ create table propagandas(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	titulo varchar(100),
 	imagem varchar(255),
+	link varchar(350),
 	idUsuario int(11),
 	FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 );
