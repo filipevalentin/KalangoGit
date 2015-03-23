@@ -556,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `avisos` (
   `descricao` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `urlImagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dataExpiracao` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idCurso` int(11) DEFAULT NULL
+  `idCurso` int(11) DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1709,7 +1709,7 @@ ADD CONSTRAINT `aulas_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`id
 -- Limitadores para a tabela `avisos`
 --
 ALTER TABLE `avisos`
-ADD CONSTRAINT `avisos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
+ADD CONSTRAINT `avisos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`),
 ADD CONSTRAINT `avisos_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `cursos` (`id`);
 
 --
@@ -1771,7 +1771,3 @@ ADD CONSTRAINT `turmas_ibfk_2` FOREIGN KEY (`idProfessor`) REFERENCES `professor
 ALTER TABLE `turmasalunos`
 ADD CONSTRAINT `turmasalunos_ibfk_1` FOREIGN KEY (`idTurma`) REFERENCES `turmas` (`id`),
 ADD CONSTRAINT `turmasalunos_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `alunos` (`id`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
