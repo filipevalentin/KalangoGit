@@ -388,6 +388,106 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 		return View::make('modulo/alunoView')->with('modulo',$modulo);
 	});
 
+	Route::get('dashboard', function(){
+		$turmas = Auth::user()->aluno->turmas->filter(function($turma){
+		    return ($turma->status == "1"); // filtra só os com status ativo;
+		});
+
+
+		$certas=0;
+		$erradas=0;
+
+		// aqui separamos as informações do dashboard relativa a cada modulo/turma que o aluno cursa. Ex: respostas certas/erradas de atividades do curso inglês(turma A) e outro de espanhol(turmaB)
+		foreach ($turmas as $turma) {
+			//pega todas as questoes relativas a um modulo
+			$aux = $turma->modulo->questoes;
+			//filtra só as questoes do modulo que o aluno já respondeu, atraves de intersecção entre as funções aluno->questoes e $aux
+			$aux = Auth::user()->aluno->respostas->intersect($aux);
+			// adiciona a coleção de questoes que o aluno já respondeu para a turma/modulo correspondende da questão
+			$turma->questoes = $aux;
+
+			//Pontos por Topicos
+			$topicos = array();
+			foreach($turma->questoes as $resposta){
+				//se o topico ainda não está na lista, add ele na lista, com sua chave sendo seu id, e inicia seu attr "pontos" como 0.
+				if (!(@in_array($resposta->idTopico, $topicos)) ){
+					$topico = Topico::find($resposta->idTopico);
+					$topico->pontos = 0;
+					$topicos[$resposta->idTopico] = $topico;
+				}
+				// se a resposta em questao foi acertada pelo aluno, adicionamos os pontos ao topico condizente e incrementamos o contador de acertos
+				// caso contrário só incrementamos o contador de erros
+				if($resposta->pivot->correcao == '1'){
+					$topicos[$resposta->idTopico]->pontos += $resposta->pontos;
+					$certas++;
+				}else{
+					$erradas++;
+				}
+
+			};
+
+			//ranking modulo
+			$rankingModulo = new \Illuminate\Database\Eloquent\Collection;
+			//pega todas as turmas do modulo e da um merge nos alunos;
+			$turmasModulo = $turma->modulo->turmas;
+			foreach ($turmasModulo as $turmaM) {
+				foreach ($turmaM->alunos as $aluno) {
+					$rankingModulo->push($aluno);
+				}
+			}
+
+			 $rankingModulo->sort(function($a, $b){
+		        $a = $a->pivot->pontuacao;
+		        $b = $b->pivot->pontuacao;
+		        if ($a === $b) {
+		            return 0;
+		        }
+		        return ($a > $b) ? 1 : -1;
+		    });
+
+			//ranking turma
+			$rankingTurma = $turma->alunos;
+
+			 $rankingTurma->sort(function($a, $b){
+		        $a = $a->pivot->pontuacao;
+		        $b = $b->pivot->pontuacao;
+		        if ($a === $b) {
+		            return 0;
+		        }
+		        return ($a > $b) ? 1 : -1;
+		    });
+
+			//pega as posiçoes do rank para o aluno atual
+			$meuRanking = array();
+			$meuRanking['modulo'] = array_search(Auth::user()->id, $rankingModulo->keyBy('id')->keys());
+			$meuRanking['turma'] = array_search(Auth::user()->id, $rankingTurma->keyBy('id')->keys());
+
+			//Limita o rankind do módulo para os 10 primeiros
+			$rankingModulo = $rankingModulo->slice(1,10);
+
+			//topTopicos
+			$topTopicos = $topicos;
+			arsort($topTopicos);
+			$melhorTopico = reset($topTopicos);
+			$piorTopico = end($topTopicos);
+			$topTopicos = array();
+			$topTopicos['melhor'] = $melhorTopico;
+			$topTopicos['pior'] = $piorTopico;
+
+			// adiciona as informações do dashboard no objeto turma;
+			$turma->meuRanking = $meuRanking;
+			$turma->acertos = $certas;
+			$turma->erros = $erradas;
+			$turma->topicos = $topicos;
+			$turma->topTopicos = $topTopicos;
+			$turma->rankingTurma = $rankingTurma;
+			$turma->rankingModulo = $rankingModulo;
+
+		}
+
+		return View::make('dashboard')->with('turmas', $turmas);
+	});
+
 });
 
 	
@@ -1133,7 +1233,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Redirect::back();
 	});
 
-	Route::post('atualizarAviso', function($id){
+	Route::post('atualizarAviso', function(){
 		$aviso = Aviso::find(Input::get('id'));
 		$aviso->titulo = Input::get('titulo');
 		$aviso->descricao = Input::get('descricao');
@@ -1157,14 +1257,26 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 	//Tópicos
 
-	Route::get('topicos', function(){
+	//ajax - tabela
+	Route::get('listarTopicos', function(){
 		$topicos = Topico::all();
-		return View::make('topico/viewAdmin')->with('topicos',$topicos);
+
+		foreach ($topicos as $topico) {
+			$topico->criadoPor = User::find($topico->idUsuario)->nome;
+			$topico->numQuestoes = $topico->questoes->count();
+			$topico->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$topico->id' data-nome='$topico->nome' data-toggle='modal' data-target='#editarTopico'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+		}
+
+		$response = array(
+				"data" => $topicos,
+				"iTotalRecords" => count($topicos),
+				"iTotalDisplayRecords" => count($topicos)
+			);
+		return Response::json($response);
 	});
 
-	Route::get('topico/{id}', function($id){
-		$topico = Topico::find($id);
-		return View::make('topico/showAdmin')->with('topico',$topico);
+	Route::get('topicos', function(){
+		return View::make('topico/showAdmin');
 	});
 
 	Route::post('criarTopico', function(){
@@ -1183,14 +1295,82 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Redirect::back();
 	});
 
-	Route::post('topicos/atualizar/{id}', function($id){
-		$topico = Topico::find($id);
+	Route::post('atualizarTopico', function(){
+		$topico = Topico::find(Input::get('id'));
 		$topico->nome = Input::get('nome');
 		$topico->idUsuario = Auth::user()->id;
 
 		$topico->save();
 		return Redirect::back();
 	});
+
+	// Propagandas
+
+	Route::get('listarPropagandas', function(){
+		$propagandas = Propaganda::all();
+
+		foreach ($propagandas as $propaganda) {
+			$propaganda->criadoPor = User::find($propaganda->idUsuario)->nome;
+			$propaganda->linkView = ($propaganda->link != null) ? "<a href='$propaganda->link''>Visitar Link</a>" : 'N/A';
+			$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+		}
+
+		$response = array(
+				"data" => $propagandas,
+				"iTotalRecords" => count($propagandas),
+				"iTotalDisplayRecords" => count($propagandas)
+			);
+		return Response::json($response);
+	});
+
+	Route::get('propagandas', function(){
+		return View::make('propaganda/showAdmin');
+	});
+
+	Route::post('criarPropaganda', function(){
+		$propaganda = new Propaganda;
+		$propaganda->titulo = Input::get('titulo');
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+		if($imagem!=NULL){
+			$filename = $imagem->getClientOriginalName();
+
+			$propaganda->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
+		}
+		$propaganda->idUsuario = Auth::user()->id;
+		$propaganda->save();
+
+		return Redirect::back();
+	});
+
+	Route::get('propagandas/deletar/{id}', function($id){
+		$propaganda = Propaganda::find($id);
+		$propaganda->delete();
+		return Redirect::back();
+	});
+
+	Route::post('atualizarPropaganda', function(){
+		$propaganda = Propaganda::find(Input::get('id'));
+		$propaganda->titulo = Input::get('titulo');
+		$propaganda->idUsuario = Auth::user()->id;
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+		if($imagem!=NULL){
+			$filename = $imagem->getClientOriginalName();
+
+			$propaganda->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
+		}
+
+		$propaganda->save();
+		return Redirect::back();
+	});
+
 
 	// CRUD
 

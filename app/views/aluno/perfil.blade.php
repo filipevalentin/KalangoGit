@@ -136,21 +136,6 @@
                                                 </div>
                                             </div>
 
-                                            <div class="info-box bg-green">
-                                                <span class="info-box-icon" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-up"></i></span>
-                                                <div class="info-box-content">
-                                                    <span class="info-box-text">Likes</span>
-                                                    <span class="info-box-number" style="display: block;">41,410</span>
-                                                    <div class="progress" style="height: 5px;background: rgb(0, 134, 73);">
-                                                        <div class="progress-bar" style="width: 70%;background-color: white;">
-                                                        </div>
-                                                    </div>
-                                                    <span class="progress-description">
-                                                        70% Increase in 30 Days
-                                                    </span>
-                                                </div><!-- /.info-box-content -->
-                                            </div>
-
                                         </div>
                                     </div>                                  <!-- Fim Texto do Usuário -->
 

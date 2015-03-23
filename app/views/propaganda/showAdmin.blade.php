@@ -2,18 +2,36 @@
 
 @section('modals')
 
-<div class="modal fade" id="criarTopico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="verImagem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Novo Tópico</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Imagem da Propaganda</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/admin/criarTopico" enctype="multipart/form-data">
+                <img id="src" src="" alt="" style="max=height: 800px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="criarPropaganda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Nova Propaganda</h4>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="/admin/criarPropaganda" enctype="multipart/form-data">
                     <div id="div_nome" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" class="form-control" >
+                        <label class="control-label" for="titulo"><i id="icone_titulo" class="fa"></i> Título</label>
+                        <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" >
+                    </div>
+                    <div id="div_nome" class="form-group">
+                        <label class="control-label" for="urlImagem"><i id="icone_urlImagem" class="fa"></i> Imagem</label>
+                        <input type="file" autocomplete="off" id="urlImagem" name="urlImagem" class="form-control" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -25,21 +43,25 @@
     </div>
 </div>
 
-<div class="modal fade" id="editarTopico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarPropaganda" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar Tópico</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Editar Propaganda</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/admin/atualizarTopico" enctype="multipart/form-data">
+                <form method="POST" action="/admin/atualizarPropaganda" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>
                     <div id="div_nome" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" class="form-control" >
+                        <label class="control-label" for="titulo"><i id="icone_titulo" class="fa"></i> Título</label>
+                        <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" >
+                    </div>
+                    <div id="div_nome" class="form-group">
+                        <label class="control-label" for="urlImagem"><i id="icone_urlImagem" class="fa"></i> Imagem</label>
+                        <input type="file" autocomplete="off" id="urlImagem" name="urlImagem" class="form-control" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -55,10 +77,10 @@
 
 @section('maincontent')
 	<section class="content-header">
-	    <h1>Topicos</h1>
+	    <h1>Propagandas</h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Topicos</li>
+	        <li class="active">Propagandas</li>
 	    </ol>
 	</section>
 
@@ -69,20 +91,20 @@
 			        <thead>
 			            <tr>
 			                <th>#</th>
-			                <th>Nome</th>
-			                <th>Nº de Questões</th>
+			                <th>Título</th>
+			                <th>Link Externo</th>
 			                <th>Criado Por</th>
-			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarTopico" ><i class="fa fa-plus"></i></button></th>
+			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarPropaganda" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </thead>
 			 
 			        <tfoot>
 			            <tr>
 			                <th>#</th>
-			                <th>Nome</th>
-			                <th>Nº de Questões</th>
+			                <th>Título</th>
+			                <th>Link Externo</th>
 			                <th>Criado Por</th>
-			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarTopico" ><i class="fa fa-plus"></i></button></th>
+			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarPropaganda" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </tfoot>
 			    </table>
@@ -97,25 +119,34 @@
 
 <script>
 
-	$('#editarTopico').on('show.bs.modal', function (event) {
+	$('#verImagem').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var datasrc = button.data('src');
+
+        var modal = $(this)
+        modal.find('#src').attr('src', datasrc)
+
+    });
+
+	$('#editarPropaganda').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var dataid = button.data('id');
-        var datanome = button.data('nome')
+        var datatitulo = button.data('titulo')
 
         var modal = $(this)
         modal.find('#id').val(dataid)
-        modal.find('#nome').val(datanome)
+        modal.find('#titulo').val(datatitulo)
 
     });
 
 	$('.item').first().addClass("active");
 
 	$('#example').DataTable( {
-	  "ajax":"/admin/listarTopicos" ,
+	  "ajax":"/admin/listarPropagandas" ,
 	    "columns": [
 	        { data: 'id' },
-	        { data: 'nome' },
-	        { data: 'numQuestoes' },
+	        { data: 'titulo' },
+	        { data: 'linkView' },
 	        { data: 'criadoPor' },
 	        { data: 'action' }
 	    ],

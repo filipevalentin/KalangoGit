@@ -3,6 +3,7 @@
 <?php
     $aux = -1;
     $turmas = Auth::user()->aluno->turmas;
+    $propagandas = Propaganda::all();
 ?>
 
 @section('carrossel')
@@ -15,29 +16,19 @@
                 <div class="box-body">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
-                            <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                        @foreach($propagandas as $propaganda)
+                            <li id="liCarousel" data-target="#carousel-example-generic" data-slide-to="{{$propaganda->id}}" class=""></li>
+                        @endforeach
                         </ol>
                         <div class="carousel-inner">
-                            <div class="item active">
-                                <img src="http://placehold.it/1980x450/39CCCC/ffffff&amp;text=KalanGO!" alt="First slide">
+                         @foreach($propagandas as $propaganda)
+                            <div class="item" id="divCarousel">
+                                <img src="/{{$propaganda->urlImagem}}" alt="{{$propaganda->titulo}}" style="max-height: 400px; margin:auto;">
                                 <div class="carousel-caption">
-                                    <!-- Legenda do banner -->
+                                    {{$propaganda->titulo}}
                                 </div>
                             </div>
-                            <div class="item">
-                                <img src="http://placehold.it/1980x450/3c8dbc/ffffff&amp;text=KalanGO!" alt="Second slide">
-                                <div class="carousel-caption">
-                                    <!-- Legenda do banner -->
-                                </div>
-                            </div>
-                            <div class="item">
-                                <img src="http://placehold.it/1980x450/f39c12/ffffff&amp;text=KalanGO!" alt="Third slide">
-                                <div class="carousel-caption">
-                                   <!-- Legenda do banner -->
-                                </div>
-                            </div>
+                         @endforeach
                         </div>
                         <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
                             <span class="glyphicon glyphicon-chevron-left"></span>
@@ -95,27 +86,6 @@
 	                        </a>
 	                    @endforeach
 
-	                    <div class="col-md-12">
-							<div id="div_card_{{++$aux}}" >
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();">
-									<div class="inner">
-										<span style="color:#FFF;font-size:30px;"><b>Espanhol</b></span><br>
-										<span style="color:#FFF;">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-											Sed placerat tempus lectus id consectetur. 
-											Praesent in metus nisl.
-										</span>
-									</div>
-									<div class="icon">
-										<i class="fa fa-calendar"></i>
-									</div>
-								</a> 
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();" class="small-box-footer">
-									Detalhes <i class="fa fa-arrow-circle-right"></i>
-								</a>
-							</div>
-						</div>
-
 						<div class="col-md-12">
 							<div id="div_card_{{++$aux}}" >
 								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();">
@@ -161,13 +131,11 @@
 
 						<div class="col-md-12">
 							<div id="div_card_{{++$aux}}" >
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();">
+								<a href="/aluno/dashboard" onclick="javascript:fcn_indisponivel();">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Desempenho</b></span><br>
 										<span style="color:#FFF;">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-											Sed placerat tempus lectus id consectetur. 
-											Praesent in metus nisl.
+											Veja seus pontos, acertos e erros das atividades respondidas
 										</span>
 									</div>
 									<div class="icon">
@@ -232,7 +200,7 @@
 
 						<div class="col-lg-6">
 							<div id="div_card_{{++$aux}}" class="" >
-								<a href="#">
+								<a href="/aluno/perfil">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Perfil</b></span><br>
 										<span style="color:#FFF;">
@@ -280,12 +248,15 @@
 
 @section('scripts')
     <script language="javascript">
+    $('#liCarousel').first().addClass('active');
+    $('#divCarousel').first().addClass('active');
+
 	    
 	    for (var i = 0; i < valorMaximo; i++) {
-	        console.log(i);
-	        console.log('div_card_'+i);
-	        console.log(cores[(valor+i)%9]);
-	        console.log(document.getElementById('div_card_' + i));
+	        // console.log(i);
+	        // console.log('div_card_'+i);
+	        // console.log(cores[(valor+i)%9]);
+	        // console.log(document.getElementById('div_card_' + i));
 
 	        //Gera numeros aleatorios baseado no valor maximo
 	        document.getElementById('div_card_' + i).className = cores[(valor+i)%9]; //Colore card sequencialmente com cores aleatorias

@@ -195,7 +195,7 @@
                                     <div class="box-body">
                                         <div class="small-box bg-blue">
                                             <div class="inner">
-                                                @if(get_class($categorias[$j])!="Modulo")
+                                                @if(get_class($categorias[$j]) =="Modulo")
                                                 <div class="curso" style="cursor:pointer;" id="{{$categorias[$j]->id}}" data-tipo="{{get_class($categorias[$j])}}" data-atividades="{{$atividades}}">
                                                     <h4 style="font-size: 20px;">{{$categorias[$j]->nome}}</h4>
                                                     <p style="margin:0px;">  </p>
