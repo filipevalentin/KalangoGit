@@ -146,13 +146,19 @@
                         </li>
 
                         <li>
+                            <a href="/admin/topicos">
+                                <i class="fa fa-calendar"></i> <span>Tópicos de Questões</span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="/admin/avisos">
                                 <i class="fa fa-calendar"></i> <span>Avisos</span>
                             </a>
                         </li>
                         
                         <li>
-                            <a href="#">
+                            <a href="/admin/propagandas">
                                 <i class="fa fa-calendar"></i> <span>Propagandas</span>
                             </a>
                         </li>
