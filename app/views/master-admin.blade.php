@@ -147,7 +147,7 @@
 
                         <li>
                             <a href="/admin/topicos">
-                                <i class="fa fa-calendar"></i> <span>Tópicos de Questões</span>
+                                <i class="fa fa-th"></i> <span>Tópicos de Questões</span>
                             </a>
                         </li>
 
@@ -159,7 +159,7 @@
                         
                         <li>
                             <a href="/admin/propagandas">
-                                <i class="fa fa-calendar"></i> <span>Propagandas</span>
+                                <i class="fa fa-bullhorn"></i> <span>Propagandas</span>
                             </a>
                         </li>
 
