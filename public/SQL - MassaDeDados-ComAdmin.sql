@@ -738,7 +738,7 @@ INSERT INTO `professores` (`id`, `codRegistro`, `sobreMim`, `formacaoAcademica`)
 CREATE TABLE IF NOT EXISTS `propagandas` (
 `id` int(11) NOT NULL,
   `titulo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `imagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `urlImagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `link` varchar(350) COLLATE utf8_unicode_ci DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -1482,7 +1482,7 @@ ALTER TABLE `aulas`
 -- Indexes for table `avisos`
 --
 ALTER TABLE `avisos`
- ADD PRIMARY KEY (`id`), ADD KEY `idUsuario` (`idUsuario`);
+ ADD PRIMARY KEY (`id`), ADD KEY `idUsuario` (`idUsuario`), ADD KEY `idCurso` (`idCurso`);
 
 --
 -- Indexes for table `categorias`

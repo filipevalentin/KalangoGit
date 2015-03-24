@@ -1221,7 +1221,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		}
 		$aviso->dataExpiracao = Input::get('dataExpiracao');
 		$aviso->idUsuario = Auth::user()->id;
-		$aviso->idCurso = Input::get('idCurso');
+		$aviso->idCurso = (Input::get('idCurso') != null) ? Input::get('idCurso') : NULL ;
 		$aviso->save();
 
 		return Redirect::back();
