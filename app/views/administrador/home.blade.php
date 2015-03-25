@@ -220,8 +220,8 @@
             <div class="box box-solid">
                 <div class="box-header">
                     <h3 class="box-title">Cursos</h3>
-                    <div class="box-tools pull-right" style="padding: 10px 20px 5px 5px;">
-                        <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarcurso" ><i class="fa fa-plus"></i></button>
+                    <div class="box-tools pull-right" style="padding: 10px 20px 5px 5px;" data-toggle="tooltip" data-placement="left" title="Criar Curso">
+                        <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarcurso"><i class="fa fa-plus"></i></button>
                     </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
@@ -241,7 +241,7 @@
                                             <div class="inner">
                                                 <div class="box-tools pull-right" style="padding-top: 8px;">
                                 
-                                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarcurso" data-id="{{$cursosArray[$j]['id']}}" data-nome="{{$cursosArray[$j]['nome']}}" data-idioma="{{$cursosArray[$j]['idIdioma']}}"><i class="fa fa-pencil"></i></button>
+                                                    <button class="btn btn-success btn-xs" data-toggle="modal" rel="tooltip" data-placement="left" title="Editar Curso" data-target="#editarcurso" data-id="{{$cursosArray[$j]['id']}}" data-nome="{{$cursosArray[$j]['nome']}}" data-idioma="{{$cursosArray[$j]['idIdioma']}}"><i class="fa fa-pencil"></i></button>
                                                     <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="curso" style="cursor:pointer;" id="{{$cursosArray[$j]['id']}}">
@@ -350,6 +350,10 @@
     @section('scripts')
 
         <script>
+            $(function () {
+              $('[rel="tooltip"]').tooltip()
+            })
+
             $('#editarmodulo').on('show.bs.modal', function (event) {
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var dataid = button.data('id')

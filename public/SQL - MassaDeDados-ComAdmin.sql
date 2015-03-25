@@ -1,38 +1,18 @@
--- phpMyAdmin SQL Dump
--- version 4.2.11
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: 21-Mar-2015 às 01:57
--- Versão do servidor: 5.6.21
--- PHP Version: 5.6.3
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `kalangov2.3`
---
-
--- --------------------------------------------------------
-
 --
 -- Estrutura da tabela `acessosatividades`
 --
 
 CREATE TABLE IF NOT EXISTS `acessosatividades` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` int(1) DEFAULT NULL COMMENT '0: Iniciado, 1: Concluído',
   `idAluno` int(11) DEFAULT NULL,
   `idQuestao` int(11) DEFAULT NULL COMMENT 'Indica qual questao o aluno parou',
-  `idAtividade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idAtividade` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idAluno` (`idAluno`),
+  KEY `idQuestao` (`idQuestao`),
+  KEY `idAtividade` (`idAtividade`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -41,16 +21,10 @@ CREATE TABLE IF NOT EXISTS `acessosatividades` (
 --
 
 CREATE TABLE IF NOT EXISTS `administradores` (
-`id` int(11) NOT NULL,
-  `codRegistro` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=277 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Extraindo dados da tabela `administradores`
---
-
-INSERT INTO `administradores` (`id`, `codRegistro`) VALUES
-(276, NULL);
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `codRegistro` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -59,269 +33,270 @@ INSERT INTO `administradores` (`id`, `codRegistro`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `alunos` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` int(11) DEFAULT NULL,
   `sobreMim` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dataNascimento` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dataVencimentoBoleto` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=276 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `dataVencimentoBoleto` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=276 ;
 
 --
 -- Extraindo dados da tabela `alunos`
 --
 
 INSERT INTO `alunos` (`id`, `matricula`, `sobreMim`, `dataNascimento`, `dataVencimentoBoleto`) VALUES
-(25, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39543', '09'),
-(26, 0, 'Sou a Rafaela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '39633', '10'),
-(27, 0, 'Futebol, video game e internet', '39620', '11'),
-(28, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '39291', '05'),
-(29, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '39807', '01'),
-(30, 0, 'Sou a ChunLi e gosto de brincar de boneca , estudar e fazer novos amigos', '38804', '06'),
-(31, 0, 'Olá, sou a Caroline e amo assistir tv, séries e filmes', '38463', '08'),
-(32, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39293', '10'),
-(33, 0, 'Sou o Cleber e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '39807', '07'),
-(34, 0, 'Sou a Irene e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '39723', '05'),
-(35, 0, 'Sou o Filipe, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '39223', '05'),
-(36, 0, 'Gosto de brincar, jogar video game e fazer amigos', '38679', '09'),
-(37, 0, 'Sou a Barbara, adoro cinema e o Justin Bieber! Sou fã do One Direction', '39643', '04'),
-(38, 0, 'Futebol, video game e internet', '39239', '03'),
-(39, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '39120', '04'),
-(40, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '39715', '02'),
-(41, 0, 'Sou a Milena e gosto de brincar de boneca , estudar e fazer novos amigos', '39755', '02'),
-(42, 0, 'Olá, sou o Cleber e amo assistir tv, séries e filmes', '39077', '10'),
-(43, 0, 'Gosto de brincar, jogar video game e fazer amigos', '38819', '09'),
-(44, 0, 'Sou a Jonas e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '39742', '10'),
-(45, 0, 'Sou o Filipe e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '38506', '11'),
-(46, 0, 'Sou o Otavio, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '39559', '05'),
-(47, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39306', '01'),
-(48, 0, 'Sou o Xerxes, adoro cinema e o Justin Bieber! Sou fã do One Direction', '39749', '06'),
-(49, 0, 'Futebol, video game e internet', '38913', '08'),
-(50, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '39051', '10'),
-(51, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '38408', '07'),
-(52, 0, 'Sou o Caio e gosto de brincar de boneca , estudar e fazer novos amigos', '38580', '05'),
-(53, 0, 'Olá, sou o Jaime e amo assistir tv, séries e filmes', '38910', '05'),
-(54, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39081', '09'),
-(55, 0, 'Sou o Peterson e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '39173', '04'),
-(56, 0, 'Sou o Simão e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '39446', '03'),
-(57, 0, 'Sou a Sonia, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '39315', '04'),
-(58, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39770', '02'),
-(59, 0, 'Sou o Claudio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '39609', '02'),
-(60, 0, 'Futebol, video game e internet', '38533', '10'),
-(61, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '38798', '09'),
-(62, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '39742', '10'),
-(63, 0, 'Sou o Leonidas e gosto de brincar de boneca , estudar e fazer novos amigos', '39769', '11'),
-(64, 0, 'Olá, sou o Peterson e amo assistir tv, séries e filmes', '39232', '05'),
-(65, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39750', '01'),
-(66, 0, 'Sou a Andreia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '39586', '06'),
-(67, 0, 'Sou a Caroline e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '38803', '08'),
-(68, 0, 'Sou a ChunLi, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '38928', '10'),
-(69, 0, 'Gosto de brincar, jogar video game e fazer amigos', '38498', '07'),
-(70, 0, 'Sou a Akemi, adoro cinema e o Justin Bieber! Sou fã do One Direction', '39438', '05'),
-(71, 0, 'Futebol, video game e internet', '38703', '05'),
-(72, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '38588', '09'),
-(73, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '38562', '04'),
-(74, 0, 'Sou o Otavio e gosto de brincar de boneca , estudar e fazer novos amigos', '38621', '03'),
-(75, 0, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '38505', '04'),
-(76, 0, 'Gosto de brincar, jogar video game e fazer amigos', '38552', '02'),
-(77, 0, 'Sou a Milena e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '38790', '02'),
-(78, 0, 'Sou o Eric e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '39430', '10'),
-(79, 0, 'Sou o Dante, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '39453', '09'),
-(80, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39325', '10'),
-(81, 0, 'Sou a Daniela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '38674', '11'),
-(82, 0, 'Futebol, video game e internet', '38857', '05'),
-(83, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '39160', '01'),
-(84, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '39223', '06'),
-(85, 0, 'Sou o Jaime e gosto de brincar de boneca , estudar e fazer novos amigos', '39290', '08'),
-(86, 0, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '38878', '10'),
-(87, 0, 'Gosto de brincar, jogar video game e fazer amigos', '38932', '07'),
-(88, 0, 'Sou a Bruna e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '39753', '05'),
-(89, 0, 'Sou a Odete e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '39068', '05'),
-(90, 0, 'Sou a Sarah, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '38853', '09'),
-(91, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39448', '04'),
-(92, 0, 'Sou o Caio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '39260', '03'),
-(93, 0, 'Futebol, video game e internet', '38482', '04'),
-(94, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '38406', '02'),
-(95, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '38980', '02'),
-(96, 0, 'Sou a Akemi e gosto de brincar de boneca , estudar e fazer novos amigos', '39725', '10'),
-(97, 0, 'Olá, sou a Jill e amo assistir tv, séries e filmes', '38505', '09'),
-(98, 0, 'Gosto de brincar, jogar video game e fazer amigos', '38707', '10'),
-(99, 0, 'Sou a Sonia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '38453', '11'),
-(100, 0, 'Sou o Augusto e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '39462', '05'),
-(101, 0, 'Sou a Yoko, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '38509', '01'),
-(102, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39575', '06'),
-(103, 0, 'Sou o Peterson, adoro cinema e o Justin Bieber! Sou fã do One Direction', '39513', '08'),
-(104, 0, 'Futebol, video game e internet', '39198', '10'),
-(105, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '38864', '07'),
-(106, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '39541', '05'),
-(107, 0, 'Sou o Peterson e gosto de brincar de boneca , estudar e fazer novos amigos', '38704', '05'),
-(108, 0, 'Olá, sou o Filipe e amo assistir tv, séries e filmes', '39773', '09'),
-(109, 0, 'Gosto de brincar, jogar video game e fazer amigos', '39068', '04'),
-(110, 0, 'Sou o Cauê e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '39481', '03'),
-(111, 0, 'Sou a Jonas e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '39743', '04'),
-(112, 0, 'Sou a Irene, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '37693', '02'),
-(113, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37756', '02'),
-(114, 0, 'Sou a Rafaela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '37364', '09'),
-(115, 0, 'Futebol, video game e internet', '37580', '10'),
-(116, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '38081', '11'),
-(117, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '37847', '05'),
-(118, 0, 'Sou o ChunLi e gosto de brincar de boneca , estudar e fazer novos amigos', '37991', '01'),
-(119, 0, 'Olá, sou o Caroline e amo assistir tv, séries e filmes', '36910', '06'),
-(120, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37982', '08'),
-(121, 0, 'Sou a Cleber e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '37562', '10'),
-(122, 0, 'Sou o Irene e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '37625', '07'),
-(123, 0, 'Sou a Filipe, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '38199', '05'),
-(124, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37296', '05'),
-(125, 0, 'Sou o Barbara, adoro cinema e o Justin Bieber! Sou fã do One Direction', '36887', '09'),
-(126, 0, 'Futebol, video game e internet', '36833', '04'),
-(127, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '37590', '03'),
-(128, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '36483', '04'),
-(129, 0, 'Sou a Milena e gosto de brincar de boneca , estudar e fazer novos amigos', '37000', '02'),
-(130, 0, 'Olá, sou o Cleber e amo assistir tv, séries e filmes', '37114', '02'),
-(131, 0, 'Gosto de brincar, jogar video game e fazer amigos', '36875', '10'),
-(132, 0, 'Sou o Jonas e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '37204', '09'),
-(133, 0, 'Sou o Filipe e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '37221', '10'),
-(134, 0, 'Sou a Otavio, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '37281', '11'),
-(135, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37177', '05'),
-(136, 0, 'Sou a Xerxes, adoro cinema e o Justin Bieber! Sou fã do One Direction', '38050', '01'),
-(137, 0, 'Futebol, video game e internet', '38133', '06'),
-(138, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '37310', '08'),
-(139, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '37552', '10'),
-(140, 0, 'Sou a Caio e gosto de brincar de boneca , estudar e fazer novos amigos', '37786', '07'),
-(141, 0, 'Olá, sou a Jaime e amo assistir tv, séries e filmes', '36828', '05'),
-(142, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37733', '05'),
-(143, 0, 'Sou a Peterson e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '37142', '09'),
-(144, 0, 'Sou o Simão e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '37303', '04'),
-(145, 0, 'Sou a Sonia, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '38186', '03'),
-(146, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37776', '04'),
-(147, 0, 'Sou a Claudio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '37224', '02'),
-(148, 0, 'Futebol, video game e internet', '37918', '02'),
-(149, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '37570', '10'),
-(150, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '36560', '09'),
-(151, 0, 'Sou a Leonidas e gosto de brincar de boneca , estudar e fazer novos amigos', '37796', '10'),
-(152, 0, 'Olá, sou o Peterson e amo assistir tv, séries e filmes', '37426', '11'),
-(153, 0, 'Gosto de brincar, jogar video game e fazer amigos', '38105', '05'),
-(154, 0, 'Sou a Andreia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '37847', '01'),
-(155, 0, 'Sou a Caroline e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '37695', '06'),
-(156, 0, 'Sou a ChunLi, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '37571', '08'),
-(157, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37136', '10'),
-(158, 0, 'Sou a Akemi, adoro cinema e o Justin Bieber! Sou fã do One Direction', '38162', '07'),
-(159, 0, 'Futebol, video game e internet', '38165', '05'),
-(160, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '37754', '05'),
-(161, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '37525', '09'),
-(162, 0, 'Sou a Otavio e gosto de brincar de boneca , estudar e fazer novos amigos', '38041', '04'),
-(163, 0, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '37573', '03'),
-(164, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37960', '04'),
-(165, 0, 'Sou o Milena e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '36828', '02'),
-(166, 0, 'Sou o Eric e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '36856', '02'),
-(167, 0, 'Sou o Dante, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '37797', '10'),
-(168, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37160', '03'),
-(169, 0, 'Sou o Daniela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '37686', '04'),
-(170, 0, 'Futebol, video game e internet', '37742', '02'),
-(171, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '37221', '02'),
-(172, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '37660', '10'),
-(173, 0, 'Sou o Jaime e gosto de brincar de boneca , estudar e fazer novos amigos', '38118', '09'),
-(174, 0, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '37251', '10'),
-(175, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37976', '11'),
-(176, 0, 'Sou o Bruna e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '36614', '05'),
-(177, 0, 'Sou o Odete e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '36622', '01'),
-(178, 0, 'Sou a Sarah, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '37047', '06'),
-(179, 0, 'Gosto de brincar, jogar video game e fazer amigos', '36509', '08'),
-(180, 0, 'Sou a Caio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '36836', '10'),
-(181, 0, 'Futebol, video game e internet', '36826', '07'),
-(182, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '38114', '05'),
-(183, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '37143', '05'),
-(184, 0, 'Sou a Akemi e gosto de brincar de boneca , estudar e fazer novos amigos', '37697', '09'),
-(185, 0, 'Olá, sou o Jill e amo assistir tv, séries e filmes', '37969', '04'),
-(186, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37909', '03'),
-(187, 0, 'Sou o Sonia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '37347', '04'),
-(188, 0, 'Sou o Augusto e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '37264', '02'),
-(189, 0, 'Sou o Yoko, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '37731', '02'),
-(190, 0, 'Gosto de brincar, jogar video game e fazer amigos', '37221', '10'),
-(191, 0, 'Sou a Peterson, adoro cinema e o Justin Bieber! Sou fã do One Direction', '36929', '09'),
-(192, 0, 'Futebol, video game e internet', '38033', '10'),
-(193, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '38183', '11'),
-(194, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '38005', '05'),
-(195, 0, 'Sou a Peterson e gosto de brincar de boneca , estudar e fazer novos amigos', '37686', '01'),
-(196, 0, 'Futebol, video game e internet', '29955', '06'),
-(197, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '27601', '08'),
-(198, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '33586', '10'),
-(199, 0, 'Sou o ChunLi e gosto de brincar de boneca , estudar e fazer novos amigos', '27041', '07'),
-(200, 0, 'Olá, sou o Caroline e amo assistir tv, séries e filmes', '22204', '05'),
-(201, 0, 'Gosto de brincar, jogar video game e fazer amigos', '22271', '05'),
-(202, 0, 'Sou o Cleber e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '29661', '09'),
-(203, 0, 'Sou a Irene e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '28722', '04'),
-(204, 0, 'Sou a Filipe, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '22487', '03'),
-(205, 0, 'Gosto de brincar, jogar video game e fazer amigos', '35477', '04'),
-(206, 0, 'Sou a Barbara, adoro cinema e o Justin Bieber! Sou fã do One Direction', '21176', '02'),
-(207, 0, 'Futebol, video game e internet', '28605', '02'),
-(208, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '29777', '10'),
-(209, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '32820', '09'),
-(210, 0, 'Sou o Milena e gosto de brincar de boneca , estudar e fazer novos amigos', '35759', '10'),
-(211, 0, 'Olá, sou o Cleber e amo assistir tv, séries e filmes', '23815', '11'),
-(212, 0, 'Gosto de brincar, jogar video game e fazer amigos', '24066', '05'),
-(213, 0, 'Sou o Jonas e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '28128', '01'),
-(214, 0, 'Sou a Filipe e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '32559', '06'),
-(215, 0, 'Sou a Otavio, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '20116', '08'),
-(216, 0, 'Gosto de brincar, jogar video game e fazer amigos', '28587', '10'),
-(217, 0, 'Sou a Xerxes, adoro cinema e o Justin Bieber! Sou fã do One Direction', '26217', '07'),
-(218, 0, 'Futebol, video game e internet', '27731', '05'),
-(219, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '22025', '05'),
-(220, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '35142', '09'),
-(221, 0, 'Sou o Caio e gosto de brincar de boneca , estudar e fazer novos amigos', '24437', '04'),
-(222, 0, 'Olá, sou o Jaime e amo assistir tv, séries e filmes', '32740', '03'),
-(223, 0, 'Gosto de brincar, jogar video game e fazer amigos', '35784', '04'),
-(224, 0, 'Sou a Peterson e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '35474', '02'),
-(225, 0, 'Sou a Simão e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '30717', '02'),
-(226, 0, 'Sou o Sonia, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '27857', '10'),
-(227, 0, 'Gosto de brincar, jogar video game e fazer amigos', '33619', '09'),
-(228, 0, 'Sou o Claudio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '28893', '10'),
-(229, 0, 'Futebol, video game e internet', '30293', '11'),
-(230, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '35290', '05'),
-(231, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '33802', '01'),
-(232, 0, 'Sou a Leonidas e gosto de brincar de boneca , estudar e fazer novos amigos', '27661', '06'),
-(233, 0, 'Olá, sou o Peterson e amo assistir tv, séries e filmes', '25268', '08'),
-(234, 0, 'Gosto de brincar, jogar video game e fazer amigos', '32128', '10'),
-(235, 0, 'Sou o Andreia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '20046', '07'),
-(236, 0, 'Sou o Caroline e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '35631', '05'),
-(237, 0, 'Sou a ChunLi, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '29717', '05'),
-(238, 0, 'Gosto de brincar, jogar video game e fazer amigos', '22872', '09'),
-(239, 0, 'Sou o Akemi, adoro cinema e o Justin Bieber! Sou fã do One Direction', '26191', '04'),
-(240, 0, 'Futebol, video game e internet', '22988', '03'),
-(241, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '34415', '04'),
-(242, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '20920', '02'),
-(243, 0, 'Sou o Otavio e gosto de brincar de boneca , estudar e fazer novos amigos', '23499', '02'),
-(244, 0, 'Olá, sou a Xerxes e amo assistir tv, séries e filmes', '30633', '09'),
-(245, 0, 'Gosto de brincar, jogar video game e fazer amigos', '31969', '10'),
-(246, 0, 'Sou o Milena e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '34105', '11'),
-(247, 0, 'Sou o Eric e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '34769', '05'),
-(248, 0, 'Sou a Dante, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '26664', '01'),
-(249, 0, 'Gosto de brincar, jogar video game e fazer amigos', '33033', '06'),
-(250, 0, 'Sou o Daniela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '28430', '08'),
-(251, 0, 'Futebol, video game e internet', '23378', '10'),
-(252, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '26434', '07'),
-(253, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '28856', '05'),
-(254, 0, 'Sou o Jaime e gosto de brincar de boneca , estudar e fazer novos amigos', '21217', '05'),
-(255, 0, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '31200', '09'),
-(256, 0, 'Gosto de brincar, jogar video game e fazer amigos', '23488', '04'),
-(257, 0, 'Sou a Bruna e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '33329', '03'),
-(258, 0, 'Sou a Odete e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '30563', '04'),
-(259, 0, 'Sou a Sarah, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '22518', '02'),
-(260, 0, 'Gosto de brincar, jogar video game e fazer amigos', '21931', '02'),
-(261, 0, 'Sou a Caio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '29661', '10'),
-(262, 0, 'Futebol, video game e internet', '27622', '09'),
-(263, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '26026', '10'),
-(264, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '26543', '11'),
-(265, 0, 'Sou a Akemi e gosto de brincar de boneca , estudar e fazer novos amigos', '29620', '05'),
-(266, 0, 'Olá, sou o Jill e amo assistir tv, séries e filmes', '23542', '01'),
-(267, 0, 'Gosto de brincar, jogar video game e fazer amigos', '23188', '06'),
-(268, 0, 'Sou a Sonia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '21804', '08'),
-(269, 0, 'Sou a Augusto e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '24439', '10'),
-(270, 0, 'Sou o Yoko, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '29304', '07'),
-(271, 0, 'Gosto de brincar, jogar video game e fazer amigos', '28221', '05'),
-(272, 0, 'Sou a Peterson, adoro cinema e o Justin Bieber! Sou fã do One Direction', '32772', '05'),
-(273, 0, 'Futebol, video game e internet', '25609', '09'),
-(274, 0, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '28056', '04'),
-(275, 0, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '27916', '03');
+(25, 2544, 'Gosto de brincar, jogar video game e fazer amigos', '05/04/2008', 'dataVencim'),
+(26, 1926, 'Sou a Rafaela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '04/07/2008', 'dataVencim'),
+(27, 4787, 'Futebol, video game e internet', '21/06/2008', 'dataVencim'),
+(28, 4018, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '28/07/2007', 'dataVencim'),
+(29, 9275, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '25/12/2008', 'dataVencim'),
+(30, 5807, 'Sou a ChunLi e gosto de brincar de boneca , estudar e fazer novos amigos', '28/03/2006', 'dataVencim'),
+(31, 8745, 'Olá, sou a Caroline e amo assistir tv, séries e filmes', '21/04/2005', 'dataVencim'),
+(32, 5030, 'Gosto de brincar, jogar video game e fazer amigos', '30/07/2007', 'dataVencim'),
+(33, 8129, 'Sou o Cleber e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '25/12/2008', 'dataVencim'),
+(34, 4507, 'Sou a Irene e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '02/10/2008', 'dataVencim'),
+(35, 7502, 'Sou o Filipe, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '21/05/2007', 'dataVencim'),
+(36, 7508, 'Gosto de brincar, jogar video game e fazer amigos', '23/11/2005', 'dataVencim'),
+(37, 6599, 'Sou a Barbara, adoro cinema e o Justin Bieber! Sou fã do One Direction', '14/07/2008', 'dataVencim'),
+(38, 6314, 'Futebol, video game e internet', '06/06/2007', 'dataVencim'),
+(39, 2349, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '07/02/2007', 'dataVencim'),
+(40, 6821, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '24/09/2008', 'dataVencim'),
+(41, 3001, 'Sou a Milena e gosto de brincar de boneca , estudar e fazer novos amigos', '03/11/2008', 'dataVencim'),
+(42, 9096, 'Olá, sou o Cleber e amo assistir tv, séries e filmes', '26/12/2006', 'dataVencim'),
+(43, 3634, 'Gosto de brincar, jogar video game e fazer amigos', '12/04/2006', 'dataVencim'),
+(44, 7255, 'Sou a Jonas e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '21/10/2008', 'dataVencim'),
+(45, 7935, 'Sou o Filipe e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '03/06/2005', 'dataVencim'),
+(46, 6521, 'Sou o Otavio, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '21/04/2008', 'dataVencim'),
+(47, 8001, 'Gosto de brincar, jogar video game e fazer amigos', '12/08/2007', 'dataVencim'),
+(48, 2734, 'Sou o Xerxes, adoro cinema e o Justin Bieber! Sou fã do One Direction', '28/10/2008', 'dataVencim'),
+(49, 1878, 'Futebol, video game e internet', '15/07/2006', 'dataVencim'),
+(50, 5117, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '30/11/2006', 'dataVencim'),
+(51, 2985, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '25/02/2005', 'dataVencim'),
+(52, 1791, 'Sou o Caio e gosto de brincar de boneca , estudar e fazer novos amigos', '16/08/2005', 'dataVencim'),
+(53, 4089, 'Olá, sou o Jaime e amo assistir tv, séries e filmes', '12/07/2006', 'dataVencim'),
+(54, 5490, 'Gosto de brincar, jogar video game e fazer amigos', '30/12/2006', 'dataVencim'),
+(55, 3641, 'Sou o Peterson e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '01/04/2007', 'dataVencim'),
+(56, 5460, 'Sou o Simão e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '30/12/2007', 'dataVencim'),
+(57, 3056, 'Sou a Sonia, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '21/08/2007', 'dataVencim'),
+(58, 8385, 'Gosto de brincar, jogar video game e fazer amigos', '18/11/2008', 'dataVencim'),
+(59, 1487, 'Sou o Claudio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '10/06/2008', 'dataVencim'),
+(60, 4196, 'Futebol, video game e internet', '30/06/2005', 'dataVencim'),
+(61, 7113, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '22/03/2006', 'dataVencim'),
+(62, 1023, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '21/10/2008', 'dataVencim'),
+(63, 1285, 'Sou o Leonidas e gosto de brincar de boneca , estudar e fazer novos amigos', '17/11/2008', 'dataVencim'),
+(64, 1409, 'Olá, sou o Peterson e amo assistir tv, séries e filmes', '30/05/2007', 'dataVencim'),
+(65, 9516, 'Gosto de brincar, jogar video game e fazer amigos', '29/10/2008', 'dataVencim'),
+(66, 6692, 'Sou a Andreia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '18/05/2008', 'dataVencim'),
+(67, 8148, 'Sou a Caroline e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '27/03/2006', 'dataVencim'),
+(68, 5932, 'Sou a ChunLi, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '30/07/2006', 'dataVencim'),
+(69, 9277, 'Gosto de brincar, jogar video game e fazer amigos', '26/05/2005', 'dataVencim'),
+(70, 7605, 'Sou a Akemi, adoro cinema e o Justin Bieber! Sou fã do One Direction', '22/12/2007', 'dataVencim'),
+(71, 2312, 'Futebol, video game e internet', '17/12/2005', 'dataVencim'),
+(72, 4036, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '24/08/2005', 'dataVencim'),
+(73, 4663, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '29/07/2005', 'dataVencim'),
+(74, 8773, 'Sou o Otavio e gosto de brincar de boneca , estudar e fazer novos amigos', '26/09/2005', 'dataVencim'),
+(75, 2347, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '02/06/2005', 'dataVencim'),
+(76, 4867, 'Gosto de brincar, jogar video game e fazer amigos', '19/07/2005', 'dataVencim'),
+(77, 3715, 'Sou a Milena e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '14/03/2006', 'dataVencim'),
+(78, 9348, 'Sou o Eric e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '14/12/2007', 'dataVencim'),
+(79, 4776, 'Sou o Dante, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '06/01/2008', 'dataVencim'),
+(80, 1702, 'Gosto de brincar, jogar video game e fazer amigos', '31/08/2007', 'dataVencim'),
+(81, 2722, 'Sou a Daniela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '18/11/2005', 'dataVencim'),
+(82, 1501, 'Futebol, video game e internet', '20/05/2006', 'dataVencim'),
+(83, 7815, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '19/03/2007', 'dataVencim'),
+(84, 4804, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '21/05/2007', 'dataVencim'),
+(85, 7148, 'Sou o Jaime e gosto de brincar de boneca , estudar e fazer novos amigos', '27/07/2007', 'dataVencim'),
+(86, 4622, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '10/06/2006', 'dataVencim'),
+(87, 1582, 'Gosto de brincar, jogar video game e fazer amigos', '03/08/2006', 'dataVencim'),
+(88, 1365, 'Sou a Bruna e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '01/11/2008', 'dataVencim'),
+(89, 7025, 'Sou a Odete e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '17/12/2006', 'dataVencim'),
+(90, 7617, 'Sou a Sarah, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '16/05/2006', 'dataVencim'),
+(91, 6606, 'Gosto de brincar, jogar video game e fazer amigos', '01/01/2008', 'dataVencim'),
+(92, 9210, 'Sou o Caio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '27/06/2007', 'dataVencim'),
+(93, 9643, 'Futebol, video game e internet', '10/05/2005', 'dataVencim'),
+(94, 3809, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '23/02/2005', 'dataVencim'),
+(95, 8586, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '20/09/2006', 'dataVencim'),
+(96, 2385, 'Sou a Akemi e gosto de brincar de boneca , estudar e fazer novos amigos', '04/10/2008', 'dataVencim'),
+(97, 7985, 'Olá, sou a Jill e amo assistir tv, séries e filmes', '02/06/2005', 'dataVencim'),
+(98, 8730, 'Gosto de brincar, jogar video game e fazer amigos', '21/12/2005', 'dataVencim'),
+(99, 8480, 'Sou a Sonia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '11/04/2005', 'dataVencim'),
+(100, 7909, 'Sou o Augusto e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '15/01/2008', 'dataVencim'),
+(101, 7344, 'Sou a Yoko, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '06/06/2005', 'dataVencim'),
+(102, 4368, 'Gosto de brincar, jogar video game e fazer amigos', '07/05/2008', 'dataVencim'),
+(103, 9074, 'Sou o Peterson, adoro cinema e o Justin Bieber! Sou fã do One Direction', '06/03/2008', 'dataVencim'),
+(104, 6180, 'Futebol, video game e internet', '26/04/2007', 'dataVencim'),
+(105, 9653, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '27/05/2006', 'dataVencim'),
+(106, 3738, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '03/04/2008', 'dataVencim'),
+(107, 4685, 'Sou o Peterson e gosto de brincar de boneca , estudar e fazer novos amigos', '18/12/2005', 'dataVencim'),
+(108, 1458, 'Olá, sou o Filipe e amo assistir tv, séries e filmes', '21/11/2008', 'dataVencim'),
+(109, 2063, 'Gosto de brincar, jogar video game e fazer amigos', '17/12/2006', 'dataVencim'),
+(110, 1316, 'Sou o Cauê e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '03/02/2008', 'dataVencim'),
+(111, 6061, 'Sou a Jonas e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '22/10/2008', 'dataVencim'),
+(112, 6295, 'Sou a Irene, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '13/03/2003', 'dataVencim'),
+(113, 5337, 'Gosto de brincar, jogar video game e fazer amigos', '15/05/2003', 'dataVencim'),
+(114, 5403, 'Sou a Rafaela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '18/04/2002', 'dataVencim'),
+(115, 9171, 'Futebol, video game e internet', '20/11/2002', 'dataVencim'),
+(116, 3523, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '04/04/2004', 'dataVencim'),
+(117, 4723, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '14/08/2003', 'dataVencim'),
+(118, 8450, 'Sou o ChunLi e gosto de brincar de boneca , estudar e fazer novos amigos', '05/01/2004', 'dataVencim'),
+(119, 8261, 'Olá, sou o Caroline e amo assistir tv, séries e filmes', '19/01/2001', 'dataVencim'),
+(120, 3519, 'Gosto de brincar, jogar video game e fazer amigos', '27/12/2003', 'dataVencim'),
+(121, 9654, 'Sou a Cleber e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '02/11/2002', 'dataVencim'),
+(122, 9473, 'Sou o Irene e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '04/01/2003', 'dataVencim'),
+(123, 2957, 'Sou a Filipe, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '31/07/2004', 'dataVencim'),
+(124, 5694, 'Gosto de brincar, jogar video game e fazer amigos', '09/02/2002', 'dataVencim'),
+(125, 3068, 'Sou o Barbara, adoro cinema e o Justin Bieber! Sou fã do One Direction', '27/12/2000', 'dataVencim'),
+(126, 8712, 'Futebol, video game e internet', '03/11/2000', 'dataVencim'),
+(127, 8234, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '30/11/2002', 'dataVencim'),
+(128, 3977, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '19/11/1999', 'dataVencim'),
+(129, 5317, 'Sou a Milena e gosto de brincar de boneca , estudar e fazer novos amigos', '19/04/2001', 'dataVencim'),
+(130, 7146, 'Olá, sou o Cleber e amo assistir tv, séries e filmes', '11/08/2001', 'dataVencim'),
+(131, 3428, 'Gosto de brincar, jogar video game e fazer amigos', '15/12/2000', 'dataVencim'),
+(132, 6404, 'Sou o Jonas e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '09/11/2001', 'dataVencim'),
+(133, 3117, 'Sou o Filipe e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '26/11/2001', 'dataVencim'),
+(134, 6798, 'Sou a Otavio, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '25/01/2002', 'dataVencim'),
+(135, 2909, 'Gosto de brincar, jogar video game e fazer amigos', '13/10/2001', 'dataVencim'),
+(136, 4774, 'Sou a Xerxes, adoro cinema e o Justin Bieber! Sou fã do One Direction', '04/03/2004', 'dataVencim'),
+(137, 3786, 'Futebol, video game e internet', '26/05/2004', 'dataVencim'),
+(138, 2209, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '23/02/2002', 'dataVencim'),
+(139, 5768, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '23/10/2002', 'dataVencim'),
+(140, 1718, 'Sou a Caio e gosto de brincar de boneca , estudar e fazer novos amigos', '14/06/2003', 'dataVencim'),
+(141, 2721, 'Olá, sou a Jaime e amo assistir tv, séries e filmes', '29/10/2000', 'dataVencim'),
+(142, 8182, 'Gosto de brincar, jogar video game e fazer amigos', '22/04/2003', 'dataVencim'),
+(143, 3920, 'Sou a Peterson e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '08/09/2001', 'dataVencim'),
+(144, 5097, 'Sou o Simão e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '16/02/2002', 'dataVencim'),
+(145, 7016, 'Sou a Sonia, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '18/07/2004', 'dataVencim'),
+(146, 9003, 'Gosto de brincar, jogar video game e fazer amigos', '04/06/2003', 'dataVencim'),
+(147, 5413, 'Sou a Claudio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '29/11/2001', 'dataVencim'),
+(148, 6896, 'Futebol, video game e internet', '24/10/2003', 'dataVencim'),
+(149, 9640, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '10/11/2002', 'dataVencim'),
+(150, 3020, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '04/02/2000', 'dataVencim'),
+(151, 3321, 'Sou a Leonidas e gosto de brincar de boneca , estudar e fazer novos amigos', '24/06/2003', 'dataVencim'),
+(152, 6752, 'Olá, sou o Peterson e amo assistir tv, séries e filmes', '19/06/2002', 'dataVencim'),
+(153, 1639, 'Gosto de brincar, jogar video game e fazer amigos', '28/04/2004', 'dataVencim'),
+(154, 6610, 'Sou a Andreia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '14/08/2003', 'dataVencim'),
+(155, 9642, 'Sou a Caroline e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '15/03/2003', 'dataVencim'),
+(156, 1631, 'Sou a ChunLi, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '11/11/2002', 'dataVencim'),
+(157, 3116, 'Gosto de brincar, jogar video game e fazer amigos', '02/09/2001', 'dataVencim'),
+(158, 1555, 'Sou a Akemi, adoro cinema e o Justin Bieber! Sou fã do One Direction', '24/06/2004', 'dataVencim'),
+(159, 6337, 'Futebol, video game e internet', '27/06/2004', 'dataVencim'),
+(160, 8110, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '13/05/2003', 'dataVencim'),
+(161, 9031, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '26/09/2002', 'dataVencim'),
+(162, 5607, 'Sou a Otavio e gosto de brincar de boneca , estudar e fazer novos amigos', '24/02/2004', 'dataVencim'),
+(163, 8016, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '13/11/2002', 'dataVencim'),
+(164, 9836, 'Gosto de brincar, jogar video game e fazer amigos', '05/12/2003', 'dataVencim'),
+(165, 4785, 'Sou o Milena e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '29/10/2000', 'dataVencim'),
+(166, 8571, 'Sou o Eric e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '26/11/2000', 'dataVencim'),
+(167, 3405, 'Sou o Dante, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '25/06/2003', 'dataVencim'),
+(168, 2620, 'Gosto de brincar, jogar video game e fazer amigos', '26/09/2001', 'dataVencim'),
+(169, 9802, 'Sou o Daniela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '06/03/2003', 'dataVencim'),
+(170, 6767, 'Futebol, video game e internet', '01/05/2003', 'dataVencim'),
+(171, 9057, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '26/11/2001', 'dataVencim'),
+(172, 6601, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '08/02/2003', 'dataVencim'),
+(173, 7089, 'Sou o Jaime e gosto de brincar de boneca , estudar e fazer novos amigos', '11/05/2004', 'dataVencim'),
+(174, 8707, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '26/12/2001', 'dataVencim'),
+(175, 8133, 'Gosto de brincar, jogar video game e fazer amigos', '21/12/2003', 'dataVencim'),
+(176, 1299, 'Sou o Bruna e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '29/03/2000', 'dataVencim'),
+(177, 2484, 'Sou o Odete e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '06/04/2000', 'dataVencim'),
+(178, 2796, 'Sou a Sarah, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '05/06/2001', 'dataVencim'),
+(179, 8602, 'Gosto de brincar, jogar video game e fazer amigos', '15/12/1999', 'dataVencim'),
+(180, 8078, 'Sou a Caio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '06/11/2000', 'dataVencim'),
+(181, 5012, 'Futebol, video game e internet', '27/10/2000', 'dataVencim'),
+(182, 5062, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '07/05/2004', 'dataVencim'),
+(183, 6325, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '09/09/2001', 'dataVencim'),
+(184, 2519, 'Sou a Akemi e gosto de brincar de boneca , estudar e fazer novos amigos', '17/03/2003', 'dataVencim'),
+(185, 6575, 'Olá, sou o Jill e amo assistir tv, séries e filmes', '14/12/2003', 'dataVencim'),
+(186, 4226, 'Gosto de brincar, jogar video game e fazer amigos', '15/10/2003', 'dataVencim'),
+(187, 6371, 'Sou o Sonia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '01/04/2002', 'dataVencim'),
+(188, 1142, 'Sou o Augusto e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '08/01/2002', 'dataVencim'),
+(189, 1544, 'Sou o Yoko, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '20/04/2003', 'dataVencim'),
+(190, 4651, 'Gosto de brincar, jogar video game e fazer amigos', '26/11/2001', 'dataVencim'),
+(191, 2968, 'Sou a Peterson, adoro cinema e o Justin Bieber! Sou fã do One Direction', '07/02/2001', 'dataVencim'),
+(192, 8357, 'Futebol, video game e internet', '16/02/2004', 'dataVencim'),
+(193, 6907, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '15/07/2004', 'dataVencim'),
+(194, 4331, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '19/01/2004', 'dataVencim'),
+(195, 1404, 'Sou a Peterson e gosto de brincar de boneca , estudar e fazer novos amigos', '06/03/2003', 'dataVencim'),
+(196, 6269, 'Futebol, video game e internet', '04/01/1982', 'dataVencim'),
+(197, 5591, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '26/07/1975', 'dataVencim'),
+(198, 4702, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '14/12/1991', 'dataVencim'),
+(199, 3458, 'Sou o ChunLi e gosto de brincar de boneca , estudar e fazer novos amigos', '12/01/1974', 'dataVencim'),
+(200, 6963, 'Olá, sou o Caroline e amo assistir tv, séries e filmes', '15/10/1960', 'dataVencim'),
+(201, 5024, 'Gosto de brincar, jogar video game e fazer amigos', '21/12/1960', 'dataVencim'),
+(202, 2128, 'Sou o Cleber e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '16/03/1981', 'dataVencim'),
+(203, 1246, 'Sou a Irene e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '20/08/1978', 'dataVencim'),
+(204, 8183, 'Sou a Filipe, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '25/07/1961', 'dataVencim'),
+(205, 6682, 'Gosto de brincar, jogar video game e fazer amigos', '16/02/1997', 'dataVencim'),
+(206, 8919, 'Sou a Barbara, adoro cinema e o Justin Bieber! Sou fã do One Direction', '22/12/1957', 'dataVencim'),
+(207, 8553, 'Futebol, video game e internet', '25/04/1978', 'dataVencim'),
+(208, 1636, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '10/07/1981', 'dataVencim'),
+(209, 8900, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '08/11/1989', 'dataVencim'),
+(210, 5937, 'Sou o Milena e gosto de brincar de boneca , estudar e fazer novos amigos', '25/11/1997', 'dataVencim'),
+(211, 3814, 'Olá, sou o Cleber e amo assistir tv, séries e filmes', '14/03/1965', 'dataVencim'),
+(212, 1561, 'Gosto de brincar, jogar video game e fazer amigos', '20/11/1965', 'dataVencim'),
+(213, 9245, 'Sou o Jonas e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '03/01/1977', 'dataVencim'),
+(214, 4139, 'Sou a Filipe e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '20/02/1989', 'dataVencim'),
+(215, 5042, 'Sou a Otavio, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '27/01/1955', 'dataVencim'),
+(216, 2550, 'Gosto de brincar, jogar video game e fazer amigos', '07/04/1978', 'dataVencim'),
+(217, 1121, 'Sou a Xerxes, adoro cinema e o Justin Bieber! Sou fã do One Direction', '11/10/1971', 'dataVencim'),
+(218, 4452, 'Futebol, video game e internet', '03/12/1975', 'dataVencim'),
+(219, 9380, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '19/04/1960', 'dataVencim'),
+(220, 7210, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '18/03/1996', 'dataVencim'),
+(221, 5163, 'Sou o Caio e gosto de brincar de boneca , estudar e fazer novos amigos', '26/11/1966', 'dataVencim'),
+(222, 6095, 'Olá, sou o Jaime e amo assistir tv, séries e filmes', '20/08/1989', 'dataVencim'),
+(223, 9767, 'Gosto de brincar, jogar video game e fazer amigos', '20/12/1997', 'dataVencim'),
+(224, 9138, 'Sou a Peterson e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '13/02/1997', 'dataVencim'),
+(225, 5181, 'Sou a Simão e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '05/02/1984', 'dataVencim'),
+(226, 5936, 'Sou o Sonia, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '07/04/1976', 'dataVencim'),
+(227, 4582, 'Gosto de brincar, jogar video game e fazer amigos', '16/01/1992', 'dataVencim'),
+(228, 9826, 'Sou o Claudio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '07/02/1979', 'dataVencim'),
+(229, 4376, 'Futebol, video game e internet', '08/12/1982', 'dataVencim'),
+(230, 4975, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '13/08/1996', 'dataVencim'),
+(231, 3997, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '17/07/1992', 'dataVencim'),
+(232, 7101, 'Sou a Leonidas e gosto de brincar de boneca , estudar e fazer novos amigos', '24/09/1975', 'dataVencim'),
+(233, 5086, 'Olá, sou o Peterson e amo assistir tv, séries e filmes', '06/03/1969', 'dataVencim'),
+(234, 6591, 'Gosto de brincar, jogar video game e fazer amigos', '17/12/1987', 'dataVencim'),
+(235, 6623, 'Sou o Andreia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '18/11/1954', 'dataVencim'),
+(236, 8609, 'Sou o Caroline e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '20/07/1997', 'dataVencim'),
+(237, 8020, 'Sou a ChunLi, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '11/05/1981', 'dataVencim'),
+(238, 9819, 'Gosto de brincar, jogar video game e fazer amigos', '14/08/1962', 'dataVencim'),
+(239, 8269, 'Sou o Akemi, adoro cinema e o Justin Bieber! Sou fã do One Direction', '15/09/1971', 'dataVencim'),
+(240, 5026, 'Futebol, video game e internet', '08/12/1962', 'dataVencim'),
+(241, 8592, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '22/03/1994', 'dataVencim'),
+(242, 2274, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '10/04/1957', 'dataVencim'),
+(243, 6710, 'Sou o Otavio e gosto de brincar de boneca , estudar e fazer novos amigos', '02/05/1964', 'dataVencim'),
+(244, 2271, 'Olá, sou a Xerxes e amo assistir tv, séries e filmes', '13/11/1983', 'dataVencim'),
+(245, 4791, 'Gosto de brincar, jogar video game e fazer amigos', '11/07/1987', 'dataVencim'),
+(246, 9449, 'Sou o Milena e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '16/05/1993', 'dataVencim'),
+(247, 5698, 'Sou o Eric e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '11/03/1995', 'dataVencim'),
+(248, 3118, 'Sou a Dante, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '31/12/1972', 'dataVencim'),
+(249, 7352, 'Gosto de brincar, jogar video game e fazer amigos', '09/06/1990', 'dataVencim'),
+(250, 8084, 'Sou o Daniela, adoro cinema e o Justin Bieber! Sou fã do One Direction', '01/11/1977', 'dataVencim'),
+(251, 5381, 'Futebol, video game e internet', '02/01/1964', 'dataVencim'),
+(252, 8926, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '15/05/1972', 'dataVencim'),
+(253, 1947, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '01/01/1979', 'dataVencim'),
+(254, 1104, 'Sou o Jaime e gosto de brincar de boneca , estudar e fazer novos amigos', '01/02/1958', 'dataVencim'),
+(255, 8212, 'Olá, sou o Xerxes e amo assistir tv, séries e filmes', '02/06/1985', 'dataVencim'),
+(256, 2899, 'Gosto de brincar, jogar video game e fazer amigos', '21/04/1964', 'dataVencim'),
+(257, 4459, 'Sou a Bruna e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '01/04/1991', 'dataVencim'),
+(258, 6302, 'Sou a Odete e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '04/09/1983', 'dataVencim'),
+(259, 6237, 'Sou a Sarah, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '25/08/1961', 'dataVencim'),
+(260, 6223, 'Gosto de brincar, jogar video game e fazer amigos', '16/01/1960', 'dataVencim'),
+(261, 2963, 'Sou a Caio, adoro cinema e o Justin Bieber! Sou fã do One Direction', '16/03/1981', 'dataVencim'),
+(262, 6039, 'Futebol, video game e internet', '16/08/1975', 'dataVencim'),
+(263, 1004, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '03/04/1971', 'dataVencim'),
+(264, 5283, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '01/09/1972', 'dataVencim'),
+(265, 5424, 'Sou a Akemi e gosto de brincar de boneca , estudar e fazer novos amigos', '03/02/1981', 'dataVencim'),
+(266, 1880, 'Olá, sou o Jill e amo assistir tv, séries e filmes', '14/06/1964', 'dataVencim'),
+(267, 3716, 'Gosto de brincar, jogar video game e fazer amigos', '26/06/1963', 'dataVencim'),
+(268, 3728, 'Sou a Sonia e gosto de brincar de qualquer coisa com meus amigos, sempre jogo videogame e futebol. Sou muito inteligente', '11/09/1959', 'dataVencim'),
+(269, 1535, 'Sou a Augusto e gosto de brincar de qualquer coisa com meus amigos, sempre brinco com eles em casa e minha mãe faz vários comidas pra gente', '28/11/1966', 'dataVencim'),
+(270, 6032, 'Sou o Yoko, não gosto de estudar, só estudo inglês porque minha mãe me obriga', '24/03/1980', 'dataVencim'),
+(271, 8418, 'Gosto de brincar, jogar video game e fazer amigos', '06/04/1977', 'dataVencim'),
+(272, 6184, 'Sou a Peterson, adoro cinema e o Justin Bieber! Sou fã do One Direction', '21/09/1989', 'dataVencim'),
+(273, 5265, 'Futebol, video game e internet', '10/02/1970', 'dataVencim'),
+(274, 4367, 'Gosto de jogar volei na praia com minhas amigas e adoro doces', '23/10/1976', 'dataVencim'),
+(275, 3344, 'Gosto de bolo de choholate, jogar video game e do filme Matrix', '05/06/1976', 'dataVencim');
 
 -- --------------------------------------------------------
 
@@ -330,15 +305,20 @@ INSERT INTO `alunos` (`id`, `matricula`, `sobreMim`, `dataNascimento`, `dataVenc
 --
 
 CREATE TABLE IF NOT EXISTS `atividades` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `tipo` int(1) DEFAULT NULL COMMENT '1: Conteudo de aula, 2: extra',
   `status` int(1) DEFAULT NULL COMMENT '0: inativo, 1:ativo',
   `idAula` int(11) DEFAULT NULL,
   `idCategoria` int(11) DEFAULT NULL,
   `idModulo` int(11) DEFAULT NULL,
-  `idUsuario` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idUsuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idAula` (`idAula`),
+  KEY `idCategoria` (`idCategoria`),
+  KEY `idModulo` (`idModulo`),
+  KEY `idUsuario` (`idUsuario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=121 ;
 
 --
 -- Extraindo dados da tabela `atividades`
@@ -473,10 +453,12 @@ INSERT INTO `atividades` (`id`, `nome`, `tipo`, `status`, `idAula`, `idCategoria
 --
 
 CREATE TABLE IF NOT EXISTS `aulas` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idModulo` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idModulo` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idModulo` (`idModulo`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=61 ;
 
 --
 -- Extraindo dados da tabela `aulas`
@@ -551,14 +533,17 @@ INSERT INTO `aulas` (`id`, `titulo`, `idModulo`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `avisos` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `descricao` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `urlImagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dataExpiracao` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
   `idCurso` int(11) DEFAULT NULL,
-  `idUsuario` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `idUsuario` (`idUsuario`),
+  KEY `idCurso` (`idCurso`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -567,9 +552,10 @@ CREATE TABLE IF NOT EXISTS `avisos` (
 --
 
 CREATE TABLE IF NOT EXISTS `categorias` (
-`id` int(11) NOT NULL,
-  `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -578,10 +564,11 @@ CREATE TABLE IF NOT EXISTS `categorias` (
 --
 
 CREATE TABLE IF NOT EXISTS `cursos` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idIdioma` int(1) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idIdioma` int(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Extraindo dados da tabela `cursos`
@@ -599,9 +586,10 @@ INSERT INTO `cursos` (`id`, `nome`, `idIdioma`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `idiomas` (
-`id` int(11) NOT NULL,
-  `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `idiomas`
@@ -621,11 +609,13 @@ INSERT INTO `idiomas` (`id`, `nome`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `materialapoio` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idAula` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idAula` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idAula` (`idAula`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -634,15 +624,19 @@ CREATE TABLE IF NOT EXISTS `materialapoio` (
 --
 
 CREATE TABLE IF NOT EXISTS `mensagens` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `conteudo` varchar(1500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lida` int(1) DEFAULT NULL,
   `data` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `idUsuarioOrigem` int(11) DEFAULT NULL,
   `idUsuarioDestino` int(11) DEFAULT NULL,
-  `idRE` int(11) DEFAULT NULL COMMENT 'Indica o id da mensagem em resposta, caso exista'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idRE` int(11) DEFAULT NULL COMMENT 'Indica o id da mensagem em resposta, caso exista',
+  PRIMARY KEY (`id`),
+  KEY `idUsuarioOrigem` (`idUsuarioOrigem`),
+  KEY `idUsuarioDestino` (`idUsuarioDestino`),
+  KEY `idRE` (`idRE`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -651,10 +645,12 @@ CREATE TABLE IF NOT EXISTS `mensagens` (
 --
 
 CREATE TABLE IF NOT EXISTS `modulos` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idCurso` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idCurso` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idCurso` (`idCurso`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
 
 --
 -- Extraindo dados da tabela `modulos`
@@ -683,7 +679,9 @@ INSERT INTO `modulos` (`id`, `nome`, `idCurso`) VALUES
 CREATE TABLE IF NOT EXISTS `password_reminders` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  KEY `password_reminders_email_index` (`email`),
+  KEY `password_reminders_token_index` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -693,11 +691,12 @@ CREATE TABLE IF NOT EXISTS `password_reminders` (
 --
 
 CREATE TABLE IF NOT EXISTS `professores` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `codRegistro` int(11) DEFAULT NULL,
   `sobreMim` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `formacaoAcademica` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `formacaoAcademica` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=25 ;
 
 --
 -- Extraindo dados da tabela `professores`
@@ -736,12 +735,14 @@ INSERT INTO `professores` (`id`, `codRegistro`, `sobreMim`, `formacaoAcademica`)
 --
 
 CREATE TABLE IF NOT EXISTS `propagandas` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `titulo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `urlImagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `imagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `link` varchar(350) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idUsuario` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idUsuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idUsuario` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -750,7 +751,7 @@ CREATE TABLE IF NOT EXISTS `propagandas` (
 --
 
 CREATE TABLE IF NOT EXISTS `questoes` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `textoPergunta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `urlMidia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `numero` int(10) DEFAULT NULL COMMENT 'indica a posicao/ordem da questao dentro de uma atividade',
@@ -763,8 +764,11 @@ CREATE TABLE IF NOT EXISTS `questoes` (
   `respostaCerta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `pontos` int(10) DEFAULT NULL,
   `idAtividade` int(11) DEFAULT NULL,
-  `idTopico` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idTopico` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idAtividade` (`idAtividade`),
+  KEY `idTopico` (`idTopico`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -773,12 +777,15 @@ CREATE TABLE IF NOT EXISTS `questoes` (
 --
 
 CREATE TABLE IF NOT EXISTS `respostas` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `respostaAluno` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `correcao` int(1) DEFAULT NULL COMMENT '0: errou, 1: acertou',
   `idAluno` int(11) DEFAULT NULL,
-  `idQuestao` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idQuestao` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idAluno` (`idAluno`),
+  KEY `idQuestao` (`idQuestao`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -787,10 +794,12 @@ CREATE TABLE IF NOT EXISTS `respostas` (
 --
 
 CREATE TABLE IF NOT EXISTS `topicos` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `idUsuario` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idUsuario` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idUsuario` (`idUsuario`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -799,12 +808,15 @@ CREATE TABLE IF NOT EXISTS `topicos` (
 --
 
 CREATE TABLE IF NOT EXISTS `turmas` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` int(1) DEFAULT NULL COMMENT '0:Turma fechada/modulo concluido  1: Turma ativa/Alunos com aula',
   `idModulo` int(11) DEFAULT NULL,
-  `idProfessor` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idProfessor` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idModulo` (`idModulo`),
+  KEY `idProfessor` (`idProfessor`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=61 ;
 
 --
 -- Extraindo dados da tabela `turmas`
@@ -879,11 +891,14 @@ INSERT INTO `turmas` (`id`, `nome`, `status`, `idModulo`, `idProfessor`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `turmasalunos` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `pontuacao` int(10) DEFAULT NULL,
   `idTurma` int(11) DEFAULT NULL,
-  `idAluno` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=252 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `idAluno` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idTurma` (`idTurma`),
+  KEY `idAluno` (`idAluno`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=252 ;
 
 --
 -- Extraindo dados da tabela `turmasalunos`
@@ -1149,7 +1164,7 @@ INSERT INTO `turmasalunos` (`id`, `pontuacao`, `idTurma`, `idAluno`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `usuarios` (
-`id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `sobrenome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `login` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1158,526 +1173,292 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `urlImagem` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `confirmed` int(1) DEFAULT NULL COMMENT 'Indica se o usuario confirmou o registro atraves do email enviado',
   `confirmation_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Codigo enviado por email ao se cadastrar um novo usuario',
-  `remember_token` varchar(255) COMMENT 'Funcao "manter conectado"',
-  `tipo` int(11) DEFAULT NULL COMMENT '1:Aluno  2:Professor  3:Admin'
-) ENGINE=InnoDB AUTO_INCREMENT=277 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `remember_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Funcao "manter conectado"',
+  `tipo` int(11) DEFAULT NULL COMMENT '1:Aluno  2:Professor  3:Admin',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=276 ;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nome`, `sobrenome`, `login`, `password`, `email`, `urlImagem`, `confirmed`, `confirmation_code`, `tipo`) VALUES
-(1, 'Jéssica', 'Matos', 'jessica.matos@gmail.com', '$2y$10$GSGO1sSNFBWivOaqShg0huumaLYtKfWal4scpfdgs6KXBrKvVhR/W', 'jessica.matos@gmail.com', NULL, 1, NULL, 2),
-(2, 'Milena', 'Pádua', 'milena.padua@gmail.com', '$2y$10$.Na4JmuW1CIYyXTw80dmFuuKQXPVVyTxw4qVXcHea0dI.M1B3jzIy', 'milena.padua@gmail.com', NULL, 1, NULL, 2),
-(3, 'Sheeva', 'Batista', 'sheeva.batista@gmail.com', '$2y$10$VdnpkAz8ykHEMoDyDjwS4er1dUjcz6sRGWvkhQyO75SfqffuT/do6', 'sheeva.batista@gmail.com', NULL, 1, NULL, 2),
-(4, 'Michele', 'Carvalho', 'michele.carvalho@gmail.com', '$2y$10$eESOYCKhBePAlrgQM.98ZeMTboxajHj2t0UhtZnKAGXNYkICsF9G.', 'michele.carvalho@gmail.com', NULL, 1, NULL, 2),
-(5, 'Lara', 'da Silva', 'lara.da silva@gmail.com', '$2y$10$I3eWLn2Qz0vRZluWS6U9ROVBMtuVktCwDJeGWOD58wzNpNsJ1aLCC', 'lara.da silva@gmail.com', NULL, 1, NULL, 2),
-(6, 'ChunLi', 'Valverde', 'chunli.valverde@gmail.com', '$2y$10$Se8gGne7qxrUx/BOduLFT.VOnA0gmURM/bayBbYf9/Z2WBsT6fLVa', 'chunli.valverde@gmail.com', NULL, 1, NULL, 2),
-(7, 'Otavio', 'Gouveia', 'otavio.gouveia@gmail.com', '$2y$10$.m47i3OX0k5jXvxm5wR/JulEdvLKu4JSY7/1BFLJfcYZbEEM/XWrm', 'otavio.gouveia@gmail.com', NULL, 1, NULL, 2),
-(8, 'Dante', 'Peixoto', 'dante.peixoto@gmail.com', '$2y$10$cDB2hXT777Cj5KJbinp7NOfsuwy1V374bkVkw7trzktC0zXPv2nRq', 'dante.peixoto@gmail.com', NULL, 1, NULL, 2),
-(9, 'Doulgas', 'Takahashi', 'doulgas.takahashi@gmail.com', '$2y$10$2tnuo0zFnofbb8.PI96ko.p0bDYzgo7vlTIQ5PL/GV8bbGtyS6IT6', 'doulgas.takahashi@gmail.com', NULL, 1, NULL, 2),
-(10, 'Jonas', 'Franca', 'jonas.franca@gmail.com', '$2y$10$Z1UE.Awr8UNyptnBp0sEkOPhr.jzEBHq6Su9BVx9LibigQ9X.NpY2', 'jonas.franca@gmail.com', NULL, 1, NULL, 2),
-(11, 'Daniela', 'Leal', 'daniela.leal@gmail.com', '$2y$10$O333SMfQPBNbNLjKJpyaAOoEFBneJCaSd5hVh6oPAHAfktplGwWz2', 'daniela.leal@gmail.com', NULL, 1, NULL, 2),
-(12, 'Aline', 'Hernandes', 'aline.hernandes@gmail.com', '$2y$10$CVwMKRaASTEtBuiDLbQapOUZYAOVQWPzI4nau3gPIYaKN7TxXRa1e', 'aline.hernandes@gmail.com', NULL, 1, NULL, 2),
-(13, 'Monica', 'Lins', 'monica.lins@gmail.com', '$2y$10$fOjdFwJ1Vnu2T9bd9IajlOMh7vG0GJuu9ZPW8siw/s99MeYQK2IZK', 'monica.lins@gmail.com', NULL, 1, NULL, 2),
-(14, 'Leonidas', 'Macedo', 'leonidas.macedo@gmail.com', '$2y$10$wxRnj9IhtwvyiVjIL13y6OiEcM8R3XeVKMf9EHdcKegPc.LlMue4.', 'leonidas.macedo@gmail.com', NULL, 1, NULL, 2),
-(15, 'Morpheu', 'Sato', 'morpheu.sato@gmail.com', '$2y$10$A1cFSZSaBibAZLCqXhuvpusKtYa0m8ybwpc0OPJJXfX5rflf.rx5e', 'morpheu.sato@gmail.com', NULL, 1, NULL, 2),
-(16, 'Claudio', 'Tanaka', 'claudio.tanaka@gmail.com', '$2y$10$p34asSPVM1uluUFdR1G5xO8ShURmnAsf1/tgi9PAoYm6hlTPGN.k.', 'claudio.tanaka@gmail.com', NULL, 1, NULL, 2),
-(17, 'Augusto', 'Yamada', 'augusto.yamada@gmail.com', '$2y$10$qgcHsJp0pvmKuTBVINxOM.kkO7oHA7cg1iI1Jh6zs3XpBM6fKw3VC', 'augusto.yamada@gmail.com', NULL, 1, NULL, 2),
-(18, 'Eric', 'Valentine', 'eric.valentine@gmail.com', '$2y$10$yA7Ru0gRAropvz9OohJtPOxv6/sV.yS72ulZPK6ntFgaBKDAlJR22', 'eric.valentine@gmail.com', NULL, 1, NULL, 2),
-(19, 'Bruno', 'Villablanca', 'bruno.villablanca@gmail.com', '$2y$10$oSarno80a9yZ0Wa/k.f73equyWWL7XnFaKvI6cMyuwAK6IHD83YIe', 'bruno.villablanca@gmail.com', NULL, 1, NULL, 2),
-(20, 'Yori', 'Salgueiro', 'yori.salgueiro@gmail.com', '$2y$10$BfreXYGH/7m.A8mLpMmVW.YShqsZJ0RocVg9mTfsn44EQBbz..pHa', 'yori.salgueiro@gmail.com', NULL, 1, NULL, 2),
-(21, 'Angelina', 'Suzuki', 'angelina.suzuki@gmail.com', '$2y$10$stCnJkGytbUJskY1SwGoauhzULqTvh.2pwY/MG9hi5tmWZeS2HSui', 'angelina.suzuki@gmail.com', NULL, 1, NULL, 2),
-(22, 'Trinity', 'dos Santos', 'trinity.dos santos@gmail.com', '$2y$10$Why9EoueXTjgJ5HvMCCHe.V97YLgPHZ9t29Ud6UYp.8m0vnNE3rfy', 'trinity.dos santos@gmail.com', NULL, 1, NULL, 2),
-(23, 'Akemi', 'Costa', 'akemi.costa@gmail.com', '$2y$10$tF4galceEex7dJ4IGVa2GeGMwDuf40fKuYUeY826y.e0xnha.iJi6', 'akemi.costa@gmail.com', NULL, 1, NULL, 2),
-(24, 'Yoko', 'Rocha', 'yoko.rocha@gmail.com', '$2y$10$ygpDA4SJ0SA9OhSa.S8X9uVzjOdzIyXqi5wU0Rp1Qj5SjK9QgGTsq', 'yoko.rocha@gmail.com', NULL, 1, NULL, 2),
-(25, 'Eduardo', 'Minazuki', '2544', '$2y$10$IBeq1Gbd3679Mg0mFoPLwuizHq228zQ1o.7hGeiBrf79UdY6VYoOG', 'eduardo.minazuki@gmail.com', NULL, 1, NULL, 1),
-(26, 'Rafaela', 'Ishida', '1926', '$2y$10$qibWpeUSNiYoQ08dGw.e/.Ax2P5TZABzFHuxnmXPMsrtr5O7sttq2', 'rafaela.ishida@gmail.com', NULL, 1, NULL, 1),
-(27, 'Caio', 'Macedo', '4787', '$2y$10$V8vNDZTJk0rWRpwzT6nuAeYVNBglwQz4bQQFlcReytEhGAaV/DsZO', 'caio.macedo@gmail.com', NULL, 1, NULL, 1),
-(28, 'Kitana', 'Peixoto', '4018', '$2y$10$m7YjaCpjP1aglL6bIsDATeDwPD.f4/K864JX.jVp38UUOkv8pvv56', 'kitana.peixoto@gmail.com', NULL, 1, NULL, 1),
-(29, 'Morpheu', 'Villablanca', '9275', '$2y$10$WvzmhsgSfIlWRTlzgb12TeE.WU/vm95cap9H7zdgqyMqg5R4Kx9JS', 'morpheu.villablanca@gmail.com', NULL, 1, NULL, 1),
-(30, 'Chunli', 'Neves', '5807', '$2y$10$vU.dBp0KhKMobLIt8EMnMu2/jve9NNfSMEJ6c97lHORQ/PS.Nz2Ri', 'chunli.neves@gmail.com', NULL, 1, NULL, 1),
-(31, 'Caroline', 'Neves', '8745', '$2y$10$2T9ADrqf2qZGvuoVfPEM.ucccvIsHlYDEbM//c5XdBjZqB0b/4OBG', 'caroline.neves@gmail.com', NULL, 1, NULL, 1),
-(32, 'Caroline', 'da Silva', '5030', '$2y$10$IIQH8h26qCMAN5oymForo.lvxAbqNIzUqE7iSB5hn/n.3sdG7k.gC', 'caroline.da silva@gmail.com', NULL, 1, NULL, 1),
-(33, 'Cleber', 'Sato', '8129', '$2y$10$JA9iNsW9QUXBTJFQ/8Eem.eckTbz9RWd2Tv.8vmd4Eoo0W97fCVf.', 'cleber.sato@gmail.com', NULL, 1, NULL, 1),
-(34, 'Irene', 'Salgueiro', '4507', '$2y$10$VGkBn8hc5TJlSD.S/OZqZe6t4gFfmFvMuSo6kRVie8OCB5eTEhVuq', 'irene.salgueiro@gmail.com', NULL, 1, NULL, 1),
-(35, 'Filipe', 'Neto', '7502', '$2y$10$8Kz85EVEMZhPrqrA/HiEPuo/LIt8n1U1Rjtrs4jqbdI7Sjn3D4E52', 'filipe.neto@gmail.com', NULL, 1, NULL, 1),
-(36, 'Filipe', 'Nazário', '7508', '$2y$10$aoutrHG6H0q/tMy1DNmezu0hpKBNeSe4BusKu3wIy825UK9.Ky9Oq', 'filipe.nazario@gmail.com', NULL, 1, NULL, 1),
-(37, 'Barbara', 'Nazário', '6599', '$2y$10$GNDX9ahX4WwG6FIMdI6oWenArPWM55BqcXac16W9kjxw6LPzYN9ca', 'barbara.nazario@gmail.com', NULL, 1, NULL, 1),
-(38, 'Sarah', 'Ishida Silva', '6314', '$2y$10$CRGLIwZRsKFIhUwlB.EoXO6ZXSjR99Q6kaZlhHudreer7hdm5SkT.', 'sarah.ishida silva@gmail.com', NULL, 1, NULL, 1),
-(39, 'Akemi', 'Semedo', '2349', '$2y$10$6jeJ6Zm8ZLZJ/E/2F6WEAOfQu5ToVTSOy1xcz6vXbHGM.cu6SsO7.', 'akemi.semedo@gmail.com', NULL, 1, NULL, 1),
-(40, 'Milena', 'Nazário', '6821', '$2y$10$IctG7i98sk7GNn5rQlOmHucjJPT/Hl1IJiK3GLSu7EX00oipw5tz6', 'milena.nazario@gmail.com', NULL, 1, NULL, 1),
-(41, 'Milena', 'Castanheira', '3001', '$2y$10$aT9sxApM3Wi80wKborAK9efHkYWKJGS9ilzUlj3uAH1alzzfwtKeC', 'milena.castanheira@gmail.com', NULL, 1, NULL, 1),
-(42, 'Cleber', 'Freire', '9096', '$2y$10$E0AjwaKqXQfyO40iGzpYkum5DJyzqCCC1fowbo0DwvRrXqOzKpNrC', 'cleber.freire@gmail.com', NULL, 1, NULL, 1),
-(43, 'Cleber', 'Leal', '3634', '$2y$10$5kK93RXhOnmr2Fa1YptqYu5sURFb41Fyrzff1XLpJ6sQKrmcK/R4W', 'cleber.leal@gmail.com', NULL, 1, NULL, 1),
-(44, 'Jonas', 'Nazário', '7255', '$2y$10$bIOC2H/91G5nOhoXumwuTOLmxTsrBkl890I4Y50XZ.wYmgvPkQWG6', 'jonas.nazario@gmail.com', NULL, 1, NULL, 1),
-(45, 'Filipe', 'Monteiro', '7935', '$2y$10$bnjv/ohrNRRrSfv5FRpg5O1XWfoGOSEplnEVrVTZjpZ5zNIxuv/fq', 'filipe.monteiro@gmail.com', NULL, 1, NULL, 1),
-(46, 'Otavio', 'dos Santos', '6521', '$2y$10$YpUqlhjanVOsbfWq36wWRu3CU/kl4Wpl6Ke18A/dRAxpZHXNEMNxC', 'otavio.dos santos@gmail.com', NULL, 1, NULL, 1),
-(47, 'Jaime', 'Valverde', '8001', '$2y$10$UYvQFrdmB.3UMJ.bkqXlPOI/AEEmLJmHczHkauxrKZQAbsPDpi/NW', 'jaime.valverde@gmail.com', NULL, 1, NULL, 1),
-(48, 'Xerxes', 'Rocha', '2734', '$2y$10$zq1ddHpvndBAA3sF2gjGzOk.M3zxoxsBA2EBR19jhPGTH.856T4k6', 'xerxes.rocha@gmail.com', NULL, 1, NULL, 1),
-(49, 'Alexandra', 'Pinheiro', '1878', '$2y$10$va7MtPv9zDlUFcFW4RRsrevOdq6Dt1hxDJBhAA7FI2xPEcv5U/mG2', 'alexandra.pinheiro@gmail.com', NULL, 1, NULL, 1),
-(50, 'Sarah', 'Carvalho', '5117', '$2y$10$VV9x0QxISR7zkmxkWKyC.uKkXJ1vlq18DXgMoRqOw3Hxr/KR3Fsr6', 'sarah.carvalho@gmail.com', NULL, 1, NULL, 1),
-(51, 'Sonia', 'Takahashi', '2985', '$2y$10$z7lHx/q8ATo91XgNuOnMJeLHR.dTQc9nELTeoLyzsUuGI7atNzBCK', 'sonia.takahashi@gmail.com', NULL, 1, NULL, 1),
-(52, 'Caio', 'Nazário', '1791', '$2y$10$eLr/Wr.1ktlrdnFI6xO3C.GVC8QiMQZy48Hx5ysH7frfDExaz5stu', 'caio.nazario@gmail.com', NULL, 1, NULL, 1),
-(53, 'Jaime', 'Takahashi', '4089', '$2y$10$0Qe6lmf/9qvp1MKWkONDSuGg8c.pyS4RW5sfDyAyxWVTf1mhRRJu2', 'jaime.takahashi@gmail.com', NULL, 1, NULL, 1),
-(54, 'Akemi', 'Takahashi', '5490', '$2y$10$TaoasqBzjDK7krs8YdKO/OSKAH7u9DuF0QoiD3EO/5dtqSOEfD80W', 'akemi.takahashi@gmail.com', NULL, 1, NULL, 1),
-(55, 'Peterson', 'Torres', '3641', '$2y$10$wOQHHX.aUkZo7v8vsLi08OEpziS.IdAVFXLtQIR0gmyL8Urms4THW', 'peterson.torres@gmail.com', NULL, 1, NULL, 1),
-(56, 'Simão', 'Alves', '5460', '$2y$10$Z66l.zAdcNzAXX57lVT/XOiRzMMiI55cFLMD8tOBqyOgRGQthteCu', 'simao.alves@gmail.com', NULL, 1, NULL, 1),
-(57, 'Sonia', 'Nazário', '3056', '$2y$10$pnhKx.hF2eP7SdSmnhur3en0JCKuqZAct3s0coLPPxWczEA.tMJ9m', 'sonia.nazario@gmail.com', NULL, 1, NULL, 1),
-(58, 'Fernando', 'Hernandes', '8385', '$2y$10$1ADoKSKdO6e5PTfTHlIvnePNeHWFdtbcMA4GO7GWfDoEe6r52aN7G', 'fernando.hernandes@gmail.com', NULL, 1, NULL, 1),
-(59, 'Claudio', 'Severo', '1487', '$2y$10$47a/OwWuzO5TEkluGj0k0uBtPxXcnGCANQp45O.v9Y3Ii/Fz5xdM2', 'claudio.severo@gmail.com', NULL, 1, NULL, 1),
-(60, 'Milena', 'Matos', '4196', '$2y$10$i2PLaQnGimGnvJzxYkfoeOPzfojnrvR0abM3Mo6pj3k2kKTrP0hBe', 'milena.matos@gmail.com', NULL, 1, NULL, 1),
-(61, 'Cauê', 'Carvalho', '7113', '$2y$10$9q2HpHkVG64SCbp3uvILSuEzIdE9kkP.xynVBjdSAldjVuafMyWJi', 'caue.carvalho@gmail.com', NULL, 1, NULL, 1),
-(62, 'Simão', 'Freire', '1023', '$2y$10$nF1Uo5Z0weM6pXfQXybXEeJi4JadOl.n7N9v.TzEjLJatnUXjj/Ay', 'simao.freire@gmail.com', NULL, 1, NULL, 1),
-(63, 'Leonidas', 'Semedo', '1285', '$2y$10$1GAKV2xXO4j9SpAxoRJzzeai05fYMBgTAfa.eT0wZJfJpWZjiQDy.', 'leonidas.semedo@gmail.com', NULL, 1, NULL, 1),
-(64, 'Peterson', 'Neto', '1409', '$2y$10$JgPkviAP5WuDR/kLSWhJi.iq/9zSc9X2rU2j1UQRVTzr1HngnQjtS', 'peterson.neto@gmail.com', NULL, 1, NULL, 1),
-(65, 'Fernando', 'Costa', '9516', '$2y$10$C60uC8LBlUaQIm4mCZ53KOuZ16TtEdJcbbk7pj3iJnxkOcBLTxpH.', 'fernando.costa@gmail.com', NULL, 1, NULL, 1),
-(66, 'Andreia', 'Jordão', '6692', '$2y$10$Z4UHpFVeL/ORgsAzUv3xjOyaY9whNjYbRIgh/c03FYPW9VkPjheya', 'andreia.jordao@gmail.com', NULL, 1, NULL, 1),
-(67, 'Caroline', 'Rocha', '8148', '$2y$10$eFM3HGghRnIxir2WOfQbaePAEiqywJuoHBu2.XvoFRY7aY0toHpSm', 'caroline.rocha@gmail.com', NULL, 1, NULL, 1),
-(68, 'Chunli', 'Carvalho', '5932', '$2y$10$vpB5SWhowE90mJ9D1HzIKu/8AcHrEXTcDmGLmih26aljfXj8jXXby', 'chunli.carvalho@gmail.com', NULL, 1, NULL, 1),
-(69, 'Eric', 'Ishida Silva', '9277', '$2y$10$Il0Crju5V7gKkwLDObO1NOmzAmv3wf0WdpnfS4xAfn50IevOwe7q6', 'eric.ishida silva@gmail.com', NULL, 1, NULL, 1),
-(70, 'Akemi', 'Redfield', '7605', '$2y$10$zi8HZZKUyS782zuZSdgz0OqWO4s07Fw22QAFsOQPuxIqlBBFYLIz6', 'akemi.redfield@gmail.com', NULL, 1, NULL, 1),
-(71, 'Rafaela', 'Tanaka', '2312', '$2y$10$khXMVF9UU7FDViuRxWhnvuAMTQbB6CRKgD7M9Kzkl4IFJK/KHFB7S', 'rafaela.tanaka@gmail.com', NULL, 1, NULL, 1),
-(72, 'Trinity', 'Neto', '4036', '$2y$10$RltmJRlKsb5Rl9byO8mVrOl0WUBa74rr9Y.AN6msDbfTmrKGq4QNu', 'trinity.neto@gmail.com', NULL, 1, NULL, 1),
-(73, 'Jéssica', 'Freire', '4663', '$2y$10$UmgfOksBn/PnEl9i8nJpM.GmuULvn5EEQNRxCsjKY6FABQYIzrX8a', 'jessica.freire@gmail.com', NULL, 1, NULL, 1),
-(74, 'Otavio', 'Pádua', '8773', '$2y$10$QNa4WMRYLZ0wtBFNGUZQ6.LKRZz3vRbN/cUxpH3ebpPlRPW1p4HrC', 'otavio.padua@gmail.com', NULL, 1, NULL, 1),
-(75, 'Xerxes', 'Matos', '2347', '$2y$10$RWmCD39nG5or6G/alwvyIOZZs44hxy6vBF4ylV7bz44NLA5Uuwoiq', 'xerxes.matos@gmail.com', NULL, 1, NULL, 1),
-(76, 'Dante', 'Minazuki', '4867', '$2y$10$ku4Fsv8jNTx87AlwfvNGe.h5uzrOpdVX6J9gzCp88S5mIUoBbspAu', 'dante.minazuki@gmail.com', NULL, 1, NULL, 1),
-(77, 'Milena', 'Batista', '3715', '$2y$10$3vbeYCHVghhSTCFjeabgHOwRqxYFxSe3erhyTjCwoFmyySi1IzGsa', 'milena.batista@gmail.com', NULL, 1, NULL, 1),
-(78, 'Eric', 'Alves', '9348', '$2y$10$UVzJ7oMe40dcNa1g4UkrLeQzt.R3Ef08wc67EvuvLmQnf.KgMKRbW', 'eric.alves@gmail.com', NULL, 1, NULL, 1),
-(79, 'Dante', 'Macedo', '4776', '$2y$10$Bgcnun0bGwkMNDKyRRSCK.RVXNJ/WJSZvqQLIlyISkYhcaQ5oFfr.', 'dante.macedo@gmail.com', NULL, 1, NULL, 1),
-(80, 'Jade', 'Villablanca', '1702', '$2y$10$Pqvp0AwxEhyRGd.yX66pQOQfIr3kzAGgzFSogAF4plu3lNRHb55gq', 'jade.villablanca@gmail.com', NULL, 1, NULL, 1),
-(81, 'Daniela', 'Monteiro', '2722', '$2y$10$dwCC2psWzguDvwzaSy4Dde0oxwMWY05xJ6VAXtFoXU2jysVm7hKVK', 'daniela.monteiro@gmail.com', NULL, 1, NULL, 1),
-(82, 'Morpheu', 'Matos', '1501', '$2y$10$imSJpYmfM.TdO2Uq0CjhOune..UATBsWptvgSGVQckl//aEeQ3wlm', 'morpheu.matos@gmail.com', NULL, 1, NULL, 1),
-(83, 'Rafaela', 'Alves', '7815', '$2y$10$qxYUyG0gbv6EZ0RRCNZxwuMSvB/rooLr/29Tyw2Z01/solGSyH1Y2', 'rafaela.alves@gmail.com', NULL, 1, NULL, 1),
-(84, 'Fernando', 'Takahashi', '4804', '$2y$10$5.HW1190W8IaWlp0dUGToegsfOuA/6Po/0eV1MmiAHt.VbD6YLkqe', 'fernando.takahashi@gmail.com', NULL, 1, NULL, 1),
-(85, 'Jaime', 'Pinheiro', '7148', '$2y$10$TllP0Crljdf4XXRj4MHB9ewXwUKp69u9rxFN.yhob9G2/CcJS58cC', 'jaime.pinheiro@gmail.com', NULL, 1, NULL, 1),
-(86, 'Xerxes', 'Torres', '4622', '$2y$10$WJdFB1qpn8xWilhtO2JUB.rz4iSlvq98ia06aSRNsmMt5PIPcYYSK', 'xerxes.torres@gmail.com', NULL, 1, NULL, 1),
-(87, 'Camila', 'dos Santos', '1582', '$2y$10$Z4.cx8qMdnyq9ytKTdFToeH8BaoyMDWl9CwsTtIS/YWTw9iWGQPfi', 'camila.dos santos@gmail.com', NULL, 1, NULL, 1),
-(88, 'Bruna', 'Faria', '1365', '$2y$10$1yywH38Sdwvmjjsn8nN61.xRkfxgyRBbOdXadv2bZD5sDw/IMbb1K', 'bruna.faria@gmail.com', NULL, 1, NULL, 1),
-(89, 'Odete', 'Salgueiro', '7025', '$2y$10$dEsUuQS9WeDxwU944NGHIOTbun4ZmVhRWggW1XQXZ9dloElW8klyS', 'odete.salgueiro@gmail.com', NULL, 1, NULL, 1),
-(90, 'Sarah', 'Castanheira', '7617', '$2y$10$CSp7pWla6xkIVzB1pubIMuGe5MiFZ.o4rqJBJvIWYRV0x3j1Jq5tK', 'sarah.castanheira@gmail.com', NULL, 1, NULL, 1),
-(91, 'Doulgas', 'Gouveia', '6606', '$2y$10$44sg87OUJly39oSZ7wprpuixxfaE/DVWQaYMMrL3CVEV7kR3EkSwG', 'doulgas.gouveia@gmail.com', NULL, 1, NULL, 1),
-(92, 'Caio', 'Costa', '9210', '$2y$10$QMssiSZzsjwIw/p.N8Q.qO3VecDVE3x7u6BDRLeM1p9UK0jmTxKzu', 'caio.costa@gmail.com', NULL, 1, NULL, 1),
-(93, 'Xerxes', 'Minazuki', '9643', '$2y$10$3fBihUGS.yfAs88s0dLDk.cwCiQwsyshp6UPgzhbLJkTJOWr5zVsG', 'xerxes.minazuki@gmail.com', NULL, 1, NULL, 1),
-(94, 'Jade', 'Lopes', '3809', '$2y$10$hQzrF5NnbHDjCnokQFE9j.vFdq7hQzIkSMBBuGnuGF6YB3Z5xtoPa', 'jade.lopes@gmail.com', NULL, 1, NULL, 1),
-(95, 'Dante', 'Camilo', '8586', '$2y$10$pgeVjUycUEMhkZ9g4K9CLOdVbdED1BGesXpIVLXPndw3VFCWh8yJ2', 'dante.camilo@gmail.com', NULL, 1, NULL, 1),
-(96, 'Akemi', 'Valentine', '2385', '$2y$10$5RXFP.rouWG1REiKSSsb6OTFjc41s.UPOWpiVaGCV4CcdyO2tvVyi', 'akemi.valentine@gmail.com', NULL, 1, NULL, 1),
-(97, 'Jill', 'Castanheira', '7985', '$2y$10$lLZhxrF8ztjKZHKkS0at.uFuDILEAPv6QTdRj5eW2J.G49kKRsmXS', 'jill.castanheira@gmail.com', NULL, 1, NULL, 1),
-(98, 'Trinity', 'Redfield', '8730', '$2y$10$fwgL2EDB9CvCRwjfkUbHnuHHsONacTQLekYePp2Z0WZX0puUUV736', 'trinity.redfield@gmail.com', NULL, 1, NULL, 1),
-(99, 'Sonia', 'Pádua', '8480', '$2y$10$9i7LJk2vKOxX6Ok6DRY8DuLAgBH4M2LTZ8m1VnyOOxesJCmSOxXGS', 'sonia.padua@gmail.com', NULL, 1, NULL, 1),
-(100, 'Augusto', 'Castanheira', '7909', '$2y$10$aKujJu672Vc4p952g.bDaOVfxexmQinOXwaSA.CpJaAD/H2q0Bbcy', 'augusto.castanheira@gmail.com', NULL, 1, NULL, 1),
-(101, 'Yoko', 'Alves', '7344', '$2y$10$zHGatsIR3o66.gK7FuBw7Onna9l1WBJOGR14wRFZphWTvZ34l6ThO', 'yoko.alves@gmail.com', NULL, 1, NULL, 1),
-(102, 'Michele', 'Macedo', '4368', '$2y$10$QLjeaHu3Q6cRor4BCMqKue39Tvy5Jum1CCzg4ziA2gkEl6K4OZa2W', 'michele.macedo@gmail.com', NULL, 1, NULL, 1),
-(103, 'Peterson', 'Costa', '9074', '$2y$10$5yjVVcIJ2WlYM0PwoD97Bum58/wBpD6p6I8a43OhtlO1hENKYMon6', 'peterson.costa@gmail.com', NULL, 1, NULL, 1),
-(104, 'Bruno', 'Monteiro', '6180', '$2y$10$bXMeZUO3cwFBFghgde8BGu0qN9aQKUtLC30IvHomBvAWedS7JZHZe', 'bruno.monteiro@gmail.com', NULL, 1, NULL, 1),
-(105, 'Jonas', 'Matos', '9653', '$2y$10$YYLJF8hvLM/KSPwF1eGYc.o9dzfEAavimykrgqT5qeDcxfFpDAyDi', 'jonas.matos@gmail.com', NULL, 1, NULL, 1),
-(106, 'Jade', 'Franca', '3738', '$2y$10$RyTOw9FC9k1RILMlbehBZeovAfVr/Pc4JkEUxj41WwRsynyzVQITi', 'jade.franca@gmail.com', NULL, 1, NULL, 1),
-(107, 'Peterson', 'Redfield', '4685', '$2y$10$5cB3blNOT66I3hI8OADwMuGsG8fnchoMCbjSf5RxyCbx6K5/YBEn2', 'peterson.redfield@gmail.com', NULL, 1, NULL, 1),
-(108, 'Filipe', 'Neves', '1458', '$2y$10$hOn2K9EAeqooyKJf5yJoJ.Y4gSS17R16jA9.hHCh2eqFyGc69cAVi', 'filipe.neves@gmail.com', NULL, 1, NULL, 1),
-(109, 'Jill', 'dos Santos', '2063', '$2y$10$HKQO.PXPMejBwE.eeJ1FXeadOl3trSR9tAdsS.eTVVNlM10ZUmqPm', 'jill.dos santos@gmail.com', NULL, 1, NULL, 1),
-(110, 'Cauê', 'Minazuki', '1316', '$2y$10$bqij8zEz7LHLsENmnktjCeHEHZG44/D0jd7QvUgvXRNL1DZOFXbUC', 'caue.minazuki@gmail.com', NULL, 1, NULL, 1),
-(111, 'Jonas', 'Valentine', '6061', '$2y$10$GIcHth7ryW5CpQ.UPlmQT.pJPkCqH.GZr6ZFy1V5WkcC8lWUwNvzK', 'jonas.valentine@gmail.com', NULL, 1, NULL, 1),
-(112, 'Irene', 'Camilo', '6295', '$2y$10$wED/kDsoocZMAf0MD.7QjOWH39gMxViwManQSoBLjaVxvoeYtqTnK', 'irene.camilo@gmail.com', NULL, 1, NULL, 1),
-(113, 'Doulgas', 'Tanaka', '5337', '$2y$10$Ov2pbXyLhbcHLdOAEHwn8eT8iQzHZVUZADzMqWOs77h17xYT5xHLS', 'doulgas.tanaka@gmail.com', NULL, 1, NULL, 1),
-(114, 'Angelina', 'Valentine', '5403', '$2y$10$HDA4NhU6wuzn5t0bsjLlOuBx0PzWaxQYO.x8xLnjML4Gv1N3yti9e', 'angelina.valentine@gmail.com', NULL, 1, NULL, 1),
-(115, 'Monica', 'Suzuki', '9171', '$2y$10$sZdeWsc29pnvEdTbQaPWh.S1k4NX/5etfbv0O/rO8HKnblatEn9B2', 'monica.suzuki@gmail.com', NULL, 1, NULL, 1),
-(116, 'Peterson', 'Faria', '3523', '$2y$10$POxug9li8lyb74rAvqeAs.Ms1naLfNDic5gKlTM30dpH6hVAsaldu', 'peterson.faria@gmail.com', NULL, 1, NULL, 1),
-(117, 'Leonidas', 'Severo', '4723', '$2y$10$ur/cUaR8fLqnkB1q04B77ePHVkfEw75gzgXeEFZpBVNyTGI7VzI7S', 'leonidas.severo@gmail.com', NULL, 1, NULL, 1),
-(118, 'Augusto', 'Neto', '8450', '$2y$10$CjAcme3VYOqK0zBKX9OIgezxi/Wo69/lonsJ0b8GIsxh8nQwPGItm', 'augusto.neto@gmail.com', NULL, 1, NULL, 1),
-(119, 'Leonidas', 'Nazário', '8261', '$2y$10$47wx8mPDfxWzNF0k7FvTL.fcRRVUoVB8M7tH/NP.LNSpiOAoO8ftq', 'leonidas.nazario@gmail.com', NULL, 1, NULL, 1),
-(120, 'Eric', 'Hernandes', '3519', '$2y$10$aIn5Nvix5xkB71Jlnh27Ae85PfRtMijdpSVf7fK/Rmo1v8kczBZ5O', 'eric.hernandes@gmail.com', NULL, 1, NULL, 1),
-(121, 'Chunli', 'Nazário', '9654', '$2y$10$y1OX7ongrOaisq5sb5M.Pegbpi9UwaTgMYTMZDBSqJsds/GZUirAi', 'chunli.nazario@gmail.com', NULL, 1, NULL, 1),
-(122, 'Doulgas', 'Castanheira', '9473', '$2y$10$QutLLViWaUswQLFJ02KSKe/jXfb.G5lFBGThu.OvQM18OE2Z/Sxhy', 'doulgas.castanheira@gmail.com', NULL, 1, NULL, 1),
-(123, 'Jéssica', 'Franca', '2957', '$2y$10$x8fp8BPXeYniTLfLVXRlnOrbR9resd0B3FNE5TcsSW5vW2KQkQDpa', 'jessica.franca@gmail.com', NULL, 1, NULL, 1),
-(124, 'Jaime', 'Villablanca', '5694', '$2y$10$gQUQyQQLUG/v4K62o91oqurl59oF6Igfqi2ptZXrbTf/.NrF9.Vz6', 'jaime.villablanca@gmail.com', NULL, 1, NULL, 1),
-(125, 'Peterson', 'Minazuki', '3068', '$2y$10$SAUXkHdC5aQr40rDAoEKV.9qHJTqNbJajz6zriGV0eQkvw3DEp0AO', 'peterson.minazuki@gmail.com', NULL, 1, NULL, 1),
-(126, 'Cauê', 'Gomes', '8712', '$2y$10$OQY91v.j8eM1Q8I8C8oXp.Up7Y5Ir.1OUQ2t3LcZEKOCkUc3c56KK', 'caue.gomes@gmail.com', NULL, 1, NULL, 1),
-(127, 'Leonidas', 'Yamada Silva', '8234', '$2y$10$ASqCfXBjEFManZjyorjY8OkYAJQvl.ZCSyjI3cT5TGcH97AFOyinq', 'leonidas.yamada silva@gmail.com', NULL, 1, NULL, 1),
-(128, 'Leonidas', 'Matos', '3977', '$2y$10$.awEqMdrTKvAzhnsqiQTG.3wYDVbE.vK9RnaYPwDSrCPVAwMRUwPG', 'leonidas.matos@gmail.com', NULL, 1, NULL, 1),
-(129, 'Michele', 'Valentine', '5317', '$2y$10$znJF6ps/hYZ.VD3Fx22ZP.hMxBGLwWOXR/AWeF5IsUFXLxl55Ub.K', 'michele.valentine@gmail.com', NULL, 1, NULL, 1),
-(130, 'Doulgas', 'Sato', '7146', '$2y$10$F/h/oxmfQK2h7Z.g3qLnMuq3/w4Xo4hMNFh8UtreOsGLEqlPt2J22', 'doulgas.sato@gmail.com', NULL, 1, NULL, 1),
-(131, 'Doulgas', 'Rocha', '3428', '$2y$10$sxAfFX1mkuLtM2cDm4/U1..uxRdAi/YGciAr5w49gJt5egFxBfdv2', 'doulgas.rocha@gmail.com', NULL, 1, NULL, 1),
-(132, 'Dante', 'Lins', '6404', '$2y$10$Y8eqt8qvTJp/lwplMPdq5.Z4B/dAdnh0pe3eZc1dRZD3/kJT/z9Yu', 'dante.lins@gmail.com', NULL, 1, NULL, 1),
-(133, 'Cauê', 'Takahashi', '3117', '$2y$10$o5D1s18mxEIMOhrnkooa3.8cSBB7YCrTDyG9Y8Jll8NNln5deyA4y', 'caue.takahashi@gmail.com', NULL, 1, NULL, 1),
-(134, 'Michele', 'Rocha', '6798', '$2y$10$HC8LmRuNspZkT8JeNFLSEOEm/bzLB3k8nDXtm82u4thApmJ14X1VK', 'michele.rocha@gmail.com', NULL, 1, NULL, 1),
-(135, 'Tamires', 'Matos', '2909', '$2y$10$hM3ux.dPgplc.sdUW2euR.44L.Hv6PycYpywOw.hwZoMu2O281DEG', 'tamires.matos@gmail.com', NULL, 1, NULL, 1),
-(136, 'Aline', 'Lins', '4774', '$2y$10$I/mQhWhL7gSrG9Kt1tDZk.y9Kotm0GDKxsBr7fmYkuFw/MIsxeK0y', 'aline.lins@gmail.com', NULL, 1, NULL, 1),
-(137, 'Monica', 'Batista', '3786', '$2y$10$iOLURLlD/9NNILxqZvs4XeO7q3G4iJbl9CYgPEepB5dnO2fngEeTm', 'monica.batista@gmail.com', NULL, 1, NULL, 1),
-(138, 'Caio', 'Hato', '2209', '$2y$10$e1f.tO131bsZ2uURaMWQvehniGIXvpu0uq4prSQeHfDvNBQmipFma', 'caio.hato@gmail.com', NULL, 1, NULL, 1),
-(139, 'Eric', 'Sato', '5768', '$2y$10$l5fC5AoFcvLiIY9stVfVG.dhcfzFXeJAXo/5mMabjPE2pBh315DjG', 'eric.sato@gmail.com', NULL, 1, NULL, 1),
-(140, 'Akemi', 'Costa', '1718', '$2y$10$YA00H5xjKa2cunh6V1t7i.Eq/Iv0XszWcLW2/mZe0zLDBaFHRfjkC', 'akemi.costa@gmail.com', NULL, 1, NULL, 1),
-(141, 'Milena', 'Neves', '2721', '$2y$10$cbePQ9urmg2.dK1LPkzlnOoCoOPKbB7K5/pNyZgsOhsvRV5PMdA/2', 'milena.neves@gmail.com', NULL, 1, NULL, 1),
-(142, 'Bruno', 'Semedo', '8182', '$2y$10$f3BEQJiRRZ2VClzpp1JSDeuAc8EU7PsoZ.sH9BjkZlEuuUQfPxgGW', 'bruno.semedo@gmail.com', NULL, 1, NULL, 1),
-(143, 'Odete', 'dos Santos', '3920', '$2y$10$JAcMNYVcppSSGvZtJ0uCX.uA7OHOifCGJS9XLuuPKNMBcOhZxm7Ny', 'odete.dos santos@gmail.com', NULL, 1, NULL, 1),
-(144, 'Jaime', 'Nazário', '5097', '$2y$10$PjF/qnvJZrNw.SIRHxmk/uzik6k6xaDGINCTTN2yhFLfgqPoRGMSK', 'jaime.nazario@gmail.com', NULL, 1, NULL, 1),
-(145, 'Michele', 'Castanheira', '7016', '$2y$10$MzU7nuhvgO25Mi.PO89NBOMQprXbiyGD3KkCsStuHM8s7GdTbn7ye', 'michele.castanheira@gmail.com', NULL, 1, NULL, 1),
-(146, 'Caroline', 'Minazuki', '9003', '$2y$10$iPtThqPMZvnfc0dSVD8LmuSeoQUYnykqlSIGrvT1gFyfg9Do4OBY6', 'caroline.minazuki@gmail.com', NULL, 1, NULL, 1),
-(147, 'Sonia', 'Macedo', '5413', '$2y$10$Ea.Hn/27xzo1py0fe2CA9uxcxMxs/lVwAPlHs99ObZlGmHYmlC7QO', 'sonia.macedo@gmail.com', NULL, 1, NULL, 1),
-(148, 'Kitana', 'Lins', '6896', '$2y$10$LHdssxn6W6KFImhiDwHHOu8hffcqg7U19WdPvBM20lDj2rlC.xD32', 'kitana.lins@gmail.com', NULL, 1, NULL, 1),
-(149, 'Dante', 'Faria', '9640', '$2y$10$RRIhtw6ixSwJwG2zZMGDsuodEt5POd75vC8iFan.X4vUADoLRDJaO', 'dante.faria@gmail.com', NULL, 1, NULL, 1),
-(150, 'Claudio', 'Faria', '3020', '$2y$10$egAENa0V.rntWbUG/lp0U.dmrfNM91rxoMNzR.15pBG5/FLRqE8S.', 'claudio.faria@gmail.com', NULL, 1, NULL, 1),
-(151, 'Sarah', 'Peixoto', '3321', '$2y$10$2v1C.Ketz9u8GcxWNWKC.OojdmRV1CVrO5A2Dfa2HeC2qa8BQhUc2', 'sarah.peixoto@gmail.com', NULL, 1, NULL, 1),
-(152, 'Eduardo', 'Pádua', '6752', '$2y$10$.8ru4rv9UDEe3oEfN1pJSO1jpeI0D7F4S0q.7klzAt4C2LJ5.vs3S', 'eduardo.padua@gmail.com', NULL, 1, NULL, 1),
-(153, 'Otavio', 'Franca', '1639', '$2y$10$PzL19GWnErIvN562.iMrf.wMZd7DNh.I/dT1V4LGVNnTXXWNfZ6hW', 'otavio.franca@gmail.com', NULL, 1, NULL, 1),
-(154, 'Jill', 'Salgueiro', '6610', '$2y$10$prPbn3wTQYmTnCp5zqerbuxVlZKCZcmgJj4y/41mMnX5095wzcgBC', 'jill.salgueiro@gmail.com', NULL, 1, NULL, 1),
-(155, 'Camila', 'Nazário', '9642', '$2y$10$MAZwok.5dskegmXOwCLFSeKYLvRDlX1DUbVSV7v17vLygUge/0T6y', 'camila.nazario@gmail.com', NULL, 1, NULL, 1),
-(156, 'Camila', 'Lopes', '1631', '$2y$10$bMttM/AWAcRCNVZV0IGigu3qQwkL34JriHvsUZpS0yQvW5J8ovzdC', 'camila.lopes@gmail.com', NULL, 1, NULL, 1),
-(157, 'Lara', 'Nazário', '3116', '$2y$10$gRwalgwwQWKZwbsusdEfUO2S7mVRT1bhX5lLTyZYK7zxAYj0aC03C', 'lara.nazario@gmail.com', NULL, 1, NULL, 1),
-(158, 'Andreia', 'Takahashi', '1555', '$2y$10$Bnt/2XlMhdr8V4MgcN2GWuexU6FJpbNLkwV/fAXhs47JIQUOL6.vy', 'andreia.takahashi@gmail.com', NULL, 1, NULL, 1),
-(159, 'Yoko', 'Franca', '6337', '$2y$10$z1z4HeIVCMr0lF8f2.BOVel01qObWr/eI4Y3eRbK93LVtES1.TiGy', 'yoko.franca@gmail.com', NULL, 1, NULL, 1),
-(160, 'Claudio', 'Nazário', '8110', '$2y$10$ndG5N7mCuogzTxF05n0gc.LEz6tYP9sIEGCZO3hrPPBZzZ7Mcpbou', 'claudio.nazario@gmail.com', NULL, 1, NULL, 1),
-(161, 'Barbara', 'Tanaka', '9031', '$2y$10$nIyqKLC.ufISpuvi2RnQ2eDBcn8kA42EBhFKTnqYfsn9AptVLW71.', 'barbara.tanaka@gmail.com', NULL, 1, NULL, 1),
-(162, 'Jonas', 'Lopes', '5607', '$2y$10$FGaqJIQP4fL.zvPWPv2YneBK.mpiCOJytwgYcjcpfJMpTwE4nILUC', 'jonas.lopes@gmail.com', NULL, 1, NULL, 1),
-(163, 'Fernando', 'Castanheira', '8016', '$2y$10$.m94MnEBN/t9sFop6KNXLe9sn49eGIMBm5BMd5CbZZe.pUMo.c8DW', 'fernando.castanheira@gmail.com', NULL, 1, NULL, 1),
-(164, 'Jade', 'Costa', '9836', '$2y$10$DzNSN0rh4F4ZGATkygrBKu1U6QGGoZP30yBSTUtGqBppt3e439Xn.', 'jade.costa@gmail.com', NULL, 1, NULL, 1),
-(165, 'Peterson', 'Sato', '4785', '$2y$10$48gYXBHizebn/O4B4Uc1TOU3R8/c9tH.QPPYLyKSNNBRbV8haMplu', 'peterson.sato@gmail.com', NULL, 1, NULL, 1),
-(166, 'Dante', 'Lopes', '8571', '$2y$10$rlHWbHRBe5PL4hcH/eNy9ufwCCyEKpO9C7ZEAI9O6ejp.rXm6/GrC', 'dante.lopes@gmail.com', NULL, 1, NULL, 1),
-(167, 'Eduardo', 'Freire', '3405', '$2y$10$c.NsgpM9SxtlMm0Vmg/3C.xOTvGXRkJS6nKcYAU1/YsteCA6c0HHm', 'eduardo.freire@gmail.com', NULL, 1, NULL, 1),
-(168, 'Odete', 'Lins', '2620', '$2y$10$0ta0RUhxTg/oK/bT8U7hIu.CwxUWeF77k325RsyccWLyV/M1kGVFa', 'odete.lins@gmail.com', NULL, 1, NULL, 1),
-(169, 'Simão', 'Franca', '9802', '$2y$10$RDyCfXPJNo1y3ynSuAAbbOfr.PUlxYZAeUVgmr9ol8hqyPL//hNMS', 'simao.franca@gmail.com', NULL, 1, NULL, 1),
-(170, 'Yori', 'Yamada Silva', '6767', '$2y$10$KLxnD8LoikRcw44QNDomle1UibhgIjVlVuIoKYLHr1jIis0LlPSMC', 'yori.yamada silva@gmail.com', NULL, 1, NULL, 1),
-(171, 'Dante', 'Leal', '9057', '$2y$10$2y963B8DuCcAkR6Is8IHFOQaG24SGdMtbNgG7XwI6JU96ODTXHUcC', 'dante.leal@gmail.com', NULL, 1, NULL, 1),
-(172, 'Xerxes', 'Monteiro', '6601', '$2y$10$uq/33OXG/ABgETrCsXxUr.uZtVuZothH6X5ZhZiIHGK58h6qOqIIy', 'xerxes.monteiro@gmail.com', NULL, 1, NULL, 1),
-(173, 'Augusto', 'Leal', '7089', '$2y$10$cwD4j4hA6N7Zr73p3acakOdrmxg021Voj/cz5L6zCJcP2tYm9ybyO', 'augusto.leal@gmail.com', NULL, 1, NULL, 1),
-(174, 'Simão', 'Pádua', '8707', '$2y$10$OK/v22MG9Lry1RUrYQLuY.hLJCleS4Tn2/rDXJi4oJsnRiakXBSNe', 'simao.padua@gmail.com', NULL, 1, NULL, 1),
-(175, 'Cauê', 'dos Santos', '8133', '$2y$10$.4O8tPkeJKIbKZnePb.dKu6x2SZWe49tef6CtAxdOfOlFP22j83zK', 'caue.dos santos@gmail.com', NULL, 1, NULL, 1),
-(176, 'Claudio', 'Salgueiro', '1299', '$2y$10$xol.ug0qtpucAVeggYhrMOQ0mV6.7C479RtRX/au46KtppuNt6T3u', 'claudio.salgueiro@gmail.com', NULL, 1, NULL, 1),
-(177, 'Bruno', 'Redfield', '2484', '$2y$10$yH31bdMmW2.vYM8rcEJ4A.HaQu2JcaqoIzqTcaLgyyRiQOX.pz8OW', 'bruno.redfield@gmail.com', NULL, 1, NULL, 1),
-(178, 'Akemi', 'Hernandes', '2796', '$2y$10$/62pgpSlHuJOpJGTG0fXpuf5l7ioszs2es7whTdrsdcfT0gaMb7Ya', 'akemi.hernandes@gmail.com', NULL, 1, NULL, 1),
-(179, 'Rafaela', 'Valentine', '8602', '$2y$10$SA..lfbqa2ASeKgWGcSLD.u4iQhfpD0L0btvVoGyKn6FT8F8SDaOe', 'rafaela.valentine@gmail.com', NULL, 1, NULL, 1),
-(180, 'Sheeva', 'Pádua', '8078', '$2y$10$69XrbhUCZcnNFkHLN5lTaOHogoSwfunPqZ3B4XwvLFLroe44d.xLW', 'sheeva.padua@gmail.com', NULL, 1, NULL, 1),
-(181, 'Jade', 'Batista', '5012', '$2y$10$dw2BMz7vADH3Wq/dVSRng.dsGEw6x7RyzhKlhScG1r/Y4.2uc3AFa', 'jade.batista@gmail.com', NULL, 1, NULL, 1),
-(182, 'Peterson', 'Takahashi', '5062', '$2y$10$3Bij4UcCvUVtA/m5nJCQO.WMg653fy3obkaZ4ipVccHspv.kuSaqi', 'peterson.takahashi@gmail.com', NULL, 1, NULL, 1),
-(183, 'Fernanda', 'Yamada Silva', '6325', '$2y$10$9c2UNojm7.7uQ3r4bCaNzu9QIj4h3eGvaIPDe8spfZADEV8xPoDtW', 'fernanda.yamada silva@gmail.com', NULL, 1, NULL, 1),
-(184, 'Jill', 'Severo', '2519', '$2y$10$cACkjVzAFYEnw287cgLoR.p9MEGHt5R8gsiAJ24ZdF.Dcy/7/glVy', 'jill.severo@gmail.com', NULL, 1, NULL, 1),
-(185, 'Augusto', 'Valentine', '6575', '$2y$10$AJ/rx77ECT4GMdQ7ZmfWUujgVzZz4fu5vOXMAsjlKk1GdeBCC1j3q', 'augusto.valentine@gmail.com', NULL, 1, NULL, 1),
-(186, 'Filipe', 'Faria', '4226', '$2y$10$lkJTaZWsbuC7AQo1Gc20zO8s3E5Cd9Mk/4Olyu8e9c5Fsg9U7IHG.', 'filipe.faria@gmail.com', NULL, 1, NULL, 1),
-(187, 'Morpheu', 'Faria', '6371', '$2y$10$C/RZNJQV/899pHTcFgSkyei0eZfY0hPOAQvkaiuDgGsh0Z2AuCddK', 'morpheu.faria@gmail.com', NULL, 1, NULL, 1),
-(188, 'Cleber', 'Torres', '1142', '$2y$10$k97GXlq4olw2iXyxmOTVUOhLgawA7.PkaZrLwQYbLn4jEy32RRPzu', 'cleber.torres@gmail.com', NULL, 1, NULL, 1),
-(189, 'Eduardo', 'Ishida Silva', '1544', '$2y$10$3Tjbm2n3P3rhxeyMbqOUy.nwbQKvUunhFb1PDwQH7Th6XEo8rSqAK', 'eduardo.ishida silva@gmail.com', NULL, 1, NULL, 1),
-(190, 'Angelina', 'Suzuki', '4651', '$2y$10$OLVpFv0Lxy9R71J0yDvrkO2MPiLwDvgqy6oiXQPDxDFVtTUZOeiba', 'angelina.suzuki@gmail.com', NULL, 1, NULL, 1),
-(191, 'Barbara', 'Rocha', '2968', '$2y$10$lee03.Szbm7ZHYjDB3Oj1OUx40P84/MKpZbR.QnRPW7klK/DJ5ipG', 'barbara.rocha@gmail.com', NULL, 1, NULL, 1),
-(192, 'Lara', 'Valentine', '8357', '$2y$10$T96CSWUznp4A1gIuwyP06.f0DWaJkLnJFo/RYhMvePjFImMOX0C2C', 'lara.valentine@gmail.com', NULL, 1, NULL, 1),
-(193, 'Bruno', 'Pádua', '6907', '$2y$10$n1ohdSNgu1ObTvVUooxwW.bfRUIP8FdywSUUsL8YiQldWADri04rW', 'bruno.padua@gmail.com', NULL, 1, NULL, 1),
-(194, 'Jade', 'Alves', '4331', '$2y$10$peKpGeibnSmUBb8GTyMDpOh7cJxDoMABd.6JVYv3fnMlTpblDBJ3q', 'jade.alves@gmail.com', NULL, 1, NULL, 1),
-(195, 'Jonas', 'Faria', '1404', '$2y$10$L37Vnxw2hK4RdYKA/tJIYObi4k5srgs7fHLTKtTQoSHwYSSG5vt/q', 'jonas.faria@gmail.com', NULL, 1, NULL, 1),
-(196, 'Fernando', 'Suzuki', '6269', '$2y$10$lLT2DIw262nLrOpRlPwMXedYq8WLYb3rnbwz496H4ZvzQ/XZbI1k.', 'fernando.suzuki@gmail.com', NULL, 1, NULL, 1),
-(197, 'Rafaela', 'da Silva', '5591', '$2y$10$Utgwg69jbow/qBg13J6XmuNhkGhOY4OG1OxTYys5LEJDqUh2cg8F2', 'rafaela.da silva@gmail.com', NULL, 1, NULL, 1),
-(198, 'Tamires', 'Faria', '4702', '$2y$10$dxan.2BOh.e5dCHiptlloubRwDreYRJrQevabt99Mhk5aM.VUB7r.', 'tamires.faria@gmail.com', NULL, 1, NULL, 1),
-(199, 'Eric', 'Castanheira', '3458', '$2y$10$.y2gjlWtOl6x5YAVGiGwjevKdxkU5UDT8AloS682ivcpObwwxJdSK', 'eric.castanheira@gmail.com', NULL, 1, NULL, 1),
-(200, 'Dante', 'Takahashi', '6963', '$2y$10$c6Dm6ptQGg.peuZX1GEKCuB3Um7MNRk35DlO5elEu.To6mVkdrYFm', 'dante.takahashi@gmail.com', NULL, 1, NULL, 1),
-(201, 'Cleber', 'Peixoto', '5024', '$2y$10$zaVRewYo9RlPUQHHiMh/tuKSTAZ/AivMT0PLO8EJmWSGWPoWPIYLi', 'cleber.peixoto@gmail.com', NULL, 1, NULL, 1),
-(202, 'Caio', 'da Silva', '2128', '$2y$10$TPFMgkS3xqvndE/Vl62O1.2fIL78v9uEBGX0aqHe16mpwQPYgyMr.', 'caio.da silva@gmail.com', NULL, 1, NULL, 1),
-(203, 'Kitana', 'Camilo', '1246', '$2y$10$534hOsI/0kQSTw/TcRpZou0Lcfvpeakjf5dwgH4Ybu.UxZLIFQWcO', 'kitana.camilo@gmail.com', NULL, 1, NULL, 1),
-(204, 'Yoko', 'Lins', '8183', '$2y$10$IYJLmDe.a2Xc6s7fsco4quYPl5rzA2.pKo74OVMkFk2uS4uCnJh6a', 'yoko.lins@gmail.com', NULL, 1, NULL, 1),
-(205, 'Alexandra', 'Torres', '6682', '$2y$10$2IK7zBEFfVr77z9iJRFc1.4DbHkbzRwTwnuyfpQSELI65JVcmj6FC', 'alexandra.torres@gmail.com', NULL, 1, NULL, 1),
-(206, 'Andreia', 'Monteiro', '8919', '$2y$10$looC5ILkYOiYpICw1fROK.O/YE.g0MU5uXLfkq28jvpNjsK2MJpba', 'andreia.monteiro@gmail.com', NULL, 1, NULL, 1),
-(207, 'Jonas', 'da Silva', '8553', '$2y$10$XPHFlWjrP89c/hr6Y4OX1.TQz7x9r0cvIyOvkMbVBaQPBCKXBdMKO', 'jonas.da silva@gmail.com', NULL, 1, NULL, 1),
-(208, 'Doulgas', 'Monteiro', '1636', '$2y$10$1PrRe2mkMDtslWKI8T1sfuug8uL.ASMvnduZaxRdtrOOt6uDcBNke', 'doulgas.monteiro@gmail.com', NULL, 1, NULL, 1),
-(209, 'Sheeva', 'da Mata', '8900', '$2y$10$A12LpY8NqtjnZ4qD5./lJ.ZmjEhylyRIQw6U8BCSa2u5mm6f7LxJC', 'sheeva.da mata@gmail.com', NULL, 1, NULL, 1),
-(210, 'Xerxes', 'Peixoto', '5937', '$2y$10$TuNpJsSBlw1bjTvttQnHuuFhiSrEuZFjaU6wjo7vWbOvc7aiPVSga', 'xerxes.peixoto@gmail.com', NULL, 1, NULL, 1),
-(211, 'Filipe', 'Franca', '3814', '$2y$10$PH42lJhSV98CWX0N1jEqSeYM8F0..qJpEkYO4hzLxUvWl2R/kMvDq', 'filipe.franca@gmail.com', NULL, 1, NULL, 1),
-(212, 'Aline', 'Neto', '1561', '$2y$10$HdEbR7r.52vg5ihUO3.wT.tl0zKP/2Ajqk9xKHbXAxtbvC03u13pe', 'aline.neto@gmail.com', NULL, 1, NULL, 1),
-(213, 'Doulgas', 'Torres', '9245', '$2y$10$3xDPkWEXpfTsyyBn0jmXge5WTXTW30jRU6BdTvZhO9xjvRCCh2ndC', 'doulgas.torres@gmail.com', NULL, 1, NULL, 1),
-(214, 'Sarah', 'Valverde', '4139', '$2y$10$w/KEwSYoeOHdSqZP1kuwBeBAFC3cEgatJVx.csig8XEn/8r4MAhNy', 'sarah.valverde@gmail.com', NULL, 1, NULL, 1),
-(215, 'Sheeva', 'Macedo', '5042', '$2y$10$JQFKKa5yfI.9CwB.cX6OkuDbZiBhWR8Rzxzvqk6NmMd2V7WObj85m', 'sheeva.macedo@gmail.com', NULL, 1, NULL, 1),
-(216, 'Andreia', 'Porta', '2550', '$2y$10$A7gPMrNAxYlzkj35/7GZzeyysoS1UR0R8d20lt.RXRP.ja6loUUxK', 'andreia.porta@gmail.com', NULL, 1, NULL, 1),
-(217, 'Chunli', 'Neto', '1121', '$2y$10$3gt4UUxuTvP46VpNvAqYlu0R4QyvWWgz/PBBtfDssFQ1KacOTvVeW', 'chunli.neto@gmail.com', NULL, 1, NULL, 1),
-(218, 'Bruno', 'Nazário', '4452', '$2y$10$mvdHCG2DO/8V.8n3K5c...Y7rM6Vs33pxzKzUvRIyAELcODkjNQUW', 'bruno.nazario@gmail.com', NULL, 1, NULL, 1),
-(219, 'Otavio', 'Monteiro', '9380', '$2y$10$R8oZ29GnmdGHKgkhSghxhuT1Cik6shABZsBx0qxGKg0QOSZblc1.y', 'otavio.monteiro@gmail.com', NULL, 1, NULL, 1),
-(220, 'Jill', 'Batista', '7210', '$2y$10$AiacgZTfv6.VLXzt6oWGvOWo5fJAaAGHHe.oSJ7.pGtp4gL4jWJMe', 'jill.batista@gmail.com', NULL, 1, NULL, 1),
-(221, 'Filipe', 'Torres', '5163', '$2y$10$mao54xISOMgfWE8Et7t1Zu15OnIqwmMPZZxLMSGl2QtivU3nvghJy', 'filipe.torres@gmail.com', NULL, 1, NULL, 1),
-(222, 'Filipe', 'Ishida Silva', '6095', '$2y$10$73Anbi0gZ5I2XWdMbDUT9exNvWNEiftbeLeukPvAhJir9QNi9uTAi', 'filipe.ishida silva@gmail.com', NULL, 1, NULL, 1),
-(223, 'Xerxes', 'Severo', '9767', '$2y$10$MoFuO4fmBMoDGXbhilgHYe9.NJ88/FZG2SzgoxOd/PHO3amXJWU4u', 'xerxes.severo@gmail.com', NULL, 1, NULL, 1),
-(224, 'Camila', 'Suzuki', '9138', '$2y$10$d/PEwduB5Su9PLIJZ9AYMeR151pyWi4Uety/h.ydQV5rQcupkJdhK', 'camila.suzuki@gmail.com', NULL, 1, NULL, 1),
-(225, 'Fernanda', 'Minazuki', '5181', '$2y$10$T2C8YOrhnle1GDr0IHmZKu2Vl5TNY14HUJpVsLOpAb4P1boKzggui', 'fernanda.minazuki@gmail.com', NULL, 1, NULL, 1),
-(226, 'Dante', 'Salgueiro', '5936', '$2y$10$34oI221ugxhngj3nRQ30yOoqlbBw4tgZ2aAdDs289EPsAA63ZDiDG', 'dante.salgueiro@gmail.com', NULL, 1, NULL, 1),
-(227, 'Doulgas', 'Lopes', '4582', '$2y$10$wndxpuZNF7oI5P79Bp0QVeYA00PiT5blzIxCzNRDeAFU/C3f5u5iS', 'doulgas.lopes@gmail.com', NULL, 1, NULL, 1),
-(228, 'Filipe', 'Carvalho', '9826', '$2y$10$6tyPjAcMJ1LxNZF4GGfA9.tYsDcaJleuYbU4/O6jX9mOG784X07ha', 'filipe.carvalho@gmail.com', NULL, 1, NULL, 1),
-(229, 'Augusto', 'Hernandes', '4376', '$2y$10$LKkzuuT8Gnjlw/C8zTzeje7AbclUkuo.06iak72sVXtxkuhSwPyrK', 'augusto.hernandes@gmail.com', NULL, 1, NULL, 1),
-(230, 'Doulgas', 'Yamada Silva', '4975', '$2y$10$35RhbWTod1DHawuLZqR4qOhsQw/lntZD5gYuppmuShqOnMbew67Ga', 'doulgas.yamada silva@gmail.com', NULL, 1, NULL, 1),
-(231, 'Caio', 'Leal', '3997', '$2y$10$A5Zntefo5ErZ1H1/yV9HfOUQczCMu10miZ/y.IL0c7I1bJUmZXICy', 'caio.leal@gmail.com', NULL, 1, NULL, 1),
-(232, 'Angelina', 'Batista', '7101', '$2y$10$HaZvfyLOIMYjC1Q1iGSwOeicJQI0R.OOSGK7B.PYPKUkUT808bAyW', 'angelina.batista@gmail.com', NULL, 1, NULL, 1),
-(233, 'Cauê', 'Sato', '5086', '$2y$10$vhfP3.gDF37Gw2y56KkvHu0E3D4QYfatVHwMT02iJcg5uwMXqCYIe', 'caue.sato@gmail.com', NULL, 1, NULL, 1),
-(234, 'Trinity', 'Minazuki', '6591', '$2y$10$KFr3rHVGzfgJXIx/vGDGVOEnsgXClOiR/wjdPhbuzc.e5DKUYzpby', 'trinity.minazuki@gmail.com', NULL, 1, NULL, 1),
-(235, 'Filipe', 'Macedo', '6623', '$2y$10$dK6Rx1T7Aej75iHjgz2jh.8Nt9i9j65EqGoZLaTPtnn41UaabrcTK', 'filipe.macedo@gmail.com', NULL, 1, NULL, 1),
-(236, 'Morpheu', 'Peixoto', '8609', '$2y$10$V9YIJtXWnzieiu2ETZXXNu8ZDkduiHZe6WuvjLxFnH7BP8r0oQ2CK', 'morpheu.peixoto@gmail.com', NULL, 1, NULL, 1),
-(237, 'Caroline', 'Franca', '8020', '$2y$10$cj4QAEHvf/65dh0BIu23xu0uGCToW/Cq8KyM6s.eYjuIZjuyydnXq', 'caroline.franca@gmail.com', NULL, 1, NULL, 1),
-(238, 'Fernando', 'Alves', '9819', '$2y$10$F2iBHSeruWFwHbfhSL/TzerahBW.hKwM/6wMw9hxpT4i0cmQMwJQe', 'fernando.alves@gmail.com', NULL, 1, NULL, 1),
-(239, 'Cleber', 'Franca', '8269', '$2y$10$fRks7fedTRgaYblr/2wfdO5Cug2bZmwrPPFGWTjpRPGV.yLg3wEjm', 'cleber.franca@gmail.com', NULL, 1, NULL, 1),
-(240, 'Cleber', 'Matos', '5026', '$2y$10$7/hWH/5B3NqjEdj/0GqdauAbVkr1oQEdr18bZGeI3csDKjxuyQtVe', 'cleber.matos@gmail.com', NULL, 1, NULL, 1),
-(241, 'Dante', 'Peixoto', '8592', '$2y$10$kIJ/l6dJtrd0AuUd4oMicO6d2/cyWhUhmddszCdfmhZ.92V6kkV5y', 'dante.peixoto@gmail.com', NULL, 1, NULL, 1),
-(242, 'Leonidas', 'Hernandes', '2274', '$2y$10$gwG58sJXaENPAHz.HOyt9uyXJyGAV9AXMQ/3GisLYqbpjedtVaDUW', 'leonidas.hernandes@gmail.com', NULL, 1, NULL, 1),
-(243, 'Otavio', 'Alves', '6710', '$2y$10$.ywIEslG6KDJyAxwim1.VucOvXZ/WPYPYoIjrxJnsdK6flkCTPDRi', 'otavio.alves@gmail.com', NULL, 1, NULL, 1),
-(244, 'Yoko', 'Valverde', '2271', '$2y$10$3nTHUnrawc5FM5CJ8AwXfuGm4fToZ/8MMdYziiQezEPJSbJUPsQde', 'yoko.valverde@gmail.com', NULL, 1, NULL, 1),
-(245, 'Alexandra', 'Takahashi', '4791', '$2y$10$DBoZ5n50/WUtjP39Pw569eBobmsQqbFwOv/C3KM/Cc2.HiZoKpDPG', 'alexandra.takahashi@gmail.com', NULL, 1, NULL, 1),
-(246, 'Dante', 'Tanaka', '9449', '$2y$10$zoQTb/uqnIwjfRlzPmgiU.TWjeNmIcH8s9IILmXP1B8z6BI16fWie', 'dante.tanaka@gmail.com', NULL, 1, NULL, 1),
-(247, 'Cleber', 'Valverde', '5698', '$2y$10$X6/9ZVMu5DvXPQIz7eKpPu1b70qCAJFzy5BUBzJdbh45aBUb.8Tgu', 'cleber.valverde@gmail.com', NULL, 1, NULL, 1),
-(248, 'Caroline', 'Takahashi', '3118', '$2y$10$2PXCHLMr7IP/5VpiZDaI9.ROr4JeuRb2uTROb9bV6C3GK.QvWxHIy', 'caroline.takahashi@gmail.com', NULL, 1, NULL, 1),
-(249, 'Jill', 'Takahashi', '7352', '$2y$10$hlK6J5nX0yyRMrrqmLkn9.bC.jJ8fhux6nI9E1RMmHkjnvHW.dgGi', 'jill.takahashi@gmail.com', NULL, 1, NULL, 1),
-(250, 'Peterson', 'Alves', '8084', '$2y$10$9VhTgS.a.q4W9btcUlr.I.vctDeI9kwkq7ANSp0QvtDWnLXERHo0O', 'peterson.alves@gmail.com', NULL, 1, NULL, 1),
-(251, 'Filipe', 'Tanaka', '5381', '$2y$10$MP2Y4P.CElZLa1ws63p9Z.Tm4ZNpVuCyBkSIr0kZYmg3ngs26DNNG', 'filipe.tanaka@gmail.com', NULL, 1, NULL, 1),
-(252, 'Fernanda', 'Camilo', '8926', '$2y$10$j7sTCESa/LnudrYq4W1wfuWMoE/3easCQylg3bsrEMXrEhO3Z1Ph.', 'fernanda.camilo@gmail.com', NULL, 1, NULL, 1),
-(253, 'Odete', 'Carvalho', '1947', '$2y$10$Qy0HEgGhimYGP9olVT9xSOZTLA0Iwc8ZIzmpsACmybC.IcNYbYEqS', 'odete.carvalho@gmail.com', NULL, 1, NULL, 1),
-(254, 'Xerxes', 'Costa', '1104', '$2y$10$kVmFyys9RtevH6CEF3RYEule/1tyr/7bn1401OCtlg3SZBsae1YaO', 'xerxes.costa@gmail.com', NULL, 1, NULL, 1),
-(255, 'Cleber', 'Augusto', '8212', '$2y$10$4PTrByVH9OYVGH19efu8luZNa.aZNK6QcFNg/nGPSTRDxU5UXg73.', 'cleber.augusto@gmail.com', NULL, 1, NULL, 1),
-(256, 'Michele', 'Yamada Silva', '2899', '$2y$10$rBhPKtR1PPVdLXP.5sjiXeJn80QRdchxv7Yci9jkxKB/mIeDfewai', 'michele.yamada silva@gmail.com', NULL, 1, NULL, 1),
-(257, 'Alexandra', 'Vieira', '4459', '$2y$10$eID2d8IZC6EC9EYbrwYtYeyu7jfeh1CxQHrfu6rupr2PE/A26gLF6', 'alexandra.vieira@gmail.com', NULL, 1, NULL, 1),
-(258, 'Camila', 'Alves', '6302', '$2y$10$E997uvsOlqdyIqH1GEGXxubAbd.dnxTXsKTE3QKnr7pHOTp7TqXTi', 'camila.alves@gmail.com', NULL, 1, NULL, 1),
-(259, 'Michele', 'Redfield', '6237', '$2y$10$jpZ6GT0EHwifO0Tdr/ojpOc9oH7j4XXjeXc7EchWELIKYDRT93Mn6', 'michele.redfield@gmail.com', NULL, 1, NULL, 1),
-(260, 'Jonas', 'Batista', '6223', '$2y$10$1o9AJaJ4h447CQrTT0fOGO8UtWDiuzwZoiOGnZ0gYEr/SCb6duoUK', 'jonas.batista@gmail.com', NULL, 1, NULL, 1),
-(261, 'Fernanda', 'Carvalho', '2963', '$2y$10$X9SdYuKbTY/NqmHhsfbzQ.uG3uQTVSISDGthIDyFAMy153NXespc.', 'fernanda.carvalho@gmail.com', NULL, 1, NULL, 1),
-(262, 'Otavio', 'Sato', '6039', '$2y$10$TaeqfgoJdzm0EZICtFRemO8GMrfIbM80pltQbFfcJ.hEtP0y50sRK', 'otavio.sato@gmail.com', NULL, 1, NULL, 1),
-(263, 'Rafaela', 'Ishida Silva', '1004', '$2y$10$VBkUuHAYnjbPxr5KIRwZ6.1Me6K8LpFKm5JWtqHCO1sYPV/4XgjX6', 'rafaela.ishida silva@gmail.com', NULL, 1, NULL, 1),
-(264, 'Kitana', 'Sato', '5283', '$2y$10$LLc.B7s6aKq/HHaNb3Ux.Oo9fYNZUyIl7ebejaawbBWmHS1VSF7Fu', 'kitana.sato@gmail.com', NULL, 1, NULL, 1),
-(265, 'Sheeva', 'Jordão', '5424', '$2y$10$JE0lskakQE4GnDUaNMlhOOYKRWaFbT3Wrle0SB7zKkO7YWliR4Q92', 'sheeva.jordao@gmail.com', NULL, 1, NULL, 1),
-(266, 'Cauê', 'da Silva', '1880', '$2y$10$YGieSJHR9wya16VaoBBf3OJSQocRmp26OOgwMuuGiM0tvaKvgWh2S', 'caue.da silva@gmail.com', NULL, 1, NULL, 1),
-(267, 'Michele', 'Franca', '3716', '$2y$10$qgCdRxNXExGq0iMpjyuzk.80gyVuhbBNJhXoT/6Y0KtQikUCboK62', 'michele.franca@gmail.com', NULL, 1, NULL, 1),
-(268, 'Irene', 'Takahashi', '3728', '$2y$10$pjeyq6ykV4Yf/GQzWz4r0.YVdrPU0W6C62MuATAR/rh0UMwYyz6hq', 'irene.takahashi@gmail.com', NULL, 1, NULL, 1),
-(269, 'Andreia', 'Gouveia', '1535', '$2y$10$ywy9a7IbgOOHMMjosVaVq.c.7AAj4xE2m8dtVOphBvBV8jV84Rwtq', 'andreia.gouveia@gmail.com', NULL, 1, NULL, 1),
-(270, 'Dante', 'Hernandes', '6032', '$2y$10$i67eP.ugam0EcgZa.RFMzu2YtSt.glCA1jAEtopOMc05K5PI1b2qq', 'dante.hernandes@gmail.com', NULL, 1, NULL, 1),
-(271, 'Trinity', 'Macedo', '8418', '$2y$10$DSa9QeUxSlbAMAvwkE5mXe1eJyATwwJpz.M7oCviOK6xrQKMsjrnm', 'trinity.macedo@gmail.com', NULL, 1, NULL, 1),
-(272, 'Jade', 'Freire', '6184', '$2y$10$.Ebb4/z0ZP9qVvnkeu3mJuBOoti3E3WmMvEslJ8cl69X1Pt6sSySe', 'jade.freire@gmail.com', NULL, 1, NULL, 1),
-(273, 'Caio', 'Pádua', '5265', '$2y$10$ZSOZQ/Pq7Z2YiWajKLq95OuINFmhZe0.PmjU/0vGN17v9i35NXlC2', 'caio.padua@gmail.com', NULL, 1, NULL, 1),
-(274, 'Doulgas', 'Faria', '4367', '$2y$10$yac/6t7rI.wpHEiym.AANeek8pnrY5aUe/CFZBvCsgnEbOdWKFjN6', 'doulgas.faria@gmail.com', NULL, 1, NULL, 1),
-(275, 'Akemi', 'Matos', '3344', '$2y$10$6lDRo2elbmtmY1ORDkhcdeF8eTWp5zB72ySaV6sNIAKABQ190xcoy', 'akemi.matos@gmail.com', NULL, 1, NULL, 1),
-(276, 'Administrador 1', NULL, '789', '$2y$10$mEBZpW6lzGSEzhtUYUysRuReW6LqKFMDelqkMm.AvUbXroKf0loF.', NULL, NULL, 1, NULL, 3);
+INSERT INTO `usuarios` (`id`, `nome`, `sobrenome`, `login`, `password`, `email`, `urlImagem`, `confirmed`, `confirmation_code`, `remember_token`, `tipo`) VALUES
+(1, 'Jéssica', 'Matos', 'jessica.matos@gmail.com', '$2y$10$7BNtCzd/agUzhYLi2b1HM.C4A8hiixBvz3tH8uDyPg7khbBfj7pS2', 'jessica.matos@gmail.com', NULL, 1, NULL, NULL, 2),
+(2, 'Milena', 'Pádua', 'milena.padua@gmail.com', '$2y$10$lz9jMLszczcUQUCau8ZFgOsciBWHJ5jDmKjO6Y5jCq2z1ZZRs2fEO', 'milena.padua@gmail.com', NULL, 1, NULL, NULL, 2),
+(3, 'Sheeva', 'Batista', 'sheeva.batista@gmail.com', '$2y$10$Qd2M3882PkkN5AoXR.yL0eKvVC.fH/5qBEQEnPlePjEqEaMVpcbhq', 'sheeva.batista@gmail.com', NULL, 1, NULL, NULL, 2),
+(4, 'Michele', 'Carvalho', 'michele.carvalho@gmail.com', '$2y$10$UFCV2uF1HydXUt.HDsec1efzW85g3rqD9BqeFlo4iBPG3/CUk6xY2', 'michele.carvalho@gmail.com', NULL, 1, NULL, NULL, 2),
+(5, 'Lara', 'da Silva', 'lara.da silva@gmail.com', '$2y$10$0pbCrmOycgXhu6eJxOxCUOanE8mmSnwLf2cQoTzpb9fYXP06vpojS', 'lara.da silva@gmail.com', NULL, 1, NULL, NULL, 2),
+(6, 'ChunLi', 'Valverde', 'chunli.valverde@gmail.com', '$2y$10$JCOlR/FE9elqqs81R4b9xupG0nLEHGT19.48Er9rWQSS02g270vG.', 'chunli.valverde@gmail.com', NULL, 1, NULL, NULL, 2),
+(7, 'Otavio', 'Gouveia', 'otavio.gouveia@gmail.com', '$2y$10$WADWmbnzAEwMp6.yqWa4T.LMTsj70GVnUH6QFUTxNF21xFRX9dDvS', 'otavio.gouveia@gmail.com', NULL, 1, NULL, NULL, 2),
+(8, 'Dante', 'Peixoto', 'dante.peixoto@gmail.com', '$2y$10$AIl99wJmgSjfPlKU8ouFKOQ//BrtNwixP.Lf6NcKCDw7EoBpRfBuG', 'dante.peixoto@gmail.com', NULL, 1, NULL, NULL, 2),
+(9, 'Doulgas', 'Takahashi', 'doulgas.takahashi@gmail.com', '$2y$10$vZUBkqCMJuBceffbpdaof.AITcr8k9.PSMnht.1oMRaMwOSXY2f5m', 'doulgas.takahashi@gmail.com', NULL, 1, NULL, NULL, 2),
+(10, 'Jonas', 'Franca', 'jonas.franca@gmail.com', '$2y$10$N6jiGIuna.yXQVBxbMaGHu5ihEZDyuQGgs1SFDtkK.DcmxxuITKPW', 'jonas.franca@gmail.com', NULL, 1, NULL, NULL, 2),
+(11, 'Daniela', 'Leal', 'daniela.leal@gmail.com', '$2y$10$pEfFx0vtA5U9DZ/SUIJuCO.NPK2PifR.OnKFuFg5xpaogORxHXcxS', 'daniela.leal@gmail.com', NULL, 1, NULL, NULL, 2),
+(12, 'Aline', 'Hernandes', 'aline.hernandes@gmail.com', '$2y$10$y.uOKqsWvDadQx7IWGkBxOS1MPmiEKSBbrBNsXjpQuRPzIjBXyQPC', 'aline.hernandes@gmail.com', NULL, 1, NULL, NULL, 2),
+(13, 'Monica', 'Lins', 'monica.lins@gmail.com', '$2y$10$fK4jGr5jetIlHyjTrDkA/uiy8k0yFJ5Qc.sMQQ37zI9Uidh4dhxJS', 'monica.lins@gmail.com', NULL, 1, NULL, NULL, 2),
+(14, 'Leonidas', 'Macedo', 'leonidas.macedo@gmail.com', '$2y$10$mXcMi2BPR.5sL9nuuqK7gO9Hy7B65My4TMTDt3n3eSRopYEOoewVu', 'leonidas.macedo@gmail.com', NULL, 1, NULL, NULL, 2),
+(15, 'Morpheu', 'Sato', 'morpheu.sato@gmail.com', '$2y$10$bnxc2b.3574VjCekYpZuH.qiKzAkWbZ8VN135Xsr9dLURUe3oWG5u', 'morpheu.sato@gmail.com', NULL, 1, NULL, NULL, 2),
+(16, 'Claudio', 'Tanaka', 'claudio.tanaka@gmail.com', '$2y$10$ZD3K4zluL27sAjF4MG1x5etRF20ms9rIRCQyb6LzAE9su1P9lGgZG', 'claudio.tanaka@gmail.com', NULL, 1, NULL, NULL, 2),
+(17, 'Augusto', 'Yamada', 'augusto.yamada@gmail.com', '$2y$10$moFht42S2Qn1jE4lpYwkSOtySN1GlA7tAcJvjVUxa281ddW6txjT2', 'augusto.yamada@gmail.com', NULL, 1, NULL, NULL, 2),
+(18, 'Eric', 'Valentine', 'eric.valentine@gmail.com', '$2y$10$AKcB8TuKvfNL5fpWkk5f8.E3epn74zJ6nPLurrjI/fd7u2P5v6gkS', 'eric.valentine@gmail.com', NULL, 1, NULL, NULL, 2),
+(19, 'Bruno', 'Villablanca', 'bruno.villablanca@gmail.com', '$2y$10$431UF5PfHdRbONg7TCk0Ge/wKAwkdbSxyChLqkXBSruYVP1WBUl9K', 'bruno.villablanca@gmail.com', NULL, 1, NULL, NULL, 2),
+(20, 'Yori', 'Salgueiro', 'yori.salgueiro@gmail.com', '$2y$10$I5cbKJ2xe/p0Fy9iPbM/ROYRQtxoW8TS8wjEdeBSeUAC.vYr0KV0y', 'yori.salgueiro@gmail.com', NULL, 1, NULL, NULL, 2),
+(21, 'Angelina', 'Suzuki', 'angelina.suzuki@gmail.com', '$2y$10$fR3qT6EUXeb/RLen1y9K.uxLjiA.2lpc8ygmFqZdhhaTm6mcaOdka', 'angelina.suzuki@gmail.com', NULL, 1, NULL, NULL, 2),
+(22, 'Trinity', 'dos Santos', 'trinity.dos santos@gmail.com', '$2y$10$i9Cq6Wec.WQsla4UZJXqfencmxX4T1DMwVZimC0C994RH/kBmzd9K', 'trinity.dos santos@gmail.com', NULL, 1, NULL, NULL, 2),
+(23, 'Akemi', 'Costa', 'akemi.costa@gmail.com', '$2y$10$ZMvuv.t3BfT4FTwW92fGFOt3x.GqVacNXeAgCbKOsFiFc6OAansp6', 'akemi.costa@gmail.com', NULL, 1, NULL, NULL, 2),
+(24, 'Yoko', 'Rocha', 'yoko.rocha@gmail.com', '$2y$10$8nbhxPCb91SjK6X4jbqF/uX6JYAyTlJVlgilrlFcDgXr5T/yUiwme', 'yoko.rocha@gmail.com', NULL, 1, NULL, NULL, 2),
+(25, 'Eduardo', 'Minazuki', '2544', '$2y$10$VhCfvoNxl/uxMhWEK.WcNelGokzc/vfhctkp1VcTfAvMUIbGOH.Xy', 'eduardo.minazuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(26, 'Rafaela', 'Ishida', '1926', '$2y$10$zeoOFfaUnB5kRQoEM2uuh.11USq6255ISQh621tMNVANnEcOWfH6.', 'rafaela.ishida@gmail.com', NULL, 1, NULL, NULL, 1),
+(27, 'Caio', 'Macedo', '4787', '$2y$10$OAQ2X8hjYVfjxvPYqZUdhO0JKFf9SiNB9yZojDHR.NSAzorFGZ4nC', 'caio.macedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(28, 'Kitana', 'Peixoto', '4018', '$2y$10$KwJo5ohxNxtsc8wXCM7r6usluetxBxVOSrKQe5hjoF6hcG9.u1jRG', 'kitana.peixoto@gmail.com', NULL, 1, NULL, NULL, 1),
+(29, 'Morpheu', 'Villablanca', '9275', '$2y$10$FEadyWuTELblrIx9plrqmeVlRbaI1HgjbNhr1a3OSOpca436LU87S', 'morpheu.villablanca@gmail.com', NULL, 1, NULL, NULL, 1),
+(30, 'Chunli', 'Neves', '5807', '$2y$10$v.olg2wRPK2w2auRWXTmp.LgmfVLMuYyjzg1bEoXx91mU6YZYV/mK', 'chunli.neves@gmail.com', NULL, 1, NULL, NULL, 1),
+(31, 'Caroline', 'Neves', '8745', '$2y$10$i01fvEgFGrY27R4SXelrru75vyuyKIxp0bArOi.xWexhvEbPL9QQ.', 'caroline.neves@gmail.com', NULL, 1, NULL, NULL, 1),
+(32, 'Caroline', 'da Silva', '5030', '$2y$10$SbNfBrIFTfBUyhDrSeonFu0K6Q.bjHMASCFBrPdA7MLy240Bw8bLe', 'caroline.da silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(33, 'Cleber', 'Sato', '8129', '$2y$10$2.dzYLICatbxJ9dl4tgUG.ly/cH//yihbaGH/TQ2VFPEbjVgPUBHG', 'cleber.sato@gmail.com', NULL, 1, NULL, NULL, 1),
+(34, 'Irene', 'Salgueiro', '4507', '$2y$10$h3f1WsiYSGMnM0xDejOCo.jsJ3aIgiGIqNCeEx47wu9jZgbH/EprS', 'irene.salgueiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(35, 'Filipe', 'Neto', '7502', '$2y$10$NmQBBin/qOjEsvPKzCmrQ.yOXMUYuYyipwJhBmN/gLJXB3vUisw2m', 'filipe.neto@gmail.com', NULL, 1, NULL, NULL, 1),
+(36, 'Filipe', 'Nazário', '7508', '$2y$10$DM76EGv8lhk0/X9jpXcOve03L0WfqzK2.9ExDKRcI9EUHohUDMyOS', 'filipe.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(37, 'Barbara', 'Nazário', '6599', '$2y$10$QcRRmWsCwCXjK2C8v//dyu59MFegk.gVyLK9byohmpNnb9bC/Gb8i', 'barbara.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(38, 'Sarah', 'Ishida Silva', '6314', '$2y$10$rjXSSvsonEByDLPuRx/i8e0E8YvqeJYgteKBi8B0LMakiBGQxCD7W', 'sarah.ishida silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(39, 'Akemi', 'Semedo', '2349', '$2y$10$KI4Jye7NlrNoypIvJdWkIODnJgYDZHo8r3aL.5zy9bkEGx/HhJWVS', 'akemi.semedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(40, 'Milena', 'Nazário', '6821', '$2y$10$K/KoPiy42gjShMqHrAJjm.t/2ZX21kua2KaPR9UNwr.3H/gyfk6cy', 'milena.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(41, 'Milena', 'Castanheira', '3001', '$2y$10$itRSZ5A3lZkdPD0OZaP8seWFE6SwJjg0yk9eQ.ilREqT9zlSs.6ra', 'milena.castanheira@gmail.com', NULL, 1, NULL, NULL, 1),
+(42, 'Cleber', 'Freire', '9096', '$2y$10$cKV2WUwu4f7x3ZGLOGwf2OGJyhHFJSeyPu2IYomRSzosfHwR6d64O', 'cleber.freire@gmail.com', NULL, 1, NULL, NULL, 1),
+(43, 'Cleber', 'Leal', '3634', '$2y$10$fdj3laPOmK9oA.8E34dC/.xcgYzjE2xHmCTX9crKFsYAgS.MDnFtO', 'cleber.leal@gmail.com', NULL, 1, NULL, NULL, 1),
+(44, 'Jonas', 'Nazário', '7255', '$2y$10$zedhgkWiNQm/SGdQAEEWruFS0CQ3PaTi7c1sf4vZVTF1ZbXHdJ1NS', 'jonas.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(45, 'Filipe', 'Monteiro', '7935', '$2y$10$RtXoG.uKYVDXa1SCaDULI.3c66XZOOray/AHBvFk8xjWi87y4Ofyy', 'filipe.monteiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(46, 'Otavio', 'dos Santos', '6521', '$2y$10$pnDjYqdmTeJ8HjaRqzAjH.cHsdzCMQllc6tSbyvlDJOjafahpXLJm', 'otavio.dos santos@gmail.com', NULL, 1, NULL, NULL, 1),
+(47, 'Jaime', 'Valverde', '8001', '$2y$10$tE29hCVl0i.o7Nu0RHVfp.c4qNcMIvRZ/OFIB4IkRq5py1pcgkF.q', 'jaime.valverde@gmail.com', NULL, 1, NULL, NULL, 1),
+(48, 'Xerxes', 'Rocha', '2734', '$2y$10$Kvmfbnu2MNFnc2067ZUgQuCYLDmr20IGA.xxp/VcfFn7k8oq18.wS', 'xerxes.rocha@gmail.com', NULL, 1, NULL, NULL, 1),
+(49, 'Alexandra', 'Pinheiro', '1878', '$2y$10$ZWDzPf3Xet4Zbt70F52J/OeNx25ry0iMZVA8Dvxu/sqh2xfYHSRCm', 'alexandra.pinheiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(50, 'Sarah', 'Carvalho', '5117', '$2y$10$yf6kksYm6myunie8H7PNdeD4ok4Df72ycw3yRAPLKOPh8W9HTewFe', 'sarah.carvalho@gmail.com', NULL, 1, NULL, NULL, 1),
+(51, 'Sonia', 'Takahashi', '2985', '$2y$10$mvFB5DlOCEkfYfAfDOYrKOcGyCnkYq.mqgKehHuDR79Wmxu7qiHo2', 'sonia.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(52, 'Caio', 'Nazário', '1791', '$2y$10$1eTO/XI9vcSyHzFUn9ianeZBKukbwo52fs7WDYqlolkZ2jcNNi1VW', 'caio.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(53, 'Jaime', 'Takahashi', '4089', '$2y$10$OZp4Nq8HYGjMygBXQmdbXuRK1QIvUnqBqAa5KlCBV99KaVlHrAnIm', 'jaime.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(54, 'Akemi', 'Takahashi', '5490', '$2y$10$coX3BFZe9Yjzbazp4/oTXedC3gM2/0hBpf5xaqqNhWGpXaeomVSY2', 'akemi.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(55, 'Peterson', 'Torres', '3641', '$2y$10$X4jOdbOpKQrrSLqPrhA2U.s2JpiTXeUl13I7EGCbXI7g/toVJZbae', 'peterson.torres@gmail.com', NULL, 1, NULL, NULL, 1),
+(56, 'Simão', 'Alves', '5460', '$2y$10$rKgkLzsk5.SsUr7J0gBJN.TWCwA4hkKzxsNNcFTFZA9tIvvOLm/My', 'simao.alves@gmail.com', NULL, 1, NULL, NULL, 1),
+(57, 'Sonia', 'Nazário', '3056', '$2y$10$DXfvPE7XTeM8.wmylKLAcuLs9z76QQlTY8sTr7IdDXqZc0tkUoHI2', 'sonia.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(58, 'Fernando', 'Hernandes', '8385', '$2y$10$iV1ZCMajVdgJtAw0fM4g7.6u22BmyPEDB4eAW.GL353RMVrNasNUS', 'fernando.hernandes@gmail.com', NULL, 1, NULL, NULL, 1),
+(59, 'Claudio', 'Severo', '1487', '$2y$10$rxavZDjaRJkyM3LyB3qFTOwbw2ISVqhOnur8yEf2Wctl.I0ionkBK', 'claudio.severo@gmail.com', NULL, 1, NULL, NULL, 1),
+(60, 'Milena', 'Matos', '4196', '$2y$10$WwWqJrKGoFvkcM5ex1SxQ.dVAL8K1BmbnU1O0S13jzJnVom3VYIpC', 'milena.matos@gmail.com', NULL, 1, NULL, NULL, 1),
+(61, 'Cauê', 'Carvalho', '7113', '$2y$10$ngKcQX7B2W/MGRJzs0MDr.DLws0eYutjGHvgYFBczCVAttwaLsqNm', 'caue.carvalho@gmail.com', NULL, 1, NULL, NULL, 1),
+(62, 'Simão', 'Freire', '1023', '$2y$10$.6X3XnZAu/J/mFr908tbM.7F0ZpFt4gpZHrVXKWE.5Viviuq3AVRS', 'simao.freire@gmail.com', NULL, 1, NULL, NULL, 1),
+(63, 'Leonidas', 'Semedo', '1285', '$2y$10$A0rXyQ./c95R9GqPV27hb.J/Pygn3zQj6lPsxGGNFpTR4.whhSoPG', 'leonidas.semedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(64, 'Peterson', 'Neto', '1409', '$2y$10$8Xf9kXN1mtGqwmIkBCxSYu2qewK.Txj4YcatT4c9e50vYZrqBQo0i', 'peterson.neto@gmail.com', NULL, 1, NULL, NULL, 1),
+(65, 'Fernando', 'Costa', '9516', '$2y$10$DTeUVcyi0PLyO8uQDNxYIulAqkBfoJg7J8quKsYv8o/U/Lt/zbDoy', 'fernando.costa@gmail.com', NULL, 1, NULL, NULL, 1),
+(66, 'Andreia', 'Jordão', '6692', '$2y$10$DRtE2E43eC2zBpOt7.4qoOHE6C/eKIGNt29ucY/87X0ZqIIrQAtNu', 'andreia.jordao@gmail.com', NULL, 1, NULL, NULL, 1),
+(67, 'Caroline', 'Rocha', '8148', '$2y$10$8cAgoIsI4bahkIbVSpvWfe52OGvb0oLLClKxWQ78yly4CPznajfS6', 'caroline.rocha@gmail.com', NULL, 1, NULL, NULL, 1),
+(68, 'Chunli', 'Carvalho', '5932', '$2y$10$Pe5a4baGxIeTOGFOQtSceu64WmAhhmp09ZemqJ.aIXp5tVQL6Gt9a', 'chunli.carvalho@gmail.com', NULL, 1, NULL, NULL, 1),
+(69, 'Eric', 'Ishida Silva', '9277', '$2y$10$WaeUqvwcEPhx94ZI7DKVeupwd6rud16E4tmSn9VIJZ0xx2TdvmRzm', 'eric.ishida silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(70, 'Akemi', 'Redfield', '7605', '$2y$10$VeAtMlAEi6HMxLq.1FJN/.4578ktywXXz61ICmFR3g.2aLH1ZakYi', 'akemi.redfield@gmail.com', NULL, 1, NULL, NULL, 1),
+(71, 'Rafaela', 'Tanaka', '2312', '$2y$10$20x0CsQvK/rJVSxlDarxGucTCnWNbr/Z8qoeMWxP1HCPHpZsxdHBy', 'rafaela.tanaka@gmail.com', NULL, 1, NULL, NULL, 1),
+(72, 'Trinity', 'Neto', '4036', '$2y$10$AZSFV1tGbsHNFjY1qFUr8.HVWa/m30Wdeiy50ZsU4lwpv.hqMC3GK', 'trinity.neto@gmail.com', NULL, 1, NULL, NULL, 1),
+(73, 'Jéssica', 'Freire', '4663', '$2y$10$96Xo1hTc.r8RvyQ8ugrG0ef26aCPhoTcRZhppfMk3QYAfwLVmV3Bm', 'jessica.freire@gmail.com', NULL, 1, NULL, NULL, 1),
+(74, 'Otavio', 'Pádua', '8773', '$2y$10$jwaaubAuvXF7qMoW.EcfMuinq8G2ICTKuQ8k/caSGTj/2TLCAJKoq', 'otavio.padua@gmail.com', NULL, 1, NULL, NULL, 1),
+(75, 'Xerxes', 'Matos', '2347', '$2y$10$vv1FTf9k6Ma1MwACGsUdXOj3HXXS92VrtUZ1XcKRusghbHhcJKjCC', 'xerxes.matos@gmail.com', NULL, 1, NULL, NULL, 1),
+(76, 'Dante', 'Minazuki', '4867', '$2y$10$V.qszkYZjn3E6RXVAJCWfu9AGK5GUwu24BOdcw.tOTP/UD5TFlOV.', 'dante.minazuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(77, 'Milena', 'Batista', '3715', '$2y$10$0500Yp2QVkAdFi0Nd37NFees8syds.xVxBQrKWtCf3.laVN5rJmnC', 'milena.batista@gmail.com', NULL, 1, NULL, NULL, 1),
+(78, 'Eric', 'Alves', '9348', '$2y$10$vwhAG1atI9QcYN4qkd0SmeruKBYdD6oMsB2LInFB6IUdN5/6MlqQi', 'eric.alves@gmail.com', NULL, 1, NULL, NULL, 1),
+(79, 'Dante', 'Macedo', '4776', '$2y$10$1nBNgRhBMO7UMbxvxHaxlu1b8TrxSjGhKqJspTSHOhXON44FE9GES', 'dante.macedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(80, 'Jade', 'Villablanca', '1702', '$2y$10$B2ODweDxUL00kyg.gdlweuVGIZ5bNl5nk1fPSJkFkQ.n/Wqjdpc0K', 'jade.villablanca@gmail.com', NULL, 1, NULL, NULL, 1),
+(81, 'Daniela', 'Monteiro', '2722', '$2y$10$cN4l3Lw.19S1pEfSubN3LehEBwiqXO4gWLFQDG7BFg13z.hT.yipC', 'daniela.monteiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(82, 'Morpheu', 'Matos', '1501', '$2y$10$shCke7tNG.8hdUJjriBI4O1aqI5x1Ad.IegZwDHIBAwDFrfUAfRay', 'morpheu.matos@gmail.com', NULL, 1, NULL, NULL, 1),
+(83, 'Rafaela', 'Alves', '7815', '$2y$10$JPUMS4mnWwWQctBr5dF9mufQrFkvjxBzB2UOQvi30DdpjDOew9vyO', 'rafaela.alves@gmail.com', NULL, 1, NULL, NULL, 1),
+(84, 'Fernando', 'Takahashi', '4804', '$2y$10$TwF73H4R3HnVCRs2/yFIvOWF3wzoouJ0KaCWs/41KIAwyhKjQdwQa', 'fernando.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(85, 'Jaime', 'Pinheiro', '7148', '$2y$10$ttptGxKhZpRVJ38dHIHpjOums8HsnexVu15.saq7LwUURTOFVjS1u', 'jaime.pinheiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(86, 'Xerxes', 'Torres', '4622', '$2y$10$E/q8PAIIMxpW.Bx0RdD2ie14/Bbnbx.Jr7NjpplA.xiH2CcxPBmIG', 'xerxes.torres@gmail.com', NULL, 1, NULL, NULL, 1),
+(87, 'Camila', 'dos Santos', '1582', '$2y$10$9gXFSCAydxSDnFfBn99RiusZ9d8dbTidFb0v6D3u27F9bHOtNfKJS', 'camila.dos santos@gmail.com', NULL, 1, NULL, NULL, 1),
+(88, 'Bruna', 'Faria', '1365', '$2y$10$ZMhYq2VxATY9i0d/kcSFpOHjMePfZRTART3P.AVh29UcaItK89PPS', 'bruna.faria@gmail.com', NULL, 1, NULL, NULL, 1),
+(89, 'Odete', 'Salgueiro', '7025', '$2y$10$D.WLXra9gwf3VqsWCsfLyO.6Z2jZgkC52WsBOpBoHfKnmnODkOIwy', 'odete.salgueiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(90, 'Sarah', 'Castanheira', '7617', '$2y$10$aDnNlF9EkvDOHigVYmKsMudL0bg.PTtbjykr0e9IvhrjcEC/I6WpS', 'sarah.castanheira@gmail.com', NULL, 1, NULL, NULL, 1),
+(91, 'Doulgas', 'Gouveia', '6606', '$2y$10$oIRQk2y7N8fOJGUXeFaBPOcdzK9VsrW4uQTh4aOLYNwQ6tEV/hE3O', 'doulgas.gouveia@gmail.com', NULL, 1, NULL, NULL, 1),
+(92, 'Caio', 'Costa', '9210', '$2y$10$jf7JVu0oJazp46Oxn87SrerCIfz74CoFTZT6krtxzFv3yKrqr0zBO', 'caio.costa@gmail.com', NULL, 1, NULL, NULL, 1),
+(93, 'Xerxes', 'Minazuki', '9643', '$2y$10$W88w68/9O82TXrgreE6G2ujqO1gqUTDoEqBD8MIK3j6v/w8BqBZFC', 'xerxes.minazuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(94, 'Jade', 'Lopes', '3809', '$2y$10$pUDeqQDDkbwnltcLSpwLwOMMhL6ux3qPnUgZk.oo8S6kVC6d6.Ahe', 'jade.lopes@gmail.com', NULL, 1, NULL, NULL, 1),
+(95, 'Dante', 'Camilo', '8586', '$2y$10$.OcV2MQ302FFGNjK5mDS2utaOKueBjF3w4caeRUGstRIswWSm.pda', 'dante.camilo@gmail.com', NULL, 1, NULL, NULL, 1),
+(96, 'Akemi', 'Valentine', '2385', '$2y$10$10gIbAxNDZJ./GgvpZXGZulz4viNAyqyYA2an5rtLdA0P4mij5h/2', 'akemi.valentine@gmail.com', NULL, 1, NULL, NULL, 1),
+(97, 'Jill', 'Castanheira', '7985', '$2y$10$V/6KVXiuBnsqiljxIlY.NeWOcIbSLZ7SFV09zpyZqjKgnZKk7nfwO', 'jill.castanheira@gmail.com', NULL, 1, NULL, NULL, 1),
+(98, 'Trinity', 'Redfield', '8730', '$2y$10$QjLBQNmnZlvcc9C.OwUeCuv4HYrTJJ.m8yRTnhYICj4WbhxJMMfP6', 'trinity.redfield@gmail.com', NULL, 1, NULL, NULL, 1),
+(99, 'Sonia', 'Pádua', '8480', '$2y$10$BgSAV/XOo3gqVrX0NtOlsOpCDbHcUz0LbZJSMVqs0T9g9Z4ALOLoa', 'sonia.padua@gmail.com', NULL, 1, NULL, NULL, 1),
+(100, 'Augusto', 'Castanheira', '7909', '$2y$10$0FMMuu3FqY8aHs7fSlv5m.cp8Lh2p8nvHXtSEvSvojuVewkzRsG3e', 'augusto.castanheira@gmail.com', NULL, 1, NULL, NULL, 1),
+(101, 'Yoko', 'Alves', '7344', '$2y$10$ZZrOJ669ofqefpATPmBxK.tomnozqEqVsHbOZdSq9xFZNHU63/Huq', 'yoko.alves@gmail.com', NULL, 1, NULL, NULL, 1),
+(102, 'Michele', 'Macedo', '4368', '$2y$10$FVYvv.5o5FBvTcfqPubvpegZb6ozRsvF.UAEAUG1h1zCktpk9kCQS', 'michele.macedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(103, 'Peterson', 'Costa', '9074', '$2y$10$O/bGTG.PvWHklzBn9FsYneUWZT8j5Q.x90J2959gDgPabzjHh7sga', 'peterson.costa@gmail.com', NULL, 1, NULL, NULL, 1),
+(104, 'Bruno', 'Monteiro', '6180', '$2y$10$tQLwfS3CT.Y13lh2E8FezOVrXrxatNZSPvZbqXple8Jsqnb35fS4K', 'bruno.monteiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(105, 'Jonas', 'Matos', '9653', '$2y$10$sNPs16o3kiSsBr7FdyCBoOl7kAxdyM13b6LHpQNisulM6goagQQru', 'jonas.matos@gmail.com', NULL, 1, NULL, NULL, 1),
+(106, 'Jade', 'Franca', '3738', '$2y$10$W85S3BUKfzWIWzjUYSLti.Lp1/pS1K0g8qpidoQG0okmx9a4Gm36q', 'jade.franca@gmail.com', NULL, 1, NULL, NULL, 1),
+(107, 'Peterson', 'Redfield', '4685', '$2y$10$XyuXb0mHdlaMxlJ0MWjygO2kex4EQR0/gRCScXDUK2r4i3ZMbqHty', 'peterson.redfield@gmail.com', NULL, 1, NULL, NULL, 1),
+(108, 'Filipe', 'Neves', '1458', '$2y$10$bRnMatJVjdX4Q2z.CK6hFubQRr/WYObuclK2XqFQV4UGpXOWb4pEa', 'filipe.neves@gmail.com', NULL, 1, NULL, NULL, 1),
+(109, 'Jill', 'dos Santos', '2063', '$2y$10$Qh1KufFTZ7YGxIdhVS.qNex9e8s6t3G1ZaoEzuSi4xG3gv9zWWqc.', 'jill.dos santos@gmail.com', NULL, 1, NULL, NULL, 1),
+(110, 'Cauê', 'Minazuki', '1316', '$2y$10$7zykr.CqU6OTDjrtVFWSdOlaWKJrnmCQq9xN49MI2VorJL4aBp1Ui', 'caue.minazuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(111, 'Jonas', 'Valentine', '6061', '$2y$10$b0on1ExzPvngaKer2n61AOlFvW5yhiJhXaE/F.s7edKcFU8odBWFm', 'jonas.valentine@gmail.com', NULL, 1, NULL, NULL, 1),
+(112, 'Irene', 'Camilo', '6295', '$2y$10$c2AsoUO97nUGXAjY0KXduOPj9k0mvQ38dBK8HitA7F9srocAnyYRq', 'irene.camilo@gmail.com', NULL, 1, NULL, NULL, 1),
+(113, 'Doulgas', 'Tanaka', '5337', '$2y$10$fFVRrVpD875EqIuGPgYTC.3PjSptW1ItUF.r8WxZ39vGCbZlbi.hu', 'doulgas.tanaka@gmail.com', NULL, 1, NULL, NULL, 1),
+(114, 'Angelina', 'Valentine', '5403', '$2y$10$5hxnT9tP0qngf4q6RocyS.neanSzO1RIHf6SnV6ozLbyr867rn9M2', 'angelina.valentine@gmail.com', NULL, 1, NULL, NULL, 1),
+(115, 'Monica', 'Suzuki', '9171', '$2y$10$sCMmNZKhW2HXhwXCsKFcn.YBF9kWLiCPE.ZPkbcODcXy3nhU0I6yW', 'monica.suzuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(116, 'Peterson', 'Faria', '3523', '$2y$10$lbtW/E4MRBn6TBT9Nzyx5OLLaxyw3URs73RtPhdXjfIp4kdR4LwpW', 'peterson.faria@gmail.com', NULL, 1, NULL, NULL, 1),
+(117, 'Leonidas', 'Severo', '4723', '$2y$10$YkvgkP.SfBYtPkHld84/M.UEzGZQkBkAMuE.qM5cy6EmFyAqJux3O', 'leonidas.severo@gmail.com', NULL, 1, NULL, NULL, 1),
+(118, 'Augusto', 'Neto', '8450', '$2y$10$OYJ/uLfnF0JpSaK3SucHlOyEa/Urk/H3F81e3uS7KyQu8yHOvDLjC', 'augusto.neto@gmail.com', NULL, 1, NULL, NULL, 1),
+(119, 'Leonidas', 'Nazário', '8261', '$2y$10$IJdCOIeEj53faNVI90kXueICel5kuGiZk5tgtU09pLeMIo6JBDyAa', 'leonidas.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(120, 'Eric', 'Hernandes', '3519', '$2y$10$caFSJBVb2kU4ZmmSWeJaBeBfcsZENMZ6B.pbk9pI8K87RJLn8k9SS', 'eric.hernandes@gmail.com', NULL, 1, NULL, NULL, 1),
+(121, 'Chunli', 'Nazário', '9654', '$2y$10$efS//y5i86XmQ5HhsOEbuOEMT2uu3NmCkpVKYzeQwLv.dlIshcd/C', 'chunli.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(122, 'Doulgas', 'Castanheira', '9473', '$2y$10$Y7IFdapizLLTZrhwkX.KJ.VqLl288vB4simODZ5biuKbTgWLYnwRq', 'doulgas.castanheira@gmail.com', NULL, 1, NULL, NULL, 1),
+(123, 'Jéssica', 'Franca', '2957', '$2y$10$kiuZI7Oj7G4BGzoIResEme9wmCJjU7uZfkix6jn0ueLtANFQfrk9e', 'jessica.franca@gmail.com', NULL, 1, NULL, NULL, 1),
+(124, 'Jaime', 'Villablanca', '5694', '$2y$10$Jf/NCFCruYi95o5uu6o12eey.2CtQdqGcWrflmzl55n86AI2lNJeK', 'jaime.villablanca@gmail.com', NULL, 1, NULL, NULL, 1),
+(125, 'Peterson', 'Minazuki', '3068', '$2y$10$9hlyICXQUX.wK6yMrwdQeOxy82RAF6dP7oEMYqbE4VP9opkhUL21u', 'peterson.minazuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(126, 'Cauê', 'Gomes', '8712', '$2y$10$pprwrCFfvJnYWva7Kz.6XeNz4/v95RCMkKoMjoKquuAXtzHhsym2y', 'caue.gomes@gmail.com', NULL, 1, NULL, NULL, 1),
+(127, 'Leonidas', 'Yamada Silva', '8234', '$2y$10$NbxupH6bYXUobGaXzwgqx.vh6s4qQua6TvbG6mDoOe0Kgd87ZLLou', 'leonidas.yamada silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(128, 'Leonidas', 'Matos', '3977', '$2y$10$jHPBfZWNVlZTZcQRm5BoR.lBCH9krhHvvUCQR2oZQZinH/GgnWV3G', 'leonidas.matos@gmail.com', NULL, 1, NULL, NULL, 1),
+(129, 'Michele', 'Valentine', '5317', '$2y$10$I5TL8guMrCIrzIniRm98EeRpWNsqlRF1/CB7YuOP/bvRX5IlFmFaG', 'michele.valentine@gmail.com', NULL, 1, NULL, NULL, 1),
+(130, 'Doulgas', 'Sato', '7146', '$2y$10$pziTpu3GgrrxDu6Pcokvl.z34fmCBcVH6KSSYghpAqZmRDyTlkO3C', 'doulgas.sato@gmail.com', NULL, 1, NULL, NULL, 1),
+(131, 'Doulgas', 'Rocha', '3428', '$2y$10$V0AKVeiH7HhJyIltbGHwCeCjgJWjkN.z0lgfrgtFl3v6fnd0rcGPS', 'doulgas.rocha@gmail.com', NULL, 1, NULL, NULL, 1),
+(132, 'Dante', 'Lins', '6404', '$2y$10$kDrAve3zpz9hyYwUYXX1cOxc1b6ii.sM.stUnM/IF9..Deaf8AX/u', 'dante.lins@gmail.com', NULL, 1, NULL, NULL, 1),
+(133, 'Cauê', 'Takahashi', '3117', '$2y$10$ugm8dTQzwCPhwElKW30Rh.oPBD3Lc2SS79xUnj2k1b0NuF.lvkmp.', 'caue.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(134, 'Michele', 'Rocha', '6798', '$2y$10$KWb0/PKkFtlSD.j0SROV4O.eRy2tFS2Y9AnWfnheD1hqXp1hZ5V8q', 'michele.rocha@gmail.com', NULL, 1, NULL, NULL, 1),
+(135, 'Tamires', 'Matos', '2909', '$2y$10$4dnnwqKHmbRTnEBxm1vpz.//4f.MBUUXh0RidQJ3k96mQgrypcpe6', 'tamires.matos@gmail.com', NULL, 1, NULL, NULL, 1),
+(136, 'Aline', 'Lins', '4774', '$2y$10$whiambXtA2kX190cknzPfu1WSTaPfAI3plL1ehTXTdGucN640xv7K', 'aline.lins@gmail.com', NULL, 1, NULL, NULL, 1),
+(137, 'Monica', 'Batista', '3786', '$2y$10$ORLqIzSEdWOl/jLGRSW21u5IHgNTUd1ZJLRTkzwbFnREdfvNsjKHy', 'monica.batista@gmail.com', NULL, 1, NULL, NULL, 1),
+(138, 'Caio', 'Hato', '2209', '$2y$10$bILmXGIjLn9IIwwNgxqqE.nFG0g1O.7ZlApLNdkuFyBgVFpihHjqq', 'caio.hato@gmail.com', NULL, 1, NULL, NULL, 1),
+(139, 'Eric', 'Sato', '5768', '$2y$10$Qh3/WwJCmSsN3UOqwQNScek/ACW3ayzXhJQXu2xEsQi5MbuEBTO.i', 'eric.sato@gmail.com', NULL, 1, NULL, NULL, 1),
+(140, 'Akemi', 'Costa', '1718', '$2y$10$wq8blSjBtClpU2Mt4bHIheI9DgdgQiLISWYqYm55JxBkdr8i7O8WK', 'akemi.costa@gmail.com', NULL, 1, NULL, NULL, 1),
+(141, 'Milena', 'Neves', '2721', '$2y$10$hAmq1yubC2zveA2bj9icDOPCOQnBNGyl2nJ0wxOMhrGE3O0Lx4sSG', 'milena.neves@gmail.com', NULL, 1, NULL, NULL, 1),
+(142, 'Bruno', 'Semedo', '8182', '$2y$10$wh1vCdx.0jV79Ua7WAABJO.m0YL2LqG5fTR0BRrakfQYOXreju1dW', 'bruno.semedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(143, 'Odete', 'dos Santos', '3920', '$2y$10$4oT9GAqUtEe/pY.Yo8/vzeRv547NNoK0KI96waWbmRdlID7kScNoG', 'odete.dos santos@gmail.com', NULL, 1, NULL, NULL, 1),
+(144, 'Jaime', 'Nazário', '5097', '$2y$10$KmYKoNsFs60siADfuwdiHup9fr8h41.oIFpEGQ6JfsGiLJO1HCxSq', 'jaime.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(145, 'Michele', 'Castanheira', '7016', '$2y$10$l2xpEIEzAMUNlNw7XOkbMOFRBkvblH.N9L.L4nRiHIEsTBkZdP.Pa', 'michele.castanheira@gmail.com', NULL, 1, NULL, NULL, 1),
+(146, 'Caroline', 'Minazuki', '9003', '$2y$10$TlnBXYcZMrxI9/CzLCEw2O2SXsvVhMUmhjVbd3rgmgQWPbx6jrSWy', 'caroline.minazuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(147, 'Sonia', 'Macedo', '5413', '$2y$10$Bkf3vA8ZhLqNWFz9rkcxKezo37f7.p8bjKecTP3RyiNWobIjWiKni', 'sonia.macedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(148, 'Kitana', 'Lins', '6896', '$2y$10$QkRkn1BSTEeHn0U0A3fom.zXvRJMJzmBiANdd5TtXLYS9Exco19re', 'kitana.lins@gmail.com', NULL, 1, NULL, NULL, 1),
+(149, 'Dante', 'Faria', '9640', '$2y$10$BmyqdroKpyj9Cs19ybhfZOy..KEDTGTyh1UiOkx3S84jCrZ0uN89e', 'dante.faria@gmail.com', NULL, 1, NULL, NULL, 1),
+(150, 'Claudio', 'Faria', '3020', '$2y$10$WezVoHhuvLiVs9WH2ccYR.K8hWuRE5f485/UiwvOJ9M2CtAVGZyAK', 'claudio.faria@gmail.com', NULL, 1, NULL, NULL, 1),
+(151, 'Sarah', 'Peixoto', '3321', '$2y$10$vFOpkoAEAwZsM7otuazGBu8bDTmsASE8B5sAAVok9FFbq8oe1mVd.', 'sarah.peixoto@gmail.com', NULL, 1, NULL, NULL, 1),
+(152, 'Eduardo', 'Pádua', '6752', '$2y$10$OL2KK8eFqSnwek/2vs2qX.Hk66nXkaeFR2Adr6/WFFst3z7/ICBSK', 'eduardo.padua@gmail.com', NULL, 1, NULL, NULL, 1),
+(153, 'Otavio', 'Franca', '1639', '$2y$10$BIV0dyYJMl4RErXqLvq.CuR70GK6iJ3B8H6H4D.bwNmGpHpS/Wnv6', 'otavio.franca@gmail.com', NULL, 1, NULL, NULL, 1),
+(154, 'Jill', 'Salgueiro', '6610', '$2y$10$LBFLz/iw7iP7lVXZjIxMT.pOAKrQdbAHI8wfBmveBTclC8M7kWIXG', 'jill.salgueiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(155, 'Camila', 'Nazário', '9642', '$2y$10$deqnVeOntt09F/2f/iH.duO4e.RelKlLXTGG.nRdXIdvKsxE7QAhO', 'camila.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(156, 'Camila', 'Lopes', '1631', '$2y$10$SPbbsuCtmvYWrHF97chF7.LivGeLb2J2MHmDXmHPivjT1AzNc8U4K', 'camila.lopes@gmail.com', NULL, 1, NULL, NULL, 1),
+(157, 'Lara', 'Nazário', '3116', '$2y$10$qKR/fCwDNbOEeZSUKkiUjuvpcwBPNk2do8OTfELxHLYU.SdLVfJ3G', 'lara.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(158, 'Andreia', 'Takahashi', '1555', '$2y$10$1lMd3Y9gyddIpe67ucvqwOhUOyTEy2LBhazQTmcGPbuuKclIGssmS', 'andreia.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(159, 'Yoko', 'Franca', '6337', '$2y$10$S53xwStJed3dwC5f5XzFRO5HMkTIeYtS8A2FpAZHgEMRyVzW9yPVi', 'yoko.franca@gmail.com', NULL, 1, NULL, NULL, 1),
+(160, 'Claudio', 'Nazário', '8110', '$2y$10$B1xkmJ7rs2MXiNtJwybTNe8nF20NfYPsppSvc//mo9C3cdNz0iPB.', 'claudio.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(161, 'Barbara', 'Tanaka', '9031', '$2y$10$5kQc0eu33k2YetV9SbrwwuDJDItaHAZ7oGL5dPN2R.XvsuTZJOVOy', 'barbara.tanaka@gmail.com', NULL, 1, NULL, NULL, 1),
+(162, 'Jonas', 'Lopes', '5607', '$2y$10$l79Z68DiBO.JdVrtHQXo4OM6xErBZPtvVXyYGiwr.NAmeV0Q5iguS', 'jonas.lopes@gmail.com', NULL, 1, NULL, NULL, 1),
+(163, 'Fernando', 'Castanheira', '8016', '$2y$10$EVRVak.sq2oVQboXujnwIeqUpTpqs19uUxciu6rLn9c0wy7igeSvy', 'fernando.castanheira@gmail.com', NULL, 1, NULL, NULL, 1),
+(164, 'Jade', 'Costa', '9836', '$2y$10$Y7e7przqqoxTxe40314cpeMFoUpqW34/jTSl6jiI52TEvCDfYF09K', 'jade.costa@gmail.com', NULL, 1, NULL, NULL, 1),
+(165, 'Peterson', 'Sato', '4785', '$2y$10$r3EkPvbPMQwEP4.Nbrjnf.m0fhTIpNcQYhAY09TQ8BgfXujEmAa72', 'peterson.sato@gmail.com', NULL, 1, NULL, NULL, 1),
+(166, 'Dante', 'Lopes', '8571', '$2y$10$IlhSNujJkSrI27FIRrucseW2O4aQDoyoqpv4xBj1NaveFnQi35BJS', 'dante.lopes@gmail.com', NULL, 1, NULL, NULL, 1),
+(167, 'Eduardo', 'Freire', '3405', '$2y$10$ySan9EoxePbkSK1kv1Yrm.xqRnVlOMoDU2DPszQZOJaft7hfYZBnu', 'eduardo.freire@gmail.com', NULL, 1, NULL, NULL, 1),
+(168, 'Odete', 'Lins', '2620', '$2y$10$XtaMa3iVCcEUoUfmENeNw.bmLSWNmX8niyNiuHydBnNtr1K3jd.t6', 'odete.lins@gmail.com', NULL, 1, NULL, NULL, 1),
+(169, 'Simão', 'Franca', '9802', '$2y$10$ZEYJMp/8C/pLCX2P7U7nqOD6kPP/hSc8cRMgSB1eE5phX5K05MryK', 'simao.franca@gmail.com', NULL, 1, NULL, NULL, 1),
+(170, 'Yori', 'Yamada Silva', '6767', '$2y$10$5HlZmuKrOoDpyz8deNPCSObHSUlnaxL928N5SnxPkIJdlbCMQmyFm', 'yori.yamada silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(171, 'Dante', 'Leal', '9057', '$2y$10$Q.1UA3.FjLS64wymmQ9j5O3j980qK7QUUDoDtou/itta8E.KrmaDe', 'dante.leal@gmail.com', NULL, 1, NULL, NULL, 1),
+(172, 'Xerxes', 'Monteiro', '6601', '$2y$10$ZS9NqViC0I7.CPd6Z2bIZOWegWisuLw8mmd7sdM92C3zaSqFC2OhK', 'xerxes.monteiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(173, 'Augusto', 'Leal', '7089', '$2y$10$I5CqQ.tox1geBRae.8XYUOHSRvCh4VJc8YhECNoizzmag5QlxI5IC', 'augusto.leal@gmail.com', NULL, 1, NULL, NULL, 1),
+(174, 'Simão', 'Pádua', '8707', '$2y$10$41GjL29vzRAsHiMLvhXIReJzHNigSBxQOZunAUYY3La5yAAjOSxCO', 'simao.padua@gmail.com', NULL, 1, NULL, NULL, 1),
+(175, 'Cauê', 'dos Santos', '8133', '$2y$10$cM3N/AqmRVDa6Cl2K6HIIeI8AVaRepFcBNq0u3FUS3nj2H6k0HhGe', 'caue.dos santos@gmail.com', NULL, 1, NULL, NULL, 1),
+(176, 'Claudio', 'Salgueiro', '1299', '$2y$10$nIYY84wvBuzxaZ8j4BKfUuv0sJ9V6onhAmBtJUE9DkpIPS9w5.0xC', 'claudio.salgueiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(177, 'Bruno', 'Redfield', '2484', '$2y$10$x0g7oJ0fcEKDUY2oAKHMbeT/914ztdEv2doEql4dXEnaqn.DZjLSm', 'bruno.redfield@gmail.com', NULL, 1, NULL, NULL, 1),
+(178, 'Akemi', 'Hernandes', '2796', '$2y$10$MwLN6sAufkOan2B8zjEglu1eGlIniXGM2KaigzGCSlzp6JxQ4hnny', 'akemi.hernandes@gmail.com', NULL, 1, NULL, NULL, 1),
+(179, 'Rafaela', 'Valentine', '8602', '$2y$10$Oc/wPeDxbK86oUA.TZZO9O.mx8FuBqJGxEe/eh5z.vGIErAjrsqaS', 'rafaela.valentine@gmail.com', NULL, 1, NULL, NULL, 1),
+(180, 'Sheeva', 'Pádua', '8078', '$2y$10$0m0WYQ4lEnj714p5tewnBOByI8kMszDvou2J9SxIUqdJTD5pbZN9K', 'sheeva.padua@gmail.com', NULL, 1, NULL, NULL, 1),
+(181, 'Jade', 'Batista', '5012', '$2y$10$GpQIBltrDYGC.Jf/mgWtM.oZSgSEgEJcdwUKD9eqcnrzEt2/F0pKy', 'jade.batista@gmail.com', NULL, 1, NULL, NULL, 1),
+(182, 'Peterson', 'Takahashi', '5062', '$2y$10$KrPsUnFiaSKUNTf2/YDN0u9t6WeFmZArYMPVsWB47IRgaOOPTJuXK', 'peterson.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(183, 'Fernanda', 'Yamada Silva', '6325', '$2y$10$9z5/B2JNokahdQL4abqzjenB0mQDbACkSmSjyymuZf0OIEMSB3CMu', 'fernanda.yamada silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(184, 'Jill', 'Severo', '2519', '$2y$10$aNIaFpxcjLVsMS/vIYfh9OJEud92wpEwsA/J1CKyXgRYFGRoDKgbq', 'jill.severo@gmail.com', NULL, 1, NULL, NULL, 1),
+(185, 'Augusto', 'Valentine', '6575', '$2y$10$xizY.MhlFa7ZeJbgRrGVSOQpjNKapK.N88Dh3dLThPMGPWO2bNo5u', 'augusto.valentine@gmail.com', NULL, 1, NULL, NULL, 1),
+(186, 'Filipe', 'Faria', '4226', '$2y$10$i8ebixfhWj4Ia96IuFzY3eMIiFfic8ClqjxicX0tprcZOWS58m7n6', 'filipe.faria@gmail.com', NULL, 1, NULL, NULL, 1),
+(187, 'Morpheu', 'Faria', '6371', '$2y$10$8Zzr/BjzZRh8CJYKaAGZbOZeAQUj4KhfaIhsr6ofyIGVGNOGKi7mq', 'morpheu.faria@gmail.com', NULL, 1, NULL, NULL, 1),
+(188, 'Cleber', 'Torres', '1142', '$2y$10$QJYuvY1firiRpJLnrLlUMu1nglro3SUL5.Z9lJknoM6wS7o3vOalu', 'cleber.torres@gmail.com', NULL, 1, NULL, NULL, 1),
+(189, 'Eduardo', 'Ishida Silva', '1544', '$2y$10$vrntn2QXdvpOElG30xGYVehfTqfjRpYQ0DEbGLtUkkwvsWITaz1Ha', 'eduardo.ishida silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(190, 'Angelina', 'Suzuki', '4651', '$2y$10$uRfr8Vmo7SENkSBfRDifLe7GNafeITLQtLeBZvZf..i/lECoZrYza', 'angelina.suzuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(191, 'Barbara', 'Rocha', '2968', '$2y$10$v.DwIUMg8gt1h0WMjmLhgex7d/ysYqOamlqcWLi6ShB.DnMI30WOK', 'barbara.rocha@gmail.com', NULL, 1, NULL, NULL, 1),
+(192, 'Lara', 'Valentine', '8357', '$2y$10$wFTThiPR809cT1rOQTQou.a.crQ9fLBMBXde049udDp/FbdwS0b3y', 'lara.valentine@gmail.com', NULL, 1, NULL, NULL, 1),
+(193, 'Bruno', 'Pádua', '6907', '$2y$10$kHwAAfTDB62SBEAJCWk4Fu21kxfj/8qXPsFXnlHK.GsRJg/LtNYFS', 'bruno.padua@gmail.com', NULL, 1, NULL, NULL, 1),
+(194, 'Jade', 'Alves', '4331', '$2y$10$6LnLuEo.m.ZXTQK9J2YQauSvyhRl4QREYW6LMlU4MPrrCMDp04wOi', 'jade.alves@gmail.com', NULL, 1, NULL, NULL, 1),
+(195, 'Jonas', 'Faria', '1404', '$2y$10$gGtEV.T/EUcKWGtHYMVUNux8Q12HltfX26ZB3Ebym2exs2aP2yhuK', 'jonas.faria@gmail.com', NULL, 1, NULL, NULL, 1),
+(196, 'Fernando', 'Suzuki', '6269', '$2y$10$6NuzJk0DbHQ5wFoSu3Iqc.GIU6ZUI4FQukYalj2.Lxh8Gzqkj61v6', 'fernando.suzuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(197, 'Rafaela', 'da Silva', '5591', '$2y$10$.uvp9.i7EBdjDwdvWLwvt.hHbIAVeVP9cEjPbaE2SCiHtnxV50TdC', 'rafaela.da silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(198, 'Tamires', 'Faria', '4702', '$2y$10$xUwLGAun8M37WH1TzGzsF.sDwZjolU5RCf8D7U0jCkJBkdkgH9vou', 'tamires.faria@gmail.com', NULL, 1, NULL, NULL, 1),
+(199, 'Eric', 'Castanheira', '3458', '$2y$10$Yk3KYIBQRkI24fjCpai/ReNCTm1OCppXHOXgYrC7IPY7ynhSzvffS', 'eric.castanheira@gmail.com', NULL, 1, NULL, NULL, 1),
+(200, 'Dante', 'Takahashi', '6963', '$2y$10$QL2n/yNY7.NzWENqAnm.Zu6zrj37ojoVjnd.6wTMDjF..s0HFfRja', 'dante.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(201, 'Cleber', 'Peixoto', '5024', '$2y$10$x4kzPMPQ0VgfZWuvrjEWr.FXSL7p8ouY8n8XYzCjdEK6fIxj/oity', 'cleber.peixoto@gmail.com', NULL, 1, NULL, NULL, 1),
+(202, 'Caio', 'da Silva', '2128', '$2y$10$8xl0NuGr9UpDLq0hHNdwO.TrkYxnsi9VPzFjaj7cXCVRaK2CEkXES', 'caio.da silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(203, 'Kitana', 'Camilo', '1246', '$2y$10$GZq8bszzvcMM.Yeyf6pBEuJOgREagkodTKOKyAtIfjn808FNZun/a', 'kitana.camilo@gmail.com', NULL, 1, NULL, NULL, 1),
+(204, 'Yoko', 'Lins', '8183', '$2y$10$Dlp/MDeL/gPGpcqXTalx9.DlQkruYM1MxsJMwop1zDaYH/hjA.of6', 'yoko.lins@gmail.com', NULL, 1, NULL, NULL, 1),
+(205, 'Alexandra', 'Torres', '6682', '$2y$10$53UzMrJGU6Sp1iZtxgiZXuDF2GUT5J0Elf2CNEfzEjrk6TRG.Nn6K', 'alexandra.torres@gmail.com', NULL, 1, NULL, NULL, 1),
+(206, 'Andreia', 'Monteiro', '8919', '$2y$10$7DlVSlm2DAQhSz5s6C1hqen4q8YaYLzk7VTmpR9HmkLl3De1xuynm', 'andreia.monteiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(207, 'Jonas', 'da Silva', '8553', '$2y$10$MK.xgqUQFSPDedJ8JY0O.OlRNXLzgJ/o8KVXS46/wt6h0HeMK0yKu', 'jonas.da silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(208, 'Doulgas', 'Monteiro', '1636', '$2y$10$Sn4P.Wyw8qsJwq4hK0uSgOZ8niaK5VlM1Ph7f1D86p48ShpzvHYPS', 'doulgas.monteiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(209, 'Sheeva', 'da Mata', '8900', '$2y$10$7KYIFq9l8m.RcrQfH7Naduh1YdVgBxQVdnv//bVPBDukQPyAO3Iam', 'sheeva.da mata@gmail.com', NULL, 1, NULL, NULL, 1),
+(210, 'Xerxes', 'Peixoto', '5937', '$2y$10$Fv2n7AlOPsnjqmqYkRgoo.Hdwx1VJhJ4QNHzqSjnpFuoTnREueHOG', 'xerxes.peixoto@gmail.com', NULL, 1, NULL, NULL, 1),
+(211, 'Filipe', 'Franca', '3814', '$2y$10$9TN3V/LJvWDHmcpG0W6AEe21EefBuHS6OQWtyyTcOK55VV15Bw8Vu', 'filipe.franca@gmail.com', NULL, 1, NULL, NULL, 1),
+(212, 'Aline', 'Neto', '1561', '$2y$10$./7ljpCN/0ofCTFcAtTLMO2xlmkzGZzo2AqTxQ/BeFPB.ngzOfvrC', 'aline.neto@gmail.com', NULL, 1, NULL, NULL, 1),
+(213, 'Doulgas', 'Torres', '9245', '$2y$10$KMQsuBDq5v6dt3bmSobfGuwZeGZsYiwaGIpYR1n3.a3CWtsPyB7DK', 'doulgas.torres@gmail.com', NULL, 1, NULL, NULL, 1),
+(214, 'Sarah', 'Valverde', '4139', '$2y$10$jSL1sDbDtO03YiJC3gOGE..t7BJwyxJl13dcrjAXbqA1ATuXI.Ycu', 'sarah.valverde@gmail.com', NULL, 1, NULL, NULL, 1),
+(215, 'Sheeva', 'Macedo', '5042', '$2y$10$.PnB2yx4WiV7XOid.a4jrep9v/0kkQ.3glX4ZSjsv.kmbGjn.rMd.', 'sheeva.macedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(216, 'Andreia', 'Porta', '2550', '$2y$10$Co4CDoGdURc3LLkLeKCE.eVnzUSqUUR2bQ5PLl83n8Ap0DdXSKloC', 'andreia.porta@gmail.com', NULL, 1, NULL, NULL, 1),
+(217, 'Chunli', 'Neto', '1121', '$2y$10$U6txU2kxM55sk55yO47m8Ov1rQEB6TXDILJaIz2wRvClYULJvbaAm', 'chunli.neto@gmail.com', NULL, 1, NULL, NULL, 1),
+(218, 'Bruno', 'Nazário', '4452', '$2y$10$TaW/n4JahP5qkz0ro2ngaegahiS6idrzbOVbw18DXFNlX3NL7k/ES', 'bruno.nazario@gmail.com', NULL, 1, NULL, NULL, 1),
+(219, 'Otavio', 'Monteiro', '9380', '$2y$10$1LxU/HjoWg8ynJDEZvgti.QOk8VJ5nNxH0pyRNgtxmPRv6jxkBJIC', 'otavio.monteiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(220, 'Jill', 'Batista', '7210', '$2y$10$Z9eHz0bluHp9bsLgCIYHNuxxgto2wXgHEnGl7nwJP/y/uaofUusfG', 'jill.batista@gmail.com', NULL, 1, NULL, NULL, 1),
+(221, 'Filipe', 'Torres', '5163', '$2y$10$CRWpsuHdMbEMHoU1XG2syeqKdwxC2L4BSAm7EeH7ZZCWMesnShtzm', 'filipe.torres@gmail.com', NULL, 1, NULL, NULL, 1),
+(222, 'Filipe', 'Ishida Silva', '6095', '$2y$10$gXP5PmgCPcAUveySwq1th.XDmNfqrvgXmt.eJhG8Adks4F.SsTlVm', 'filipe.ishida silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(223, 'Xerxes', 'Severo', '9767', '$2y$10$64S7oCinPE3tQSTjdniC0O0rcTdEdr253xfVFP3sUhrTslTroPxhS', 'xerxes.severo@gmail.com', NULL, 1, NULL, NULL, 1),
+(224, 'Camila', 'Suzuki', '9138', '$2y$10$KDnD/mH.DsHdaXUdu4eu/OlGKmvIxHqGdVwhe16n6PJbfbpASMMS6', 'camila.suzuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(225, 'Fernanda', 'Minazuki', '5181', '$2y$10$DS0s0eoGqKpgQRQtZxH6g.kzqJT/wRJN2nVchWrEKnaurnIYlv5kW', 'fernanda.minazuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(226, 'Dante', 'Salgueiro', '5936', '$2y$10$M4I/6kz6gVrT4LR84R4L/.4eo1MRv828RPYtFjLFgThzpoTvuNjBm', 'dante.salgueiro@gmail.com', NULL, 1, NULL, NULL, 1),
+(227, 'Doulgas', 'Lopes', '4582', '$2y$10$/Y8OfMLEYrxTYKtpT..Bwe4DZh9EvMvLPAQt2RXAiUq0zIYNSS.Ny', 'doulgas.lopes@gmail.com', NULL, 1, NULL, NULL, 1),
+(228, 'Filipe', 'Carvalho', '9826', '$2y$10$Bv0R7ZCajUQzwzUZOei03OBNS02L7.jE7A6kPHboiz151u/c3qtCO', 'filipe.carvalho@gmail.com', NULL, 1, NULL, NULL, 1),
+(229, 'Augusto', 'Hernandes', '4376', '$2y$10$r3VAAoGSqKW/kh2EWopjp.LnlkgIihj339okfbAgOHS5Q0mJ1jOVW', 'augusto.hernandes@gmail.com', NULL, 1, NULL, NULL, 1),
+(230, 'Doulgas', 'Yamada Silva', '4975', '$2y$10$eq6cqTka9DIaeaelaPIx8e1UX0pcxcaAtRvW0m8gUZl0YwK8OAHqO', 'doulgas.yamada silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(231, 'Caio', 'Leal', '3997', '$2y$10$yybuEOr2dznUVB.Zy9zHl.am6KFxKjvmmzwj/3X173o9FbPMvwKZa', 'caio.leal@gmail.com', NULL, 1, NULL, NULL, 1),
+(232, 'Angelina', 'Batista', '7101', '$2y$10$U5bzotzs1rTE43LZYme5CeOYH0G66M44hpDOAEPJ4x2aKhE2O4Vzy', 'angelina.batista@gmail.com', NULL, 1, NULL, NULL, 1),
+(233, 'Cauê', 'Sato', '5086', '$2y$10$Yj6xnl9jf0ptivVfL9iVs.Z.pidRB6WqcRJgKKmLA4fLUNlhDAet2', 'caue.sato@gmail.com', NULL, 1, NULL, NULL, 1),
+(234, 'Trinity', 'Minazuki', '6591', '$2y$10$vIMWlop8yszG4sQ6Q/gj3OW0s8zhrB74SpXuTVZ9SXV8ex4iXNtxW', 'trinity.minazuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(235, 'Filipe', 'Macedo', '6623', '$2y$10$xHhVRj8KfYMEBUvsbvUEIuHETNX8sBBn3Wnz3z05/UDECAgxdSxpC', 'filipe.macedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(236, 'Morpheu', 'Peixoto', '8609', '$2y$10$PXd3rEhm74VTII2dPLk8sOLr2rYFkGo5zyCOFY.KZuKAkt7c9yIwi', 'morpheu.peixoto@gmail.com', NULL, 1, NULL, NULL, 1),
+(237, 'Caroline', 'Franca', '8020', '$2y$10$oGPjG7wcNmMbrZSUT3UAnepebKN2hIHZuwlDVYL3R5TLF7zJXSUtW', 'caroline.franca@gmail.com', NULL, 1, NULL, NULL, 1),
+(238, 'Fernando', 'Alves', '9819', '$2y$10$qc40fAzQioXZ6trNdnD7.OX/JaMseWXYJsb/kBm0fDhCk4cDcqME.', 'fernando.alves@gmail.com', NULL, 1, NULL, NULL, 1),
+(239, 'Cleber', 'Franca', '8269', '$2y$10$uoYrLysWqNybdXPo8PB2hOu6LJmysU8YboigVYnsgf36yiKxJtsOu', 'cleber.franca@gmail.com', NULL, 1, NULL, NULL, 1),
+(240, 'Cleber', 'Matos', '5026', '$2y$10$GgEAgLOU2CTTWrQd72sO4ukYdrFU6DmqtJgwwADHmUpJ95mnm7rXu', 'cleber.matos@gmail.com', NULL, 1, NULL, NULL, 1),
+(241, 'Dante', 'Peixoto', '8592', '$2y$10$Sm.Z6txTbwWEnWlU1T7./Ox96hioV/DElePVDFQVP41Wv2NzjKDZO', 'dante.peixoto@gmail.com', NULL, 1, NULL, NULL, 1),
+(242, 'Leonidas', 'Hernandes', '2274', '$2y$10$gMzHM5h3tTrfbgknAjRcxOc3.X4p6P/t36aUNepeKBvJj8XsUa40m', 'leonidas.hernandes@gmail.com', NULL, 1, NULL, NULL, 1),
+(243, 'Otavio', 'Alves', '6710', '$2y$10$tpB/eZ8EOHHnCqGvw0yJiuNBIHFJhWfu/.VHjqPibuTkykpeG1CHC', 'otavio.alves@gmail.com', NULL, 1, NULL, NULL, 1),
+(244, 'Yoko', 'Valverde', '2271', '$2y$10$3zb3jhBcY0QtVYl.QGKbxuqT.YcPZHVsa3mnslfb0TYl8IxF3Vd5e', 'yoko.valverde@gmail.com', NULL, 1, NULL, NULL, 1),
+(245, 'Alexandra', 'Takahashi', '4791', '$2y$10$dqzkSh1mchfK1SwAKwuPvOfPJmJ7vR5i6TE/BZqACJBsjEnvPNxea', 'alexandra.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(246, 'Dante', 'Tanaka', '9449', '$2y$10$DmguYgUIxwIP8.7/AOA2buw4TedlWidlktyo8kTjNBDz84C5z2MHu', 'dante.tanaka@gmail.com', NULL, 1, NULL, NULL, 1),
+(247, 'Cleber', 'Valverde', '5698', '$2y$10$oMxocRX9arACRr.iYYYdrOVKc5mDlcxvIUF084TUrJYS8p3Fw97uy', 'cleber.valverde@gmail.com', NULL, 1, NULL, NULL, 1),
+(248, 'Caroline', 'Takahashi', '3118', '$2y$10$a25NAlbhar7qR27q4sbRHO3JU9M.ewj8IqHyqvJxTr06QO.g0nwMi', 'caroline.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(249, 'Jill', 'Takahashi', '7352', '$2y$10$A/jRmxVoBi9XvHWqm67BqekCTXO1SOXHDLUfySMoi1TvBGfCgKhBK', 'jill.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(250, 'Peterson', 'Alves', '8084', '$2y$10$8UXtUud3ZeRWi9CNNpjyB.mII3mdQTuxhLpfn5E1V31x1/7vIg8gS', 'peterson.alves@gmail.com', NULL, 1, NULL, NULL, 1),
+(251, 'Filipe', 'Tanaka', '5381', '$2y$10$EtZLQi61gmOtInjCG98zJu7G7LIr2sRhE3/jGIV7i8dlSYkHeu9ti', 'filipe.tanaka@gmail.com', NULL, 1, NULL, NULL, 1),
+(252, 'Fernanda', 'Camilo', '8926', '$2y$10$mhSt6BYIdEGwrIG6ggX/Gu0h8624tVEskCyCKj/M9BWCgHHEKOGJS', 'fernanda.camilo@gmail.com', NULL, 1, NULL, NULL, 1),
+(253, 'Odete', 'Carvalho', '1947', '$2y$10$E0.8/8bkb7alsmXCQIuOpeAhKeKflmfYNL2fqRDsALA3/c1Ik62f.', 'odete.carvalho@gmail.com', NULL, 1, NULL, NULL, 1),
+(254, 'Xerxes', 'Costa', '1104', '$2y$10$ZbFsS/zFn2QKpSRK36o.D.20HJ0q1MDy5.1h8v/CMSddK/vOfkv1C', 'xerxes.costa@gmail.com', NULL, 1, NULL, NULL, 1),
+(255, 'Cleber', 'Augusto', '8212', '$2y$10$W5H1Pq1IhwOILsIXCnwl4.N2gMeN9nJbTfqIDqbB0JDlBEUOmTrOG', 'cleber.augusto@gmail.com', NULL, 1, NULL, NULL, 1),
+(256, 'Michele', 'Yamada Silva', '2899', '$2y$10$.3Oj/B9XprKhbUtusjGKsugYkr1K4tFhngU4tkTm1qLUFd8tnWHSi', 'michele.yamada silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(257, 'Alexandra', 'Vieira', '4459', '$2y$10$K7MZUgYGJiYMVFsx4y/GFOMIkWh2Cr6EGmrVdrYZL0Bi0UxAV3Mku', 'alexandra.vieira@gmail.com', NULL, 1, NULL, NULL, 1),
+(258, 'Camila', 'Alves', '6302', '$2y$10$PMwhTb8se2jOEgPyDLjHtOSQPhtn3hmimHOE7XHpYwCgY0CHxk3Yq', 'camila.alves@gmail.com', NULL, 1, NULL, NULL, 1),
+(259, 'Michele', 'Redfield', '6237', '$2y$10$MzQ3lQ3KyIBi7XbmFjcOiOEUGrV1t07Fbw5CdQcqyPicO8dbO7AkC', 'michele.redfield@gmail.com', NULL, 1, NULL, NULL, 1),
+(260, 'Jonas', 'Batista', '6223', '$2y$10$uP2s0ZSCdOAqNX91a.jWbedrjRPSGc1isvwaTNnMBFqd4eHLc8f.G', 'jonas.batista@gmail.com', NULL, 1, NULL, NULL, 1),
+(261, 'Fernanda', 'Carvalho', '2963', '$2y$10$AEz6.daY/39Ho0jyzLCnMOA4HfVppKLpbblH2Idtm7VkRlY0kTD16', 'fernanda.carvalho@gmail.com', NULL, 1, NULL, NULL, 1),
+(262, 'Otavio', 'Sato', '6039', '$2y$10$mvPHH.CH/PTPad7U2CWgP.W5f/P3ikV2P8Q.QeO4ZBNYhLl7e6PKG', 'otavio.sato@gmail.com', NULL, 1, NULL, NULL, 1),
+(263, 'Rafaela', 'Ishida Silva', '1004', '$2y$10$S7blVYsIvYE1IM1CMX0QouTQVwn39U6QmC47Zd7FZtU.SJ8Jj0NYe', 'rafaela.ishida silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(264, 'Kitana', 'Sato', '5283', '$2y$10$Axtbq5yEbBipl9/bnLRqq.sbxNmwhD7eQwlAF8qxlKDXXHMiS/0Va', 'kitana.sato@gmail.com', NULL, 1, NULL, NULL, 1),
+(265, 'Sheeva', 'Jordão', '5424', '$2y$10$agxezhHZd2bfchDktPmX1u2i8T6ASb6nvJ7wpz6kwOQT96nKVptBS', 'sheeva.jordao@gmail.com', NULL, 1, NULL, NULL, 1),
+(266, 'Cauê', 'da Silva', '1880', '$2y$10$EnO/xL84A60Ex731.1OVSOe3X9JiqPNpl07RAoZJBFRN2PcRpyBa2', 'caue.da silva@gmail.com', NULL, 1, NULL, NULL, 1),
+(267, 'Michele', 'Franca', '3716', '$2y$10$oSu2zxyHqtu..2RATQ9Xp.oM4VukOwglRHnk2gj7aleRHQJN2j6mS', 'michele.franca@gmail.com', NULL, 1, NULL, NULL, 1),
+(268, 'Irene', 'Takahashi', '3728', '$2y$10$ehg1DzQsqL.o1cKWS5XZR.lbzQL8NG3gbdmLqDAtJkJpCVjNumG8O', 'irene.takahashi@gmail.com', NULL, 1, NULL, NULL, 1),
+(269, 'Andreia', 'Gouveia', '1535', '$2y$10$yER8fXpRcoic5eSJe6TGzOnNDedELnmnf71nWHEn.THWE97HGqJAO', 'andreia.gouveia@gmail.com', NULL, 1, NULL, NULL, 1),
+(270, 'Dante', 'Hernandes', '6032', '$2y$10$GPIeHSAPlnnlrkSM.G16WO6mPODb9FKJuoF9Ru3k9nekyiy.ogYxe', 'dante.hernandes@gmail.com', NULL, 1, NULL, NULL, 1),
+(271, 'Trinity', 'Macedo', '8418', '$2y$10$gUc.90uuyXA.XX95vqh5wOQUQv0l7VCxPC01K/vGGytFeoEm8b2qC', 'trinity.macedo@gmail.com', NULL, 1, NULL, NULL, 1),
+(272, 'Jade', 'Freire', '6184', '$2y$10$3idxspUf2KfPRsB0gR86fO53pqUQhASQ8GM7eqZVoaeC9H/18/.om', 'jade.freire@gmail.com', NULL, 1, NULL, NULL, 1),
+(273, 'Caio', 'Pádua', '5265', '$2y$10$ElkOhy.E3GiMOaYxHndsuOLrn.qYy556RC1A2HAD.S8dFKeuArwyi', 'caio.padua@gmail.com', NULL, 1, NULL, NULL, 1),
+(274, 'Doulgas', 'Faria', '4367', '$2y$10$/n/FuIs64P2PX119NORrpujOVzyh.Lg44GldMIUsRo6hUvbzjgLhG', 'doulgas.faria@gmail.com', NULL, 1, NULL, NULL, 1),
+(275, 'Akemi', 'Matos', '3344', '$2y$10$Ro9nWC5Wqh.kFUjZE.Uq7.9cV13hjUUCfFS20I5OM24lcd07YhX6K', 'akemi.matos@gmail.com', NULL, 1, NULL, NULL, 1);
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `acessosatividades`
---
-ALTER TABLE `acessosatividades`
- ADD PRIMARY KEY (`id`), ADD KEY `idAluno` (`idAluno`), ADD KEY `idQuestao` (`idQuestao`), ADD KEY `idAtividade` (`idAtividade`);
-
---
--- Indexes for table `administradores`
---
-ALTER TABLE `administradores`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `alunos`
---
-ALTER TABLE `alunos`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `atividades`
---
-ALTER TABLE `atividades`
- ADD PRIMARY KEY (`id`), ADD KEY `idAula` (`idAula`), ADD KEY `idCategoria` (`idCategoria`), ADD KEY `idModulo` (`idModulo`), ADD KEY `idUsuario` (`idUsuario`);
-
---
--- Indexes for table `aulas`
---
-ALTER TABLE `aulas`
- ADD PRIMARY KEY (`id`), ADD KEY `idModulo` (`idModulo`);
-
---
--- Indexes for table `avisos`
---
-ALTER TABLE `avisos`
- ADD PRIMARY KEY (`id`), ADD KEY `idUsuario` (`idUsuario`), ADD KEY `idCurso` (`idCurso`);
-
---
--- Indexes for table `categorias`
---
-ALTER TABLE `categorias`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `cursos`
---
-ALTER TABLE `cursos`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `idiomas`
---
-ALTER TABLE `idiomas`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `materialapoio`
---
-ALTER TABLE `materialapoio`
- ADD PRIMARY KEY (`id`), ADD KEY `idAula` (`idAula`);
-
---
--- Indexes for table `mensagens`
---
-ALTER TABLE `mensagens`
- ADD PRIMARY KEY (`id`), ADD KEY `idUsuarioOrigem` (`idUsuarioOrigem`), ADD KEY `idUsuarioDestino` (`idUsuarioDestino`), ADD KEY `idRE` (`idRE`);
-
---
--- Indexes for table `modulos`
---
-ALTER TABLE `modulos`
- ADD PRIMARY KEY (`id`), ADD KEY `idCurso` (`idCurso`);
-
---
--- Indexes for table `password_reminders`
---
-ALTER TABLE `password_reminders`
- ADD KEY `password_reminders_email_index` (`email`), ADD KEY `password_reminders_token_index` (`token`);
-
---
--- Indexes for table `professores`
---
-ALTER TABLE `professores`
- ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `propagandas`
---
-ALTER TABLE `propagandas`
- ADD PRIMARY KEY (`id`), ADD KEY `idUsuario` (`idUsuario`);
-
---
--- Indexes for table `questoes`
---
-ALTER TABLE `questoes`
- ADD PRIMARY KEY (`id`), ADD KEY `idAtividade` (`idAtividade`), ADD KEY `idTopico` (`idTopico`);
-
---
--- Indexes for table `respostas`
---
-ALTER TABLE `respostas`
- ADD PRIMARY KEY (`id`), ADD KEY `idAluno` (`idAluno`), ADD KEY `idQuestao` (`idQuestao`);
-
---
--- Indexes for table `topicos`
---
-ALTER TABLE `topicos`
- ADD PRIMARY KEY (`id`), ADD KEY `idUsuario` (`idUsuario`);
-
---
--- Indexes for table `turmas`
---
-ALTER TABLE `turmas`
- ADD PRIMARY KEY (`id`), ADD KEY `idModulo` (`idModulo`), ADD KEY `idProfessor` (`idProfessor`);
-
---
--- Indexes for table `turmasalunos`
---
-ALTER TABLE `turmasalunos`
- ADD PRIMARY KEY (`id`), ADD KEY `idTurma` (`idTurma`), ADD KEY `idAluno` (`idAluno`);
-
---
--- Indexes for table `usuarios`
---
-ALTER TABLE `usuarios`
- ADD PRIMARY KEY (`id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `acessosatividades`
---
-ALTER TABLE `acessosatividades`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `administradores`
---
-ALTER TABLE `administradores`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=277;
---
--- AUTO_INCREMENT for table `alunos`
---
-ALTER TABLE `alunos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=276;
---
--- AUTO_INCREMENT for table `atividades`
---
-ALTER TABLE `atividades`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=121;
---
--- AUTO_INCREMENT for table `aulas`
---
-ALTER TABLE `aulas`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
---
--- AUTO_INCREMENT for table `avisos`
---
-ALTER TABLE `avisos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `categorias`
---
-ALTER TABLE `categorias`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `cursos`
---
-ALTER TABLE `cursos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
---
--- AUTO_INCREMENT for table `idiomas`
---
-ALTER TABLE `idiomas`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `materialapoio`
---
-ALTER TABLE `materialapoio`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `mensagens`
---
-ALTER TABLE `mensagens`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `modulos`
---
-ALTER TABLE `modulos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `professores`
---
-ALTER TABLE `professores`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=25;
---
--- AUTO_INCREMENT for table `propagandas`
---
-ALTER TABLE `propagandas`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `questoes`
---
-ALTER TABLE `questoes`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `respostas`
---
-ALTER TABLE `respostas`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `topicos`
---
-ALTER TABLE `topicos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `turmas`
---
-ALTER TABLE `turmas`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
---
--- AUTO_INCREMENT for table `turmasalunos`
---
-ALTER TABLE `turmasalunos`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=252;
---
--- AUTO_INCREMENT for table `usuarios`
---
-ALTER TABLE `usuarios`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=277;
 --
 -- Constraints for dumped tables
 --
@@ -1686,88 +1467,88 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=277;
 -- Limitadores para a tabela `acessosatividades`
 --
 ALTER TABLE `acessosatividades`
-ADD CONSTRAINT `acessosatividades_ibfk_1` FOREIGN KEY (`idAluno`) REFERENCES `alunos` (`id`),
-ADD CONSTRAINT `acessosatividades_ibfk_2` FOREIGN KEY (`idQuestao`) REFERENCES `questoes` (`id`),
-ADD CONSTRAINT `acessosatividades_ibfk_3` FOREIGN KEY (`idAtividade`) REFERENCES `atividades` (`id`);
+  ADD CONSTRAINT `acessosatividades_ibfk_1` FOREIGN KEY (`idAluno`) REFERENCES `alunos` (`id`),
+  ADD CONSTRAINT `acessosatividades_ibfk_2` FOREIGN KEY (`idQuestao`) REFERENCES `questoes` (`id`),
+  ADD CONSTRAINT `acessosatividades_ibfk_3` FOREIGN KEY (`idAtividade`) REFERENCES `atividades` (`id`);
 
 --
 -- Limitadores para a tabela `atividades`
 --
 ALTER TABLE `atividades`
-ADD CONSTRAINT `atividades_ibfk_1` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`),
-ADD CONSTRAINT `atividades_ibfk_2` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`id`),
-ADD CONSTRAINT `atividades_ibfk_3` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`id`),
-ADD CONSTRAINT `atividades_ibfk_4` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
+  ADD CONSTRAINT `atividades_ibfk_1` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`),
+  ADD CONSTRAINT `atividades_ibfk_2` FOREIGN KEY (`idCategoria`) REFERENCES `categorias` (`id`),
+  ADD CONSTRAINT `atividades_ibfk_3` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`id`),
+  ADD CONSTRAINT `atividades_ibfk_4` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
 
 --
 -- Limitadores para a tabela `aulas`
 --
 ALTER TABLE `aulas`
-ADD CONSTRAINT `aulas_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`id`);
+  ADD CONSTRAINT `aulas_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`id`);
 
 --
 -- Limitadores para a tabela `avisos`
 --
 ALTER TABLE `avisos`
-ADD CONSTRAINT `avisos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`),
-ADD CONSTRAINT `avisos_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `cursos` (`id`);
+  ADD CONSTRAINT `avisos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `avisos_ibfk_2` FOREIGN KEY (`idCurso`) REFERENCES `cursos` (`id`);
 
 --
 -- Limitadores para a tabela `materialapoio`
 --
 ALTER TABLE `materialapoio`
-ADD CONSTRAINT `materialapoio_ibfk_1` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`);
+  ADD CONSTRAINT `materialapoio_ibfk_1` FOREIGN KEY (`idAula`) REFERENCES `aulas` (`id`);
 
 --
 -- Limitadores para a tabela `mensagens`
 --
 ALTER TABLE `mensagens`
-ADD CONSTRAINT `mensagens_ibfk_1` FOREIGN KEY (`idUsuarioOrigem`) REFERENCES `usuarios` (`id`),
-ADD CONSTRAINT `mensagens_ibfk_2` FOREIGN KEY (`idUsuarioDestino`) REFERENCES `usuarios` (`id`),
-ADD CONSTRAINT `mensagens_ibfk_3` FOREIGN KEY (`idRE`) REFERENCES `mensagens` (`id`);
+  ADD CONSTRAINT `mensagens_ibfk_1` FOREIGN KEY (`idUsuarioOrigem`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `mensagens_ibfk_2` FOREIGN KEY (`idUsuarioDestino`) REFERENCES `usuarios` (`id`),
+  ADD CONSTRAINT `mensagens_ibfk_3` FOREIGN KEY (`idRE`) REFERENCES `mensagens` (`id`);
 
 --
 -- Limitadores para a tabela `modulos`
 --
 ALTER TABLE `modulos`
-ADD CONSTRAINT `modulos_ibfk_1` FOREIGN KEY (`idCurso`) REFERENCES `cursos` (`id`);
+  ADD CONSTRAINT `modulos_ibfk_1` FOREIGN KEY (`idCurso`) REFERENCES `cursos` (`id`);
 
 --
 -- Limitadores para a tabela `propagandas`
 --
 ALTER TABLE `propagandas`
-ADD CONSTRAINT `propagandas_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
+  ADD CONSTRAINT `propagandas_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
 
 --
 -- Limitadores para a tabela `questoes`
 --
 ALTER TABLE `questoes`
-ADD CONSTRAINT `questoes_ibfk_1` FOREIGN KEY (`idAtividade`) REFERENCES `atividades` (`id`),
-ADD CONSTRAINT `questoes_ibfk_2` FOREIGN KEY (`idTopico`) REFERENCES `topicos` (`id`);
+  ADD CONSTRAINT `questoes_ibfk_1` FOREIGN KEY (`idAtividade`) REFERENCES `atividades` (`id`),
+  ADD CONSTRAINT `questoes_ibfk_2` FOREIGN KEY (`idTopico`) REFERENCES `topicos` (`id`);
 
 --
 -- Limitadores para a tabela `respostas`
 --
 ALTER TABLE `respostas`
-ADD CONSTRAINT `respostas_ibfk_1` FOREIGN KEY (`idAluno`) REFERENCES `alunos` (`id`),
-ADD CONSTRAINT `respostas_ibfk_2` FOREIGN KEY (`idQuestao`) REFERENCES `questoes` (`id`);
+  ADD CONSTRAINT `respostas_ibfk_1` FOREIGN KEY (`idAluno`) REFERENCES `alunos` (`id`),
+  ADD CONSTRAINT `respostas_ibfk_2` FOREIGN KEY (`idQuestao`) REFERENCES `questoes` (`id`);
 
 --
 -- Limitadores para a tabela `topicos`
 --
 ALTER TABLE `topicos`
-ADD CONSTRAINT `topicos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
+  ADD CONSTRAINT `topicos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`);
 
 --
 -- Limitadores para a tabela `turmas`
 --
 ALTER TABLE `turmas`
-ADD CONSTRAINT `turmas_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`id`),
-ADD CONSTRAINT `turmas_ibfk_2` FOREIGN KEY (`idProfessor`) REFERENCES `professores` (`id`);
+  ADD CONSTRAINT `turmas_ibfk_1` FOREIGN KEY (`idModulo`) REFERENCES `modulos` (`id`),
+  ADD CONSTRAINT `turmas_ibfk_2` FOREIGN KEY (`idProfessor`) REFERENCES `professores` (`id`);
 
 --
 -- Limitadores para a tabela `turmasalunos`
 --
 ALTER TABLE `turmasalunos`
-ADD CONSTRAINT `turmasalunos_ibfk_1` FOREIGN KEY (`idTurma`) REFERENCES `turmas` (`id`),
-ADD CONSTRAINT `turmasalunos_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `alunos` (`id`);
+  ADD CONSTRAINT `turmasalunos_ibfk_1` FOREIGN KEY (`idTurma`) REFERENCES `turmas` (`id`),
+  ADD CONSTRAINT `turmasalunos_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `alunos` (`id`);
