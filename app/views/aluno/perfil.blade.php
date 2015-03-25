@@ -1,17 +1,19 @@
 @extends('master')
 
-@section('maincontent')
-    <section class="content-header">
-        <h1>
-	        Perfil
-	    </h1>
-	    <ol class="breadcrumb">
-	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Comunicação</li>
-			<li class="active">Perfil</li>
-	    </ol>
-    </section>
 
+@section('content-header')
+    <!-- Content Header (Page header) -->
+    <h1>
+            Perfil
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Comunicação</li>
+            <li class="active">Perfil</li>
+        </ol>
+@stop
+
+@section('maincontent')
     <!-- Main content -->
     <section class="content" id="profile">
         
