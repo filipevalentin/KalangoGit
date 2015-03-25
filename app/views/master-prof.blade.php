@@ -34,7 +34,7 @@
         <![endif]-->
     </head>
 
-     <body class="skin-green sidebar-collapse">
+     <body class="skin-green">
      @yield('modals')
         <div class="wrapper">
             <!-- Main Header -->

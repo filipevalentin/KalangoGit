@@ -3,14 +3,14 @@
 @section('modals')
 
 <div class="modal fade" id="verImagem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">Imagem da Propaganda</h4>
             </div>
             <div class="modal-body">
-                <img id="src" src="" alt="" style="max=height: 800px;">
+                <img id="src" class="img-responsive" src="" alt="" style="margin:auto;">
             </div>
         </div>
     </div>
