@@ -41,21 +41,19 @@
             </div><!-- /.box -->
         </div>
     </div>
-@endsection
+@stop
 
 
 @section('content-header')
 	<!-- Content Header (Page header) -->
-	<section class="content-header">
-	    <h1>
-	        Bem vindo ao KalanGO!
-	        <!-- <small>Meus Cursos</small> -->
-	    </h1>
-	    <ol class="breadcrumb">
-	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-	    </ol>
-	</section>
-@endsection
+    <h1>
+        Bem vindo ao KalanGO!
+        <!-- <small>Meus Cursos</small> -->
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    </ol>
+@stop
 
 	<!-- Main content -->
 @section('maincontent')
@@ -70,7 +68,7 @@
 	                    @foreach ( $turmas as $turma)
 	                    	<a {{'href=modulo/'.$turma->modulo->id}}>
 	                            <div class="col-md-12">
-	                                <div id="div_card_{{++$aux}}" class="" style=";">
+	                                <div id="div_card_{{++$aux}}" class="box" style="">
 	                                    <div class="inner">
 	                                        <h3>{{$turma->modulo->curso->idioma->nome.' - '}}{{$turma->modulo->curso->nome}}</h3>
 	                                        <p style="font-size: 25px; font-weight: 600;">{{$turma->modulo->nome}}</p>
@@ -88,7 +86,7 @@
 	                    @endforeach
 
 						<div class="col-md-12">
-							<div id="div_card_{{++$aux}}" >
+							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Cursos Anteriores</b></span><br>
@@ -110,7 +108,7 @@
 					
 					<div class="col-lg-6" style="padding: 0;">
                     	<div class="col-md-12">
-							<div id="div_card_{{++$aux}}" class="" >
+							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="#">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Atividades Extras</b></span><br>
@@ -131,7 +129,7 @@
 						</div>
 
 						<div class="col-md-12">
-							<div id="div_card_{{++$aux}}" >
+							<div id="div_card_{{++$aux}}" class="box">
 								<a href="/aluno/dashboard" onclick="javascript:fcn_indisponivel();">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Desempenho</b></span><br>
@@ -158,7 +156,7 @@
 	        	<h2 class="page-header">Comunicação</h2>
                 	<div class="row">
                     	<div class="col-lg-6">
-							<div id="div_card_{{++$aux}}" class="" >
+							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="/aluno/mensagens/entrada">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Mensagens</b></span><br>
@@ -179,7 +177,7 @@
 						</div>
 
 						<div class="col-lg-6">
-							<div id="div_card_{{++$aux}}" >
+							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Agenda</b></span><br>
@@ -200,7 +198,7 @@
 						</div>
 
 						<div class="col-lg-6">
-							<div id="div_card_{{++$aux}}" class="" >
+							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="/aluno/perfil">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Perfil</b></span><br>
@@ -221,7 +219,7 @@
 						</div>
 
 						<div class="col-lg-6">
-							<div id="div_card_{{++$aux}}" >
+							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Contato</b></span><br>
@@ -260,7 +258,7 @@
 	        // console.log(document.getElementById('div_card_' + i));
 
 	        //Gera numeros aleatorios baseado no valor maximo
-	        document.getElementById('div_card_' + i).className = cores[(valor+i)%9]; //Colore card sequencialmente com cores aleatorias
+	        $('#div_card_' + i).addClass(cores[(valor+i)%9]) //Colore card sequencialmente com cores aleatorias
 	    }
 	     
 	</script>

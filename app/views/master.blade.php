@@ -35,9 +35,9 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body class="skin-green layout-boxed sidebar-collapse">
+    <body class="skin-green fixed layout-boxed sidebar-collapse">
     @yield('modals')
-        <div class="wrapper">
+        <div class="wrapper" style="max-width: 1250px;">
             <!-- Main Header -->
             <header class="main-header">
 
@@ -155,22 +155,23 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
                 @yield('content-header')
+                @yield('carrossel')
+            </section>
 
                 <!-- Main content -->
-                @yield('carrossel')
                 @yield('maincontent')
             </div><!-- /.content-wrapper -->
 
             <!-- Main Footer -->
             <footer class="main-footer">
                 <!-- To the right -->
-                <div class="pull-right hidden-xs">
-                    Anything you want
+                <div class="center">
+                    Copyright &copy;
+                    <img style="height:25px;" src="/img/KalangoVerde.png">
                 </div>
-                <!-- Default to the left --> 
-                <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
             </footer>
 
         </div><!-- ./wrapper -->

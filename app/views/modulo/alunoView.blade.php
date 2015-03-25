@@ -1,9 +1,9 @@
 @extends('master')
 
-@section('maincontent')
 
-	<section class="content-header">
-	    <h1>
+@section('content-header')
+	<!-- Content Header (Page header) -->
+    <h1>
 	        Aulas
 	    </h1>
 	    <ol class="breadcrumb">
@@ -11,7 +11,9 @@
 	        <li class="active">Meus Cursos</li>
 			<li class="active">Aulas</li>
 	    </ol>
-	</section>
+@stop
+
+@section('maincontent')
 
 	<section class="content">
 		<h2 class="page-header">Inglês - Teens 1</h2>

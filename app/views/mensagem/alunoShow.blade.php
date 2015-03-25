@@ -100,13 +100,17 @@
 @endsection
 
 
-
-@section('maincontent')
-	<section class="content-header no-margin">
-		<h1 class="text-center">
+@section('content-header')
+	<!-- Content Header (Page header) -->
+    <h1 class="text-center">
 			Caixa de Mensagens
 		</h1>
-	</section>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    </ol>
+@stop
+
+@section('maincontent')
 
 	<section class="content">
 

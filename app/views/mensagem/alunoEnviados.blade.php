@@ -74,11 +74,9 @@
 </div>
 @endsection
 
-
-
-@section('maincontent')
-	<section class="content-header no-margin">
-		<h1>
+@section('content-header')
+	<!-- Content Header (Page header) -->
+    <h1>
 	        Mensagens
 			<small>Enviados</small>
 	    </h1>
@@ -87,7 +85,9 @@
 	        <li class="active">Comunicação</li>
 			<li class="active">Mensagens</li>
 	    </ol>
-	</section>
+@stop
+
+@section('maincontent')
 
 	<section class="content">
 
