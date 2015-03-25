@@ -115,7 +115,7 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-header">
-                    <h3 class="box-title">Categorias</h3>
+                    <h3 class="box-title">Filtre as Atividades por categoria ou módulo</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
