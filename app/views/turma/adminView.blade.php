@@ -19,7 +19,7 @@
                     <div id="div_aluno" class="form-group">
                         <label class="control-label" for="Aluno"><i id="icone_aluno" class="fa"></i> Selecione o Aluno:</label>
                         <select name="idAluno" id="idAluno" onblur="fcn_recarregaCores();" class="form-control alunoObrigatorio">
-                        @foreach(Aluno::all() as $aluno)
+                        @foreach(Aluno::all()->diff($turma->alunos) as $aluno)
                           <option value="{{$aluno->id}}">{{$aluno->matricula}} - {{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</option>
                         @endforeach
                         </select>

@@ -2,6 +2,38 @@
 
 @section('modals')
 
+<div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title"><i class="fa fa-envelope-o"> </i> Nova Mensagem</h4>
+            </div>
+            <form action="/professor/mensagem/enviar" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">Para:</span>
+                            <select class="form-control alunoObrigatorio" name="idUsuarioDestino" id="idUsuarioDestino">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <button type="submit" class="btn btn-primary pull-right btn-enviar"><i class="fa fa-envelope"></i> Enviar</button>
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Descartar</button>
+                </div>
+            </form>
+        </div> 
+    </div> 
+</div>
 
 @endsection
 
@@ -47,7 +79,7 @@
                                 <td>{{User::find($aluno->id)->email}}</td>
                                 <td>
                                     <div class="box-tools" style="padding:0px">
-                                        <button>Enviar mensagem</button>
+                                        <button class="btn btn-success" data-toggle="modal" data-target="#compose-modal" data-idUsuarioDestino="{{$aluno->id}}" data-nomeDestino="{{$aluno->usuario->nome}}">Enviar mensagem</button>
                                     </div>
                                 </td> 
                             </tr>
@@ -65,6 +97,15 @@
     @section('scripts')
 
         <script>
+        $('#compose-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var idUsuarioDestino = button.data('idusuariodestino');
+            var nomeDestino = button.data('nomedestino');
+            var modal = $(this);
+
+            modal.find('#idUsuarioDestino option').val(idUsuarioDestino);
+            modal.find('#idUsuarioDestino option').text(nomeDestino);
+        });
            
 
             $('.item').first().addClass("active")

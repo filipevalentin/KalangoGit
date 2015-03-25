@@ -197,7 +197,7 @@
                                             <div class="inner">
                                                 @if(get_class($categorias[$j]) =="Modulo")
                                                 <div class="curso" style="cursor:pointer;" id="{{$categorias[$j]->id}}" data-tipo="{{get_class($categorias[$j])}}" data-atividades="{{$atividades}}">
-                                                    <h4 style="font-size: 20px;">{{$categorias[$j]->nome}}</h4>
+                                                    <h4 style="font-size: 20px;">{{$categorias[$j]->nome}} - {{$categorias[$j]->curso->nome}}</h4>
                                                     <p style="margin:0px;">  </p>
                                                 </div>
                                                 @else
@@ -206,7 +206,7 @@
                                                     <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                                 </div>
                                                 <div class="curso" style="cursor:pointer;" id="{{$categorias[$j]->id}}" data-tipo="{{get_class($categorias[$j])}}" data-atividades="{{$atividades}}">
-                                                    <h4 style="font-size: 20px;">{{$categorias[$j]->nome}}-{{$categorias[$j]->curso->nome}}</h4>
+                                                    <h4 style="font-size: 20px;">{{$categorias[$j]->nome}}</h4>
                                                     <p style="margin:0px;">  </p>
                                                 </div>
                                                 @endif

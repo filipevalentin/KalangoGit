@@ -16,7 +16,7 @@
 		}
 
 		public function atividades(){
-			return $this-> hasMany('Atividade','idModulo');
+			return $this-> hasManyThrough('Atividade','Aula', 'idModulo', 'idAula');
 		}
 
 		public function questoes(){

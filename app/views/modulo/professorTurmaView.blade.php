@@ -2,6 +2,39 @@
 
 @section('modals')
 
+<div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title"><i class="fa fa-envelope-o"> </i> Enviar Feedback</h4>
+            </div>
+            <form action="/professor/mensagem/enviar" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">Para:</span>
+                            <select class="form-control alunoObrigatorio" name="idUsuarioDestino" id="idUsuarioDestino">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <button type="submit" class="btn btn-primary pull-right btn-enviar"><i class="fa fa-envelope"></i> Enviar</button>
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Descartar</button>
+                </div>
+            </form>
+        </div> 
+    </div> 
+</div>
+
 @endsection
 
 <?php $cont = 1; ?>
@@ -58,7 +91,7 @@
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
                                                     <p style="float:left;">{{$atividade->nome}}</p>
                                                     <div class="box-tools pull-right">
-                                                        <a href="/professor/atividade/{{$atividade->id}}/{{$turma->id}}"><button class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button></a>
+                                                        <a href="/professor/atividade/turma/{{$atividade->id}}/{{$turma->id}}"><button class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button></a>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -85,19 +118,13 @@
                                     <tr>
                                         <th style="/* width: 10px */">#</th>
                                         <th>Nome</th>
-                                        <th>Desempenho</th>
-                                        <th>Ação</th>
+                                        <th>Atividades Acessadas</th>
                                     </tr>
                                     @foreach($alunos as $aluno)
                                     <tr>
                                         <td>{{$cont++}}</td>
                                         <td>{{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</td>
-                                        <td>90%</td>
-                                        <td>
-                                            <div class="box-tools" style="padding:0px">
-                                                <button>Enviar feedback</button>
-                                            </div>
-                                        </td> 
+                                        <td>{{$aluno->presenca*100}}%</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -114,5 +141,17 @@
     
 
 @section('scripts')
+
+<script>
+    $('#compose-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var idUsuarioDestino = button.data('idusuariodestino');
+            var nomeDestino = button.data('nomedestino');
+            var modal = $(this);
+
+            modal.find('#idUsuarioDestino option').val(idUsuarioDestino);
+            modal.find('#idUsuarioDestino option').text(nomeDestino);
+        });
+</script>
    
 @endsection

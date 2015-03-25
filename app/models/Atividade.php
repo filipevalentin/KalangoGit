@@ -13,6 +13,10 @@
         	return $this->belongsTo("Modulo", "idModulo");
         }
 
+        public function aula(){
+        	return $this->belongsTo("Aula", "idAula");
+        }
+
         public function usuario(){
         	return $this->belongsTo("User", "idUsuario");
         }

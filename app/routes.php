@@ -221,7 +221,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 	});
 
 	Route::get('mensagens/enviados', function(){
-		$mensagens = Mensagem::where('idUsuarioOrgiem', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
+		$mensagens = Mensagem::where('idUsuarioOrigem', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
 		return View::make('mensagem/alunoEnviados')->with('mensagens', $mensagens);
 		
 	});
@@ -241,7 +241,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 	Route::post('mensagem/enviar', function(){
 		$mensagem = new Mensagem;
-		$mensagem->idUsuarioOrgiem = Auth::user()->id;
+		$mensagem->idUsuarioOrigem = Auth::user()->id;
 		$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
 		$mensagem->titulo = Input::get('titulo');
 		$mensagem->conteudo = Input::get('conteudo');
@@ -256,7 +256,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 	Route::post('mensagem/responder', function(){
 		$mensagem = new Mensagem;
-		$mensagem->idUsuarioOrgiem = Auth::user()->id;
+		$mensagem->idUsuarioOrigem = Auth::user()->id;
 		$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
 		$mensagem->titulo = Input::get('titulo');
 		$mensagem->conteudo = Input::get('conteudo');
@@ -513,7 +513,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	});
 
 	Route::get('mensagens/enviados', function(){
-		$mensagens = Mensagem::where('idUsuarioOrgiem', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
+		$mensagens = Mensagem::where('idUsuarioOrigem', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
 		return View::make('mensagem/professorEnviados')->with('mensagens', $mensagens);
 		
 	});
@@ -533,7 +533,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 	Route::post('mensagem/enviar', function(){
 		$mensagem = new Mensagem;
-		$mensagem->idUsuarioOrgiem = Auth::user()->id;
+		$mensagem->idUsuarioOrigem = Auth::user()->id;
 		$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
 		$mensagem->titulo = Input::get('titulo');
 		$mensagem->conteudo = Input::get('conteudo');
@@ -548,7 +548,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 	Route::post('mensagem/responder', function(){
 		$mensagem = new Mensagem;
-		$mensagem->idUsuarioOrgiem = Auth::user()->id;
+		$mensagem->idUsuarioOrigem = Auth::user()->id;
 		$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
 		$mensagem->titulo = Input::get('titulo');
 		$mensagem->conteudo = Input::get('conteudo');
@@ -617,6 +617,16 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		$modulo = Modulo::find($idModulo);
 		$turma = Turma::find($idTurma);
 		$alunos = $turma->alunos;
+
+		foreach ($alunos as $keyA => $aluno) {
+			$presenca = 0;
+			foreach ($modulo->atividades as $keyM => $atividade) {
+				($aluno->acessos->contains($atividade)) ? $presenca++ : '' ;
+			}
+			($presenca != 0) ? $presenca = $presenca/$modulo->atividades->count() : '';
+			$aluno->presenca = $presenca;
+		}
+
 		return View::make('modulo/professorTurmaView')->with('modulo',$modulo)
 													 ->with('turma', $turma)
 													 ->with('alunos', $alunos);
@@ -647,31 +657,19 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$alunos[$i]->respostas = array();
 
 			for ($j = 0; $j < sizeof($questoes); $j++) {
-				if($questoes[$j]->tipo == "1"){
-					$resposta = Resposta::where('idAluno', '=', $alunos[$i]->id )->where('idQuestao', '=', $questoes[$j]->numero)->pluck('respostaAluno');
-					if($resposta == $questoes[$j]->respostaCerta){
-						$r = $alunos[$i]->respostas;
-						$r[] = "1";
-						$alunos[$i]->respostas = $r;
-					}else{
-						$r = $alunos[$i]->respostas;
-						$r[] = "0";
-						$alunos[$i]->respostas = $r;
-					}
+				$resposta = Resposta::where('idAluno', '=', $alunos[$i]->id )->where('idQuestao', '=', $questoes[$j]->numero)->pluck('respostaAluno');
+				if($resposta == $questoes[$j]->respostaCerta){
+					$r = $alunos[$i]->respostas;
+					$r[] = "1";
+					$alunos[$i]->respostas = $r;
 				}else{
-					$resposta = Resposta::where('idAluno', '=', $alunos[$i]->id )->where('idQuestao', '=', $questoes[$j]->numero)->pluck('respostaAluno');
-					if($resposta == $questoes[$j]->respostaCerta){
-						$r = $alunos[$i]->respostas;
-						$r[] = "1";
-						$alunos[$i]->respostas = $r;
-					}else{
-						$r = $alunos[$i]->respostas;
-						$r[] = "0";
-						$alunos[$i]->respostas = $r;
-					}
-
+					$r = $alunos[$i]->respostas;
+					$r[] = "0";
+					$alunos[$i]->respostas = $r;
 				}
 			}
+			$respostasCorretas = substr_count(implode(",", $alunos[$i]->respostas), '1');
+			($respostasCorretas != 0) ? $alunos[$i]->desempenho = $respostasCorretas/sizeof($questoes) : $alunos[$i]->desempenho = 0;
 		}
 
 		$atividade = Atividade::find($idAtividade);			 
@@ -1804,8 +1802,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$filename="";
 
 			if(Input::file('urlImagem')!=NULL){
-				$user->urlImagem = 'img/'.$filename;
 				$filename = $imagem->getClientOriginalName();
+				$user->urlImagem = 'img/'.$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -1868,6 +1866,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->sobrenome       = Input::get('sobrenome');
 			$user->email       = Input::get('email');
 			$user->login = Input::get('codRegistro');
+			$user->tipo = '2';
+			$user->password = Hash::make(Input::get('password'));
 
 			$confirmation_code = str_random(30);
 			foreach(User::all() as $u){
@@ -1942,6 +1942,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->sobrenome       = Input::get('sobrenome');
 			$user->email       = Input::get('email');
 			$user->login = Input::get('codRegistro');
+			$user->tipo = '3';
+			$user->password = Hash::make(Input::get('password'));
 
 			$imagem = Input::file('urlImagem');
 			$filename="";

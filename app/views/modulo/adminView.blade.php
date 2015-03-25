@@ -242,7 +242,7 @@
                                             @endforeach
 
                                                  <div class="box-tools pull-right" style="padding: 0px 25px 5px 5px;">
-                                                    <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarconteudo" data-idaula="1"><i class="fa fa-plus"></i></button>
+                                                    <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarconteudo" data-idaula="{{$aula->id}}"><i class="fa fa-plus"></i></button>
                                                 </div>
                                             </div>
                                         </div>
@@ -313,6 +313,7 @@
          $('#criarconteudo').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var dataidaula = button.data('idaula')
+            console.log(dataidaula)
             // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.

@@ -3,7 +3,7 @@
 
 		public $timestamps = false;
 
-		public function modulos(){
+		public function modulo(){
 			return $this->belongsTo('Modulo', "idModulo");
 		}
 

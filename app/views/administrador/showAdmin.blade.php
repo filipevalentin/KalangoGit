@@ -23,6 +23,10 @@
                         <input type="text" autocomplete="off" id="sobrenome" name="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio">
                     </div>
                     <div id="div_email" class="form-group">
+                        <label class="control-label" for="codRegistro"><i id="icone_email" class="fa"></i> Código de Registro</label>
+                        <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" >
+                    </div>
+                    <div id="div_email" class="form-group">
                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
                         <input type="text" autocomplete="off" id="email" name="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" >
                     </div>
