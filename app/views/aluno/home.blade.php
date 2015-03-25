@@ -44,7 +44,7 @@
 @endsection
 
 
-@section('maincontent')
+@section('content-header')
 	<!-- Content Header (Page header) -->
 	<section class="content-header">
 	    <h1>
@@ -55,9 +55,10 @@
 	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
 	    </ol>
 	</section>
+@endsection
 
 	<!-- Main content -->
-
+@section('maincontent')
 	<section class="content">
 	    <div class="row">
 	        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
