@@ -187,6 +187,8 @@
 
 @section('scripts')
 <script src="/js/dataTables.tableTools.js" type="text/javascript"></script>
+<script src="/js/moment.min.js" type="text/javascript"></script>
+<script src="/js/datetime-moment.js" type="text/javascript"></script>
 
 <script>
 
@@ -215,55 +217,63 @@
 
 	$('.item').first().addClass("active");
 
-	$('#example').DataTable( {
-	  "ajax":"/admin/listarAvisos" ,
-	    "columns": [
-	        { data: 'id' },
-	        { data: 'titulo' },
-	        { data: 'dataExpiracao' },
-	        { data: 'enviadoPara'},
-	        { data: 'criadoPor' },
-	        { data: 'action' }
-	    ],
+	$(document).ready(function() {
+	    $.fn.dataTable.moment( 'DD/MM/YYYY' );
 
-		"columnDefs": [ {
-		      "targets": 5,
-		      "orderable": false,
-		      "searchable": false
-		    } ],
+	    $('#example').DataTable( {
+		  "ajax":"/admin/listarAvisos" ,
+		    "columns": [
+		        { data: 'id' },
+		        { data: 'titulo' },
+		        { data: 'dataExpiracao' },
+		        { data: 'enviadoPara'},
+		        { data: 'criadoPor' },
+		        { data: 'action' }
+		    ],
 
-	    "dataSrc": "",
-	     dom: 'T<"clear">lfrtip',
-        tableTools: {
-            "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
-        },
+			"columnDefs": [ 
+				{
+			      "targets": 5,
+			      "orderable": false,
+			      "searchable": false,
+			    }
+			],
 
-        responsive: true,
+		    "dataSrc": "",
+		     dom: 'T<"clear">lfrtip',
+	        tableTools: {
+	            "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
+	        },
 
-        language: {
-		    "emptyTable":     "Nenhum registro disponível",
-		    "info":           "Mostrando _START_ a _END_ de _TOTAL_ valores",
-		    "infoEmpty":      "Mostrando 0 to 0 of 0 valores",
-		    "infoFiltered":   "(Filtrado dentre _MAX_ valores)",
-		    "infoPostFix":    "",
-		    "thousands":      ",",
-		    "lengthMenu":     "Mostrar _MENU_ valores",
-		    "loadingRecords": "Carregando...",
-		    "processing":     "Processando...",
-		    "search":         "Pesquisa:",
-		    "zeroRecords":    "Nenhum resultado encontrado",
-		    "paginate": {
-		        "first":      "Primeiro",
-		        "last":       "Último",
-		        "next":       "Próximo",
-		        "previous":   "Anterior"
-		    },
-		    "aria": {
-		        "sortAscending":  ": activate to sort column ascending",
-		        "sortDescending": ": activate to sort column descending"
-		    }
-		}
-    } );
+	        responsive: true,
+
+	        language: {
+			    "emptyTable":     "Nenhum registro disponível",
+			    "info":           "Mostrando _START_ a _END_ de _TOTAL_ valores",
+			    "infoEmpty":      "Mostrando 0 to 0 of 0 valores",
+			    "infoFiltered":   "(Filtrado dentre _MAX_ valores)",
+			    "infoPostFix":    "",
+			    "thousands":      ",",
+			    "lengthMenu":     "Mostrar _MENU_ valores",
+			    "loadingRecords": "Carregando...",
+			    "processing":     "Processando...",
+			    "search":         "Pesquisa:",
+			    "zeroRecords":    "Nenhum resultado encontrado",
+			    "paginate": {
+			        "first":      "Primeiro",
+			        "last":       "Último",
+			        "next":       "Próximo",
+			        "previous":   "Anterior"
+			    },
+			    "aria": {
+			        "sortAscending":  ": activate to sort column ascending",
+			        "sortDescending": ": activate to sort column descending"
+			    }
+			}
+	    } );
+	 
+	} );
+
 
 </script>
 	

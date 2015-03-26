@@ -1191,9 +1191,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		}
 
 		foreach ($avisos as $aviso) {
+			$aviso->dataExpiracao = date_format(date_create($aviso->dataExpiracao),"d/m/Y");
 			$aviso->criadoPor = User::find($aviso->idUsuario)->nome;
 			$aviso->enviadoPara = ($aviso->idCurso == null) ? 'Todos alunos' : 'Alunos do curso: '.$aviso->curso->nome;
-			$aviso->action = "<a style='color:white;' href='/admin/aviso/$aviso->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-external-link'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$aviso->id' data-titulo='$aviso->titulo' data-descricao='$aviso->descricao' data-urlImagem='$aviso->urlImagem' data-dataExpiracao='$aviso->dataExpiracao' data-idCurso='$aviso->idCurso' data-toggle='modal' data-target='#editarAviso'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+			$aviso->action = "<a style='color:white;' href='/admin/aviso/$aviso->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-external-link'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$aviso->id' data-titulo='$aviso->titulo' data-descricao='$aviso->descricao' data-urlImagem='$aviso->urlImagem' data-dataExpiracao='date_format($aviso->dataExpiracao,'d-m-Y')' data-idCurso='$aviso->idCurso' data-toggle='modal' data-target='#editarAviso'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
 		}
 
 		$response = array(
@@ -1228,7 +1229,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			
 			$imagem->move('img/', $filename);
 		}
-		$aviso->dataExpiracao = Input::get('dataExpiracao');
+		$data = explode('/', Input::get('dataExpiracao'));
+		$aviso->dataExpiracao = date('Y-m-d', mktime(0,0,0,$data[1],$data[0],$data[2])); //hora, min, seg, mes, dia, ano;
 		$aviso->idUsuario = Auth::user()->id;
 		$aviso->idCurso = (Input::get('idCurso') != null) ? Input::get('idCurso') : NULL ;
 		$aviso->save();

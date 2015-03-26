@@ -537,7 +537,7 @@ CREATE TABLE IF NOT EXISTS `avisos` (
   `titulo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `descricao` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `urlImagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dataExpiracao` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dataExpiracao` date COLLATE utf8_unicode_ci DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL,
   `idCurso` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
