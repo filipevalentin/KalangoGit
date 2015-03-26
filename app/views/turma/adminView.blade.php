@@ -18,8 +18,25 @@
                     </div>
                     <div id="div_aluno" class="form-group">
                         <label class="control-label" for="Aluno"><i id="icone_aluno" class="fa"></i> Selecione o Aluno:</label>
+                        <?php 
+                            $alunos2 = Aluno::all();
+                            $alunos2->each(function($aluno){
+                                $aluno->nome = $aluno->usuario->nome;
+                                $aluno->sobrenome = $aluno->usuario->sobrenome;
+                                $aluno->nomeCompleto = $aluno->nome;
+                            });
+                            $alunos2->sort(function($a, $b){
+                                 $a = $a->nomeCompleto;
+                                 $b = $b->nomeCompleto;
+                                 if ($a === $b) {
+                                    return 0;
+                                 }
+                                 return ($a > $b) ? 1 : -1;
+                            });
+
+                         ?>
                         <select name="idAluno" id="idAluno" onblur="fcn_recarregaCores();" class="form-control alunoObrigatorio">
-                        @foreach(Aluno::all()->diff($turma->alunos)-> as $aluno)
+                        @foreach($alunos->diff($turma->alunos) as $aluno)
                           <option value="{{$aluno->id}}">{{$aluno->matricula}} - {{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</option>
                         @endforeach
                         </select>
