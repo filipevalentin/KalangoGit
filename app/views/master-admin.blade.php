@@ -198,7 +198,6 @@
                         <li>
                             <a href="/admin/atividadesExtras">
                                 <i class="fa fa-star"></i> <span>Atividades Extras</span>
-                                <small class="badge pull-right bg-red">3</small>
                             </a>
                         </li>
 
@@ -271,11 +270,6 @@
             </script>
         @endif
 
-        <script>
-            $('.carousel').carousel({
-            interval: 5000 //changes the speed
-            })
-        </script>
         <script>
             $('.carousel').carousel({
                 interval: 0 //changes the speed

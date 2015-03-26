@@ -1334,7 +1334,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		if($imagem!=NULL){
 			$filename = $imagem->getClientOriginalName();
 
-			$propaganda->urlImagem = 'img/'.$filename;
+			$propaganda->imagem = 'img/'.$filename;
 			
 			$imagem->move('img/', $filename);
 		}
@@ -1360,7 +1360,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		if($imagem!=NULL){
 			$filename = $imagem->getClientOriginalName();
 
-			$propaganda->urlImagem = 'img/'.$filename;
+			$propaganda->imagem = 'img/'.$filename;
 			
 			$imagem->move('img/', $filename);
 		}
@@ -1957,7 +1957,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$user->save();
 			$administrador= Administrador::find($user->id);
-			$administrador->urlImagem = $user->urlImagem;
 
 			$administrador->codRegistro = Input::get('codRegistro');
 

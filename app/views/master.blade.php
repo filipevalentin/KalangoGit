@@ -190,6 +190,8 @@
         <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>    
         <!-- jQuery Knob Chart -->
         <script src="/plugins/knob/jquery.knob.js" type="text/javascript"></script>
+        <!-- Slimscroll -->
+        <script src="/plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <!-- Bootstrap WYSIHTML5 -->
         <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
         <!-- AdminLTE App -->
@@ -203,7 +205,7 @@
 
         <script>
             $('.carousel').carousel({
-            interval: 5000 //changes the speed
+            interval: 0; //changes the speed
             })
         </script>
 

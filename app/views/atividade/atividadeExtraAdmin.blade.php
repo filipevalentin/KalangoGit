@@ -101,7 +101,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar Atividade Extra</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Filtre as Atividades por categoria ou módulo</h4>
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/atualizarAtividadeExtra">
@@ -252,10 +252,10 @@
                         @foreach($atividadesExtras as $atividade)
 
                         @if($atividade->status == '0')
-                            <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="background-color: white;">
+                            <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="background-color: white; margin:10px;">
                             <b style="color: red;"> Inativa</b>
                         @else
-                            <div class="col-lg-3 atividade" id="{{$atividade->id}}">
+                            <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="margin:10px;">
                         @endif
                             <div id="div_card_4" class="small-box bg-fuchsia card">
                                     <div style="padding: 10px;" class="inner">

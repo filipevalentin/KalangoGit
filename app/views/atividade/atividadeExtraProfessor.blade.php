@@ -115,7 +115,7 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-header">
-                    <h3 class="box-title">Categorias</h3>
+                    <h3 class="box-title">Filtre as Atividades por categoria ou módulo</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -193,10 +193,10 @@
                     <div class="row">
                         @foreach($atividadesExtras as $atividade)
                          @if($atividade->status == '0')
-                            <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="background-color: white;">
+                            <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="background-color: white; margin:10px;">
                             <b style="color: red;"> Inativa</b>
                         @else
-                            <div class="col-lg-3 atividade" id="{{$atividade->id}}">
+                            <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="margin:10px;">
                         @endif
                             <div id="div_card_4" class="small-box bg-fuchsia card">
                                 <div style="padding: 10px;" class="inner">
