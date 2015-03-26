@@ -22,9 +22,9 @@
                         <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i> Sobrenome</label>
                         <input type="text" autocomplete="off" id="sobrenome" name="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio">
                     </div>
-                    <div id="div_email" class="form-group">
-                        <label class="control-label" for="codRegistro"><i id="icone_email" class="fa"></i> Código de Registro</label>
-                        <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" >
+                    <div id="div_codigoRegistro" class="form-group">
+                        <label class="control-label" for="codRegistro"><i id="icone_codigoRegistro" class="fa"></i> Código de Registro</label>
+                        <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" maxlength="50" class="form-control codigoRegistroObrigatorio" onblur="fcn_recarregaCores();" >
                     </div>
                     <div id="div_email" class="form-group">
                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
@@ -193,6 +193,19 @@ $(".btn-salvar").click(function(event){
 		$( "#icone_sobrenome" ).addClass("fa-check");
 	}
 	
+	if($(".codigoRegistroObrigatorio").val() == ""){
+		obrigatorioPendente = 1;
+		$( "#div_codigoRegistro" ).removeClass("has-success");
+		$( "#icone_codigoRegistro" ).removeClass("fa-check");
+		$( "#div_codigoRegistro" ).addClass("has-error");
+		$( "#icone_codigoRegistro" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_codigoRegistro" ).removeClass("has-error");
+		$( "#icone_codigoRegistro" ).removeClass("fa-times-circle-o");
+		$( "#div_codigoRegistro" ).addClass("has-success");
+		$( "#icone_codigoRegistro" ).addClass("fa-check");
+	}
+	
 	if($(".emailObrigatorio").val() == ""){
 		obrigatorioPendente = 1;
 		$( "#div_email" ).removeClass("has-success");
@@ -250,6 +263,18 @@ function fcn_recarregaCores(){
 		$( "#icone_sobrenome" ).removeClass("fa-times-circle-o");
 		$( "#div_sobrenome" ).addClass("has-success");
 		$( "#icone_sobrenome" ).addClass("fa-check");
+	}
+	
+	if($(".codigoRegistroObrigatorio").val() == ""){
+		$( "#div_codigoRegistro" ).removeClass("has-success");
+		$( "#icone_codigoRegistro" ).removeClass("fa-check");
+		$( "#div_codigoRegistro" ).addClass("has-error");
+		$( "#icone_codigoRegistro" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_codigoRegistro" ).removeClass("has-error");
+		$( "#icone_codigoRegistro" ).removeClass("fa-times-circle-o");
+		$( "#div_codigoRegistro" ).addClass("has-success");
+		$( "#icone_codigoRegistro" ).addClass("fa-check");
 	}
 	
 	if($(".emailObrigatorio").val() == ""){
