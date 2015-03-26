@@ -92,11 +92,12 @@
                             </li><!-- /.messages-menu -->
 
                             <!-- Notifications Menu -->
+                            <?php $avisos = Aviso::where('dataExpiracao','<', date('dd-mm-yyyy'))->orderBy('dataExpiracao')->get(); //dd($avisos); ?>
                             <li class="dropdown notifications-menu">
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning">10</span>
+                                    <span class="label label-warning"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="header">You have 10 notifications</li>
