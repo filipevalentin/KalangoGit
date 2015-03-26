@@ -200,7 +200,6 @@
         var dataid = button.data('id');
         var datatitulo = button.data('titulo')
         var datadescricao = button.data('descricao')
-        var dataurlimagem = button.data('urlimagem')
         var datadataexpiracao = button.data('dataexpiracao')
         var dataidcurso = button.data('idcurso')
 
@@ -209,7 +208,6 @@
         modal.find('#id').val(dataid)
         modal.find('#titulo').val(datatitulo)
         modal.find('#descricao').val(datadescricao)
-        modal.find('#urlImagem').val(dataurlimagem)
         modal.find('#dataExpiracao').val(datadataexpiracao)
         modal.find('#idCurso').val(dataidcurso)
 
