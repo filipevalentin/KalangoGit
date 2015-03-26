@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `alunos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` int(11) DEFAULT NULL,
   `sobreMim` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dataNascimento` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dataNascimento` date COLLATE utf8_unicode_ci DEFAULT NULL,
   `dataVencimentoBoleto` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=276 ;
@@ -537,7 +537,7 @@ CREATE TABLE IF NOT EXISTS `avisos` (
   `titulo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `descricao` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `urlImagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dataExpiracao` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dataExpiracao` date COLLATE utf8_unicode_ci DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL,
   `idCurso` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),

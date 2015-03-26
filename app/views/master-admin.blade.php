@@ -92,22 +92,25 @@
                             </li><!-- /.messages-menu -->
 
                             <!-- Notifications Menu -->
+                            <?php $avisos = Aviso::where('dataExpiracao','>', date('Y-m-d'))->orderBy('dataExpiracao')->get(); ?>
                             <li class="dropdown notifications-menu">
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning">10</span>
+                                    <span class="label label-warning">{{$avisos->count()}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">You have 10 notifications</li>
+                                    <li class="header">Você tem {{$avisos->count()}} avisos</li>
                                     <li>
                                         <!-- Inner Menu: contains the notifications -->
                                         <ul class="menu">
+                                        @foreach($avisos as $aviso)
                                             <li><!-- start notification -->
                                                 <a href="#">
-                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                                    <i class="fa fa-check"></i>{{$aviso->titulo}}
                                                 </a>
                                             </li><!-- end notification -->                      
+                                        @endforeach
                                         </ul>
                                     </li>
                                     <li class="footer"><a href="#">View all</a></li>
@@ -193,6 +196,12 @@
                                 <li><a href="/admin/professores" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Professor</a></li>
                                 <li><a href="/admin/administradores" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Administrador</a></li>
                             </ul>
+                        </li>
+
+                        <li>
+                            <a href="/admin/idiomas">
+                                <i class="fa fa-star"></i> <span>Gerenciar Idiomas</span>
+                            </a>
                         </li>
 
                         <li>
