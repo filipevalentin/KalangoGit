@@ -198,7 +198,6 @@
                         <li>
                             <a href="/admin/atividadesExtras">
                                 <i class="fa fa-star"></i> <span>Atividades Extras</span>
-                                <small class="badge pull-right bg-red">3</small>
                             </a>
                         </li>
 
