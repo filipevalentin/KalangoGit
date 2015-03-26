@@ -92,23 +92,25 @@
                             </li><!-- /.messages-menu -->
 
                             <!-- Notifications Menu -->
-                            <?php $avisos = Aviso::where('dataExpiracao','<', date('dd-mm-yyyy'))->orderBy('dataExpiracao')->get(); //dd($avisos); ?>
+                            <?php $avisos = Aviso::where('dataExpiracao','>', date('Y-m-d'))->orderBy('dataExpiracao')->get(); ?>
                             <li class="dropdown notifications-menu">
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning"></span>
+                                    <span class="label label-warning">{{$avisos->count()}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">You have 10 notifications</li>
+                                    <li class="header">Você tem {{$avisos->count()}} avisos</li>
                                     <li>
                                         <!-- Inner Menu: contains the notifications -->
                                         <ul class="menu">
+                                        @foreach($avisos as $aviso)
                                             <li><!-- start notification -->
                                                 <a href="#">
-                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                                    <i class="fa fa-check"></i>{{$aviso->titulo}}
                                                 </a>
                                             </li><!-- end notification -->                      
+                                        @endforeach
                                         </ul>
                                     </li>
                                     <li class="footer"><a href="#">View all</a></li>

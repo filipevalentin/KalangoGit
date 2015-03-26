@@ -17,7 +17,7 @@ create table alunos(
 	id int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	matricula int(11),
 	sobreMim varchar(1000),
-	dataNascimento varchar(10),
+	dataNascimento date,
 	dataVencimentoBoleto varchar(10)
 
 );
@@ -145,7 +145,7 @@ create table avisos(
 	titulo varchar(100),
 	descricao varchar(500),
 	urlImagem varchar(255),
-	dataExpiracao varchar(10),
+	dataExpiracao date,
 	idUsuario int(11),
 	idCurso int(11),
 	FOREIGN KEY (idUsuario) REFERENCES usuarios(id),
