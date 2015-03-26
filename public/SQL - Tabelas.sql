@@ -145,7 +145,7 @@ create table avisos(
 	titulo varchar(100),
 	descricao varchar(500),
 	urlImagem varchar(255),
-	dataExpiracao varchar(8),
+	dataExpiracao varchar(10),
 	idUsuario int(11),
 	idCurso int(11),
 	FOREIGN KEY (idUsuario) REFERENCES usuarios(id),

@@ -196,6 +196,12 @@
                         </li>
 
                         <li>
+                            <a href="/admin/idiomas">
+                                <i class="fa fa-star"></i> <span>Gerenciar Idiomas</span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="/admin/atividadesExtras">
                                 <i class="fa fa-star"></i> <span>Atividades Extras</span>
                             </a>

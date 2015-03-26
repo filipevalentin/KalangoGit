@@ -971,6 +971,17 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		
 	});
 
+	Route::get('idiomas', function(){
+		$idiomas = Idioma::all();
+		return View::make('idioma/adminView')->with('idiomas', $idiomas);
+	});
+
+	Route::post('criarIdioma', function(){
+		$idioma = new Idioma;
+		$idioma->nome = Input::get('nome');
+		$idioma->save();
+	});
+
 	Route::get('perfil', function(){
 		if(Session::has('mensagem')){
 			$mensagem = Session::get('mensagem');
