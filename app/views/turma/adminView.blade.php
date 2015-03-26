@@ -36,7 +36,7 @@
 
                          ?>
                         <select name="idAluno" id="idAluno" onblur="fcn_recarregaCores();" class="form-control alunoObrigatorio">
-                        @foreach($alunos->diff($turma->alunos) as $aluno)
+                        @foreach($alunos2->diff($turma->alunos) as $aluno)
                           <option value="{{$aluno->id}}">{{$aluno->matricula}} - {{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</option>
                         @endforeach
                         </select>
