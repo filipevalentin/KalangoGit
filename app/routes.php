@@ -1957,7 +1957,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$user->save();
 			$administrador= Administrador::find($user->id);
-			$administrador->urlImagem = $user->urlImagem;
 
 			$administrador->codRegistro = Input::get('codRegistro');
 
