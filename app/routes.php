@@ -972,8 +972,21 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	});
 
 	Route::get('idiomas', function(){
+		return View::make('idioma/adminView');
+	});
+
+	Route::get('listarIdiomas', function(){
 		$idiomas = Idioma::all();
-		return View::make('idioma/adminView')->with('idiomas', $idiomas);
+		foreach ($idiomas as $idioma) {
+			$idioma->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarIdioma' data-id='$idioma->id' data-nome='$idioma->nome'><i class='fa fa-pencil'></i></button></a><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+		}
+
+		$response = array(
+				"data" => $idiomas->toArray(),
+				"iTotalRecords" => count($idiomas),
+				"iTotalDisplayRecords" => count($idiomas)
+			);
+		return Response::json($response);
 	});
 
 	Route::post('criarIdioma', function(){
