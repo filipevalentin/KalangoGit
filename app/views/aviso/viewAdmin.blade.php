@@ -231,6 +231,8 @@
 		        { data: 'action' }
 		    ],
 
+		    "scrollX": true,
+
 			"columnDefs": [ 
 				{
 			      "targets": 5,
