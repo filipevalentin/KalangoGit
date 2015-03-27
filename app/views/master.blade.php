@@ -10,6 +10,7 @@
 
         <!-- Arquivos Básicos -->
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <meta name="theme-color" content="#2180a7" style="color: #008d4c;">
         <!-- Bootstrap 3.3.2 -->
         <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- Font Awesome Icons -->
