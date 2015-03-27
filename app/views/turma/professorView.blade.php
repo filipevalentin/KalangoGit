@@ -61,7 +61,7 @@
                 <div class="box-header">
                     <h3 class="box-title">Lista de Alunos - Turma {{$turma->nome}} </h3>
                 </div><!-- /.box-header -->
-                <div class="box-body no-padding">
+                <div class="box-body table-responsive no-padding">
                     <table class="table table-striped">
                         <tbody>
                             <tr>

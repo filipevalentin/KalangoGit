@@ -80,7 +80,7 @@
                         <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#adicionaraluno" data-idturma="1"><i class="fa fa-plus"></i></button>
                     </div>
                 </div><!-- /.box-header -->
-                <div class="box-body no-padding">
+                <div class="box-body table-responsive no-padding">
                     <table class="table table-striped">
                         <tbody>
                             <tr>
