@@ -165,7 +165,7 @@
         <div class="col-md-12">
             <div class="box box-solid">
                 <div class="box-header">
-                    <h3 class="box-title">Categorias</h3>
+                    <h3 class="box-title">Filtre as Atividades por categoria ou módulo</h3>
                     <div class="box-tools pull-right" style="padding: 10px 20px 5px 5px;">
                         <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarCategoria" ><i class="fa fa-plus"></i></button>
                     </div>
