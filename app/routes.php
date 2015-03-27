@@ -1323,7 +1323,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		foreach ($propagandas as $propaganda) {
 			$propaganda->criadoPor = User::find($propaganda->idUsuario)->nome;
 			$propaganda->linkView = ($propaganda->link != null) ? "<a href='$propaganda->link''>Visitar Link</a>" : 'N/A';
-			$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+			$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->imagem' data-link='$propaganda->link' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
 		}
 
 		$response = array(
@@ -1485,6 +1485,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 	        $questao->idAtividade = Input::get('idatividade');
 
+	        $questao->idTopico = Input::get('topico');
+			$questao->pontos = Input::get('dificuldade');
+
 			$questao->categoria = Input::get('pergunta');
 
 			$questao->tipo=2;
@@ -1557,6 +1560,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$questao->respostaCerta = Input::get('respostaCerta');
 			$questao->idAtividade = Input::get('idatividade');
+
+			$questao->idTopico = Input::get('topico');
+			$questao->pontos = Input::get('dificuldade');
 
 			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
 

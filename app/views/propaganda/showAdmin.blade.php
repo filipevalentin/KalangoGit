@@ -30,6 +30,10 @@
                         <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" >
                     </div>
                     <div id="div_nome" class="form-group">
+                        <label class="control-label" for="titulo"><i id="icone_titulo" class="fa"></i> Link Externo</label>
+                        <input type="text" autocomplete="off" id="link" name="link" class="form-control" >
+                    </div>
+                    <div id="div_nome" class="form-group">
                         <label class="control-label" for="urlImagem"><i id="icone_urlImagem" class="fa"></i> Imagem</label>
                         <input type="file" autocomplete="off" id="urlImagem" name="urlImagem" class="form-control" >
                     </div>
@@ -58,6 +62,10 @@
                     <div id="div_nome" class="form-group">
                         <label class="control-label" for="titulo"><i id="icone_titulo" class="fa"></i> Título</label>
                         <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" >
+                    </div>
+                    <div id="div_nome" class="form-group">
+                        <label class="control-label" for="titulo"><i id="icone_titulo" class="fa"></i> Link Externo</label>
+                        <input type="text" autocomplete="off" id="link" name="link" class="form-control" >
                     </div>
                     <div id="div_nome" class="form-group">
                         <label class="control-label" for="urlImagem"><i id="icone_urlImagem" class="fa"></i> Imagem</label>
@@ -132,10 +140,12 @@
         var button = $(event.relatedTarget) // Button that triggered the modal
         var dataid = button.data('id');
         var datatitulo = button.data('titulo')
+        var datalink = button.data('link')
 
         var modal = $(this)
         modal.find('#id').val(dataid)
         modal.find('#titulo').val(datatitulo)
+        modal.find('#link').val(datalink)
 
     });
 
