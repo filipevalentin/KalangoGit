@@ -200,7 +200,7 @@
 
                         <li>
                             <a href="/admin/idiomas">
-                                <i class="fa fa-star"></i> <span>Gerenciar Idiomas</span>
+                                <i class="fa fa-quote-right"></i> <span>Gerenciar Idiomas</span>
                             </a>
                         </li>
 

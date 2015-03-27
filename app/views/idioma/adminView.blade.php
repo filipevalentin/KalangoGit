@@ -70,7 +70,7 @@
 			            <tr>
 			                <th>#</th>
 			                <th>Nome</th>
-			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarPropaganda" ><i class="fa fa-plus"></i></button></th>
+			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarIdioma" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </thead>
 			 
@@ -78,7 +78,7 @@
 			            <tr>
 			                <th>#</th>
 			                <th>Nome</th>
-			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarPropaganda" ><i class="fa fa-plus"></i></button></th>
+			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarIdioma" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </tfoot>
 			    </table>
