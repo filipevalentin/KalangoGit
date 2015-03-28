@@ -2,46 +2,7 @@
 
 $layout = 'layouts.master';
 
-Route::get('criarUsuariosTeste', function(){
 
-	$u3 = new User;
-	$u3->nome = "Administrador 1";
-	$u3->login = "789";
-	$u3->tipo = "3";
-	$u3->password= Hash::make('789');
-	$u3->confirmed = '1';
-	$u3->save();
-
-	$a = new Administrador;
-	$a->id = $u3->id;
-	$a->save();
-});
-
-Route::get('teste2', function(){
-	$exercicio = Exercicio::where('id', '=', '5')->where('idAula', '=', '1')->first();
-	$exercicio->testearray = array('1','2');
-	$r = $exercicio->testearray;
-	$r[] = "3";
-	$exercicio->testearray = $r;
-	dd($exercicio->testearray);
-	return View::make('alunoResponderQuiz')->with('exercicio', $exercicio);
-});
-
-Route::get('admin', function(){
-	return View::make('hello');
-});
-
-Route::get('teste3', function(){
-	// $aluno = Aluno::find(13);
-	// return $aluno->respostas;
-
-	$modulo = Modulo::find(1);
-	return $modulo->questoes;
-});
-
-Route::get('pergunta', function(){
-	return View::make('pergunta');
-});
 
 Route::get('dashboard', function(){
 	$turmas = Auth::user()->aluno->turmas->filter(function($turma){
@@ -148,6 +109,23 @@ Route::get('dashboard', function(){
 
 	Route::controller('password', 'RemindersController');
 
+	Route::get('criarUsuariosTeste', function(){
+
+		$u3 = new User;
+		$u3->nome = "Administrador 1";
+		$u3->login = "789";
+		$u3->tipo = "3";
+		$u3->password= Hash::make('789');
+		$u3->confirmed = '1';
+		$u3->save();
+
+		$a = new Administrador;
+		$a->id = $u3->id;
+		$a->save();
+	});
+
+	//Login
+
 	Route::get('/', function(){
 		if(Auth::check()){
 			if (Auth::user()->tipo == 1){
@@ -177,9 +155,13 @@ Route::get('dashboard', function(){
 		return Redirect::to('/');
 	});
 
+	//Visualizador de arquivos
+
 	Route::get('Viewer', function(){
 		return View::make('view');
 	});
+
+	//Registrar usuário
 
 	Route::get('registro/verificar/{confirmation_code}', function($codigo){
 		Auth::logout();
@@ -214,127 +196,143 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 		return View::make('aluno/home')->with('turmas', $turmas);
 	});
 
-	Route::get('mensagens/entrada', function(){
-		$mensagens = Mensagem::where('idUsuarioDestino', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
-		return View::make('mensagem/alunoInbox')->with('mensagens', $mensagens);
-		
-	});
+	//Mensagens
 
-	Route::get('mensagens/enviados', function(){
-		$mensagens = Mensagem::where('idUsuarioOrigem', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
-		return View::make('mensagem/alunoEnviados')->with('mensagens', $mensagens);
-		
-	});
+		Route::get('mensagens/entrada', function(){
+			$mensagens = Mensagem::where('idUsuarioDestino', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
+			return View::make('mensagem/alunoInbox')->with('mensagens', $mensagens);
+			
+		});
 
-	Route::get('mensagem/{id}', function($id){
-		$mensagem = Mensagem::find($id);
-		if(strpos(URL::previous(), 'enviados') != false){
+		Route::get('mensagens/enviados', function(){
+			$mensagens = Mensagem::where('idUsuarioOrigem', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
+			return View::make('mensagem/alunoEnviados')->with('mensagens', $mensagens);
+			
+		});
 
-		}else{
-			$mensagem->lida = 1;
-		}
+		Route::get('mensagem/{id}', function($id){
+			$mensagem = Mensagem::find($id);
+			if(strpos(URL::previous(), 'enviados') != false){
 
-		$mensagem->save();
-		return View::make('mensagem/alunoShow')->with('mensagem', $mensagem);
-		
-	});
-
-	Route::post('mensagem/enviar', function(){
-		$mensagem = new Mensagem;
-		$mensagem->idUsuarioOrigem = Auth::user()->id;
-		$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
-		$mensagem->titulo = Input::get('titulo');
-		$mensagem->conteudo = Input::get('conteudo');
-		$mensagem->data = date('d-m-Y H:i:s');
-
-		$mensagem->lida = 0;
-		$mensagem->save();
-
-		return Redirect::back();
-		
-	});
-
-	Route::post('mensagem/responder', function(){
-		$mensagem = new Mensagem;
-		$mensagem->idUsuarioOrigem = Auth::user()->id;
-		$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
-		$mensagem->titulo = Input::get('titulo');
-		$mensagem->conteudo = Input::get('conteudo');
-		$mensagem->data = date('d-m-Y H:i:s');
-		$mensagem->idRE = Input::get('idRE');
-
-		$mensagem->lida = 0;
-		$mensagem->save();
-
-		return Redirect::back();
-		
-	});
-
-	Route::get('atividade/{idAtividade}', function($idAtividade){
-		$atividade = Atividade::find($idAtividade);
-		$acesso = AcessosAtividade::where('idAluno', '=', Auth::user()->id)->where('idAtividade', '=', $idAtividade)->first();
-		if($acesso != null){
-			if($acesso->status != 1){
-				return View::make('atividade/ResponderAtividade')->with(array('questao' => $acesso->idQuestao, 'atividade' => $atividade));
 			}else{
-				return Redirect::back();
+				$mensagem->lida = 1;
 			}
-		}else{
-			return View::make('atividade/ResponderAtividade')->with('atividade', $atividade);
-		}
-	});
 
-	Route::get('verificarAcesso/{idAtividade}', function($idAtividade){
-		$acesso = AcessosAtividade::where('idAtividade', '=', $idAtividade)->where('idAluno', '=', Auth::user()->id)->first();
-		if($acesso != null){
-			return Response::json('negado');
-		}else{
-			return Response::json('autorizado');
-		}
+			$mensagem->save();
+			return View::make('mensagem/alunoShow')->with('mensagem', $mensagem);
+			
+		});
 
-	});
+		Route::post('mensagem/enviar', function(){
+			$mensagem = new Mensagem;
+			$mensagem->idUsuarioOrigem = Auth::user()->id;
+			$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
+			$mensagem->titulo = Input::get('titulo');
+			$mensagem->conteudo = Input::get('conteudo');
+			$mensagem->data = date('d-m-Y H:i:s');
 
-	Route::get('registrarAcesso/{idAtividade}/{idQuestao}', function($idAtividade, $idQuestao){
-		$acesso = AcessosAtividade::where('idAtividade', '=', $idAtividade)->where('idAluno', '=', Auth::user()->id)->first();
-		if($acesso == null){
-			$acesso = new AcessosAtividade;
-		}
-		$acesso->idAluno = Auth::user()->id;
-		$acesso->idAtividade = $idAtividade;
-		$acesso->idQuestao = $idQuestao;
-		$acesso->status = '0';
+			$mensagem->lida = 0;
+			$mensagem->save();
 
-		$acesso->save();
+			return Redirect::back();
+			
+		});
 
-		return Response::json("registro feito!");
-	});
+		Route::post('mensagem/responder', function(){
+			$mensagem = new Mensagem;
+			$mensagem->idUsuarioOrigem = Auth::user()->id;
+			$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
+			$mensagem->titulo = Input::get('titulo');
+			$mensagem->conteudo = Input::get('conteudo');
+			$mensagem->data = date('d-m-Y H:i:s');
+			$mensagem->idRE = Input::get('idRE');
 
-	Route::get('registrarConclusao/{idAtividade}', function($idAtividade){
-		$acesso = AcessosAtividade::where('idAtividade', '=', $idAtividade)->where('idAluno', '=', Auth::user()->id)->first();
-		$acesso->status = '1';
+			$mensagem->lida = 0;
+			$mensagem->save();
 
-		$acesso->save();
+			return Redirect::back();
+			
+		});
 
-		return Response::json("registro feito!");
-	});
+	//Atividade e Ativ.Extra - Responder/VerificarAcesso/RegistrarAcesso/Conclusão
 
+		Route::get('atividade/{idAtividade}', function($idAtividade){
+			$atividade = Atividade::find($idAtividade);
+			$acesso = AcessosAtividade::where('idAluno', '=', Auth::user()->id)->where('idAtividade', '=', $idAtividade)->first();
+			if($acesso != null){
+				if($acesso->status != 1){
+					return View::make('atividade/ResponderAtividade')->with(array('questao' => $acesso->idQuestao, 'atividade' => $atividade));
+				}else{
+					return Redirect::back();
+				}
+			}else{
+				return View::make('atividade/ResponderAtividade')->with('atividade', $atividade);
+			}
+		});
 
-	Route::get('responder/{idQuestao}/{resposta}', function($idQuestao, $respostaAluno){
-		$acesso = AcessosAtividade::where('idAluno', '=', Auth::user()->id)->where('idAtividade', '=', Questao::find($idQuestao)->atividade->id)->first();
-		if($acesso != null){
-			if($acesso->status == 1){
+		Route::get('verificarAcesso/{idAtividade}', function($idAtividade){
+			$acesso = AcessosAtividade::where('idAtividade', '=', $idAtividade)->where('idAluno', '=', Auth::user()->id)->first();
+			if($acesso != null){
 				return Response::json('negado');
+			}else{
+				return Response::json('autorizado');
 			}
-		}
-		$resposta = new Resposta();
-		$resposta->idQuestao = $idQuestao;
-		$resposta->idAluno = Auth::user()->id;
-		$resposta->respostaAluno = $respostaAluno;
-		$resposta->save();
-		return Response::json('Resposta Salva!');
-		//salvar resposta do aluno no futuro
 
-	});
+		});
+
+		Route::get('registrarAcesso/{idAtividade}/{idQuestao}', function($idAtividade, $idQuestao){
+			$acesso = AcessosAtividade::where('idAtividade', '=', $idAtividade)->where('idAluno', '=', Auth::user()->id)->first();
+			if($acesso == null){
+				$acesso = new AcessosAtividade;
+			}
+			$acesso->idAluno = Auth::user()->id;
+			$acesso->idAtividade = $idAtividade;
+			$acesso->idQuestao = $idQuestao;
+			$acesso->status = '0';
+
+			$acesso->save();
+
+			return Response::json("registro feito!");
+		});
+
+		Route::get('registrarConclusao/{idAtividade}', function($idAtividade){
+			$acesso = AcessosAtividade::where('idAtividade', '=', $idAtividade)->where('idAluno', '=', Auth::user()->id)->first();
+			$acesso->status = '1';
+
+			$acesso->save();
+
+			return Response::json("registro feito!");
+		});
+
+
+		Route::get('responder/{idQuestao}/{resposta}', function($idQuestao, $respostaAluno){
+			$acesso = AcessosAtividade::where('idAluno', '=', Auth::user()->id)->where('idAtividade', '=', Questao::find($idQuestao)->atividade->id)->first();
+			if($acesso != null){
+				if($acesso->status == 1){
+					return Response::json('negado');
+				}
+			}
+			$resposta = new Resposta();
+			$resposta->idQuestao = $idQuestao;
+			$resposta->idAluno = Auth::user()->id;
+			$resposta->respostaAluno = $respostaAluno;
+			$resposta->save();
+			return Response::json('Resposta Salva!');
+			//salvar resposta do aluno no futuro
+
+		});
+
+	//Listar Atividades Extras
+
+
+	// Ver Conteudos do Módulo - Aulas
+		Route::get('modulo/{id}', function($id){
+			$modulo = Modulo::find($id);
+			return View::make('modulo/alunoView')->with('modulo',$modulo);
+		});
+
+
+	//Perfil - Senha - Dashborad
 
 	Route::get('perfil', function(){
 		if(Session::has('mensagem')){
@@ -381,11 +379,6 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 		$aluno->save();
 
 		return Redirect::to('aluno/perfil')->with('mensagem', 'Os dados foram atualizados!');
-	});
-
-	Route::get('modulo/{id}', function($id){
-		$modulo = Modulo::find($id);
-		return View::make('modulo/alunoView')->with('modulo',$modulo);
 	});
 
 	Route::get('dashboard', function(){
@@ -497,15 +490,38 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 // ===============================================
 Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
-	Route::get('perfil', function(){
-		if(Session::has('mensagem')){
-			$mensagem = Session::get('mensagem');
-			return View::make('professor/perfil')->with('mensagem', $mensagem);
+
+	Route::get('home/{idioma?}', function($idioma = null){
+		// fazer a busca com o idioma
+		global $idioma;
+
+		if($idioma !=null){
+			global $idioma;
+			$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->where('status','=','1')->get();
+			$cursos = Curso::whereHas('turmas', function($q)
+				{
+					global $idioma;
+					$q->where('idProfessor', '=', Auth::user()->id)->where('idIdioma', '=', Idioma::where('nome','=', $idioma)->first())->where('status','=','1');
+				})->get();
+
+			$cursosArray = $cursos->toArray();
+
+			return View::make('professor/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray, 'turmas'=>$turmas));
+		}else{
+			$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->where('status','=','1')->get();
+			$cursos = Curso::whereHas('turmas', function($q)
+				{
+					$q->where('idProfessor', '=', Auth::user()->id)->where('status','=','1');
+				})->get();
+
+			$cursosArray = $cursos->toArray();
+
+			return View::make('professor/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray, 'turmas'=>$turmas));
 		}
-		return View::make('professor/perfil');
 		
 	});
 
+	//Mensagens
 	Route::get('mensagens/entrada', function(){
 		$mensagens = Mensagem::where('idUsuarioDestino', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
 		return View::make('mensagem/professorInbox')->with('mensagens', $mensagens);
@@ -562,6 +578,17 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		
 	});
 
+	//Perfil - Senha
+
+	Route::get('perfil', function(){
+		if(Session::has('mensagem')){
+			$mensagem = Session::get('mensagem');
+			return View::make('professor/perfil')->with('mensagem', $mensagem);
+		}
+		return View::make('professor/perfil');
+		
+	});
+
 	Route::post('atualizaSenha', function(){
 
 		$user = User::find(Input::get('id'));
@@ -603,10 +630,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
 	});
 
-	Route::get('modulo/{id}', function($id){
-		$modulo = Modulo::find($id);
-		return View::make('modulo/alunoView')->with('modulo',$modulo);
-	});
+	// Módulos - Aulas
 
 	Route::get('modulo/{id}', function($id){
 		$modulo = Modulo::find($id);
@@ -638,6 +662,9 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		return View::make('turma/professorView')->with('turma',$turma)
 									           ->with('alunos',$alunos);
 	});
+
+
+	//Atividades
 
 	Route::get('atividade/{id}', function($id){
 		$atividade = Atividade::find($id);
@@ -739,41 +766,13 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 													  ->with('atividadesExtras', $atividadesExtras);
 	});
 
-	Route::get('home/{idioma?}', function($idioma = null){
-		// fazer a busca com o idioma
-		global $idioma;
-
-		if($idioma !=null){
-			global $idioma;
-			$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->where('status','=','1')->get();
-			$cursos = Curso::whereHas('turmas', function($q)
-				{
-					global $idioma;
-					$q->where('idProfessor', '=', Auth::user()->id)->where('idIdioma', '=', Idioma::where('nome','=', $idioma)->first())->where('status','=','1');
-				})->get();
-
-			$cursosArray = $cursos->toArray();
-
-			return View::make('professor/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray, 'turmas'=>$turmas));
-		}else{
-			$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->where('status','=','1')->get();
-			$cursos = Curso::whereHas('turmas', function($q)
-				{
-					$q->where('idProfessor', '=', Auth::user()->id)->where('status','=','1');
-				})->get();
-
-			$cursosArray = $cursos->toArray();
-
-			return View::make('professor/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray, 'turmas'=>$turmas));
-		}
-		
-	});
-
 	Route::get('atividade/{id}/editar', function($id){
 		$atividade = Atividade::find($id);
 
 		return View::make('atividade/editarProfessorView')->with('atividade',$atividade);
 	});
+
+	//CRUD Professor - Atividades Extras e Questoes
 
 	Route::post('criarAtividadeExtra', function(){
 		$atividadeExtra = new Atividade;
@@ -910,8 +909,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		$atividadeExtra->nome = Input::get('nome');
 		$idModulo = Input::get('idModulo');
 		$idCategoria = Input::get('idCategoria');
-		$atividadeExtra->idTopico = Input::get('topico');
-		$atividadeExtra->pontos = Input::get('dificuldade');
+		$atividadeExtra->status = Input::get('status');
 
 		if(isset($idModulo)){
 			$atividadeExtra->idModulo = Input::get('idModulo');
@@ -971,6 +969,17 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		
 	});
 
+	Route::get('perfil', function(){
+		if(Session::has('mensagem')){
+			$mensagem = Session::get('mensagem');
+			return Redirect::to('admin/administrador/'.Auth::user()->id)->with('mensagem', $mensagem);
+		}
+		return Redirect::to('admin/administrador/'.Auth::user()->id);
+		
+	});
+
+	//Idiomas
+
 	Route::get('idiomas', function(){
 		return View::make('idioma/adminView');
 	});
@@ -995,14 +1004,173 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		$idioma->save();
 	});
 
-	Route::get('perfil', function(){
-		if(Session::has('mensagem')){
-			$mensagem = Session::get('mensagem');
-			return Redirect::to('admin/administrador/'.Auth::user()->id)->with('mensagem', $mensagem);
-		}
-		return Redirect::to('admin/administrador/'.Auth::user()->id);
-		
+	//Cursos
+
+	Route::post('criarCurso', function(){
+		$Curso = new Curso;
+		$Curso->nome = Input::get('nome');
+		$Curso->idIdioma = Input::get('idioma');
+
+		$Curso->save();
+		Session::flash('message', "Curso criado com sucesso!");
+		return Redirect::back();
 	});
+
+	Route::post('atualizarCurso', function(){
+		$Curso 			    = Curso::find(Input::get('id')); 
+		$Curso->nome       	= Input::get('nome');
+		$Curso->idIdioma      = Input::get('idioma');
+		
+		$Curso->save();
+
+		Session::flash('message', "Alterações salvas com sucesso!");
+		return Redirect::back();
+	});
+
+
+	//Modulos
+	Route::get('modulo/{id}', function($id){
+		$modulo = Modulo::find($id);
+		return View::make('modulo/adminView')->with('modulo',$modulo);
+	});
+
+	Route::post('criarModulo', function(){
+		$modulos = new Modulo;
+		$modulos->nome = Input::get('nome');
+		$modulos->idCurso = Input::get('idCurso');
+
+		$modulos->save();
+
+		// redirect
+		Session::flash('message', 'Módulo criado com sucesso!');
+		return Redirect::back();
+	});
+
+	Route::post('atualizarModulo', function(){
+		$Modulo 			    = Modulo::find(Input::get('id')); 
+		$Modulo->nome       	= Input::get('nome');
+		
+		$Modulo->save();
+
+		Session::flash('message', "Alterações salvas com sucesso!");
+		return Redirect::back();
+	});
+
+	//Turmas
+
+	Route::get('turma/{id}', function($id){
+		$turma = Turma::find($id);
+		$alunos = $turma->alunos;
+		return View::make('turma/adminView')->with('turma',$turma)
+									  ->with('alunos',$alunos);
+	});
+
+	Route::post('criarTurma', function(){
+		$turma = new Turma;
+		$turma->nome = Input::get('nome');
+		$turma->idProfessor = Input::get('idprofessor');
+		$turma->idModulo = Input::get('idModulo');
+
+		$turma->save();
+
+		// redirect
+		Session::flash('message', 'Módulo criado com sucesso!');
+		return Redirect::back();
+	});
+
+	Route::post('atualizarTurma', function(){
+		$Turma 			    = Turma::find(Input::get('id')); 
+		$Turma->nome       	= Input::get('nome');
+		
+		$Turma->save();
+
+		Session::flash('message', "Alterações salvas com sucesso!");
+		return Redirect::back();
+	});
+
+	Route::post('matricularAluno', function(){
+		$turma = Turma::find(Input::get('idTurma'));
+		$aluno = Aluno::find(Input::get('idAluno'));
+
+		$turma->alunos()->save($aluno);
+		return Redirect::back();
+	});
+
+	Route::get('desmatricularAluno/{idAluno}/{idTurma}', function($idAluno, $idTurma){
+		$turma = Turma::find($idTurma);
+		$aluno = Aluno::find($idAluno);
+
+		$turma->alunos()->detach($aluno);
+		return Redirect::back();
+	});
+
+	//Aulas
+	Route::post('criarAula', function(){
+		$Aula = new Aula;
+		$Aula->titulo = Input::get('nome');
+		$Aula->idModulo = Input::get('idModulo');
+
+		$Aula->save();
+
+		// redirect
+		Session::flash('message', 'Aula criada com sucesso!');
+		return Redirect::back();
+	});
+
+	Route::post('atualizarAula', function(){
+		$Aula 			    = Aula::find(Input::get('id')); 
+		$Aula->titulo       	= Input::get('nome');
+		
+		$Aula->save();
+
+		Session::flash('message', "Alterações salvas com sucesso!");
+		return Redirect::back();
+	});
+
+	//Materiais
+
+	Route::post('criarMaterial', function(){
+		$Material = new Materialapoio;
+		$Material->nome = Input::get('nome');
+		$Material->idAula = Input::get('idAula');
+
+		$arquivo = Input::file('arquivo');
+		$filename="";
+		if($arquivo!=NULL){
+			$filename = $arquivo->getClientOriginalName();
+
+			$Material->url = 'files/'.$filename;
+			
+			$arquivo->move('files/', $filename);
+		}
+
+		$Material->save();
+
+		// redirect
+		Session::flash('message', 'Material criado com sucesso!');
+		return Redirect::back();
+	});
+
+	Route::post('atualizarMaterial', function(){
+		$Material 			    = MaterialApoio::find(Input::get('id')); 
+		$Material->nome       	= Input::get('nome');
+
+		$arquivo = Input::file('arquivo');
+
+		if($arquivo!=NULL){
+			$filename = $arquivo->getClientOriginalName();
+			$Material->url = 'files/'.$filename;
+			$arquivo->move('files/', $filename);
+
+		}
+		
+		$Material->save();
+
+		Session::flash('message', "Alterações salvas com sucesso!");
+		return Redirect::back();
+	});
+
+	//Atividades
 
 	Route::get('atividadesExtras', function(){
 		$modulos = Modulo::all();
@@ -1021,29 +1189,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 													  ->with('atividadesExtras', $atividadesExtras);
 	});
 
-	Route::post('atualizarCurso', function(){
-		$Curso 			    = Curso::find(Input::get('id')); 
-		$Curso->nome       	= Input::get('nome');
-		$Curso->idIdioma      = Input::get('idioma');
-		
-		$Curso->save();
-
-		Session::flash('message', "Alterações salvas com sucesso!");
-		return Redirect::back();
-	});
-
-	Route::get('modulo/{id}', function($id){
-		$modulo = Modulo::find($id);
-		return View::make('modulo/adminView')->with('modulo',$modulo);
-	});
-
-	Route::get('turma/{id}', function($id){
-		$turma = Turma::find($id);
-		$alunos = $turma->alunos;
-		return View::make('turma/adminView')->with('turma',$turma)
-									  ->with('alunos',$alunos);
-	});
-
 	Route::get('atividade/{id}/editar', function($id){
 		$atividade = Atividade::find($id);
 
@@ -1055,25 +1200,351 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return View::make('atividade/editarAdmin')->with('atividade',$atividade);
 	});
 
-    Route::get('listarProfessores', function(){
+	Route::post('criarAtividadeExtra', function(){
+		$atividadeExtra = new Atividade;
+		$atividadeExtra->nome = Input::get('nome');
+		$atividadeExtra->tipo = 2;
+		$atividadeExtra->status = 0;
+		$idModulo = Input::get('idModulo');
+		$idCategoria = Input::get('idCategoria');
+		$atividadeExtra->idUsuario = Auth::user()->id;
 
-		$data = array();
-
-		$users = User::where('tipo', '=', 2)->get();
-		//dd($users);
-		foreach ($users as $key => $user) {
-			$user->codRegistro = Professor::find($user->id)->codRegistro;
-			$user->formacaoAcademica = Professor::find($user->id)->formacaoAcademica;
-			$user->action = "<a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></button></a><a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
-			array_push($data, $user);
+		if($idModulo!=""){
+			$atividadeExtra->idModulo = Input::get('idModulo');
+		}
+		if($idCategoria!=""){
+			$atividadeExtra->idCategoria = Input::get('idCategoria');
 		}
 
-		$response = array(
-				"data" => $data,
-				"iTotalRecords" => count($data),
-				"iTotalDisplayRecords" => count($data)
-			);
-		return Response::json($response);
+		$atividadeExtra->save();
+
+		// redirect
+		Session::flash('message', 'Atividade Extra criado com sucesso!');
+		return Redirect::to('admin/atividadeExtra/'.$atividadeExtra->id.'/editar');
+	});
+
+	Route::post('atualizarAtividadeExtra', function(){
+		$atividadeExtra = Atividade::find(Input::get('id'));
+		$atividadeExtra->nome = Input::get('nome');
+		$idModulo = Input::get('idModulo');
+		$idCategoria = Input::get('idCategoria');
+		$atividadeExtra->status = Input::get('status');
+
+		if(isset($idModulo)){
+			$atividadeExtra->idModulo = Input::get('idModulo');
+		}
+		if(isset($idCategoria)){
+			$atividadeExtra->idCategoria = Input::get('idCategoria');
+		}
+
+		$atividadeExtra->save();
+
+		// redirect
+		Session::flash('message', 'Atividade Extra atualizada com sucesso!');
+		return Redirect::back();
+	});
+
+	Route::get('atividadeExtra/{id}/editar', function($id){
+		$atividadeExtra = Atividade::find($id);
+
+		return View::make('atividade/extraEditarAdmin')->with('atividade',$atividadeExtra);
+	});
+
+	Route::post('criarAtividade', function(){
+		$Atividade = new Atividade;
+		$Atividade->nome = Input::get('nome');
+		$Atividade->status = 0;
+		$Atividade->idAula = Input::get('idAula');
+		$Atividade->idUsuario = Auth::user()->id;
+
+		$Atividade->save();
+
+		// redirect
+		Session::flash('message', 'Atividade criado com sucesso!');
+		return Redirect::to('/admin/atividade/'.$Atividade->id.'/editar');
+	});
+
+	Route::post('atualizarAtividade', function(){
+		$Atividade 			    = Atividade::find(Input::get('id')); 
+		$Atividade->nome       	= Input::get('nome');
+		$Atividade->status 		= Input::get('status');
+		
+		$Atividade->save();
+
+		Session::flash('message', "Alterações salvas com sucesso!");
+		return Redirect::back();
+	});
+
+	Route::post('alterarOrdem', function(){
+		
+		$atividade = Atividade::find(Input::get('0'));
+		$key=1;
+		//return Response::json(Input::all());
+
+
+		$questoes = $atividade->questoes->sortBy('numero');
+
+		//return Response::json(dd($numeros));
+
+		foreach ($questoes as $questao) {
+			//return Response::json(dd($numeros[Input::get($key)-1]));
+			$questao->numero = Input::get($key);
+			$questao->save();
+			$key++;
+		}
+
+		return Response::json("alterado");
+	});
+
+	//Categoria
+	Route::post('criarCategoria', function(){
+		$categoria = new Categoria;
+		$categoria->nome = Input::get('nome');
+
+		$categoria->save();
+
+		// redirect
+		Session::flash('message', 'Categoria criada com sucesso!');
+		return Redirect::back();
+	});
+
+	Route::post('atualizarCategoria', function(){
+		$categoria = Categoria::find(Input::get('id'));
+		$categoria->nome = Input::get('nome');
+
+		$categoria->save();
+
+		// redirect
+		Session::flash('message', 'Alterações salvas com sucesso!');
+		return Redirect::back();
+	});
+
+	//Questoes
+
+	Route::post('criarQuestaoRU', function(){
+		$questao = new Questao;
+		$pergunta = Input::get('pergunta');
+
+		$questao->textopergunta = Input::get('textopergunta');
+
+		if($pergunta!=1){
+			$arquivo = Input::file('arquivo');
+			$filename = $arquivo->getClientOriginalName();
+
+			$questao->urlMidia = 'files/'.$filename;
+			
+			$arquivo->move('files/', $filename);
+		}
+
+        $questao->idAtividade = Input::get('idatividade');
+
+        $questao->idTopico = Input::get('topico');
+		$questao->pontos = Input::get('dificuldade');
+
+		$questao->categoria = Input::get('pergunta');
+
+		$questao->tipo=2;
+
+		$questao->respostaCerta = Input::get('respostaCerta');
+		$questao->save();
+
+		$questao->numero = $questao->id;
+		$questao->save();
+
+		Session::flash('message', 'Questao criada com sucesso!');
+		return Redirect::back();
+	});
+
+	Route::post('criarQuestaoME', function(){
+		$questao = new Questao;
+		$pergunta = Input::get('pergunta');
+		$resposta = Input::get('resposta');
+
+		$questao->textopergunta = Input::get('textopergunta');
+
+		$questao->tipo=1;
+
+		if($pergunta!=1){
+			$arquivo = Input::file('arquivo');
+			$filename = $arquivo->getClientOriginalName();
+
+			$questao->urlMidia = 'files/'.$filename;
+			
+			$arquivo->move('files/', $filename);
+		}
+
+		if($resposta==1){
+
+			$questao->alternativaA = Input::get('a');
+			$questao->alternativaB = Input::get('b');
+			$questao->alternativaC = Input::get('c');
+			$questao->alternativaD = Input::get('d');
+
+		}else{
+
+			//#A
+			
+			$alternativaA = Input::file('a');
+			$filenameA = $alternativaA->getClientOriginalName();
+			$questao->alternativaA = 'files/'.$filenameA;
+			$alternativaA->move('files/', $filenameA);
+
+			//#B
+
+			$alternativaB = Input::file('b');
+			$filenameB = $alternativaB->getClientOriginalName();
+			$questao->alternativaB = 'files/'.$filenameB;
+			$alternativaB->move('files/', $filenameB);
+
+			//C
+
+			$alternativaC = Input::file('c');
+			$filenameC = $alternativaC->getClientOriginalName();
+			$questao->alternativaC = 'files/'.$filenameC;
+			$alternativaC->move('files/', $filenameC);
+
+			//#D
+			$alternativaD = Input::file('d');
+			$filenameD = $alternativaD->getClientOriginalName();
+			$questao->alternativaD = 'files/'.$filenameD;
+			$alternativaD->move('files/', $filenameD);
+		}
+
+		$questao->respostaCerta = Input::get('respostaCerta');
+		$questao->idAtividade = Input::get('idatividade');
+
+		$questao->idTopico = Input::get('topico');
+		$questao->pontos = Input::get('dificuldade');
+
+		$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
+
+		$questao->save();
+
+		$questao->numero = $questao->id;
+		$questao->save();
+
+		// redirect
+		Session::flash('message', 'Questao criada com sucesso!');
+		return Redirect::back();
+	});
+
+	Route::post('atualizarRespostaUnica', function(){
+		$questao 			    = Questao::find(Input::get('id')); 
+		$pergunta = Input::get('pergunta');
+
+		$questao->textopergunta = Input::get('textopergunta');
+
+		if($pergunta!=1 && Input::file('arquivo')!= NULL){
+			$arquivo = Input::file('arquivo');
+			$filename = $arquivo->getClientOriginalName();
+
+			$questao->urlMidia = 'files/'.$filename;
+			
+			$arquivo->move('files/', $filename);
+		}
+
+		$questao->categoria = $pergunta;
+
+		$questao->idTopico = Input::get('topico');
+		$questao->pontos = Input::get('dificuldade');
+
+		$questao->respostaCerta = Input::get('respostaCerta');
+		$questao->save();
+
+		Session::flash('message', 'Questao atualizada com sucesso!');
+		return Redirect::back();
+	});
+
+	Route::post('atualizarMultiplaEscolha', function(){
+		$questao = Questao::find(Input::get('id')); 
+		$pergunta = Input::get('pergunta');
+		$resposta = Input::get('resposta');
+
+		$questao->textopergunta = Input::get('textopergunta');
+
+		if($pergunta!=1 && Input::file('arquivo')!= NULL){
+			$arquivo = Input::file('arquivo');
+
+			if($arquivo != null){
+				$filename = $arquivo->getClientOriginalName();
+
+				$questao->urlMidia = 'files/'.$filename;
+				
+				$arquivo->move('files/', $filename);
+			}
+		}
+
+		if($resposta==1){
+			if(Input::get('a')!=null)
+				$questao->alternativaA = Input::get('a');
+
+			if(Input::get('b')!=null)
+				$questao->alternativaB = Input::get('b');
+
+			if(Input::get('c')!=null)
+				$questao->alternativaC = Input::get('c');
+
+			if(Input::get('d')!=null)
+				$questao->alternativaD = Input::get('d');
+
+		}else{
+
+			//#A
+			
+			$alternativaA = Input::file('a');
+			if($alternativaA != NULL){
+				$filenameA = $alternativaA->getClientOriginalName();
+				$questao->alternativaA = 'files/'.$filenameA;
+				$alternativaA->move('files/', $filenameA);
+			}
+
+			//#B
+
+			$alternativaB = Input::file('b');
+			if($alternativaB != NULL){
+				$filenameB = $alternativaB->getClientOriginalName();
+				$questao->alternativaB = 'files/'.$filenameB;
+				$alternativaB->move('files/', $filenameB);
+			}
+
+			//C
+
+			$alternativaC = Input::file('c');
+			if($alternativaC != NULL){
+				$filenameC = $alternativaC->getClientOriginalName();
+				$questao->alternativaC = 'files/'.$filenameC;
+				$alternativaC->move('files/', $filenameC);
+			}
+
+			//#D
+			$alternativaD = Input::file('d');
+			if($alternativaC != NULL){
+				$filenameD = $alternativaD->getClientOriginalName();
+				$questao->alternativaD = 'files/'.$filenameD;
+				$alternativaD->move('files/', $filenameD);
+			}
+		}
+
+		$questao->respostaCerta = Input::get('respostacerta');
+		
+		$questao->categoria = $pergunta. $resposta;
+
+		$questao->idTopico = Input::get('topico');
+		$questao->pontos = Input::get('dificuldade');
+
+		$questao->save();
+
+		// redirect
+		Session::flash('message', 'Alterações salvas com sucesso!');
+		return Redirect::back();
+	});
+
+	//Usuarios
+	
+	//Alunos
+	Route::get('alunos', function(){
+
+		return View::make('aluno/showAdmin');
 	});
 
 	Route::get('listarAlunos', function(){
@@ -1100,6 +1571,233 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Response::json($response);
 	});
 
+	Route::get('aluno/{id}', function($id){
+		$mensagem=NULL;
+		if(Session::has('mensagem')){
+			$mensagem = Session::get('mensagem');
+		}
+		$aluno = Aluno::find($id);
+		$user = User::find($id);
+		$aluno->nome = $user->nome;
+		$aluno->sobrenome = $user->sobrenome;
+		$aluno->password = $user->password;
+		$aluno->email = $user->email;
+		$aluno->respostaSecreta = $user->respostaSecreta;
+		$aluno->nome = $user->nome;
+		return View::make('aluno/editarAdmin')->with('aluno', $aluno)
+										->with('mensagem', $mensagem);
+		
+	});
+
+	Route::post('criarAluno', function(){
+		$user = new User;
+		$user->nome       = Input::get('nome');
+		$user->sobrenome       = Input::get('sobrenome');
+		$user->email       = Input::get('email');
+		$user->login = Input::get('matricula');
+		$user->password = Hash::make(Input::get('password'));
+		$user->tipo = 1;
+
+		$confirmation_code = str_random(30);
+		foreach(User::all() as $u){
+			if($u->confirmation_code = $confirmation_code){
+				$confirmation_code = str_random(30);
+			}
+		}
+		$user->confirmation_code = $confirmation_code;
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+
+		if(Input::file('urlImagem')!=NULL){
+			$filename = $imagem->getClientOriginalName();
+			$user->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
+		}
+		$user->save();
+
+
+		$aluno = new Aluno;
+
+		$aluno->id = $user->id;
+
+		$aluno->dataNascimento = Input::get('dataNascimento');
+		$aluno->sobreMim = Input::get('sobreMim');
+		$aluno->matricula       = Input::get('matricula');
+		$aluno->dataVencimentoBoleto       = Input::get('dataVencimentoBoleto');
+
+		$aluno->save();
+
+		Mail::send('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+            $message->to(Input::get('email'), Input::get('nome'))
+                ->subject('KalanGO! - Verifique sua conta');
+        });
+
+		return Redirect::back();
+	});
+
+	Route::post('atualizarAluno', function(){
+		$user = User::find(Input::get('id'));
+		$user->nome       = Input::get('nome');
+		$user->sobrenome       = Input::get('sobrenome');
+		$user->email       = Input::get('email');
+		$user->login = Input::get('matricula');
+
+		$aluno= Aluno::find($user->id);
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+
+
+		if(Input::file('urlImagem')!=NULL){
+			$user->urlImagem = 'img/'.$filename;
+			$filename = $imagem->getClientOriginalName();
+
+			$aluno->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
+		}
+
+		$user->save();
+
+		$aluno->dataNascimento = Input::get('dataNascimento');
+		$aluno->sobreMim = Input::get('sobreMim');
+		$aluno->matricula       = Input::get('matricula');
+		$aluno->dataVencimentoBoleto       = Input::get('dataVencimentoBoleto');
+
+		$aluno->save();
+
+		return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
+	});
+
+	//Professores
+	Route::get('professores', function(){
+
+		return View::make('professor/showAdmin');
+	});
+	
+	Route::get('listarProfessores', function(){
+
+		$data = array();
+
+		$users = User::where('tipo', '=', 2)->get();
+		//dd($users);
+		foreach ($users as $key => $user) {
+			$user->codRegistro = Professor::find($user->id)->codRegistro;
+			$user->formacaoAcademica = Professor::find($user->id)->formacaoAcademica;
+			$user->action = "<a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></button></a><a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+			array_push($data, $user);
+		}
+
+		$response = array(
+				"data" => $data,
+				"iTotalRecords" => count($data),
+				"iTotalDisplayRecords" => count($data)
+			);
+		return Response::json($response);
+	});
+
+	Route::get('professor/{id}', function($id){
+		$mensagem =NULL;
+		if(Session::has('mensagem')){
+			$mensagem = Session::get('mensagem');
+		}
+		$professor = Professor::find($id);
+		$user = User::find($id);
+		$professor->nome = $user->nome;
+		$professor->sobrenome = $user->sobrenome;
+		$professor->password = $user->password;
+		$professor->email = $user->email;
+		$professor->respostaSecreta = $user->respostaSecreta;
+		$professor->nome = $user->nome;
+		return View::make('professor/editarAdmin')->with('professor', $professor)
+											->with('mensagem', $mensagem);
+		
+	});
+
+	Route::post('criarProfessor', function(){
+		$user = new User;
+		$user->nome       = Input::get('nome');
+		$user->sobrenome       = Input::get('sobrenome');
+		$user->email       = Input::get('email');
+		$user->login = Input::get('codRegistro');
+		$user->tipo = '2';
+		$user->password = Hash::make(Input::get('password'));
+
+		$confirmation_code = str_random(30);
+		foreach(User::all() as $u){
+			if($u->confirmation_code = $confirmation_code){
+				$confirmation_code = str_random(30);
+			}
+		}
+		$user->confirmation_code = $confirmation_code;
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+
+		if(Input::file('urlImagem')!=NULL){
+			$filename = $imagem->getClientOriginalName();
+
+			$user->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
+		}
+
+		$user->save();
+		$professor->id= $user->id;
+
+		$professor->formacaoAcademica = Input::get('formacaoAcademica');
+		$professor->sobreMim = Input::get('sobreMim');
+		$professor->codRegistro       = Input::get('codRegistro');
+
+		$professor->save();
+
+		Mail::send('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+            $message->to(Input::get('email'), Input::get('nome'))
+                ->subject('KalanGO! - Verifique sua conta');
+        });
+
+		return Redirect::back();
+	});
+
+	Route::post('atualizarProfessor', function(){
+		$user = User::find(Input::get('id'));
+		$user->nome       = Input::get('nome');
+		$user->sobrenome       = Input::get('sobrenome');
+		$user->email       = Input::get('email');
+		$user->login = Input::get('codRegistro');
+
+		$professor= Professor::find($user->id);
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+
+		if(Input::file('urlImagem')!=NULL){
+			$filename = $imagem->getClientOriginalName();
+
+			$user->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
+		}
+
+		$user->save();
+
+		$professor->formacaoAcademica = Input::get('formacaoAcademica');
+		$professor->sobreMim = Input::get('sobremim');
+		$professor->codRegistro       = Input::get('codRegistro');
+
+		$professor->save();
+
+		return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
+	});
+
+	//Administradores
+	Route::get('administradores', function(){
+
+		return View::make('administrador/showAdmin');
+	});
+
 	Route::get('listarAdministradores', function(){
 
 		$data = array();
@@ -1123,39 +1821,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Response::json($response);
 	});
 
-	Route::get('administradores', function(){
-
-		return View::make('administrador/showAdmin');
-	});
-
-	Route::get('alunos', function(){
-
-		return View::make('aluno/showAdmin');
-	});
-
-	Route::get('professores', function(){
-
-		return View::make('professor/showAdmin');
-	});
-
-	Route::get('professor/{id}', function($id){
-		$mensagem =NULL;
-		if(Session::has('mensagem')){
-			$mensagem = Session::get('mensagem');
-		}
-		$professor = Professor::find($id);
-		$user = User::find($id);
-		$professor->nome = $user->nome;
-		$professor->sobrenome = $user->sobrenome;
-		$professor->password = $user->password;
-		$professor->email = $user->email;
-		$professor->respostaSecreta = $user->respostaSecreta;
-		$professor->nome = $user->nome;
-		return View::make('professor/editarAdmin')->with('professor', $professor)
-											->with('mensagem', $mensagem);
-		
-	});
-
 	Route::get('administrador/{id}', function($id){
 		$mensagem =NULL;
 		if(Session::has('mensagem')){
@@ -1174,25 +1839,72 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		
 	});
 
-	Route::get('aluno/{id}', function($id){
-		$mensagem=NULL;
-		if(Session::has('mensagem')){
-			$mensagem = Session::get('mensagem');
+	Route::post('criarAdministrador', function(){
+		$user = new User;
+		$user->nome       = Input::get('nome');
+		$user->sobrenome       = Input::get('sobrenome');
+		$user->email       = Input::get('email');
+		$user->login = Input::get('codRegistro');
+		$user->tipo = '3';
+		$user->password = Hash::make(Input::get('password'));
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+
+		if(Input::file('urlImagem')!=NULL){
+			$filename = $imagem->getClientOriginalName();
+			$user->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
 		}
-		$aluno = Aluno::find($id);
-		$user = User::find($id);
-		$aluno->nome = $user->nome;
-		$aluno->sobrenome = $user->sobrenome;
-		$aluno->password = $user->password;
-		$aluno->email = $user->email;
-		$aluno->respostaSecreta = $user->respostaSecreta;
-		$aluno->nome = $user->nome;
-		return View::make('aluno/editarAdmin')->with('aluno', $aluno)
-										->with('mensagem', $mensagem);
-		
+
+		$user->save();
+		$administrador= Administrador::find($user->id);
+
+		$administrador->codRegistro = Input::get('codRegistro');
+
+		$administrador->save();
+
+		return Redirect::back();
+	});
+
+	Route::post('atualizarAdministrador', function(){
+		$user = User::find(Input::get('id'));
+		$user->nome       = Input::get('nome');
+		$user->sobrenome       = Input::get('sobrenome');
+		$user->email       = Input::get('email');
+		$user->login = Input::get('codRegistro');
+
+		$administrador= Administrador::find($user->id);
+
+		$imagem = Input::file('urlImagem');
+		$filename="";
+
+		if(Input::file('urlImagem')!=NULL){
+			$filename = $imagem->getClientOriginalName();
+			$user->urlImagem = 'img/'.$filename;
+
+			$administrador->urlImagem = 'img/'.$filename;
+			
+			$imagem->move('img/', $filename);
+		}
+
+		$user->save();
+
+		$administrador= Administrador::find($user->id);
+		$administrador->codRegistro = Input::get('codRegistro');
+
+		$administrador->save();
+
+		return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
 	});
 
 	//Avisos
+
+	Route::get('avisos', function(){
+		$categorias = Curso::all();
+		return View::make('aviso/viewAdmin')->with('categorias', $categorias);
+	});
 
 	//ajax - tabela
 	Route::get('listarAvisos/{idCurso?}', function($idCurso = null){
@@ -1216,11 +1928,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				"iTotalDisplayRecords" => count($avisos)
 			);
 		return Response::json($response);
-	});
-
-	Route::get('avisos', function(){
-		$categorias = Curso::all();
-		return View::make('aviso/viewAdmin')->with('categorias', $categorias);
 	});
 
 	Route::get('aviso/{id}', function($id){
@@ -1251,12 +1958,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Redirect::back();
 	});
 
-	Route::get('avisos/deletar/{id}', function($id){
-		$aviso = Aviso::find($id);
-		$aviso->delete();
-		return Redirect::back();
-	});
-
 	Route::post('atualizarAviso', function(){
 		$aviso = Aviso::find(Input::get('id'));
 		$aviso->titulo = Input::get('titulo');
@@ -1279,7 +1980,17 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Redirect::back();
 	});
 
+	Route::get('avisos/deletar/{id}', function($id){
+		$aviso = Aviso::find($id);
+		$aviso->delete();
+		return Redirect::back();
+	});
+
 	//Tópicos
+
+	Route::get('topicos', function(){
+		return View::make('topico/showAdmin');
+	});
 
 	//ajax - tabela
 	Route::get('listarTopicos', function(){
@@ -1299,10 +2010,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Response::json($response);
 	});
 
-	Route::get('topicos', function(){
-		return View::make('topico/showAdmin');
-	});
-
 	Route::post('criarTopico', function(){
 		$topico = new Topico;
 		$topico->nome = Input::get('nome');
@@ -1310,12 +2017,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		$topico->save();
 
-		return Redirect::back();
-	});
-
-	Route::get('topicos/deletar/{id}', function($id){
-		$topico = Topico::find($id);
-		$topico->delete();
 		return Redirect::back();
 	});
 
@@ -1328,8 +2029,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Redirect::back();
 	});
 
+	Route::get('topicos/deletar/{id}', function($id){
+		$topico = Topico::find($id);
+		$topico->delete();
+		return Redirect::back();
+	});
+
 	// Propagandas
 
+	Route::get('propagandas', function(){
+		return View::make('propaganda/showAdmin');
+	});
+
+	//Ajax - Tabela
 	Route::get('listarPropagandas', function(){
 		$propagandas = Propaganda::all();
 
@@ -1345,10 +2057,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				"iTotalDisplayRecords" => count($propagandas)
 			);
 		return Response::json($response);
-	});
-
-	Route::get('propagandas', function(){
-		return View::make('propaganda/showAdmin');
 	});
 
 	Route::post('criarPropaganda', function(){
@@ -1367,12 +2075,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		$propaganda->idUsuario = Auth::user()->id;
 		$propaganda->save();
 
-		return Redirect::back();
-	});
-
-	Route::get('propagandas/deletar/{id}', function($id){
-		$propaganda = Propaganda::find($id);
-		$propaganda->delete();
 		return Redirect::back();
 	});
 
@@ -1395,703 +2097,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		return Redirect::back();
 	});
 
+	Route::get('propagandas/deletar/{id}', function($id){
+		$propaganda = Propaganda::find($id);
+		$propaganda->delete();
+		return Redirect::back();
+	});
 
-	// CRUD
-
-		Route::post('criarCurso', function(){
-			$Curso = new Curso;
-			$Curso->nome = Input::get('nome');
-			$Curso->idIdioma = Input::get('idioma');
-
-			$Curso->save();
-			Session::flash('message', "Curso criado com sucesso!");
-			return Redirect::back();
-		});
-
-		Route::post('criarModulo', function(){
-			$modulos = new Modulo;
-			$modulos->nome = Input::get('nome');
-			$modulos->idCurso = Input::get('idCurso');
-
-			$modulos->save();
-
-			// redirect
-			Session::flash('message', 'Módulo criado com sucesso!');
-			return Redirect::back();
-		});
-
-		Route::post('criarTurma', function(){
-			$turma = new Turma;
-			$turma->nome = Input::get('nome');
-			$turma->idProfessor = Input::get('idprofessor');
-			$turma->idModulo = Input::get('idModulo');
-
-			$turma->save();
-
-			// redirect
-			Session::flash('message', 'Módulo criado com sucesso!');
-			return Redirect::back();
-		});
-
-		Route::post('criarAula', function(){
-			$Aula = new Aula;
-			$Aula->titulo = Input::get('nome');
-			$Aula->idModulo = Input::get('idModulo');
-
-			$Aula->save();
-
-			// redirect
-			Session::flash('message', 'Aula criada com sucesso!');
-			return Redirect::back();
-		});
-
-		Route::post('criarAtividade', function(){
-			$Atividade = new Atividade;
-			$Atividade->nome = Input::get('nome');
-			$Atividade->status = 0;
-			$Atividade->idAula = Input::get('idAula');
-			$Atividade->idUsuario = Auth::user()->id;
-
-			$Atividade->save();
-
-			// redirect
-			Session::flash('message', 'Atividade criado com sucesso!');
-			return Redirect::to('/admin/atividade/'.$Atividade->id.'/editar');
-		});
-
-		Route::post('criarMaterial', function(){
-			$Material = new Materialapoio;
-			$Material->nome = Input::get('nome');
-			$Material->idAula = Input::get('idAula');
-
-			$arquivo = Input::file('arquivo');
-			$filename="";
-			if($arquivo!=NULL){
-				$filename = $arquivo->getClientOriginalName();
-
-				$Material->url = 'files/'.$filename;
-				
-				$arquivo->move('files/', $filename);
-			}
-
-			$Material->save();
-
-			// redirect
-			Session::flash('message', 'Material criado com sucesso!');
-			return Redirect::back();
-		});
-
-		Route::post('criarQuestaoRU', function(){
-			$questao = new Questao;
-			$pergunta = Input::get('pergunta');
-
-			$questao->textopergunta = Input::get('textopergunta');
-
-			if($pergunta!=1){
-				$arquivo = Input::file('arquivo');
-				$filename = $arquivo->getClientOriginalName();
-
-				$questao->urlMidia = 'files/'.$filename;
-				
-				$arquivo->move('files/', $filename);
-			}
-
-	        $questao->idAtividade = Input::get('idatividade');
-
-	        $questao->idTopico = Input::get('topico');
-			$questao->pontos = Input::get('dificuldade');
-
-			$questao->categoria = Input::get('pergunta');
-
-			$questao->tipo=2;
-
-			$questao->respostaCerta = Input::get('respostaCerta');
-			$questao->save();
-
-			$questao->numero = $questao->id;
-			$questao->save();
-
-			Session::flash('message', 'Questao criada com sucesso!');
-			return Redirect::back();
-
-		});
-
-		Route::post('criarQuestaoME', function(){
-			$questao = new Questao;
-			$pergunta = Input::get('pergunta');
-			$resposta = Input::get('resposta');
-
-			$questao->textopergunta = Input::get('textopergunta');
-
-			$questao->tipo=1;
-
-			if($pergunta!=1){
-				$arquivo = Input::file('arquivo');
-				$filename = $arquivo->getClientOriginalName();
-
-				$questao->urlMidia = 'files/'.$filename;
-				
-				$arquivo->move('files/', $filename);
-			}
-
-			if($resposta==1){
-
-				$questao->alternativaA = Input::get('a');
-				$questao->alternativaB = Input::get('b');
-				$questao->alternativaC = Input::get('c');
-				$questao->alternativaD = Input::get('d');
-
-			}else{
-
-				//#A
-				
-				$alternativaA = Input::file('a');
-				$filenameA = $alternativaA->getClientOriginalName();
-				$questao->alternativaA = 'files/'.$filenameA;
-				$alternativaA->move('files/', $filenameA);
-
-				//#B
-
-				$alternativaB = Input::file('b');
-				$filenameB = $alternativaB->getClientOriginalName();
-				$questao->alternativaB = 'files/'.$filenameB;
-				$alternativaB->move('files/', $filenameB);
-
-				//C
-
-				$alternativaC = Input::file('c');
-				$filenameC = $alternativaC->getClientOriginalName();
-				$questao->alternativaC = 'files/'.$filenameC;
-				$alternativaC->move('files/', $filenameC);
-
-				//#D
-				$alternativaD = Input::file('d');
-				$filenameD = $alternativaD->getClientOriginalName();
-				$questao->alternativaD = 'files/'.$filenameD;
-				$alternativaD->move('files/', $filenameD);
-			}
-
-			$questao->respostaCerta = Input::get('respostaCerta');
-			$questao->idAtividade = Input::get('idatividade');
-
-			$questao->idTopico = Input::get('topico');
-			$questao->pontos = Input::get('dificuldade');
-
-			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
-
-			$questao->save();
-
-			$questao->numero = $questao->id;
-			$questao->save();
-
-			// redirect
-			Session::flash('message', 'Questao criada com sucesso!');
-			return Redirect::back();
-		});
-
-		//Mudar
-		
-
-		Route::post('atualizarRespostaUnica', function(){
-			$questao 			    = Questao::find(Input::get('id')); 
-			$pergunta = Input::get('pergunta');
-
-			$questao->textopergunta = Input::get('textopergunta');
-
-			if($pergunta!=1 && Input::file('arquivo')!= NULL){
-				$arquivo = Input::file('arquivo');
-				$filename = $arquivo->getClientOriginalName();
-
-				$questao->urlMidia = 'files/'.$filename;
-				
-				$arquivo->move('files/', $filename);
-			}
-
-			$questao->categoria = $pergunta;
-
-			$questao->idTopico = Input::get('topico');
-			$questao->pontos = Input::get('dificuldade');
-
-			$questao->respostaCerta = Input::get('respostaCerta');
-			$questao->save();
-
-			Session::flash('message', 'Questao atualizada com sucesso!');
-			return Redirect::back();
-		});
-
-		Route::post('atualizarMultiplaEscolha', function(){
-			$questao = Questao::find(Input::get('id')); 
-			$pergunta = Input::get('pergunta');
-			$resposta = Input::get('resposta');
-
-			$questao->textopergunta = Input::get('textopergunta');
-
-			if($pergunta!=1 && Input::file('arquivo')!= NULL){
-				$arquivo = Input::file('arquivo');
-
-				if($arquivo != null){
-					$filename = $arquivo->getClientOriginalName();
-
-					$questao->urlMidia = 'files/'.$filename;
-					
-					$arquivo->move('files/', $filename);
-				}
-			}
-
-			if($resposta==1){
-				if(Input::get('a')!=null)
-					$questao->alternativaA = Input::get('a');
-
-				if(Input::get('b')!=null)
-					$questao->alternativaB = Input::get('b');
-
-				if(Input::get('c')!=null)
-					$questao->alternativaC = Input::get('c');
-
-				if(Input::get('d')!=null)
-					$questao->alternativaD = Input::get('d');
-
-			}else{
-
-				//#A
-				
-				$alternativaA = Input::file('a');
-				if($alternativaA != NULL){
-					$filenameA = $alternativaA->getClientOriginalName();
-					$questao->alternativaA = 'files/'.$filenameA;
-					$alternativaA->move('files/', $filenameA);
-				}
-
-				//#B
-
-				$alternativaB = Input::file('b');
-				if($alternativaB != NULL){
-					$filenameB = $alternativaB->getClientOriginalName();
-					$questao->alternativaB = 'files/'.$filenameB;
-					$alternativaB->move('files/', $filenameB);
-				}
-
-				//C
-
-				$alternativaC = Input::file('c');
-				if($alternativaC != NULL){
-					$filenameC = $alternativaC->getClientOriginalName();
-					$questao->alternativaC = 'files/'.$filenameC;
-					$alternativaC->move('files/', $filenameC);
-				}
-
-				//#D
-				$alternativaD = Input::file('d');
-				if($alternativaC != NULL){
-					$filenameD = $alternativaD->getClientOriginalName();
-					$questao->alternativaD = 'files/'.$filenameD;
-					$alternativaD->move('files/', $filenameD);
-				}
-			}
-
-			$questao->respostaCerta = Input::get('respostacerta');
-			
-			$questao->categoria = $pergunta. $resposta;
-
-			$questao->idTopico = Input::get('topico');
-			$questao->pontos = Input::get('dificuldade');
-
-			$questao->save();
-
-			// redirect
-			Session::flash('message', 'Alterações salvas com sucesso!');
-			return Redirect::back();
-		});
-
-		Route::post('atualizarModulo', function(){
-			$Modulo 			    = Modulo::find(Input::get('id')); 
-			$Modulo->nome       	= Input::get('nome');
-			
-			$Modulo->save();
-
-			Session::flash('message', "Alterações salvas com sucesso!");
-			return Redirect::back();
-		});
-
-		Route::post('atualizarTurma', function(){
-			$Turma 			    = Turma::find(Input::get('id')); 
-			$Turma->nome       	= Input::get('nome');
-			
-			$Turma->save();
-
-			Session::flash('message', "Alterações salvas com sucesso!");
-			return Redirect::back();
-		});
-
-		Route::post('atualizarAula', function(){
-			$Aula 			    = Aula::find(Input::get('id')); 
-			$Aula->titulo       	= Input::get('nome');
-			
-			$Aula->save();
-
-			Session::flash('message', "Alterações salvas com sucesso!");
-			return Redirect::back();
-		});
-
-		Route::post('atualizarAtividade', function(){
-			$Atividade 			    = Atividade::find(Input::get('id')); 
-			$Atividade->nome       	= Input::get('nome');
-			$Atividade->status 		= Input::get('status');
-			
-			$Atividade->save();
-
-			Session::flash('message', "Alterações salvas com sucesso!");
-			return Redirect::back();
-		});
-
-		Route::post('atualizarMaterial', function(){
-			$Material 			    = MaterialApoio::find(Input::get('id')); 
-			$Material->nome       	= Input::get('nome');
-
-			$arquivo = Input::file('arquivo');
-
-			if($arquivo!=NULL){
-				$filename = $arquivo->getClientOriginalName();
-				$Material->url = 'files/'.$filename;
-				$arquivo->move('files/', $filename);
-
-			}
-			
-			$Material->save();
-
-			Session::flash('message', "Alterações salvas com sucesso!");
-			return Redirect::back();
-		});
-
-		Route::post('matricularAluno', function(){
-			$turma = Turma::find(Input::get('idTurma'));
-			$aluno = Aluno::find(Input::get('idAluno'));
-
-			$turma->alunos()->save($aluno);
-			return Redirect::back();
-		});
-
-		Route::get('desmatricularAluno/{idAluno}/{idTurma}', function($idAluno, $idTurma){
-			$turma = Turma::find($idTurma);
-			$aluno = Aluno::find($idAluno);
-
-			$turma->alunos()->detach($aluno);
-			return Redirect::back();
-		});
-
-		Route::post('atualizarAluno', function(){
-			$user = User::find(Input::get('id'));
-			$user->nome       = Input::get('nome');
-			$user->sobrenome       = Input::get('sobrenome');
-			$user->email       = Input::get('email');
-			$user->login = Input::get('matricula');
-
-			$aluno= Aluno::find($user->id);
-
-			$imagem = Input::file('urlImagem');
-			$filename="";
-
-
-			if(Input::file('urlImagem')!=NULL){
-				$user->urlImagem = 'img/'.$filename;
-				$filename = $imagem->getClientOriginalName();
-
-				$aluno->urlImagem = 'img/'.$filename;
-				
-				$imagem->move('img/', $filename);
-			}
-
-			$user->save();
-
-			$aluno->dataNascimento = Input::get('dataNascimento');
-			$aluno->sobreMim = Input::get('sobreMim');
-			$aluno->matricula       = Input::get('matricula');
-			$aluno->dataVencimentoBoleto       = Input::get('dataVencimentoBoleto');
-
-			$aluno->save();
-
-			return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
-		});
-
-		Route::post('criarAluno', function(){
-			$user = new User;
-			$user->nome       = Input::get('nome');
-			$user->sobrenome       = Input::get('sobrenome');
-			$user->email       = Input::get('email');
-			$user->login = Input::get('matricula');
-			$user->password = Hash::make(Input::get('password'));
-			$user->tipo = 1;
-
-			$confirmation_code = str_random(30);
-			foreach(User::all() as $u){
-				if($u->confirmation_code = $confirmation_code){
-					$confirmation_code = str_random(30);
-				}
-			}
-			$user->confirmation_code = $confirmation_code;
-
-			$imagem = Input::file('urlImagem');
-			$filename="";
-
-			if(Input::file('urlImagem')!=NULL){
-				$filename = $imagem->getClientOriginalName();
-				$user->urlImagem = 'img/'.$filename;
-				
-				$imagem->move('img/', $filename);
-			}
-			$user->save();
-
-
-			$aluno = new Aluno;
-
-			$aluno->id = $user->id;
-
-			$aluno->dataNascimento = Input::get('dataNascimento');
-			$aluno->sobreMim = Input::get('sobreMim');
-			$aluno->matricula       = Input::get('matricula');
-			$aluno->dataVencimentoBoleto       = Input::get('dataVencimentoBoleto');
-
-			$aluno->save();
-
-			Mail::send('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
-	            $message->to(Input::get('email'), Input::get('nome'))
-	                ->subject('KalanGO! - Verifique sua conta');
-	        });
-
-			return Redirect::back();
-		});
-
-		Route::post('atualizarProfessor', function(){
-			$user = User::find(Input::get('id'));
-			$user->nome       = Input::get('nome');
-			$user->sobrenome       = Input::get('sobrenome');
-			$user->email       = Input::get('email');
-			$user->login = Input::get('codRegistro');
-
-			$professor= Professor::find($user->id);
-
-			$imagem = Input::file('urlImagem');
-			$filename="";
-
-			if(Input::file('urlImagem')!=NULL){
-				$filename = $imagem->getClientOriginalName();
-
-				$user->urlImagem = 'img/'.$filename;
-				
-				$imagem->move('img/', $filename);
-			}
-
-			$user->save();
-
-			$professor->formacaoAcademica = Input::get('formacaoAcademica');
-			$professor->sobreMim = Input::get('sobremim');
-			$professor->codRegistro       = Input::get('codRegistro');
-
-			$professor->save();
-
-			return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
-		});
-
-		Route::post('criarProfessor', function(){
-			$user = new User;
-			$user->nome       = Input::get('nome');
-			$user->sobrenome       = Input::get('sobrenome');
-			$user->email       = Input::get('email');
-			$user->login = Input::get('codRegistro');
-			$user->tipo = '2';
-			$user->password = Hash::make(Input::get('password'));
-
-			$confirmation_code = str_random(30);
-			foreach(User::all() as $u){
-				if($u->confirmation_code = $confirmation_code){
-					$confirmation_code = str_random(30);
-				}
-			}
-			$user->confirmation_code = $confirmation_code;
-
-			$imagem = Input::file('urlImagem');
-			$filename="";
-
-			if(Input::file('urlImagem')!=NULL){
-				$filename = $imagem->getClientOriginalName();
-
-				$user->urlImagem = 'img/'.$filename;
-				
-				$imagem->move('img/', $filename);
-			}
-
-			$user->save();
-			$professor->id= $user->id;
-
-			$professor->formacaoAcademica = Input::get('formacaoAcademica');
-			$professor->sobreMim = Input::get('sobreMim');
-			$professor->codRegistro       = Input::get('codRegistro');
-
-			$professor->save();
-
-			Mail::send('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
-	            $message->to(Input::get('email'), Input::get('nome'))
-	                ->subject('KalanGO! - Verifique sua conta');
-	        });
-
-			return Redirect::back();
-		});
-
-		Route::post('atualizarAdministrador', function(){
-			$user = User::find(Input::get('id'));
-			$user->nome       = Input::get('nome');
-			$user->sobrenome       = Input::get('sobrenome');
-			$user->email       = Input::get('email');
-			$user->login = Input::get('codRegistro');
-
-			$administrador= Administrador::find($user->id);
-
-			$imagem = Input::file('urlImagem');
-			$filename="";
-
-			if(Input::file('urlImagem')!=NULL){
-				$filename = $imagem->getClientOriginalName();
-				$user->urlImagem = 'img/'.$filename;
-
-				$administrador->urlImagem = 'img/'.$filename;
-				
-				$imagem->move('img/', $filename);
-			}
-
-			$user->save();
-
-			$administrador= Administrador::find($user->id);
-			$administrador->codRegistro = Input::get('codRegistro');
-
-			$administrador->save();
-
-			return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
-		});
-
-		Route::post('criarAdministrador', function(){
-			$user = new User;
-			$user->nome       = Input::get('nome');
-			$user->sobrenome       = Input::get('sobrenome');
-			$user->email       = Input::get('email');
-			$user->login = Input::get('codRegistro');
-			$user->tipo = '3';
-			$user->password = Hash::make(Input::get('password'));
-
-			$imagem = Input::file('urlImagem');
-			$filename="";
-
-			if(Input::file('urlImagem')!=NULL){
-				$filename = $imagem->getClientOriginalName();
-				$user->urlImagem = 'img/'.$filename;
-				
-				$imagem->move('img/', $filename);
-			}
-
-			$user->save();
-			$administrador= Administrador::find($user->id);
-
-			$administrador->codRegistro = Input::get('codRegistro');
-
-			$administrador->save();
-
-			return Redirect::back();
-		});
-
-		Route::post('criarCategoria', function(){
-			$categoria = new Categoria;
-			$categoria->nome = Input::get('nome');
-
-			$categoria->save();
-
-			// redirect
-			Session::flash('message', 'Categoria criada com sucesso!');
-			return Redirect::back();
-		});
-
-		Route::post('atualizarCategoria', function(){
-			$categoria = Categoria::find(Input::get('id'));
-			$categoria->nome = Input::get('nome');
-
-			$categoria->save();
-
-			// redirect
-			Session::flash('message', 'Alterações salvas com sucesso!');
-			return Redirect::back();
-		});
-
-		Route::post('criarAtividadeExtra', function(){
-			$atividadeExtra = new Atividade;
-			$atividadeExtra->nome = Input::get('nome');
-			$atividadeExtra->tipo = 2;
-			$atividadeExtra->status = 0;
-			$idModulo = Input::get('idModulo');
-			$idCategoria = Input::get('idCategoria');
-			$atividadeExtra->idUsuario = Auth::user()->id;
-
-			if($idModulo!=""){
-				$atividadeExtra->idModulo = Input::get('idModulo');
-			}
-			if($idCategoria!=""){
-				$atividadeExtra->idCategoria = Input::get('idCategoria');
-			}
-
-			$atividadeExtra->save();
-
-			// redirect
-			Session::flash('message', 'Atividade Extra criado com sucesso!');
-			return Redirect::to('admin/atividadeExtra/'.$atividadeExtra->id.'/editar');
-		});
-
-		Route::post('atualizarAtividadeExtra', function(){
-			$atividadeExtra = Atividade::find(Input::get('id'));
-			$atividadeExtra->nome = Input::get('nome');
-			$idModulo = Input::get('idModulo');
-			$idCategoria = Input::get('idCategoria');
-			$atividadeExtra->status = Input::get('status');
-
-			if(isset($idModulo)){
-				$atividadeExtra->idModulo = Input::get('idModulo');
-			}
-			if(isset($idCategoria)){
-				$atividadeExtra->idCategoria = Input::get('idCategoria');
-			}
-
-			$atividadeExtra->save();
-
-			// redirect
-			Session::flash('message', 'Atividade Extra atualizada com sucesso!');
-			return Redirect::back();
-		});
-
-		Route::get('atividadeExtra/{id}/editar', function($id){
-			$atividadeExtra = Atividade::find($id);
-
-			return View::make('atividade/extraEditarAdmin')->with('atividade',$atividadeExtra);
-		});
-
-		Route::post('alterarOrdem', function(){
-			
-			$atividade = Atividade::find(Input::get('0'));
-			$key=1;
-			//return Response::json(Input::all());
-
-
-			$questoes = $atividade->questoes->sortBy('numero');
-
-			//return Response::json(dd($numeros));
-
-			foreach ($questoes as $questao) {
-				//return Response::json(dd($numeros[Input::get($key)-1]));
-				$questao->numero = Input::get($key);
-				$questao->save();
-				$key++;
-			}
-
-			return Response::json("alterado");
-
-		});
-
-	// CRUD - FIM
 
 	
 });
