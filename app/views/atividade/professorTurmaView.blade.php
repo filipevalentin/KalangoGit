@@ -208,19 +208,19 @@
                                                                 switch($questao->respostaCerta)
                                                                 {
                                                                     case 'a':
-                                                                        echo '<p class="bg-aqua"> A) Azul</p>';
+                                                                        echo '<p class="bg-aqua"> A)</p>';
                                                                         break;
 
                                                                     case 'b':
-                                                                        echo '<p class="bg-red"> B) Vermelho</p>';
+                                                                        echo '<p class="bg-red"> B)</p>';
                                                                         break;
 
                                                                     case 'c':
-                                                                        echo '<p class="bg-green"> C) Verde</p>';
+                                                                        echo '<p class="bg-green"> C)</p>';
                                                                         break;
                                                                         
                                                                     case 'd':
-                                                                        echo '<p class="bg-orange"> D) Laranja</p>';
+                                                                        echo '<p class="bg-orange"> D)</p>';
                                                                         break;
 
                                                                 }
@@ -395,10 +395,10 @@
             }
             console.log(texto[questao]);
             if(texto[questao] == 1){
-                $(val).css("background-color","blue");
+                $(val).css("background-color","rgb(153, 255, 197)");
                 console.log('Mudando cor para azul');
             }else{
-                $(val).css("background-color","red");
+                $(val).css("background-color","rgb(255, 176, 153)");
                 console.log('Mudando cor para vermelho');
             }
         });

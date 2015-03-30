@@ -1,13 +1,12 @@
-@extends('master-prof')
+@extends('master')
 
 @section('modals')
-
 
 @endsection
 
 @section('maincontent')
 <section class="content-header">
-    <h1>Criar Exercício</h1>
+    <h1> Resultados</h1>
     <ol class="breadcrumb">
         <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Widgets</li>
@@ -18,63 +17,18 @@
 
     <div class="row">
         <div class="col-md-12">
-            <div class="box box-solid">
-
-                <div class="box-header">
-                    <h3 class="box-title">Turmas</h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-
-                        @for($i=0; $i <= (int)(count($turmasArray)/5); $i++)
-        
-                            <div class="item">
-
-                            @for($j=4*$i; $j<4*$i+4 && $j<(count($turmasArray)); $j++)
-
-
-                                <div class="col-sm-3">
-                                    <div class="box-body">
-                                        <div class="small-box bg-blue">
-                                            <div class="inner">
-                                                <div class="turma" style="cursor:pointer;" data-idTurma="{{$turmasArray[$j]['id']}}">
-                                                    <h4 style="font-size: 20px;">{{$turmasArray[$j]['nome']}}</h4>
-                                                    <p style="margin:0px;">{{$turmasArray[$j]['alunosTurma']->count()}} Alunos</p>
-                                                </div>
-                                            </div>
-
-                                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            @endfor
-
-                            </div>
-                        @endfor
-
-                        </div>
-                    
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev" style="background-image:none; width:3%;"><span class="glyphicon glyphicon-chevron-left"></span></a>
-                        
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next" style="background-image:none; width:3%;"><span class="glyphicon glyphicon-chevron-right"></span></a>
-
-                    </div>
-                </div> <!-- /.box-body -->
-            </div>
 
             <h2 class="page-header">Inglês - Teens - Módulo 1 - Aula 2</h2>
 
             <div class="col-md-8">
                 <div class="box box-solid">
                     <div class="box-header">
-                        <h3 class="box-title">{{$exercicio->nome}}</h3>
+                        <h3 class="box-title">{{$atividade->nome}}</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
                         <div class="box-group " id="accordion">
                         <?php $aux = 1;
-                            $questoes = $exercicio->questoes->sortBy('numero');
+                            $questoes = $atividade->questoes->sortBy('id');
                         ?>
 
                             
@@ -87,21 +41,20 @@
                             @endif
 
                             @foreach($questoes as $questao)
-                                @if($questao->tipo == 1)
+                                @if($questao->tipo == "1")
 
                                 <div class="panel box box-primary">
                                     <div class="box-header">
                                         <h4 class="box-title">
                                             <a data-toggle="collapse" data-questao="{{$aux-1}}" data-parent="#accordion" href="#ME{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
-                                        <small class="badge pull-right bg-green" style="margin: 12px 10px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                     </div>
                                     <div id="ME{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->titulo}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
                                                     </div>
                                                     <div class="box-body">
                                                         <?php $categoria = (string)($questao->categoria); ?>
@@ -250,7 +203,7 @@
                                 </div>
                                 @endif
 
-                                @if($questao->tipo == 2)
+                                @if($questao->tipo == "2")
 
                                 <div class="panel box box-primary ">
                                     <div class="box-header">
@@ -263,7 +216,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->titulo}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
                                                     </div>
                                                     <div class="box-body">
 
@@ -307,48 +260,42 @@
                 </div>
             </div>
 
-            @foreach($turmas as $turma)
-
-                <?php $alunos = $turma->alunosTurma; ?>
-
-                <div class="col-md-4 alunosTurma" id="{{$turma->id}}" style="display: none;">
-                    <div class="box">
-                        <div class="box-header">
-                            <h3 class="box-title">Relatório de Acesso - Turma {{$turma->nome}} </h3>
-                        </div><!-- /.box-header -->
-                        <div class="box-body no-padding">
-                            <table class="table table">
-                                <tbody>
-                                    <tr>
-                                        <th style="/* width: 10px */ display:none;">#</th>
-                                        <th>Nome</th>
-                                        <th>Desempenho</th>
-                                        <th>Ação</th>
-                                    </tr>
-                                    @foreach($alunos as $aluno)
-                                    <tr id="aluno" data-respostas="<?php
-                                        for ($i=0; $i <sizeof($aluno->respostas) ; $i++) { 
-                                            echo $aluno->respostas[$i];
-                                        }
-
-                                     ?>">
-                                        <td style="display: none;">{{$aluno->matricula}}</td>
-                                        <td>{{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</td>
-                                        <td>{{$aluno->desempenho*100}}%</td>
-                                        <td>
-                                            <div class="box-tools" style="padding:0px">
-                                                <button>Enviar feedback</button>
-                                            </div>
-                                        </td> 
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div><!-- /.box-body -->
-                    </div>
+            <div class="col-md-4">
+                <div class="box">
+                    <div class="box-header">
+                        <h3 class="box-title">Resultados da Atividade </h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body no-padding">
+                        <table class="table table">
+                            <tbody>
+                                <tr>
+                                    <th style="/* width: 10px */ display:none;">#</th>
+                                    <th>Questão</th>
+                                    <th>Resultado</th>
+                                </tr>
+                                @foreach($questoes as $questao)
+                                <tr id="aluno">
+                                    <?php $aux = 1; ?>
+                                    <td>#{{$aux++}}</td>
+                                    <td>
+                                    <?php $respostas = Auth::user()->aluno->respostas; ?>
+                                        @if($respostas->find($questao->id) != null)
+                                            @if($respostas->find($questao->id)->pivot->correcao == 1)
+                                                <i class="fa fa-check" style="color:green;"> Resposta Correta</i>
+                                            @else
+                                                <i class="fa fa-times" style="color:green;"> Resposta Errada</i>
+                                            @endif
+                                        @else
+                                            <i>Nenhuma resposta registrada</i>
+                                        @endif
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div><!-- /.box-body -->
                 </div>
-
-            @endforeach
+            </div>
 
         </div>
     </div> 
@@ -356,6 +303,22 @@
 @endsection
 
 @section('scripts')
+
+    <script>
+        $('#compose-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var idUsuarioDestino = button.data('idusuariodestino');
+            var nomeDestino = button.data('nomedestino');
+            var modal = $(this);
+
+            modal.find('#idUsuarioDestino option').val(idUsuarioDestino);
+            modal.find('#idUsuarioDestino option').text(nomeDestino);
+        });
+           
+
+            $('.item').first().addClass("active")
+
+        </script>
 
 <script>
 
@@ -380,52 +343,6 @@
 
 </script>
 
-<script>
-
-    $('div.turma').on('click', (function(event) {
-        var idTurma = $(this).data('idturma');
-        $('div.alunosTurma').fadeOut();
-        $('div.alunosTurma#'+idTurma).fadeIn();
-        
-        //$("div.conteudocurso[id="+id+"]").delay(401).fadeIn();
-    }));
-
-    $('.item').first().addClass("active");
-
-</script>
-
-<script>
-    // *Inserir lógica na rota:-> adicionar a cada obejto aluno a info se ele respondeu um exercicio ou nao, buscando no banco
-    // ao carregar a página colocar os alunos que não respondeu com um destaque, e por no fim da lista
-    // Escutar quando uma questão é clicada
-
-    $('a[data-questao]').on('click', (function(event) {
-        var button = $(this);
-        var questao = button.data('questao');
-        //console.log(questao);
-        var alunos = $('tr#aluno');
-        //console.log(alunos);
-
-        $.each(alunos, function(index, val) {
-            var texto = $(val).data('respostas');
-            if($.type(texto) == "number"){
-                texto = texto.toString();
-            }
-            console.log(texto[questao]);
-            if(texto[questao] == 1){
-                $(val).css("background-color","rgb(153, 255, 197)");
-                console.log('Mudando cor para azul');
-            }else{
-                $(val).css("background-color","rgb(255, 176, 153)");
-                console.log('Mudando cor para vermelho');
-            }
-        });
-
-    }));
-    // buscar todos os alunos que responderam todas as questoes
-    // adicionar uma classe data-respostas="" conforme o resultado -Acertou ou Errou
-
-</script>
 @endsection
 
 <!-- Scripts import -->

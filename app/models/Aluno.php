@@ -5,13 +5,8 @@
 		public $timestamps = false;
 
 		public function turmas(){
-        	return $this->belongsToMany('Turma', 'turmasalunos', 'idAluno', 'idTurma')->withPivot('pontuacao');	
-        }
-
- 		//foreach ($aluno->turmas as $turma)
-		// {
-		//     echo $turma->pivot->pontuacao;
-		// }
+        	       return $this->belongsToMany('Turma', 'turmasalunos', 'idAluno', 'idTurma')->withPivot('pontuacao');	
+                }
 
                 public function usuario(){
                 	return $this->belongsTo('User', 'id');

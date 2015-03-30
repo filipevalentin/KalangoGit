@@ -2,7 +2,6 @@
 
 <?php
     $aux = -1;
-    $turmas = Auth::user()->aluno->turmas;
     $propagandas = Propaganda::all();
 ?>
 
@@ -87,7 +86,7 @@
 
 						<div class="col-md-12">
 							<div id="div_card_{{++$aux}}" class="box" >
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();">
+								<a href="/aluno/cursos/anteriores" onclick="javascript:fcn_indisponivel();">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Cursos Anteriores</b></span><br>
 										<span style="color:#FFF;">
@@ -109,7 +108,7 @@
 					<div class="col-lg-6" style="padding: 0;">
                     	<div class="col-md-12">
 							<div id="div_card_{{++$aux}}" class="box" >
-								<a href="#">
+								<a href="/aluno/atividades/extra">
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Atividades Extras</b></span><br>
 										<span style="color:#FFF;">

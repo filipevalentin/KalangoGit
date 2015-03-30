@@ -60,55 +60,66 @@
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             <!-- Messages: style can be found in dropdown.less-->
+                           <?php global $count; $mensagens= Auth::user()->mensagensRecebidas; ?> 
+                            <?php $mensagens->each(function($mensagem){
+                                global $count;
+                                if($mensagem->lida!=1){
+                                    $count++;
+                                }
+                            }) ?>
                             <li class="dropdown messages-menu">
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-envelope-o"></i>
-                                    <span class="label label-success">4</span>
+                                    <span class="label label-success">{{$count}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">You have 4 messages</li>
+                                    <li class="header"><?php ($count != 0) ? "Você tem $count novas mensagens" : "Sem novas mensagens"; ?></li>
                                     <li>
                                         <!-- inner menu: contains the messages -->
                                         <ul class="menu">
+                                        @foreach($mensagens as $mensagem)
                                             <li><!-- start message -->
-                                                <a href="#">
+                                                <a href="/professor/mensagem/{{$mensagem->id}}">
                                                     <div class="pull-left">
                                                         <!-- User Image -->
-                                                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                                                        <img src="/{{$mensagem->usuarioOrigem->urlImagem}}" class="img-circle" alt="User Image"/>
                                                     </div>
                                                     <!-- Message title and timestamp -->
                                                     <h4>                            
-                                                        Support Team
-                                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                        {{$mensagem->titulo}}
                                                     </h4>
                                                     <!-- The message -->
-                                                    <p>Why not buy a new awesome theme?</p>
+                                                    <p>{{$mensagem->conteudo}}</p>
                                                 </a>
-                                            </li><!-- end message -->                      
+                                            </li><!-- end message -->
+                                        @endforeach                   
                                         </ul><!-- /.menu -->
                                     </li>
-                                    <li class="footer"><a href="#">See All Messages</a></li>
+                                    <li class="footer"><a href="/professor/mensagens">Ir para Mensagens</a></li>
                                 </ul>
                             </li><!-- /.messages-menu -->
 
                             <!-- Notifications Menu -->
+                            <?php $avisos = Aviso::where('dataExpiracao','>', date('Y-m-d'))->orderBy('dataExpiracao')->get(); ?>
                             <li class="dropdown notifications-menu">
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-bell-o"></i>
-                                    <span class="label label-warning">10</span>
+                                    <span class="label label-warning">{{$avisos->count()}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">You have 10 notifications</li>
+                                    <li class="header">Você tem {{$avisos->count()}} avisos</li>
                                     <li>
                                         <!-- Inner Menu: contains the notifications -->
                                         <ul class="menu">
+                                        @foreach($avisos as $aviso)
                                             <li><!-- start notification -->
                                                 <a href="#">
-                                                    <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                                                    <i class="fa fa-check"></i>{{$aviso->titulo}}
                                                 </a>
                                             </li><!-- end notification -->                      
+                                        @endforeach
                                         </ul>
                                     </li>
                                     <li class="footer"><a href="#">View all</a></li>
@@ -180,18 +191,6 @@
                                 @foreach(Idioma::all() as $idioma)
                                 <li><a href="/professor/home/{{$idioma->nome}}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> {{$idioma->nome}}</a></li>
                                 @endforeach
-                            </ul>
-                        </li>
-
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-user"></i>
-                                <span>Buscar</span>
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="#/professorBuscarAlunos" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Aluno</a></li>
-                                <li><a href="#/professorBuscarProfessores" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> Professor</a></li>
                             </ul>
                         </li>
 

@@ -5,8 +5,8 @@
 		protected $table = 'questoes';
 		public $timestamps = false;
 
-		public function atividade(){
-        	return $this->belongsTo('Atividade', 'idAtividade');
+	public function atividade(){
+	       return $this->belongsTo('Atividade', 'idAtividade');
         }
 
         // Agora a questao terá só um skill atrelado, então será hasOne

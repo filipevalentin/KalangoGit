@@ -2,6 +2,17 @@
 
 $layout = 'layouts.master';
 
+Route::get('teste4',function(){ 
+	$turmas = Turma::all();
+
+	$atividades = $turmas->each(function($turma){
+		$turma->modulo->atividades;
+	});
+
+	return $atividades->find;
+
+});
+
 
 // ===============================================
 // COMMON SECTION ================================
@@ -92,9 +103,24 @@ $layout = 'layouts.master';
 Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 		Route::get('home', function(){
-			$turmas = Auth::user()->aluno->turmas;
+			$turmas = Auth::user()->aluno->turmas->filter(function($turma){
+				if($turma->status != 0){
+					return true;
+				}
+			});
 			return View::make('aluno/home')->with('turmas', $turmas);
 		});
+
+	//Cursos Anteriores
+		Route::get('cursos/anteriores', function(){
+			$turmas = Auth::user()->aluno->turmas->filter(function($turma){
+				if($turma->status != 1){
+					return true;
+				}
+			});
+			return View::make('aluno/cursosAnteriores')->with('turmas', $turmas);
+		});
+
 
 	//Mensagens
 
@@ -156,14 +182,34 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 	//Atividade e Ativ.Extra - Responder/VerificarAcesso/RegistrarAcesso/Conclusão
 
-		Route::get('atividade/{idAtividade}', function($idAtividade){
+		Route::get('atividade/{idAtividade}', function($idAtividade){  // ### APLICAR LOGICA PARA IR NO RESULTADO DAS RESPOSTAS CASO JA TENHA FEITO A ATIVIDADE
 			$atividade = Atividade::find($idAtividade);
+
+			//Checa se o aluno está habilitado a responder a atividade - No caso dele estar vendo um curso que já fez no passado
+			// Fazemos isso vendo se o aluno está matriculado em uma turma ativa do mesmo curso/modulo que a atividade está cadastrada
+			$flag = false;
+			foreach (Auth::user()->aluno->turmas as $turma) {
+				if($turma->status == "1"){
+					if($turma->modulo->id == $atividade->aula->modulo->id){
+						$flag = true;
+					}
+				}
+			}
+
+			if($flag == false){
+				return View::make('atividade/alunoView')->with('atividade',$atividade);
+			}
+
+			if($atividade->status == '0'){
+				return Redirect::back();
+			}
 			$acesso = AcessosAtividade::where('idAluno', '=', Auth::user()->id)->where('idAtividade', '=', $idAtividade)->first();
 			if($acesso != null){
 				if($acesso->status != 1){
 					return View::make('atividade/ResponderAtividade')->with(array('questao' => $acesso->idQuestao, 'atividade' => $atividade));
 				}else{
-					return Redirect::back();
+					//INSERIR AQUI O REDRECIONAMENTO PARA OS RESULTADOS
+					return View::make('atividade/alunoView')->with('atividade',$atividade);
 				}
 			}else{
 				return View::make('atividade/ResponderAtividade')->with('atividade', $atividade);
@@ -197,6 +243,11 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 		Route::get('registrarConclusao/{idAtividade}', function($idAtividade){
 			$acesso = AcessosAtividade::where('idAtividade', '=', $idAtividade)->where('idAluno', '=', Auth::user()->id)->first();
+			if($acesso == null){
+				$acesso = new AcessosAtividade;
+				$acesso->idAtividade = $idAtividade;
+				$acesso->idAluno = Auth::user()->id;
+			}
 			$acesso->status = '1';
 
 			$acesso->save();
@@ -216,7 +267,28 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$resposta->idQuestao = $idQuestao;
 			$resposta->idAluno = Auth::user()->id;
 			$resposta->respostaAluno = $respostaAluno;
+			$resposta->correcao = ($respostaAluno == Questao::find($idQuestao)->respostaCerta) ? '1':'0';
 			$resposta->save();
+
+			//Adiciona os pontos na contagem geral
+			//Caso seja atividade de aula
+			if(Questao::find($idQuestao)->idModulo != null){
+				Auth::user()->aluno->turmas->each(function($turma) use($idQuestao){
+					if($turma->modulo == Questao::find($idQuestao)->atividade->aula->modulo){
+						$pontos = Questao::find($idQuestao)->pontos + $turma->pivot->pontuacao;
+						Auth::user()->aluno->turmas()->updateExistingPivot($turma->id, array('pontuacao'=>$pontos));
+					}
+				});
+			//Caso seja atividade extra
+			}else{
+				Auth::user()->aluno->turmas->each(function($turma) use($idQuestao){
+					if($turma->modulo == Questao::find($idQuestao)->atividade->modulo){
+						$pontos = Questao::find($idQuestao)->pontos + $turma->pivot->pontuacao;
+						Auth::user()->aluno->turmas()->updateExistingPivot($turma->id, array('pontuacao'=>$pontos));
+					}
+				});
+			}
+			
 			return Response::json('Resposta Salva!');
 			//salvar resposta do aluno no futuro
 
@@ -224,6 +296,22 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 	//Listar Atividades Extras
 
+		Route::get('atividades/extra', function(){
+			$turmas = Auth::user()->aluno->turmas;
+
+			$categorias = Categoria::all();
+
+			global $atividadesExtras;
+			$atividadesExtras = array();
+
+			$turmas->each(function($turma){
+				global $atividadesExtras;
+				$atividadesExtras = array_merge($turma->modulo->atividadesExtras->all());
+			});
+
+
+			return View::make('atividade/atividadeExtraAluno')->with('atividadesExtras', $atividadesExtras)->with('categorias',$categorias);
+		});
 
 	// Ver Conteudos do Módulo - Aulas
 		Route::get('modulo/{id}', function($id){
@@ -292,9 +380,11 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			// aqui separamos as informações do dashboard relativa a cada modulo/turma que o aluno cursa. Ex: respostas certas/erradas de atividades do curso inglês(turma A) e outro de espanhol(turmaB)
 			foreach ($turmas as $turma) {
 				//pega todas as questoes relativas a um modulo
-				$aux = $turma->modulo->questoes;
+				$aux = Questao::whereIn('idAtividade', $turma->modulo->atividades->lists('id'))->whereIn('id',Auth::user()->aluno->respostas->lists('id'))->get();
+				//$turma->modulo->questoes;
 				//filtra só as questoes do modulo que o aluno já respondeu, atraves de intersecção entre as funções aluno->questoes e $aux
 				$aux = Auth::user()->aluno->respostas->intersect($aux);
+
 				// adiciona a coleção de questoes que o aluno já respondeu para a turma/modulo correspondende da questão
 				$turma->questoes = $aux;
 
@@ -334,7 +424,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			        if ($a === $b) {
 			            return 0;
 			        }
-			        return ($a > $b) ? 1 : -1;
+			        return ($a < $b) ? 1 : -1;
 			    });
 
 				//ranking turma
@@ -346,7 +436,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			        if ($a === $b) {
 			            return 0;
 			        }
-			        return ($a > $b) ? 1 : -1;
+			        return ($a < $b) ? 1 : -1;
 			    });
 
 				//pega as posiçoes do rank para o aluno atual
@@ -355,7 +445,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				$meuRanking['turma'] = array_search(Auth::user()->id, $rankingTurma->keyBy('id')->keys());
 
 				//Limita o rankind do módulo para os 10 primeiros
-				$rankingModulo = $rankingModulo->slice(1,10);
+				$rankingModulo = $rankingModulo->slice(0,10);
 
 				//topTopicos
 				$topTopicos = $topicos;
@@ -377,7 +467,9 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			}
 
-			return View::make('dashboard')->with('turmas', $turmas);
+			//dd($turmas);
+
+			return View::make('aluno/dashboard')->with('turmas', $turmas);
 		});
 
 });
@@ -636,8 +728,11 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 							$alunos[$i]->respostas = $r;
 						}
 					}
+					$respostasCorretas = substr_count(implode(",", $alunos[$i]->respostas), '1');
+					($respostasCorretas != 0) ? $alunos[$i]->desempenho = $respostasCorretas/sizeof($questoes) : $alunos[$i]->desempenho = 0;
 
 				}
+
 				$turmas[$k]->alunosTurma = $alunos;
 			}
 				
