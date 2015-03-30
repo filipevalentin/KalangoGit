@@ -188,13 +188,16 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			//Checa se o aluno está habilitado a responder a atividade - No caso dele estar vendo um curso que já fez no passado
 			// Fazemos isso vendo se o aluno está matriculado em uma turma ativa do mesmo curso/modulo que a atividade está cadastrada
 			$flag = false;
-			foreach (Auth::user()->aluno->turmas as $turma) {
-				if($turma->status == "1"){
-					if($turma->modulo->id == $atividade->aula->modulo->id){
-						$flag = true;
+			if(Atividade::find($idAtividade)->tipo == 1){
+				foreach (Auth::user()->aluno->turmas as $turma) {
+					if($turma->status == "1"){
+						if($turma->modulo->id == $atividade->aula->modulo->id){
+							$flag = true;
+						}
 					}
 				}
 			}
+			
 
 			if($flag == false){
 				return View::make('atividade/alunoView')->with('atividade',$atividade);
