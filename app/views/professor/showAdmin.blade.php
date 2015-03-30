@@ -71,7 +71,7 @@
 <section class="content">
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 box box-body">
 			<table id="example" class="display" cellspacing="0" width="100%">
 		        <thead>
 		            <tr>
