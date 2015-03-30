@@ -273,9 +273,9 @@
                                     <th>Questão</th>
                                     <th>Resultado</th>
                                 </tr>
+                                <?php $aux = 1; ?>
                                 @foreach($questoes as $questao)
                                 <tr id="aluno">
-                                    <?php $aux = 1; ?>
                                     <td>#{{$aux++}}</td>
                                     <td>
                                     <?php $respostas = Auth::user()->aluno->respostas; ?>

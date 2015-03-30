@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS `acessosatividades` (
   `idAtividade` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idAluno` (`idAluno`),
-  KEY `idQuestao` (`idQuestao`),
   KEY `idAtividade` (`idAtividade`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -1468,7 +1467,6 @@ INSERT INTO `usuarios` (`id`, `nome`, `sobrenome`, `login`, `password`, `email`,
 --
 ALTER TABLE `acessosatividades`
   ADD CONSTRAINT `acessosatividades_ibfk_1` FOREIGN KEY (`idAluno`) REFERENCES `alunos` (`id`),
-  ADD CONSTRAINT `acessosatividades_ibfk_2` FOREIGN KEY (`idQuestao`) REFERENCES `questoes` (`id`),
   ADD CONSTRAINT `acessosatividades_ibfk_3` FOREIGN KEY (`idAtividade`) REFERENCES `atividades` (`id`);
 
 --

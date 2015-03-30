@@ -187,8 +187,9 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			//Checa se o aluno está habilitado a responder a atividade - No caso dele estar vendo um curso que já fez no passado
 			// Fazemos isso vendo se o aluno está matriculado em uma turma ativa do mesmo curso/modulo que a atividade está cadastrada
-			$flag = false;
+			$flag = true;
 			if(Atividade::find($idAtividade)->tipo == 1){
+				$flag = false;
 				foreach (Auth::user()->aluno->turmas as $turma) {
 					if($turma->status == "1"){
 						if($turma->modulo->id == $atividade->aula->modulo->id){
@@ -209,7 +210,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$acesso = AcessosAtividade::where('idAluno', '=', Auth::user()->id)->where('idAtividade', '=', $idAtividade)->first();
 			if($acesso != null){
 				if($acesso->status != 1){
-					return View::make('atividade/ResponderAtividade')->with(array('questao' => $acesso->idQuestao, 'atividade' => $atividade));
+					return View::make('atividade/ResponderAtividade')->with(array('ultimaQuestao' => $acesso->idQuestao, 'atividade' => $atividade));
 				}else{
 					//INSERIR AQUI O REDRECIONAMENTO PARA OS RESULTADOS
 					return View::make('atividade/alunoView')->with('atividade',$atividade);
@@ -260,6 +261,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 
 		Route::get('responder/{idQuestao}/{resposta}', function($idQuestao, $respostaAluno){
+			$respostaAluno = urldecode($respostaAluno);
 			$acesso = AcessosAtividade::where('idAluno', '=', Auth::user()->id)->where('idAtividade', '=', Questao::find($idQuestao)->atividade->id)->first();
 			if($acesso != null){
 				if($acesso->status == 1){

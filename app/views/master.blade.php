@@ -211,13 +211,13 @@
 
         @if (isset($mensagem))
             <script>
-                alert("{{$mensagem}}");
+                //alert("{{$mensagem}}");
             </script>
         @endif
 
         <script>
             $('.carousel').carousel({
-            interval: 0; //changes the speed
+                interval: 0; //changes the speed
             })
         </script>
 
