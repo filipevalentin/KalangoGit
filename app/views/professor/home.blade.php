@@ -98,7 +98,7 @@
                                     @foreach($modulo->turmas as $turma)
                                         <div class="col-md-3">
                                             <div class="box-body">
-                                                <div class="small-box bg-blue">
+                                                <div class="small-box bg-green">
                                                     <div class="inner">
                                                         <a href="/professor/modulo/{{$modulo->id}}/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">
                                                             <h4 style="font-size: 20px;">{{$turma->nome}}</h4>

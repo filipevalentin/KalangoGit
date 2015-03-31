@@ -1,3 +1,27 @@
+-- phpMyAdmin SQL Dump
+-- version 4.1.6
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: 30-Mar-2015 às 23:26
+-- Versão do servidor: 5.6.16
+-- PHP Version: 5.5.9
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `kalangov2.3`
+--
+
+-- --------------------------------------------------------
+
 --
 -- Estrutura da tabela `acessosatividades`
 --
@@ -11,7 +35,14 @@ CREATE TABLE IF NOT EXISTS `acessosatividades` (
   PRIMARY KEY (`id`),
   KEY `idAluno` (`idAluno`),
   KEY `idAtividade` (`idAtividade`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=17 ;
+
+--
+-- Extraindo dados da tabela `acessosatividades`
+--
+
+INSERT INTO `acessosatividades` (`id`, `status`, `idAluno`, `idQuestao`, `idAtividade`) VALUES
+(16, 0, 25, 1, 121);
 
 -- --------------------------------------------------------
 
@@ -23,7 +54,14 @@ CREATE TABLE IF NOT EXISTS `administradores` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `codRegistro` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=277 ;
+
+--
+-- Extraindo dados da tabela `administradores`
+--
+
+INSERT INTO `administradores` (`id`, `codRegistro`) VALUES
+(276, NULL);
 
 -- --------------------------------------------------------
 
@@ -35,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `alunos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `matricula` int(11) DEFAULT NULL,
   `sobreMim` varchar(1000) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dataNascimento` date COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dataNascimento` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dataVencimentoBoleto` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=276 ;
@@ -317,7 +355,7 @@ CREATE TABLE IF NOT EXISTS `atividades` (
   KEY `idCategoria` (`idCategoria`),
   KEY `idModulo` (`idModulo`),
   KEY `idUsuario` (`idUsuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=121 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=123 ;
 
 --
 -- Extraindo dados da tabela `atividades`
@@ -443,7 +481,9 @@ INSERT INTO `atividades` (`id`, `nome`, `tipo`, `status`, `idAula`, `idCategoria
 (117, 'Atividade 1 - ', 1, 1, 59, NULL, NULL, NULL),
 (118, 'Atividade 2 - ', 1, 1, 59, NULL, NULL, NULL),
 (119, 'Atividade 2 - ', 1, 1, 60, NULL, NULL, NULL),
-(120, 'Atividade 2 - ', 1, 1, 60, NULL, NULL, NULL);
+(120, 'Atividade 2 - ', 1, 1, 60, NULL, NULL, NULL),
+(121, 'Ativ Extra Teste', 2, 0, NULL, 1, 1, 276),
+(122, 'teste', 2, 1, NULL, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -536,13 +576,25 @@ CREATE TABLE IF NOT EXISTS `avisos` (
   `titulo` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `descricao` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `urlImagem` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `dataExpiracao` date COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dataExpiracao` date DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL,
   `idCurso` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idUsuario` (`idUsuario`),
   KEY `idCurso` (`idCurso`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+
+--
+-- Extraindo dados da tabela `avisos`
+--
+
+INSERT INTO `avisos` (`id`, `titulo`, `descricao`, `urlImagem`, `dataExpiracao`, `idUsuario`, `idCurso`) VALUES
+(1, 'Aviso TEste', 'DAsda', NULL, '2015-03-27', 276, NULL),
+(2, 'asdas', 'dasdasd', 'img/profile.png', '2015-03-28', 276, 1),
+(3, 'asdas', 'adsad', NULL, '2013-03-11', 276, NULL),
+(5, 'teste', 'teste', NULL, '2015-03-07', 276, NULL),
+(6, '', '', NULL, '2015-03-28', 276, NULL),
+(7, 'teste 2 ', 'teste 2', NULL, '2015-03-28', 276, NULL);
 
 -- --------------------------------------------------------
 
@@ -554,7 +606,14 @@ CREATE TABLE IF NOT EXISTS `categorias` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `categorias`
+--
+
+INSERT INTO `categorias` (`id`, `nome`) VALUES
+(1, 'Halloween');
 
 -- --------------------------------------------------------
 
@@ -635,7 +694,19 @@ CREATE TABLE IF NOT EXISTS `mensagens` (
   KEY `idUsuarioOrigem` (`idUsuarioOrigem`),
   KEY `idUsuarioDestino` (`idUsuarioDestino`),
   KEY `idRE` (`idRE`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Extraindo dados da tabela `mensagens`
+--
+
+INSERT INTO `mensagens` (`id`, `titulo`, `conteudo`, `lida`, `data`, `idUsuarioOrigem`, `idUsuarioDestino`, `idRE`) VALUES
+(1, 'asdas', 'asdas', 1, '26-03-2015 03:54:06', 25, 1, NULL),
+(2, NULL, 'teste 1', 1, '27-03-2015 05:42:06', 1, 25, NULL),
+(3, NULL, 'teste 12 aluno', 1, '27-03-2015 05:54:21', 25, 1, NULL),
+(4, 'RE: ', 'teste', 1, '27-03-2015 05:56:19', 1, 25, 3),
+(5, 'RE: RE: ', '', 1, '27-03-2015 05:59:02', 25, 1, 4),
+(6, 'RE: RE: RE: ', '', 1, '27-03-2015 05:59:55', 1, 25, 5);
 
 -- --------------------------------------------------------
 
@@ -702,7 +773,7 @@ CREATE TABLE IF NOT EXISTS `professores` (
 --
 
 INSERT INTO `professores` (`id`, `codRegistro`, `sobreMim`, `formacaoAcademica`) VALUES
-(1, 0, '', ''),
+(1, 0, NULL, 'Pedagogia'),
 (2, 0, '', ''),
 (3, 0, '', ''),
 (4, 0, '', ''),
@@ -741,7 +812,14 @@ CREATE TABLE IF NOT EXISTS `propagandas` (
   `idUsuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idUsuario` (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Extraindo dados da tabela `propagandas`
+--
+
+INSERT INTO `propagandas` (`id`, `titulo`, `imagem`, `link`, `idUsuario`) VALUES
+(1, 'teste', 'img/Banner-Digital-001.jpg', NULL, 276);
 
 -- --------------------------------------------------------
 
@@ -767,7 +845,18 @@ CREATE TABLE IF NOT EXISTS `questoes` (
   PRIMARY KEY (`id`),
   KEY `idAtividade` (`idAtividade`),
   KEY `idTopico` (`idTopico`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Extraindo dados da tabela `questoes`
+--
+
+INSERT INTO `questoes` (`id`, `textoPergunta`, `urlMidia`, `numero`, `tipo`, `categoria`, `alternativaA`, `alternativaB`, `alternativaC`, `alternativaD`, `respostaCerta`, `pontos`, `idAtividade`, `idTopico`) VALUES
+(1, 'Qual é o passado do verbo to get ?', NULL, 1, 2, 1, NULL, NULL, NULL, NULL, 'Got', 200, 121, 1),
+(2, 'Qual é o passado do verbo to get ?', NULL, 2, 2, 1, NULL, NULL, NULL, NULL, 'Got', 300, 121, 1),
+(3, 'Qual é o passado do verbo to get ?', NULL, 3, 1, 12, 'files/1.jpg', 'files/2.jpg', 'files/3.jpg', 'files/4.jpg', 'a', 400, 121, 1),
+(4, 'Qual é o passado do verbo to get ?', NULL, 4, 1, 11, 'Got', 'Gotten', 'Gotcha', 'Gotta', 'a', 200, 1, 1),
+(5, 'Transcreva o áudio a seguir:', 'files/usa4.mp3', 5, 2, 3, NULL, NULL, NULL, NULL, 'What was James doing when his friends arrived ?', 400, 121, 1);
 
 -- --------------------------------------------------------
 
@@ -784,7 +873,15 @@ CREATE TABLE IF NOT EXISTS `respostas` (
   PRIMARY KEY (`id`),
   KEY `idAluno` (`idAluno`),
   KEY `idQuestao` (`idQuestao`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=55 ;
+
+--
+-- Extraindo dados da tabela `respostas`
+--
+
+INSERT INTO `respostas` (`id`, `respostaAluno`, `correcao`, `idAluno`, `idQuestao`) VALUES
+(53, 'got', 0, 25, 1),
+(54, 'got', 0, 25, 2);
 
 -- --------------------------------------------------------
 
@@ -798,7 +895,15 @@ CREATE TABLE IF NOT EXISTS `topicos` (
   `idUsuario` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idUsuario` (`idUsuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+
+--
+-- Extraindo dados da tabela `topicos`
+--
+
+INSERT INTO `topicos` (`id`, `nome`, `idUsuario`) VALUES
+(1, 'Verbos', 276),
+(2, 'Adjetivos', 276);
 
 -- --------------------------------------------------------
 
@@ -904,257 +1009,257 @@ CREATE TABLE IF NOT EXISTS `turmasalunos` (
 --
 
 INSERT INTO `turmasalunos` (`id`, `pontuacao`, `idTurma`, `idAluno`) VALUES
-(1, NULL, 1, 25),
-(2, NULL, 1, 26),
-(3, NULL, 1, 27),
-(4, NULL, 1, 28),
-(5, NULL, 1, 29),
-(6, NULL, 1, 30),
-(7, NULL, 2, 31),
-(8, NULL, 2, 32),
-(9, NULL, 2, 33),
-(10, NULL, 2, 34),
-(11, NULL, 2, 35),
-(12, NULL, 2, 36),
-(13, NULL, 3, 37),
-(14, NULL, 3, 38),
-(15, NULL, 3, 39),
-(16, NULL, 3, 40),
-(17, NULL, 3, 41),
-(18, NULL, 3, 42),
-(19, NULL, 4, 43),
-(20, NULL, 4, 44),
-(21, NULL, 4, 45),
-(22, NULL, 4, 46),
-(23, NULL, 4, 47),
-(24, NULL, 5, 48),
-(25, NULL, 5, 49),
-(26, NULL, 5, 50),
-(27, NULL, 5, 51),
-(28, NULL, 6, 52),
-(29, NULL, 6, 53),
-(30, NULL, 6, 54),
-(31, NULL, 6, 55),
-(32, NULL, 7, 56),
-(33, NULL, 7, 57),
-(34, NULL, 7, 58),
-(35, NULL, 7, 59),
-(36, NULL, 8, 60),
-(37, NULL, 8, 61),
-(38, NULL, 8, 62),
-(39, NULL, 8, 63),
-(40, NULL, 9, 64),
-(41, NULL, 9, 65),
-(42, NULL, 9, 66),
-(43, NULL, 9, 67),
-(44, NULL, 10, 68),
-(45, NULL, 10, 69),
-(46, NULL, 10, 70),
-(47, NULL, 10, 71),
-(48, NULL, 11, 72),
-(49, NULL, 11, 73),
-(50, NULL, 11, 74),
-(51, NULL, 11, 75),
-(52, NULL, 12, 76),
-(53, NULL, 12, 77),
-(54, NULL, 12, 78),
-(55, NULL, 12, 79),
-(56, NULL, 13, 80),
-(57, NULL, 13, 81),
-(58, NULL, 13, 82),
-(59, NULL, 13, 83),
-(60, NULL, 14, 84),
-(61, NULL, 14, 85),
-(62, NULL, 14, 86),
-(63, NULL, 14, 87),
-(64, NULL, 15, 88),
-(65, NULL, 15, 89),
-(66, NULL, 15, 90),
-(67, NULL, 15, 91),
-(68, NULL, 16, 92),
-(69, NULL, 16, 93),
-(70, NULL, 16, 94),
-(71, NULL, 16, 95),
-(72, NULL, 17, 96),
-(73, NULL, 17, 97),
-(74, NULL, 17, 98),
-(75, NULL, 17, 99),
-(76, NULL, 18, 100),
-(77, NULL, 18, 101),
-(78, NULL, 18, 102),
-(79, NULL, 18, 103),
-(80, NULL, 19, 104),
-(81, NULL, 19, 105),
-(82, NULL, 19, 106),
-(83, NULL, 19, 107),
-(84, NULL, 20, 108),
-(85, NULL, 20, 109),
-(86, NULL, 20, 110),
-(87, NULL, 20, 111),
-(88, NULL, 21, 112),
-(89, NULL, 21, 113),
-(90, NULL, 21, 114),
-(91, NULL, 21, 115),
-(92, NULL, 22, 116),
-(93, NULL, 22, 117),
-(94, NULL, 22, 118),
-(95, NULL, 22, 119),
-(96, NULL, 23, 120),
-(97, NULL, 23, 121),
-(98, NULL, 23, 122),
-(99, NULL, 23, 123),
-(100, NULL, 24, 124),
-(101, NULL, 24, 125),
-(102, NULL, 24, 126),
-(103, NULL, 24, 127),
-(104, NULL, 25, 128),
-(105, NULL, 25, 129),
-(106, NULL, 25, 130),
-(107, NULL, 25, 131),
-(108, NULL, 26, 132),
-(109, NULL, 26, 133),
-(110, NULL, 26, 134),
-(111, NULL, 26, 135),
-(112, NULL, 27, 136),
-(113, NULL, 27, 137),
-(114, NULL, 27, 138),
-(115, NULL, 27, 139),
-(116, NULL, 28, 140),
-(117, NULL, 28, 141),
-(118, NULL, 28, 142),
-(119, NULL, 28, 143),
-(120, NULL, 29, 144),
-(121, NULL, 29, 145),
-(122, NULL, 29, 146),
-(123, NULL, 29, 147),
-(124, NULL, 30, 148),
-(125, NULL, 30, 149),
-(126, NULL, 30, 150),
-(127, NULL, 30, 151),
-(128, NULL, 31, 152),
-(129, NULL, 31, 153),
-(130, NULL, 31, 154),
-(131, NULL, 31, 155),
-(132, NULL, 32, 156),
-(133, NULL, 32, 157),
-(134, NULL, 32, 158),
-(135, NULL, 32, 159),
-(136, NULL, 32, 160),
-(137, NULL, 33, 161),
-(138, NULL, 33, 162),
-(139, NULL, 33, 163),
-(140, NULL, 33, 164),
-(141, NULL, 33, 165),
-(142, NULL, 33, 166),
-(143, NULL, 33, 167),
-(144, NULL, 34, 168),
-(145, NULL, 34, 169),
-(146, NULL, 34, 170),
-(147, NULL, 34, 171),
-(148, NULL, 35, 172),
-(149, NULL, 35, 173),
-(150, NULL, 35, 174),
-(151, NULL, 35, 175),
-(152, NULL, 36, 176),
-(153, NULL, 36, 177),
-(154, NULL, 36, 178),
-(155, NULL, 36, 179),
-(156, NULL, 37, 180),
-(157, NULL, 37, 181),
-(158, NULL, 37, 182),
-(159, NULL, 38, 183),
-(160, NULL, 38, 184),
-(161, NULL, 38, 185),
-(162, NULL, 38, 186),
-(163, NULL, 39, 187),
-(164, NULL, 39, 188),
-(165, NULL, 39, 189),
-(166, NULL, 39, 190),
-(167, NULL, 40, 191),
-(168, NULL, 40, 192),
-(169, NULL, 40, 193),
-(170, NULL, 40, 194),
-(171, NULL, 40, 195),
-(172, NULL, 41, 196),
-(173, NULL, 41, 197),
-(174, NULL, 41, 198),
-(175, NULL, 41, 199),
-(176, NULL, 42, 200),
-(177, NULL, 42, 201),
-(178, NULL, 42, 202),
-(179, NULL, 42, 203),
-(180, NULL, 43, 204),
-(181, NULL, 43, 205),
-(182, NULL, 43, 206),
-(183, NULL, 43, 207),
-(184, NULL, 44, 208),
-(185, NULL, 44, 209),
-(186, NULL, 44, 210),
-(187, NULL, 44, 211),
-(188, NULL, 45, 212),
-(189, NULL, 45, 213),
-(190, NULL, 45, 214),
-(191, NULL, 45, 215),
-(192, NULL, 46, 216),
-(193, NULL, 46, 217),
-(194, NULL, 46, 218),
-(195, NULL, 46, 219),
-(196, NULL, 47, 220),
-(197, NULL, 47, 221),
-(198, NULL, 47, 222),
-(199, NULL, 47, 223),
-(200, NULL, 48, 224),
-(201, NULL, 48, 225),
-(202, NULL, 48, 226),
-(203, NULL, 48, 227),
-(204, NULL, 49, 228),
-(205, NULL, 49, 229),
-(206, NULL, 49, 230),
-(207, NULL, 49, 231),
-(208, NULL, 50, 232),
-(209, NULL, 50, 233),
-(210, NULL, 50, 234),
-(211, NULL, 50, 235),
-(212, NULL, 51, 236),
-(213, NULL, 51, 237),
-(214, NULL, 51, 238),
-(215, NULL, 51, 239),
-(216, NULL, 52, 240),
-(217, NULL, 52, 241),
-(218, NULL, 52, 242),
-(219, NULL, 52, 243),
-(220, NULL, 53, 244),
-(221, NULL, 53, 245),
-(222, NULL, 53, 246),
-(223, NULL, 53, 247),
-(224, NULL, 54, 248),
-(225, NULL, 54, 249),
-(226, NULL, 54, 250),
-(227, NULL, 54, 251),
-(228, NULL, 55, 252),
-(229, NULL, 55, 253),
-(230, NULL, 55, 254),
-(231, NULL, 55, 255),
-(232, NULL, 56, 256),
-(233, NULL, 56, 257),
-(234, NULL, 56, 258),
-(235, NULL, 56, 259),
-(236, NULL, 57, 260),
-(237, NULL, 57, 261),
-(238, NULL, 57, 262),
-(239, NULL, 57, 263),
-(240, NULL, 58, 264),
-(241, NULL, 58, 265),
-(242, NULL, 58, 266),
-(243, NULL, 58, 267),
-(244, NULL, 59, 268),
-(245, NULL, 59, 269),
-(246, NULL, 59, 270),
-(247, NULL, 59, 271),
-(248, NULL, 60, 272),
-(249, NULL, 60, 273),
-(250, NULL, 60, 274),
-(251, NULL, 60, 275);
+(1, 5100, 1, 25),
+(2, 0, 1, 26),
+(3, 0, 1, 27),
+(4, 0, 1, 28),
+(5, 0, 1, 29),
+(6, 0, 1, 30),
+(7, 0, 2, 31),
+(8, 0, 2, 32),
+(9, 0, 2, 33),
+(10, 0, 2, 34),
+(11, 0, 2, 35),
+(12, 0, 2, 36),
+(13, 0, 3, 37),
+(14, 0, 3, 38),
+(15, 0, 3, 39),
+(16, 0, 3, 40),
+(17, 0, 3, 41),
+(18, 0, 3, 42),
+(19, 0, 4, 43),
+(20, 0, 4, 44),
+(21, 0, 4, 45),
+(22, 0, 4, 46),
+(23, 0, 4, 47),
+(24, 0, 5, 48),
+(25, 0, 5, 49),
+(26, 0, 5, 50),
+(27, 0, 5, 51),
+(28, 0, 6, 52),
+(29, 0, 6, 53),
+(30, 0, 6, 54),
+(31, 0, 6, 55),
+(32, 0, 7, 56),
+(33, 0, 7, 57),
+(34, 0, 7, 58),
+(35, 0, 7, 59),
+(36, 0, 8, 60),
+(37, 0, 8, 61),
+(38, 0, 8, 62),
+(39, 0, 8, 63),
+(40, 0, 9, 64),
+(41, 0, 9, 65),
+(42, 0, 9, 66),
+(43, 0, 9, 67),
+(44, 0, 10, 68),
+(45, 0, 10, 69),
+(46, 0, 10, 70),
+(47, 0, 10, 71),
+(48, 0, 11, 72),
+(49, 0, 11, 73),
+(50, 0, 11, 74),
+(51, 0, 11, 75),
+(52, 0, 12, 76),
+(53, 0, 12, 77),
+(54, 0, 12, 78),
+(55, 0, 12, 79),
+(56, 0, 13, 80),
+(57, 0, 13, 81),
+(58, 0, 13, 82),
+(59, 0, 13, 83),
+(60, 0, 14, 84),
+(61, 0, 14, 85),
+(62, 0, 14, 86),
+(63, 0, 14, 87),
+(64, 0, 15, 88),
+(65, 0, 15, 89),
+(66, 0, 15, 90),
+(67, 0, 15, 91),
+(68, 0, 16, 92),
+(69, 0, 16, 93),
+(70, 0, 16, 94),
+(71, 0, 16, 95),
+(72, 0, 17, 96),
+(73, 0, 17, 97),
+(74, 0, 17, 98),
+(75, 0, 17, 99),
+(76, 0, 18, 100),
+(77, 0, 18, 101),
+(78, 0, 18, 102),
+(79, 0, 18, 103),
+(80, 0, 19, 104),
+(81, 0, 19, 105),
+(82, 0, 19, 106),
+(83, 0, 19, 107),
+(84, 0, 20, 108),
+(85, 0, 20, 109),
+(86, 0, 20, 110),
+(87, 0, 20, 111),
+(88, 0, 21, 112),
+(89, 0, 21, 113),
+(90, 0, 21, 114),
+(91, 0, 21, 115),
+(92, 0, 22, 116),
+(93, 0, 22, 117),
+(94, 0, 22, 118),
+(95, 0, 22, 119),
+(96, 0, 23, 120),
+(97, 0, 23, 121),
+(98, 0, 23, 122),
+(99, 0, 23, 123),
+(100, 0, 24, 124),
+(101, 0, 24, 125),
+(102, 0, 24, 126),
+(103, 0, 24, 127),
+(104, 0, 25, 128),
+(105, 0, 25, 129),
+(106, 0, 25, 130),
+(107, 0, 25, 131),
+(108, 0, 26, 132),
+(109, 0, 26, 133),
+(110, 0, 26, 134),
+(111, 0, 26, 135),
+(112, 0, 27, 136),
+(113, 0, 27, 137),
+(114, 0, 27, 138),
+(115, 0, 27, 139),
+(116, 0, 28, 140),
+(117, 0, 28, 141),
+(118, 0, 28, 142),
+(119, 0, 28, 143),
+(120, 0, 29, 144),
+(121, 0, 29, 145),
+(122, 0, 29, 146),
+(123, 0, 29, 147),
+(124, 0, 30, 148),
+(125, 0, 30, 149),
+(126, 0, 30, 150),
+(127, 0, 30, 151),
+(128, 0, 31, 152),
+(129, 0, 31, 153),
+(130, 0, 31, 154),
+(131, 0, 31, 155),
+(132, 0, 32, 156),
+(133, 0, 32, 157),
+(134, 0, 32, 158),
+(135, 0, 32, 159),
+(136, 0, 32, 160),
+(137, 0, 33, 161),
+(138, 0, 33, 162),
+(139, 0, 33, 163),
+(140, 0, 33, 164),
+(141, 0, 33, 165),
+(142, 0, 33, 166),
+(143, 0, 33, 167),
+(144, 0, 34, 168),
+(145, 0, 34, 169),
+(146, 0, 34, 170),
+(147, 0, 34, 171),
+(148, 0, 35, 172),
+(149, 0, 35, 173),
+(150, 0, 35, 174),
+(151, 0, 35, 175),
+(152, 0, 36, 176),
+(153, 0, 36, 177),
+(154, 0, 36, 178),
+(155, 0, 36, 179),
+(156, 0, 37, 180),
+(157, 0, 37, 181),
+(158, 0, 37, 182),
+(159, 0, 38, 183),
+(160, 0, 38, 184),
+(161, 0, 38, 185),
+(162, 0, 38, 186),
+(163, 0, 39, 187),
+(164, 0, 39, 188),
+(165, 0, 39, 189),
+(166, 0, 39, 190),
+(167, 0, 40, 191),
+(168, 0, 40, 192),
+(169, 0, 40, 193),
+(170, 0, 40, 194),
+(171, 0, 40, 195),
+(172, 0, 41, 196),
+(173, 0, 41, 197),
+(174, 0, 41, 198),
+(175, 0, 41, 199),
+(176, 0, 42, 200),
+(177, 0, 42, 201),
+(178, 0, 42, 202),
+(179, 0, 42, 203),
+(180, 0, 43, 204),
+(181, 0, 43, 205),
+(182, 0, 43, 206),
+(183, 0, 43, 207),
+(184, 0, 44, 208),
+(185, 0, 44, 209),
+(186, 0, 44, 210),
+(187, 0, 44, 211),
+(188, 0, 45, 212),
+(189, 0, 45, 213),
+(190, 0, 45, 214),
+(191, 0, 45, 215),
+(192, 0, 46, 216),
+(193, 0, 46, 217),
+(194, 0, 46, 218),
+(195, 0, 46, 219),
+(196, 0, 47, 220),
+(197, 0, 47, 221),
+(198, 0, 47, 222),
+(199, 0, 47, 223),
+(200, 0, 48, 224),
+(201, 0, 48, 225),
+(202, 0, 48, 226),
+(203, 0, 48, 227),
+(204, 0, 49, 228),
+(205, 0, 49, 229),
+(206, 0, 49, 230),
+(207, 0, 49, 231),
+(208, 0, 50, 232),
+(209, 0, 50, 233),
+(210, 0, 50, 234),
+(211, 0, 50, 235),
+(212, 0, 51, 236),
+(213, 0, 51, 237),
+(214, 0, 51, 238),
+(215, 0, 51, 239),
+(216, 0, 52, 240),
+(217, 0, 52, 241),
+(218, 0, 52, 242),
+(219, 0, 52, 243),
+(220, 0, 53, 244),
+(221, 0, 53, 245),
+(222, 0, 53, 246),
+(223, 0, 53, 247),
+(224, 0, 54, 248),
+(225, 0, 54, 249),
+(226, 0, 54, 250),
+(227, 0, 54, 251),
+(228, 0, 55, 252),
+(229, 0, 55, 253),
+(230, 0, 55, 254),
+(231, 0, 55, 255),
+(232, 0, 56, 256),
+(233, 0, 56, 257),
+(234, 0, 56, 258),
+(235, 0, 56, 259),
+(236, 0, 57, 260),
+(237, 0, 57, 261),
+(238, 0, 57, 262),
+(239, 0, 57, 263),
+(240, 0, 58, 264),
+(241, 0, 58, 265),
+(242, 0, 58, 266),
+(243, 0, 58, 267),
+(244, 0, 59, 268),
+(245, 0, 59, 269),
+(246, 0, 59, 270),
+(247, 0, 59, 271),
+(248, 0, 60, 272),
+(249, 0, 60, 273),
+(250, 0, 60, 274),
+(251, 0, 60, 275);
 
 -- --------------------------------------------------------
 
@@ -1175,14 +1280,14 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `remember_token` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT 'Funcao "manter conectado"',
   `tipo` int(11) DEFAULT NULL COMMENT '1:Aluno  2:Professor  3:Admin',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=276 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=277 ;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
 INSERT INTO `usuarios` (`id`, `nome`, `sobrenome`, `login`, `password`, `email`, `urlImagem`, `confirmed`, `confirmation_code`, `remember_token`, `tipo`) VALUES
-(1, 'Jéssica', 'Matos', 'jessica.matos@gmail.com', '$2y$10$7BNtCzd/agUzhYLi2b1HM.C4A8hiixBvz3tH8uDyPg7khbBfj7pS2', 'jessica.matos@gmail.com', NULL, 1, NULL, NULL, 2),
+(1, 'Jéssica', 'Matos', '0', '$2y$10$7BNtCzd/agUzhYLi2b1HM.C4A8hiixBvz3tH8uDyPg7khbBfj7pS2', 'jessica.matos@gmail.com', 'img/profile.png', 1, NULL, 'tU9KBDkG59LHj7FPRBfakTY1fBBU6Srk0lKaURBhEOZqr9fG29MPZSPsKHKr', 2),
 (2, 'Milena', 'Pádua', 'milena.padua@gmail.com', '$2y$10$lz9jMLszczcUQUCau8ZFgOsciBWHJ5jDmKjO6Y5jCq2z1ZZRs2fEO', 'milena.padua@gmail.com', NULL, 1, NULL, NULL, 2),
 (3, 'Sheeva', 'Batista', 'sheeva.batista@gmail.com', '$2y$10$Qd2M3882PkkN5AoXR.yL0eKvVC.fH/5qBEQEnPlePjEqEaMVpcbhq', 'sheeva.batista@gmail.com', NULL, 1, NULL, NULL, 2),
 (4, 'Michele', 'Carvalho', 'michele.carvalho@gmail.com', '$2y$10$UFCV2uF1HydXUt.HDsec1efzW85g3rqD9BqeFlo4iBPG3/CUk6xY2', 'michele.carvalho@gmail.com', NULL, 1, NULL, NULL, 2),
@@ -1206,7 +1311,7 @@ INSERT INTO `usuarios` (`id`, `nome`, `sobrenome`, `login`, `password`, `email`,
 (22, 'Trinity', 'dos Santos', 'trinity.dos santos@gmail.com', '$2y$10$i9Cq6Wec.WQsla4UZJXqfencmxX4T1DMwVZimC0C994RH/kBmzd9K', 'trinity.dos santos@gmail.com', NULL, 1, NULL, NULL, 2),
 (23, 'Akemi', 'Costa', 'akemi.costa@gmail.com', '$2y$10$ZMvuv.t3BfT4FTwW92fGFOt3x.GqVacNXeAgCbKOsFiFc6OAansp6', 'akemi.costa@gmail.com', NULL, 1, NULL, NULL, 2),
 (24, 'Yoko', 'Rocha', 'yoko.rocha@gmail.com', '$2y$10$8nbhxPCb91SjK6X4jbqF/uX6JYAyTlJVlgilrlFcDgXr5T/yUiwme', 'yoko.rocha@gmail.com', NULL, 1, NULL, NULL, 2),
-(25, 'Eduardo', 'Minazuki', '2544', '$2y$10$VhCfvoNxl/uxMhWEK.WcNelGokzc/vfhctkp1VcTfAvMUIbGOH.Xy', 'eduardo.minazuki@gmail.com', NULL, 1, NULL, NULL, 1),
+(25, 'Eduardo', 'Minazuki', '2544', '$2y$10$VhCfvoNxl/uxMhWEK.WcNelGokzc/vfhctkp1VcTfAvMUIbGOH.Xy', 'eduardo.minazuki@gmail.com', NULL, 1, NULL, 'pPxm4WFA7a4A44oOh65zESHV6J1E2UHZyVozaTiQJqzC4eVJpAFEsWbcThK5', 1),
 (26, 'Rafaela', 'Ishida', '1926', '$2y$10$zeoOFfaUnB5kRQoEM2uuh.11USq6255ISQh621tMNVANnEcOWfH6.', 'rafaela.ishida@gmail.com', NULL, 1, NULL, NULL, 1),
 (27, 'Caio', 'Macedo', '4787', '$2y$10$OAQ2X8hjYVfjxvPYqZUdhO0JKFf9SiNB9yZojDHR.NSAzorFGZ4nC', 'caio.macedo@gmail.com', NULL, 1, NULL, NULL, 1),
 (28, 'Kitana', 'Peixoto', '4018', '$2y$10$KwJo5ohxNxtsc8wXCM7r6usluetxBxVOSrKQe5hjoF6hcG9.u1jRG', 'kitana.peixoto@gmail.com', NULL, 1, NULL, NULL, 1),
@@ -1456,7 +1561,8 @@ INSERT INTO `usuarios` (`id`, `nome`, `sobrenome`, `login`, `password`, `email`,
 (272, 'Jade', 'Freire', '6184', '$2y$10$3idxspUf2KfPRsB0gR86fO53pqUQhASQ8GM7eqZVoaeC9H/18/.om', 'jade.freire@gmail.com', NULL, 1, NULL, NULL, 1),
 (273, 'Caio', 'Pádua', '5265', '$2y$10$ElkOhy.E3GiMOaYxHndsuOLrn.qYy556RC1A2HAD.S8dFKeuArwyi', 'caio.padua@gmail.com', NULL, 1, NULL, NULL, 1),
 (274, 'Doulgas', 'Faria', '4367', '$2y$10$/n/FuIs64P2PX119NORrpujOVzyh.Lg44GldMIUsRo6hUvbzjgLhG', 'doulgas.faria@gmail.com', NULL, 1, NULL, NULL, 1),
-(275, 'Akemi', 'Matos', '3344', '$2y$10$Ro9nWC5Wqh.kFUjZE.Uq7.9cV13hjUUCfFS20I5OM24lcd07YhX6K', 'akemi.matos@gmail.com', NULL, 1, NULL, NULL, 1);
+(275, 'Akemi', 'Matos', '3344', '$2y$10$Ro9nWC5Wqh.kFUjZE.Uq7.9cV13hjUUCfFS20I5OM24lcd07YhX6K', 'akemi.matos@gmail.com', NULL, 1, NULL, NULL, 1),
+(276, 'Administrador 1', NULL, '789', '$2y$10$c1yRwXmMnVEEWIiHotmCROsvhE1xJJ/Vx.l5g3CiRx8YhbYkLqiUa', NULL, NULL, 1, NULL, 'dm9vpfHM5Z7Or5nN73fFtUg7nd6384dylFtrWO7kZZdpvei7bvWh11rQxZ4q', 3);
 
 --
 -- Constraints for dumped tables
@@ -1550,3 +1656,7 @@ ALTER TABLE `turmas`
 ALTER TABLE `turmasalunos`
   ADD CONSTRAINT `turmasalunos_ibfk_1` FOREIGN KEY (`idTurma`) REFERENCES `turmas` (`id`),
   ADD CONSTRAINT `turmasalunos_ibfk_2` FOREIGN KEY (`idAluno`) REFERENCES `alunos` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

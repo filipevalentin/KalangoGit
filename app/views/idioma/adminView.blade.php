@@ -2,17 +2,17 @@
 
 @section('modals')
 
-<div class="modal fade" id="criarTopico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="criarIdioma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Novo Tópico</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Criar Idioma</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/admin/criarTopico" enctype="multipart/form-data">
+                <form method="POST" action="/admin/criarIdioma" enctype="multipart/form-data">
                     <div id="div_nome" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome" class="fa"></i> Nome</label>
+                        <label class="control-label" for="nome"><i id="icone_titulo" class="fa"></i> Nome</label>
                         <input type="text" autocomplete="off" id="nome" name="nome" class="form-control" >
                     </div>
 					<div class="modal-footer">
@@ -25,20 +25,20 @@
     </div>
 </div>
 
-<div class="modal fade" id="editarTopico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarIdioma" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar Tópico</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Editar Propaganda</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/admin/atualizarTopico" enctype="multipart/form-data">
+                 <form method="POST" action="/admin/criarIdioma" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>
                     <div id="div_nome" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome" class="fa"></i> Nome</label>
+                        <label class="control-label" for="nome"><i id="icone_titulo" class="fa"></i> Nome</label>
                         <input type="text" autocomplete="off" id="nome" name="nome" class="form-control" >
                     </div>
 					<div class="modal-footer">
@@ -55,10 +55,10 @@
 
 @section('maincontent')
 	<section class="content-header">
-	    <h1>Topicos</h1>
+	    <h1>Idiomas</h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Topicos</li>
+	        <li class="active">Idiomas</li>
 	    </ol>
 	</section>
 
@@ -70,9 +70,7 @@
 			            <tr>
 			                <th>#</th>
 			                <th>Nome</th>
-			                <th>Nº de Questões</th>
-			                <th>Criado Por</th>
-			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarTopico" ><i class="fa fa-plus"></i></button></th>
+			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarIdioma" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </thead>
 			 
@@ -80,9 +78,7 @@
 			            <tr>
 			                <th>#</th>
 			                <th>Nome</th>
-			                <th>Nº de Questões</th>
-			                <th>Criado Por</th>
-			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarTopico" ><i class="fa fa-plus"></i></button></th>
+			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarIdioma" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </tfoot>
 			    </table>
@@ -97,7 +93,7 @@
 
 <script>
 
-	$('#editarTopico').on('show.bs.modal', function (event) {
+	$('#editarIdioma').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var dataid = button.data('id');
         var datanome = button.data('nome')
@@ -111,19 +107,17 @@
 	$('.item').first().addClass("active");
 
 	$('#example').DataTable( {
-	  "ajax":"/admin/listarTopicos" ,
+	  "ajax":"/admin/listarIdiomas" ,
 	    "columns": [
 	        { data: 'id' },
 	        { data: 'nome' },
-	        { data: 'numQuestoes' },
-	        { data: 'criadoPor' },
 	        { data: 'action' }
 	    ],
 
 	    "scrollX": true,
 
 		"columnDefs": [ {
-		      "targets": 4,
+		      "targets": 2,
 		      "orderable": false,
 		      "searchable": false
 		    } ],

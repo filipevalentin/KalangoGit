@@ -307,7 +307,7 @@
                                     @foreach($modulo->turmas as $turma)
                                         <div class="col-md-3">
                                             <div class="box-body">
-                                                <div class="small-box bg-blue">
+                                                <div class="small-box bg-green">
                                                     <div class="inner">
                                                         <div class="box-tools pull-right" style="padding-top: 8px;">
                                         

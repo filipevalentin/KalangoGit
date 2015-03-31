@@ -6,6 +6,7 @@
 
         <!-- Arquivos Básicos -->
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <meta name="theme-color" content="#008d4c" style="color: #008d4c;">
         <!-- Bootstrap 3.3.2 -->
         <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- Font Awesome Icons -->
@@ -58,38 +59,48 @@
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
+                        @if(Auth::user()->tipo == 2)
                             <!-- Messages: style can be found in dropdown.less-->
+                            <?php global $count; $mensagens= Auth::user()->mensagensRecebidas; ?> 
+                            <?php $mensagens->each(function($mensagem){
+                                global $count;
+                                if($mensagem->lida!=1){
+                                    $count++;
+                                }
+                            }) ?>
                             <li class="dropdown messages-menu">
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-envelope-o"></i>
-                                    <span class="label label-success">4</span>
+                                    <span class="label label-success">{{$count}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header">You have 4 messages</li>
+                                    <li class="header"><?php ($count != 0) ? "Você tem $count novas mensagens" : "Sem novas mensagens"; ?></li>
                                     <li>
                                         <!-- inner menu: contains the messages -->
                                         <ul class="menu">
+                                        @foreach($mensagens as $mensagem)
                                             <li><!-- start message -->
-                                                <a href="#">
+                                                <a href="/admin/mensagem/{{$mensagem->id}}">
                                                     <div class="pull-left">
                                                         <!-- User Image -->
-                                                        <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                                                        <img src="/{{$mensagem->usuarioOrigem->urlImagem}}" class="img-circle" alt="User Image"/>
                                                     </div>
                                                     <!-- Message title and timestamp -->
                                                     <h4>                            
-                                                        Support Team
-                                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                                        {{$mensagem->titulo}}
                                                     </h4>
                                                     <!-- The message -->
-                                                    <p>Why not buy a new awesome theme?</p>
+                                                    <p>{{$mensagem->conteudo}}</p>
                                                 </a>
-                                            </li><!-- end message -->                      
+                                            </li><!-- end message -->
+                                        @endforeach                   
                                         </ul><!-- /.menu -->
                                     </li>
-                                    <li class="footer"><a href="#">See All Messages</a></li>
+                                    <li class="footer"><a href="/professor/mensagens">Ir para Mensagens</a></li>
                                 </ul>
                             </li><!-- /.messages-menu -->
+                        @endif
 
                             <!-- Notifications Menu -->
                             <?php $avisos = Aviso::where('dataExpiracao','>', date('Y-m-d'))->orderBy('dataExpiracao')->get(); ?>
@@ -200,7 +211,7 @@
 
                         <li>
                             <a href="/admin/idiomas">
-                                <i class="fa fa-star"></i> <span>Gerenciar Idiomas</span>
+                                <i class="fa fa-quote-right"></i> <span>Gerenciar Idiomas</span>
                             </a>
                         </li>
 

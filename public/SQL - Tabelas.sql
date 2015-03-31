@@ -169,7 +169,6 @@ create table acessosatividades(
 	idAluno int(11),
 	CONSTRAINT FOREIGN KEY(idAluno) REFERENCES alunos(id),
 	idQuestao int(11) COMMENT 'Indica qual questao o aluno parou',
-	CONSTRAINT FOREIGN KEY(idQuestao) REFERENCES questoes(id),
 	idAtividade int(11),
 	CONSTRAINT FOREIGN KEY (idAtividade) REFERENCES atividades(id)
 );

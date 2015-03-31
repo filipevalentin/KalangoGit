@@ -118,6 +118,8 @@
 	        { data: 'action'}
 	    ],
 
+	    "scrollX": true,
+
 	    "columnDefs": [ {
 		      "targets": 5,
 		      "orderable": false,

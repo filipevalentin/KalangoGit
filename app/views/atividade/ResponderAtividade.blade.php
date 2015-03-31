@@ -10,6 +10,9 @@
 <?php $aux = 1;
     $questoes = $atividade->questoes->sortBy('numero');
     $count = 1;
+    if(!isset($ultimaQuestao)){
+    	$ultimaQuestao = 0;
+    }
 ?>
 
 @section('maincontent')
@@ -247,6 +250,7 @@
 	<script src="/wizard/bootstrap.min.js"></script>
 
 	<script src="/wizard/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+
 	<script>
 		$(document).ready(function() {
 		  	$('#rootwizard').bootstrapWizard({
@@ -257,12 +261,17 @@
 					$('#rootwizard .progress-bar').css({width:$percent+'%'});
 				},
 				onTabClick: function(tab, navigation, index) {
-					alert('Use os botão "Próximo" localizado no canto inferior direito da página');
+					alert('Para ir para outra questão é necessário responder a atual ');
 					return false;
 				}
 			});
 		});
+	</script>
 
+	<script>
+		$(function() {
+			$('#rootwizard').bootstrapWizard('show',"{{++$ultimaQuestao}}");
+		});
 	</script>
 
 	<script>
@@ -304,8 +313,7 @@
 			var idAtividade = botao.parents('.respostas').data('idatividade');
 			$(this).parents('.respostas').find('button').attr("disabled","disabled");
 
-
-			$.get('/aluno/responder/'+numeroQuestao+'/'+resposta, function(data){
+			$.get('/aluno/responder/'+numeroQuestao+'/'+escape(resposta), function(data){
 				if(data == 'negado'){
 					alert("Você já concluiu essa atividade.\nVocê será redirecionado para a página inicial");
 					window.location.href = '/aluno/home';
@@ -319,7 +327,7 @@
 					if(atual != total){
 						console.log('Questao numero '+'atual');
 						// atualiza a última questao respondida
-						$.get('/aluno/registrarAcesso/'+idAtividade+'/'+numeroQuestao);
+						$.get('/aluno/registrarAcesso/'+idAtividade+'/'+atual);
 					}else{
 						console.log('Última Questao');
 						// se for a última questão, mudar o status do atividade para o aluno como "concluido" e redirecionar a página para a lista de atividades
@@ -358,7 +366,7 @@
 				resposta = 'null';
 			}
 
-			$.get('/aluno/responder/'+numeroQuestao+'/'+resposta, function(data){
+			$.get('/aluno/responder/'+numeroQuestao+'/'+escape(resposta), function(data){
 				if(data == 'negado'){
 					alert("Você já concluiu essa atividade.\nVocê será redirecionado para a página inicial");
 					window.location.href = '/aluno/home';
@@ -372,7 +380,7 @@
 					if(atual != total){
 						console.log('Questao numero '+'atual');
 						// atualiza a última questao respondida
-						$.get('/aluno/registrarAcesso/'+idAtividade+'/'+numeroQuestao);
+						$.get('/aluno/registrarAcesso/'+idAtividade+'/'+atual);
 					}else{
 						console.log('Última Questao');
 						// se for a última questão, mudar o status do atividade para o aluno como "concluido" e redirecionar a página para a lista de atividades
