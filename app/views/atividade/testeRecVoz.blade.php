@@ -123,7 +123,7 @@
         		alert(transcription.textContent);
         		recognizer.stop();
         		$('#status>span').removeClass('gravando');
-				document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "gravando";
+				document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "aguardando permissão";
         	}
 
         	$("#gravar").on("click",function(){
