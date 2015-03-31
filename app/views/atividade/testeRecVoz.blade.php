@@ -73,7 +73,7 @@
 			<div class="col-12">
 				<p id="ola">Leia a frase a Seguir:</p>
 				
-				<p id="ola">What was James doing when his friends arrived ?</p>
+				<p id="ola" data-respostaCorreta="how are you">How are you?</p>
 
 				<div id="transcription" style="display: none;"></div>
 		 		
@@ -108,7 +108,7 @@
 	    	var transcription = document.getElementById("transcription");
 
         	//Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
-        	recognizer.continuous = true;
+        	recognizer.continuous = false;
         	recognizer.lang = "en";
 
         	recognizer.onresult = function(event){
@@ -120,7 +120,12 @@
 		            	transcription.textContent += event.results[i][0].transcript;
         			}
         		}
-        		alert(transcription.textContent);
+        		var resposta = $('#ola').data('respostacorreta');
+        		if(resposta == transcription.textContent){
+        			alert('Resposta Correta!');
+        		}else{
+        			alert('Tente outra vez...');
+        		}
         		recognizer.stop();
         		$('#status>span').removeClass('gravando');
 				document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "aguardando permissão";
