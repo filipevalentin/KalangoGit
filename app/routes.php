@@ -3,13 +3,8 @@
 $layout = 'layouts.master';
 
 Route::get('teste4',function(){ 
-	$turmas = Turma::all();
-
-	$atividades = $turmas->each(function($turma){
-		$turma->modulo->atividades;
-	});
-
-	return $atividades->find;
+	
+	return View::make('atividade/testeRecVoz');
 
 });
 
