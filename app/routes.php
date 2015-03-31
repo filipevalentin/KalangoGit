@@ -270,23 +270,25 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$resposta->correcao = ($respostaAluno == Questao::find($idQuestao)->respostaCerta) ? '1':'0';
 			$resposta->save();
 
-			//Adiciona os pontos na contagem geral
+			//Adiciona os pontos na contagem geral caso tenha acertado a questao
 			//Caso seja atividade de aula
-			if(Questao::find($idQuestao)->idModulo != null){
-				Auth::user()->aluno->turmas->each(function($turma) use($idQuestao){
-					if($turma->modulo == Questao::find($idQuestao)->atividade->aula->modulo){
-						$pontos = Questao::find($idQuestao)->pontos + $turma->pivot->pontuacao;
-						Auth::user()->aluno->turmas()->updateExistingPivot($turma->id, array('pontuacao'=>$pontos));
-					}
-				});
-			//Caso seja atividade extra
-			}else{
-				Auth::user()->aluno->turmas->each(function($turma) use($idQuestao){
-					if($turma->modulo == Questao::find($idQuestao)->atividade->modulo){
-						$pontos = Questao::find($idQuestao)->pontos + $turma->pivot->pontuacao;
-						Auth::user()->aluno->turmas()->updateExistingPivot($turma->id, array('pontuacao'=>$pontos));
-					}
-				});
+			if($resposta->correcao == 1){
+				if(Questao::find($idQuestao)->atividade->idModulo == null){
+					Auth::user()->aluno->turmas->each(function($turma) use($idQuestao){
+						if($turma->modulo == Questao::find($idQuestao)->atividade->aula->modulo){
+							$pontos = Questao::find($idQuestao)->pontos + $turma->pivot->pontuacao;
+							Auth::user()->aluno->turmas()->updateExistingPivot($turma->id, array('pontuacao'=>$pontos));
+						}
+					});
+				//Caso seja atividade extra
+				}else{
+					Auth::user()->aluno->turmas->each(function($turma) use($idQuestao){
+						if($turma->modulo == Questao::find($idQuestao)->atividade->modulo){
+							$pontos = Questao::find($idQuestao)->pontos + $turma->pivot->pontuacao;
+							Auth::user()->aluno->turmas()->updateExistingPivot($turma->id, array('pontuacao'=>$pontos));
+						}
+					});
+				}
 			}
 			
 			return Response::json('Resposta Salva!');
@@ -379,8 +381,12 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			// aqui separamos as informações do dashboard relativa a cada modulo/turma que o aluno cursa. Ex: respostas certas/erradas de atividades do curso inglês(turma A) e outro de espanhol(turmaB)
 			foreach ($turmas as $turma) {
-				//pega todas as questoes relativas a um modulo
-				$aux = Questao::whereIn('idAtividade', $turma->modulo->atividades->lists('id'))->whereIn('id',Auth::user()->aluno->respostas->lists('id'))->get();
+								//pega todas as questoes de atividades extras, ou seja, que são relativas a um modulo (FK-IdModulo != null)
+				$aux = Questao::whereIn('idAtividade', array_merge($turma->modulo->atividadesExtras->lists('id'),$turma->modulo->atividades->lists('id')))->
+								// pega todas as questoes de atividades de aula, ou seja, que são relativas a Aula (FK-IdAula != null)
+								// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
+								whereIn('id',Auth::user()->aluno->respostas->lists('id'))->
+								get();
 				//$turma->modulo->questoes;
 				//filtra só as questoes do modulo que o aluno já respondeu, atraves de intersecção entre as funções aluno->questoes e $aux
 				$aux = Auth::user()->aluno->respostas->intersect($aux);
@@ -2119,6 +2125,10 @@ Route::resource('turmasalunos', 'TurmasAlunoController');
 Route::resource('usuarios', 'UserController');
 
  	
+// Event::listen('illuminate.query', function($sql)
+// {
+//     var_dump($sql);
+// }); 
 
 ?>
 

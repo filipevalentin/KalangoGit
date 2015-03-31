@@ -5,10 +5,8 @@
 <style>
 
 	#ola {
-		font-size: 50px;
-		color: #fff;
+		font-size: 30px;
 		text-align: center;
-		text-shadow: -1px -1px 0 #ccc; margin: 50px 0 30px
 	}
 
 	#transcription {
@@ -16,6 +14,7 @@
 		border-radius: 5px;
 		height: 100px;
 		margin: 0 auto;
+		border: solid;
 		display: block;
 		font-size: 16px;
 		padding: 11px;
@@ -27,7 +26,7 @@
 		border: none;
 		background: transparent;
 		font-size: 40px;
-		color: #fff;
+		color: black;
 		width: 100%;
 		outline-color: transparent;
 		padding-top: 20px;
@@ -49,11 +48,11 @@
 	}
 
 	#gravar i:hover {
-		box-shadow: inset 0 0 20px #fff;
+		box-shadow: inset 0 0 20px red;
 	}
 	#gravar i:active {box-shadow: inset 0 0 20px 100px #fff; color:#E81D62;  }
 
-	#status {color: #fff; text-align: center; display: block}
+	#status { text-align: center; display: block}
 	#status span {font-weight: bold;}
 	#status span.gravando {color: rgb(70, 232, 29);}
 	#status span.pausado {color: rgb(173, 115, 229);}
@@ -69,12 +68,15 @@
 
 @section('maincontent')
 
-	<section class="content" style="overflow: hidden; background-color: red;">
+	<section class="content" style="overflow: hidden; background: rgb(237, 237, 237)">
 		<div class="row">
 			<div class="col-12">
-				<p id="ola">Olá tableless, você falou:</p>
-				<div id="transcription"></div>
-		 
+				<p id="ola">Leia a frase a Seguir:</p>
+				
+				<p id="ola">What was James doing when his friends arrived ?</p>
+
+				<div id="transcription" style="display: none;"></div>
+		 		
 				<button id="gravar">
 					<i class="fa fa-microphone"></i>
 				</button>
@@ -118,7 +120,10 @@
 		            	transcription.textContent += event.results[i][0].transcript;
         			}
         		}
+        		alert(transcription.textContent);
         		recognizer.stop();
+        		$('#status>span').removeClass('gravando');
+				document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "gravando";
         	}
 
         	$("#gravar").on("click",function(){

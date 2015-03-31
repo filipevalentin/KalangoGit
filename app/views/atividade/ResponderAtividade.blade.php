@@ -11,7 +11,7 @@
     $questoes = $atividade->questoes->sortBy('numero');
     $count = 1;
     if(!isset($ultimaQuestao)){
-    	$ultimaQuestao = 0;
+    	$ultimaQuestao = -1;
     }
 ?>
 

@@ -28,7 +28,7 @@
 
                 <!-- Dados Gerais -->
                 <div class="row">
-                    <div class="col-lg-7">
+                    <div class="col-lg-6">
                         <div class="box box-solid" style="background: #B6703D; color: black;">
                             <div class="box-header">
                                 <h3 class="box-title" style="color: white;">Meus Desempenho</h3>
@@ -59,7 +59,7 @@
                             </div> 
                         </div> 
                     </div>
-                    <div class="col-lg-5">
+                    <div class="col-lg-6">
                         <div class="box box-solid " style="background: #3F74D3; color: black;">
                             <div class="box-header">
                                 <h3 class="box-title" style="color: white;">Estatísticas</h3>
@@ -137,11 +137,11 @@
                             <div class="box-body" style="background: rgb(236, 236, 236)">
 
                                 <div class="row">
-                                    <div class="info-box bg-green" style="margin: 10px 20px" >
-                                        <span class="info-box-icon" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-up"></i></span>
-                                        <div class="info-box-content">
-                                            <span class="info-box-text" style="display: block;"><?php if($turma->topTopicos['melhor'] != null)echo $turma->topTopicos['melhor']->nome; ?></span>
-                                            <span class="info-box-number"><?php if($turma->topTopicos['melhor'] != null) echo $turma->topTopicos['melhor']->nome; ?> pontos</span>
+                                    <div class=" bg-green" style="margin: 10px 20px" >
+                                        <span class="" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-up"></i></span>
+                                        <div class="">
+                                            <span class="" style="display: block;"><?php if($turma->topTopicos['melhor'] != null)echo $turma->topTopicos['melhor']->nome; ?></span>
+                                            <span class=""><?php if($turma->topTopicos['melhor'] != null) echo $turma->topTopicos['melhor']->pontos; ?> pontos</span>
                                             <small class="pull-right" style="display: block;">90%</small>
                                             <div class="progress" style="height: 15px;background: rgb(0, 134, 73);">
                                                 <div class="progress-bar" style="width: 50%;background-color: white;">
@@ -155,11 +155,11 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="info-box bg-red" style="margin: 10px 20px">
-                                        <span class="info-box-icon" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-down"></i></span>
-                                        <div class="info-box-content">
-                                            <span class="info-box-text" style="display: block;"><?php if($turma->topTopicos['pior'] != null)echo $turma->topTopicos['pior']->nome; ?></span>
-                                            <span class="info-box-number"><?php if($turma->topTopicos['pior'] != null) echo $turma->topTopicos['pior']->nome; ?> pontos</span>
+                                    <div class="bg-red" style="margin: 10px 20px">
+                                        <span class="" style="font-size: -webkit-xxx-large;float: left;padding: 10px 20px 10px 20px;height: 100%;"><i class="fa fa-thumbs-o-down"></i></span>
+                                        <div class="">
+                                            <span class="" style="display: block;"><?php if($turma->topTopicos['pior'] != null)echo $turma->topTopicos['pior']->nome; ?></span>
+                                            <span class=""><?php if($turma->topTopicos['pior'] != null) echo $turma->topTopicos['pior']->pontos; ?> pontos</span>
                                             <small class="pull-right" style="display: block;">90%</small>
                                             <div class="progress" style="height: 15px;background: rgb(0, 134, 73);">
                                                 <div class="progress-bar" style="width: 10%;background-color: white;">

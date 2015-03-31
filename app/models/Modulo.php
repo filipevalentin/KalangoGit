@@ -15,6 +15,7 @@
 			return $this-> hasMany('Aula','idModulo');
 		}
 
+		//Só atividades De aula
 		public function atividades(){
 			return $this-> hasManyThrough('Atividade','Aula', 'idModulo', 'idAula');
 		}
