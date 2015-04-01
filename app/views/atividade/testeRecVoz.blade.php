@@ -47,8 +47,26 @@
 		margin-bottom: 15px;
 	}
 
+	.sound{
+		  box-shadow: inset 0 0 45px red;
+		  -webkit-transition: all 0.2s linear;
+		  -moz-transition: all 0.2s linear;
+		  -ms-transition: all 0.2s linear;
+		  -o-transition: all 0.2s linear;
+		  transition: all 0.2s linear;
+	}
+
+	.speech{
+		  box-shadow: inset 0 0 70px red;
+		  -webkit-transition: all 0.2s linear;
+		  -moz-transition: all 0.2s linear;
+		  -ms-transition: all 0.2s linear;
+		  -o-transition: all 0.2s linear;
+		  transition: all 0.2s linear;
+	}
+
 	#gravar i:hover {
-		box-shadow: inset 0 0 20px red;
+		box-shadow: inset 0 0 20px rgb(21, 211, 255);
 	}
 	#gravar i:active {box-shadow: inset 0 0 20px 100px #fff; color:#E81D62;  }
 
@@ -121,6 +139,14 @@
         	//Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
         	//recognizer.continuous = true;
         	recognizer.lang = "en";
+
+        	recognizer.onsound = function() {
+				$('#gravar').addClass('sound');
+			};
+
+			recognizer.onspeach = function() {
+				$('#gravar').addClass('speach');
+			};
 
         	recognizer.onstart = function() {
 				transcription.val("");
