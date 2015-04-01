@@ -99,6 +99,8 @@
                                  window.webkitSpeechRecognition ||
                                  null;
 
+		var resposta = "how are you";
+		alert(resposta);                           
 		//caso não suporte esta API DE VOZ                              
 		if (window.SpeechRecognition === null) {
 	        document.getElementById('ws-unsupported').classList.remove('hidden');
@@ -108,7 +110,7 @@
 	    	var transcription = document.getElementById("transcription");
 
         	//Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
-        	recognizer.continuous = false;
+        	recognizer.continuous = true;
         	recognizer.lang = "en";
 
         	recognizer.onresult = function(event){
@@ -120,11 +122,11 @@
 		            	transcription.textContent += event.results[i][0].transcript;
         			}
         		}
-        		var resposta = $('#ola').data('respostacorreta');
         		if(resposta == transcription.textContent){
         			alert('Resposta Correta!');
         		}else{
         			alert('Tente outra vez...');
+        			alert(resposta+"\n"+transcription.textContent)
         		}
         		recognizer.stop();
         		$('#status>span').removeClass('gravando');

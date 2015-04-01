@@ -121,7 +121,7 @@
 										<i class="fa fa-gift"></i>
 									</div>
 								</a>
-								<a href="vis_atividades.php" class="small-box-footer">
+								<a href="/aluno/atividades/extra" class="small-box-footer">
 									Detalhes <i class="fa fa-arrow-circle-right"></i>
 								</a>
 							</div>

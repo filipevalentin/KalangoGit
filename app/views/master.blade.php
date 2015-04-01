@@ -93,7 +93,7 @@
                                         @endforeach                   
                                         </ul><!-- /.menu -->
                                     </li>
-                                    <li class="footer"><a href="/professor/mensagens">Ir para Mensagens</a></li>
+                                    <li class="footer"><a href="/aluno/mensagens/entrada">Ir para Mensagens</a></li>
                                 </ul>
                             </li><!-- /.messages-menu -->
 
