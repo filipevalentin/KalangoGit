@@ -73,9 +73,9 @@
 			<div class="col-12">
 				<p id="ola">Leia a frase a Seguir:</p>
 				
-				<p id="ola" data-respostaCorreta="how are you">How are you?</p>
+				<p id="ola" class="resposta" data-respostaCorreta="how are you">How are you?</p>
 
-				<div id="transcription" style=""></div>
+				<input type="text" id="transcription" style="" readonly="">
 		 		
 				<button id="gravar">
 					<i class="fa fa-microphone"></i>
@@ -99,7 +99,8 @@
                                  window.webkitSpeechRecognition ||
                                  null;
 
-		var resposta = "how are you";
+		var resposta = $('.resposta').data('respostacorreta');
+		console.log(resposta);
 
 		//caso não suporte esta API DE VOZ                              
 		if (window.SpeechRecognition === null) {
@@ -107,49 +108,58 @@
 	        $('#gravar').setAttribute('style','box-shadow: inset 0 0 20px 100px red;color:#000;');
 	    }else {
 	    	var recognizer = new window.SpeechRecognition();
-	    	var transcription = document.getElementById("transcription");
+	    	var transcription = $('#transcription');
 
 	    	// variavel para detectar se o reconhecimento esta ativo ou nao, usado no botão
 	    	var recognizing = false;
+
+	    	recognizer.continuous = true;
+	    	recognizer.interimResults = true;
+
+	    	resultado = "";
 
         	//Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
         	//recognizer.continuous = true;
         	recognizer.lang = "en";
 
         	recognizer.onstart = function() {
-				transcription.textContent = "";
+				transcription.val("");
 				recognizing = true;
-				document.getElementById("status").getElementsByTagName("span")[0].className = "gravando";
-				document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "gravando";
+				console.log('Começou');
+				$('#status>span').addClass("gravando");
+				$('#status>span').val("gravando");
 			};
 
 			recognizer.onend = function() {
-				recognizing = false;
+				console.log('fim!');
 				$('#status>span').removeClass('gravando');
-				document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "aguardando permissão";
+				$('#status>span').val("aguardando permissão");
+				if(resposta == resultado){
+        			alert('Resposta Correta!');
+        		}else{
+        			alert('tente outra vez...');
+        		}
 			};
 
         	recognizer.onresult = function(event){
-        		transcription.textContent = "";
+        		console.log('Temos um resultado!');
+        		transcription.val("");
         		for (var i = event.resultIndex; i < event.results.length; i++) {
         			if(event.results[i].isFinal){
-        				transcription.textContent = event.results[i][0].transcript+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')';
+        				resultado = event.results[i][0].transcript;
+        				transcription.val(event.results[i][0].transcript+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')');
         			}else{
-		            	transcription.textContent += event.results[i][0].transcript;
+		            	transcription.val(transcription.val() + event.results[i][0].transcript); 
         			}
         		}
-        		if(resposta == transcription.textContent){
-        			alert('Resposta Correta!');
-        		}else{
-        			alert('Tente outra vez...');
-        			alert(resposta+"\n"+transcription.textContent)
-        		}
-        		recognizer.stop();
         	}
 
         	$("#gravar").on("click",function(){
         		if (recognizing) {
-					recognition.stop();
+					recognizer.stop();
+					recognizing = false;
+					console.log('Parou de gravar');
+					console.log(recognizing);
 					return;
 				}
 				try {
@@ -157,9 +167,11 @@
 		        }catch(ex) {
 		        	alert("error: "+ex.message);
 		        }
+		        recognizing = true;
+		        console.log('Gravando!');
+				console.log(recognizing);
+
 				transcription.textContent = "";
-				recognition.start();
-        		
         	})
 	    }
 	</script>
