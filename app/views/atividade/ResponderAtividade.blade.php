@@ -388,7 +388,7 @@
 	        		for (var i = event.resultIndex; i < event.results.length; i++) {
 	        			if(event.results[i].isFinal){
 	        				resultado = event.results[i][0].transcript;
-	        				transcription.val(event.results[i][0].transcript;//+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')');
+	        				transcription.val(event.results[i][0].transcript);
 	        				$('.fa-microphone').removeClass('speech');
 	        			}else{
 			            	transcription.val(transcription.val() + event.results[i][0].transcript);
