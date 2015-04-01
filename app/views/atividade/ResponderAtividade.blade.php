@@ -265,20 +265,20 @@
                                                 <div class="row respostas" data-idatividade="{{$questao->idAtividade}}" data-numeroQuestao="{{$questao->numero}}">
                                                 	<input type="hidden" id="respostaCerta" value="{{$questao->respostaCerta}}">
 
-																	@if(substr((string)$questao->categoria, 1)==4)
-																		<div class="col-10" style="padding-bottom: 5px;">
-																			
-																			<div class="input-group input-group-sm" style="margin: 0px 25px 0px 25px;">
-																				<input type="text" id="transcription" class="form-control resposta" readonly="">
-																				<span class="input-group-btn">
-																					<button class="btn btn-info btn-flat resposta" type="button">Responder</button>
-																				</span>
-																			</div>
-																			<button id="gravar"><i class="fa fa-microphone"></i></button>
-																			<p id="status">status: <span>aguardando permissão</span></p>
-																		</div>
+														@if(substr((string)$questao->categoria, 1)==4)
+															<div class="col-10" style="padding-bottom: 5px;">
+																
+																<div class="input-group input-group-sm" style="margin: 0px 25px 0px 25px;">
+																	<input type="text" id="transcription" class="form-control resposta" readonly="">
+																	<span class="input-group-btn">
+																		<button class="btn btn-info btn-flat resposta" type="button">Responder</button>
+																	</span>
+																</div>
+																<button id="gravar" data-respostacorreta="{{$questao->respostaCerta}}"><i class="fa fa-microphone"></i></button>
+																<p id="status">status: <span>aguardando permissão</span></p>
+															</div>
 
-																	@else
+														@else
 	                                                	<div class="col-md-10" style="padding-bottom: 5px;">
 	                                                		<div class="input-group input-group-sm">
 	                                                			<input type="text" class="form-control resposta">
@@ -330,7 +330,7 @@
 	                                 window.webkitSpeechRecognition ||
 	                                 null;
 
-			var resposta = $('.resposta').data('respostacorreta');
+			var resposta ="";
 			console.log(resposta);
 
 			//caso não suporte esta API DE VOZ                              
@@ -377,9 +377,9 @@
 					$('#status>span').removeClass('gravando');
 					$('#status>span').val("aguardando permissão");
 					if(resposta == resultado){
-	        			alert('Resposta Correta!');
+	        			console.log('Resposta Correta!');
 	        		}else{
-	        			alert('tente outra vez...');
+	        			console.log('tente outra vez...');
 	        		}
 				};
 
@@ -388,7 +388,7 @@
 	        		for (var i = event.resultIndex; i < event.results.length; i++) {
 	        			if(event.results[i].isFinal){
 	        				resultado = event.results[i][0].transcript;
-	        				transcription.val(event.results[i][0].transcript+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')');
+	        				transcription.val(event.results[i][0].transcript;//+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')');
 	        				$('.fa-microphone').removeClass('speech');
 	        			}else{
 			            	transcription.val(transcription.val() + event.results[i][0].transcript);
@@ -399,6 +399,7 @@
 	        	}
 
 	        	$("#gravar").on("click",function(){
+	        		resposta = $(this).data('respostacorreta');
 	        		if (recognizing) {
 						recognizer.stop();
 						recognizing = false;
