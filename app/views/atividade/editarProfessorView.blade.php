@@ -154,6 +154,13 @@
                     
                     <h3>Resposta Correta</h3><hr>
 
+                    <div class="form-group">
+                        <select id="resposta" name="resposta" onblur="" class="form-control">
+                          <option id="texto" value="1">Texto</option>
+                          <option id="audio" value="4">Áudio - Reconhecimento de voz</option>
+                        </select>
+                    </div>
+
                     <div id="div_resposta-dissertativa-editar-questao" class="form-group">
                         <label class="control-label" for="respostaCerta"><i id="icone_resposta-dissertativa-editar-questao" class="fa"></i> Resposta Correta</label>
                         <input type="text" autocomplete="off" id="respostaCerta" name="respostaCerta" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" maxlength="100" class="form-control respostaObrigatoria-dissertativa-editar-questao"></input>
@@ -318,6 +325,13 @@
                     
                     <h3>Resposta Correta</h3><hr>
 
+                    <div class="form-group">
+                        <select id="resposta" name="resposta" onblur="" class="form-control">
+                          <option id="texto" value="1">Texto</option>
+                          <option id="audio" value="4">Áudio - Reconhecimento de voz</option>
+                        </select>
+                    </div>
+
                     <div id="div_resposta-dissertativa-nova-questao" class="form-group">
                         <label class="control-label" for="respostaCerta"><i id="icone_resposta-dissertativa-nova-questao" class="fa"></i> Resposta Correta</label>
                         <input type="text" autocomplete="off" id="respostaCerta" name="respostaCerta" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" maxlength="100" class="form-control respostaObrigatoria-dissertativa-nova-questao"></input>
@@ -381,11 +395,11 @@
                                         <h4 class="box-title">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#ME{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
-                                        <div class="box-tools pull-right" style="padding-top: 8px;">
-                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textopergunta}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
+                                        <div class="box-tools pull-right" >
+                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textoPergunta}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>
-                                        <small class="badge pull-right bg-green" style="margin: 12px 10px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
+                                        <small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                     </div>
                                     <div id="ME{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">
@@ -518,18 +532,21 @@
                                         <h4 class="box-title">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#RU{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
-                                        <div class="box-tools pull-right" style="padding-top: 8px;">
-                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textopergunta}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
+                                        <div class="box-tools pull-right" >
+                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textoPergunta}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
-                                            <small class="badge pull-right bg-green" style="margin: 12px 10px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                         </div>
+                                        @if(substr($questao->categoria,1) == "4")
+                                            <small class="badge pull-right bg-red" style="margin: 0px 76px 0px 5px;">Rec. de Voz</small>
+                                        @endif
+                                        <small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                     </div>
                                     <div id="RU{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->textopergunta}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
                                                     </div>
                                                     <div class="box-body">
 
@@ -706,17 +723,22 @@
     $('#editarru').on('show.bs.modal', function (event) {
 
         var button = $(event.relatedTarget) // Button that triggered the modal
+        var modal = $(this)
         var dataid = button.data('id')
         var datatextopergunta = button.data('textopergunta')
         var datacategoria = button.data('categoria')
         var pergunta = datacategoria
+        if(pergunta.length>1){
+            pergunta = String(datacategoria).substring(0,1);
+            var resposta = String(datacategoria).substring(1,2);
+            modal.find(resposta).val(resposta);
+        }
         var respostaCerta = button.data('respostacerta')
         var topico = button.data('topico');
         var dificuldade = button.data('dificuldade');
          // Extract info from data-* attributes
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
         modal.find('#id').val(dataid)
         modal.find('#textopergunta').val(datatextopergunta)
         modal.find('#categoria').val(datacategoria)
@@ -724,7 +746,6 @@
         modal.find('#respostaCerta').val(respostaCerta)
         modal.find('#topico').val(topico);
         modal.find('#dificuldade').val(dificuldade);
-
 
         if(modal.find('select#pergunta').val()==1){
             modal.find('#arquivo').fadeOut().siblings().fadeOut();

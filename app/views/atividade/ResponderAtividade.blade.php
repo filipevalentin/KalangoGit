@@ -4,6 +4,62 @@
 
 <link rel="stylesheet" href="/wizard/custom.css" type="text/css" rel="stylesheet">
 <!-- Latest compiled and minified CSS -->
+<style>
+
+	#ola {
+		font-size: 30px;
+		text-align: center;
+	}
+
+	#transcription {
+		background: #fff;
+	}
+
+	#gravar {
+		margin: auto;
+		border: none;
+		background: transparent;
+		font-size: 40px;
+		color: black;
+		width: 80px;
+		outline-color: transparent;
+	}
+
+	#gravar i { 
+		cursor: pointer;
+		width: 80px;
+		height: 80px;
+		line-height: 80px;
+		border-radius: 100%;
+		box-shadow: inset 0 0 0 transparent;
+		-webkit-transition: all 0.5s linear;
+		-moz-transition: all 0.5s linear;
+		-ms-transition: all 0.5s linear;
+		-o-transition: all 0.5s linear;
+		transition: all 0.5s linear;
+	}
+
+	.speech{
+		  box-shadow: inset 0 0 70px red !important;
+		  -webkit-transition: all 0.3s linear !important;
+		  -moz-transition: all 0.3s linear !important;
+		  -ms-transition: all 0.3s linear !important;
+		  -o-transition: all 0.3s linear !important;
+		  transition: all 0.3s linear !important;
+	}
+
+	#gravar i:hover {
+		box-shadow: inset 0 0 30px rgb(21, 211, 255);
+	}
+	#gravar i:active {box-shadow: inset 0 0 20px 100px #fff; color:#E81D62;  }
+
+	#status { text-align: center; display: block}
+	#status span {font-weight: bold;}
+	#status span.gravando {color: rgb(70, 232, 29);}
+	#status span.pausado {color: rgb(173, 115, 229);}
+
+	.hidden {display: none;}
+</style>
 
 @endsection
 
@@ -51,7 +107,7 @@
 		                                
 		                                    <div class="box text-center">
 		                                        <div class="box-header">
-		                                        	<small class="badge pull-right bg-green" style="margin: 12px 10px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
+		                                        	<small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
 		                                            <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
 		                                        </div>
 		                                        <div class="box-body">
@@ -173,56 +229,72 @@
 
 		                        @if($questao->tipo == "2") <!--dissertativa -->
 
-									<div class="col-md-2"></div>
+											<div class="col-md-2"></div>
 
-					    			<div class="col-md-8 center">
+						    				<div class="col-md-8 center">
 	                            
-	                                    <div class="box-body">
-	                                        <div class="row" style="margin:0px;">
-	                                            <div class="box text-center">
-	                                                <div class="box-header">
-	                                                <small class="badge pull-right bg-green" style="margin: 12px 10px 0px 5px;"><?php if($questao->topico != null) echo $questao->topico->nome ?></small>
-	                                                    <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
-	                                                </div>
-	                                                <div class="box-body">
+                                    <div class="box-body">
+                                        <div class="row" style="margin:0px;">
+                                            <div class="box text-center">
+                                                <div class="box-header">
+                                                @if(substr($questao->categoria,1) == "4")
+			                                          <small class="badge pull-right bg-red" style="margin: 0px 5px 0px 5px;"><i class="fa fa-microphone"></i>  Rec. de Voz</small>
+			                                       @endif
+                                                <small class="badge pull-right bg-green" ><?php if($questao->topico != null) echo $questao->topico->nome ?></small>
+                                                </div>
+                                                <h3 class="box-title center" style="float: none; ">{{$questao->textoPergunta}}</h3>
+                                                <div class="box-body">
 
-	                                                    @if(substr((string)$questao->categoria, 0, 1)==2)
-	                                                        <img src="/{{$questao->urlMidia}}" class="img-responsive center" alt="Responsive image" style="display: initial; max-height: 300px;">
-	                                                    @elseif(substr((string)$questao->categoria, 0, 1)==3)
-	                                                        <audio id="audio" controls="controls" style="display:none;">  
-	                                                            <source src="/{{$questao->urlMidia}}" />
-	                                                        </audio>
-	                                                        <div id="playParent" class="row">
-	                                                            <div class="small-box bg-aqua" style="width: 100px; margin:auto; font-size: -webkit-xxx-large;">
-	                                                                <i id="play" class="ion ion-play" style=""></i>
-	                                                            </div>
-	                                                        </div>
+                                                    @if(substr((string)$questao->categoria, 0, 1)==2)
+                                                        <img src="/{{$questao->urlMidia}}" class="img-responsive center" alt="Responsive image" style="display: initial; max-height: 300px;">
+                                                    @elseif(substr((string)$questao->categoria, 0, 1)==3)
+                                                        <audio id="audio" controls="controls" style="display:none;">  
+                                                            <source src="/{{$questao->urlMidia}}" />
+                                                        </audio>
+                                                        <div id="playParent" class="row">
+                                                            <div class="small-box bg-aqua" style="width: 100px; margin:auto; font-size: -webkit-xxx-large;">
+                                                                <i id="play" class="ion ion-play" style=""></i>
+                                                            </div>
+                                                        </div>
 
-	                                                    
-	                                                @endif
+                                                    
+                                                @endif
 
-	                                                </div>
+                                                </div>
 
-	                                                <div class="row respostas" data-idatividade="{{$questao->idAtividade}}" data-numeroQuestao="{{$questao->numero}}">
-	                                                	<input type="hidden" id="respostaCerta" value="{{$questao->respostaCerta}}">
-	                                                    <div class="col-md-1"></div>
+                                                <div class="row respostas" data-idatividade="{{$questao->idAtividade}}" data-numeroQuestao="{{$questao->numero}}">
+                                                	<input type="hidden" id="respostaCerta" value="{{$questao->respostaCerta}}">
 
-	                                                    <div class="col-md-10" style="padding-bottom: 5px;">
-										                    <div class="input-group input-group-sm">
-																<input type="text" class="form-control resposta">
-																<span class="input-group-btn">
-																	<button class="btn btn-info btn-flat resposta" type="button">Responder</button>
-																</span>
-															</div>
-	                                                    </div>
+																	@if(substr((string)$questao->categoria, 1)==4)
+																		<div class="col-10" style="padding-bottom: 5px;">
+																			
+																			<div class="input-group input-group-sm" style="margin: 0px 25px 0px 25px;">
+																				<input type="text" id="transcription" class="form-control resposta" readonly="">
+																				<span class="input-group-btn">
+																					<button class="btn btn-info btn-flat resposta" type="button">Responder</button>
+																				</span>
+																			</div>
+																			<button id="gravar"><i class="fa fa-microphone"></i></button>
+																			<p id="status">status: <span>aguardando permissão</span></p>
+																		</div>
 
-	                                                </div>
-	                                                <br>
-	                                            </div>
-	                                        </div>
-	                                    </div>
+																	@else
+	                                                	<div class="col-md-10" style="padding-bottom: 5px;">
+	                                                		<div class="input-group input-group-sm">
+	                                                			<input type="text" class="form-control resposta">
+	                                                			<span class="input-group-btn">
+	                                                				<button class="btn btn-info btn-flat resposta" type="button">Responder</button>
+	                                                			</span>
+	                                                		</div>
+	                                                   </div>
+                                                   @endif
+                                                </div>
+                                                <br>
+                                            </div>
+                                        </div>
+                                    </div>
 
-	                                </div>
+                                </div>
 	                            
 		                        @endif
 
@@ -250,6 +322,103 @@
 	<script src="/wizard/bootstrap.min.js"></script>
 
 	<script src="/wizard/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+
+	@if(substr((string)$questao->categoria, 1)==4)
+		<script>
+			// Test browser support
+	      window.SpeechRecognition = window.SpeechRecognition       ||
+	                                 window.webkitSpeechRecognition ||
+	                                 null;
+
+			var resposta = $('.resposta').data('respostacorreta');
+			console.log(resposta);
+
+			//caso não suporte esta API DE VOZ                              
+			if (window.SpeechRecognition === null) {
+		        document.getElementById('ws-unsupported').classList.remove('hidden');
+		        $('#gravar').setAttribute('style','box-shadow: inset 0 0 20px 100px red;color:#000;');
+		    }else {
+		    	var recognizer = new window.SpeechRecognition();
+		    	var transcription = $('#transcription');
+
+		    	// variavel para detectar se o reconhecimento esta ativo ou nao, usado no botão
+		    	var recognizing = false;
+
+		    	recognizer.continuous = true;
+		    	recognizer.interimResults = true;
+
+		    	resultado = "";
+
+	        	//Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
+	        	//recognizer.continuous = true;
+	        	recognizer.lang = "en";
+
+
+				recognizer.onspeechstart = function() {
+					console.log('Speech START');
+					$('.fa-microphone').addClass('speech');
+				};
+
+				recognizer.onspeechend = function() {
+					console.log('Speech acabou');
+					$('.fa-microphone').removeClass('speech');
+				};
+
+	        	recognizer.onstart = function() {
+					transcription.val("");
+					recognizing = true;
+					console.log('Começou');
+					$('#status>span').addClass("gravando");
+					$('#status>span').val("gravando");
+				};
+
+				recognizer.onend = function() {
+					console.log('fim!');
+					$('#status>span').removeClass('gravando');
+					$('#status>span').val("aguardando permissão");
+					if(resposta == resultado){
+	        			alert('Resposta Correta!');
+	        		}else{
+	        			alert('tente outra vez...');
+	        		}
+				};
+
+	        	recognizer.onresult = function(event){
+	        		transcription.val("");
+	        		for (var i = event.resultIndex; i < event.results.length; i++) {
+	        			if(event.results[i].isFinal){
+	        				resultado = event.results[i][0].transcript;
+	        				transcription.val(event.results[i][0].transcript+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')');
+	        				$('.fa-microphone').removeClass('speech');
+	        			}else{
+			            	transcription.val(transcription.val() + event.results[i][0].transcript);
+			            	$('.fa-microphone').addClass('speech');
+			            	console.log('adicionou'); 
+	        			}
+	        		}
+	        	}
+
+	        	$("#gravar").on("click",function(){
+	        		if (recognizing) {
+						recognizer.stop();
+						recognizing = false;
+						console.log('Parou de gravar');
+						console.log(recognizing);
+	        			$('.fa-microphone').removeClass('speech');
+						return;
+					}
+					try {
+			        	recognizer.start();
+			        	$('.fa-microphone').addClass('speech');
+			        }catch(ex) {
+			        	alert("error: "+ex.message);
+			        }
+			        recognizing = true;
+					transcription.val("");
+	        	})
+		    }
+		</script>
+	@endif
 
 	<script>
 		$(document).ready(function() {

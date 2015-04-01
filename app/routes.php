@@ -801,8 +801,10 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		Route::post('criarQuestaoRU', function(){
 			$questao = new Questao;
 			$pergunta = Input::get('pergunta');
+			$resposta = Input::get('resposta');
+			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
 
-			$questao->textopergunta = Input::get('textopergunta');
+			$questao->textoPergunta = Input::get('textopergunta');
 
 			if($pergunta!=1){
 				$arquivo = Input::file('arquivo');
@@ -814,8 +816,6 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			}
 
 	        $questao->idAtividade = Input::get('idatividade');
-
-			$questao->categoria = Input::get('pergunta');
 
 			$questao->idTopico = Input::get('topico');
 			$questao->pontos = Input::get('dificuldade');
@@ -838,7 +838,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 
-			$questao->textopergunta = Input::get('textopergunta');
+			$questao->textoPergunta = Input::get('textopergunta');
 
 			$questao->tipo=1;
 
@@ -902,6 +902,117 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			// redirect
 			Session::flash('message', 'Questao criada com sucesso!');
+			return Redirect::back();
+		});
+	
+		Route::post('atualizarRespostaUnica', function(){
+			$questao 			    = Questao::find(Input::get('id')); 
+			$pergunta = Input::get('pergunta');
+			$resposta = Input::get('resposta');
+			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
+
+			$questao->textoPergunta = Input::get('textopergunta');
+
+			if($pergunta!=1 && Input::file('arquivo')!= NULL){
+				$arquivo = Input::file('arquivo');
+				$filename = $arquivo->getClientOriginalName();
+
+				$questao->urlMidia = 'files/'.$filename;
+				
+				$arquivo->move('files/', $filename);
+			}
+
+			$questao->idTopico = Input::get('topico');
+			$questao->pontos = Input::get('dificuldade');
+
+			$questao->respostaCerta = Input::get('respostaCerta');
+			$questao->save();
+
+			Session::flash('message', 'Questao atualizada com sucesso!');
+			return Redirect::back();
+		});
+
+		Route::post('atualizarMultiplaEscolha', function(){
+			$questao = Questao::find(Input::get('id')); 
+			$pergunta = Input::get('pergunta');
+			$resposta = Input::get('resposta');
+
+			$questao->textoPergunta = Input::get('textopergunta');
+
+			if($pergunta!=1 && Input::file('arquivo')!= NULL){
+				$arquivo = Input::file('arquivo');
+
+				if($arquivo != null){
+					$filename = $arquivo->getClientOriginalName();
+
+					$questao->urlMidia = 'files/'.$filename;
+					
+					$arquivo->move('files/', $filename);
+				}
+			}
+
+			if($resposta==1){
+				if(Input::get('a')!=null)
+					$questao->alternativaA = Input::get('a');
+
+				if(Input::get('b')!=null)
+					$questao->alternativaB = Input::get('b');
+
+				if(Input::get('c')!=null)
+					$questao->alternativaC = Input::get('c');
+
+				if(Input::get('d')!=null)
+					$questao->alternativaD = Input::get('d');
+
+			}else{
+
+				//#A
+				
+				$alternativaA = Input::file('a');
+				if($alternativaA != NULL){
+					$filenameA = $alternativaA->getClientOriginalName();
+					$questao->alternativaA = 'files/'.$filenameA;
+					$alternativaA->move('files/', $filenameA);
+				}
+
+				//#B
+
+				$alternativaB = Input::file('b');
+				if($alternativaB != NULL){
+					$filenameB = $alternativaB->getClientOriginalName();
+					$questao->alternativaB = 'files/'.$filenameB;
+					$alternativaB->move('files/', $filenameB);
+				}
+
+				//C
+
+				$alternativaC = Input::file('c');
+				if($alternativaC != NULL){
+					$filenameC = $alternativaC->getClientOriginalName();
+					$questao->alternativaC = 'files/'.$filenameC;
+					$alternativaC->move('files/', $filenameC);
+				}
+
+				//#D
+				$alternativaD = Input::file('d');
+				if($alternativaC != NULL){
+					$filenameD = $alternativaD->getClientOriginalName();
+					$questao->alternativaD = 'files/'.$filenameD;
+					$alternativaD->move('files/', $filenameD);
+				}
+			}
+
+			$questao->respostaCerta = Input::get('respostacerta');
+			
+			$questao->categoria = $pergunta. $resposta;
+
+			$questao->idTopico = Input::get('topico');
+			$questao->pontos = Input::get('dificuldade');
+
+			$questao->save();
+
+			// redirect
+			Session::flash('message', 'Alterações salvas com sucesso!');
 			return Redirect::back();
 		});
 
@@ -1325,8 +1436,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('criarQuestaoRU', function(){
 			$questao = new Questao;
 			$pergunta = Input::get('pergunta');
+			$resposta = Input::get('resposta');
+			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
 
-			$questao->textopergunta = Input::get('textopergunta');
+			$questao->textoPergunta = Input::get('textopergunta');
 
 			if($pergunta!=1){
 				$arquivo = Input::file('arquivo');
@@ -1341,8 +1454,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 	        $questao->idTopico = Input::get('topico');
 			$questao->pontos = Input::get('dificuldade');
-
-			$questao->categoria = Input::get('pergunta');
 
 			$questao->tipo=2;
 
@@ -1361,7 +1472,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 
-			$questao->textopergunta = Input::get('textopergunta');
+			$questao->textoPergunta = Input::get('textopergunta');
 
 			$questao->tipo=1;
 
@@ -1432,8 +1543,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('atualizarRespostaUnica', function(){
 			$questao 			    = Questao::find(Input::get('id')); 
 			$pergunta = Input::get('pergunta');
+			$resposta = Input::get('resposta');
+			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
 
-			$questao->textopergunta = Input::get('textopergunta');
+			$questao->textoPergunta = Input::get('textopergunta');
 
 			if($pergunta!=1 && Input::file('arquivo')!= NULL){
 				$arquivo = Input::file('arquivo');
@@ -1443,8 +1556,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				
 				$arquivo->move('files/', $filename);
 			}
-
-			$questao->categoria = $pergunta;
 
 			$questao->idTopico = Input::get('topico');
 			$questao->pontos = Input::get('dificuldade');
@@ -1461,7 +1572,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 
-			$questao->textopergunta = Input::get('textopergunta');
+			$questao->textoPergunta = Input::get('textopergunta');
 
 			if($pergunta!=1 && Input::file('arquivo')!= NULL){
 				$arquivo = Input::file('arquivo');
