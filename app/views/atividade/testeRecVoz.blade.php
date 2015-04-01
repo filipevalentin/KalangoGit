@@ -23,11 +23,13 @@
 	}
 
 	#gravar {
+		display: block;
+		margin: auto;
 		border: none;
 		background: transparent;
 		font-size: 40px;
 		color: black;
-		width: 100%;
+		width: 80px;
 		outline-color: transparent;
 		padding-top: 20px;
 	}
@@ -47,26 +49,17 @@
 		margin-bottom: 15px;
 	}
 
-	.sound{
-		  box-shadow: inset 0 0 45px red;
-		  -webkit-transition: all 0.2s linear;
-		  -moz-transition: all 0.2s linear;
-		  -ms-transition: all 0.2s linear;
-		  -o-transition: all 0.2s linear;
-		  transition: all 0.2s linear;
-	}
-
 	.speech{
-		  box-shadow: inset 0 0 70px red;
-		  -webkit-transition: all 0.2s linear;
-		  -moz-transition: all 0.2s linear;
-		  -ms-transition: all 0.2s linear;
-		  -o-transition: all 0.2s linear;
-		  transition: all 0.2s linear;
+		  box-shadow: inset 0 0 70px red !important;
+		  -webkit-transition: all 0.3s linear !important;
+		  -moz-transition: all 0.3s linear !important;
+		  -ms-transition: all 0.3s linear !important;
+		  -o-transition: all 0.3s linear !important;
+		  transition: all 0.3s linear !important;
 	}
 
 	#gravar i:hover {
-		box-shadow: inset 0 0 20px rgb(21, 211, 255);
+		box-shadow: inset 0 0 30px rgb(21, 211, 255);
 	}
 	#gravar i:active {box-shadow: inset 0 0 20px 100px #fff; color:#E81D62;  }
 
@@ -140,12 +133,15 @@
         	//recognizer.continuous = true;
         	recognizer.lang = "en";
 
-        	recognizer.onsound = function() {
-				$('#gravar').addClass('sound');
+
+			recognizer.onspeechstart = function() {
+				console.log('Speech START');
+				$('.fa-microphone').addClass('speech');
 			};
 
-			recognizer.onspeach = function() {
-				$('#gravar').addClass('speach');
+			recognizer.onspeechend = function() {
+				console.log('Speech acabou');
+				$('.fa-microphone').removeClass('speech');
 			};
 
         	recognizer.onstart = function() {
@@ -168,14 +164,16 @@
 			};
 
         	recognizer.onresult = function(event){
-        		console.log('Temos um resultado!');
         		transcription.val("");
         		for (var i = event.resultIndex; i < event.results.length; i++) {
         			if(event.results[i].isFinal){
         				resultado = event.results[i][0].transcript;
         				transcription.val(event.results[i][0].transcript+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')');
+        				$('.fa-microphone').removeClass('speech');
         			}else{
-		            	transcription.val(transcription.val() + event.results[i][0].transcript); 
+		            	transcription.val(transcription.val() + event.results[i][0].transcript);
+		            	$('.fa-microphone').addClass('speech');
+		            	console.log('adicionou'); 
         			}
         		}
         	}
@@ -186,18 +184,17 @@
 					recognizing = false;
 					console.log('Parou de gravar');
 					console.log(recognizing);
+        			$('.fa-microphone').removeClass('speech');
 					return;
 				}
 				try {
 		        	recognizer.start();
+		        	$('.fa-microphone').addClass('speech');
 		        }catch(ex) {
 		        	alert("error: "+ex.message);
 		        }
 		        recognizing = true;
-		        console.log('Gravando!');
-				console.log(recognizing);
-
-				transcription.textContent = "";
+				transcription.val("");
         	})
 	    }
 	</script>
