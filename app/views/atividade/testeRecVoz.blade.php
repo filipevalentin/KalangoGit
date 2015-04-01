@@ -75,7 +75,7 @@
 				
 				<p id="ola" data-respostaCorreta="how are you">How are you?</p>
 
-				<div id="transcription" style="display: none;"></div>
+				<div id="transcription" style=""></div>
 		 		
 				<button id="gravar">
 					<i class="fa fa-microphone"></i>
@@ -100,7 +100,7 @@
                                  null;
 
 		var resposta = "how are you";
-		alert(resposta);                           
+
 		//caso não suporte esta API DE VOZ                              
 		if (window.SpeechRecognition === null) {
 	        document.getElementById('ws-unsupported').classList.remove('hidden');
@@ -109,9 +109,25 @@
 	    	var recognizer = new window.SpeechRecognition();
 	    	var transcription = document.getElementById("transcription");
 
+	    	// variavel para detectar se o reconhecimento esta ativo ou nao, usado no botão
+	    	var recognizing = false;
+
         	//Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
-        	recognizer.continuous = true;
+        	//recognizer.continuous = true;
         	recognizer.lang = "en";
+
+        	recognizer.onstart = function() {
+				transcription.textContent = "";
+				recognizing = true;
+				document.getElementById("status").getElementsByTagName("span")[0].className = "gravando";
+				document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "gravando";
+			};
+
+			recognizer.onend = function() {
+				recognizing = false;
+				$('#status>span').removeClass('gravando');
+				document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "aguardando permissão";
+			};
 
         	recognizer.onresult = function(event){
         		transcription.textContent = "";
@@ -129,18 +145,21 @@
         			alert(resposta+"\n"+transcription.textContent)
         		}
         		recognizer.stop();
-        		$('#status>span').removeClass('gravando');
-				document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "aguardando permissão";
         	}
 
         	$("#gravar").on("click",function(){
-        		try {
-		            recognizer.start();
-					document.getElementById("status").getElementsByTagName("span")[0].className = "gravando";
-					document.getElementById("status").getElementsByTagName("span")[0].innerHTML = "gravando";
-		          } catch(ex) {
-		          	alert("error: "+ex.message);
-		          }
+        		if (recognizing) {
+					recognition.stop();
+					return;
+				}
+				try {
+		        	recognizer.start();
+		        }catch(ex) {
+		        	alert("error: "+ex.message);
+		        }
+				transcription.textContent = "";
+				recognition.start();
+        		
         	})
 	    }
 	</script>
