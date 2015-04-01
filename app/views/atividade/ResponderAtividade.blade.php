@@ -6,16 +6,11 @@
 <!-- Latest compiled and minified CSS -->
 <style>
 
-	#ola {
-		font-size: 30px;
-		text-align: center;
-	}
-
-	#transcription {
+	.transcription {
 		background: #fff;
 	}
 
-	#gravar {
+	.gravar {
 		margin: auto;
 		border: none;
 		background: transparent;
@@ -25,7 +20,7 @@
 		outline-color: transparent;
 	}
 
-	#gravar i { 
+	.gravar i { 
 		cursor: pointer;
 		width: 80px;
 		height: 80px;
@@ -48,15 +43,15 @@
 		  transition: all 0.3s linear !important;
 	}
 
-	#gravar i:hover {
+	.gravar i:hover {
 		box-shadow: inset 0 0 30px rgb(21, 211, 255);
 	}
-	#gravar i:active {box-shadow: inset 0 0 20px 100px #fff; color:#E81D62;  }
+	.gravar i:active {box-shadow: inset 0 0 20px 100px #fff; color:#E81D62;  }
 
-	#status { text-align: center; display: block}
-	#status span {font-weight: bold;}
-	#status span.gravando {color: rgb(70, 232, 29);}
-	#status span.pausado {color: rgb(173, 115, 229);}
+	.status { text-align: center; display: block}
+	.status span {font-weight: bold;}
+	.status span.gravando {color: rgb(70, 232, 29);}
+	.status span.pausado {color: rgb(173, 115, 229);}
 
 	.hidden {display: none;}
 </style>
@@ -269,13 +264,13 @@
 															<div class="col-10" style="padding-bottom: 5px;">
 																
 																<div class="input-group input-group-sm" style="margin: 0px 25px 0px 25px;">
-																	<input type="text" id="transcription" class="form-control resposta" readonly="">
+																	<input type="text" id="" class="form-control resposta transcription" readonly="">
 																	<span class="input-group-btn">
 																		<button class="btn btn-info btn-flat resposta" type="button">Responder</button>
 																	</span>
 																</div>
-																<button id="gravar" data-respostacorreta="{{$questao->respostaCerta}}"><i class="fa fa-microphone"></i></button>
-																<p id="status">status: <span>aguardando permissão</span></p>
+																<button id="gravar" class="gravar" data-respostacorreta="{{$questao->respostaCerta}}"><i class="fa fa-microphone"></i></button>
+																<p id="status" class="status">status: <span>aguardando permissão</span></p>
 															</div>
 
 														@else
@@ -322,6 +317,7 @@
 	<script src="/wizard/bootstrap.min.js"></script>
 
 	<script src="/wizard/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+<<<<<<< HEAD
 
 	@if(substr((string)$questao->categoria, 1)==4)
 		<script>
@@ -420,6 +416,104 @@
 		    }
 		</script>
 	@endif
+=======
+	
+	<!-- Reconhecimento de voz -->
+	<script>
+		// Test browser support
+      window.SpeechRecognition = window.SpeechRecognition       ||
+                                 window.webkitSpeechRecognition ||
+                                 null;
+
+		var resposta ="";
+		console.log(resposta);
+
+		//caso não suporte esta API DE VOZ                              
+		if (window.SpeechRecognition === null) {
+	        $('#gravar').setAttribute('style','box-shadow: inset 0 0 20px 100px red;color:#000;');
+	    }else {
+	    	var recognizer = new window.SpeechRecognition();
+	    	var transcription = $('#transcription');
+
+	    	// variavel para detectar se o reconhecimento esta ativo ou nao, usado no botão
+	    	var recognizing = false;
+
+	    	recognizer.continuous = true;
+	    	recognizer.interimResults = true;
+
+	    	resultado = "";
+
+        	//Para o reconhecedor de voz, não parar de ouvir, mesmo que tenha pausas no usuario
+        	//recognizer.continuous = true;
+        	recognizer.lang = "en";
+
+
+			recognizer.onspeechstart = function() {
+				console.log('Speech START');
+				$('.fa-microphone').addClass('speech');
+			};
+
+			recognizer.onspeechend = function() {
+				console.log('Speech acabou');
+				$('.fa-microphone').removeClass('speech');
+			};
+
+        	recognizer.onstart = function() {
+				transcription.val("");
+				recognizing = true;
+				console.log('Começou');
+				$('#status>span').addClass("gravando");
+				$('#status>span').val("gravando");
+			};
+
+			recognizer.onend = function() {
+				console.log('fim!');
+				$('#status>span').removeClass('gravando');
+				$('#status>span').val("aguardando permissão");
+				if(resposta == resultado){
+        			console.log('Resposta Correta!');
+        		}else{
+        			console.log('tente outra vez...');
+        		}
+			};
+
+        	recognizer.onresult = function(event){
+        		transcription.val("");
+        		for (var i = event.resultIndex; i < event.results.length; i++) {
+        			if(event.results[i].isFinal){
+        				resultado = event.results[i][0].transcript;
+        				transcription.val(event.results[i][0].transcript;//+' (Taxa de acerto [0/1] : ' + event.results[i][0].confidence + ')');
+        				$('.fa-microphone').removeClass('speech');
+        			}else{
+		            	transcription.val(transcription.val() + event.results[i][0].transcript);
+		            	$('.fa-microphone').addClass('speech');
+		            	console.log('adicionou'); 
+        			}
+        		}
+        	}
+
+        	$("#gravar").on("click",function(){
+        		resposta = $(this).data('respostacorreta');
+        		if (recognizing) {
+					recognizer.stop();
+					recognizing = false;
+					console.log('Parou de gravar');
+					console.log(recognizing);
+        			$('.fa-microphone').removeClass('speech');
+					return;
+				}
+				try {
+		        	recognizer.start();
+		        	$('.fa-microphone').addClass('speech');
+		        }catch(ex) {
+		        	alert("error: "+ex.message);
+		        }
+		        recognizing = true;
+				transcription.val("");
+        	})
+	    }
+	</script>
+>>>>>>> origin/master
 
 	<script>
 		$(document).ready(function() {
