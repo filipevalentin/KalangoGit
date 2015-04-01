@@ -385,7 +385,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				$aux = Questao::whereIn('idAtividade', array_merge($turma->modulo->atividadesExtras->lists('id'),$turma->modulo->atividades->lists('id')))->
 								// pega todas as questoes de atividades de aula, ou seja, que são relativas a Aula (FK-IdAula != null)
 								// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
-								whereIn('id',(Auth::user()->aluno->respostas->lists('id') != null)?(Auth::user()->aluno->respostas->lists('id') != null):array('null'))->
+								whereIn('id',(Auth::user()->aluno->respostas->lists('id') != null)?(Auth::user()->aluno->respostas->lists('id')):array('null'))->
 								get();
 				//$turma->modulo->questoes;
 				//filtra só as questoes do modulo que o aluno já respondeu, atraves de intersecção entre as funções aluno->questoes e $aux
