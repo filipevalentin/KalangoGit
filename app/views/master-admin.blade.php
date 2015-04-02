@@ -280,7 +280,7 @@
         <!-- Bootstrap WYSIHTML5 -->
         <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
         <!-- Data Tables -->
-        <script src="/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="{{ URL::asset('/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
         <!-- AdminLTE App -->
         <script src="/dist/js/app.min.js" type="text/javascript"></script>
 

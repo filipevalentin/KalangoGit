@@ -123,7 +123,7 @@
 @endsection
 
 @section('scripts')
-<script src="/js/dataTables.tableTools.js" type="text/javascript"></script>
+<script src="{{ URL::asset('/js/dataTables.tableTools.js') }}" type="text/javascript"></script>
 
 <script>
 

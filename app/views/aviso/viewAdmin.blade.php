@@ -186,7 +186,7 @@
 @endsection
 
 @section('scripts')
-<script src="/js/dataTables.tableTools.js" type="text/javascript"></script>
+<script src="{{ URL::asset('/js/dataTables.tableTools.js') }}" type="text/javascript"></script>
 <script src="/js/moment.min.js" type="text/javascript"></script>
 <script src="/js/datetime-moment.js" type="text/javascript"></script>
 
