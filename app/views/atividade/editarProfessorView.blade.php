@@ -38,17 +38,17 @@
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-multipla-editar-questao" class="fa"></i> Arquivo</label>
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-multipla-editar-questao" onblur="fcn_recarregaCoresMultiplaEditarQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'editar-questao-multipla');" ></input>
                     </div>
-                    <div id="" class="form-group">
-                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Tópico</label>
-                        <select id="topico" name="topico" onblur="" class="form-control">
+                    <div id="div_topico-multipla-editar-questao" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_topico-multipla-editar-questao" class="fa"></i> Tópico</label>
+                        <select id="topico" name="topico" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control topicoObrigatorio-multipla-editar-questao">
                         @foreach(Topico::all() as $topico)
                           <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
                         @endforeach
                         </select>
                     </div>
-                    <div id="" class="form-group">
-                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Dificuldade</label>
-                        <select id="dificuldade" name="dificuldade" onblur="" class="form-control">
+                    <div id="div_dificuldade-multipla-editar-questao" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_dificuldade-multipla-editar-questao" class="fa"></i> Dificuldade</label>
+                        <select id="dificuldade" name="dificuldade" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control dificuldadeObrigatoria-multipla-editar-questao">
                           <option id="texto" value="200"> fácil</option>
                           <option id="texto" value="300"> médio</option>
                           <option id="texto" value="400"> difícil</option>
@@ -126,36 +126,35 @@
                     <div id="div_texto-dissertativa-editar-questao" class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
-                    <div id="div_arquivoPergunta-dissertativa-editar-questao" class="form-group">
-                        <label class="control-label" for="textoPergunta"><i id="icone_texto-dissertativa-editar-questao" class="fa"></i> Texto da Pergunta</label>
+                    <div id="div_textoPergunta-dissertativa-editar-questao" class="form-group">
+                        <label class="control-label" for="textoPergunta"><i id="icone_textoPergunta-dissertativa-editar-questao" class="fa"></i> Texto da Pergunta</label>
                         <input type="text" id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control textoPerguntaObrigatoria-dissertativa-editar-questao" rows="3"></input>
                     </div>
-                    <div class="form-group">
+                    <div id="div_arquivoPergunta-dissertativa-editar-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-dissertativa-editar-questao" class="fa"></i> Arquivo</label>
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-dissertativa-editar-questao" onblur="fcn_recarregaCoresDissertativaEditarQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'editar-questao-dissertativa');" ></input>
                     </div>
 
-                    <div id="" class="form-group">
-                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Tópico</label>
-                        <select id="topico" name="topico" onblur="" class="form-control">
+                    <div id="div_topico-dissertativa-editar-questao" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_topico-dissertativa-editar-questao" class="fa"></i> Tópico</label>
+                        <select id="topico" name="topico" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control topicoObrigatorio-dissertativa-editar-questao">
                         @foreach(Topico::all() as $topico)
                           <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
                         @endforeach
                         </select>
                     </div>
-                    <div id="" class="form-group">
-                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Dificuldade</label>
-                        <select id="dificuldade" name="dificuldade" onblur="" class="form-control">
+                    <div id="div_dificuldade-dissertativa-editar-questao" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_dificuldade-dissertativa-editar-questao" class="fa"></i> Dificuldade</label>
+                        <select id="dificuldade" name="dificuldade" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control dificuldadeObrigatoria-dissertativa-editar-questao">
                           <option id="texto" value="200"> fácil</option>
                           <option id="texto" value="300"> médio</option>
                           <option id="texto" value="400"> difícil</option>
                         </select>
                     </div>
                     
-                    <h3>Resposta Correta</h3><hr>
-
-                    <div class="form-group">
-                        <select id="resposta" name="resposta" onblur="" class="form-control">
+                    <div id="div_tipoResposta-dissertativa-editar-questao" class="form-group">
+                        <label class="control-label" for="tipoResposta"><i id="icone_tipoResposta-dissertativa-editar-questao" class="fa"></i> Tipo</label>
+						<select id="resposta" name="resposta" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control tipoRespostaObrigatoria-dissertativa-editar-questao">
                           <option id="texto" value="1">Texto</option>
                           <option id="audio" value="4">Áudio - Reconhecimento de voz</option>
                         </select>
@@ -218,17 +217,17 @@
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-multipla-nova-questao" onblur="fcn_recarregaCoresMultiplaNovaQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'nova-questao-multipla');"></input>
                     </div>
 
-                    <div id="" class="form-group">
-                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Tópico</label>
-                        <select id="topico" name="topico" onblur="" class="form-control">
+                    <div id="div_topico-multipla-nova-questao" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_topico-multipla-nova-questao" class="fa"></i> Tópico</label>
+                        <select id="topico" name="topico" onblur="fcn_recarregaCoresMultiplaNovaQuestao();" class="form-control topicoObrigatorio-multipla-nova-questao">
                         @foreach(Topico::all() as $topico)
                           <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
                         @endforeach
                         </select>
                     </div>
-                    <div id="" class="form-group">
-                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Dificuldade</label>
-                        <select id="dificuldade" name="dificuldade" onblur="" class="form-control">
+                    <div id="div_dificuldade-multipla-nova-questao" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_dificuldade-multipla-nova-questao" class="fa"></i> Dificuldade</label>
+                        <select id="dificuldade" name="dificuldade" onblur="fcn_recarregaCoresMultiplaNovaQuestao();" class="form-control dificuldadeObrigatoria-multipla-nova-questao">
                           <option id="texto" value="200"> fácil</option>
                           <option id="texto" value="300"> médio</option>
                           <option id="texto" value="400"> difícil</option>
@@ -306,27 +305,26 @@
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-dissertativa-nova-questao" onblur="fcn_recarregaCoresDissertativaNovaQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'nova-questao-dissertativa');"></input>
                     </div>
 
-                    <div id="" class="form-group">
-                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Tópico</label>
-                        <select id="topico" name="topico" onblur="" class="form-control">
+                    <div id="div_topico-dissertativa-nova-questao" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_topico-dissertativa-nova-questao" class="fa"></i> Tópico</label>
+                        <select id="topico" name="topico" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control topicoObrigatorio-dissertativa-nova-questao">
                         @foreach(Topico::all() as $topico)
                           <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
                         @endforeach
                         </select>
                     </div>
-                    <div id="" class="form-group">
-                        <label class="control-label" for="idioma"><i id="" class="fa"></i> Dificuldade</label>
-                        <select id="dificuldade" name="dificuldade" onblur="" class="form-control">
+                    <div id="div_dificuldade-dissertativa-nova-questao" class="form-group">
+                        <label class="control-label" for="idioma"><i id="icone_dificuldade-dissertativa-nova-questao" class="fa"></i> Dificuldade</label>
+                        <select id="dificuldade" name="dificuldade" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control dificuldadeObrigatoria-dissertativa-nova-questao">
                           <option id="texto" value="200"> fácil</option>
                           <option id="texto" value="300"> médio</option>
                           <option id="texto" value="400"> difícil</option>
                         </select>
                     </div>
                     
-                    <h3>Resposta Correta</h3><hr>
-
-                    <div class="form-group">
-                        <select id="resposta" name="resposta" onblur="" class="form-control">
+                    <div id="div_tipoResposta-dissertativa-nova-questao" class="form-group">
+                        <label class="control-label" for="tipoResposta"><i id="icone_tipoResposta-dissertativa-nova-questao" class="fa"></i> Tipo</label>
+						<select id="resposta" name="resposta" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control tipoRespostaObrigatoria-dissertativa-nova-questao">
                           <option id="texto" value="1">Texto</option>
                           <option id="audio" value="4">Áudio - Reconhecimento de voz</option>
                         </select>
@@ -881,6 +879,32 @@
 					
 				}
 				
+				if($(".topicoObrigatorio-multipla-nova-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_topico-multipla-nova-questao" ).removeClass("has-success");
+					$( "#icone_topico-multipla-nova-questao" ).removeClass("fa-check");
+					$( "#div_topico-multipla-nova-questao" ).addClass("has-error");
+					$( "#icone_topico-multipla-nova-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_topico-multipla-nova-questao" ).removeClass("has-error");
+					$( "#icone_topico-multipla-nova-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_topico-multipla-nova-questao" ).addClass("has-success");
+					$( "#icone_topico-multipla-nova-questao" ).addClass("fa-check");
+				}
+				
+				if($(".dificuldadeObrigatoria-multipla-nova-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_dificuldade-multipla-nova-questao" ).removeClass("has-success");
+					$( "#icone_dificuldade-multipla-nova-questao" ).removeClass("fa-check");
+					$( "#div_dificuldade-multipla-nova-questao" ).addClass("has-error");
+					$( "#icone_dificuldade-multipla-nova-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_dificuldade-multipla-nova-questao" ).removeClass("has-error");
+					$( "#icone_dificuldade-multipla-nova-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_dificuldade-multipla-nova-questao" ).addClass("has-success");
+					$( "#icone_dificuldade-multipla-nova-questao" ).addClass("fa-check");
+				}
+				
 				if($(".tipoRespostaObrigatoria-multipla-nova-questao").val() == ""){
 					obrigatorioPendente = 1;
 					$( "#div_tipoResposta-multipla-nova-questao" ).removeClass("has-success");
@@ -1013,6 +1037,32 @@
 					$( "#icone_arquivoPergunta-multipla-nova-questao" ).addClass("fa-check");
 				}
 				
+			}
+			
+			if($(".topicoObrigatorio-multipla-nova-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_topico-multipla-nova-questao" ).removeClass("has-success");
+				$( "#icone_topico-multipla-nova-questao" ).removeClass("fa-check");
+				$( "#div_topico-multipla-nova-questao" ).addClass("has-error");
+				$( "#icone_topico-multipla-nova-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_topico-multipla-nova-questao" ).removeClass("has-error");
+				$( "#icone_topico-multipla-nova-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_topico-multipla-nova-questao" ).addClass("has-success");
+				$( "#icone_topico-multipla-nova-questao" ).addClass("fa-check");
+			}
+			
+			if($(".dificuldadeObrigatoria-multipla-nova-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_dificuldade-multipla-nova-questao" ).removeClass("has-success");
+				$( "#icone_dificuldade-multipla-nova-questao" ).removeClass("fa-check");
+				$( "#div_dificuldade-multipla-nova-questao" ).addClass("has-error");
+				$( "#icone_dificuldade-multipla-nova-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_dificuldade-multipla-nova-questao" ).removeClass("has-error");
+				$( "#icone_dificuldade-multipla-nova-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_dificuldade-multipla-nova-questao" ).addClass("has-success");
+				$( "#icone_dificuldade-multipla-nova-questao" ).addClass("fa-check");
 			}
 			
 			if($(".tipoRespostaObrigatoria-multipla-nova-questao").val() == ""){
@@ -1156,6 +1206,45 @@
 					
 				}
 				
+				if($(".topicoObrigatorio-dissertativa-nova-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_topico-dissertativa-nova-questao" ).removeClass("has-success");
+					$( "#icone_topico-dissertativa-nova-questao" ).removeClass("fa-check");
+					$( "#div_topico-dissertativa-nova-questao" ).addClass("has-error");
+					$( "#icone_topico-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_topico-dissertativa-nova-questao" ).removeClass("has-error");
+					$( "#icone_topico-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_topico-dissertativa-nova-questao" ).addClass("has-success");
+					$( "#icone_topico-dissertativa-nova-questao" ).addClass("fa-check");
+				}
+				
+				if($(".dificuldadeObrigatoria-dissertativa-nova-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_dificuldade-dissertativa-nova-questao" ).removeClass("has-success");
+					$( "#icone_dificuldade-dissertativa-nova-questao" ).removeClass("fa-check");
+					$( "#div_dificuldade-dissertativa-nova-questao" ).addClass("has-error");
+					$( "#icone_dificuldade-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_dificuldade-dissertativa-nova-questao" ).removeClass("has-error");
+					$( "#icone_dificuldade-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_dificuldade-dissertativa-nova-questao" ).addClass("has-success");
+					$( "#icone_dificuldade-dissertativa-nova-questao" ).addClass("fa-check");
+				}
+				
+				if($(".tipoRespostaObrigatoria-dissertativa-nova-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-success");
+					$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-check");
+					$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-error");
+					$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-error");
+					$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-success");
+					$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-check");
+				}
+				
 				if($(".respostaObrigatoria-dissertativa-nova-questao").val() == ""){
 					obrigatorioPendente = 1;
 					$( "#div_resposta-dissertativa-nova-questao" ).removeClass("has-success");
@@ -1225,6 +1314,45 @@
 					$( "#icone_arquivoPergunta-dissertativa-nova-questao" ).addClass("fa-check");
 				}
 				
+			}
+			
+			if($(".topicoObrigatorio-dissertativa-nova-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_topico-dissertativa-nova-questao" ).removeClass("has-success");
+				$( "#icone_topico-dissertativa-nova-questao" ).removeClass("fa-check");
+				$( "#div_topico-dissertativa-nova-questao" ).addClass("has-error");
+				$( "#icone_topico-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_topico-dissertativa-nova-questao" ).removeClass("has-error");
+				$( "#icone_topico-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_topico-dissertativa-nova-questao" ).addClass("has-success");
+				$( "#icone_topico-dissertativa-nova-questao" ).addClass("fa-check");
+			}
+			
+			if($(".dificuldadeObrigatoria-dissertativa-nova-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_dificuldade-dissertativa-nova-questao" ).removeClass("has-success");
+				$( "#icone_dificuldade-dissertativa-nova-questao" ).removeClass("fa-check");
+				$( "#div_dificuldade-dissertativa-nova-questao" ).addClass("has-error");
+				$( "#icone_dificuldade-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_dificuldade-dissertativa-nova-questao" ).removeClass("has-error");
+				$( "#icone_dificuldade-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_dificuldade-dissertativa-nova-questao" ).addClass("has-success");
+				$( "#icone_dificuldade-dissertativa-nova-questao" ).addClass("fa-check");
+			}
+			
+			if($(".tipoRespostaObrigatoria-dissertativa-nova-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-success");
+				$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-check");
+				$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-error");
+				$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-error");
+				$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-success");
+				$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-check");
 			}
 			
 			if($(".respostaObrigatoria-dissertativa-nova-questao").val() == ""){
@@ -1313,6 +1441,32 @@
 						$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-check");
 					}
 					
+				}
+				
+				if($(".topicoObrigatorio-multipla-editar-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_topico-multipla-editar-questao" ).removeClass("has-success");
+					$( "#icone_topico-multipla-editar-questao" ).removeClass("fa-check");
+					$( "#div_topico-multipla-editar-questao" ).addClass("has-error");
+					$( "#icone_topico-multipla-editar-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_topico-multipla-editar-questao" ).removeClass("has-error");
+					$( "#icone_topico-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_topico-multipla-editar-questao" ).addClass("has-success");
+					$( "#icone_topico-multipla-editar-questao" ).addClass("fa-check");
+				}
+				
+				if($(".dificuldadeObrigatoria-multipla-editar-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_dificuldade-multipla-editar-questao" ).removeClass("has-success");
+					$( "#icone_dificuldade-multipla-editar-questao" ).removeClass("fa-check");
+					$( "#div_dificuldade-multipla-editar-questao" ).addClass("has-error");
+					$( "#icone_dificuldade-multipla-editar-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_dificuldade-multipla-editar-questao" ).removeClass("has-error");
+					$( "#icone_dificuldade-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_dificuldade-multipla-editar-questao" ).addClass("has-success");
+					$( "#icone_dificuldade-multipla-editar-questao" ).addClass("fa-check");
 				}
 				
 				if($(".tipoRespostaObrigatoria-multipla-editar-questao").val() == ""){
@@ -1449,6 +1603,32 @@
 				
 			}
 			
+			if($(".topicoObrigatorio-multipla-editar-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_topico-multipla-editar-questao" ).removeClass("has-success");
+				$( "#icone_topico-multipla-editar-questao" ).removeClass("fa-check");
+				$( "#div_topico-multipla-editar-questao" ).addClass("has-error");
+				$( "#icone_topico-multipla-editar-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_topico-multipla-editar-questao" ).removeClass("has-error");
+				$( "#icone_topico-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_topico-multipla-editar-questao" ).addClass("has-success");
+				$( "#icone_topico-multipla-editar-questao" ).addClass("fa-check");
+			}
+			
+			if($(".dificuldadeObrigatoria-multipla-editar-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_dificuldade-multipla-editar-questao" ).removeClass("has-success");
+				$( "#icone_dificuldade-multipla-editar-questao" ).removeClass("fa-check");
+				$( "#div_dificuldade-multipla-editar-questao" ).addClass("has-error");
+				$( "#icone_dificuldade-multipla-editar-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_dificuldade-multipla-editar-questao" ).removeClass("has-error");
+				$( "#icone_dificuldade-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_dificuldade-multipla-editar-questao" ).addClass("has-success");
+				$( "#icone_dificuldade-multipla-editar-questao" ).addClass("fa-check");
+			}
+			
 			if($(".tipoRespostaObrigatoria-multipla-editar-questao").val() == ""){
 				obrigatorioPendente = 1;
 				$( "#div_tipoResposta-multipla-editar-questao" ).removeClass("has-success");
@@ -1562,15 +1742,15 @@
 				
 				if($(".textoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
 					obrigatorioPendente = 1;
-					$( "#div_texto-dissertativa-editar-questao" ).removeClass("has-success");
-					$( "#icone_texto-dissertativa-editar-questao" ).removeClass("fa-check");
-					$( "#div_texto-dissertativa-editar-questao" ).addClass("has-error");
-					$( "#icone_texto-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+					$( "#div_textoPergunta-dissertativa-editar-questao" ).removeClass("has-success");
+					$( "#icone_textoPergunta-dissertativa-editar-questao" ).removeClass("fa-check");
+					$( "#div_textoPergunta-dissertativa-editar-questao" ).addClass("has-error");
+					$( "#icone_textoPergunta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
 				}else{
-					$( "#div_texto-dissertativa-editar-questao" ).removeClass("has-error");
-					$( "#icone_texto-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
-					$( "#div_texto-dissertativa-editar-questao" ).addClass("has-success");
-					$( "#icone_texto-dissertativa-editar-questao" ).addClass("fa-check");
+					$( "#div_textoPergunta-dissertativa-editar-questao" ).removeClass("has-error");
+					$( "#icone_textoPergunta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_textoPergunta-dissertativa-editar-questao" ).addClass("has-success");
+					$( "#icone_textoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
 				}
 				
 				if($(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "3"){
@@ -1588,6 +1768,45 @@
 						$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
 					}
 					
+				}
+				
+				if($(".topicoObrigatorio-dissertativa-editar-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_topico-dissertativa-editar-questao" ).removeClass("has-success");
+					$( "#icone_topico-dissertativa-editar-questao" ).removeClass("fa-check");
+					$( "#div_topico-dissertativa-editar-questao" ).addClass("has-error");
+					$( "#icone_topico-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_topico-dissertativa-editar-questao" ).removeClass("has-error");
+					$( "#icone_topico-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_topico-dissertativa-editar-questao" ).addClass("has-success");
+					$( "#icone_topico-dissertativa-editar-questao" ).addClass("fa-check");
+				}
+				
+				if($(".dificuldadeObrigatoria-dissertativa-editar-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_dificuldade-dissertativa-editar-questao" ).removeClass("has-success");
+					$( "#icone_dificuldade-dissertativa-editar-questao" ).removeClass("fa-check");
+					$( "#div_dificuldade-dissertativa-editar-questao" ).addClass("has-error");
+					$( "#icone_dificuldade-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_dificuldade-dissertativa-editar-questao" ).removeClass("has-error");
+					$( "#icone_dificuldade-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_dificuldade-dissertativa-editar-questao" ).addClass("has-success");
+					$( "#icone_dificuldade-dissertativa-editar-questao" ).addClass("fa-check");
+				}
+				
+				if($(".tipoRespostaObrigatoria-dissertativa-editar-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-success");
+					$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-check");
+					$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-error");
+					$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-error");
+					$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-success");
+					$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-check");
 				}
 				
 				if($(".respostaObrigatoria-dissertativa-editar-questao").val() == ""){
@@ -1631,15 +1850,15 @@
 			
 			if($(".textoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
 				obrigatorioPendente = 1;
-				$( "#div_texto-dissertativa-editar-questao" ).removeClass("has-success");
-				$( "#icone_texto-dissertativa-editar-questao" ).removeClass("fa-check");
-				$( "#div_texto-dissertativa-editar-questao" ).addClass("has-error");
-				$( "#icone_texto-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+				$( "#div_textoPergunta-dissertativa-editar-questao" ).removeClass("has-success");
+				$( "#icone_textoPergunta-dissertativa-editar-questao" ).removeClass("fa-check");
+				$( "#div_textoPergunta-dissertativa-editar-questao" ).addClass("has-error");
+				$( "#icone_textoPergunta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
 			}else{
-				$( "#div_texto-dissertativa-editar-questao" ).removeClass("has-error");
-				$( "#icone_texto-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
-				$( "#div_texto-dissertativa-editar-questao" ).addClass("has-success");
-				$( "#icone_texto-dissertativa-editar-questao" ).addClass("fa-check");
+				$( "#div_textoPergunta-dissertativa-editar-questao" ).removeClass("has-error");
+				$( "#icone_textoPergunta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_textoPergunta-dissertativa-editar-questao" ).addClass("has-success");
+				$( "#icone_textoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
 			}
 			
 			if($(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "3"){
@@ -1657,6 +1876,45 @@
 					$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
 				}
 				
+			}
+			
+			if($(".topicoObrigatorio-dissertativa-editar-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_topico-dissertativa-editar-questao" ).removeClass("has-success");
+				$( "#icone_topico-dissertativa-editar-questao" ).removeClass("fa-check");
+				$( "#div_topico-dissertativa-editar-questao" ).addClass("has-error");
+				$( "#icone_topico-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_topico-dissertativa-editar-questao" ).removeClass("has-error");
+				$( "#icone_topico-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_topico-dissertativa-editar-questao" ).addClass("has-success");
+				$( "#icone_topico-dissertativa-editar-questao" ).addClass("fa-check");
+			}
+			
+			if($(".dificuldadeObrigatoria-dissertativa-editar-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_dificuldade-dissertativa-editar-questao" ).removeClass("has-success");
+				$( "#icone_dificuldade-dissertativa-editar-questao" ).removeClass("fa-check");
+				$( "#div_dificuldade-dissertativa-editar-questao" ).addClass("has-error");
+				$( "#icone_dificuldade-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_dificuldade-dissertativa-editar-questao" ).removeClass("has-error");
+				$( "#icone_dificuldade-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_dificuldade-dissertativa-editar-questao" ).addClass("has-success");
+				$( "#icone_dificuldade-dissertativa-editar-questao" ).addClass("fa-check");
+			}
+			
+			if($(".tipoRespostaObrigatoria-dissertativa-editar-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-success");
+				$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-check");
+				$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-error");
+				$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-error");
+				$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-success");
+				$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-check");
 			}
 			
 			if($(".respostaObrigatoria-dissertativa-editar-questao").val() == ""){
@@ -1721,6 +1979,30 @@
 				$( "#icone_arquivoPergunta-multipla-nova-questao" ).addClass("fa-check");
 			}
 			
+		}
+		
+		if($(".topicoObrigatorio-multipla-nova-questao").val() == ""){
+			$( "#div_topico-multipla-nova-questao" ).removeClass("has-success");
+			$( "#icone_topico-multipla-nova-questao" ).removeClass("fa-check");
+			$( "#div_topico-multipla-nova-questao" ).addClass("has-error");
+			$( "#icone_topico-multipla-nova-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_topico-multipla-nova-questao" ).removeClass("has-error");
+			$( "#icone_topico-multipla-nova-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_topico-multipla-nova-questao" ).addClass("has-success");
+			$( "#icone_topico-multipla-nova-questao" ).addClass("fa-check");
+		}
+		
+		if($(".dificuldadeObrigatoria-multipla-nova-questao").val() == ""){
+			$( "#div_dificuldade-multipla-nova-questao" ).removeClass("has-success");
+			$( "#icone_dificuldade-multipla-nova-questao" ).removeClass("fa-check");
+			$( "#div_dificuldade-multipla-nova-questao" ).addClass("has-error");
+			$( "#icone_dificuldade-multipla-nova-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_dificuldade-multipla-nova-questao" ).removeClass("has-error");
+			$( "#icone_dificuldade-multipla-nova-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_dificuldade-multipla-nova-questao" ).addClass("has-success");
+			$( "#icone_dificuldade-multipla-nova-questao" ).addClass("fa-check");
 		}
 		
 		if($(".tipoRespostaObrigatoria-multipla-nova-questao").val() == ""){
@@ -1839,6 +2121,42 @@
 			
 		}
 		
+		if($(".topicoObrigatorio-dissertativa-nova-questao").val() == ""){
+			$( "#div_topico-dissertativa-nova-questao" ).removeClass("has-success");
+			$( "#icone_topico-dissertativa-nova-questao" ).removeClass("fa-check");
+			$( "#div_topico-dissertativa-nova-questao" ).addClass("has-error");
+			$( "#icone_topico-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_topico-dissertativa-nova-questao" ).removeClass("has-error");
+			$( "#icone_topico-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_topico-dissertativa-nova-questao" ).addClass("has-success");
+			$( "#icone_topico-dissertativa-nova-questao" ).addClass("fa-check");
+		}
+		
+		if($(".dificuldadeObrigatoria-dissertativa-nova-questao").val() == ""){
+			$( "#div_dificuldade-dissertativa-nova-questao" ).removeClass("has-success");
+			$( "#icone_dificuldade-dissertativa-nova-questao" ).removeClass("fa-check");
+			$( "#div_dificuldade-dissertativa-nova-questao" ).addClass("has-error");
+			$( "#icone_dificuldade-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_dificuldade-dissertativa-nova-questao" ).removeClass("has-error");
+			$( "#icone_dificuldade-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_dificuldade-dissertativa-nova-questao" ).addClass("has-success");
+			$( "#icone_dificuldade-dissertativa-nova-questao" ).addClass("fa-check");
+		}
+		
+		if($(".tipoRespostaObrigatoria-dissertativa-nova-questao").val() == ""){
+			$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-success");
+			$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-check");
+			$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-error");
+			$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-error");
+			$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-success");
+			$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-check");
+		}
+		
 		if($(".respostaObrigatoria-dissertativa-nova-questao").val() == ""){
 			$( "#div_resposta-dissertativa-nova-questao" ).removeClass("has-success");
 			$( "#icone_resposta-dissertativa-nova-questao" ).removeClass("fa-check");
@@ -1893,6 +2211,30 @@
 				$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-check");
 			}
 			
+		}
+		
+		if($(".topicoObrigatorio-multipla-editar-questao").val() == ""){
+			$( "#div_topico-multipla-editar-questao" ).removeClass("has-success");
+			$( "#icone_topico-multipla-editar-questao" ).removeClass("fa-check");
+			$( "#div_topico-multipla-editar-questao" ).addClass("has-error");
+			$( "#icone_topico-multipla-editar-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_topico-multipla-editar-questao" ).removeClass("has-error");
+			$( "#icone_topico-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_topico-multipla-editar-questao" ).addClass("has-success");
+			$( "#icone_topico-multipla-editar-questao" ).addClass("fa-check");
+		}
+		
+		if($(".dificuldadeObrigatoria-multipla-editar-questao").val() == ""){
+			$( "#div_dificuldade-multipla-editar-questao" ).removeClass("has-success");
+			$( "#icone_dificuldade-multipla-editar-questao" ).removeClass("fa-check");
+			$( "#div_dificuldade-multipla-editar-questao" ).addClass("has-error");
+			$( "#icone_dificuldade-multipla-editar-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_dificuldade-multipla-editar-questao" ).removeClass("has-error");
+			$( "#icone_dificuldade-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_dificuldade-multipla-editar-questao" ).addClass("has-success");
+			$( "#icone_dificuldade-multipla-editar-questao" ).addClass("fa-check");
 		}
 		
 		if($(".tipoRespostaObrigatoria-multipla-editar-questao").val() == ""){
@@ -1984,15 +2326,15 @@
 		}
 		
 		if($(".textoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
-			$( "#div_texto-dissertativa-editar-questao" ).removeClass("has-success");
-			$( "#icone_texto-dissertativa-editar-questao" ).removeClass("fa-check");
-			$( "#div_texto-dissertativa-editar-questao" ).addClass("has-error");
-			$( "#icone_texto-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+			$( "#div_textoPergunta-dissertativa-editar-questao" ).removeClass("has-success");
+			$( "#icone_textoPergunta-dissertativa-editar-questao" ).removeClass("fa-check");
+			$( "#div_textoPergunta-dissertativa-editar-questao" ).addClass("has-error");
+			$( "#icone_textoPergunta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
 		}else{
-			$( "#div_texto-dissertativa-editar-questao" ).removeClass("has-error");
-			$( "#icone_texto-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
-			$( "#div_texto-dissertativa-editar-questao" ).addClass("has-success");
-			$( "#icone_texto-dissertativa-editar-questao" ).addClass("fa-check");
+			$( "#div_textoPergunta-dissertativa-editar-questao" ).removeClass("has-error");
+			$( "#icone_textoPergunta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_textoPergunta-dissertativa-editar-questao" ).addClass("has-success");
+			$( "#icone_textoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
 		}
 		
 		if($(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "3"){
@@ -2009,6 +2351,42 @@
 				$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
 			}
 			
+		}
+		
+		if($(".topicoObrigatorio-dissertativa-editar-questao").val() == ""){
+			$( "#div_topico-dissertativa-editar-questao" ).removeClass("has-success");
+			$( "#icone_topico-dissertativa-editar-questao" ).removeClass("fa-check");
+			$( "#div_topico-dissertativa-editar-questao" ).addClass("has-error");
+			$( "#icone_topico-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_topico-dissertativa-editar-questao" ).removeClass("has-error");
+			$( "#icone_topico-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_topico-dissertativa-editar-questao" ).addClass("has-success");
+			$( "#icone_topico-dissertativa-editar-questao" ).addClass("fa-check");
+		}
+		
+		if($(".dificuldadeObrigatoria-dissertativa-editar-questao").val() == ""){
+			$( "#div_dificuldade-dissertativa-editar-questao" ).removeClass("has-success");
+			$( "#icone_dificuldade-dissertativa-editar-questao" ).removeClass("fa-check");
+			$( "#div_dificuldade-dissertativa-editar-questao" ).addClass("has-error");
+			$( "#icone_dificuldade-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_dificuldade-dissertativa-editar-questao" ).removeClass("has-error");
+			$( "#icone_dificuldade-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_dificuldade-dissertativa-editar-questao" ).addClass("has-success");
+			$( "#icone_dificuldade-dissertativa-editar-questao" ).addClass("fa-check");
+		}
+		
+		if($(".tipoRespostaObrigatoria-dissertativa-editar-questao").val() == ""){
+			$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-success");
+			$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-check");
+			$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-error");
+			$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-error");
+			$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-success");
+			$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-check");
 		}
 		
 		if($(".respostaObrigatoria-dissertativa-editar-questao").val() == ""){
