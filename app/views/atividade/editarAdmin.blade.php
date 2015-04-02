@@ -153,10 +153,9 @@
                         </select>
                     </div>
                     
-                    <h3>Resposta Correta</h3><hr>
-
-                    <div class="form-group">
-                        <select id="resposta" name="resposta" onblur="" class="form-control">
+                    <div id="div_tipoResposta-dissertativa-editar-questao" class="form-group">
+                        <label class="control-label" for="tipoResposta"><i id="icone_tipoResposta-dissertativa-editar-questao" class="fa"></i> Tipo</label>
+						<select id="resposta" name="resposta" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control tipoRespostaObrigatoria-dissertativa-editar-questao">
                           <option id="texto" value="1">Texto</option>
                           <option id="audio" value="4">Áudio - Reconhecimento de voz</option>
                         </select>
@@ -323,10 +322,10 @@
                           <option id="texto" value="400"> difícil</option>
                         </select>
                     </div>
-                    
-                    <h3>Resposta Correta</h3><hr>
-                    <div class="form-group">
-                        <select id="resposta" name="resposta" onblur="" class="form-control">
+						
+                    <div id="div_tipoResposta-dissertativa-nova-questao" class="form-group">
+                        <label class="control-label" for="tipoResposta"><i id="icone_tipoResposta-dissertativa-nova-questao" class="fa"></i> Tipo</label>
+						<select id="resposta" name="resposta" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control tipoRespostaObrigatoria-dissertativa-nova-questao">
                           <option id="texto" value="1">Texto</option>
                           <option id="audio" value="4">Áudio - Reconhecimento de voz</option>
                         </select>
@@ -1266,6 +1265,19 @@
 					$( "#icone_dificuldade-dissertativa-nova-questao" ).addClass("fa-check");
 				}
 				
+				if($(".tipoRespostaObrigatoria-dissertativa-nova-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-success");
+					$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-check");
+					$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-error");
+					$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-error");
+					$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-success");
+					$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-check");
+				}
+				
 				if($(".respostaObrigatoria-dissertativa-nova-questao").val() == ""){
 					obrigatorioPendente = 1;
 					$( "#div_resposta-dissertativa-nova-questao" ).removeClass("has-success");
@@ -1361,6 +1373,19 @@
 				$( "#icone_dificuldade-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
 				$( "#div_dificuldade-dissertativa-nova-questao" ).addClass("has-success");
 				$( "#icone_dificuldade-dissertativa-nova-questao" ).addClass("fa-check");
+			}
+			
+			if($(".tipoRespostaObrigatoria-dissertativa-nova-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-success");
+				$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-check");
+				$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-error");
+				$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-error");
+				$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-success");
+				$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-check");
 			}
 			
 			if($(".respostaObrigatoria-dissertativa-nova-questao").val() == ""){
@@ -1804,6 +1829,19 @@
 					$( "#icone_dificuldade-dissertativa-editar-questao" ).addClass("fa-check");
 				}
 				
+				if($(".tipoRespostaObrigatoria-dissertativa-editar-questao").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-success");
+					$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-check");
+					$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-error");
+					$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-error");
+					$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+					$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-success");
+					$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-check");
+				}
+				
 				if($(".respostaObrigatoria-dissertativa-editar-questao").val() == ""){
 					obrigatorioPendente = 1;
 					$( "#div_resposta-dissertativa-editar-questao" ).removeClass("has-success");
@@ -1897,6 +1935,19 @@
 				$( "#icone_dificuldade-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
 				$( "#div_dificuldade-dissertativa-editar-questao" ).addClass("has-success");
 				$( "#icone_dificuldade-dissertativa-editar-questao" ).addClass("fa-check");
+			}
+			
+			if($(".tipoRespostaObrigatoria-dissertativa-editar-questao").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-success");
+				$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-check");
+				$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-error");
+				$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-error");
+				$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+				$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-success");
+				$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-check");
 			}
 			
 			if($(".respostaObrigatoria-dissertativa-editar-questao").val() == ""){
@@ -2127,6 +2178,18 @@
 			$( "#icone_dificuldade-dissertativa-nova-questao" ).addClass("fa-check");
 		}
 		
+		if($(".tipoRespostaObrigatoria-dissertativa-nova-questao").val() == ""){
+			$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-success");
+			$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-check");
+			$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-error");
+			$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_tipoResposta-dissertativa-nova-questao" ).removeClass("has-error");
+			$( "#icone_tipoResposta-dissertativa-nova-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_tipoResposta-dissertativa-nova-questao" ).addClass("has-success");
+			$( "#icone_tipoResposta-dissertativa-nova-questao" ).addClass("fa-check");
+		}
+		
 		if($(".respostaObrigatoria-dissertativa-nova-questao").val() == ""){
 			$( "#div_resposta-dissertativa-nova-questao" ).removeClass("has-success");
 			$( "#icone_resposta-dissertativa-nova-questao" ).removeClass("fa-check");
@@ -2345,6 +2408,18 @@
 			$( "#icone_dificuldade-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
 			$( "#div_dificuldade-dissertativa-editar-questao" ).addClass("has-success");
 			$( "#icone_dificuldade-dissertativa-editar-questao" ).addClass("fa-check");
+		}
+		
+		if($(".tipoRespostaObrigatoria-dissertativa-editar-questao").val() == ""){
+			$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-success");
+			$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-check");
+			$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-error");
+			$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_tipoResposta-dissertativa-editar-questao" ).removeClass("has-error");
+			$( "#icone_tipoResposta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+			$( "#div_tipoResposta-dissertativa-editar-questao" ).addClass("has-success");
+			$( "#icone_tipoResposta-dissertativa-editar-questao" ).addClass("fa-check");
 		}
 		
 		if($(".respostaObrigatoria-dissertativa-editar-questao").val() == ""){
