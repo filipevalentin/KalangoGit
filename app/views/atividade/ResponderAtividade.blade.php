@@ -361,6 +361,7 @@
         	recognizer.onstart = function() {
 				transcription.val("");
 				recognizing = true;
+				console.log('Começou');
 				$('#status>span').addClass("gravando");
 				$('#status>span').val("gravando");
 			};
@@ -386,6 +387,7 @@
         			}else{
 		            	transcription.val(transcription.val() + event.results[i][0].transcript);
 		            	$('.fa-microphone').addClass('speech');
+		            	console.log('adicionou'); 
         			}
         		}
         	}
@@ -395,6 +397,8 @@
         		if (recognizing) {
 					recognizer.stop();
 					recognizing = false;
+					console.log('Parou de gravar');
+					console.log(recognizing);
         			$('.fa-microphone').removeClass('speech');
 					return;
 				}

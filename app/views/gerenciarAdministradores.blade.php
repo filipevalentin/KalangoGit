@@ -99,7 +99,7 @@
 @endsection
 
 @section('scripts')
-<script src="/plugins/datatables/dataTables.tableTools.js" type="text/javascript"></script>
+<script src="http://datatables.net/release-datatables/extensions/TableTools/js/dataTables.tableTools.js" type="text/javascript"></script>
 
 <script>
 	
