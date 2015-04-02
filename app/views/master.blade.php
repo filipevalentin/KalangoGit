@@ -8,6 +8,10 @@
         <meta charset="UTF-8">
         <title>KalanGO!</title>
 
+          <!--[if IE]>
+            <link rel="stylesheet" href="/css/fixIE.css" type="text/css">
+        <![endif]-->
+
         <!-- Arquivos Básicos -->
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <meta name="theme-color" content="#008d4c" style="color: #008d4c;">
@@ -26,6 +30,11 @@
         <link href="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
 		<!-- <link href="/css/Custom.css" rel="stylesheet" type="text/css" /> -->
         <link href="/css/Custom.css" rel="stylesheet" type="text/css" />
+        <style>
+            .fixIE{
+                left:95px !important;
+            }
+        </style>
 		<link rel="shortcut icon" href="../img/favicon.ico">
         @yield('css')
 
@@ -35,12 +44,13 @@
           <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+        
     </head>
     <body class="skin-green fixed layout-boxed sidebar-collapse">
     @yield('modals')
         <div class="wrapper" style="max-width: 1250px;">
             <!-- Main Header -->
-            <header class="main-header">
+            <header class="main-header" style="">
 
                 <!-- Logo -->
                 <div class="logo1">
@@ -209,6 +219,13 @@
         <!-- AdminLTE App -->
         <script src="/dist/js/app.min.js" type="text/javascript"></script>
 
+        <script>
+            if (/*@cc_on!@*/false || !!document.documentMode) {
+                $('header').addClass('fixIE');
+            }
+
+        </script>
+
         @if (isset($mensagem))
             <script>
                 //alert("{{$mensagem}}");
@@ -217,7 +234,7 @@
 
         <script>
             $('.carousel').carousel({
-                interval: 0; //changes the speed
+                interval: 0
             })
         </script>
 
