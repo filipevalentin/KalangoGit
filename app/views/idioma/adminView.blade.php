@@ -30,7 +30,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar Propaganda</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Editar Idioma</h4>
             </div>
             <div class="modal-body">
                  <form method="POST" action="/admin/criarIdioma" enctype="multipart/form-data">
@@ -55,10 +55,10 @@
 
 @section('maincontent')
 	<section class="content-header">
-	    <h1>Idiomas</h1>
+	    <h1>Gerenciar Idiomas</h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Idiomas</li>
+	        <li class="active">Gerenciar Idiomas</li>
 	    </ol>
 	</section>
 
