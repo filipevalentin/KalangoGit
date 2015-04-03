@@ -153,7 +153,7 @@
                                             <a href="#">Cursos</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Desempenho</a>
+                                            <a href="/aluno/dashboard">Desempenho</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
                                             <a href="/aluno/perfil">Perfil</a>
