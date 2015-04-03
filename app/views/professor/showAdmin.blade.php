@@ -78,8 +78,8 @@
 		                <th>Nome</th>
 		                <th>Sobrenome</th>
 		                <th>Login</th>
-		                <th>E-mail.</th>
-		                <th>Registro</th>
+		                <th>E-mail</th>
+		                <th>Código de Registro</th>
 		                <th>Formação Acadêmica</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarProfessor" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
@@ -90,8 +90,8 @@
 		                <th>Nome</th>
 		                <th>Sobrenome</th>
 		                <th>Login</th>
-		                <th>E-mail.</th>
-		                <th>Registro</th>
+		                <th>E-mail</th>
+		                <th>Código de Registro</th>
 		                <th>Formação Acadêmica</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarProfessor" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
