@@ -112,7 +112,7 @@
 		                <th>Nome</th>
 		                <th>Sobrenome</th>
 		                <th>Login</th>
-		                <th>E-mail.</th>
+		                <th>E-mail</th>
 		                <th>Matrícula</th>
 		                <th>Data de Nascimento</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAluno" ><i class="fa fa-plus"></i></button></th>
@@ -124,7 +124,7 @@
 		                <th>Nome</th>
 		                <th>Sobrenome</th>
 		                <th>Login</th>
-		                <th>E-mail.</th>
+		                <th>E-mail</th>
 		                <th>Matrícula</th>
 		                <th>Data de Nascimento</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAluno" ><i class="fa fa-plus"></i></button></th>
