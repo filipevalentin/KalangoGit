@@ -141,7 +141,7 @@
                                         </p>
                                     </li>
                                     <!-- Menu Body -->
-                                    <li class="user-body">
+                                    <!--<li class="user-body">
                                         <div class="col-xs-4 text-center">
                                             <a href="#">Cursos</a>
                                         </div>
@@ -151,12 +151,12 @@
                                         <div class="col-xs-4 text-center">
                                             <a href="/professor/perfil">Perfil</a>
                                         </div>
-                                    </li>
+                                    </li>-->
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
-                                        <div class="pull-left">
+                                        <!--<div class="pull-left">
                                             <a href="/professor/perfil" class="btn btn-default btn-flat">Perfil</a>
-                                        </div>
+                                        </div>-->
                                         <div class="pull-right">
                                             <a href="/logout" class="btn btn-default btn-flat">Sair</a>
                                         </div>
