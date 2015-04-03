@@ -206,10 +206,10 @@
 @section('maincontent')
 
 <section class="content-header">
-    <h1>Gerenciar Cursos - Inglês</h1>
+    <h1>Gerenciar Cursos</h1>
     <ol class="breadcrumb">
         <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Widgets</li>
+        <li class="active">Gerenciar Cursos</li>
     </ol>
 </section>
 
@@ -250,7 +250,7 @@
                                                 </div>
                                             </div>
 
-                                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                            <a href="#" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -279,7 +279,7 @@
                 <div class="box box-solid">
                     <div class="box-header">
                         <h3 class="box-title">Módulos</h3>
-                        <div class="box-tools pull-right" style="padding: 10px 20px 5px 5px;">
+                        <div class="box-tools pull-right" style="padding: 10px 20px 5px 5px;" data-toggle="tooltip" data-placement="left" title="Criar Módulo">
                             <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarmodulo" data-idcurso="{{$curso->id}}"><i class="fa fa-plus"></i></button>
                         </div>
                     </div><!-- /.box-header -->
@@ -295,7 +295,7 @@
                                             {{$modulo->nome}}
                                         </a>
                                     </h4>
-                                    <div class="box-tools pull-right" style="padding-top: 8px;">
+                                    <div class="box-tools pull-right" style="padding-top: 8px;" >
                                         <a href="/admin/modulo/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
                                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarmodulo" data-id="{{$modulo->id}}" data-nome="{{$modulo->nome}}"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger btn-sm" ><i class="fa fa-times"></i></button>
@@ -321,15 +321,17 @@
                                                         </a>
                                                     </div>
 
-                                                    <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                                    <a href="#" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
                                     @endforeach
 
                                         <div class="box-tools pull-right" style="padding: 100px 25px 5px 5px;">
+											<div data-toggle="tooltip" data-placement="left" title="Criar Turma">
                                             <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarturma" data-idmodulo="{{$modulo->id}}"><i class="fa fa-plus"></i></button>
-                                        </div>
+											</div>
+										</div>
 
                                     </div>
                                 </div>
