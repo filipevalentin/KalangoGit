@@ -11,13 +11,13 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/criarIdioma" enctype="multipart/form-data">
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_titulo" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" class="form-control" >
+                    <div id="div_nome_criar_idioma" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome_criar_idioma" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresCriarIdioma();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_criar_idioma" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar" value="Salvar" >
+                        <input type="submit" class="btn btn-primary btn-salvar btn-criar-idioma" value="Salvar" >
                     </div>
                 </form>
             </div>
@@ -37,13 +37,13 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_titulo" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" class="form-control" >
+                    <div id="div_nome_editar_idioma" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome_editar_idioma" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarIdioma();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_editar_idioma" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar" value="Salvar" >
+                        <input type="submit" class="btn btn-primary btn-salvar btn-editar-idioma" value="Salvar" >
                     </div>
                 </form>
             </div>
@@ -155,6 +155,98 @@
 		}
     } );
 
+</script>
+
+<script> //Validações
+	
+	$( ".somenteLetras" ).keyup(function() {
+		//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
+		if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
+			var valor = $(this).val().replace(/[^a-zA-ZãÃáÁàÀâÂéÉèÈêÊíÍìÌîÎõÕóÓòÒôÔúÚùÙûÛÇç ]+/g,'');
+			$(this).val(valor);
+		}
+	});
+	
+	$(".btn-criar-idioma").click(function(event){
+		
+		var obrigatorioPendente = 0;
+		
+		if($(".nomeObrigatorio_criar_idioma").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_nome_criar_idioma" ).removeClass("has-success");
+			$( "#icone_nome_criar_idioma" ).removeClass("fa-check");
+			$( "#div_nome_criar_idioma" ).addClass("has-error");
+			$( "#icone_nome_criar_idioma" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome_criar_idioma" ).removeClass("has-error");
+			$( "#icone_nome_criar_idioma" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_criar_idioma" ).addClass("has-success");
+			$( "#icone_nome_criar_idioma" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
+	
+	$(".btn-editar-idioma").click(function(event){
+		
+		var obrigatorioPendente = 0;
+		
+		if($(".nomeObrigatorio_editar_idioma").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_nome_editar_idioma" ).removeClass("has-success");
+			$( "#icone_nome_editar_idioma" ).removeClass("fa-check");
+			$( "#div_nome_editar_idioma" ).addClass("has-error");
+			$( "#icone_nome_editar_idioma" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome_editar_idioma" ).removeClass("has-error");
+			$( "#icone_nome_editar_idioma" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_editar_idioma" ).addClass("has-success");
+			$( "#icone_nome_editar_idioma" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
+	
+	function fcn_recarregaCoresCriarIdioma(){
+		
+		if($(".nomeObrigatorio_criar_idioma").val() == ""){
+			$( "#div_nome_criar_idioma" ).removeClass("has-success");
+			$( "#icone_nome_criar_idioma" ).removeClass("fa-check");
+			$( "#div_nome_criar_idioma" ).addClass("has-error");
+			$( "#icone_nome_criar_idioma" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome_criar_idioma" ).removeClass("has-error");
+			$( "#icone_nome_criar_idioma" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_criar_idioma" ).addClass("has-success");
+			$( "#icone_nome_criar_idioma" ).addClass("fa-check");
+		}
+		
+	}
+	
+	function fcn_recarregaCoresEditarIdioma(){
+		
+		if($(".nomeObrigatorio_editar_idioma").val() == ""){
+			$( "#div_nome_editar_idioma" ).removeClass("has-success");
+			$( "#icone_nome_editar_idioma" ).removeClass("fa-check");
+			$( "#div_nome_editar_idioma" ).addClass("has-error");
+			$( "#icone_nome_editar_idioma" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome_editar_idioma" ).removeClass("has-error");
+			$( "#icone_nome_editar_idioma" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_editar_idioma" ).addClass("has-success");
+			$( "#icone_nome_editar_idioma" ).addClass("fa-check");
+		}
+		
+	}
+	
 </script>
 	
 @endsection
