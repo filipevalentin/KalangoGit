@@ -46,7 +46,7 @@
 @section('content-header')
 	<!-- Content Header (Page header) -->
     <h1>
-        Bem vindo ao KalanGO!
+        {{Auth::user()->nome}}, bem vindo ao KalanGO!
         <!-- <small>Meus Cursos</small> -->
     </h1>
     <ol class="breadcrumb">
@@ -59,7 +59,7 @@
 	<section class="content">
 	    <div class="row">
 	        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	        	<h2 class="page-header">Meus Cursos</h2>
+	        	<h2 class="page-header" style="border-bottom:1px solid #000;">Meus Cursos</h2>
 
                 <div class="row">
 
@@ -77,7 +77,7 @@
 	                                        <i class="ion ion-paper-airplane"></i>
 	                                    </div>
 	                                    <a href="" class="small-box-footer">
-	                                        Voltar para última lição <i class="fa fa-arrow-circle-right"></i>
+	                                        Detalhes <i class="fa fa-arrow-circle-right"></i>
 	                                    </a>
 	                              	</div>
 	                            </div>
@@ -86,18 +86,18 @@
 
 						<div class="col-md-12">
 							<div id="div_card_{{++$aux}}" class="box" >
-								<a href="/aluno/cursos/anteriores" onclick="javascript:fcn_indisponivel();">
+								<a href="/aluno/cursos/anteriores" >
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Cursos Anteriores</b></span><br>
 										<span style="color:#FFF;">
-											Aqui você cosegue consultar os materiais dos cursos feitos previamente
+											Aqui você cosegue consultar os materiais dos cursos feitos anteriormente
 										</span>
 									</div>
 									<div class="icon">
 										<i class="fa fa-calendar"></i>
 									</div>
 								</a> 
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();" class="small-box-footer">
+								<a href="javascript:void(0);" class="small-box-footer">
 									Detalhes <i class="fa fa-arrow-circle-right"></i>
 								</a>
 							</div>
@@ -129,7 +129,7 @@
 
 						<div class="col-md-12">
 							<div id="div_card_{{++$aux}}" class="box">
-								<a href="/aluno/dashboard" onclick="javascript:fcn_indisponivel();">
+								<a href="/aluno/dashboard" >
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Desempenho</b></span><br>
 										<span style="color:#FFF;">
@@ -140,7 +140,7 @@
 										<i class="fa fa-bar-chart-o"></i>
 									</div>
 								</a>
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();" class="small-box-footer">
+								<a href="javascript:void(0);" class="small-box-footer">
 									Detalhes <i class="fa fa-arrow-circle-right"></i>
 								</a>
 							</div>
@@ -152,7 +152,7 @@
 	        </div>
 
 			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	        	<h2 class="page-header">Comunicação</h2>
+	        	<h2 class="page-header" style="border-bottom:1px solid #000;">Comunicação</h2>
                 	<div class="row">
                     	<div class="col-lg-6">
 							<div id="div_card_{{++$aux}}" class="box" >
@@ -177,7 +177,7 @@
 
 						<div class="col-lg-6">
 							<div id="div_card_{{++$aux}}" class="box" >
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();">
+								<a href="javascript:void(0);" >
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Agenda</b></span><br>
 										<span style="color:#FFF;">
@@ -190,7 +190,7 @@
 										<i class="fa fa-bar-chart-o"></i>
 									</div>
 								</a>
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();" class="small-box-footer">
+								<a href="javascript:void(0);" class="small-box-footer">
 									Detalhes <i class="fa fa-arrow-circle-right"></i>
 								</a>
 							</div>
@@ -219,7 +219,7 @@
 
 						<div class="col-lg-6">
 							<div id="div_card_{{++$aux}}" class="box" >
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();">
+								<a href="javascript:void(0);" >
 									<div class="inner">
 										<span style="color:#FFF;font-size:30px;"><b>Contato</b></span><br>
 										<span style="color:#FFF;">
@@ -230,7 +230,7 @@
 										<i class="fa fa-bar-chart-o"></i>
 									</div>
 								</a>
-								<a href="javascript:void(0);" onclick="javascript:fcn_indisponivel();" class="small-box-footer">
+								<a href="javascript:void(0);" class="small-box-footer">
 									Detalhes <i class="fa fa-arrow-circle-right"></i>
 								</a>
 							</div>
