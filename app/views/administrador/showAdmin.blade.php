@@ -70,8 +70,8 @@
 		                <th>Nome</th>
 		                <th>Sobrenome</th>
 		                <th>Login</th>
-		                <th>E-mail.</th>
-		                <th>Registro</th>
+		                <th>E-mail</th>
+		                <th>Código de Registro</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAdministrador" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
 		        </thead>
@@ -81,8 +81,8 @@
 		                <th>Nome</th>
 		                <th>Sobrenome</th>
 		                <th>Login</th>
-		                <th>E-mail.</th>
-		                <th>Registro</th>
+		                <th>E-mail</th>
+		                <th>Código de Registro</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAdministrador" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
 		        </tfoot>
