@@ -11,13 +11,13 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/criarTopico" enctype="multipart/form-data">
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" class="form-control" >
+                    <div id="div_nome_novo_topico" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome_novo_topico" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar" value="Salvar" >
+                        <input type="submit" class="btn btn-primary btn-salvar btn-novo-topico" value="Salvar" >
                     </div>
                 </form>
             </div>
@@ -37,13 +37,13 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" class="form-control" >
+                    <div id="div_nome_editar_topico" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome_editar_topico" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_editar_topico" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar" value="Salvar" >
+                        <input type="submit" class="btn btn-primary btn-salvar btn-editar-topico" value="Salvar" >
                     </div>
                 </form>
             </div>
@@ -162,5 +162,97 @@
     } );
 
 </script>
+
+<script> //Validações
 	
+	$( ".somenteLetras" ).keyup(function() {
+		//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
+		if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
+			var valor = $(this).val().replace(/[^a-zA-ZãÃáÁàÀâÂéÉèÈêÊíÍìÌîÎõÕóÓòÒôÔúÚùÙûÛÇç ]+/g,'');
+			$(this).val(valor);
+		}
+	});
+	
+	$(".btn-novo-topico").click(function(event){
+		
+		var obrigatorioPendente = 0;
+		
+		if($(".nomeObrigatorio_novo_topico").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_nome_novo_topico" ).removeClass("has-success");
+			$( "#icone_nome_novo_topico" ).removeClass("fa-check");
+			$( "#div_nome_novo_topico" ).addClass("has-error");
+			$( "#icone_nome_novo_topico" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome_novo_topico" ).removeClass("has-error");
+			$( "#icone_nome_novo_topico" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_novo_topico" ).addClass("has-success");
+			$( "#icone_nome_novo_topico" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
+	
+	$(".btn-editar-topico").click(function(event){
+		
+		var obrigatorioPendente = 0;
+		
+		if($(".nomeObrigatorio_editar_topico").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_nome_editar_topico" ).removeClass("has-success");
+			$( "#icone_nome_editar_topico" ).removeClass("fa-check");
+			$( "#div_nome_editar_topico" ).addClass("has-error");
+			$( "#icone_nome_editar_topico" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome_editar_topico" ).removeClass("has-error");
+			$( "#icone_nome_editar_topico" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_editar_topico" ).addClass("has-success");
+			$( "#icone_nome_editar_topico" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
+	
+	function fcn_recarregaCoresNovoTopico(){
+		
+		if($(".nomeObrigatorio_novo_topico").val() == ""){
+			$( "#div_nome_novo_topico" ).removeClass("has-success");
+			$( "#icone_nome_novo_topico" ).removeClass("fa-check");
+			$( "#div_nome_novo_topico" ).addClass("has-error");
+			$( "#icone_nome_novo_topico" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome_novo_topico" ).removeClass("has-error");
+			$( "#icone_nome_novo_topico" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_novo_topico" ).addClass("has-success");
+			$( "#icone_nome_novo_topico" ).addClass("fa-check");
+		}
+		
+	}
+	
+	function fcn_recarregaCoresEditarTopico(){
+		
+		if($(".nomeObrigatorio_editar_topico").val() == ""){
+			$( "#div_nome_editar_topico" ).removeClass("has-success");
+			$( "#icone_nome_editar_topico" ).removeClass("fa-check");
+			$( "#div_nome_editar_topico" ).addClass("has-error");
+			$( "#icone_nome_editar_topico" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome_editar_topico" ).removeClass("has-error");
+			$( "#icone_nome_editar_topico" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_editar_topico" ).addClass("has-success");
+			$( "#icone_nome_editar_topico" ).addClass("fa-check");
+		}
+		
+	}
+	
+</script>
+
 @endsection
