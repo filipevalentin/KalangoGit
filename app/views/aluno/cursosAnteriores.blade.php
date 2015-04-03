@@ -7,11 +7,12 @@
 @section('content-header')
 	<!-- Content Header (Page header) -->
     <h1>
-        Bem vindo ao KalanGO!
-        <!-- <small>Meus Cursos</small> -->
+        Cursos Anteriores
     </h1>
     <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Cursos Anteriores</a></li>
+        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Meus Cursos</li>
+		<li class="active">Cursos Anteriores</li>
     </ol>
 @stop
 
@@ -20,9 +21,7 @@
 	<section class="content">
 	    <div class="row">
 	        <div class="col-xs-12">
-	        	<h2 class="page-header">Meus Cursos</h2>
-
-                <div class="row">
+	        	<div class="row">
 
 					<div class="col-lg-3" style="padding: 0;"> <!-- Coluna de cursos -->
 	                    @foreach ( $turmas as $turma)
