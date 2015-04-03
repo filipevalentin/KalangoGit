@@ -10,10 +10,10 @@
 @section('maincontent')
 
 <section class="content-header">
-    <h1>Gerenciar Cursos - Inglês</h1>
+    <h1>Gerenciar Cursos</h1>
     <ol class="breadcrumb">
         <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Widgets</li>
+        <li class="active">Gerenciar Cursos</li>
     </ol>
 </section>
 
@@ -46,7 +46,7 @@
                                                 </div>
                                             </div>
 
-                                            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                                            <a href="#" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
