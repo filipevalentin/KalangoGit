@@ -751,7 +751,7 @@ CREATE TABLE IF NOT EXISTS `propagandas` (
 
 CREATE TABLE IF NOT EXISTS `questoes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `textoPergunta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `enunciado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `urlMidia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `numero` int(10) DEFAULT NULL COMMENT 'indica a posicao/ordem da questao dentro de uma atividade',
   `tipo` int(1) DEFAULT NULL COMMENT '1-Multipla Escolha, 2-Dissertativa',

@@ -88,7 +88,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->enunciado}}</h3>
                                                     </div>
                                                     <div class="box-body">
                                                         <?php $categoria = (string)($questao->categoria); ?>
@@ -254,7 +254,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->enunciado}}</h3>
                                                     </div>
                                                     <div class="box-body">
 

@@ -804,7 +804,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$resposta = Input::get('resposta');
 			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
 
-			$questao->textoPergunta = Input::get('textopergunta');
+			$questao->enunciado = Input::get('enunciado');
 
 			if($pergunta!=1){
 				$arquivo = Input::file('arquivo');
@@ -838,7 +838,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 
-			$questao->textoPergunta = Input::get('textopergunta');
+			$questao->enunciado = Input::get('enunciado');
 
 			$questao->tipo=1;
 
@@ -911,7 +911,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$resposta = Input::get('resposta');
 			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
 
-			$questao->textoPergunta = Input::get('textopergunta');
+			$questao->enunciado = Input::get('enunciado');
 
 			if($pergunta!=1 && Input::file('arquivo')!= NULL){
 				$arquivo = Input::file('arquivo');
@@ -937,7 +937,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 
-			$questao->textoPergunta = Input::get('textopergunta');
+			$questao->enunciado = Input::get('enunciado');
 
 			if($pergunta!=1 && Input::file('arquivo')!= NULL){
 				$arquivo = Input::file('arquivo');
@@ -1439,7 +1439,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$resposta = Input::get('resposta');
 			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
 
-			$questao->textoPergunta = Input::get('textopergunta');
+			$questao->enunciado = Input::get('enunciado');
 
 			if($pergunta!=1){
 				$arquivo = Input::file('arquivo');
@@ -1472,7 +1472,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 
-			$questao->textoPergunta = Input::get('textopergunta');
+			$questao->enunciado = Input::get('enunciado');
 
 			$questao->tipo=1;
 
@@ -1546,7 +1546,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$resposta = Input::get('resposta');
 			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
 
-			$questao->textoPergunta = Input::get('textopergunta');
+			$questao->enunciado = Input::get('enunciado');
 
 			if($pergunta!=1 && Input::file('arquivo')!= NULL){
 				$arquivo = Input::file('arquivo');
@@ -1572,7 +1572,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 
-			$questao->textoPergunta = Input::get('textopergunta');
+			$questao->enunciado = Input::get('enunciado');
 
 			if($pergunta!=1 && Input::file('arquivo')!= NULL){
 				$arquivo = Input::file('arquivo');

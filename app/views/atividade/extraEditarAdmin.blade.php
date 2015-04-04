@@ -31,8 +31,8 @@
                         <input type="hidden" class="form-control" id="categoria" name="categoria">
                     </div>
                     <div id="div_texto-multipla-editar-questao" class="form-group">
-                        <label class="control-label" for="textopergunta"><i id="icone_texto-multipla-editar-questao" class="fa"></i> Texto da Pergunta</label>
-                        <input id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control textoPerguntaObrigatoria-multipla-editar-questao" rows="3">
+                        <label class="control-label" for="enunciado"><i id="icone_texto-multipla-editar-questao" class="fa"></i> Texto da Pergunta</label>
+                        <input id="enunciado" name="enunciado" maxlength="8000" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control enunciadoObrigatoria-multipla-editar-questao" rows="3">
                     </div>
                     <div id="div_arquivoPergunta-multipla-editar-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-multipla-editar-questao" class="fa"></i> Arquivo</label>
@@ -127,8 +127,8 @@
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
                     <div id="div_texto-dissertativa-editar-questao" class="form-group">
-                        <label class="control-label" for="textopergunta"><i id="icone_texto-dissertativa-editar-questao" class="fa"></i> Texto da Pergunta</label>
-                        <textarea id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control textoPerguntaObrigatoria-dissertativa-editar-questao" rows="3"></textarea>
+                        <label class="control-label" for="enunciado"><i id="icone_texto-dissertativa-editar-questao" class="fa"></i> Texto da Pergunta</label>
+                        <textarea id="enunciado" name="enunciado" maxlength="8000" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control enunciadoObrigatoria-dissertativa-editar-questao" rows="3"></textarea>
                     </div>
                     <div id="div_arquivoPergunta-dissertativa-editar-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-dissertativa-editar-questao" class="fa"></i> Arquivo</label>
@@ -210,8 +210,8 @@
                         <input type="hidden" class="form-control" id="categoria" name="categoria">
                     </div>
                     <div id="div_texto-multipla-nova-questao" class="form-group">
-                        <label class="control-label" for="textoPergunta"><i id="icone_texto-multipla-nova-questao" class="fa"></i> Texto da Pergunta</label>
-                        <input id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresMultiplaNovaQuestao();" class="form-control textoPerguntaObrigatoria-multipla-nova-questao" rows="3" >
+                        <label class="control-label" for="enunciado"><i id="icone_texto-multipla-nova-questao" class="fa"></i> Texto da Pergunta</label>
+                        <input id="enunciado" name="enunciado" maxlength="8000" onblur="fcn_recarregaCoresMultiplaNovaQuestao();" class="form-control enunciadoObrigatoria-multipla-nova-questao" rows="3" >
                     </div>
                     <div id="div_arquivoPergunta-multipla-nova-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-multipla-nova-questao" class="fa"></i> Arquivo</label>
@@ -298,8 +298,8 @@
                         <input type="hidden" class="form-control" id="categoria" name="categoria">
                     </div>
                     <div id="div_texto-dissertativa-nova-questao" class="form-group">
-                        <label class="control-label" for="textopergunta"><i id="icone_texto-dissertativa-nova-questao" class="fa"></i> Texto da Pergunta</label>
-                        <input id="textopergunta" name="textopergunta" maxlength="8000" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control textoPerguntaObrigatoria-dissertativa-nova-questao" rows="3" >
+                        <label class="control-label" for="enunciado"><i id="icone_texto-dissertativa-nova-questao" class="fa"></i> Texto da Pergunta</label>
+                        <input id="enunciado" name="enunciado" maxlength="8000" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control enunciadoObrigatoria-dissertativa-nova-questao" rows="3" >
                     </div>
                     <div id="div_arquivoPergunta-dissertativa-nova-questao" class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-dissertativa-nova-questao" class="fa"></i> Arquivo</label>
@@ -397,7 +397,7 @@
                                             <a data-toggle="collapse" data-parent="#accordion" href="#ME{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
                                         <div class="box-tools pull-right">
-                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textoPergunta}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-enunciado="{{$questao->enunciado}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>
                                         <small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
@@ -407,7 +407,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->enunciado}}</h3>
                                                     </div>
                                                     <div class="box-body">
                                                     <?php $categoria = (string)($questao->categoria);?>
@@ -564,7 +564,7 @@
                                             <a data-toggle="collapse" data-parent="#accordion" href="#RU{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
                                         <div class="box-tools pull-right" >
-                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-textopergunta="{{$questao->textoPergunta}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-enunciado="{{$questao->enunciado}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>
                                         @if(substr($questao->categoria,1) == "4")
@@ -577,7 +577,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->enunciado}}</h3>
                                                     </div>
                                                     <div class="box-body">
 
@@ -707,7 +707,7 @@
 
         var button = $(event.relatedTarget) // Button that triggered the modal
         var dataid = button.data('id')
-        var datatextopergunta = button.data('textopergunta')
+        var dataenunciado = button.data('enunciado')
         var datacategoria = button.data('categoria')
         var pergunta = String(datacategoria).substring(0,1)
         var resposta = String(datacategoria).substring(1,2)
@@ -719,7 +719,7 @@
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         var modal = $(this)
         modal.find('#id').val(dataid)
-        modal.find('#textopergunta').val(datatextopergunta)
+        modal.find('#enunciado').val(dataenunciado)
         modal.find('#categoria').val(datacategoria)
         modal.find('#pergunta').val(pergunta)
         modal.find('#resposta').val(resposta)
@@ -756,7 +756,7 @@
         var button = $(event.relatedTarget) // Button that triggered the modal
         var modal = $(this)
         var dataid = button.data('id')
-        var datatextopergunta = button.data('textopergunta')
+        var dataenunciado = button.data('enunciado')
         var datacategoria = button.data('categoria')
         var pergunta = datacategoria
         if(pergunta.length>1){
@@ -771,7 +771,7 @@
         // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
         // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
         modal.find('#id').val(dataid)
-        modal.find('#textopergunta').val(datatextopergunta)
+        modal.find('#enunciado').val(dataenunciado)
         modal.find('#categoria').val(datacategoria)
         modal.find('#pergunta').val(pergunta)
         modal.find('#respostaCerta').val(respostaCerta)
@@ -883,7 +883,7 @@
 					$( "#icone_tipoPergunta-multipla-nova-questao" ).addClass("fa-check");
 				}
 				
-				if($(".textoPerguntaObrigatoria-multipla-nova-questao").val() == ""){
+				if($(".enunciadoObrigatoria-multipla-nova-questao").val() == ""){
 					obrigatorioPendente = 1;
 					$( "#div_texto-multipla-nova-questao" ).removeClass("has-success");
 					$( "#icone_texto-multipla-nova-questao" ).removeClass("fa-check");
@@ -1043,7 +1043,7 @@
 				$( "#icone_tipoPergunta-multipla-nova-questao" ).addClass("fa-check");
 			}
 			
-			if($(".textoPerguntaObrigatoria-multipla-nova-questao").val() == ""){
+			if($(".enunciadoObrigatoria-multipla-nova-questao").val() == ""){
 				obrigatorioPendente = 1;
 				$( "#div_texto-multipla-nova-questao" ).removeClass("has-success");
 				$( "#icone_texto-multipla-nova-questao" ).removeClass("fa-check");
@@ -1210,7 +1210,7 @@
 					$( "#icone_tipoPergunta-dissertativa-nova-questao" ).addClass("fa-check");
 				}
 				
-				if($(".textoPerguntaObrigatoria-dissertativa-nova-questao").val() == ""){
+				if($(".enunciadoObrigatoria-dissertativa-nova-questao").val() == ""){
 					obrigatorioPendente = 1;
 					$( "#div_texto-dissertativa-nova-questao" ).removeClass("has-success");
 					$( "#icone_texto-dissertativa-nova-questao" ).removeClass("fa-check");
@@ -1307,7 +1307,7 @@
 				$( "#icone_tipoPergunta-dissertativa-nova-questao" ).addClass("fa-check");
 			}
 			
-			if($(".textoPerguntaObrigatoria-dissertativa-nova-questao").val() == ""){
+			if($(".enunciadoObrigatoria-dissertativa-nova-questao").val() == ""){
 				obrigatorioPendente = 1;
 				$( "#div_texto-dissertativa-nova-questao" ).removeClass("has-success");
 				$( "#icone_texto-dissertativa-nova-questao" ).removeClass("fa-check");
@@ -1421,7 +1421,7 @@
 					$( "#icone_tipoPergunta-multipla-editar-questao" ).addClass("fa-check");
 				}
 				
-				if($(".textoPerguntaObrigatoria-multipla-editar-questao").val() == ""){
+				if($(".enunciadoObrigatoria-multipla-editar-questao").val() == ""){
 					obrigatorioPendente = 1;
 					$( "#div_texto-multipla-editar-questao" ).removeClass("has-success");
 					$( "#icone_texto-multipla-editar-questao" ).removeClass("fa-check");
@@ -1581,7 +1581,7 @@
 				$( "#icone_tipoPergunta-multipla-editar-questao" ).addClass("fa-check");
 			}
 			
-			if($(".textoPerguntaObrigatoria-multipla-editar-questao").val() == ""){
+			if($(".enunciadoObrigatoria-multipla-editar-questao").val() == ""){
 				obrigatorioPendente = 1;
 				$( "#div_texto-multipla-editar-questao" ).removeClass("has-success");
 				$( "#icone_texto-multipla-editar-questao" ).removeClass("fa-check");
@@ -1748,7 +1748,7 @@
 					$( "#icone_tipoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
 				}
 				
-				if($(".textoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
+				if($(".enunciadoObrigatoria-dissertativa-editar-questao").val() == ""){
 					obrigatorioPendente = 1;
 					$( "#div_texto-dissertativa-editar-questao" ).removeClass("has-success");
 					$( "#icone_texto-dissertativa-editar-questao" ).removeClass("fa-check");
@@ -1843,7 +1843,7 @@
 				$( "#icone_tipoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
 			}
 			
-			if($(".textoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
+			if($(".enunciadoObrigatoria-dissertativa-editar-questao").val() == ""){
 				obrigatorioPendente = 1;
 				$( "#div_texto-dissertativa-editar-questao" ).removeClass("has-success");
 				$( "#icone_texto-dissertativa-editar-questao" ).removeClass("fa-check");
@@ -1935,7 +1935,7 @@
 			$( "#icone_tipoPergunta-multipla-nova-questao" ).addClass("fa-check");
 		}
 		
-		if($(".textoPerguntaObrigatoria-multipla-nova-questao").val() == ""){
+		if($(".enunciadoObrigatoria-multipla-nova-questao").val() == ""){
 			$( "#div_texto-multipla-nova-questao" ).removeClass("has-success");
 			$( "#icone_texto-multipla-nova-questao" ).removeClass("fa-check");
 			$( "#div_texto-multipla-nova-questao" ).addClass("has-error");
@@ -2075,7 +2075,7 @@
 			$( "#icone_tipoPergunta-dissertativa-nova-questao" ).addClass("fa-check");
 		}
 		
-		if($(".textoPerguntaObrigatoria-dissertativa-nova-questao").val() == ""){
+		if($(".enunciadoObrigatoria-dissertativa-nova-questao").val() == ""){
 			$( "#div_texto-dissertativa-nova-questao" ).removeClass("has-success");
 			$( "#icone_texto-dissertativa-nova-questao" ).removeClass("fa-check");
 			$( "#div_texto-dissertativa-nova-questao" ).addClass("has-error");
@@ -2155,7 +2155,7 @@
 			$( "#icone_tipoPergunta-multipla-editar-questao" ).addClass("fa-check");
 		}
 		
-		if($(".textoPerguntaObrigatoria-multipla-editar-questao").val() == ""){
+		if($(".enunciadoObrigatoria-multipla-editar-questao").val() == ""){
 			$( "#div_texto-multipla-editar-questao" ).removeClass("has-success");
 			$( "#icone_texto-multipla-editar-questao" ).removeClass("fa-check");
 			$( "#div_texto-multipla-editar-questao" ).addClass("has-error");
@@ -2295,7 +2295,7 @@
 			$( "#icone_tipoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
 		}
 		
-		if($(".textoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
+		if($(".enunciadoObrigatoria-dissertativa-editar-questao").val() == ""){
 			$( "#div_texto-dissertativa-editar-questao" ).removeClass("has-success");
 			$( "#icone_texto-dissertativa-editar-questao" ).removeClass("fa-check");
 			$( "#div_texto-dissertativa-editar-questao" ).addClass("has-error");

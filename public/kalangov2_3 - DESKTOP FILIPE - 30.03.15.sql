@@ -829,7 +829,7 @@ INSERT INTO `propagandas` (`id`, `titulo`, `imagem`, `link`, `idUsuario`) VALUES
 
 CREATE TABLE IF NOT EXISTS `questoes` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `textoPergunta` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `enunciado` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `urlMidia` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `numero` int(10) DEFAULT NULL COMMENT 'indica a posicao/ordem da questao dentro de uma atividade',
   `tipo` int(1) DEFAULT NULL COMMENT '1-Multipla Escolha, 2-Dissertativa',
@@ -851,7 +851,7 @@ CREATE TABLE IF NOT EXISTS `questoes` (
 -- Extraindo dados da tabela `questoes`
 --
 
-INSERT INTO `questoes` (`id`, `textoPergunta`, `urlMidia`, `numero`, `tipo`, `categoria`, `alternativaA`, `alternativaB`, `alternativaC`, `alternativaD`, `respostaCerta`, `pontos`, `idAtividade`, `idTopico`) VALUES
+INSERT INTO `questoes` (`id`, `enunciado`, `urlMidia`, `numero`, `tipo`, `categoria`, `alternativaA`, `alternativaB`, `alternativaC`, `alternativaD`, `respostaCerta`, `pontos`, `idAtividade`, `idTopico`) VALUES
 (1, 'Qual é o passado do verbo to get ?', NULL, 1, 2, 1, NULL, NULL, NULL, NULL, 'Got', 200, 121, 1),
 (2, 'Qual é o passado do verbo to get ?', NULL, 2, 2, 1, NULL, NULL, NULL, NULL, 'Got', 300, 121, 1),
 (3, 'Qual é o passado do verbo to get ?', NULL, 3, 1, 12, 'files/1.jpg', 'files/2.jpg', 'files/3.jpg', 'files/4.jpg', 'a', 400, 121, 1),

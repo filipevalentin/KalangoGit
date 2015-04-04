@@ -103,7 +103,7 @@
 		                                    <div class="box text-center">
 		                                        <div class="box-header">
 		                                        	<small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
-		                                            <h3 class="box-title center" style="float: none;">{{$questao->textoPergunta}}</h3>
+		                                            <h3 class="box-title center" style="float: none;">{{$questao->enunciado}}</h3>
 		                                        </div>
 		                                        <div class="box-body">
 		                                            <?php $categoria = (string)($questao->categoria);?>
@@ -237,7 +237,7 @@
 			                                       @endif
                                                 <small class="badge pull-right bg-green" ><?php if($questao->topico != null) echo $questao->topico->nome ?></small>
                                                 </div>
-                                                <h3 class="box-title center" style="float: none; ">{{$questao->textoPergunta}}</h3>
+                                                <h3 class="box-title center" style="float: none; ">{{$questao->enunciado}}</h3>
                                                 <div class="box-body">
 
                                                     @if(substr((string)$questao->categoria, 0, 1)==2)
