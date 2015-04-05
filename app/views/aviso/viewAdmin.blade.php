@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem</label>
-                        <input type="file" id="urlImagem" name="urlImagem" onblur="fcn_recarregaCores_novo_aviso();" class="form-control">
+                        <input type="file" id="urlImagem" name="urlImagem" maxlength="200" onblur="fcn_recarregaCores_novo_aviso();" class="form-control">
                     </div>
                     <div id="div_dataExpiracao_novo_aviso" class="form-group">
                         <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_novo_aviso" class="fa"></i> Data de Expiração</label>
@@ -63,15 +63,15 @@
                     </div>
                     <div id="div_titulo_editar_aviso" class="form-group">
                         <label class="control-label" for="titulo"><i id="icone_titulo_editar_aviso" class="fa"></i> Titulo</label>
-                        <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="titulo" name="titulo" class="form-control tituloObrigatorio_editar_aviso" >
+                        <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" maxlength="100" id="titulo" name="titulo" class="form-control tituloObrigatorio_editar_aviso" >
                     </div>
                     <div id="div_descricao_editar_aviso" class="form-group">
                         <label class="control-label" for="descricao"><i id="icone_descricao_editar_aviso" class="fa"></i> Descrição</label>
-                        <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="descricao" name="descricao" class="form-control descricaoObrigatoria_editar_aviso">
+                        <textarea autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" maxlength="8000" id="descricao" name="descricao" class="form-control descricaoObrigatoria_editar_aviso"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem</label>
-                        <input type="file" id="urlImagem" name="urlImagem" onblur="fcn_recarregaCores_editar_aviso();" class="form-control">
+                        <input type="file" id="urlImagem" name="urlImagem" maxlength="200" onblur="fcn_recarregaCores_editar_aviso();" class="form-control">
                     </div>
                     <div id="div_dataExpiracao_editar_aviso" class="form-group">
                         <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_editar_aviso" class="fa"></i> Data de Expiração</label>
