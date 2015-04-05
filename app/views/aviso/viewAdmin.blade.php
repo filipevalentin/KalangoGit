@@ -24,15 +24,15 @@
                     </div>
                     <div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem</label>
-                        <input type="file" id="urlImagem" name="urlImagem" maxlength="200" onblur="fcn_recarregaCores_novo_aviso();" class="form-control">
+                        <input type="file" id="urlImagem" name="urlImagem" maxlength="200" onblur="fcn_validaArquivoNovoAviso(this.form, this.form.urlImagem.value);" class="form-control campo_imagem_novo_aviso">
                     </div>
                     <div id="div_dataExpiracao_novo_aviso" class="form-group">
                         <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_novo_aviso" class="fa"></i> Data de Expiração</label>
                         <input type="text" autocomplete="off" id="dataExpiracao" name="dataExpiracao" onblur="fcn_recarregaCores_novo_aviso();" class="form-control validaData dataExpiracaoObrigatoria_novo_aviso">
 					</div>
-					<div id="div_enviarPara_novo_aviso" class="form-group">
-                        <label class="control-label" for="enviarPara"><i id="icone_enviarPara_novo_aviso" class="fa"></i> Enviar para:</label>
-                        <select type="text" id="idCurso" name="idCurso" onblur="fcn_recarregaCores_novo_aviso();" class="form-control enviarParaObrigatorio_novo_aviso">
+					<div class="form-group">
+                        <label class="control-label" for="enviarPara">Enviar para:</label>
+                        <select type="text" id="idCurso" name="idCurso" onblur="fcn_recarregaCores_novo_aviso();" class="form-control">
                         	<option value="">Todos os alunos</option>
 							@foreach(Curso::all() as $curso)
                         		<option value="{{$curso->id}}">Curso: {{$curso->nome}}-{{$curso->idioma->nome}}</option>
@@ -71,15 +71,15 @@
                     </div>
                     <div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem</label>
-                        <input type="file" id="urlImagem" name="urlImagem" maxlength="200" onblur="fcn_recarregaCores_editar_aviso();" class="form-control">
+                        <input type="file" id="urlImagem" name="urlImagem" maxlength="200" onblur="fcn_validaArquivoEditarAviso(this.form, this.form.urlImagem.value);" class="form-control campo_imagem_editar_aviso">
                     </div>
                     <div id="div_dataExpiracao_editar_aviso" class="form-group">
                         <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_editar_aviso" class="fa"></i> Data de Expiração</label>
                         <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="dataExpiracao" name="dataExpiracao" class="form-control validaData dataExpiracaoObrigatoria_editar_aviso">
 					</div>
-					<div id="div_enviarPara_editar_aviso" class="form-group">
-                        <label class="control-label" for="enviarPara"><i id="icone_enviarPara_editar_aviso" class="fa"></i> Curso</label>
-                        <select type="text" id="idCurso" name="idCurso" onblur="fcn_recarregaCores_editar_aviso();" class="form-control enviarParaObrigatorio_editar_aviso">
+					<div class="form-group">
+                        <label class="control-label" for="enviarPara">Enviar para:</label>
+                        <select type="text" id="idCurso" name="idCurso" onblur="fcn_recarregaCores_editar_aviso();" class="form-control">
 							<option value="">Todos os alunos</option>
 							@foreach(Curso::all() as $curso)
                         		<option value="{{$curso->id}}">Curso: {{$curso->nome}}-{{$curso->idioma->nome}}</option>
@@ -326,19 +326,6 @@
 			$( "#icone_dataExpiracao_novo_aviso" ).addClass("fa-check");
 		}
 		
-		if($(".enviarParaObrigatorio_novo_aviso").val() == ""){
-			obrigatorioPendente = 1;
-			$( "#div_enviarPara_novo_aviso" ).removeClass("has-success");
-			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-check");
-			$( "#div_enviarPara_novo_aviso" ).addClass("has-error");
-			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_enviarPara_novo_aviso" ).removeClass("has-error");
-			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-times-circle-o");
-			$( "#div_enviarPara_novo_aviso" ).addClass("has-success");
-			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-check");
-		}
-		
 		if(obrigatorioPendente == 1){
 			alert("É necessário preencher todos os campos obrigatórios!");
 			return false;
@@ -389,19 +376,6 @@
 			$( "#icone_dataExpiracao_editar_aviso" ).addClass("fa-check");
 		}
 		
-		if($(".enviarParaObrigatorio_editar_aviso").val() == ""){
-			obrigatorioPendente = 1;
-			$( "#div_enviarPara_editar_aviso" ).removeClass("has-success");
-			$( "#icone_enviarPara_editar_aviso" ).removeClass("fa-check");
-			$( "#div_enviarPara_editar_aviso" ).addClass("has-error");
-			$( "#icone_enviarPara_editar_aviso" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_enviarPara_editar_aviso" ).removeClass("has-error");
-			$( "#icone_enviarPara_editar_aviso" ).removeClass("fa-times-circle-o");
-			$( "#div_enviarPara_editar_aviso" ).addClass("has-success");
-			$( "#icone_enviarPara_editar_aviso" ).addClass("fa-check");
-		}
-		
 		if(obrigatorioPendente == 1){
 			alert("É necessário preencher todos os campos obrigatórios!");
 			return false;
@@ -447,18 +421,6 @@
 			$( "#icone_dataExpiracao_novo_aviso" ).addClass("fa-check");
 		}
 		
-		if($(".enviarParaObrigatorio_novo_aviso").val() == ""){
-			$( "#div_enviarPara_novo_aviso" ).removeClass("has-success");
-			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-check");
-			$( "#div_enviarPara_novo_aviso" ).addClass("has-error");
-			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_enviarPara_novo_aviso" ).removeClass("has-error");
-			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-times-circle-o");
-			$( "#div_enviarPara_novo_aviso" ).addClass("has-success");
-			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-check");
-		}
-		
 	};
 	
 	function fcn_recarregaCores_editar_aviso(){
@@ -499,18 +461,58 @@
 			$( "#icone_dataExpiracao_editar_aviso" ).addClass("fa-check");
 		}
 		
-		if($(".enviarParaObrigatorio_editar_aviso").val() == ""){
-			$( "#div_enviarPara_editar_aviso" ).removeClass("has-success");
-			$( "#icone_enviarPara_editar_aviso" ).removeClass("fa-check");
-			$( "#div_enviarPara_editar_aviso" ).addClass("has-error");
-			$( "#icone_enviarPara_editar_aviso" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_enviarPara_editar_aviso" ).removeClass("has-error");
-			$( "#icone_enviarPara_editar_aviso" ).removeClass("fa-times-circle-o");
-			$( "#div_enviarPara_editar_aviso" ).addClass("has-success");
-			$( "#icone_enviarPara_editar_aviso" ).addClass("fa-check");
-		}
+	}
+	
+	function fcn_validaArquivoNovoAviso(formulario, arquivo) { 
 		
+		if(arquivo != ""){
+			extensoes_permitidas = new Array(".jpg", ".png", ".jpeg"); 
+			meuerro = ""; 
+			 
+			extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase(); 
+			permitida = false; 
+			for (var i = 0; i < extensoes_permitidas.length; i++) { 
+				if (extensoes_permitidas[i] == extensao) { 
+					permitida = true; 
+					break; 
+				} 
+			} 
+			
+			if (permitida == false) { 
+				alert("Verifique a extensão do arquivo anexado. \n\nAs extensões permitidas são: " + extensoes_permitidas.join()); 
+				$('.campo_imagem_novo_aviso').val("");
+				return 1;
+				
+			}
+			 
+			return 0; 
+		}
+	}
+	
+	function fcn_validaArquivoEditarAviso(formulario, arquivo) { 
+		
+		if(arquivo != ""){
+			extensoes_permitidas = new Array(".jpg", ".png", ".jpeg"); 
+			meuerro = ""; 
+			 
+			extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase(); 
+			permitida = false; 
+			for (var i = 0; i < extensoes_permitidas.length; i++) { 
+				if (extensoes_permitidas[i] == extensao) { 
+					permitida = true; 
+					break; 
+				} 
+			} 
+			
+			if (permitida == false) { 
+				alert("Verifique a extensão do arquivo anexado. \n\nAs extensões permitidas são: " + extensoes_permitidas.join()); 
+				$('.campo_imagem_editar_aviso').val("");
+				return 1;
+				
+			}
+			 
+			return 0; 
+		}
 	}
 	
 </script>
