@@ -25,21 +25,21 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/criarPropaganda" enctype="multipart/form-data">
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="titulo"><i id="icone_titulo" class="fa"></i> Título</label>
-                        <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" >
+                    <div id="div_titulo_nova_propaganda" class="form-group">
+                        <label class="control-label" for="titulo"><i id="icone_titulo_nova_propaganda" class="fa"></i> Título</label>
+                        <input type="text" autocomplete="off" id="titulo" name="titulo" maxlength="100" onblur="fcn_recarregaCoresNovaPropaganda();" class="form-control tituloObrigatorio_nova_propaganda" >
                     </div>
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="titulo"><i id="icone_titulo" class="fa"></i> Link Externo</label>
-                        <input type="text" autocomplete="off" id="link" name="link" class="form-control" >
+                    <div id="div_link_nova_propaganda" class="form-group">
+                        <label class="control-label" for="titulo"><i id="icone_link_nova_propaganda" class="fa"></i> Link Externo</label>
+                        <input type="text" autocomplete="off" id="link" name="link" maxlength="200" value="http://" onblur="fcn_recarregaCoresNovaPropaganda();fcn_validaLink(this.value, 1);" class="form-control linkObrigatorio_nova_propaganda" >
                     </div>
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="urlImagem"><i id="icone_urlImagem" class="fa"></i> Imagem</label>
-                        <input type="file" autocomplete="off" id="urlImagem" name="urlImagem" class="form-control" >
+                    <div id="div_imagem_nova_propaganda" class="form-group">
+                        <label class="control-label" for="urlImagem"><i id="icone_imagem_nova_propaganda" class="fa"></i> Imagem</label>
+                        <input type="file" autocomplete="off" id="urlImagem" name="urlImagem" onblur="fcn_recarregaCoresNovaPropaganda();fcn_validaArquivoNovaPropaganda(this.form, this.form.urlImagem.value);" class="form-control campo_imagem_nova_propaganda imagemObrigatoria_nova_propaganda" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar" value="Salvar" >
+                        <input type="submit" class="btn btn-primary btn-salvar-nova-propaganda" value="Salvar" >
                     </div>
                 </form>
             </div>
@@ -59,21 +59,21 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="titulo"><i id="icone_titulo" class="fa"></i> Título</label>
-                        <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" >
+                    <div id="div_titulo_editar_propaganda" class="form-group">
+                        <label class="control-label" for="titulo"><i id="icone_titulo_editar_propaganda" class="fa"></i> Título</label>
+                        <input type="text" autocomplete="off" maxlength="100" id="titulo" name="titulo" onblur="fcn_recarregaCoresEditarPropaganda();" class="form-control tituloObrigatorio_editar_propaganda" >
                     </div>
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="titulo"><i id="icone_titulo" class="fa"></i> Link Externo</label>
-                        <input type="text" autocomplete="off" id="link" name="link" class="form-control" >
+                    <div id="div_link_editar_propaganda" class="form-group">
+                        <label class="control-label" for="titulo"><i id="icone_link_editar_propaganda" class="fa"></i> Link Externo</label>
+                        <input type="text" autocomplete="off" id="link" name="link"maxlength="200" onblur="fcn_recarregaCoresEditarPropaganda();fcn_validaLink(this.value, 2);" maxlength="200" class="form-control linkObrigatorio_editar_propaganda" >
                     </div>
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="urlImagem"><i id="icone_urlImagem" class="fa"></i> Imagem</label>
-                        <input type="file" autocomplete="off" id="urlImagem" name="urlImagem" class="form-control" >
+                    <div id="div_imagem_editar_propaganda" class="form-group">
+                        <label class="control-label" for="urlImagem"><i id="icone_imagem_editar_propaganda" class="fa"></i> Imagem</label>
+                        <input type="file" autocomplete="off" id="urlImagem" name="urlImagem" onblur="fcn_recarregaCoresEditarPropaganda();fcn_validaArquivoEditarPropaganda(this.form, this.form.urlImagem.value);" class="form-control campo_imagem_editar_propaganda imagemObrigatoria_editar_propaganda" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar" value="Salvar" >
+                        <input type="submit" class="btn btn-primary btn-salvar-editar-propaganda" value="Salvar" >
                     </div>
                 </form>
             </div>
@@ -202,6 +202,260 @@
 		}
     } );
 
+</script>
+
+<script> //validações
+	
+	$(".btn-salvar-nova-propaganda").click(function(event){
+	
+		var obrigatorioPendente = 0;
+		
+		if($(".tituloObrigatorio_nova_propaganda").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_titulo_nova_propaganda" ).removeClass("has-success");
+			$( "#icone_titulo_nova_propaganda" ).removeClass("fa-check");
+			$( "#div_titulo_nova_propaganda" ).addClass("has-error");
+			$( "#icone_titulo_nova_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_titulo_nova_propaganda" ).removeClass("has-error");
+			$( "#icone_titulo_nova_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_titulo_nova_propaganda" ).addClass("has-success");
+			$( "#icone_titulo_nova_propaganda" ).addClass("fa-check");
+		}
+		
+		if($(".linkObrigatorio_nova_propaganda").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_link_nova_propaganda" ).removeClass("has-success");
+			$( "#icone_link_nova_propaganda" ).removeClass("fa-check");
+			$( "#div_link_nova_propaganda" ).addClass("has-error");
+			$( "#icone_link_nova_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_link_nova_propaganda" ).removeClass("has-error");
+			$( "#icone_link_nova_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_link_nova_propaganda" ).addClass("has-success");
+			$( "#icone_link_nova_propaganda" ).addClass("fa-check");
+		}
+		
+		if($(".imagemObrigatoria_nova_propaganda").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_imagem_nova_propaganda" ).removeClass("has-success");
+			$( "#icone_imagem_nova_propaganda" ).removeClass("fa-check");
+			$( "#div_imagem_nova_propaganda" ).addClass("has-error");
+			$( "#icone_imagem_nova_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_imagem_nova_propaganda" ).removeClass("has-error");
+			$( "#icone_imagem_nova_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_imagem_nova_propaganda" ).addClass("has-success");
+			$( "#icone_imagem_nova_propaganda" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
+	
+	$(".btn-salvar-editar-propaganda").click(function(event){
+	
+		var obrigatorioPendente = 0;
+		
+		if($(".tituloObrigatorio_editar_propaganda").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_titulo_editar_propaganda" ).removeClass("has-success");
+			$( "#icone_titulo_editar_propaganda" ).removeClass("fa-check");
+			$( "#div_titulo_editar_propaganda" ).addClass("has-error");
+			$( "#icone_titulo_editar_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_titulo_editar_propaganda" ).removeClass("has-error");
+			$( "#icone_titulo_editar_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_titulo_editar_propaganda" ).addClass("has-success");
+			$( "#icone_titulo_editar_propaganda" ).addClass("fa-check");
+		}
+		
+		if($(".linkObrigatorio_editar_propaganda").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_link_editar_propaganda" ).removeClass("has-success");
+			$( "#icone_link_editar_propaganda" ).removeClass("fa-check");
+			$( "#div_link_editar_propaganda" ).addClass("has-error");
+			$( "#icone_link_editar_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_link_editar_propaganda" ).removeClass("has-error");
+			$( "#icone_link_editar_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_link_editar_propaganda" ).addClass("has-success");
+			$( "#icone_link_editar_propaganda" ).addClass("fa-check");
+		}
+		
+		if($(".imagemObrigatoria_nova_propaganda").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_imagem_editar_propaganda" ).removeClass("has-success");
+			$( "#icone_imagem_editar_propaganda" ).removeClass("fa-check");
+			$( "#div_imagem_editar_propaganda" ).addClass("has-error");
+			$( "#icone_imagem_editar_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_imagem_editar_propaganda" ).removeClass("has-error");
+			$( "#icone_imagem_editar_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_imagem_editar_propaganda" ).addClass("has-success");
+			$( "#icone_imagem_editar_propaganda" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
+	
+	function fcn_recarregaCoresNovaPropaganda(){
+		
+		if($(".tituloObrigatorio_nova_propaganda").val() == ""){
+			$( "#div_titulo_nova_propaganda" ).removeClass("has-success");
+			$( "#icone_titulo_nova_propaganda" ).removeClass("fa-check");
+			$( "#div_titulo_nova_propaganda" ).addClass("has-error");
+			$( "#icone_titulo_nova_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_titulo_nova_propaganda" ).removeClass("has-error");
+			$( "#icone_titulo_nova_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_titulo_nova_propaganda" ).addClass("has-success");
+			$( "#icone_titulo_nova_propaganda" ).addClass("fa-check");
+		}
+		
+		if($(".linkObrigatorio_nova_propaganda").val() == ""){
+			$( "#div_link_nova_propaganda" ).removeClass("has-success");
+			$( "#icone_link_nova_propaganda" ).removeClass("fa-check");
+			$( "#div_link_nova_propaganda" ).addClass("has-error");
+			$( "#icone_link_nova_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_link_nova_propaganda" ).removeClass("has-error");
+			$( "#icone_link_nova_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_link_nova_propaganda" ).addClass("has-success");
+			$( "#icone_link_nova_propaganda" ).addClass("fa-check");
+		}
+		
+		if($(".imagemObrigatoria_nova_propaganda").val() == ""){
+			$( "#div_imagem_nova_propaganda" ).removeClass("has-success");
+			$( "#icone_imagem_nova_propaganda" ).removeClass("fa-check");
+			$( "#div_imagem_nova_propaganda" ).addClass("has-error");
+			$( "#icone_imagem_nova_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_imagem_nova_propaganda" ).removeClass("has-error");
+			$( "#icone_imagem_nova_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_imagem_nova_propaganda" ).addClass("has-success");
+			$( "#icone_imagem_nova_propaganda" ).addClass("fa-check");
+		}
+		
+	}
+	
+	function fcn_recarregaCoresEditarPropaganda(){
+		
+		if($(".tituloObrigatorio_editar_propaganda").val() == ""){
+			$( "#div_titulo_editar_propaganda" ).removeClass("has-success");
+			$( "#icone_titulo_editar_propaganda" ).removeClass("fa-check");
+			$( "#div_titulo_editar_propaganda" ).addClass("has-error");
+			$( "#icone_titulo_editar_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_titulo_editar_propaganda" ).removeClass("has-error");
+			$( "#icone_titulo_editar_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_titulo_editar_propaganda" ).addClass("has-success");
+			$( "#icone_titulo_editar_propaganda" ).addClass("fa-check");
+		}
+		
+		if($(".linkObrigatorio_editar_propaganda").val() == ""){
+			$( "#div_link_editar_propaganda" ).removeClass("has-success");
+			$( "#icone_link_editar_propaganda" ).removeClass("fa-check");
+			$( "#div_link_editar_propaganda" ).addClass("has-error");
+			$( "#icone_link_editar_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_link_editar_propaganda" ).removeClass("has-error");
+			$( "#icone_link_editar_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_link_editar_propaganda" ).addClass("has-success");
+			$( "#icone_link_editar_propaganda" ).addClass("fa-check");
+		}
+		
+		if($(".imagemObrigatoria_nova_propaganda").val() == ""){
+			$( "#div_imagem_editar_propaganda" ).removeClass("has-success");
+			$( "#icone_imagem_editar_propaganda" ).removeClass("fa-check");
+			$( "#div_imagem_editar_propaganda" ).addClass("has-error");
+			$( "#icone_imagem_editar_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_imagem_editar_propaganda" ).removeClass("has-error");
+			$( "#icone_imagem_editar_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_imagem_editar_propaganda" ).addClass("has-success");
+			$( "#icone_imagem_editar_propaganda" ).addClass("fa-check");
+		}
+		
+	}
+	
+	function fcn_validaArquivoNovaPropaganda(formulario, arquivo) { 
+		
+		if(arquivo != ""){
+			extensoes_permitidas = new Array(".jpg", ".png", ".jpeg"); 
+			meuerro = ""; 
+			 
+			extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase(); 
+			permitida = false; 
+			for (var i = 0; i < extensoes_permitidas.length; i++) { 
+				if (extensoes_permitidas[i] == extensao) { 
+					permitida = true; 
+					break; 
+				} 
+			} 
+			
+			if (permitida == false) { 
+				alert("Verifique a extensão do arquivo anexado. \n\nAs extensões permitidas são: " + extensoes_permitidas.join()); 
+				$('.campo_imagem_nova_propaganda').val("");
+				return 1;
+				
+			}
+			 
+			return 0; 
+		}
+	}
+	
+	function fcn_validaArquivoEditarPropaganda(formulario, arquivo) { 
+		
+		if(arquivo != ""){
+			extensoes_permitidas = new Array(".jpg", ".png", ".jpeg"); 
+			meuerro = ""; 
+			 
+			extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase(); 
+			permitida = false; 
+			for (var i = 0; i < extensoes_permitidas.length; i++) { 
+				if (extensoes_permitidas[i] == extensao) { 
+					permitida = true; 
+					break; 
+				} 
+			} 
+			
+			if (permitida == false) { 
+				alert("Verifique a extensão do arquivo anexado. \n\nAs extensões permitidas são: " + extensoes_permitidas.join()); 
+				$('.campo_imagem_editar_propaganda').val("");
+				return 1;
+				
+			}
+			 
+			return 0; 
+		}
+	}
+	
+	function fcn_validaLink(pstr_link, pint_entrada){
+		if(pstr_link != ""){
+			if (pstr_link.substring(0, 7) != "http://"){
+				
+				alert("Link deverá começar sempre com 'http://'"); 
+				
+				if(pint_entrada == "1"){
+					$('.linkObrigatorio_nova_propaganda').focus();
+				}
+				
+				if(pint_entrada == "2"){
+					$('.linkObrigatorio_editar_propaganda').focus();
+				}
+				
+			}
+		}
+	}
+	
 </script>
 	
 @endsection
