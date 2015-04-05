@@ -7,11 +7,10 @@
 
 @section('maincontent')
 <section class="content-header">
-    <h1>Gerenciar Exercícios</h1>
+    <h1>Criar Exercício</h1>
     <ol class="breadcrumb">
         <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Atividades Extras</li>
-		<li class="active">Gerenciar Exercícios</li>
+        <li class="active">Widgets</li>
     </ol>
 </section>
 
