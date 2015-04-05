@@ -43,9 +43,9 @@
                             <label class="control-label" for="nome"><i id="icone_nome-editar-exercicio" class="fa"></i> Nome</label>
                             <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarExercicio();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-exercicio"></input>
                         </div>
-                        <div id="" class="form-group">
-                            <label class="control-label" for="status"><i id="icone_nome-editar-exercicio" class="fa"></i> Status</label>
-                            <select type="text" autocomplete="off" id="status" name="status" class="form-control">
+                        <div id="div_status_editar-exercicio" class="form-group">
+                            <label class="control-label" for="status"><i id="icone_status-editar-exercicio" class="fa"></i> Status</label>
+                            <select type="text" onblur="fcn_recarregaCoresEditarExercicio();" id="status" name="status" class="form-control statusObrigatorio-editar-exercicio">
                                 <option value="0"> Desativado</option>
                                 <option value="1"> Ativado</option>
                             </select>
@@ -509,6 +509,19 @@
 				$( "#icone_nome-editar-exercicio" ).addClass("fa-check");
 			}
 			
+			if($(".statusObrigatorio-editar-exercicio").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_status_editar-exercicio" ).removeClass("has-success");
+				$( "#icone_status-editar-exercicio" ).removeClass("fa-check");
+				$( "#div_status_editar-exercicio" ).addClass("has-error");
+				$( "#icone_status-editar-exercicio" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_status_editar-exercicio" ).removeClass("has-error");
+				$( "#icone_status-editar-exercicio" ).removeClass("fa-times-circle-o");
+				$( "#div_status_editar-exercicio" ).addClass("has-success");
+				$( "#icone_status-editar-exercicio" ).addClass("fa-check");
+			}
+			
 			if(obrigatorioPendente == 1){
 				alert("É necessário preencher todos os campos obrigatórios!");
 				return false;
@@ -620,6 +633,34 @@
 			
 		}
 		
+		function fcn_recarregaCoresEditarExercicio(){
+			
+			if($(".nomeObrigatorio-editar-exercicio").val() == ""){
+				$( "#div_nome-editar-exercicio" ).removeClass("has-success");
+				$( "#icone_nome-editar-exercicio" ).removeClass("fa-check");
+				$( "#div_nome-editar-exercicio" ).addClass("has-error");
+				$( "#icone_nome-editar-exercicio" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_nome-editar-exercicio" ).removeClass("has-error");
+				$( "#icone_nome-editar-exercicio" ).removeClass("fa-times-circle-o");
+				$( "#div_nome-editar-exercicio" ).addClass("has-success");
+				$( "#icone_nome-editar-exercicio" ).addClass("fa-check");
+			}
+			
+			if($(".statusObrigatorio-editar-exercicio").val() == ""){
+				$( "#div_status_editar-exercicio" ).removeClass("has-success");
+				$( "#icone_status-editar-exercicio" ).removeClass("fa-check");
+				$( "#div_status_editar-exercicio" ).addClass("has-error");
+				$( "#icone_status-editar-exercicio" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_status_editar-exercicio" ).removeClass("has-error");
+				$( "#icone_status-editar-exercicio" ).removeClass("fa-times-circle-o");
+				$( "#div_status_editar-exercicio" ).addClass("has-success");
+				$( "#icone_status-editar-exercicio" ).addClass("fa-check");
+			}
+			
+		}
+		
 		function fcn_validaArquivo(formulario, arquivo) { 
 		   
 			if(arquivo != ""){
@@ -643,22 +684,6 @@
 				 
 				return 0; 
 			}
-		}
-		
-		function fcn_recarregaCoresEditarExercicio(){
-			
-			if($(".nomeObrigatorio-editar-exercicio").val() == ""){
-				$( "#div_nome-editar-exercicio" ).removeClass("has-success");
-				$( "#icone_nome-editar-exercicio" ).removeClass("fa-check");
-				$( "#div_nome-editar-exercicio" ).addClass("has-error");
-				$( "#icone_nome-editar-exercicio" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_nome-editar-exercicio" ).removeClass("has-error");
-				$( "#icone_nome-editar-exercicio" ).removeClass("fa-times-circle-o");
-				$( "#div_nome-editar-exercicio" ).addClass("has-success");
-				$( "#icone_nome-editar-exercicio" ).addClass("fa-check");
-			}
-			
 		}
 		
 	</script>
