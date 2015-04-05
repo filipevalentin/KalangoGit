@@ -22,9 +22,9 @@
                         <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i> Sobrenome</label>
                         <input type="text" autocomplete="off" id="sobrenome" name="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio">
                     </div>
-                    <div id="div_email" class="form-group">
-                        <label class="control-label" for="codRegistro"><i id="icone_email" class="fa"></i> Código de Registro</label>
-                        <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" >
+                    <div id="div_codRegistro" class="form-group">
+                        <label class="control-label" for="codRegistro"><i id="icone_codRegistro" class="fa"></i> Código de Registro</label>
+                        <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" maxlength="50" class="form-control somenteNumeros codRegistroObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" >
                     </div>
                     <div id="div_email" class="form-group">
                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
@@ -165,6 +165,14 @@ $( ".somenteLetras" ).keyup(function() {
 	}
 });
 
+$( ".somenteNumeros" ).keyup(function() {
+	//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
+	if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
+		var valor = $(this).val().replace(/[^0-9]+/g,'');
+		$(this).val(valor);
+	}
+});
+
 $(".btn-salvar").click(function(event){
 	
 	var obrigatorioPendente = 0;
@@ -193,6 +201,19 @@ $(".btn-salvar").click(function(event){
 		$( "#icone_sobrenome" ).removeClass("fa-times-circle-o");
 		$( "#div_sobrenome" ).addClass("has-success");
 		$( "#icone_sobrenome" ).addClass("fa-check");
+	}
+	
+	if($(".codRegistroObrigatorio").val() == ""){
+		obrigatorioPendente = 1;
+		$( "#div_codRegistro" ).removeClass("has-success");
+		$( "#icone_codRegistro" ).removeClass("fa-check");
+		$( "#div_codRegistro" ).addClass("has-error");
+		$( "#icone_codRegistro" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_codRegistro" ).removeClass("has-error");
+		$( "#icone_codRegistro" ).removeClass("fa-times-circle-o");
+		$( "#div_codRegistro" ).addClass("has-success");
+		$( "#icone_codRegistro" ).addClass("fa-check");
 	}
 	
 	if($(".emailObrigatorio").val() == ""){
@@ -252,6 +273,18 @@ function fcn_recarregaCores(){
 		$( "#icone_sobrenome" ).removeClass("fa-times-circle-o");
 		$( "#div_sobrenome" ).addClass("has-success");
 		$( "#icone_sobrenome" ).addClass("fa-check");
+	}
+	
+	if($(".codRegistroObrigatorio").val() == ""){
+		$( "#div_codRegistro" ).removeClass("has-success");
+		$( "#icone_codRegistro" ).removeClass("fa-check");
+		$( "#div_codRegistro" ).addClass("has-error");
+		$( "#icone_codRegistro" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_codRegistro" ).removeClass("has-error");
+		$( "#icone_codRegistro" ).removeClass("fa-times-circle-o");
+		$( "#div_codRegistro" ).addClass("has-success");
+		$( "#icone_codRegistro" ).addClass("fa-check");
 	}
 	
 	if($(".emailObrigatorio").val() == ""){
