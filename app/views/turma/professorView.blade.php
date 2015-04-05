@@ -7,7 +7,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title"><i class="fa fa-envelope-o"> </i> Nova Mensagem</h4>
+                <h4 class="modal-title"><i class="fa fa-envelope-o"> </i> Nova Mensagem </h4>
             </div>
             <form action="/professor/mensagem/enviar" method="post">
                 <div class="modal-body">
@@ -43,11 +43,11 @@
 @section('maincontent')
 
 <section class="content-header">
-    <h1>Gerenciar Turmas</h1>
+    <h1>Enviar Mensagem</h1>
     <ol class="breadcrumb">
         <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Gerenciar Cursos</li>
-		<li class="active">Gerenciar Turmas</li>
+        <li class="active">Gerenciar Turmas</li>
+		<li class="active">Enviar Mensagem</li>
     </ol>
 </section>
 
