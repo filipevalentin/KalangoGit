@@ -74,7 +74,7 @@
 					</div>
 					<div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem Perfil</label>
-                        <input type="file" id="urlImagem" name="urlImagem" onblur="fcn_validaArquivo(this.form, this.form.urlImagem.value)" class="form-control">
+                        <input type="file" id="urlImagem" name="urlImagem" onblur="fcn_validaArquivo(this.form, this.form.urlImagem.value);" class="form-control">
                     </div>
 					<div class="form-group">
                         <label class="control-label" for="sobreMim">Sobre Mim</label>
