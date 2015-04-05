@@ -129,9 +129,9 @@
                             @endforeach
                         </select>
                     </div>
-                    <div id="" class="form-group">
-                        <label class="control-label" for="status"><i id="icone_nome-editar-exercicio" class="fa"></i> Status</label>
-                        <select type="text" autocomplete="off" id="status" name="status" class="form-control">
+                    <div id="div_status-editar-atividadeExtra" class="form-group">
+                        <label class="control-label" for="status"><i id="icone_status-editar-atividadeExtra" class="fa"></i> Status</label>
+                        <select type="text" autocomplete="off" onblur="fcn_recarregaCoresEditarAtividadeExtra();" id="status" name="status" class="form-control statusObrigatorio-editar-atividadeExtra">
                             <option value="0"> Desativado</option>
                             <option value="1"> Ativado</option>
                         </select>
@@ -523,6 +523,19 @@
 					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-check");
 				}
 				
+				if($(".statusObrigatorio-editar-atividadeExtra").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_status-editar-atividadeExtra" ).removeClass("has-success");
+					$( "#icone_status-editar-atividadeExtra" ).removeClass("fa-check");
+					$( "#div_status-editar-atividadeExtra" ).addClass("has-error");
+					$( "#icone_status-editar-atividadeExtra" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_status-editar-atividadeExtra" ).removeClass("has-error");
+					$( "#icone_status-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
+					$( "#div_status-editar-atividadeExtra" ).addClass("has-success");
+					$( "#icone_status-editar-atividadeExtra" ).addClass("fa-check");
+				} 
+				
 				if(obrigatorioPendente == 1){
 					alert("É necessário preencher todos os campos obrigatórios!");
 					return false;
@@ -638,6 +651,18 @@
 					$( "#icone_categoria-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
 					$( "#div_categoria-editar-atividadeExtra" ).addClass("has-success");
 					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-check");
+				}
+				
+				if($(".statusObrigatorio-editar-atividadeExtra").val() == ""){
+					$( "#div_status-editar-atividadeExtra" ).removeClass("has-success");
+					$( "#icone_status-editar-atividadeExtra" ).removeClass("fa-check");
+					$( "#div_status-editar-atividadeExtra" ).addClass("has-error");
+					$( "#icone_status-editar-atividadeExtra" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_status-editar-atividadeExtra" ).removeClass("has-error");
+					$( "#icone_status-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
+					$( "#div_status-editar-atividadeExtra" ).addClass("has-success");
+					$( "#icone_status-editar-atividadeExtra" ).addClass("fa-check");
 				}
 				
 			}
