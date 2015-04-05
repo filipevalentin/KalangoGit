@@ -14,34 +14,34 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="tipo" name="tipo" value="1">
                     </div>
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="titulo"><i id="icone_nome" class="fa"></i> Titulo</label>
-                        <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" >
+                    <div id="div_titulo_novo_aviso" class="form-group">
+                        <label class="control-label" for="titulo"><i id="icone_titulo_novo_aviso" class="fa"></i> Titulo</label>
+                        <input type="text" autocomplete="off" maxlength="100" id="titulo" name="titulo" onblur="fcn_recarregaCores_novo_aviso();" class="form-control tituloObrigatorio_novo_aviso" >
                     </div>
-                    <div id="div_sobrenome" class="form-group">
-                        <label class="control-label" for="descricao"><i id="icone_descricao" class="fa"></i> Descrição</label>
-                        <input type="text" autocomplete="off" id="descricao" name="descricao" class="form-control">
+                    <div id="div_descricao_novo_aviso" class="form-group">
+                        <label class="control-label" for="descricao"><i id="icone_descricao_novo_aviso" class="fa"></i> Descrição</label>
+                        <textarea autocomplete="off" maxlength="8000" id="descricao" name="descricao" onblur="fcn_recarregaCores_novo_aviso();" class="form-control descricaoObrigatoria_novo_aviso"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem</label>
-                        <input type="file" id="urlImagem" name="urlImagem" class="form-control">
+                        <input type="file" id="urlImagem" name="urlImagem" onblur="fcn_recarregaCores_novo_aviso();" class="form-control">
                     </div>
-                    <div id="dataExpiracao" class="form-group">
-                        <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao" class="fa"></i> Data de Expiração</label>
-                        <input type="text" autocomplete="off" id="dataExpiracao" name="dataExpiracao" class="form-control">
+                    <div id="div_dataExpiracao_novo_aviso" class="form-group">
+                        <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_novo_aviso" class="fa"></i> Data de Expiração</label>
+                        <input type="text" autocomplete="off" id="dataExpiracao" name="dataExpiracao" onblur="fcn_recarregaCores_novo_aviso();" class="form-control validaData dataExpiracaoObrigatoria_novo_aviso">
 					</div>
-					<div id="idCurso" class="form-group">
-                        <label class="control-label" for="idCurso"><i id="icone_idCurso" class="fa"></i> Enviar para:</label>
-                        <select type="text" autocomplete="off" id="idCurso" name="idCurso" class="form-control">
+					<div id="div_enviarPara_novo_aviso" class="form-group">
+                        <label class="control-label" for="enviarPara"><i id="icone_enviarPara_novo_aviso" class="fa"></i> Enviar para:</label>
+                        <select type="text" id="idCurso" name="idCurso" onblur="fcn_recarregaCores_novo_aviso();" class="form-control enviarParaObrigatorio_novo_aviso">
                         	<option value="">Todos os alunos</option>
 							@foreach(Curso::all() as $curso)
                         		<option value="{{$curso->id}}">Curso: {{$curso->nome}}-{{$curso->idioma->nome}}</option>
-                        	@endforeach
+                        	@endforeach	
                         </select>
 					</div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar" value="Salvar" >
+                        <input type="submit" class="btn btn-primary btn-salvar-novo-aviso" value="Salvar" >
                     </div>
                 </form>
             </div>
@@ -61,25 +61,25 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>
-                    <div id="div_nome" class="form-group">
-                        <label class="control-label" for="titulo"><i id="icone_nome" class="fa"></i> Titulo</label>
-                        <input type="text" autocomplete="off" id="titulo" name="titulo" class="form-control" >
+                    <div id="div_titulo_editar_aviso" class="form-group">
+                        <label class="control-label" for="titulo"><i id="icone_titulo_editar_aviso" class="fa"></i> Titulo</label>
+                        <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="titulo" name="titulo" class="form-control tituloObrigatorio_editar_aviso" >
                     </div>
-                    <div id="div_sobrenome" class="form-group">
-                        <label class="control-label" for="descricao"><i id="icone_descricao" class="fa"></i> Descrição</label>
-                        <input type="text" autocomplete="off" id="descricao" name="descricao" class="form-control">
+                    <div id="div_descricao_editar_aviso" class="form-group">
+                        <label class="control-label" for="descricao"><i id="icone_descricao_editar_aviso" class="fa"></i> Descrição</label>
+                        <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="descricao" name="descricao" class="form-control descricaoObrigatoria_editar_aviso">
                     </div>
                     <div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem</label>
-                        <input type="file" id="urlImagem" name="urlImagem" class="form-control">
+                        <input type="file" id="urlImagem" name="urlImagem" onblur="fcn_recarregaCores_editar_aviso();" class="form-control">
                     </div>
-                    <div id="dataExpiracao" class="form-group">
-                        <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao" class="fa"></i> Data de Expiração</label>
-                        <input type="text" autocomplete="off" id="dataExpiracao" name="dataExpiracao" class="form-control">
+                    <div id="div_dataExpiracao_editar_aviso" class="form-group">
+                        <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_editar_aviso" class="fa"></i> Data de Expiração</label>
+                        <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="dataExpiracao" name="dataExpiracao" class="form-control validaData dataExpiracaoObrigatoria_editar_aviso">
 					</div>
-					<div id="idCurso" class="form-group">
-                        <label class="control-label" for="idCurso"><i id="icone_idCurso" class="fa"></i> Curso</label>
-                        <select type="text" autocomplete="off" id="idCurso" name="idCurso" class="form-control">
+					<div id="div_enviarPara_editar_aviso" class="form-group">
+                        <label class="control-label" for="enviarPara"><i id="icone_enviarPara_editar_aviso" class="fa"></i> Curso</label>
+                        <select type="text" id="idCurso" name="idCurso" onblur="fcn_recarregaCores_editar_aviso();" class="form-control enviarParaObrigatorio_editar_aviso">
 							<option value="">Todos os alunos</option>
 							@foreach(Curso::all() as $curso)
                         		<option value="{{$curso->id}}">Curso: {{$curso->nome}}-{{$curso->idioma->nome}}</option>
@@ -88,7 +88,7 @@
 					</div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar" value="Salvar" >
+                        <input type="submit" class="btn btn-primary btn-salvar-editar-aviso" value="Salvar" >
                     </div>
                 </form>
             </div>
@@ -277,6 +277,242 @@
 	} );
 
 
+</script>
+
+<script src="../../js/jquery.maskedinput.min.js"></script>
+<script> //validações
+	$(".validaData").mask("99/99/9999");
+	
+	$(".btn-salvar-novo-aviso").click(function(event){
+			
+		var obrigatorioPendente = 0;
+		
+		if($(".tituloObrigatorio_novo_aviso").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_titulo_novo_aviso" ).removeClass("has-success");
+			$( "#icone_titulo_novo_aviso" ).removeClass("fa-check");
+			$( "#div_titulo_novo_aviso" ).addClass("has-error");
+			$( "#icone_titulo_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_titulo_novo_aviso" ).removeClass("has-error");
+			$( "#icone_titulo_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_titulo_novo_aviso" ).addClass("has-success");
+			$( "#icone_titulo_novo_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".descricaoObrigatoria_novo_aviso").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_descricao_novo_aviso" ).removeClass("has-success");
+			$( "#icone_descricao_novo_aviso" ).removeClass("fa-check");
+			$( "#div_descricao_novo_aviso" ).addClass("has-error");
+			$( "#icone_descricao_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_descricao_novo_aviso" ).removeClass("has-error");
+			$( "#icone_descricao_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_descricao_novo_aviso" ).addClass("has-success");
+			$( "#icone_descricao_novo_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".dataExpiracaoObrigatoria_novo_aviso").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_dataExpiracao_novo_aviso" ).removeClass("has-success");
+			$( "#icone_dataExpiracao_novo_aviso" ).removeClass("fa-check");
+			$( "#div_dataExpiracao_novo_aviso" ).addClass("has-error");
+			$( "#icone_dataExpiracao_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_dataExpiracao_novo_aviso" ).removeClass("has-error");
+			$( "#icone_dataExpiracao_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_dataExpiracao_novo_aviso" ).addClass("has-success");
+			$( "#icone_dataExpiracao_novo_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".enviarParaObrigatorio_novo_aviso").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_enviarPara_novo_aviso" ).removeClass("has-success");
+			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-check");
+			$( "#div_enviarPara_novo_aviso" ).addClass("has-error");
+			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_enviarPara_novo_aviso" ).removeClass("has-error");
+			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_enviarPara_novo_aviso" ).addClass("has-success");
+			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	});
+	
+	$(".btn-salvar-editar-aviso").click(function(event){
+			
+		var obrigatorioPendente = 0;
+		
+		if($(".tituloObrigatorio_editar_aviso").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_titulo_editar_aviso" ).removeClass("has-success");
+			$( "#icone_titulo_editar_aviso" ).removeClass("fa-check");
+			$( "#div_titulo_editar_aviso" ).addClass("has-error");
+			$( "#icone_titulo_editar_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_titulo_editar_aviso" ).removeClass("has-error");
+			$( "#icone_titulo_editar_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_titulo_editar_aviso" ).addClass("has-success");
+			$( "#icone_titulo_editar_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".descricaoObrigatoria_editar_aviso").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_descricao_editar_aviso" ).removeClass("has-success");
+			$( "#icone_descricao_editar_aviso" ).removeClass("fa-check");
+			$( "#div_descricao_editar_aviso" ).addClass("has-error");
+			$( "#icone_descricao_editar_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_descricao_editar_aviso" ).removeClass("has-error");
+			$( "#icone_descricao_editar_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_descricao_editar_aviso" ).addClass("has-success");
+			$( "#icone_descricao_editar_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".dataExpiracaoObrigatoria_editar_aviso").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_dataExpiracao_editar_aviso" ).removeClass("has-success");
+			$( "#icone_dataExpiracao_editar_aviso" ).removeClass("fa-check");
+			$( "#div_dataExpiracao_editar_aviso" ).addClass("has-error");
+			$( "#icone_dataExpiracao_editar_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_dataExpiracao_editar_aviso" ).removeClass("has-error");
+			$( "#icone_dataExpiracao_editar_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_dataExpiracao_editar_aviso" ).addClass("has-success");
+			$( "#icone_dataExpiracao_editar_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".enviarParaObrigatorio_editar_aviso").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_enviarPara_editar_aviso" ).removeClass("has-success");
+			$( "#icone_enviarPara_editar_aviso" ).removeClass("fa-check");
+			$( "#div_enviarPara_editar_aviso" ).addClass("has-error");
+			$( "#icone_enviarPara_editar_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_enviarPara_editar_aviso" ).removeClass("has-error");
+			$( "#icone_enviarPara_editar_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_enviarPara_editar_aviso" ).addClass("has-success");
+			$( "#icone_enviarPara_editar_aviso" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	});
+	
+	function fcn_recarregaCores_novo_aviso(){
+		
+		if($(".tituloObrigatorio_novo_aviso").val() == ""){
+			$( "#div_titulo_novo_aviso" ).removeClass("has-success");
+			$( "#icone_titulo_novo_aviso" ).removeClass("fa-check");
+			$( "#div_titulo_novo_aviso" ).addClass("has-error");
+			$( "#icone_titulo_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_titulo_novo_aviso" ).removeClass("has-error");
+			$( "#icone_titulo_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_titulo_novo_aviso" ).addClass("has-success");
+			$( "#icone_titulo_novo_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".descricaoObrigatoria_novo_aviso").val() == ""){
+			$( "#div_descricao_novo_aviso" ).removeClass("has-success");
+			$( "#icone_descricao_novo_aviso" ).removeClass("fa-check");
+			$( "#div_descricao_novo_aviso" ).addClass("has-error");
+			$( "#icone_descricao_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_descricao_novo_aviso" ).removeClass("has-error");
+			$( "#icone_descricao_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_descricao_novo_aviso" ).addClass("has-success");
+			$( "#icone_descricao_novo_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".dataExpiracaoObrigatoria_novo_aviso").val() == ""){
+			$( "#div_dataExpiracao_novo_aviso" ).removeClass("has-success");
+			$( "#icone_dataExpiracao_novo_aviso" ).removeClass("fa-check");
+			$( "#div_dataExpiracao_novo_aviso" ).addClass("has-error");
+			$( "#icone_dataExpiracao_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_dataExpiracao_novo_aviso" ).removeClass("has-error");
+			$( "#icone_dataExpiracao_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_dataExpiracao_novo_aviso" ).addClass("has-success");
+			$( "#icone_dataExpiracao_novo_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".enviarParaObrigatorio_novo_aviso").val() == ""){
+			$( "#div_enviarPara_novo_aviso" ).removeClass("has-success");
+			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-check");
+			$( "#div_enviarPara_novo_aviso" ).addClass("has-error");
+			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_enviarPara_novo_aviso" ).removeClass("has-error");
+			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_enviarPara_novo_aviso" ).addClass("has-success");
+			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-check");
+		}
+		
+	};
+	
+	function fcn_recarregaCores_editar_aviso(){
+		
+		if($(".tituloObrigatorio_editar_aviso").val() == ""){
+			$( "#div_titulo_editar_aviso" ).removeClass("has-success");
+			$( "#icone_titulo_editar_aviso" ).removeClass("fa-check");
+			$( "#div_titulo_editar_aviso" ).addClass("has-error");
+			$( "#icone_titulo_editar_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_titulo_editar_aviso" ).removeClass("has-error");
+			$( "#icone_titulo_editar_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_titulo_editar_aviso" ).addClass("has-success");
+			$( "#icone_titulo_editar_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".descricaoObrigatoria_editar_aviso").val() == ""){
+			$( "#div_descricao_editar_aviso" ).removeClass("has-success");
+			$( "#icone_descricao_editar_aviso" ).removeClass("fa-check");
+			$( "#div_descricao_editar_aviso" ).addClass("has-error");
+			$( "#icone_descricao_editar_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_descricao_editar_aviso" ).removeClass("has-error");
+			$( "#icone_descricao_editar_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_descricao_editar_aviso" ).addClass("has-success");
+			$( "#icone_descricao_editar_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".dataExpiracaoObrigatoria_editar_aviso").val() == ""){
+			$( "#div_dataExpiracao_editar_aviso" ).removeClass("has-success");
+			$( "#icone_dataExpiracao_editar_aviso" ).removeClass("fa-check");
+			$( "#div_dataExpiracao_editar_aviso" ).addClass("has-error");
+			$( "#icone_dataExpiracao_editar_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_dataExpiracao_editar_aviso" ).removeClass("has-error");
+			$( "#icone_dataExpiracao_editar_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_dataExpiracao_editar_aviso" ).addClass("has-success");
+			$( "#icone_dataExpiracao_editar_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".enviarParaObrigatorio_editar_aviso").val() == ""){
+			$( "#div_enviarPara_editar_aviso" ).removeClass("has-success");
+			$( "#icone_enviarPara_editar_aviso" ).removeClass("fa-check");
+			$( "#div_enviarPara_editar_aviso" ).addClass("has-error");
+			$( "#icone_enviarPara_editar_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_enviarPara_editar_aviso" ).removeClass("has-error");
+			$( "#icone_enviarPara_editar_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_enviarPara_editar_aviso" ).addClass("has-success");
+			$( "#icone_enviarPara_editar_aviso" ).addClass("fa-check");
+		}
+		
+	}
+	
 </script>
 	
 @endsection
