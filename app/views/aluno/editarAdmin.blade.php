@@ -161,19 +161,19 @@
                                                 <div class="col-sm-9 col-xs-12">
                                                     <input type="text" name="id" class="form-control" style="display:none;" value={{$aluno->id}}>
                                                     <div id="div_nome" class="form-group margin">
-                                                        <label class="control-label" for="nome"><i id="icone_nome" class="fa"></i></label> <b>Nome</b>
+                                                        <label class="control-label" for="nome"><i id="icone_nome" class="fa"></i> Nome</label>
                                                         <input type="text" autocomplete="off" name="nome" id="nome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras nomeObrigatorio" value={{$aluno->nome}}>
                                                     </div>
                                                     <div id="div_sobrenome" class="form-group margin">
-                                                        <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i></label> <b>Sobrenome</b>
+                                                        <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i> Sobrenome</label>
                                                         <input type="text" autocomplete="off" name="sobrenome" id="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio" value={{$aluno->sobrenome}}>
                                                     </div>
                                                     <div id="div_dataNascimento" class="form-group margin">
-                                                        <label class="control-label" for="dataNascimento"><i id="icone_dataNascimento" class="fa"></i></label> <b>Data de nascimento</b>
+                                                         <label class="control-label" for="dataNascimento"><i id="icone_dataNascimento" class="fa"></i> Data de Nascimento</label>
                                                         <input type="text" autocomplete="off" name="dataNascimento" id="dataNascimento" onblur="fcn_recarregaCores();fcn_validaDtNascimento(this)" class="form-control validaData dataNascimentoObrigatorio" value={{$aluno->dataNascimento}}>
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
-                                                        <label class="control-label" for="email"><i id="icone_email" class="fa"></i></label> <b>E-mail</b>
+                                                        <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
                                                         <input type="text" autocomplete="off" name="email" id="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$aluno->email}}>
                                                     </div>
 													<div id="div_diaVencimentoBoleto" class="form-group margin">
@@ -211,11 +211,11 @@
 														</select>
                                                     </div>
                                                     <div id="div_matricula" class="form-group margin">
-                                                        <label class="control-label" for="matricula"><i id="icone_matricula" class="fa"></i></label> <b>Matrícula</b>
+                                                        <label class="control-label" for="matricula"><i id="icone_matricula" class="fa"></i> Matrícula</label>
                                                         <input type="text" autocomplete="off" name="matricula" id="matricula" maxlength="10" onblur="fcn_recarregaCores();" class="form-control somenteNumeros matriculaObrigatoria" value={{$aluno->matricula}}>
                                                     </div>
 													<div class="form-group margin">
-                                                        <label class="control-label" for="sobreMim"></label> <b>Sobre mim</b>
+                                                        <label class="control-label" for="sobreMim">Sobre Mim</label>
                                                         <textarea id="sobreMim" name="sobreMim" maxlength="8000" onblur="fcn_recarregaCores();" class="form-control" rows="3">{{''.$aluno->sobreMim.''}}</textarea>
 													</div>
                                                     <div class="margin" style="padding-bottom:10px;">
@@ -243,15 +243,15 @@
                                             </div>
                                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                                     <div id="div_senhaAtual" class="form-group margin">
-                                                        <label class="control-label" for="inputSuccess"><i id="icone_senhaAtual" class="fa"></i></label> <b>Senha Atual</b>
+                                                        <label class="control-label" for="inputSuccess"><i id="icone_senhaAtual" class="fa"></i><b> Senha Atual</b></label>
                                                         <input type="password" maxlength="12" class="form-control senhaAtualObrigatoria" name="senhaAtual" id="senhaAtual" onblur="fcn_recarregaCoresSenha();fcn_validaSenhaAtual(6, 12, this.value);" >
                                                     </div>
                                                     <div id="div_novaSenha" class="form-group margin">
-                                                        <label class="control-label" for="inputSuccess"><i id="icone_novaSenha" class="fa"></i></label> <b>Nova Senha</b>
+                                                        <label class="control-label" for="inputSuccess"><i id="icone_novaSenha" class="fa"></i><b> Nova Senha</b></label>
                                                         <input type="password" maxlength="12" class="form-control novaSenhaObrigatoria" name="senha" id="senha" onblur="fcn_recarregaCoresSenha();fcn_validaNovaSenha(6, 12, this.value);" >
                                                     </div>
                                                     <div id="div_confirmarNovaSenha" class="form-group margin">
-                                                        <label class="control-label" for="inputSuccess"><i id="icone_confirmarNovaSenha" class="fa"></i></label> <b>Confirmar Nova Senha</b>
+                                                        <label class="control-label" for="inputSuccess"><i id="icone_confirmarNovaSenha" class="fa"></i><b> Confirmar Nova Senha</b></label>
                                                         <input type="password" maxlength="12" class="form-control confirmaNovaSenhaObrigatoria" name="novaSenha" id="novaSenha" onblur="fcn_recarregaCoresSenha();fcn_validaConfirmaNovaSenha(6, 12, this.value);" >
                                                     </div>
                                                     <div class="margin" style="padding-bottom:10px;">
