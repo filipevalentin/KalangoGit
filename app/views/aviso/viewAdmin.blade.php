@@ -2,6 +2,38 @@
 
 @section('modals')
 
+<link rel="stylesheet" href="../plugins/jQueryUI/calendario/jquery-ui.css">
+<script src="../plugins/jQuery/jQuery-2.1.3.min.js"></script>
+<script>
+  
+  $(function() {
+    $( ".dataExpiracaoObrigatoria_novo_aviso" ).datepicker({
+		dateFormat: 'dd/mm/yy',
+		dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+		dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+		dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+		nextText: 'Próximo',
+		prevText: 'Anterior'
+	});
+  });
+  
+  $(function() {
+    $( ".dataExpiracaoObrigatoria_editar_aviso" ).datepicker({
+		dateFormat: 'dd/mm/yy',
+		dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+		dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+		dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+		nextText: 'Próximo',
+		prevText: 'Anterior'
+	});
+  });
+  
+</script>
+
 <div class="modal fade" id="criarAviso" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -28,7 +60,7 @@
                     </div>
                     <div id="div_dataExpiracao_novo_aviso" class="form-group">
                         <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_novo_aviso" class="fa"></i> Data de Expiração</label>
-                        <input type="text" autocomplete="off" id="dataExpiracao" name="dataExpiracao" onblur="fcn_recarregaCores_novo_aviso();" class="form-control validaData dataExpiracaoObrigatoria_novo_aviso">
+                        <input type="text" autocomplete="off" id="dataExpiracao" name="dataExpiracao" onblur="fcn_recarregaCores_novo_aviso();" class="form-control dataExpiracaoObrigatoria_novo_aviso">
 					</div>
 					<div class="form-group">
                         <label class="control-label" for="enviarPara">Enviar para:</label>
@@ -75,7 +107,7 @@
                     </div>
                     <div id="div_dataExpiracao_editar_aviso" class="form-group">
                         <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_editar_aviso" class="fa"></i> Data de Expiração</label>
-                        <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="dataExpiracao" name="dataExpiracao" class="form-control validaData dataExpiracaoObrigatoria_editar_aviso">
+                        <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="dataExpiracaoEditar" name="dataExpiracao" class="form-control dataExpiracaoObrigatoria_editar_aviso">
 					</div>
 					<div class="form-group">
                         <label class="control-label" for="enviarPara">Enviar para:</label>
@@ -210,7 +242,7 @@
         modal.find('#id').val(dataid)
         modal.find('#titulo').val(datatitulo)
         modal.find('#descricao').val(datadescricao)
-        modal.find('#dataExpiracao').val(datadataexpiracao)
+        modal.find('#dataExpiracaoEditar').val(datadataexpiracao)
         modal.find('#idCurso').val(dataidcurso)
 
     });
@@ -279,12 +311,12 @@
 
 </script>
 
-<script src="../../js/jquery.maskedinput.min.js"></script>
 <script> //validações
-	$(".validaData").mask("99/99/9999");
 	
 	$(".btn-salvar-novo-aviso").click(function(event){
-			
+		
+		fcn_validaDtExpiracao_Novo_Aviso($(".dataExpiracaoObrigatoria_novo_aviso").val());
+		
 		var obrigatorioPendente = 0;
 		
 		if($(".tituloObrigatorio_novo_aviso").val() == ""){
@@ -334,7 +366,9 @@
 	});
 	
 	$(".btn-salvar-editar-aviso").click(function(event){
-			
+		
+		fcn_validaDtExpiracao_Editar_Aviso($(".dataExpiracaoObrigatoria_editar_aviso").val());
+		
 		var obrigatorioPendente = 0;
 		
 		if($(".tituloObrigatorio_editar_aviso").val() == ""){
@@ -512,6 +546,50 @@
 			}
 			 
 			return 0; 
+		}
+	}
+	
+	function fcn_validaDtExpiracao_Novo_Aviso(element) 
+	{
+		if(element != "" && element != "__/__/____"){
+			regex = /^((((0?[1-9]|1\d|2[0-8])\/(0?[1-9]|1[0-2]))|((29|30)\/(0?[13456789]|1[0-2]))|(31\/(0?[13578]|1[02])))\/((19|20)?\d\d))$|((29\/0?2\/)((19|20)?(0[48]|[2468][048]|[13579][26])|(20)?00))$/;
+			
+			resultado = regex.exec(element);
+			
+			if(!resultado || element.length != 10)
+			{
+				$( "#div_dataExpiracao_novo_aviso" ).removeClass("has-success");
+				$( "#icone_dataExpiracao_novo_aviso" ).removeClass("fa-check");
+				$( "#div_dataExpiracao_novo_aviso" ).addClass("has-error");
+				$( "#icone_dataExpiracao_novo_aviso" ).addClass("fa-times-circle-o");
+				
+				alert("Data de Expiração inválida!");
+				document.getElementById('dataExpiracao').value = "";
+				return false;
+			}
+			
+		}
+	}
+	
+	function fcn_validaDtExpiracao_Editar_Aviso(element) 
+	{
+		if(element != "" && element != "__/__/____"){
+			regex = /^((((0?[1-9]|1\d|2[0-8])\/(0?[1-9]|1[0-2]))|((29|30)\/(0?[13456789]|1[0-2]))|(31\/(0?[13578]|1[02])))\/((19|20)?\d\d))$|((29\/0?2\/)((19|20)?(0[48]|[2468][048]|[13579][26])|(20)?00))$/;
+			
+			resultado = regex.exec(element);
+			
+			if(!resultado || element.length != 10)
+			{
+				$( "#div_dataExpiracao_editar_aviso" ).removeClass("has-success");
+				$( "#icone_dataExpiracao_editar_aviso" ).removeClass("fa-check");
+				$( "#div_dataExpiracao_editar_aviso" ).addClass("has-error");
+				$( "#icone_dataExpiracao_editar_aviso" ).addClass("fa-times-circle-o");
+				
+				alert("Data de Expiração inválida!");
+				document.getElementById('dataExpiracaoEditar').value = "";
+				return false;
+			}
+			
 		}
 	}
 	
