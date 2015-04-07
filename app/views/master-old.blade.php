@@ -65,7 +65,11 @@
                                 <ul class="dropdown-menu" style="margin-left: -165px;">
                                     <!-- User image -->
                                     <li class="user-header" style="background: #088F01;">
-                                        <img src="/img/avatar3.png" class="img-circle" alt="User Image" />
+                                        @if(Auth::user()->urlImagem != null)
+                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="Auth::user()->urlImagem">
+                                        @else
+                                             <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
+                                        @endif
                                         <p>
                                             {{Auth::user()->nome}} {{" "}} {{Auth::user()->sobrenome}}
                                             <small>Membro desde Nov/2012</small>

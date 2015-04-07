@@ -32,13 +32,17 @@
                     <div class="col-lg-6">
                         <div class="box box-solid" style="background: #B6703D; color: black;">
                             <div class="box-header">
-                                <h3 class="box-title" style="color: white;">Meus Desempenho</h3>
+                                <h3 class="box-title" style="color: white;">Meu Desempenho</h3>
                             </div> 
                             <div class="box-body" style="background: rgb(236, 236, 236)">
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-3 center" style="text-align: center">
                                         <span class="profile-picture">
-                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/{{Auth::user()->urlImagem}}">
+                                             @if(Auth::user()->urlImagem != null)
+                                                <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="Auth::user()->urlImagem">
+                                            @else
+                                                 <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
+                                            @endif
                                         </span>
                                     </div>
                                     <div class="col-sm-9">
@@ -46,13 +50,54 @@
                                             <li style="font-size: x-large;font-weight: 600;">{{Auth::user()->nome}} {{Auth::user()->sobrenome}}</li>
                                             <li style="font-size: large;font-weight: 500;">{{Auth::user()->aluno->turmas->first()->nome}}</li>
                                             <li style="font-size: large;font-weight: 500;">Ranking: Turma: {{$turma->meuRanking['turma']+1}}º   Módulo: {{$turma->meuRanking['modulo']+1}}º</li>
-                                            <li style="font-size: large;font-weight: 500;">Medalha:
-                                                <small class="pull-right">90%</small>
-                                                <div class="progress" style="margin-top:5px; height: 20px;background: white;">
-                                                    <div class="progress-bar" style="width: 90%;background-color: silver;"><!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
-                                                    {{$turma->pivot->pontuacao}} Pontos
+                                            <li style="font-size: large;font-weight: 500;">Pontuação: {{$turma->pivot->pontuacao}} Pontos
+                                                <?php
+                                                    $pontos = $turma->pivot->pontuacao;
+                                                ?> 
+                                                @if($pontos < 5000)
+                                                    <small class="pull-right">{{($pontos/5000)*100}}%</small>
+                                                    <div class="progress" style="margin-top:5px; margin-bottom: 5px; height: 20px;background: white;">
+                                                        <div class="progress-bar" style="width: {{($pontos/5000)*100}}%;background-color: darkgoldenrod;"><!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                        {{$turma->pivot->pontuacao}} Pontos
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    <p class=""> Nenhuma Medalha - Faltam {{5000 - $pontos}} pontos para Bronze</p>
+                                                @elseif($pontos < 10000)
+                                                    <small class="pull-right">{{(($pontos-5000)/5000)*100}}%</small>
+                                                    <div class="progress" style="margin-top:5px; height: 20px;background: white;">
+                                                        <div class="progress-bar" style="width: {{(($pontos-5000)/5000)*100}}%;background-color: silver;"><!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                        {{$turma->pivot->pontuacao}} Pontos
+                                                        </div>
+                                                    </div>
+                                                    <li style="font-size: large;font-weight: 500; float:left;">
+                                                        <small><img src="/images/bronze.png" alt="" style="max-height:35px; padding-left:5px"></small>
+                                                    </li>
+                                                    <p class="pull-right">Faltam {{10000 - $pontos}} pontos para Prata</p>
+                                                @elseif($pontos < 15000)
+                                                    <small class="pull-right">{{(($pontos-10000)/5000)*100}}%</small>
+                                                    <div class="progress" style="margin-top:5px; height: 20px;background: white;">
+                                                        <div class="progress-bar" style="width: {{(($pontos-10000)/5000)*100}}%;background-color: gold;"><!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                        {{$turma->pivot->pontuacao}} Pontos
+                                                        </div>
+                                                    </div>
+                                                    <li style="font-size: large;font-weight: 500; float:left;">
+                                                        <small><img src="/images/bronze.png" alt="" style="max-height:35px; padding-left:5px"></small>
+                                                        <small><img src="/images/prata.png" alt="" style="max-height:35px; padding-left:5px"></small>
+                                                    </li>
+                                                    <p class="pull-right"> Faltam {{15000 - $pontos}} pontos para Ouro</p>
+                                                @elseif($pontos >= 20000)
+                                                    <small class="pull-right">100%</small>
+                                                    <div class="progress" style="margin-top:5px; height: 20px;background: white;">
+                                                        <div class="progress-bar" style="width: 100%;background-color: gold;"><!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                        {{$turma->pivot->pontuacao}} Pontos
+                                                        </div>
+                                                    </div>
+                                                    <li style="font-size: large;font-weight: 500; float:left;">
+                                                        <small><img src="/images/bronze.png" alt="" style="max-height:35px; padding-left:5px"></small>
+                                                        <small><img src="/images/prata.png" alt="" style="max-height:35px; padding-left:5px"></small><small><img src="/images/ouro.png" alt="" style="max-height:35px; padding-left:5px"></small>
+                                                    </li>
+                                                    <p class="pull-right">Parabéns!!! Você conquistou todas as Medalhas!</p>
+                                                @endif
                                             </li>
                                         </ul>
                                     </div>   
@@ -95,14 +140,49 @@
                             <div class="box-body" style="background: rgb(236, 236, 236)">
                                 <ul style="padding:0px; list-style: none;">
                                 @foreach($turma->topicos as $topico)
-                                    <li style="font-size:larger; font-weight: 500;">{{$topico->nome}}:
-                                        <small class="pull-right">90%</small>
-                                        <div class="progress" style="margin-top:5px; height: 15px;background: white;">
-                                            <div class="progress-bar" style="width: 30%;background-color: gold; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
-                                            {{$topico->pontos}} pontos
+                                    @if($topico->pontos < 2500)
+                                        <li style="font-size:larger; font-weight: 500;">{{$topico->nome}}:
+                                            <small class="pull-right">{{($topico->pontos/2500)*100}}%</small>
+                                            <div class="progress" style="margin-top:5px; height: 15px;background: white;">
+                                                <div class="progress-bar" style="width: {{($topico->pontos/2500)*100}}%;background-color: darkgoldenrod; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                {{$topico->pontos}} pontos
+                                                </div>
                                             </div>
-                                        </div>
-                                    </li>
+                                        </li>
+                                    @elseif($topico->pontos < 5000)
+                                        <li style="font-size:larger; font-weight: 500;">{{$topico->nome}}:
+                                            <small><img src="/images/bronze.png" alt="" style="max-height:25px; padding-left:5px"></small>
+                                            <small class="pull-right">{{(($pontos-2500)/2500)*100}}%</small>
+                                            <div class="progress" style="margin-top:5px; height: 15px;background: white;">
+                                                <div class="progress-bar" style="width: {{(($pontos-2500)/2500)*100}}%;background-color: silver; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                {{$topico->pontos}} pontos
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @elseif($topico->pontos < 7500)
+                                        <li style="font-size:larger; font-weight: 500;">{{$topico->nome}}:
+                                            <small><img src="/images/bronze.png" alt="" style="max-height:25px; padding-left:5px"></small>
+                                            <small><img src="/images/silver.png" alt="" style="max-height:25px; padding-left:5px"></small>
+                                            <small class="pull-right">{{(($pontos-5000)/2500)*100}}%</small>
+                                            <div class="progress" style="margin-top:5px; height: 15px;background: white;">
+                                                <div class="progress-bar" style="width: {{(($pontos-5000)/2500)*100}}%;background-color: gold; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                {{$topico->pontos}} pontos
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @elseif($topico->pontos > 12500)
+                                        <li style="font-size:larger; font-weight: 500;">{{$topico->nome}}:
+                                            <small><img src="/images/bronze.png" alt="" style="max-height:25px; padding-left:5px"></small>
+                                            <small><img src="/images/silver.png" alt="" style="max-height:25px; padding-left:5px"></small>
+                                            <small><img src="/images/ouro.png" alt="" style="max-height:25px; padding-left:5px"></small>
+                                            <small class="pull-right">{{(($pontos-10000)/2500)*100}}%</small>
+                                            <div class="progress" style="margin-top:5px; height: 15px;background: white;">
+                                                <div class="progress-bar" style="width: {{(($pontos-10000)/2500)*100}}%;background-color: gold; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                {{$topico->pontos}} pontos
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endif
                                 @endforeach
                                 Conteudo não dinamico abaixo
                                     <li style="font-size:larger; font-weight: 500;">Adjetivos:

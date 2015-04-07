@@ -84,7 +84,11 @@
                                                 <a href="/admin/mensagem/{{$mensagem->id}}">
                                                     <div class="pull-left">
                                                         <!-- User Image -->
-                                                        <img src="/{{$mensagem->usuarioOrigem->urlImagem}}" class="img-circle" alt="User Image"/>
+                                                        @if($mensagem->usuarioOrigem->urlImagem != null)
+                                                            <img src="/{{$mensagem->usuarioOrigem->urlImagem}}" class="img-circle" alt="User Image"/>
+                                                        @else
+                                                            <img src="/images/default.png" class="img-circle" alt="User Image"/>
+                                                        @endif
                                                     </div>
                                                     <!-- Message title and timestamp -->
                                                     <h4>                            
@@ -136,7 +140,11 @@
                                 <ul class="dropdown-menu" style="margin-left: -165px;">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="/img/avatar3.png" class="img-circle" alt="User Image" />
+                                        @if(Auth::user()->urlImagem != null)
+                                            <img class="editable img-circle" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="Auth::user()->urlImagem">
+                                        @else
+                                             <img class="editable img-circle" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
+                                        @endif
                                         <p>
                                             {{Auth::user()->nome}} {{" "}} {{Auth::user()->sobrenome}}
                                             <small>Membro desde Nov/2012</small>
