@@ -314,7 +314,7 @@
                                         <h4 class="box-title">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#ME{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
-                                        <div class="box-tools pull-right" style="padding-top: 8px;">
+                                        <div class="box-tools pull-right">
                                             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-titulo="{{$questao->titulo}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>
@@ -381,7 +381,7 @@
                                         <h4 class="box-title">
                                             <a data-toggle="collapse" data-parent="#accordion" href="#RU{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
-                                        <div class="box-tools pull-right" style="padding-top: 8px;">
+                                        <div class="box-tools pull-right">
                                             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-titulo="{{$questao->titulo}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>

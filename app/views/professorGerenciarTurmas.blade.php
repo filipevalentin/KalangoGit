@@ -295,7 +295,7 @@
                                             {{$turma->modulo->nome}}
                                         </a>
                                     </h4>
-                                    <div class="box-tools pull-right" style="padding-top: 8px;">
+                                    <div class="box-tools pull-right">
                                         <a href="/professorModuloView/{{$turma->modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
                                     </div>
                                 </div>

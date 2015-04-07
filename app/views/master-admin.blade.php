@@ -196,6 +196,12 @@
                             </ul>
                         </li>
 
+                        <li>
+                            <a href="/admin/turmas">
+                                <i class="fa fa-group"></i> <span>Gerenciar Turmas</span>
+                            </a>
+                        </li>
+
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-user"></i>

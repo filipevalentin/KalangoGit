@@ -212,7 +212,7 @@
                                                 {{$aula->titulo}}
                                             </a>
                                         </h4>
-                                        <div class="box-tools pull-right" style="padding-top: 8px;">
+                                        <div class="box-tools pull-right">
                                             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editaraula" data-id="{{$aula->id}}" data-nome="{{$aula->titulo}}"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>

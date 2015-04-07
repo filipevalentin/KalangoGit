@@ -102,7 +102,7 @@
 		                                
 		                                    <div class="box text-center">
 		                                        <div class="box-header">
-		                                        	<small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
+		                                        	<small class="badge pull-right bg-green" style="margin: 0px 76px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
 		                                            <h3 class="box-title center" style="float: none;">{{$questao->enunciado}}</h3>
 		                                        </div>
 		                                        <div class="box-body">

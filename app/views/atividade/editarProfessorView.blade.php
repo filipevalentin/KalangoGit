@@ -398,7 +398,7 @@
                                             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-enunciado="{{$questao->enunciado}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>
-                                        <small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
+                                        <small class="badge pull-right bg-green" style="margin: 0px 76px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                     </div>
                                     <div id="ME{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">
@@ -538,7 +538,7 @@
                                         @if(substr($questao->categoria,1) == "4")
                                             <small class="badge pull-right bg-red" style="margin: 0px 76px 0px 5px;">Rec. de Voz</small>
                                         @endif
-                                        <small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
+                                        <small class="badge pull-right bg-green" style="margin: 0px 76px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                     </div>
                                     <div id="RU{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">

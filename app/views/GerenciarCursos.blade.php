@@ -250,7 +250,7 @@
                                     <div class="box-body">
                                         <div class="small-box bg-blue">
                                             <div class="inner">
-                                                <div class="box-tools pull-right" style="padding-top: 8px;">
+                                                <div class="box-tools pull-right">
                                 
                                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarcurso" data-id="{{$cursosArray[$j]['id']}}" data-nome="{{$cursosArray[$j]['nome']}}" data-descricao="{{$cursosArray[$j]['descricao']}}" data-idioma="{{$cursosArray[$j]['idioma']}}"><i class="fa fa-pencil"></i></button>
                                                     <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
@@ -306,7 +306,7 @@
                                             {{$modulo->nome}}
                                         </a>
                                     </h4>
-                                    <div class="box-tools pull-right" style="padding-top: 8px;">
+                                    <div class="box-tools pull-right">
                                         <a href="moduloView/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
                                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarmodulo" data-id="{{$modulo->id}}" data-nome="{{$modulo->nome}}" data-descricao="{{$modulo->descricao}}"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger btn-sm" ><i class="fa fa-times"></i></button>
@@ -320,7 +320,7 @@
                                             <div class="box-body">
                                                 <div class="small-box bg-blue">
                                                     <div class="inner">
-                                                        <div class="box-tools pull-right" style="padding-top: 8px;">
+                                                        <div class="box-tools pull-right">
                                         
                                                             <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarturma" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" data-professor="{{User::find($turma->professor->id)->nome}}" data-idprofessor="{{$turma->professor->id}}"><i class="fa fa-pencil"></i></button>
                                                             <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>

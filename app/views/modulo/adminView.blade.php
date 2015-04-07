@@ -204,7 +204,7 @@
                                                 {{$aula->titulo}}
                                             </a>
                                         </h4>
-                                        <div class="box-tools pull-right" style="padding-top: 8px;">
+                                        <div class="box-tools pull-right">
                                             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editaraula" data-id="{{$aula->id}}" data-nome="{{$aula->titulo}}"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>
@@ -227,7 +227,7 @@
 
                                             @foreach ($aula->atividades as $atividade)
                                                 @if($atividade->status == '0')
-                                                    <div class="alert bg-primary alert-dismissable" style="min-height: 55px; background-color: white;">
+                                                    <div class="alert bg-primary alert-dismissable" style="min-height: 55px; background-color: rgb(103, 103, 103);">
                                                     <b style="color: red;">&nbsp;(Inativa)</b>
                                                 @else
                                                 <div class="alert bg-primary alert-dismissable" style="min-height: 55px;">

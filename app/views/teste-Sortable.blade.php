@@ -28,7 +28,7 @@
                                     <h4 class="box-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#ME1" class="collapsed">Questão 1</a>
                                     </h4>
-                                    <div class="box-tools pull-right" style="padding-top: 8px;">
+                                    <div class="box-tools pull-right">
                                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="1" data-titulo="Qual é o seu nome?" data-categoria="21" data-a="aaaaa" data-b="asdasasd" data-c="asdas" data-d="dasd" data-respostacerta="c" data-numero="1" data-tipo="me"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                     </div>
@@ -73,7 +73,7 @@
                                     <h4 class="box-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#RU3" class="collapsed">Questão 2</a>
                                     </h4>
-                                    <div class="box-tools pull-right" style="padding-top: 8px;">
+                                    <div class="box-tools pull-right">
                                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="3" data-titulo="Qual é o seu nome?" data-categoria="2" data-respostacerta="abc" data-numero="2" data-tipo="ru"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                     </div>
@@ -111,7 +111,7 @@
                                     <h4 class="box-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#RU4" class="collapsed">Questão 3</a>
                                     </h4>
-                                    <div class="box-tools pull-right" style="padding-top: 8px;">
+                                    <div class="box-tools pull-right">
                                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="4" data-titulo="Qual a porta mais a direita?" data-categoria="1" data-respostacerta="1234" data-numero="3" data-tipo="ru"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                     </div>

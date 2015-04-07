@@ -197,7 +197,7 @@
                                     <div class="box-body">
                                         <div class="small-box bg-blue">
                                             <div class="inner">
-                                                <div class="box-tools pull-right" style="padding-top: 8px;">
+                                                <div class="box-tools pull-right">
 
                                                 @if(get_class($categorias[$j])!="Curso")                                
                                                     <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarCategoria" data-id="{{$categorias[$j]->id}}" data-nome="{{$categorias[$j]->nome}}" data-tipo="{{get_class($categorias[$j])}}"><i class="fa fa-pencil"></i></button>
@@ -252,7 +252,7 @@
                             <div id="div_card_4" class="small-box bg-fuchsia card">
                                     <div style="padding: 10px;" class="inner">
 
-                                    <div class="box-tools pull-right" style="padding-top: 8px;">
+                                    <div class="box-tools pull-right">
                                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarAtividadeExtra" data-id="{{$atividade->id}}" data-nome="{{$atividade->titulo}}" data-descricao="{{$atividade->descricao}}" data-idCurso="{{$atividade->idCurso}}" data-idCategoria="{{$atividade->idCategoria}}"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                     </div>

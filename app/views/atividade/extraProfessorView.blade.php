@@ -95,7 +95,7 @@
                                         <h4 class="box-title">
                                             <a data-toggle="collapse" data-questao="{{$aux-1}}" data-parent="#accordion" href="#ME{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
-                                        <small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
+                                        <small class="badge pull-right bg-green" style="margin: 0px 76px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                     </div>
                                     <div id="ME{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">
@@ -261,7 +261,7 @@
                                         @if(substr($questao->categoria,1) == "4")
                                             <small class="badge pull-right bg-red" style="margin: 0px 76px 0px 5px;">Rec. de Voz</small>
                                         @endif
-                                        <small class="badge pull-right bg-green" style="margin: 0px 0px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
+                                        <small class="badge pull-right bg-green" style="margin: 0px 76px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                     </div>
                                     <div id="RU{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">

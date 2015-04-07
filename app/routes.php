@@ -1158,6 +1158,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
+		Route::get('listarModulos/{idCurso?}', function($idCurso = null){
+			$modulos = Curso::find($idCurso)->modulos;
+
+			return Response::json($modulos);
+
+		});
+
 		Route::post('atualizarModulo', function(){
 			$Modulo 			    = Modulo::find(Input::get('id')); 
 			$Modulo->nome       	= Input::get('nome');
@@ -1169,6 +1176,36 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 	//Turmas
+
+		Route::get('turmas', function(){
+			return View::make('turma/adminShow');
+		});
+
+		Route::get('listarTurmas',function(){
+
+			$data = array();
+
+			$turmas = Turma::all();
+
+			foreach ($turmas as $key => $turma) {
+				$turma->curso = $turma->modulo->curso->nome;
+				$turma->modulo2 = $turma->modulo->nome;
+				$turma->professor2 = $turma->professor->usuario->nome ." ". $turma->professor->usuario->sobrenome;
+				$turma->status2 = ($turma->status == 0) ? "Fechada" : "Em Andamento";
+				$turma->action = "<a style='color:white;' href='/admin/turma/$turma->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-group'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarTurma' data-id='$turma->id' data-nome='$turma->nome' data-idprofessor='$turma->idProfessor' data-status='$turma->status'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+				array_push($data, $turma);
+			}
+			//dd($data);
+
+
+
+			$response = array(
+					"data" => $data,
+					"iTotalRecords" => count($data),
+					"iTotalDisplayRecords" => count($data)
+				);
+			return Response::json($response);
+		});
 
 		Route::get('turma/{id}', function($id){
 			$turma = Turma::find($id);
@@ -1182,6 +1219,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$turma->nome = Input::get('nome');
 			$turma->idProfessor = Input::get('idprofessor');
 			$turma->idModulo = Input::get('idModulo');
+			$turma->status = 1;
 
 			$turma->save();
 

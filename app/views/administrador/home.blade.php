@@ -48,7 +48,7 @@
                     </div>
                     <div id="div_nome-editar-turma" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-turma" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresEditarTurma();" class="form-control nomeObrigatorio-editar-turma"></textarea>
+                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresEditarTurma();" class="form-control nomeObrigatorio-editar-turma">
                     </div>
                     <div id="div_professor-editar-turma" class="form-group">
                         <label class="control-label" for="professor"><i id="icone_professor-editar-turma" class="fa"></i> Professor</label>
@@ -56,6 +56,13 @@
                         @foreach(Professor::all() as $professor)
                             <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
                         @endforeach
+                        </select>
+                    </div>
+                    <div id="div_nome-editar-turma" class="form-group">
+                        <label class="control-label" for="status"><i id="icone_status-editar-turma" class="fa"></i> Status</label>
+                        <select autocomplete="off" id="status" name="status" maxlength="50" onblur="" class="form-control">
+                            <option value="1">Aberta (em andamento)</option>
+                            <option value="0">Fechada (concluída)</option>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -239,7 +246,7 @@
                                     <div class="box-body">
                                         <div class="small-box bg-blue">
                                             <div class="inner">
-                                                <div class="box-tools pull-right" style="padding-top: 8px;">
+                                                <div class="box-tools pull-right">
                                 
                                                     <button class="btn btn-success btn-xs" data-toggle="modal" rel="tooltip" data-placement="left" title="Editar Curso" data-target="#editarcurso" data-id="{{$cursosArray[$j]['id']}}" data-nome="{{$cursosArray[$j]['nome']}}" data-idioma="{{$cursosArray[$j]['idIdioma']}}"><i class="fa fa-pencil"></i></button>
                                                     <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
@@ -295,7 +302,7 @@
                                             {{$modulo->nome}}
                                         </a>
                                     </h4>
-                                    <div class="box-tools pull-right" style="padding-top: 8px;" >
+                                    <div class="box-tools pull-right">
                                         <a href="/admin/modulo/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
                                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarmodulo" data-id="{{$modulo->id}}" data-nome="{{$modulo->nome}}"><i class="fa fa-pencil"></i></button>
                                         <button class="btn btn-danger btn-sm" ><i class="fa fa-times"></i></button>
@@ -309,9 +316,9 @@
                                             <div class="box-body">
                                                 <div class="small-box bg-green">
                                                     <div class="inner">
-                                                        <div class="box-tools pull-right" style="padding-top: 8px;">
+                                                        <div class="box-tools pull-right">
                                         
-                                                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarturma" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" data-professor="{{User::find($turma->professor->id)->nome}}" data-idprofessor="{{$turma->professor->id}}"><i class="fa fa-pencil"></i></button>
+                                                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarturma" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" data-professor="{{User::find($turma->professor->id)->nome}}" data-idprofessor="{{$turma->professor->id}}" data-status="{{$turma->status}}"><i class="fa fa-pencil"></i></button>
                                                             <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                                         </div>
                                                         <a href="/admin/turma/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">
@@ -370,14 +377,15 @@
                 var button = $(event.relatedTarget) // Button that triggered the modal
                 var dataid = button.data('id')
                 var datanome = button.data('nome')
-                var dataidprofessor = button.data('idprofessor') // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+                var dataidprofessor = button.data('idprofessor')
+                var datastatus = button.data('status');
+
                 var modal = $(this)
                 modal.find('.modal-title').text('Editar Turma ' + datanome)
                 modal.find('#id').val(dataid)
                 modal.find('#nome').val(datanome)
                 modal.find('#idprofessor').val(dataidprofessor)
+                modal.find('#status').val(datastatus);
                 })
 
             $('#editarcurso').on('show.bs.modal', function (event) {
