@@ -2,6 +2,14 @@
 
 $layout = 'layouts.master';
 
+Route::get('teste5',function(){ 
+	
+	$u = User::all()->first();
+
+	return Auth::attempt(array('login' => $u->login , 'password' => $u->password, 'confirmed' => $u->confirmed )) ? "Logado" : "Algum problema";
+
+});
+
 Route::get('teste4',function(){ 
 	
 	return View::make('atividade/testeRecVoz');
@@ -19,7 +27,7 @@ Route::get('teste4',function(){
 
 			$u3 = new User;
 			$u3->nome = "Administrador 1";
-			$u3->login = "789";
+			$u3->login = 789;
 			$u3->tipo = "3";
 			$u3->password= Hash::make('789');
 			$u3->confirmed = '1';
@@ -1114,6 +1122,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$idioma = new Idioma;
 			$idioma->nome = Input::get('nome');
 			$idioma->save();
+
+			return Redirect::back();
 		});
 
 	//Cursos
@@ -1895,11 +1905,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 
 			$user->save();
+			$professor = new Professor;
 			$professor->id= $user->id;
 
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
-			$professor->sobreMim = Input::get('sobreMim');
-			$professor->codRegistro       = Input::get('codRegistro');
 
 			$professor->save();
 
