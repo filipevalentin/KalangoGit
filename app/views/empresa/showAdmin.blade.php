@@ -2,18 +2,26 @@
 
 @section('modals')
 
-<div class="modal fade" id="criarTopico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="criarEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Novo Tópico</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Nova Empresa</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/admin/criarTopico" enctype="multipart/form-data">
+                <form method="POST" action="/admin/criarEmpresa" enctype="multipart/form-data">
                     <div id="div_nome_novo_topico" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome_novo_topico" class="fa"></i> Nome</label>
                         <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
+                    </div>
+                    <div id="div_nome_novo_topico" class="form-group">
+                        <label class="control-label" for="razaoSocial"><i id="icone_razaoSocial_novo_topico" class="fa"></i> Razão Social</label>
+                        <input type="text" autocomplete="off" id="razaoSocial" name="razaoSocial" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
+                    </div>
+                    <div id="div_nome_novo_topico" class="form-group">
+                        <label class="control-label" for="cnpj"><i id="icone_cnpj_novo_topico" class="fa"></i> CNPJ</label>
+                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="" maxlength="100" class="form-control" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -25,21 +33,29 @@
     </div>
 </div>
 
-<div class="modal fade" id="editarTopico" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="editarEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="exampleModalLabel">Editar Tópico</h4>
+                <h4 class="modal-title" id="exampleModalLabel">Editar Empresa</h4>
             </div>
             <div class="modal-body">
-                <form method="POST" action="/admin/atualizarTopico" enctype="multipart/form-data">
+                <form method="POST" action="/admin/atualizarEmpresa" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>
-                    <div id="div_nome_editar_topico" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome_editar_topico" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_editar_topico" >
+                    <div id="div_nome_novo_topico" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome_novo_topico" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
+                    </div>
+                    <div id="div_nome_novo_topico" class="form-group">
+                        <label class="control-label" for="razaoSocial"><i id="icone_razaoSocial_novo_topico" class="fa"></i> Razão Social</label>
+                        <input type="text" autocomplete="off" id="razaoSocial" name="razaoSocial" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
+                    </div>
+                    <div id="div_nome_novo_topico" class="form-group">
+                        <label class="control-label" for="cnpj"><i id="icone_cnpj_novo_topico" class="fa"></i> CNPJ</label>
+                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="" maxlength="100" class="form-control" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -55,10 +71,10 @@
 
 @section('maincontent')
 	<section class="content-header">
-	    <h1>Tópicos de Questões</h1>
+	    <h1>Empresas</h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Tópicos de Questões</li>
+	        <li class="active">Empresas</li>
 	    </ol>
 	</section>
 
@@ -68,19 +84,21 @@
 				<table id="example" class="display" cellspacing="0" width="100%">
 			        <thead>
 			            <tr>
-			                <th>#</th>
 			                <th>Nome</th>
-			                <th>Nº de Questões</th>
-			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarTopico" ><i class="fa fa-plus"></i></button></th>
+			                <th>Razão Social</th>
+			                <th>CNPJ</th>
+			                <th>Nº de Propagandas</th>
+			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarEmpresa" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </thead>
 			 
 			        <tfoot>
 			            <tr>
-			                <th>#</th>
 			                <th>Nome</th>
-			                <th>Nº de Questões</th>
-			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarTopico" ><i class="fa fa-plus"></i></button></th>
+			                <th>Razão Social</th>
+			                <th>CNPJ</th>
+			                <th>Nº de Propagandas</th>
+			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarEmpresa" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </tfoot>
 			    </table>
@@ -95,32 +113,36 @@
 
 <script>
 
-	$('#editarTopico').on('show.bs.modal', function (event) {
+	$('#editarEmpresa').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var dataid = button.data('id');
         var datanome = button.data('nome')
+        var datarazaosocial = button.data('razaosocial')
+        var datacnpj = button.data('cnpj')
 
         var modal = $(this)
         modal.find('#id').val(dataid)
         modal.find('#nome').val(datanome)
+        modal.find('#razaosocial').val(datarazaosocial)
+        modal.find('#cnpj').val(datacnpj)
 
     });
 
-	$('.item').first().addClass("active");
 
 	$('#example').DataTable( {
-	  "ajax":"/admin/listarTopicos" ,
+	  "ajax":"/admin/listarEmpresas" ,
 	    "columns": [
-	        { data: 'id' },
 	        { data: 'nome' },
-	        { data: 'numQuestoes' },
+	        { data: 'razaoSocial' },
+	        { data: 'cnpj' },
+	        { data: 'numPropagandas' },
 	        { data: 'action' }
 	    ],
 
 	    "scrollX": true,
 
 		"columnDefs": [ {
-		      "targets": 3,
+		      "targets": 4,
 		      "orderable": false,
 		      "searchable": false
 		    } ],

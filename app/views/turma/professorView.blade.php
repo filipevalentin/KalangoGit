@@ -61,16 +61,27 @@
             <div class="box">
                 <div class="box-header">
                     <h3 class="box-title">Lista de Alunos - Turma {{$turma->nome}} </h3>
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-info">Relatórios de Turma</button>
+                        <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a id="" href="/professor/relatorios/aula/turma/{{$turma->id}}">Aula</a></li>
+                            <li><a id="" href="/professor/relatorios/atividadesExtras/turma/{{$turma->id}}">Atividades Extras</a></li>
+                        </ul>
+                    </div>
                 </div><!-- /.box-header -->
                 <div class="box-body table-responsive no-padding">
                     <table class="table table-striped">
                         <tbody>
                             <tr>
-                                <th style="/* width: 10px */">#</th>
-                                <th>Nome</th>
-                                <th>Sobrenome</th>
-                                <th style="/* width: 40px */">E-mail</th>
-                                <th>Ação</th>
+                                <th style="width: 5%;">#</th>
+                                <th style="width: 15%;">Nome</th>
+                                <th style="width: 17%;">Sobrenome</th>
+                                <th style="width: 20%">E-mail</th>
+                                <th style="width: 20%;">Ação</th>
                             </tr>
                             @foreach($alunos as $aluno)
                             <tr>
@@ -81,6 +92,17 @@
                                 <td>
                                     <div class="box-tools" style="padding:0px">
                                         <button class="btn btn-success" data-toggle="modal" data-target="#compose-modal" data-idUsuarioDestino="{{$aluno->id}}" data-nomeDestino="{{$aluno->usuario->nome}}">Enviar mensagem</button>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-info">Relatórios</button>
+                                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                <span class="caret"></span>
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li><a id="" href="/professor/relatorios/aula/aluno/{{$aluno->id}}/{{$turma->id}}">Aula</a></li>
+                                                <li><a id="" href="/professor/relatorios/atividadesExtras/aluno/{{$aluno->id}}/{{$turma->id}}">Atividades Extras</a></li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </td> 
                             </tr>

@@ -714,7 +714,7 @@ class AtividadeSeeder extends Seeder{
 		  'idAula' => '59'
 		));
 		$ativ = Atividade::create(array(
-		  'nome' => 'Atividade 2 - ',
+		  'nome' => 'Atividade 1 - ',
 		  'tipo' => '1',
 		  'status' => '1',
 		  'idAula' => '60'

@@ -1,5 +1,9 @@
 @extends('master-admin')
 
+@section('css')
+	<link rel="stylesheet" type="text/css" href="/plugins/bootstrap-select/css/bootstrap-select.css">
+@endsection
+
 @section('modals')
 
 <link rel="stylesheet" href="../plugins/jQueryUI/calendario/jquery-ui.css">
@@ -64,10 +68,14 @@
 					</div>
 					<div class="form-group">
                         <label class="control-label" for="enviarPara">Enviar para:</label>
-                        <select type="text" id="idCurso" name="idCurso" onblur="fcn_recarregaCores_novo_aviso();" class="form-control">
-                        	<option value="">Todos os alunos</option>
+                        <select type="text" id="idTurma" name="idTurma[]" data-live-search="true" data-selected-text-format="count > 5" data-size="5"onblur="fcn_recarregaCores_novo_aviso();" class="form-control selectjs" multiple title='Escolha as turmas...'>
+                        	<option value="todos">Todas as turmas</option>
 							@foreach(Curso::all() as $curso)
-                        		<option value="{{$curso->id}}">Curso: {{$curso->nome}}-{{$curso->idioma->nome}}</option>
+							<optgroup label="{{$curso->idioma->nome}} - {{$curso->nome}}">
+								@foreach($curso->turmas as $turma)
+                        		<option value="{{$turma->id}}">{{$turma->modulo->nome}} - {{$turma->nome}}</option>
+                        		@endforeach
+                        	</optgroup>
                         	@endforeach	
                         </select>
 					</div>
@@ -111,11 +119,15 @@
 					</div>
 					<div class="form-group">
                         <label class="control-label" for="enviarPara">Enviar para:</label>
-                        <select type="text" id="idCurso" name="idCurso" onblur="fcn_recarregaCores_editar_aviso();" class="form-control">
-							<option value="">Todos os alunos</option>
+                        <select type="text" id="idTurma" name="idTurma[]" data-live-search="true" data-selected-text-format="count > 5" data-size="5"onblur="fcn_recarregaCores_novo_aviso();" class="form-control selectjs" multiple title='Escolha as turmas...'>
+                        	<option value="todos">Todas as turmas</option>
 							@foreach(Curso::all() as $curso)
-                        		<option value="{{$curso->id}}">Curso: {{$curso->nome}}-{{$curso->idioma->nome}}</option>
-                        	@endforeach
+							<optgroup label="{{$curso->idioma->nome}} - {{$curso->nome}}">
+								@foreach($curso->turmas as $turma)
+                        		<option value="{{$turma->id}}">{{$turma->modulo->nome}} - {{$turma->nome}}</option>
+                        		@endforeach
+                        	</optgroup>
+                        	@endforeach	
                         </select>
 					</div>
 					<div class="modal-footer">
@@ -144,7 +156,7 @@
 			<div class="col-md-12">
 				<div class="box box-solid">
 	                <div class="box-header">
-	                    <h3 class="box-title">Filtre os avisos por Curso</h3>
+	                    <h3 class="box-title">Filtre os avisos por Turma</h3>
 	                </div><!-- /.box-header -->
 	                <div class="box-body">
 	                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -161,7 +173,7 @@
 	                                        <div class="small-box bg-blue">
 	                                            <div class="inner">
 	                                                <div class="curso" style="cursor:pointer;" id="{{$categorias[$j]->id}}">
-	                                                    <h4 style="font-size: 20px;">{{$categorias[$j]->nome}} - {{$categorias[$j]->idioma->nome}}</h4>
+	                                                    <h4 style="font-size: 20px;">{{$categorias[$j]->nome}} @if($j!=4*$i) - {{$categorias[$j]->modulo->curso->nome}} @endif</h4>
 	                                                    <p style="margin:0px;">  </p>
 	                                                </div>
 	                                            </div>
@@ -221,6 +233,7 @@
 <script src="{{ URL::asset('/js/dataTables.tableTools.js') }}" type="text/javascript"></script>
 <script src="/js/moment.min.js" type="text/javascript"></script>
 <script src="/js/datetime-moment.js" type="text/javascript"></script>
+<script src="/plugins/bootstrap-select/js/bootstrap-select.js"></script>
 
 <script>
 
@@ -229,13 +242,26 @@
 		table.ajax.url( '/admin/listarAvisos/'+$(this).attr('id') ).load();
 	});
 
+	$('.selectjs').selectpicker();
+
+	$('.selectjs').change(function(){
+		var select = $(this);
+		if(select.find('option:first').is(':checked')){
+			select.find('option').not('option:first').attr('disabled', true).attr('selected', false);
+			select.selectpicker('refresh');
+		}else{
+			select.find('option').not('.selectjs option:first').attr('disabled', false);
+			select.selectpicker('refresh');
+		}
+	});
+
 	$('#editarAviso').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget) // Button that triggered the modal
         var dataid = button.data('id');
-        var datatitulo = button.data('titulo')
+        var datatitulo = button.data('titulo');
         var datadescricao = button.data('descricao')
         var datadataexpiracao = button.data('dataexpiracao')
-        var dataidcurso = button.data('idcurso')
+        var dataidturma = button.data('idturma')
 
 
         var modal = $(this)
@@ -243,7 +269,16 @@
         modal.find('#titulo').val(datatitulo)
         modal.find('#descricao').val(datadescricao)
         modal.find('#dataExpiracaoEditar').val(datadataexpiracao)
-        modal.find('#idCurso').val(dataidcurso)
+
+        if(dataidturma != "todos"){
+        	var turmas = dataidturma.split(',');
+        	modal.find('#idTurma').val(dataidturma);
+        }else{
+        	modal.find('#idTurma').val(dataidturma);
+        }
+
+        modal.find( ".selectjs" ).trigger( "change" );
+        
 
     });
 

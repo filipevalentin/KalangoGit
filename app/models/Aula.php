@@ -8,7 +8,7 @@
 		}
 
 		public function materialApoio(){
-			return $this-> hasMany('MaterialApoio',"idAula");
+			return $this->belongsToMany('MaterialApoio', 'materialapoioaula', 'idAula', 'idMaterialApoio');
 		}
 
 		public function atividades(){

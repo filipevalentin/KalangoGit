@@ -16,9 +16,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '0'
 		));
 		$user = User::create(array(
 		  'nome' => 'Milena',
@@ -31,9 +30,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '1'
 		));
 		$user = User::create(array(
 		  'nome' => 'Sheeva',
@@ -46,9 +44,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '2'
 		));
 		$user = User::create(array(
 		  'nome' => 'Michele',
@@ -61,9 +58,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '3'
 		));
 		$user = User::create(array(
 		  'nome' => 'Lara',
@@ -76,9 +72,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '4'
 		));
 		$user = User::create(array(
 		  'nome' => 'ChunLi',
@@ -91,9 +86,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '5'
 		));
 		$user = User::create(array(
 		  'nome' => 'Otavio',
@@ -106,9 +100,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '6'
 		));
 		$user = User::create(array(
 		  'nome' => 'Dante',
@@ -121,9 +114,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '7'
 		));
 		$user = User::create(array(
 		  'nome' => 'Doulgas',
@@ -136,9 +128,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '8'
 		));
 		$user = User::create(array(
 		  'nome' => 'Jonas',
@@ -151,9 +142,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '9'
 		));
 		$user = User::create(array(
 		  'nome' => 'Daniela',
@@ -166,9 +156,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '10'
 		));
 		$user = User::create(array(
 		  'nome' => 'Aline',
@@ -181,9 +170,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '20'
 		));
 		$user = User::create(array(
 		  'nome' => 'Monica',
@@ -196,9 +184,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '30'
 		));
 		$user = User::create(array(
 		  'nome' => 'Leonidas',
@@ -211,9 +198,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '40'
 		));
 		$user = User::create(array(
 		  'nome' => 'Morpheu',
@@ -226,9 +212,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '50'
 		));
 		$user = User::create(array(
 		  'nome' => 'Claudio',
@@ -241,9 +226,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '60'
 		));
 		$user = User::create(array(
 		  'nome' => 'Augusto',
@@ -256,9 +240,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '70'
 		));
 		$user = User::create(array(
 		  'nome' => 'Eric',
@@ -271,9 +254,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '80'
 		));
 		$user = User::create(array(
 		  'nome' => 'Bruno',
@@ -286,9 +268,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '90'
 		));
 		$user = User::create(array(
 		  'nome' => 'Yori',
@@ -301,9 +282,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '100'
 		));
 		$user = User::create(array(
 		  'nome' => 'Angelina',
@@ -316,9 +296,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '110'
 		));
 		$user = User::create(array(
 		  'nome' => 'Trinity',
@@ -331,9 +310,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '120'
 		));
 		$user = User::create(array(
 		  'nome' => 'Akemi',
@@ -346,9 +324,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '130'
 		));
 		$user = User::create(array(
 		  'nome' => 'Yoko',
@@ -361,9 +338,8 @@ class ProfessorSeeder extends Seeder{
 		));
 		$professor = Professor::create(array(
 		  'id' => $user->id,
-		  'codRegistro' => '',
-		  'sobreMim' => '',
-		 'formacaoAcademica' => '',
+		  'formacaoAcademica' => '',
+		  'REProf' => '140'
 		));
 
 

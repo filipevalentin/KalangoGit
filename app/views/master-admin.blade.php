@@ -248,6 +248,12 @@
                         </li>
                         
                         <li>
+                            <a href="/admin/empresas">
+                                <i class="fa fa-building-o"></i> <span>Empresas</span>
+                            </a>
+                        </li>
+
+                        <li>
                             <a href="/admin/propagandas">
                                 <i class="fa fa-bullhorn"></i> <span>Propagandas</span>
                             </a>

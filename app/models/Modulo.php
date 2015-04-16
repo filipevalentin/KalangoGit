@@ -24,6 +24,11 @@
 			return $this-> hasMany('Atividade','idModulo');
 		}
 
+		//Categorias das atividades Extras
+		public function categorias(){
+			return $this-> hasManyThrough('Categoria','Atividade', 'idModulo', 'id');
+		}
+
 		public function questoes(){
 			return $this->hasManyThrough('Questao', 'Atividade', 'idModulo', 'idAtividade');
 		}

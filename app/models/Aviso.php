@@ -6,11 +6,11 @@
 
 
         public function usuario(){
-        	return $this->belongsTo("User", "idUsuario");
+        	return $this->belongsTo("User", "idAdmin");
         }
 
-        public function curso(){
-        	return $this->belongsTo("Curso", "idCurso");
+        public function turma(){
+        	return $this->belongsToMany('Turma', 'avisosturmas', 'idAviso', 'idTurma')->withPivot('dataAviso');
         }
 
 

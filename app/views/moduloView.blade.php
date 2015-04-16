@@ -118,7 +118,7 @@
     </div>
 
     <div class="modal fade" id="criarconteudo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -127,47 +127,89 @@
                 <div class="modal-body">
                     
                     <div class="text-center">
-                        <button class="btn btn-primary" type="button" id="btnMaterial">Material de Apoio</button>
-                        <button class="btn btn-success" type="button" id="btnExercicio">Exercício</button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info">Material de Apoio</button>
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a id="btnNovoMaterial" href="">Novo Material</a></li>
+                                <li><a id="btnCopiarMaterial" href="">Copiar Material</a></li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-success" type="button" id="btnAtividade">Exercício</button>
                     </div>
 
-                    <form action="/criarMaterial" method="POST" id="formMaterial" style="display:none;"enctype="multipart/form-data">
+                    <form action="/admin/criarMaterial" method="POST" id="formNovoMaterial" style="display:none;"enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="idaula" name="idAula">
                         </div>
-                        <div class="form-group">
-                            <label for="nome" class="control-label">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control"></input>
+                        <div id="div_nome-novoConteudo-material" class="form-group">
+                            <label class="control-label" for="nome"><i id="icone_nome-novoConteudo-material" class="fa"></i> Nome</label>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoConteudoMaterial();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-novoConteudo-material"></input>
                         </div>
-                        <div class="form-group">
-                            <label for="descricao" class="control-label">Descrição</label>
-                            <input type="text" id="descricao" name="descricao" class="form-control"></input>
-                        </div>
-                        <div class="form-group">
-                            <label for="arquivo" class="control-label">Arquivo</label>
-                            <input type="file" id="arquivo" name="arquivo" class="form-control"></input>
+                        <div id="div_arquivo-novoConteudo-material" class="form-group">
+                            <label class="control-label" for="arquivo"><i id="icone_arquivo-novoConteudo-material" class="fa"></i> Arquivo</label>
+                            <input type="file" id="arquivo" name="arquivo" onblur="fcn_recarregaCoresNovoConteudoMaterial();fcn_validaArquivo(this.form, this.form.arquivo.value)" class="form-control arquivoObrigatorio-novoConteudo-material"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" value="Salvar">
+                            <input type="submit" class="btn btn-primary btn-salvar-novoConteudo-material" value="Salvar">
                         </div>
                     </form>
 
-                    <form action="/criarExercicio" method="POST" id="formExercicio" style="display:none;">
+                    <form action="/admin/copiarMaterial" method="POST" id="formCopiarMaterial" style="display:none;"enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="idaula" name="idAula">
                         </div>
-                        <div class="form-group">
-                            <label for="nome" class="control-label">Nome</label>
-                            <input type="text" id="nome" name="nome" class="form-control"></input>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="example" class="display" cellspacing="0" width="100$">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>tipo</th>
+                                            <th>Curso</th>
+                                            <th>Modulo</th>
+                                            <th>Aula</th>
+                                            <th>Selecionar</th>
+                                        </tr>
+                                    </thead>
+                             
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>tipo</th>
+                                            <th>Curso</th>
+                                            <th>Modulo</th>
+                                            <th>Aula</th>
+                                            <th>Selecionar</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="descricao" class="control-label">Descrição</label>
-                            <input type="text" id="descricao" name="descricao" class="form-control"></input>
+                           
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" class="btn btn-primary" value="Salvar">
+                            <input type="submit" class="btn btn-primary btn-salvar-novoConteudo-material" value="Salvar">
+                        </div>
+                    </form>
+
+                    <form action="/admin/criarAtividade" method="POST" id="formAtividade" style="display:none;">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="idaula" name="idAula">
+                        </div>
+                        <div id="div_nome-novoConteudo-exercicio" class="form-group">
+                            <label class="control-label" for="nome"><i id="icone_nome-novoConteudo-exercicio" class="fa"></i> Nome</label>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoConteudoExercicio();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-novoConteudo-exercicio"></input>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" class="btn btn-primary btn-salvar-novoConteudo-exercicio" value="Salvar">
                         </div>
                     </form>
 
@@ -267,6 +309,77 @@
     
 
 @section('scripts')
+    <!-- Data Tables -->
+    <script src="{{ URL::asset('/js/dataTables.tableTools.js') }}" type="text/javascript"></script>
+
+    <script>
+
+        $('#example').DataTable( {
+          "ajax":"/admin/listarMateriais" ,
+            "columns": [
+                { data: 'nome' },
+                { data: 'tipo' },
+                { data: 'curso2' },
+                { data: 'modulo2' },
+                { data: 'aula2' },
+                { data: 'action'}
+            ],
+
+            // "scrollX": true,
+
+            "columnDefs": [ {
+                  "targets": 5,
+                  "orderable": false,
+                  "searchable": false
+                } ],
+
+            "dataSrc": "",
+             dom: 'T<"clear">lfrtip',
+            tableTools: {
+                "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
+            },
+
+            responsive: true,
+
+            language: {
+                "emptyTable":     "Nenhum registro disponível",
+                "info":           "Mostrando _START_ a _END_ de _TOTAL_ valores",
+                "infoEmpty":      "Mostrando 0 to 0 of 0 valores",
+                "infoFiltered":   "(Filtrado dentre _MAX_ valores)",
+                "infoPostFix":    "",
+                "thousands":      ",",
+                "lengthMenu":     "Mostrar _MENU_ valores",
+                "loadingRecords": "Carregando...",
+                "processing":     "Processando...",
+                "search":         "Pesquisa:",
+                "zeroRecords":    "Nenhum resultado encontrado",
+                "paginate": {
+                    "first":      "Primeiro",
+                    "last":       "Último",
+                    "next":       "Próximo",
+                    "previous":   "Anterior"
+                },
+                "aria": {
+                    "sortAscending":  ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                }
+            }
+        } );
+        
+        // $('#example').on( 'init.dt', function () {
+        //  var materiais = [];
+        //  $('input.check').on('click', function(){
+        //      if($(this).is(":checked")){
+        //          materiais.push($(this).data('id'));
+        //          console.log('adicionado '+$(this).data('id'));
+        //      }else{
+        //          materiais.splice(materiais.indexOf($(this).data('id')),1);
+        //          console.log('removido '+$(this).data('id'));
+        //      }
+        //  });
+     //    } ).dataTable();
+
+    </script>
     <script>
         $('#editaraula').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
@@ -326,16 +439,25 @@
             modal.find('input#idaula').val(dataidaula)
             })
 
-         $('#btnMaterial').on('click', function(event) {
+        $('#btnNovoMaterial').on('click', function(event) {
              event.preventDefault();
-             $('#formExercicio').hide();
-             $('#formMaterial').show();
+             $('#formAtividade').hide();
+             $('#formCopiarMaterial').hide();
+             $('#formNovoMaterial').show();
          })
 
-         $('#btnExercicio').on('click', function(event) {
+        $('#btnCopiarMaterial').on('click', function(event) {
              event.preventDefault();
+             $('#formAtividade').hide();
              $('#formMaterial').hide();
-             $('#formExercicio').show();
+             $('#formCopiarMaterial').show();
+         })
+
+         $('#btnAtividade').on('click', function(event) {
+             event.preventDefault();
+             $('#formNovoMaterial').hide();
+             $('#formCopiarMaterial').hide();
+             $('#formAtividade').show();
          })
 
     </script>

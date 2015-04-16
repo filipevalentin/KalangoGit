@@ -7,6 +7,10 @@
         	return $this->belongsTo('User', 'idUsuario');
         }
 
+        public function empresa(){
+        	return $this->belongsTo('Empresa', 'idEmpresa');
+        }
+
 	}
 
  ?>

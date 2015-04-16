@@ -25,6 +25,14 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/criarPropaganda" enctype="multipart/form-data">
+                	<div id="div_professor-editar-turma" class="form-group">
+                        <label class="control-label" for="empresa"><i id="icone_empresa-editar-turma" class="fa"></i> Empresa</label>
+                        <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresEditarTurma();" class="form-control">
+                        @foreach(Empresa::all() as $empresa)
+                            <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
+                        @endforeach
+                        </select>
+                    </div>
                     <div id="div_titulo_nova_propaganda" class="form-group">
                         <label class="control-label" for="titulo"><i id="icone_titulo_nova_propaganda" class="fa"></i> Título</label>
                         <input type="text" autocomplete="off" id="titulo" name="titulo" maxlength="100" onblur="fcn_recarregaCoresNovaPropaganda();" class="form-control tituloObrigatorio_nova_propaganda" >
@@ -58,6 +66,14 @@
                 <form method="POST" action="/admin/atualizarPropaganda" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
+                    </div>
+                    <div id="div_professor-editar-turma" class="form-group">
+                        <label class="control-label" for="empresa"><i id="icone_empresa-editar-turma" class="fa"></i> Empresa</label>
+                        <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresEditarTurma();" class="form-control">
+                        @foreach(Empresa::all() as $empresa)
+                            <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
+                        @endforeach
+                        </select>
                     </div>
                     <div id="div_titulo_editar_propaganda" class="form-group">
                         <label class="control-label" for="titulo"><i id="icone_titulo_editar_propaganda" class="fa"></i> Título</label>
@@ -100,6 +116,7 @@
 			            <tr>
 			                <th>#</th>
 			                <th>Título</th>
+			                <th>Empresa</th>
 			                <th>Link Externo</th>
 			                <th>Criado Por</th>
 			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarPropaganda" ><i class="fa fa-plus"></i></button></th>
@@ -110,6 +127,7 @@
 			            <tr>
 			                <th>#</th>
 			                <th>Título</th>
+			                <th>Empresa</th>
 			                <th>Link Externo</th>
 			                <th>Criado Por</th>
 			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarPropaganda" ><i class="fa fa-plus"></i></button></th>
@@ -141,11 +159,13 @@
         var dataid = button.data('id');
         var datatitulo = button.data('titulo')
         var datalink = button.data('link')
+        var dataidempresa = button.data('idempresa');
 
         var modal = $(this)
         modal.find('#id').val(dataid)
         modal.find('#titulo').val(datatitulo)
         modal.find('#link').val(datalink)
+        modal.find('#idempresa').val(dataidempresa)
 
     });
 
@@ -156,6 +176,7 @@
 	    "columns": [
 	        { data: 'id' },
 	        { data: 'titulo' },
+	        { data: 'empresa' },
 	        { data: 'linkView' },
 	        { data: 'criadoPor' },
 	        { data: 'action' }

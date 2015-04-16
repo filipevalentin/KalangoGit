@@ -117,7 +117,7 @@
     </div>
 
     <div class="modal fade" id="criarconteudo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -126,11 +126,21 @@
                 <div class="modal-body">
                     
                     <div class="text-center">
-                        <button class="btn btn-primary" type="button" id="btnMaterial">Material de Apoio</button>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info">Material de Apoio</button>
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a id="btnNovoMaterial" href="">Novo Material</a></li>
+                                <li><a id="btnCopiarMaterial" href="">Copiar Material</a></li>
+                            </ul>
+                        </div>
                         <button class="btn btn-success" type="button" id="btnAtividade">Exercício</button>
                     </div>
 
-                    <form action="/admin/criarMaterial" method="POST" id="formMaterial" style="display:none;"enctype="multipart/form-data">
+                    <form action="/admin/criarMaterial" method="POST" id="formNovoMaterial" style="display:none;"enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="idaula" name="idAula">
                         </div>
@@ -145,6 +155,46 @@
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                             <input type="submit" class="btn btn-primary btn-salvar-novoConteudo-material" value="Salvar">
+                        </div>
+                    </form>
+
+                    <form action="/admin/copiarMaterial" method="POST" id="formCopiarMaterial" style="display:none;"enctype="multipart/form-data">
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="idaula" name="idAula">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table id="example" class="display" cellspacing="0" width="100$">
+                                    <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>tipo</th>
+                                            <th>Curso</th>
+                                            <th>Modulo</th>
+                                            <th>Aula</th>
+                                            <th>Selecionar</th>
+                                        </tr>
+                                    </thead>
+                             
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>tipo</th>
+                                            <th>Curso</th>
+                                            <th>Modulo</th>
+                                            <th>Aula</th>
+                                            <th>Selecionar</th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                           
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" class="btn btn-primary" value="Salvar">
                         </div>
                     </form>
 
@@ -264,6 +314,78 @@
     
 
 @section('scripts')
+    <!-- Data Tables -->
+    <script src="{{ URL::asset('/js/dataTables.tableTools.js') }}" type="text/javascript"></script>
+
+    <script>
+
+        $('#example').DataTable( {
+          "ajax":"/admin/listarMateriais" ,
+            "columns": [
+                { data: 'nome' },
+                { data: 'tipo' },
+                { data: 'curso2' },
+                { data: 'modulo2' },
+                { data: 'aula2' },
+                { data: 'action'}
+            ],
+
+            // "scrollX": true,
+
+            "columnDefs": [ {
+                  "targets": 5,
+                  "orderable": false,
+                  "searchable": false
+                } ],
+
+            "dataSrc": "",
+             dom: 'T<"clear">lfrtip',
+            tableTools: {
+                "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
+            },
+
+            responsive: true,
+
+            language: {
+                "emptyTable":     "Nenhum registro disponível",
+                "info":           "Mostrando _START_ a _END_ de _TOTAL_ valores",
+                "infoEmpty":      "Mostrando 0 to 0 of 0 valores",
+                "infoFiltered":   "(Filtrado dentre _MAX_ valores)",
+                "infoPostFix":    "",
+                "thousands":      ",",
+                "lengthMenu":     "Mostrar _MENU_ valores",
+                "loadingRecords": "Carregando...",
+                "processing":     "Processando...",
+                "search":         "Pesquisa:",
+                "zeroRecords":    "Nenhum resultado encontrado",
+                "paginate": {
+                    "first":      "Primeiro",
+                    "last":       "Último",
+                    "next":       "Próximo",
+                    "previous":   "Anterior"
+                },
+                "aria": {
+                    "sortAscending":  ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                }
+            }
+        } );
+        
+        // $('#example').on( 'init.dt', function () {
+        //  var materiais = [];
+        //  $('input.check').on('click', function(){
+        //      if($(this).is(":checked")){
+        //          materiais.push($(this).data('id'));
+        //          console.log('adicionado '+$(this).data('id'));
+        //      }else{
+        //          materiais.splice(materiais.indexOf($(this).data('id')),1);
+        //          console.log('removido '+$(this).data('id'));
+        //      }
+        //  });
+     //    } ).dataTable();
+
+    </script>
+
     <script>
         $('#editaraula').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
@@ -299,9 +421,9 @@
             modal.find('#id').val(dataid)
             modal.find('#nome').val(datanome)
             modal.find('#arquivo').val(dataarquivo)
-            })
+        })
 
-         $('#criaraula').on('show.bs.modal', function (event) {
+        $('#criaraula').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget) // Button that triggered the modal
             var dataidmodulo = button.data('idmodulo')
             // Extract info from data-* attributes
@@ -309,28 +431,43 @@
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
             modal.find('#idmodulo').val(dataidmodulo)
-            })
+        })
 
-         $('#criarconteudo').on('show.bs.modal', function (event) {
+        $('#criarconteudo').on('show.bs.modal', function (event) {
+            $('#formAtividade').hide();
+            $('#formCopiarMaterial').hide();
+            $('#formNovoMaterial').hide();
             var button = $(event.relatedTarget) // Button that triggered the modal
             var dataidaula = button.data('idaula')
-            console.log(dataidaula)
             // Extract info from data-* attributes
             // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
             // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
             var modal = $(this)
-            modal.find('input#idaula').val(dataidaula)
-            })
+            modal.find('input#idaula').val(dataidaula);
 
-         $('#btnMaterial').on('click', function(event) {
+            var table = $('#example').DataTable();
+            table.ajax.url("/admin/listarMateriais/"+dataidaula).load();
+
+        })
+
+         $('#btnNovoMaterial').on('click', function(event) {
              event.preventDefault();
              $('#formAtividade').hide();
-             $('#formMaterial').show();
+             $('#formCopiarMaterial').hide();
+             $('#formNovoMaterial').show();
+         })
+
+        $('#btnCopiarMaterial').on('click', function(event) {
+             event.preventDefault();
+             $('#formAtividade').hide();
+             $('#formMaterial').hide();
+             $('#formCopiarMaterial').show();
          })
 
          $('#btnAtividade').on('click', function(event) {
              event.preventDefault();
-             $('#formMaterial').hide();
+             $('#formNovoMaterial').hide();
+             $('#formCopiarMaterial').hide();
              $('#formAtividade').show();
          })
 
