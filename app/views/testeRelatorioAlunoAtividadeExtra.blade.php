@@ -28,7 +28,7 @@
 			<div class="col-md-1"></div>
 	        <div class="col-md-10">
 	        <div class="box box-solid" style="padding: 2% 3%;">
-	        	<div class="col-md-12 center" style="padding-bottom: 25px;"><h3>Relatório Geral de Atividades de Aula</h3></div>
+	        	<div class="col-md-12 center" style="padding-bottom: 25px;"><h3>Relatório Geral de Atividades Extras</h3></div>
 	        	<div class="box-header with-border">
 	        		<div class="col-sm-6">
 	        			<h3 class="box-title" style="font-size:20px; padding-right:70px;"><strong>{{$aluno->usuario->nome}} {{$aluno->usuario->sobrenome}}</strong></h3>
@@ -43,7 +43,7 @@
 	        	</div></br><!-- /.box-header -->
 	        	<div class="box-body">
 	        		<ul class="list-unstyled">
-	        			@foreach($aluno->aulasAluno as $aula)
+	        			@foreach($aluno->categoriasAluno as $aula)
 		        			<li>
 		        				<span><strong>{{$aula->titulo}}</strong></span>
 		        				<div class="pull-right">

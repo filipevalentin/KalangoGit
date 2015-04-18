@@ -41,8 +41,8 @@
                                         <div class="small-box bg-blue">
                                             <div class="inner">
                                                 <div class="curso" style="cursor:pointer;" id="{{$cursosArray[$j]['id']}}">
-                                                    <h4 style="font-size: 20px;">{{$cursosArray[$j]['nome']}}</h4>
-                                                    <p style="margin:0px;">{{$turmas->count()}} Turmas</p>
+                                                    <h4 style="font-size: 20px;">{{$cursos[$j]['nome']}}</h4>
+                                                    <p style="margin:0px;">{{$cursos[$j]->numTurmas}} Turmas</p>
                                                 </div>
                                             </div>
 

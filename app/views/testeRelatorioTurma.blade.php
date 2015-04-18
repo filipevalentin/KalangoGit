@@ -25,7 +25,7 @@
 
 @section('maincontent')
 	<section class="content-header">
-	    <h1>Relatório do Aluno</h1>
+	    <h1>Relatório de Turma</h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
 	        <li class="active">Relatório</li>
@@ -38,9 +38,10 @@
 	        <div class="col-md-10">
 	        @foreach($alunos as $aluno)
 		        <div class="box box-solid" style="padding: 2% 3%;">
-		        	<div class="col-md-12 center" style="padding-bottom: 25px;"><h3>Relatório Geral de Atividades de Aula</h3></div>
+		        	<div class="col-md-12 center" style="padding-bottom: 20px;"><h3>Relatório Geral de Atividades de Aula</h3></div>
 		        	@if($alunos->first() == $aluno)
-						<div class="col-md-12" style="padding-bottom: 25px;"><h3>Média Geral da Turma:{{$count}}</h3></div>
+						<div class="col-md-6 center" style="padding-bottom: 35px;"><h3><strong>Turma: </strong>{{$aluno->turma->nome}}</h3></div>
+						<div class="col-md-6 center" style="padding-bottom: 35px;"><h3><strong>Média Geral da Turma: </strong>{{round($count*10,2)}}</h3></div>
 		        	@endif
 		        	<div class="box-header with-border">
 		        		<div class="col-sm-6">

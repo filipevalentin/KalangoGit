@@ -43,6 +43,9 @@
 	        	</div></br><!-- /.box-header -->
 	        	<div class="box-body">
 	        		<ul class="list-unstyled">
+	        			@if($aluno->aulasAluno == null)
+	        				<h3 class="center">Nenhuma Atividade Respondida</h3>
+	        			@endif
 	        			@foreach($aluno->aulasAluno as $aula)
 		        			<li>
 		        				<span><strong>{{$aula->titulo}}</strong></span>
