@@ -25,10 +25,11 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/criarPropaganda" enctype="multipart/form-data">
-                	<div id="div_professor-editar-turma" class="form-group">
-                        <label class="control-label" for="empresa"><i id="icone_empresa-editar-turma" class="fa"></i> Empresa</label>
-                        <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresEditarTurma();" class="form-control">
-                        @foreach(Empresa::all() as $empresa)
+                	<div id="div_empresa_nova_propaganda" class="form-group">
+                        <label class="control-label" for="empresa"><i id="icone_empresa_nova_propaganda" class="fa"></i> Empresa</label>
+                        <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresNovaPropaganda();" class="form-control empresaObrigatoria_nova_propaganda">
+                        <option value="" >Selecione</option>
+						@foreach(Empresa::all() as $empresa)
                             <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
                         @endforeach
                         </select>
@@ -70,7 +71,8 @@
                     <div id="div_professor-editar-turma" class="form-group">
                         <label class="control-label" for="empresa"><i id="icone_empresa-editar-turma" class="fa"></i> Empresa</label>
                         <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresEditarTurma();" class="form-control">
-                        @foreach(Empresa::all() as $empresa)
+                        <option value="" >Selecione</option>
+						@foreach(Empresa::all() as $empresa)
                             <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
                         @endforeach
                         </select>
@@ -231,6 +233,19 @@
 	
 		var obrigatorioPendente = 0;
 		
+		if($(".empresaObrigatoria_nova_propaganda").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_empresa_nova_propaganda" ).removeClass("has-success");
+			$( "#icone_empresa_nova_propaganda" ).removeClass("fa-check");
+			$( "#div_empresa_nova_propaganda" ).addClass("has-error");
+			$( "#icone_empresa_nova_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_empresa_nova_propaganda" ).removeClass("has-error");
+			$( "#icone_empresa_nova_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_empresa_nova_propaganda" ).addClass("has-success");
+			$( "#icone_empresa_nova_propaganda" ).addClass("fa-check");
+		}
+		
 		if($(".tituloObrigatorio_nova_propaganda").val() == ""){
 			obrigatorioPendente = 1;
 			$( "#div_titulo_nova_propaganda" ).removeClass("has-success");
@@ -328,6 +343,18 @@
 	})
 	
 	function fcn_recarregaCoresNovaPropaganda(){
+		
+		if($(".empresaObrigatoria_nova_propaganda").val() == ""){
+			$( "#div_empresa_nova_propaganda" ).removeClass("has-success");
+			$( "#icone_empresa_nova_propaganda" ).removeClass("fa-check");
+			$( "#div_empresa_nova_propaganda" ).addClass("has-error");
+			$( "#icone_empresa_nova_propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_empresa_nova_propaganda" ).removeClass("has-error");
+			$( "#icone_empresa_nova_propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_empresa_nova_propaganda" ).addClass("has-success");
+			$( "#icone_empresa_nova_propaganda" ).addClass("fa-check");
+		}
 		
 		if($(".tituloObrigatorio_nova_propaganda").val() == ""){
 			$( "#div_titulo_nova_propaganda" ).removeClass("has-success");
