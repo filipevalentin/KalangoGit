@@ -2180,6 +2180,16 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$categorias = Categoria::all();
 
+			$all = new Modulo;
+			$all->id = null;
+			$all->nome = '';
+			$curso = new stdClass();
+			$curso->nome = "Todas Atividades";
+			$all->curso = $curso;
+
+			$categorias->prepend($all);
+
+
 			foreach ($modulos as $modulo) {
 				$categorias->push($modulo);
 			}
