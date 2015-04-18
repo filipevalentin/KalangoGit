@@ -18,7 +18,7 @@
                     </div>
                     <div id="div_nome-editar-modulo" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-modulo" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" maxlength="50" id="nome" name="nome" onblur="fcn_recarregaCoresEditarModulo();" class="form-control somenteLetras nomeObrigatorio-editar-modulo" onblur="fcn_recarregaCoresEditarModulo();" >
+                        <input type="text" autocomplete="off" maxlength="50" id="nome" name="nome" onblur="fcn_recarregaCoresEditarModulo();" class="form-control somenteLetrasENumeros nomeObrigatorio-editar-modulo" onblur="fcn_recarregaCoresEditarModulo();" >
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -58,9 +58,9 @@
                         @endforeach
                         </select>
                     </div>
-                    <div id="div_nome-editar-turma" class="form-group">
+                    <div id="div_status-editar-turma" class="form-group">
                         <label class="control-label" for="status"><i id="icone_status-editar-turma" class="fa"></i> Status</label>
-                        <select autocomplete="off" id="status" name="status" maxlength="50" onblur="" class="form-control">
+                        <select autocomplete="off" id="status" name="status" maxlength="50" onblur="fcn_recarregaCoresEditarTurma()" class="form-control statusObrigatorio-editar-turma">
                             <option value="1">Aberta (em andamento)</option>
                             <option value="0">Fechada (concluída)</option>
                         </select>
@@ -195,7 +195,7 @@
                     </div>
                     <div id="div_nome-novo-modulo" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-novo-modulo" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50"onblur="fcn_recarregaCoresNovoModulo();" class="form-control somenteLetras nomeObrigatorio-novo-modulo"></textarea>
+                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50"onblur="fcn_recarregaCoresNovoModulo();" class="form-control somenteLetrasENumeros nomeObrigatorio-novo-modulo"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -443,6 +443,14 @@
 				}
 			});
 			
+			$( ".somenteLetrasENumeros" ).keyup(function() {
+				//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
+				if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
+					var valor = $(this).val().replace(/[^0-9a-zA-ZãÃáÁàÀâÂéÉèÈêÊíÍìÌîÎõÕóÓòÒôÔúÚùÙûÛÇç ]+/g,'');
+					$(this).val(valor);
+				}
+			});
+			
 			$(".btn-salvar-editar-modulo").click(function(event){
 			
 				var obrigatorioPendente = 0;
@@ -495,6 +503,19 @@
 					$( "#icone_professor-editar-turma" ).removeClass("fa-times-circle-o");
 					$( "#div_professor-editar-turma" ).addClass("has-success");
 					$( "#icone_professor-editar-turma" ).addClass("fa-check");
+				}
+				
+				if($(".statusObrigatorio-editar-turma").val() == ""){
+					obrigatorioPendente = 1;
+					$( "#div_status-editar-turma" ).removeClass("has-success");
+					$( "#icone_status-editar-turma" ).removeClass("fa-check");
+					$( "#div_status-editar-turma" ).addClass("has-error");
+					$( "#icone_status-editar-turma" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_status-editar-turma" ).removeClass("has-error");
+					$( "#icone_status-editar-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_status-editar-turma" ).addClass("has-success");
+					$( "#icone_status-editar-turma" ).addClass("fa-check");
 				}
 				
 				if(obrigatorioPendente == 1){
@@ -679,6 +700,18 @@
 					$( "#icone_professor-editar-turma" ).removeClass("fa-times-circle-o");
 					$( "#div_professor-editar-turma" ).addClass("has-success");
 					$( "#icone_professor-editar-turma" ).addClass("fa-check");
+				}
+				
+				if($(".statusObrigatorio-editar-turma").val() == ""){
+					$( "#div_status-editar-turma" ).removeClass("has-success");
+					$( "#icone_status-editar-turma" ).removeClass("fa-check");
+					$( "#div_status-editar-turma" ).addClass("has-error");
+					$( "#icone_status-editar-turma" ).addClass("fa-times-circle-o");
+				}else{
+					$( "#div_status-editar-turma" ).removeClass("has-error");
+					$( "#icone_status-editar-turma" ).removeClass("fa-times-circle-o");
+					$( "#div_status-editar-turma" ).addClass("has-success");
+					$( "#icone_status-editar-turma" ).addClass("fa-check");
 				}
 				
 			}
