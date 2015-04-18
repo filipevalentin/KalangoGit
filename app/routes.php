@@ -1870,10 +1870,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if($idioma == null){
 				$cursos = Curso::all();
 				$cursosArray = $cursos->toArray();
+
+				Session::flash('warning', "Cuidado com o que você vai fazer!!!");
 				return View::make('administrador/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray));	
 			}else{
 				$cursos = Curso::where('idIdioma','=',Idioma::where('nome','=', $idioma)->first()->id)->get();
 				$cursosArray = $cursos->toArray();
+				Session::flash('warning', "Cuidado Com o Frango!!!");
 				return View::make('administrador/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray));
 			}
 			

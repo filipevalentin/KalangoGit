@@ -460,7 +460,7 @@
         $('#btnCopiarMaterial').on('click', function(event) {
              event.preventDefault();
              $('#formAtividade').hide();
-             $('#formMaterial').hide();
+             $('#formNovoMaterial').hide();
              $('#formCopiarMaterial').show();
          })
 

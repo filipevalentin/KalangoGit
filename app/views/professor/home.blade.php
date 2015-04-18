@@ -29,6 +29,12 @@
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
 
+                         @if($cursos->count() == 0)
+                            <div class="callout callout-danger" style="max-width:50%; margin:auto;">
+                                <h4 class="center">Nenhum Curso</h4>
+                            </div>
+                         @endif
+
                         @for($i=0; $i <= (int)(count($cursosArray)/5); $i++)
         
                             <div class="item">

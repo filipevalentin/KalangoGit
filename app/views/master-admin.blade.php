@@ -304,10 +304,23 @@
         <!-- AdminLTE App -->
         <script src="/dist/js/app.min.js" type="text/javascript"></script>
 
-        @if (isset($mensagem))
-            <script>
-                alert("{{$mensagem}}");
-            </script>
+         @if (Session::has('warning'))
+            <div style="position: absolute; width: 100%; top:55px; border-radius: 5px 0px 0px 5px; z-index: 99999">
+                <div class="alert alert-danger alert-dismissable" style="width: 80%; max-width:500px; margin: auto; box-shadow: rgba(0, 0, 0, 0.55) 0px 14px 27px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-warning"></i> Opps...</h4>
+                    {{Session::get('warning')}}
+                </div>
+            </div>
+        @endif
+        @if (Session::has('info'))
+            <div style="position: absolute; width: 100%; top:55px; border-radius: 5px 0px 0px 5px; z-index: 99999">
+                <div class="alert alert-success alert-dismissable" style="width: 80%; max-width:500px; margin: auto; box-shadow: rgba(0, 0, 0, 0.55) 0px 14px 27px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4><i class="icon fa fa-success"></i> Mensagem</h4>
+                    {{Session::get('info')}}
+                </div>
+            </div>
         @endif
 
         <script>
@@ -316,11 +329,6 @@
             })
 
         </script>
-        @if (isset($mensagem))
-            <script>
-                alert("{{$mensagem}}");
-            </script>
-        @endif
 
         @yield('scripts')
         
