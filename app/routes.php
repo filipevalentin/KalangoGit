@@ -1165,7 +1165,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			$categorias = Categoria::all();
 
-			all = new Modulo;
+			$all = new Modulo;
 			$all->id = null;
 			$all->nome = '';
 			$curso = new stdClass();
