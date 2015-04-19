@@ -6,375 +6,6 @@ Route::get('teste5',function(){
 	return DB::table('usuarios')->where('id','=','1')->get();
 });
 
-//Relatórios Individuais
-
-Route::get('relatorios/aula/aluno/{idAluno}/{idTurma}',function($idAluno, $idTurma){ 
-	// Função para relatório individual: input-> id aluno, id turma
-	// Função para relatório de turma:	 input-> id Turma
-
-	// Lógica função individual
-	$aluno = Aluno::find($idAluno); //idAluno como parametro 196
-	$turma = $aluno->turmas->find($idTurma); //idTurma como parametro 41
-
-	// Add o objeto turma que está sendo gerado o relatório, no objeto aluno
-	$aluno->turma = $turma;
-
-	//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
-	$atividadesAluno = Atividade::whereIn('id',$aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id'))->get();
-
-	//Add as aulas ao objeto aluno
-	$aluno->aulasAluno = $turma->modulo->aulas;
-
-	//Cria o attr mediaGeral e presençaGeral ao objeto aluno
-	$aluno->mediaGeral = 0;
-	$aluno->presencaGeral = 0;
-
-	//Contadores parciais para media e presença Gerais
-	$countPresencaGeral = 0;
-	$countMediaGeral = 0;
-
-	foreach($aluno->aulasAluno as $aula){
-		// Cria os attr media e presença, para o objeto aula
-		$aula->presenca = 0;
-		$aula->media = 0;
-
-		//Cria o attr atividadesAluno e add ao obejto aula
-		$aula->atividadesAluno = $aula->atividades;
-
-		//Contadores parciais para media e presença da Aula
-		$countPresencaAula = 0;
-		$countMediaAula = 0;
-		foreach($aula->atividadesAluno as $atividade){
-			//cria o attr nota para o objeto atividade
-			$atividade->nota = 0;
-			//Se essa atividade está na lista das ativ que o aluno concluiu
-			if($atividadesAluno->contains($atividade)){
-				//pega a % de acerto
-				$questoes = Questao::where('idAtividade', $atividade->id)->
-						 		// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
-						 		whereIn('id',($aluno->respostas->lists('id') != null)?($aluno->respostas->lists('id')):array('null'))->get();
-				$questoes = $aluno->respostas->intersect($questoes);
-				foreach($questoes as $questao){
-					if($questao->pivot->correcao == '1'){
-						$atividade->nota = $atividade->nota + 1;
-					}
-				}
-
-				//Add a nota (% de acerto) ao objeto atividade
-				$atividade->nota = ($atividade->nota == 0) ? "0" : $atividade->nota/$atividade->questoes->count();
-
-				//Adiciona +1 no contador de presença (Aula e Geral)
-				$countPresencaAula++;
-				$countPresencaGeral++;
-
-				//Add a nota no contador de media (Aula e Geral)
-				$countMediaAula += $atividade->nota;
-				$countMediaGeral += $atividade->nota;
-
-			}else{
-				//crava como: 0 =  "Não Concluiu"
-				$atividade->nota = 0;
-			}
-
-		}
-
-		// Add a lista de atividades já com os calculos ao objeto aula
-
-		// Calcula a média do nº de atividades concluidas nesta Aula (PresençaAula)
-		$aula->presenca = (0 == $countPresencaAula) ? 0 : ($countPresencaAula/$aula->atividades->count());
-
-		//Calcula a média da nota das atividades CONCLUIDAS pelo aluno nesta Aula (MediaAula)
-		$aula->media = (0 == $countMediaAula) ? 0 : ($countMediaAula/$aula->atividades->count());
-	}
-
-	//Calcula a media geral do Nº de atividades concluidas em TODAS as Aulas do Módulo cursado
-	$aluno->presencaGeral = (0 == $countPresencaGeral) ? 0 : ($countPresencaGeral/$turma->modulo->atividades->count());
-
-	//Calcula a media geral da nota das atividades concluidas em TODAS as Aulas do Módulo cursado
-	$aluno->mediaGeral = (0 == $countMediaGeral) ? 0 : ($countMediaGeral/$turma->modulo->atividades->count());
-
-	//Como acessar as informações:
-		//Média Geral do aluno: 		$aluno->mediaGeral
-		//Presença Geral do aluno: 		$aluno->presencaGeral
-		//Array de aulas do aluno:		$aluno->aulasAluno
-		//Presença do aluno numa Aula:	$aula->presenca
-		//Média do aluno numa Aula:		$aula->media
-		//Array de atividades da Aula:	$aula->atividadesAluno
-		//Nota do aluno muma Atividade:	$atividade->nota
-
-	//return $aluno->aulasAluno;
-
-	return View::make('testeRelatorioAluno')->with('aluno', $aluno);
-	
-});
-
-Route::get('relatorios/atividadesExtras/aluno/{idAluno}/{idTurma}',function($idAluno, $idTurma){ 
-
-	// Lógica função individual
-	$aluno = Aluno::find($idAluno); //idAluno como parametro
-	$turma = $aluno->turmas->find($idTurma); //idTurma como parametro
-
-	// Add o objeto turma que está sendo gerado o relatório, no objeto aluno
-	$aluno->turma = $turma;
-
-	//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
-	$atividadesAluno = Atividade::whereIn('id',$aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id'))->get();
-
-	//Add as aulas ao objeto aluno
-	$aluno->categoriasAluno = Categoria::all();
-
-	foreach($aluno->categoriasAluno as $categoria){
-		// Cria os attr media e presença, para o objeto aula
-		$categoria->presenca = 0;
-		$categoria->media = 0;
-
-		//Cria o attr atividadesAluno (Extras) e add ao obejto aula -> só as atividades relacionadas ao modulo ou as livres (sem idModulo)
-		$categoria->atividadesAluno = $categoria->
-									  atividades->
-									  filter(function($atividade) use ($aluno){
-									    return ($atividade->idModulo == $aluno->turma->idModulo || $atividade->idModulo == null);
-									  });
-
-		//Contadores parciais para media e presença da Aula
-		$countPresencaAula = 0;
-		$countMediaAula = 0;
-		foreach($categoria->atividadesAluno as $atividade){
-			//cria o attr nota para o objeto atividade
-			$atividade->nota = 0;
-			//Se essa atividade está na lista das ativ que o aluno concluiu
-			if($atividadesAluno->contains($atividade)){
-				//pega a % de acerto
-				$questoes = Questao::where('idAtividade', $atividade->id)->
-						 		// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
-						 		whereIn('id',($aluno->respostas->lists('id') != null)?($aluno->respostas->lists('id')):array('null'))->get();
-				$questoes = $aluno->respostas->intersect($questoes);
-				foreach($questoes as $questao){
-					if($questao->pivot->correcao == '1'){
-						$atividade->nota = $atividade->nota + 1;
-					}
-				}
-
-				//Add a nota (% de acerto) ao objeto atividade
-				$atividade->nota = ($atividade->nota == 0) ? "0" : $atividade->nota/$atividade->questoes->count();
-
-				//Adiciona +1 no contador de presença (Aula e Geral)
-				$countPresencaAula++;
-
-				//Add a nota no contador de media (Aula e Geral)
-				$countMediaAula += $atividade->nota;
-
-			}else{
-				//crava como: 0 =  "Não Concluiu"
-				$atividade->nota = 0;
-			}
-
-		}
-
-		// Add a lista de atividades já com os calculos ao objeto aula
-
-		// Calcula a média do nº de atividades concluidas nesta Aula (PresençaAula)
-		$categoria->presenca = (0 == $countPresencaAula) ? 0 : ($countPresencaAula/$categoria->atividades->count());
-
-		//Calcula a média da nota das atividades CONCLUIDAS pelo aluno nesta Aula (MediaAula)
-		$categoria->media = (0 == $countMediaAula) ? 0 : ($countMediaAula/$categoria->atividades->count());
-	}
-
-	//Como acessar as informações:
-		//Array de categorias do aluno:	$aluno->categoriasAluno
-		//Presença do aluno numa Aula:	$aula->presenca
-		//Média do aluno numa Aula:		$aula->media
-		//Array de atividades da Aula:	$aula->atividadesAluno
-		//Nota do aluno muma Atividade:	$atividade->nota
-
-	//return $aluno->aulasAluno;
-
-	return View::make('testeRelatorioAlunoAtividadeExtra')->with('aluno', $aluno);
-	
-});
-
-//Relatórios de Turma
-
-Route::get('relatorios/aula/turma/{idTurma}',function($idTurma){ 
-	$alunos = Turma::find($idTurma)->alunos;
-
-	foreach ($alunos as $aluno) {
-
-		// Add o objeto turma que está sendo gerado o relatório, no objeto aluno
-		$aluno->turma = $turma;
-
-		//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
-		$atividadesAluno = Atividade::whereIn('id',$aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id'))->get();
-
-		//Add as aulas ao objeto aluno
-		$aluno->aulasAluno = $turma->modulo->aulas;
-
-		//Cria o attr mediaGeral e presençaGeral ao objeto aluno
-		$aluno->mediaGeral = 0;
-		$aluno->presencaGeral = 0;
-
-		//Contadores parciais para media e presença Gerais
-		$countPresencaGeral = 0;
-		$countMediaGeral = 0;
-
-		foreach($aluno->aulasAluno as $aula){
-			// Cria os attr media e presença, para o objeto aula
-			$aula->presenca = 0;
-			$aula->media = 0;
-
-			//Cria o attr atividadesAluno e add ao obejto aula
-			$aula->atividadesAluno = $aula->atividades;
-
-			//Contadores parciais para media e presença da Aula
-			$countPresencaAula = 0;
-			$countMediaAula = 0;
-			foreach($aula->atividadesAluno as $atividade){
-				//cria o attr nota para o objeto atividade
-				$atividade->nota = 0;
-				//Se essa atividade está na lista das ativ que o aluno concluiu
-				if($atividadesAluno->contains($atividade)){
-					//pega a % de acerto
-					$questoes = Questao::where('idAtividade', $atividade->id)->
-							 		// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
-							 		whereIn('id',($aluno->respostas->lists('id') != null)?($aluno->respostas->lists('id')):array('null'))->get();
-					$questoes = $aluno->respostas->intersect($questoes);
-					foreach($questoes as $questao){
-						if($questao->pivot->correcao == '1'){
-							$atividade->nota = $atividade->nota + 1;
-						}
-					}
-
-					//Add a nota (% de acerto) ao objeto atividade
-					$atividade->nota = ($atividade->nota == 0) ? "0" : $atividade->nota/$atividade->questoes->count();
-
-					//Adiciona +1 no contador de presença (Aula e Geral)
-					$countPresencaAula++;
-					$countPresencaGeral++;
-
-					//Add a nota no contador de media (Aula e Geral)
-					$countMediaAula += $atividade->nota;
-					$countMediaGeral += $atividade->nota;
-
-				}else{
-					//crava como: 0 =  "Não Concluiu"
-					$atividade->nota = 0;
-				}
-
-			}
-
-			// Add a lista de atividades já com os calculos ao objeto aula
-
-			// Calcula a média do nº de atividades concluidas nesta Aula (PresençaAula)
-			$aula->presenca = (0 == $countPresencaAula) ? 0 : ($countPresencaAula/$aula->atividades->count());
-
-			//Calcula a média da nota das atividades CONCLUIDAS pelo aluno nesta Aula (MediaAula)
-			$aula->media = (0 == $countMediaAula) ? 0 : ($countMediaAula/$aula->atividades->count());
-		}
-
-		//Calcula a media geral do Nº de atividades concluidas em TODAS as Aulas do Módulo cursado
-		$aluno->presencaGeral = (0 == $countPresencaGeral) ? 0 : ($countPresencaGeral/$turma->modulo->atividades->count());
-
-		//Calcula a media geral da nota das atividades concluidas em TODAS as Aulas do Módulo cursado
-		$aluno->mediaGeral = (0 == $countMediaGeral) ? 0 : ($countMediaGeral/$turma->modulo->atividades->count());
-	}
-
-	//Como acessar as informações:
-		//Média Geral do aluno: 		$aluno->mediaGeral
-		//Presença Geral do aluno: 		$aluno->presencaGeral
-		//Array de aulas do aluno:		$aluno->aulasAluno
-		//Presença do aluno numa Aula:	$aula->presenca
-		//Média do aluno numa Aula:		$aula->media
-		//Array de atividades da Aula:	$aula->atividadesAluno
-		//Nota do aluno muma Atividade:	$atividade->nota
-
-	//return $aluno->aulasAluno;
-
-	return View::make('testeRelatorioTurma')->with('alunos', $alunos);
-	
-});
-
-Route::get('relatorios/atividadesExtras/turma/{idTurma}',function($idTurma){ 
-
-	$alunos = Turma::find($idTurma)->alunos;
-
-	foreach($alunos as $aluno){
-		// Add o objeto turma que está sendo gerado o relatório, no objeto aluno
-		$aluno->turma = $turma;
-
-		//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
-		$atividadesAluno = Atividade::whereIn('id',$aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id'))->get();
-
-		//Add as aulas ao objeto aluno
-		$aluno->categoriasAluno = Categoria::all();
-
-		foreach($aluno->categoriasAluno as $categoria){
-			// Cria os attr media e presença, para o objeto aula
-			$categoria->presenca = 0;
-			$categoria->media = 0;
-
-			//Cria o attr atividadesAluno (Extras) e add ao obejto aula -> só as atividades relacionadas ao modulo ou as livres (sem idModulo)
-			$categoria->atividadesAluno = $categoria->
-										  atividades->
-										  filter(function($atividade) use ($aluno){
-										    return ($atividade->idModulo == $aluno->turma->idModulo || $atividade->idModulo == null);
-										  });
-
-			//Contadores parciais para media e presença da Aula
-			$countPresencaAula = 0;
-			$countMediaAula = 0;
-			foreach($categoria->atividadesAluno as $atividade){
-				//cria o attr nota para o objeto atividade
-				$atividade->nota = 0;
-				//Se essa atividade está na lista das ativ que o aluno concluiu
-				if($atividadesAluno->contains($atividade)){
-					//pega a % de acerto
-					$questoes = Questao::where('idAtividade', $atividade->id)->
-							 		// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
-							 		whereIn('id',($aluno->respostas->lists('id') != null)?($aluno->respostas->lists('id')):array('null'))->get();
-					$questoes = $aluno->respostas->intersect($questoes);
-					foreach($questoes as $questao){
-						if($questao->pivot->correcao == '1'){
-							$atividade->nota = $atividade->nota + 1;
-						}
-					}
-
-					//Add a nota (% de acerto) ao objeto atividade
-					$atividade->nota = ($atividade->nota == 0) ? "0" : $atividade->nota/$atividade->questoes->count();
-
-					//Adiciona +1 no contador de presença (Aula e Geral)
-					$countPresencaAula++;
-
-					//Add a nota no contador de media (Aula e Geral)
-					$countMediaAula += $atividade->nota;
-
-				}else{
-					//crava como: 0 =  "Não Concluiu"
-					$atividade->nota = 0;
-				}
-
-			}
-
-			// Add a lista de atividades já com os calculos ao objeto aula
-
-			// Calcula a média do nº de atividades concluidas nesta Aula (PresençaAula)
-			$categoria->presenca = (0 == $countPresencaAula) ? 0 : ($countPresencaAula/$categoria->atividades->count());
-
-			//Calcula a média da nota das atividades CONCLUIDAS pelo aluno nesta Aula (MediaAula)
-			$categoria->media = (0 == $countMediaAula) ? 0 : ($countMediaAula/$categoria->atividades->count());
-		}
-	}
-
-	//Como acessar as informações:
-		//Array de categorias do aluno:	$aluno->categoriasAluno
-		//Presença do aluno numa Aula:	$aula->presenca
-		//Média do aluno numa Aula:		$aula->media
-		//Array de atividades da Aula:	$aula->atividadesAluno
-		//Nota do aluno muma Atividade:	$atividade->nota
-
-	//return $aluno->aulasAluno;
-
-	return View::make('testeRelatorioTurmaAtividadeExtra')->with('alunos', $alunos);
-	
-});
 
 Route::get('teste4',function(){ 
 	
@@ -1866,6 +1497,8 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
+	//Home e Perfil
+
 		Route::get('home/{idioma?}', function($idioma = null){
 			if($idioma == null){
 				$cursos = Curso::all();
@@ -1876,17 +1509,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}else{
 				$cursos = Curso::where('idIdioma','=',Idioma::where('nome','=', $idioma)->first()->id)->get();
 				$cursosArray = $cursos->toArray();
-				Session::flash('warning', "Cuidado Com o Frango!!!");
 				return View::make('administrador/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray));
 			}
 			
 		});
 
 		Route::get('perfil', function(){
-			if(Session::has('mensagem')){
-				$mensagem = Session::get('mensagem');
-				return Redirect::to('admin/administrador/'.Auth::user()->id)->with('mensagem', $mensagem);
-			}
+
 			return Redirect::to('admin/administrador/'.Auth::user()->id);
 			
 		});
@@ -1916,6 +1545,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$idioma->nome = Input::get('nome');
 			$idioma->save();
 
+			Session::flash('info', "Idioma criado com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -1927,7 +1558,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Curso->idIdioma = Input::get('idioma');
 
 			$Curso->save();
-			Session::flash('message', "Curso criado com sucesso!");
+			Session::flash('info', "Curso criado com sucesso!");
 			return Redirect::back();
 		});
 
@@ -1938,7 +1569,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			
 			$Curso->save();
 
-			Session::flash('message', "Alterações salvas com sucesso!");
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -1957,7 +1588,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$modulos->save();
 
 			// redirect
-			Session::flash('message', 'Módulo criado com sucesso!');
+			Session::flash('info', 'Módulo criado com sucesso!');
 			return Redirect::back();
 		});
 
@@ -1974,7 +1605,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			
 			$Modulo->save();
 
-			Session::flash('message', "Alterações salvas com sucesso!");
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -2027,7 +1658,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$turma->save();
 
 			// redirect
-			Session::flash('message', 'Módulo criado com sucesso!');
+			Session::flash('info', 'Módulo criado com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2037,7 +1668,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			
 			$Turma->save();
 
-			Session::flash('message', "Alterações salvas com sucesso!");
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -2051,6 +1682,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			);
 
 			$turma->alunos()->save($aluno);
+
+			Session::flash('info', "Aluno matriculado com sucesso!");
 			return Redirect::back();
 		});
 
@@ -2059,6 +1692,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$aluno = Aluno::find($idAluno);
 
 			$turma->alunos()->detach($aluno);
+
+			Session::flash('info', "Aluno desmatriculado com sucesso!");
 			return Redirect::back();
 		});
 
@@ -2071,7 +1706,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Aula->save();
 
 			// redirect
-			Session::flash('message', 'Aula criada com sucesso!');
+			Session::flash('info', 'Aula criada com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2081,7 +1716,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			
 			$Aula->save();
 
-			Session::flash('message', "Alterações salvas com sucesso!");
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -2107,7 +1742,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$aula->materialApoio()->attach($Material->id);
 
 			// redirect
-			Session::flash('message', 'Material criado com sucesso!');
+			Session::flash('info', 'Material criado com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2126,7 +1761,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			
 			$Material->save();
 
-			Session::flash('message', "Alterações salvas com sucesso!");
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -2182,6 +1817,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$aula->materialApoio()->attach($material);
 				}
 			}
+			Session::flash('info', "Material copiado com sucesso!");
 			return Redirect::back();
 		});
 
@@ -2244,7 +1880,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$atividadeExtra->save();
 
 			// redirect
-			Session::flash('message', 'Atividade Extra criado com sucesso!');
+			Session::flash('info', 'Atividade Extra criado com sucesso!');
 			return Redirect::to('admin/atividadeExtra/'.$atividadeExtra->id.'/editar');
 		});
 
@@ -2265,7 +1901,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$atividadeExtra->save();
 
 			// redirect
-			Session::flash('message', 'Atividade Extra atualizada com sucesso!');
+			Session::flash('info', 'Alterações salvas com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2285,7 +1921,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Atividade->save();
 
 			// redirect
-			Session::flash('message', 'Atividade criado com sucesso!');
+			Session::flash('info', 'Atividade criada com sucesso!');
 			return Redirect::to('/admin/atividade/'.$Atividade->id.'/editar');
 		});
 
@@ -2296,7 +1932,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			
 			$Atividade->save();
 
-			Session::flash('message', "Alterações salvas com sucesso!");
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -2329,7 +1965,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$categoria->save();
 
 			// redirect
-			Session::flash('message', 'Categoria criada com sucesso!');
+			Session::flash('info', 'Categoria criada com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2340,7 +1976,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$categoria->save();
 
 			// redirect
-			Session::flash('message', 'Alterações salvas com sucesso!');
+			Session::flash('info', 'Alterações salvas com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2376,7 +2012,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$questao->numero = $questao->id;
 			$questao->save();
 
-			Session::flash('message', 'Questao criada com sucesso!');
+			Session::flash('info', 'Questão criada com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2449,7 +2085,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$questao->save();
 
 			// redirect
-			Session::flash('message', 'Questao criada com sucesso!');
+			Session::flash('info', 'Questão criada com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2476,7 +2112,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$questao->respostaCerta = Input::get('respostaCerta');
 			$questao->save();
 
-			Session::flash('message', 'Questao atualizada com sucesso!');
+			Session::flash('info', 'Alterações salvas com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2560,7 +2196,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$questao->save();
 
 			// redirect
-			Session::flash('message', 'Alterações salvas com sucesso!');
+			Session::flash('info', 'Alterações salvas com sucesso!');
 			return Redirect::back();
 		});
 
@@ -2659,6 +2295,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	                ->subject('KalanGO! - Verifique sua conta');
 	        });
 
+	        Session::flash('info', "Aluno criado com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -2693,7 +2331,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$aluno->save();
 
-			return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
+			Session::flash('info', "Alterações salvas com sucesso!");
+			return Redirect::back();
 		});
 
 	//Professores
@@ -2782,6 +2421,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	                ->subject('KalanGO! - Verifique sua conta');
 	        });
 
+	        Session::flash('info', "Professor criado com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -2813,7 +2454,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$professor->save();
 
-			return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
+			Session::flash('info', "Alterações salvas com sucesso!");
+			return Redirect::back();
 		});
 
 	//Administradores
@@ -2889,6 +2531,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$administrador->save();
 
+			Session::flash('info', "Administrador criado com sucesso!");
 			return Redirect::back();
 		});
 
@@ -2919,8 +2562,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$administrador->codRegistro = Input::get('codRegistro');
 
 			$administrador->save();
-
-			return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
+			
+			Session::flash('info', "Alterações salvas com sucesso!");			
+			return Redirect::back();
 		});
 
 	//Avisos
@@ -3001,6 +2645,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				}
 			}
 
+			Session::flash('info', "Aviso criado com sucesso!");
 			return Redirect::back();
 		});
 
@@ -3034,6 +2679,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$turma->avisos()->sync(array($aviso->id));
 				}
 			}
+
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -3072,6 +2719,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$topico->save();
 
+			Session::flash('info', "Tópico criado com sucesso!");
 			return Redirect::back();
 		});
 
@@ -3080,6 +2728,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$topico->nome = Input::get('nome');
 
 			$topico->save();
+
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -3118,6 +2768,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$empresa->razaoSocial = Input::get('razaoSocial');
 
 			$empresa->save();
+
+			Session::flash('info', "Empresa criada com sucesso!");
 			return Redirect::back();
 		});
 
@@ -3128,6 +2780,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$empresa->razaoSocial = Input::get('razaoSocial');
 
 			$empresa->save();
+
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -3178,6 +2832,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$propaganda->idUsuario = Auth::user()->id;
 			$propaganda->save();
 
+			Session::flash('info', "Propaganda criada com sucesso!");
 			return Redirect::back();
 		});
 
@@ -3197,6 +2852,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 
 			$propaganda->save();
+
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
