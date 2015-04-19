@@ -5,6 +5,32 @@
     $propagandas = Propaganda::all();
 ?>
 
+@section('css')
+<style>
+	@media (min-width: 1200px){
+		.fix-espacos-left {
+		  padding-right: 5px;
+		}
+
+		.fix-espacos-right {
+		  padding-left: 5px;
+		}
+	}
+
+	@media (min-width: 922px){
+		.fix-grupo-left {
+		  padding-right: 25px;
+		}
+
+		.fix-grupo-right {
+		  padding-left: 25px;
+		}
+	}
+	
+</style>
+	
+@endsection
+
 @section('carrossel')
 	<div class="row">
         <div class="col-md-12">
@@ -58,17 +84,17 @@
 @section('maincontent')
 	<section class="content">
 	    <div class="row">
-	        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	        	<h2 class="page-header" style="border-bottom:1px solid #000;">Meus Cursos</h2>
+	        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fix-grupo-left">
+	        	<h2 class="page-header center" style="border-bottom:1px solid #000;">Meus Cursos</h2>
 
                 <div class="row">
 
 					<div class="col-lg-6" style="padding: 0;"> <!-- Coluna de cursos -->
 	                    @foreach ( $turmas as $turma)
 	                    	<a {{'href=modulo/'.$turma->modulo->id}}>
-	                            <div class="col-md-12">
+	                            <div class="col-md-12 fix-espacos-left">
 	                                <div id="div_card_{{++$aux}}" class="box" style="">
-	                                    <div class="inner">
+	                                    <div class="inner" style="height: 122px;">
 	                                        <h3>{{$turma->modulo->curso->idioma->nome.' - '}}{{$turma->modulo->curso->nome}}</h3>
 	                                        <p style="font-size: 25px; font-weight: 600;">{{$turma->modulo->nome}}</p>
 	                                        <p style="">{{$turma->modulo->descricao}}</p>
@@ -84,10 +110,10 @@
 	                        </a>
 	                    @endforeach
 
-						<div class="col-md-12">
+						<div class="col-md-12 fix-espacos-left">
 							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="/aluno/cursos/anteriores" >
-									<div class="inner">
+									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Cursos Anteriores</b></span><br>
 										<span style="color:#FFF;">
 											Aqui você cosegue consultar os materiais dos cursos feitos anteriormente
@@ -106,10 +132,10 @@
 	                </div> <!-- fim coluna de cursos -->
 					
 					<div class="col-lg-6" style="padding: 0;">
-                    	<div class="col-md-12">
+                    	<div class="col-md-12 fix-espacos-right">
 							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="/aluno/atividades/extra">
-									<div class="inner">
+									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Atividades Extras</b></span><br>
 										<span style="color:#FFF;">
 											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -127,10 +153,10 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
+						<div class="col-md-12 fix-espacos-right">
 							<div id="div_card_{{++$aux}}" class="box">
 								<a href="/aluno/dashboard" >
-									<div class="inner">
+									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Desempenho</b></span><br>
 										<span style="color:#FFF;">
 											Veja seus pontos, acertos e erros das atividades respondidas
@@ -151,13 +177,13 @@
             
 	        </div>
 
-			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-	        	<h2 class="page-header" style="border-bottom:1px solid #000;">Comunicação</h2>
+			<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fix-grupo-right">
+	        	<h2 class="page-header center" style="border-bottom:1px solid #000;">Comunicação</h2>
                 	<div class="row">
-                    	<div class="col-lg-6">
+                    	<div class="col-lg-6 fix-espacos-left">
 							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="/aluno/mensagens/entrada">
-									<div class="inner">
+									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Mensagens</b></span><br>
 										<span style="color:#FFF;">
 											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -175,10 +201,10 @@
 							</div>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-6 fix-espacos-right">
 							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="javascript:void(0);" >
-									<div class="inner">
+									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Agenda</b></span><br>
 										<span style="color:#FFF;">
 											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -196,10 +222,10 @@
 							</div>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-6 fix-espacos-left">
 							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="/aluno/perfil">
-									<div class="inner">
+									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Perfil</b></span><br>
 										<span style="color:#FFF;">
 											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -217,10 +243,10 @@
 							</div>
 						</div>
 
-						<div class="col-lg-6">
+						<div class="col-lg-6 fix-espacos-right">
 							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="javascript:void(0);" >
-									<div class="inner">
+									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Contato</b></span><br>
 										<span style="color:#FFF;">
 											Fazer uma rotina para que a mensagem do aluno vá para o e-mail da escola
@@ -257,7 +283,7 @@
 	        // console.log(document.getElementById('div_card_' + i));
 
 	        //Gera numeros aleatorios baseado no valor maximo
-	        $('#div_card_' + i).addClass(cores[(valor+i)%9]) //Colore card sequencialmente com cores aleatorias
+	        $('#div_card_' + i).addClass(cores[(valor+i)%6]) //Colore card sequencialmente com cores aleatorias
 	    }
 	     
 	</script>

@@ -1,4 +1,4 @@
-<html lang="en"><head>
+<html lang="pt-br"><head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -109,10 +109,10 @@
 </div>
 </div>
 <!-- jQuery Version 1.11.0 -->
-<script src="js/jquery-1.11.0.js"></script>
+<script src="plugins/JQuery/jQuery-2.1.3.min.js"></script>
 
 <!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
 
 <!-- Script to Activate the Carousel -->
 <script>

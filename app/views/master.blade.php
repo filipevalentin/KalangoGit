@@ -260,8 +260,8 @@
         </script>
 
         <script>
-            valor = Math.floor((Math.random() * 9)+9);  // Gera um número aleatório entre 9 e 17
-            var cores= ["small-box bg-aqua card","small-box bg-red card","small-box bg-green card","small-box bg-olive card","small-box bg-orange card","small-box bg-purple card","small-box bg-light-blue card","small-box bg-fuchsia card","small-box bg-teal card"];
+            valor = Math.floor((Math.random() * 6)+6);  // Gera um número aleatório entre 9 e 17
+            var cores= ["small-box bg-aqua card","small-box bg-red card","small-box bg-green card","small-box bg-olive card","small-box bg-purple card","small-box bg-teal card"];
             var valorMaximo = <?=$vint_valorMaximo?>; //valorMaximo deve ser calculado via banco pois a quantidade de cursos torna o numero dinamico
         </script>
 
