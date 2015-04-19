@@ -17,7 +17,7 @@
                 <form method="POST" action="/professor/criarAtividadeExtra">
                     <div id="div_nome-nova-atividadeExtra" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-nova-atividadeExtra" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAtividadeExtra();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-nova-atividadeExtra"></textarea>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAtividadeExtra();" maxlength="50" class="form-control somenteLetrasENumeros nomeObrigatorio-nova-atividadeExtra"></textarea>
                     </div>
                     <div id="div_curso-nova-atividadeExtra" class="form-group">
                         <label class="control-label" for="idModulo"><i id="icone_curso-nova-atividadeExtra" class="fa"></i>Selecione o Módulo</label>
@@ -27,10 +27,10 @@
                             @endforeach
                         </select>
                     </div>
-                    <div id="div_categoria-nova-atividadeExtra" class="form-group">
-                        <label class="control-label" for="idCategoria"><i id="icone_categoria-nova-atividadeExtra" class="fa"></i> Categoria</label>
-                        <select id="idCategoria" name="idCategoria" onblur="fcn_recarregaCoresNovaAtividadeExtra();" class="form-control categoriaObrigatoria-nova-atividadeExtra">
-                            <option value="">Atribua uma categoria - Sem categoria</option>
+                    <div class="form-group">
+                        <label class="control-label" for="idCategoria"><i class="fa"></i> Categoria</label>
+                        <select id="idCategoria" name="idCategoria" onblur="fcn_recarregaCoresNovaAtividadeExtra();" class="form-control">
+                            <option value="">Sem categoria</option>
                             @foreach(Categoria::all() as $categoria)
                                 <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
                             @endforeach
@@ -61,7 +61,7 @@
 
                     <div id="div_nome-editar-atividadeExtra" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-atividadeExtra" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAtividadeExtra();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-editar-atividadeExtra"></textarea>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAtividadeExtra();" maxlength="50" class="form-control somenteLetrasENumeros nomeObrigatorio-editar-atividadeExtra"></textarea>
                     </div>
                     <div id="div_curso-editar-atividadeExtra" class="form-group">
                         <label class="control-label" for="idModulo"><i id="icone_curso-editar-atividadeExtra" class="fa"></i>Selecione o Módulo</label>
@@ -71,17 +71,18 @@
                             @endforeach
                         </select>
                     </div>
-                    <div id="div_categoria-editar-atividadeExtra" class="form-group">
-                        <label class="control-label" for="idCategoria"><i id="icone_categoria-editar-atividadeExtra" class="fa"></i> Categoria</label>
-                        <select id="idCategoria" name="idCategoria" onblur="fcn_recarregaCoresEditarAtividadeExtra();" class="form-control categoriaObrigatoria-editar-atividadeExtra">
-                            @foreach(Categoria::all() as $categoria)
+                    <div class="form-group">
+                        <label class="control-label" for="idCategoria"><i class="fa"></i> Categoria</label>
+                        <select id="idCategoria" name="idCategoria" onblur="fcn_recarregaCoresEditarAtividadeExtra();" class="form-control">
+                            <option value="">Sem categoria</option>
+							@foreach(Categoria::all() as $categoria)
                                 <option value="{{$categoria->id}}">{{$categoria->nome}}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div id="" class="form-group">
-                        <label class="control-label" for="status"><i id="icone_nome-editar-exercicio" class="fa"></i> Status</label>
-                        <select type="text" autocomplete="off" id="status" name="status" class="form-control">
+                    <div id="div_status-editar-atividadeExtra" class="form-group">
+                        <label class="control-label" for="status"><i id="icone_status-editar-atividadeExtra" class="fa"></i> Status</label>
+                        <select type="text" autocomplete="off" id="status" name="status" onblur="fcn_recarregaCoresEditarAtividadeExtra();" class="form-control statusObrigatorio-editar-atividadeExtra">
                             <option value="0"> Desativado</option>
                             <option value="1"> Ativado</option>
                         </select>
@@ -285,6 +286,14 @@
 				}
 			});
 			
+			$( ".somenteLetrasENumeros" ).keyup(function() {
+				//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
+				if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
+					var valor = $(this).val().replace(/[^0-9a-zA-ZãÃáÁàÀâÂéÉèÈêÊíÍìÌîÎõÕóÓòÒôÔúÚùÙûÛÇç ]+/g,'');
+					$(this).val(valor);
+				}
+			});
+			
 			$(".btn-salvar-nova-atividadeExtra").click(function(event){
 			
 				var obrigatorioPendente = 0;
@@ -313,19 +322,6 @@
 					$( "#icone_curso-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
 					$( "#div_curso-nova-atividadeExtra" ).addClass("has-success");
 					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".categoriaObrigatoria-nova-atividadeExtra").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_categoria-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_categoria-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_categoria-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_categoria-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_categoria-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_categoria-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_categoria-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_categoria-nova-atividadeExtra" ).addClass("fa-check");
 				}
 				
 				if(obrigatorioPendente == 1){
@@ -365,17 +361,17 @@
 					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-check");
 				}
 				
-				if($(".categoriaObrigatoria-editar-atividadeExtra").val() == ""){
+				if($(".statusObrigatorio-editar-atividadeExtra").val() == ""){
 					obrigatorioPendente = 1;
-					$( "#div_categoria-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_categoria-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_categoria-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-times-circle-o");
+					$( "#div_status-editar-atividadeExtra" ).removeClass("has-success");
+					$( "#icone_status-editar-atividadeExtra" ).removeClass("fa-check");
+					$( "#div_status-editar-atividadeExtra" ).addClass("has-error");
+					$( "#icone_status-editar-atividadeExtra" ).addClass("fa-times-circle-o");
 				}else{
-					$( "#div_categoria-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_categoria-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_categoria-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-check");
+					$( "#div_status-editar-atividadeExtra" ).removeClass("has-error");
+					$( "#icone_status-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
+					$( "#div_status-editar-atividadeExtra" ).addClass("has-success");
+					$( "#icone_status-editar-atividadeExtra" ).addClass("fa-check");
 				}
 				
 				if(obrigatorioPendente == 1){
@@ -411,18 +407,6 @@
 					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-check");
 				}
 				
-				if($(".categoriaObrigatoria-nova-atividadeExtra").val() == ""){
-					$( "#div_categoria-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_categoria-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_categoria-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_categoria-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_categoria-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_categoria-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_categoria-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_categoria-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
 			}
 			
 			function fcn_recarregaCoresEditarAtividadeExtra(){
@@ -451,16 +435,16 @@
 					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-check");
 				}
 				
-				if($(".categoriaObrigatoria-editar-atividadeExtra").val() == ""){
-					$( "#div_categoria-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_categoria-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_categoria-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-times-circle-o");
+				if($(".statusObrigatorio-editar-atividadeExtra").val() == ""){
+					$( "#div_status-editar-atividadeExtra" ).removeClass("has-success");
+					$( "#icone_status-editar-atividadeExtra" ).removeClass("fa-check");
+					$( "#div_status-editar-atividadeExtra" ).addClass("has-error");
+					$( "#icone_status-editar-atividadeExtra" ).addClass("fa-times-circle-o");
 				}else{
-					$( "#div_categoria-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_categoria-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_categoria-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_categoria-editar-atividadeExtra" ).addClass("fa-check");
+					$( "#div_status-editar-atividadeExtra" ).removeClass("has-error");
+					$( "#icone_status-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
+					$( "#div_status-editar-atividadeExtra" ).addClass("has-success");
+					$( "#icone_status-editar-atividadeExtra" ).addClass("fa-check");
 				}
 				
 			}
