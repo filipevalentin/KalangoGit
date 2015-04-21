@@ -134,6 +134,32 @@
             $('.item').first().addClass("active")
 
         </script>
+		
+		<script> //Validações
+	
+			$(".btn-enviar").click(function(event){
+					
+				if($(".alunoObrigatorio").val() == ""){
+					alert("É necessário preencher o Aluno que deverá receber a mensagem!");
+					$(".alunoObrigatorio").focus();
+					return false;
+				} 
+				
+				if($(".tituloObrigatorio").val() == ""){
+					alert("É necessário preencher o Título da Mensagem!");
+					$(".tituloObrigatorio").focus();
+					return false;
+				}
+
+				if($(".mensagemObrigatoria").val() == ""){
+					alert("É necessário preencher a Mensagem!");
+					$(".mensagemObrigatoria").focus();
+					return false;
+				}			
+				
+			})
+					
+		</script>
     @endsection
 
 @endsection
