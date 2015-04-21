@@ -14,6 +14,24 @@
 @stop
 
 @section('maincontent')
+
+<link rel="stylesheet" href="../../plugins/jQueryUI/calendario/jquery-ui.css">
+<script src="../../plugins/jQuery/jQuery-2.1.3.min.js"></script>
+<script>
+  $(function() {
+    $( "#dataNascimento" ).datepicker({
+		dateFormat: 'dd/mm/yy',
+		dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+		dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+		dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+		monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+		monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+		nextText: 'Próximo',
+		prevText: 'Anterior'
+	});
+  });
+</script>
+
     <!-- Main content -->
     <section class="content" id="profile">
         
@@ -254,7 +272,7 @@
                                                     </div>
                                                     <div id="div_dataNascimento" class="form-group margin">
                                                         <label class="control-label" for="dataNascimento"><i id="icone_dataNascimento" class="fa"></i></label> <b>Data de nascimento</b>
-                                                        <input type="text" autocomplete="off" name="dataNascimento" id="dataNascimento" onblur="fcn_recarregaCores();fcn_validaDtNascimento(this)" class="form-control validaData dataNascimentoObrigatorio" value={{Aluno::find(Auth::user()->id)->dataNascimento}}>
+                                                        <input type="text" autocomplete="off" name="dataNascimento" id="dataNascimento" onblur="fcn_recarregaCores();" class="form-control dataNascimentoObrigatorio" value={{Aluno::find(Auth::user()->id)->dataNascimento}}>
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i></label> <b>E-mail</b>
@@ -322,7 +340,6 @@
 
 @section('scripts')
 	
-	<script src="../../js/jquery.maskedinput.min.js"></script>
 	<script> //Validações
 		$( ".somenteLetras" ).keyup(function() {
 			//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
@@ -340,9 +357,9 @@
 			}
 		});
 		
-		$(".validaData").mask("99/99/9999");
-		
 		$(".btn-salvar-dados").click(function(event){
+			
+			fcn_validaDtNascimento($(".dataNascimentoObrigatorio").val());
 			
 			var obrigatorioPendente = 0;
 			
@@ -589,11 +606,12 @@
 		
 		function fcn_validaDtNascimento(element) 
 		{
-			if(element.value != "" && element.value != "__/__/____"){
+			if(element != "" && element != "__/__/____"){
+				
 				regex = /^((((0?[1-9]|1\d|2[0-8])\/(0?[1-9]|1[0-2]))|((29|30)\/(0?[13456789]|1[0-2]))|(31\/(0?[13578]|1[02])))\/((19|20)?\d\d))$|((29\/0?2\/)((19|20)?(0[48]|[2468][048]|[13579][26])|(20)?00))$/;
 				
-				resultado = regex.exec(element.value);
-				if(!resultado)
+				resultado = regex.exec(element);
+				if(!resultado || element.length != 10)
 				{
 					
 					$( "#div_dataNascimento" ).removeClass("has-success");
@@ -601,17 +619,17 @@
 					$( "#div_dataNascimento" ).addClass("has-error");
 					$( "#icone_dataNascimento" ).addClass("fa-times-circle-o");
 					
-					document.getElementById('dataNascimento').focus();
+					document.getElementById('dataNascimento').value = "";
 					alert("Data de Nascimento inválida!");
 					return false;
 				}
 				
-				var data = element.value;
+				var data = element;
 				var objDate = new Date();
 				objDate.setYear(data.split("/")[2]);
 				objDate.setMonth(data.split("/")[1]  - 1);//- 1 pq em js é de 0 a 11 os meses
 				objDate.setDate(data.split("/")[0]);
-
+				
 				if(objDate.getTime() > new Date().getTime()){
 					
 					$( "#div_dataNascimento" ).removeClass("has-success");
@@ -619,7 +637,7 @@
 					$( "#div_dataNascimento" ).addClass("has-error");
 					$( "#icone_dataNascimento" ).addClass("fa-times-circle-o");
 					
-					document.getElementById('dataNascimento').focus();
+					document.getElementById('dataNascimento').value = "";
 					alert("A data de nascimento deve ser menor ou igual à data atual.");
 					return false;
 				}
