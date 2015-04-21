@@ -17,21 +17,21 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="idprofessor" name="idprofessor">
                     </div>
-                    <div id="div_nome-editar-turma" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome-editar-turma" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresEditarTurma();" class="form-control nomeObrigatorio-editar-turma">
+                    <div id="div_nome_editar_turma" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome_editar_turma" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresEditarTurma();" class="form-control nomeObrigatorio_editar_turma">
                     </div>
-                    <div id="div_professor-editar-turma" class="form-group">
-                        <label class="control-label" for="professor"><i id="icone_professor-editar-turma" class="fa"></i> Professor</label>
-                        <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresEditarTurma();" class="form-control professorObrigatorio-editar-turma">
+                    <div id="div_professor_editar_turma" class="form-group">
+                        <label class="control-label" for="professor"><i id="icone_professor_editar_turma" class="fa"></i> Professor</label>
+                        <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresEditarTurma();" class="form-control professorObrigatorio_editar_turma">
                         @foreach(Professor::all() as $professor)
                             <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
                         @endforeach
                         </select>
                     </div>
-                    <div id="div_nome-editar-turma" class="form-group">
-                        <label class="control-label" for="status"><i id="icone_status-editar-turma" class="fa"></i> Status</label>
-                        <select autocomplete="off" id="status" name="status" maxlength="50" onblur="" class="form-control">
+                    <div id="div_status_editar_turma" class="form-group">
+                        <label class="control-label" for="status"><i id="icone_status_editar_turma" class="fa"></i> Status</label>
+                        <select autocomplete="off" id="status" name="status" maxlength="50" onblur="fcn_recarregaCoresNovaTurma();" class="form-control statusObrigatorio_editar_turma">
                             <option value="1">Aberta (em andamento)</option>
                             <option value="0">Fechada (concluída)</option>
                         </select>
@@ -60,9 +60,9 @@
                         <input type="hidden" class="form-control" id="idmodulo" name="idModulo">
                     </div>
 
-                    <div id="div_nome-nova-turma" class="form-group">
-                        <label class="control-label" for="curso"><i id="icone_nome-nova-turma" class="fa"></i> Curso</label>
-                        <select name="curso" id="curso" class="form-control">
+                    <div id="div_curso_nova_turma" class="form-group">
+                        <label class="control-label" for="curso"><i id="icone_curso_nova_turma" class="fa"></i> Curso</label>
+                        <select name="curso" id="curso" class="form-control cursoObrigatorio_nova_turma" onblur="fcn_recarregaCoresNovaTurma();">
                         @foreach(Idioma::all() as $idioma)
 	                        <optgroup label="{{$idioma->nome}}">
 	                        	@foreach($idioma->cursos as $curso)
@@ -74,20 +74,20 @@
                         </select>
                     </div>
 
-                    <div id="div_nome-nova-turma" class="form-group">
-                        <label class="control-label" for="curso"><i id="icone_nome-nova-turma" class="fa"></i> Modulo</label>
-                        <select name="curso" id="modulo" class="form-control">
+                    <div id="div_modulo_nova_turma" class="form-group">
+                        <label class="control-label" for="curso"><i id="icone_modulo_nova_turma" class="fa"></i> Modulo</label>
+                        <select name="curso" id="modulo" onblur="fcn_recarregaCoresNovaTurma();" class="form-control moduloObrigatorio_nova_turma">
 	                        
                         </select>
                     </div>
 
-                    <div id="div_nome-nova-turma" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome-nova-turma" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresNovaTurma();" class="form-control nomeObrigatorio-nova-turma">
+                    <div id="div_nome_nova_turma" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome_nova_turma" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresNovaTurma();" class="form-control nomeObrigatorio_nova_turma">
                     </div>
-                    <div id="div_professor-nova-turma" class="form-group">
-                        <label class="control-label" for="professor"><i id="icone_professor-nova-turma" class="fa"></i> Professor</label>
-                        <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresNovaTurma();" class="form-control professorObrigatorio-nova-turma">
+                    <div id="div_professor_nova_turma" class="form-group">
+                        <label class="control-label" for="professor"><i id="icone_professor_nova_turma" class="fa"></i> Professor</label>
+                        <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresNovaTurma();" class="form-control professorObrigatorio_nova_turma">
                             <option value="" disabled>Selecione um Professor</option>
                         @foreach(Professor::all() as $professor)
                             <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
@@ -269,86 +269,60 @@ $( ".somenteNumeros" ).keyup(function() {
 	}
 });
 
-$(".btn-salvar").click(function(event){
+$(".btn-salvar-nova-turma").click(function(event){
 	
 	var obrigatorioPendente = 0;
 	
-	if($(".nomeObrigatorio").val() == ""){
+	if($(".cursoObrigatorio_nova_turma").val() == ""){
 		obrigatorioPendente = 1;
-		$( "#div_nome" ).removeClass("has-success");
-		$( "#icone_nome" ).removeClass("fa-check");
-		$( "#div_nome" ).addClass("has-error");
-		$( "#icone_nome" ).addClass("fa-times-circle-o");
+		$( "#div_curso_nova_turma" ).removeClass("has-success");
+		$( "#icone_curso_nova_turma" ).removeClass("fa-check");
+		$( "#div_curso_nova_turma" ).addClass("has-error");
+		$( "#icone_curso_nova_turma" ).addClass("fa-times-circle-o");
 	}else{
-		$( "#div_nome" ).removeClass("has-error");
-		$( "#icone_nome" ).removeClass("fa-times-circle-o");
-		$( "#div_nome" ).addClass("has-success");
-		$( "#icone_nome" ).addClass("fa-check");
+		$( "#div_curso_nova_turma" ).removeClass("has-error");
+		$( "#icone_curso_nova_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_curso_nova_turma" ).addClass("has-success");
+		$( "#icone_curso_nova_turma" ).addClass("fa-check");
 	}
 	
-	if($(".sobrenomeObrigatorio").val() == ""){
+	if($(".moduloObrigatorio_nova_turma").val() == ""){
 		obrigatorioPendente = 1;
-		$( "#div_sobrenome" ).removeClass("has-success");
-		$( "#icone_sobrenome" ).removeClass("fa-check");
-		$( "#div_sobrenome" ).addClass("has-error");
-		$( "#icone_sobrenome" ).addClass("fa-times-circle-o");
+		$( "#div_modulo_nova_turma" ).removeClass("has-success");
+		$( "#icone_modulo_nova_turma" ).removeClass("fa-check");
+		$( "#div_modulo_nova_turma" ).addClass("has-error");
+		$( "#icone_modulo_nova_turma" ).addClass("fa-times-circle-o");
 	}else{
-		$( "#div_sobrenome" ).removeClass("has-error");
-		$( "#icone_sobrenome" ).removeClass("fa-times-circle-o");
-		$( "#div_sobrenome" ).addClass("has-success");
-		$( "#icone_sobrenome" ).addClass("fa-check");
+		$( "#div_modulo_nova_turma" ).removeClass("has-error");
+		$( "#icone_modulo_nova_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_modulo_nova_turma" ).addClass("has-success");
+		$( "#icone_modulo_nova_turma" ).addClass("fa-check");
 	}
 	
-	if($(".formacaoAcademicaObrigatoria").val() == ""){
+	if($(".nomeObrigatorio_nova_turma").val() == ""){
 		obrigatorioPendente = 1;
-		$( "#div_formacaoAcademica" ).removeClass("has-success");
-		$( "#icone_formacaoAcademica" ).removeClass("fa-check");
-		$( "#div_formacaoAcademica" ).addClass("has-error");
-		$( "#icone_formacaoAcademica" ).addClass("fa-times-circle-o");
+		$( "#div_nome_nova_turma" ).removeClass("has-success");
+		$( "#icone_nome_nova_turma" ).removeClass("fa-check");
+		$( "#div_nome_nova_turma" ).addClass("has-error");
+		$( "#icone_nome_nova_turma" ).addClass("fa-times-circle-o");
 	}else{
-		$( "#div_formacaoAcademica" ).removeClass("has-error");
-		$( "#icone_formacaoAcademica" ).removeClass("fa-times-circle-o");
-		$( "#div_formacaoAcademica" ).addClass("has-success");
-		$( "#icone_formacaoAcademica" ).addClass("fa-check");
+		$( "#div_nome_nova_turma" ).removeClass("has-error");
+		$( "#icone_nome_nova_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_nome_nova_turma" ).addClass("has-success");
+		$( "#icone_nome_nova_turma" ).addClass("fa-check");
 	}
 	
-	if($(".emailObrigatorio").val() == ""){
+	if($(".professorObrigatorio_nova_turma").val() == ""){
 		obrigatorioPendente = 1;
-		$( "#div_email" ).removeClass("has-success");
-		$( "#icone_email" ).removeClass("fa-check");
-		$( "#div_email" ).addClass("has-error");
-		$( "#icone_email" ).addClass("fa-times-circle-o");
+		$( "#div_professor_nova_turma" ).removeClass("has-success");
+		$( "#icone_professor_nova_turma" ).removeClass("fa-check");
+		$( "#div_professor_nova_turma" ).addClass("has-error");
+		$( "#icone_professor_nova_turma" ).addClass("fa-times-circle-o");
 	}else{
-		$( "#div_email" ).removeClass("has-error");
-		$( "#icone_email" ).removeClass("fa-times-circle-o");
-		$( "#div_email" ).addClass("has-success");
-		$( "#icone_email" ).addClass("fa-check");
-	}
-	
-	if($(".codigoRegistroObrigatorio").val() == ""){
-		obrigatorioPendente = 1;
-		$( "#div_codigoRegistro" ).removeClass("has-success");
-		$( "#icone_codigoRegistro" ).removeClass("fa-check");
-		$( "#div_codigoRegistro" ).addClass("has-error");
-		$( "#icone_codigoRegistro" ).addClass("fa-times-circle-o");
-	}else{
-		$( "#div_codigoRegistro" ).removeClass("has-error");
-		$( "#icone_codigoRegistro" ).removeClass("fa-times-circle-o");
-		$( "#div_codigoRegistro" ).addClass("has-success");
-		$( "#icone_codigoRegistro" ).addClass("fa-check");
-	}
-	
-	if($(".senhaObrigatoria").val() == ""){
-		obrigatorioPendente = 1;
-		$( "#div_senha" ).removeClass("has-success");
-		$( "#icone_senha" ).removeClass("fa-check");
-		$( "#div_senha" ).addClass("has-error");
-		$( "#icone_senha" ).addClass("fa-times-circle-o");
-	}else{
-		$( "#div_senha" ).removeClass("has-error");
-		$( "#icone_senha" ).removeClass("fa-times-circle-o");
-		$( "#div_senha" ).addClass("has-success");
-		$( "#icone_senha" ).addClass("fa-check");
+		$( "#div_professor_nova_turma" ).removeClass("has-error");
+		$( "#icone_professor_nova_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_professor_nova_turma" ).addClass("has-success");
+		$( "#icone_professor_nova_turma" ).addClass("fa-check");
 	}
 	
 	if(obrigatorioPendente == 1){
@@ -358,175 +332,148 @@ $(".btn-salvar").click(function(event){
 	
 })
 
-function fcn_recarregaCores(){
+$(".btn-salvar-editar-turma").click(function(event){
 	
-	if($(".nomeObrigatorio").val() == ""){
-		$( "#div_nome" ).removeClass("has-success");
-		$( "#icone_nome" ).removeClass("fa-check");
-		$( "#div_nome" ).addClass("has-error");
-		$( "#icone_nome" ).addClass("fa-times-circle-o");
+	var obrigatorioPendente = 0;
+	
+	if($(".nomeObrigatorio_editar_turma").val() == ""){
+		obrigatorioPendente = 1;
+		$( "#div_nome_editar_turma" ).removeClass("has-success");
+		$( "#icone_nome_editar_turma" ).removeClass("fa-check");
+		$( "#div_nome_editar_turma" ).addClass("has-error");
+		$( "#icone_nome_editar_turma" ).addClass("fa-times-circle-o");
 	}else{
-		$( "#div_nome" ).removeClass("has-error");
-		$( "#icone_nome" ).removeClass("fa-times-circle-o");
-		$( "#div_nome" ).addClass("has-success");
-		$( "#icone_nome" ).addClass("fa-check");
+		$( "#div_nome_editar_turma" ).removeClass("has-error");
+		$( "#icone_nome_editar_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_nome_editar_turma" ).addClass("has-success");
+		$( "#icone_nome_editar_turma" ).addClass("fa-check");
 	}
 	
-	if($(".sobrenomeObrigatorio").val() == ""){
-		$( "#div_sobrenome" ).removeClass("has-success");
-		$( "#icone_sobrenome" ).removeClass("fa-check");
-		$( "#div_sobrenome" ).addClass("has-error");
-		$( "#icone_sobrenome" ).addClass("fa-times-circle-o");
+	if($(".professorObrigatorio_editar_turma").val() == ""){
+		obrigatorioPendente = 1;
+		$( "#div_professor_editar_turma" ).removeClass("has-success");
+		$( "#icone_professor_editar_turma" ).removeClass("fa-check");
+		$( "#div_professor_editar_turma" ).addClass("has-error");
+		$( "#icone_professor_editar_turma" ).addClass("fa-times-circle-o");
 	}else{
-		$( "#div_sobrenome" ).removeClass("has-error");
-		$( "#icone_sobrenome" ).removeClass("fa-times-circle-o");
-		$( "#div_sobrenome" ).addClass("has-success");
-		$( "#icone_sobrenome" ).addClass("fa-check");
+		$( "#div_professor_editar_turma" ).removeClass("has-error");
+		$( "#icone_professor_editar_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_professor_editar_turma" ).addClass("has-success");
+		$( "#icone_professor_editar_turma" ).addClass("fa-check");
 	}
 	
-	if($(".formacaoAcademicaObrigatoria").val() == ""){
-		$( "#div_formacaoAcademica" ).removeClass("has-success");
-		$( "#icone_formacaoAcademica" ).removeClass("fa-check");
-		$( "#div_formacaoAcademica" ).addClass("has-error");
-		$( "#icone_formacaoAcademica" ).addClass("fa-times-circle-o");
+	if($(".statusObrigatorio_editar_turma").val() == ""){
+		obrigatorioPendente = 1;
+		$( "#div_status_editar_turma" ).removeClass("has-success");
+		$( "#icone_status_editar_turma" ).removeClass("fa-check");
+		$( "#div_status_editar_turma" ).addClass("has-error");
+		$( "#icone_status_editar_turma" ).addClass("fa-times-circle-o");
 	}else{
-		$( "#div_formacaoAcademica" ).removeClass("has-error");
-		$( "#icone_formacaoAcademica" ).removeClass("fa-times-circle-o");
-		$( "#div_formacaoAcademica" ).addClass("has-success");
-		$( "#icone_formacaoAcademica" ).addClass("fa-check");
+		$( "#div_status_editar_turma" ).removeClass("has-error");
+		$( "#icone_status_editar_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_status_editar_turma" ).addClass("has-success");
+		$( "#icone_status_editar_turma" ).addClass("fa-check");
 	}
 	
-	if($(".emailObrigatorio").val() == ""){
-		$( "#div_email" ).removeClass("has-success");
-		$( "#icone_email" ).removeClass("fa-check");
-		$( "#div_email" ).addClass("has-error");
-		$( "#icone_email" ).addClass("fa-times-circle-o");
-	}else{
-		$( "#div_email" ).removeClass("has-error");
-		$( "#icone_email" ).removeClass("fa-times-circle-o");
-		$( "#div_email" ).addClass("has-success");
-		$( "#icone_email" ).addClass("fa-check");
+	if(obrigatorioPendente == 1){
+		alert("É necessário preencher todos os campos obrigatórios!");
+		return false;
 	}
 	
-	if($(".codigoRegistroObrigatorio").val() == ""){
-		$( "#div_codigoRegistro" ).removeClass("has-success");
-		$( "#icone_codigoRegistro" ).removeClass("fa-check");
-		$( "#div_codigoRegistro" ).addClass("has-error");
-		$( "#icone_codigoRegistro" ).addClass("fa-times-circle-o");
+})
+
+function fcn_recarregaCoresNovaTurma(){
+
+	if($(".cursoObrigatorio_nova_turma").val() == ""){
+		$( "#div_curso_nova_turma" ).removeClass("has-success");
+		$( "#icone_curso_nova_turma" ).removeClass("fa-check");
+		$( "#div_curso_nova_turma" ).addClass("has-error");
+		$( "#icone_curso_nova_turma" ).addClass("fa-times-circle-o");
 	}else{
-		$( "#div_codigoRegistro" ).removeClass("has-error");
-		$( "#icone_codigoRegistro" ).removeClass("fa-times-circle-o");
-		$( "#div_codigoRegistro" ).addClass("has-success");
-		$( "#icone_codigoRegistro" ).addClass("fa-check");
+		$( "#div_curso_nova_turma" ).removeClass("has-error");
+		$( "#icone_curso_nova_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_curso_nova_turma" ).addClass("has-success");
+		$( "#icone_curso_nova_turma" ).addClass("fa-check");
 	}
 	
-	if($(".senhaObrigatoria").val() == ""){
-		$( "#div_senha" ).removeClass("has-success");
-		$( "#icone_senha" ).removeClass("fa-check");
-		$( "#div_senha" ).addClass("has-error");
-		$( "#icone_senha" ).addClass("fa-times-circle-o");
+	if($(".moduloObrigatorio_nova_turma").val() == ""){
+		$( "#div_modulo_nova_turma" ).removeClass("has-success");
+		$( "#icone_modulo_nova_turma" ).removeClass("fa-check");
+		$( "#div_modulo_nova_turma" ).addClass("has-error");
+		$( "#icone_modulo_nova_turma" ).addClass("fa-times-circle-o");
 	}else{
-		$( "#div_senha" ).removeClass("has-error");
-		$( "#icone_senha" ).removeClass("fa-times-circle-o");
-		$( "#div_senha" ).addClass("has-success");
-		$( "#icone_senha" ).addClass("fa-check");
+		$( "#div_modulo_nova_turma" ).removeClass("has-error");
+		$( "#icone_modulo_nova_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_modulo_nova_turma" ).addClass("has-success");
+		$( "#icone_modulo_nova_turma" ).addClass("fa-check");
+	}
+	
+	if($(".nomeObrigatorio_nova_turma").val() == ""){
+		$( "#div_nome_nova_turma" ).removeClass("has-success");
+		$( "#icone_nome_nova_turma" ).removeClass("fa-check");
+		$( "#div_nome_nova_turma" ).addClass("has-error");
+		$( "#icone_nome_nova_turma" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_nome_nova_turma" ).removeClass("has-error");
+		$( "#icone_nome_nova_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_nome_nova_turma" ).addClass("has-success");
+		$( "#icone_nome_nova_turma" ).addClass("fa-check");
+	}
+	
+	if($(".professorObrigatorio_nova_turma").val() == ""){
+		$( "#div_professor_nova_turma" ).removeClass("has-success");
+		$( "#icone_professor_nova_turma" ).removeClass("fa-check");
+		$( "#div_professor_nova_turma" ).addClass("has-error");
+		$( "#icone_professor_nova_turma" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_professor_nova_turma" ).removeClass("has-error");
+		$( "#icone_professor_nova_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_professor_nova_turma" ).addClass("has-success");
+		$( "#icone_professor_nova_turma" ).addClass("fa-check");
+	}
+
+}
+
+function fcn_recarregaCoresEditarTurma(){
+	
+	if($(".nomeObrigatorio_editar_turma").val() == ""){
+		$( "#div_nome_editar_turma" ).removeClass("has-success");
+		$( "#icone_nome_editar_turma" ).removeClass("fa-check");
+		$( "#div_nome_editar_turma" ).addClass("has-error");
+		$( "#icone_nome_editar_turma" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_nome_editar_turma" ).removeClass("has-error");
+		$( "#icone_nome_editar_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_nome_editar_turma" ).addClass("has-success");
+		$( "#icone_nome_editar_turma" ).addClass("fa-check");
+	}
+	
+	if($(".professorObrigatorio_editar_turma").val() == ""){
+		$( "#div_professor_editar_turma" ).removeClass("has-success");
+		$( "#icone_professor_editar_turma" ).removeClass("fa-check");
+		$( "#div_professor_editar_turma" ).addClass("has-error");
+		$( "#icone_professor_editar_turma" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_professor_editar_turma" ).removeClass("has-error");
+		$( "#icone_professor_editar_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_professor_editar_turma" ).addClass("has-success");
+		$( "#icone_professor_editar_turma" ).addClass("fa-check");
+	}
+	
+	if($(".statusObrigatorio_editar_turma").val() == ""){
+		$( "#div_status_editar_turma" ).removeClass("has-success");
+		$( "#icone_status_editar_turma" ).removeClass("fa-check");
+		$( "#div_status_editar_turma" ).addClass("has-error");
+		$( "#icone_status_editar_turma" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_status_editar_turma" ).removeClass("has-error");
+		$( "#icone_status_editar_turma" ).removeClass("fa-times-circle-o");
+		$( "#div_status_editar_turma" ).addClass("has-success");
+		$( "#icone_status_editar_turma" ).addClass("fa-check");
 	}
 				
 }
-
-function fcn_validaEmail(pstr_email){
-	if (pstr_email.value != '') {	
-		er = /^[a-zA-Z0-9][a-zA-Z0-9\._-]+@([a-zA-Z0-9\._-]+\.)[a-zA-Z-0-9]{2}/;
-		if (!er.exec(pstr_email.value)) {
-			
-			$( "#div_email" ).removeClass("has-success");
-			$( "#icone_email" ).removeClass("fa-check");
-			$( "#div_email" ).addClass("has-error");
-			$( "#icone_email" ).addClass("fa-times-circle-o");
-			
-			pstr_email.focus();
-			alert("É necessário o preenchimento de um endereço de e-mail válido.");
-			pstr_email.focus();
-			return false;
-		}
-	}
-}
-
-function fcn_validaSenha(minimo, maximo, pstr_valor){
-	
-	var senha = document.getElementById('senha').value;
-	var str = pstr_valor;
-	
-	if(senha != ""){
-	
-		if (senha.length > maximo) {
-			document.getElementById('senha').value = senha.substring(0, maximo);
-		} else {
-			
-			if(senha.length < minimo){
-				
-				$( "#div_senha" ).removeClass("has-success");
-				$( "#icone_senha" ).removeClass("fa-check");
-				$( "#div_senha" ).addClass("has-error");
-				$( "#icone_senha" ).addClass("fa-times-circle-o");
-				
-				alert("A senha deve ter entre 6 e 12 caracteres.");
-				document.getElementById('senha').focus();
-				return false;
-			}
-			
-		}
-		
-		//Caracteres especiais
-		if (!(
-				str.indexOf('"') > 0 || str.indexOf('!') > 0 || str.indexOf('@') > 0 || str.indexOf('#') > 0 || str.indexOf('$') > 0 || 
-				str.indexOf('%') > 0 || str.indexOf('¨') > 0 || str.indexOf('&') > 0 || str.indexOf('*') > 0 ||	str.indexOf('(') > 0 || 
-				str.indexOf(')') > 0 || str.indexOf('-') > 0 ||	str.indexOf('_') > 0 || str.indexOf('=') > 0 || str.indexOf('+') > 0 || 
-				str.indexOf('¹') > 0 || str.indexOf('²') > 0 || str.indexOf('³') > 0 || str.indexOf('£') > 0 || str.indexOf('¢') > 0 || 
-				str.indexOf('¬') > 0 || str.indexOf(',') > 0 || str.indexOf('.') > 0 || str.indexOf(';') > 0 || str.indexOf('/') > 0 || 
-				str.indexOf('<') > 0 || str.indexOf('>') > 0 || str.indexOf(':') > 0 || str.indexOf('?') > 0 || str.indexOf('~') > 0 || 
-				str.indexOf('^') > 0 || str.indexOf(']') > 0 || str.indexOf('}') > 0 || str.indexOf('{') > 0 || str.indexOf('[') > 0 || 
-				str.indexOf('º') > 0 || str.indexOf('ª') > 0 || str.indexOf('§') > 0 || str.indexOf('*') > 0 || str.indexOf('°') > 0
-			)) {
-			
-			$( "#div_senha" ).removeClass("has-success");
-			$( "#icone_senha" ).removeClass("fa-check");
-			$( "#div_senha" ).addClass("has-error");
-			$( "#icone_senha" ).addClass("fa-times-circle-o");
-			
-			alert("A senha deve ter pelo menos 1 caracter especial.");
-			document.getElementById('senha').focus();
-			return false;
-		}
-		
-	}
-	
-}
-
-function fcn_validaArquivo(formulario, arquivo) { 
-   
-	if(arquivo != ""){
-		extensoes_permitidas = new Array(".jpg", ".png", ".jpeg"); 
-		meuerro = ""; 
-		 
-		extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase(); 
-		permitida = false; 
-		for (var i = 0; i < extensoes_permitidas.length; i++) { 
-			if (extensoes_permitidas[i] == extensao) { 
-				permitida = true; 
-				break; 
-			} 
-		} 
-		
-		if (permitida == false) { 
-			alert("Verifique a extensão do arquivo anexado. \n\nAs extensões permitidas são: " + extensoes_permitidas.join()); 
-			document.getElementById('urlImagem').value = "";
-			return 1;
-		}
-		 
-		return 0; 
-	}
-} 
+ 
 </script>
 
 @endsection
