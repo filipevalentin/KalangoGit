@@ -34,8 +34,8 @@
                         <label class="control-label" for="enunciado"><i id="icone_texto-multipla-editar-questao" class="fa"></i> Texto da Pergunta</label>
                         <input id="enunciado" name="enunciado" maxlength="8000" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control enunciadoObrigatoria-multipla-editar-questao" rows="3" >
                     </div>
-                    <div id="div_arquivoPergunta-multipla-editar-questao" class="form-group">
-                        <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-multipla-editar-questao" class="fa"></i> Arquivo</label>
+                    <div class="form-group">
+                        <label class="control-label" for="arquivo"><i class="fa"></i> Arquivo</label>
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-multipla-editar-questao" onblur="fcn_recarregaCoresMultiplaEditarQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'editar-questao-multipla');" ></input>
                     </div>
 
@@ -1459,22 +1459,22 @@
 					$( "#icone_texto-multipla-editar-questao" ).addClass("fa-check");
 				}
 				
-				if($(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "3"){
+				//if($(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "3"){
 					
-					if($(".arquivoPerguntaObrigatoria-multipla-editar-questao").val() == ""){
-						obrigatorioPendente = 1;
-						$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-success");
-						$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-check");
-						$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-error");
-						$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-times-circle-o");
-					}else{
-						$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-error");
-						$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-						$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-success");
-						$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-check");
-					}
+				//	if($(".arquivoPerguntaObrigatoria-multipla-editar-questao").val() == ""){
+				//		obrigatorioPendente = 1;
+				//		$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-success");
+				//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-check");
+				//		$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-error");
+				//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-times-circle-o");
+				//	}else{
+				//		$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-error");
+				//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+				//		$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-success");
+				//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-check");
+				//	}
 					
-				}
+				//}
 				
 				if($(".topicoObrigatorio-multipla-editar-questao").val() == ""){
 					obrigatorioPendente = 1;
@@ -1619,22 +1619,22 @@
 				$( "#icone_texto-multipla-editar-questao" ).addClass("fa-check");
 			}
 			
-			if($(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "3"){
+			//if($(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "3"){
 				
-				if($(".arquivoPerguntaObrigatoria-multipla-editar-questao").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-success");
-					$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-check");
-					$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-error");
-					$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-error");
-					$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-					$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-success");
-					$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-check");
-				}
+			//	if($(".arquivoPerguntaObrigatoria-multipla-editar-questao").val() == ""){
+			//		obrigatorioPendente = 1;
+			//		$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-success");
+			//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-check");
+			//		$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-error");
+			//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-times-circle-o");
+			//	}else{
+			//		$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-error");
+			//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+			//		$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-success");
+			//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-check");
+			//	}
 				
-			}
+			//}
 			
 			if($(".topicoObrigatorio-multipla-editar-questao").val() == ""){
 				obrigatorioPendente = 1;
@@ -2230,21 +2230,21 @@
 			$( "#icone_texto-multipla-editar-questao" ).addClass("fa-check");
 		}
 		
-		if($(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "3"){
+		//if($(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-multipla-editar-questao").val() == "3"){
 			
-			if($(".arquivoPerguntaObrigatoria-multipla-editar-questao").val() == ""){
-				$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-success");
-				$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-check");
-				$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-error");
-				$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-error");
-				$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-				$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-success");
-				$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-check");
-			}
+		//	if($(".arquivoPerguntaObrigatoria-multipla-editar-questao").val() == ""){
+		//		$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-success");
+		//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-check");
+		//		$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-error");
+		//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-times-circle-o");
+		//	}else{
+		//		$( "#div_arquivoPergunta-multipla-editar-questao" ).removeClass("has-error");
+		//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+		//		$( "#div_arquivoPergunta-multipla-editar-questao" ).addClass("has-success");
+		//		$( "#icone_arquivoPergunta-multipla-editar-questao" ).addClass("fa-check");
+		//	}
 			
-		}
+		//}
 		
 		if($(".topicoObrigatorio-multipla-editar-questao").val() == ""){
 			$( "#div_topico-multipla-editar-questao" ).removeClass("has-success");
