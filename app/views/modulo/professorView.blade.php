@@ -21,7 +21,7 @@
 
                 <h2 class="page-header">Inglês - Teens - Módulo 1</h2>
 
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <div class="box box-solid">
                         <div class="box-header">
                             <h3 class="box-title">Conteúdos</h3>
