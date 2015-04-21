@@ -18,7 +18,7 @@
 	<section class="content">
 		<h2 class="page-header">Inglês - Teens 1</h2>
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<div class="box box-solid">
 		            <div class="box-header">
 		                <h3 class="box-title">Conteúdos</h3>
@@ -71,35 +71,7 @@
 		        </div>
 		    </div>
 
-			<div class="col-md-4">
-				<div class="box box-solid bg-green-gradient">
-                    <div class="box-header">
-                        <i class="fa fa-calendar"></i>
-                        <h3 class="box-title">Eventos</h3>
-                        <!-- tools box -->
-                        <div class="pull-right box-tools">
-                            <!-- button with a dropdown -->
-                            <div class="btn-group">
-                                <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-                                <ul class="dropdown-menu pull-right" role="menu">
-                                    <li><a href="#">Adicionar Evento</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Ver Calendário</a></li>
-                                </ul>
-                            </div>
-                            <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                            <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>                                        
-                        </div><!-- /. tools -->
-                    </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <!--The calendar -->
-                        <div id="calendar" style="width: 100%"><div class="datepicker datepicker-inline">
-                        	
-                        </div>
-                    </div><!-- /.box-body -->  
-                </div>
-			</div>
-
+			
 		</div>
 	</section>
 
