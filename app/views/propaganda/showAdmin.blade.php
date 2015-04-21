@@ -85,9 +85,9 @@
                         <label class="control-label" for="titulo"><i id="icone_link_editar_propaganda" class="fa"></i> Link Externo</label>
                         <input type="text" autocomplete="off" id="link" name="link"maxlength="200" onblur="fcn_recarregaCoresEditarPropaganda();fcn_validaLink(this.value, 2);" maxlength="200" class="form-control linkObrigatorio_editar_propaganda" >
                     </div>
-                    <div id="div_imagem_editar_propaganda" class="form-group">
-                        <label class="control-label" for="urlImagem"><i id="icone_imagem_editar_propaganda" class="fa"></i> Imagem</label>
-                        <input type="file" autocomplete="off" id="urlImagem" name="urlImagem" onblur="fcn_recarregaCoresEditarPropaganda();fcn_validaArquivoEditarPropaganda(this.form, this.form.urlImagem.value);" class="form-control campo_imagem_editar_propaganda imagemObrigatoria_editar_propaganda" >
+                    <div class="form-group">
+                        <label class="control-label" for="urlImagem"><i class="fa"></i> Imagem</label>
+                        <input type="file" autocomplete="off" id="urlImagem" name="urlImagem" onblur="fcn_recarregaCoresEditarPropaganda();fcn_validaArquivoEditarPropaganda(this.form, this.form.urlImagem.value);" class="form-control campo_imagem_editar_propaganda" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
