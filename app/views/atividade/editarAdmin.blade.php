@@ -67,20 +67,20 @@
                         </select>
                     </div>
 
-                    <div id="div_alternativaA-multipla-editar-questao" class="form-group">
-                        <label class="control-label" for="a"><i id="icone_alternativaA-multipla-editar-questao" class="fa"></i> Alternativa A</label>
+                    <div class="form-group">
+                        <label class="control-label" for="a"><i class="fa"></i> Alternativa A</label>
                         <input type="text" autocomplete="off" id="a" name="a" onblur="fcn_recarregaCoresMultiplaEditarQuestao();fcn_validaArquivoResposta(this.form, this.form.a.value, 'A');" maxlength="100" class="form-control alternativaAObrigatoria-multipla-editar-questao"></input>
                     </div>
-                    <div id="div_alternativaB-multipla-editar-questao" class="form-group">
-                        <label class="control-label" for="b"><i id="icone_alternativaB-multipla-editar-questao" class="fa"></i> Alternativa B</label>
+                    <div class="form-group">
+                        <label class="control-label" for="b"><i class="fa"></i> Alternativa B</label>
                         <input type="text" autocomplete="off" id="b" name="b" onblur="fcn_recarregaCoresMultiplaEditarQuestao();fcn_validaArquivoResposta(this.form, this.form.a.value, 'B');" maxlength="100" class="form-control alternativaBObrigatoria-multipla-editar-questao"></input>
                     </div>
-                    <div id="div_alternativaC-multipla-editar-questao" class="form-group">
-                        <label class="control-label" for="c"><i id="icone_alternativaC-multipla-editar-questao" class="fa"></i> Alternativa C</label>
+                    <div class="form-group">
+                        <label class="control-label" for="c"><i class="fa"></i> Alternativa C</label>
                         <input type="text" autocomplete="off" id="c" name="c" onblur="fcn_recarregaCoresMultiplaEditarQuestao();fcn_validaArquivoResposta(this.form, this.form.a.value, 'C');" maxlength="100" class="form-control alternativaCObrigatoria-multipla-editar-questao"></input>
                     </div>
-                    <div id="div_alternativaD-multipla-editar-questao" class="form-group">
-                        <label class="control-label" for="d"><i id="icone_alternativaD-multipla-editar-questao" class="fa"></i> Alternativa D</label>
+                    <div class="form-group">
+                        <label class="control-label" for="d"><i class="fa"></i> Alternativa D</label>
                         <input type="text" autocomplete="off" id="d" name="d" onblur="fcn_recarregaCoresMultiplaEditarQuestao();fcn_validaArquivoResposta(this.form, this.form.a.value, 'D');" maxlength="100" class="form-control alternativaDObrigatoria-multipla-editar-questao"></input>
                     </div>
                     <div id="div_respostaCorreta-multipla-editar-questao" class="form-group">
@@ -131,7 +131,7 @@
                         <label class="control-label" for="enunciado"><i id="icone_texto-dissertativa-editar-questao" class="fa"></i> Texto da Pergunta</label>
                         <input id="enunciado" name="enunciado" maxlength="8000" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control enunciadoObrigatoria-dissertativa-editar-questao" rows="3" >
                     </div>
-                    <div id="div_arquivoPergunta-dissertativa-editar-questao" class="form-group">
+                    <div class="form-group">
                         <label class="control-label" for="arquivo"><i id="icone_arquivoPergunta-dissertativa-editar-questao" class="fa"></i> Arquivo</label>
                         <input type="file" id="arquivo" name="arquivo" class="form-control arquivoPerguntaObrigatoria-dissertativa-editar-questao" onblur="fcn_recarregaCoresDissertativaEditarQuestao();fcn_validaArquivo(this.form, this.form.arquivo.value, 'editar-questao-dissertativa');"></input>
                     </div>
@@ -1515,57 +1515,57 @@
 					$( "#icone_tipoResposta-multipla-editar-questao" ).addClass("fa-check");
 				}
 				
-				if($(".alternativaAObrigatoria-multipla-editar-questao").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-success");
-					$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-check");
-					$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-error");
-					$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-error");
-					$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-					$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-success");
-					$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-check");
-				}
+				//if($(".alternativaAObrigatoria-multipla-editar-questao").val() == ""){
+				//	obrigatorioPendente = 1;
+				//	$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-success");
+				//	$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-check");
+				//	$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-error");
+				//	$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-times-circle-o");
+				//}else{
+				//	$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-error");
+				//	$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+				//	$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-success");
+				//	$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-check");
+				//}
 				
-				if($(".alternativaBObrigatoria-multipla-editar-questao").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-success");
-					$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-check");
-					$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-error");
-					$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-error");
-					$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-					$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-success");
-					$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-check");
-				}
+				//if($(".alternativaBObrigatoria-multipla-editar-questao").val() == ""){
+				//	obrigatorioPendente = 1;
+				//	$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-success");
+				//	$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-check");
+				//	$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-error");
+				//	$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-times-circle-o");
+				//}else{
+				//	$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-error");
+				//	$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+				//	$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-success");
+				//	$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-check");
+				//}
 				
-				if($(".alternativaCObrigatoria-multipla-editar-questao").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-success");
-					$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-check");
-					$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-error");
-					$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-error");
-					$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-					$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-success");
-					$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-check");
-				}
+				//if($(".alternativaCObrigatoria-multipla-editar-questao").val() == ""){
+				//	obrigatorioPendente = 1;
+				//	$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-success");
+				//	$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-check");
+				//	$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-error");
+				//	$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-times-circle-o");
+				//}else{
+				//	$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-error");
+				//	$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+				//	$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-success");
+				//	$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-check");
+				//}
 				
-				if($(".alternativaDObrigatoria-multipla-editar-questao").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-success");
-					$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-check");
-					$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-error");
-					$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-error");
-					$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-					$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-success");
-					$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-check");
-				}
+				//if($(".alternativaDObrigatoria-multipla-editar-questao").val() == ""){
+				//	obrigatorioPendente = 1;
+				//	$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-success");
+				//	$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-check");
+				//	$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-error");
+				//	$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-times-circle-o");
+				//}else{
+				//	$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-error");
+				//	$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+				//	$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-success");
+				//	$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-check");
+				//}
 				
 				if($(".respostaCorretaObrigatoria-multipla-editar-questao").val() == ""){
 					obrigatorioPendente = 1;
@@ -1675,57 +1675,57 @@
 				$( "#icone_tipoResposta-multipla-editar-questao" ).addClass("fa-check");
 			}
 			
-			if($(".alternativaAObrigatoria-multipla-editar-questao").val() == ""){
-				obrigatorioPendente = 1;
-				$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-success");
-				$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-check");
-				$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-error");
-				$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-error");
-				$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-				$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-success");
-				$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-check");
-			}
+			//if($(".alternativaAObrigatoria-multipla-editar-questao").val() == ""){
+			//	obrigatorioPendente = 1;
+			//	$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-success");
+			//	$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-check");
+			//	$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-error");
+			//	$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-times-circle-o");
+			//}else{
+			//	$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-error");
+			//	$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+			//	$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-success");
+			//	$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-check");
+			//}
 			
-			if($(".alternativaBObrigatoria-multipla-editar-questao").val() == ""){
-				obrigatorioPendente = 1;
-				$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-success");
-				$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-check");
-				$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-error");
-				$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-error");
-				$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-				$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-success");
-				$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-check");
-			}
+			//if($(".alternativaBObrigatoria-multipla-editar-questao").val() == ""){
+			//	obrigatorioPendente = 1;
+			//	$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-success");
+			//	$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-check");
+			//	$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-error");
+			//	$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-times-circle-o");
+			//}else{
+			//	$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-error");
+			//	$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+			//	$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-success");
+			//	$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-check");
+			//}
 			
-			if($(".alternativaCObrigatoria-multipla-editar-questao").val() == ""){
-				obrigatorioPendente = 1;
-				$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-success");
-				$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-check");
-				$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-error");
-				$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-error");
-				$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-				$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-success");
-				$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-check");
-			}
+			//if($(".alternativaCObrigatoria-multipla-editar-questao").val() == ""){
+			//	obrigatorioPendente = 1;
+			//	$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-success");
+			//	$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-check");
+			//	$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-error");
+			//	$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-times-circle-o");
+			//}else{
+			//	$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-error");
+			//	$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+			//	$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-success");
+			//	$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-check");
+			//}
 			
-			if($(".alternativaDObrigatoria-multipla-editar-questao").val() == ""){
-				obrigatorioPendente = 1;
-				$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-success");
-				$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-check");
-				$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-error");
-				$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-error");
-				$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-				$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-success");
-				$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-check");
-			}
+			//if($(".alternativaDObrigatoria-multipla-editar-questao").val() == ""){
+			//	obrigatorioPendente = 1;
+			//	$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-success");
+			//	$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-check");
+			//	$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-error");
+			//	$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-times-circle-o");
+			//}else{
+			//	$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-error");
+			//	$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+			//	$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-success");
+			//	$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-check");
+			//}
 			
 			if($(".respostaCorretaObrigatoria-multipla-editar-questao").val() == ""){
 				obrigatorioPendente = 1;
@@ -1786,22 +1786,22 @@
 					$( "#icone_texto-dissertativa-editar-questao" ).addClass("fa-check");
 				}
 				
-				if($(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "3"){
+				//if($(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "3"){
 					
-					if($(".arquivoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
-						obrigatorioPendente = 1;
-						$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-success");
-						$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-check");
-						$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-error");
-						$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
-					}else{
-						$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-error");
-						$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
-						$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-success");
-						$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
-					}
+				//	if($(".arquivoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
+				//		obrigatorioPendente = 1;
+				//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-success");
+				//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-check");
+				//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-error");
+				//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+				//	}else{
+				//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-error");
+				//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+				//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-success");
+				//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
+				//	}
 					
-				}
+				//}
 				
 				if($(".topicoObrigatorio-dissertativa-editar-questao").val() == ""){
 					obrigatorioPendente = 1;
@@ -1894,22 +1894,22 @@
 				$( "#icone_texto-dissertativa-editar-questao" ).addClass("fa-check");
 			}
 			
-			if($(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "3"){
+			//if($(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "3"){
 				
-				if($(".arquivoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-success");
-					$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-check");
-					$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-error");
-					$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-error");
-					$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
-					$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-success");
-					$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
-				}
+			//	if($(".arquivoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
+			//		obrigatorioPendente = 1;
+			//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-success");
+			//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-check");
+			//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-error");
+			//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+			//	}else{
+			//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-error");
+			//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+			//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-success");
+			//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
+			//	}
 				
-			}
+			//}
 			
 			if($(".topicoObrigatorio-dissertativa-editar-questao").val() == ""){
 				obrigatorioPendente = 1;
@@ -2282,53 +2282,53 @@
 			$( "#icone_tipoResposta-multipla-editar-questao" ).addClass("fa-check");
 		}
 		
-		if($(".alternativaAObrigatoria-multipla-editar-questao").val() == ""){
-			$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-success");
-			$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-check");
-			$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-error");
-			$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-error");
-			$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-			$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-success");
-			$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-check");
-		}
+		//if($(".alternativaAObrigatoria-multipla-editar-questao").val() == ""){
+		//	$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-success");
+		//	$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-check");
+		//	$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-error");
+		//	$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-times-circle-o");
+		//}else{
+		//	$( "#div_alternativaA-multipla-editar-questao" ).removeClass("has-error");
+		//	$( "#icone_alternativaA-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+		//	$( "#div_alternativaA-multipla-editar-questao" ).addClass("has-success");
+		//	$( "#icone_alternativaA-multipla-editar-questao" ).addClass("fa-check");
+		//}
 		
-		if($(".alternativaBObrigatoria-multipla-editar-questao").val() == ""){
-			$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-success");
-			$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-check");
-			$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-error");
-			$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-error");
-			$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-			$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-success");
-			$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-check");
-		}
+		//if($(".alternativaBObrigatoria-multipla-editar-questao").val() == ""){
+		//	$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-success");
+		//	$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-check");
+		//	$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-error");
+		//	$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-times-circle-o");
+		//}else{
+		//	$( "#div_alternativaB-multipla-editar-questao" ).removeClass("has-error");
+		//	$( "#icone_alternativaB-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+		//	$( "#div_alternativaB-multipla-editar-questao" ).addClass("has-success");
+		//	$( "#icone_alternativaB-multipla-editar-questao" ).addClass("fa-check");
+		//}
 		
-		if($(".alternativaCObrigatoria-multipla-editar-questao").val() == ""){
-			$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-success");
-			$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-check");
-			$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-error");
-			$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-error");
-			$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-			$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-success");
-			$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-check");
-		}
+		//if($(".alternativaCObrigatoria-multipla-editar-questao").val() == ""){
+		//	$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-success");
+		//	$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-check");
+		//	$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-error");
+		//	$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-times-circle-o");
+		//}else{
+		//	$( "#div_alternativaC-multipla-editar-questao" ).removeClass("has-error");
+		//	$( "#icone_alternativaC-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+		//	$( "#div_alternativaC-multipla-editar-questao" ).addClass("has-success");
+		//	$( "#icone_alternativaC-multipla-editar-questao" ).addClass("fa-check");
+		//}
 		
-		if($(".alternativaDObrigatoria-multipla-editar-questao").val() == ""){
-			$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-success");
-			$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-check");
-			$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-error");
-			$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-error");
-			$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-times-circle-o");
-			$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-success");
-			$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-check");
-		}
+		//if($(".alternativaDObrigatoria-multipla-editar-questao").val() == ""){
+		//	$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-success");
+		//	$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-check");
+		//	$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-error");
+		//	$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-times-circle-o");
+		//}else{
+		//	$( "#div_alternativaD-multipla-editar-questao" ).removeClass("has-error");
+		//	$( "#icone_alternativaD-multipla-editar-questao" ).removeClass("fa-times-circle-o");
+		//	$( "#div_alternativaD-multipla-editar-questao" ).addClass("has-success");
+		//	$( "#icone_alternativaD-multipla-editar-questao" ).addClass("fa-check");
+		//}
 		
 		if($(".respostaCorretaObrigatoria-multipla-editar-questao").val() == ""){
 			$( "#div_respostaCorreta-multipla-editar-questao" ).removeClass("has-success");
@@ -2370,21 +2370,21 @@
 			$( "#icone_texto-dissertativa-editar-questao" ).addClass("fa-check");
 		}
 		
-		if($(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "3"){
+		//if($(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "2" || $(".tipoPerguntaObrigatoria-dissertativa-editar-questao").val() == "3"){
 			
-			if($(".arquivoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
-				$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-success");
-				$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-check");
-				$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-error");
-				$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-error");
-				$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
-				$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-success");
-				$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
-			}
+		//	if($(".arquivoPerguntaObrigatoria-dissertativa-editar-questao").val() == ""){
+		//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-success");
+		//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-check");
+		//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-error");
+		//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-times-circle-o");
+		//	}else{
+		//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).removeClass("has-error");
+		//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).removeClass("fa-times-circle-o");
+		//		$( "#div_arquivoPergunta-dissertativa-editar-questao" ).addClass("has-success");
+		//		$( "#icone_arquivoPergunta-dissertativa-editar-questao" ).addClass("fa-check");
+		//	}
 			
-		}
+		//}
 		
 		if($(".topicoObrigatorio-dissertativa-editar-questao").val() == ""){
 			$( "#div_topico-dissertativa-editar-questao" ).removeClass("has-success");
