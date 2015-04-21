@@ -76,9 +76,9 @@
                             <label class="control-label" for="nome"><i id="icone_nome-editar-material" class="fa"></i> Nome</label>
                             <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarMaterial();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-material"></input>
                         </div>
-                        <div id="div_arquivo-editar-material" class="form-group">
-                            <label class="control-label" for="arquivo"><i id="icone_arquivo-editar-material" class="fa"></i> Arquivo</label>
-                            <input type="file" id="arquivo" name="arquivo" onblur="fcn_recarregaCoresEditarMaterial();fcn_validaArquivo(this.form, this.form.arquivo.value)" class="form-control arquivoObrigatorio-editar-material"></input>
+                        <div class="form-group">
+                            <label class="control-label" for="arquivo"><i class="fa"></i> Arquivo</label>
+                            <input type="file" id="arquivo" name="arquivo" onblur="fcn_recarregaCoresEditarMaterial();fcn_validaArquivo(this.form, this.form.arquivo.value)" class="form-control"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -617,19 +617,6 @@
 				$( "#icone_nome-editar-material" ).addClass("fa-check");
 			}
 			
-			if($(".arquivoObrigatorio-editar-material").val() == ""){
-				obrigatorioPendente = 1;
-				$( "#div_arquivo-editar-material" ).removeClass("has-success");
-				$( "#icone_arquivo-editar-material" ).removeClass("fa-check");
-				$( "#div_arquivo-editar-material" ).addClass("has-error");
-				$( "#icone_arquivo-editar-material" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_arquivo-editar-material" ).removeClass("has-error");
-				$( "#icone_arquivo-editar-material" ).removeClass("fa-times-circle-o");
-				$( "#div_arquivo-editar-material" ).addClass("has-success");
-				$( "#icone_arquivo-editar-material" ).addClass("fa-check");
-			}
-			
 			if(obrigatorioPendente == 1){
 				alert("É necessário preencher todos os campos obrigatórios!");
 				return false;
@@ -762,18 +749,6 @@
 				$( "#icone_nome-editar-material" ).removeClass("fa-times-circle-o");
 				$( "#div_nome-editar-material" ).addClass("has-success");
 				$( "#icone_nome-editar-material" ).addClass("fa-check");
-			}
-			
-			if($(".arquivoObrigatorio-editar-material").val() == ""){
-				$( "#div_arquivo-editar-material" ).removeClass("has-success");
-				$( "#icone_arquivo-editar-material" ).removeClass("fa-check");
-				$( "#div_arquivo-editar-material" ).addClass("has-error");
-				$( "#icone_arquivo-editar-material" ).addClass("fa-times-circle-o");
-			}else{
-				$( "#div_arquivo-editar-material" ).removeClass("has-error");
-				$( "#icone_arquivo-editar-material" ).removeClass("fa-times-circle-o");
-				$( "#div_arquivo-editar-material" ).addClass("has-success");
-				$( "#icone_arquivo-editar-material" ).addClass("fa-check");
 			}
 			
 		}
