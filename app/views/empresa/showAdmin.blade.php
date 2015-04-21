@@ -11,21 +11,21 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="/admin/criarEmpresa" enctype="multipart/form-data">
-                    <div id="div_nome_novo_topico" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome_novo_topico" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
+                    <div id="div_nome_nova_empresa" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome_nova_empresa" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaEmpresa();" maxlength="100" class="form-control nomeObrigatorio_nova_empresa" >
                     </div>
-                    <div id="div_nome_novo_topico" class="form-group">
-                        <label class="control-label" for="razaoSocial"><i id="icone_razaoSocial_novo_topico" class="fa"></i> Razão Social</label>
-                        <input type="text" autocomplete="off" id="razaoSocial" name="razaoSocial" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
+                    <div id="div_razaosocial_nova_empresa" class="form-group">
+                        <label class="control-label" for="razaoSocial"><i id="icone_razaosocial_nova_empresa" class="fa"></i> Razão Social</label>
+                        <input type="text" autocomplete="off" id="razaoSocial" name="razaoSocial" onblur="fcn_recarregaCoresNovaEmpresa();" maxlength="100" class="form-control razaosocialObrigatoria_nova_empresa" >
                     </div>
-                    <div id="div_nome_novo_topico" class="form-group">
-                        <label class="control-label" for="cnpj"><i id="icone_cnpj_novo_topico" class="fa"></i> CNPJ</label>
-                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="" maxlength="100" class="form-control" >
+                    <div id="div_cnpj_nova_empresa" class="form-group">
+                        <label class="control-label" for="cnpj"><i id="icone_cnpj_nova_empresa" class="fa"></i> CNPJ</label>
+                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="fcn_recarregaCoresNovaEmpresa();" maxlength="100" class="form-control cnpjObrigatorio_nova_empresa" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar btn-novo-topico" value="Salvar" >
+                        <input type="submit" class="btn btn-primary btn-salvar btn-nova-empresa" value="Salvar" >
                     </div>
                 </form>
             </div>
@@ -45,22 +45,22 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>
-                    <div id="div_nome_novo_topico" class="form-group">
-                        <label class="control-label" for="nome"><i id="icone_nome_novo_topico" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
+                    <div id="div_nome_editar_empresa" class="form-group">
+                        <label class="control-label" for="nome"><i id="icone_nome_editar_empresa" class="fa"></i> Nome</label>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarEmpresa();" maxlength="100" class="form-control nomeObrigatorio_editar_empresa" >
                     </div>
-                    <div id="div_nome_novo_topico" class="form-group">
-                        <label class="control-label" for="razaoSocial"><i id="icone_razaoSocial_novo_topico" class="fa"></i> Razão Social</label>
-                        <input type="text" autocomplete="off" id="razaoSocial" name="razaoSocial" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
+                    <div id="div_razaosocial_editar_empresa" class="form-group">
+                        <label class="control-label" for="razaoSocial"><i id="icone_razaoSocial_editar_empresa" class="fa"></i> Razão Social</label>
+                        <input type="text" autocomplete="off" id="razaoSocial" name="razaoSocial" onblur="fcn_recarregaCoresEditarEmpresa();" maxlength="100" class="form-control razaoSocialObrigatoria_editar_empresa" >
                     </div>
-                    <div id="div_nome_novo_topico" class="form-group">
-                        <label class="control-label" for="cnpj"><i id="icone_cnpj_novo_topico" class="fa"></i> CNPJ</label>
-                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="" maxlength="100" class="form-control" >
+                    <div id="div_cnpj_editar_empresa" class="form-group">
+                        <label class="control-label" for="cnpj"><i id="icone_cnpj_editar_empresa" class="fa"></i> CNPJ</label>
+                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="fcn_recarregaCoresEditarEmpresa();" maxlength="100" class="form-control cnpjObrigatorio_editar_empresa" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <input type="submit" class="btn btn-primary btn-salvar btn-editar-topico" value="Salvar" >
-                    </div>
+                        <input type="submit" class="btn btn-primary btn-salvar btn-editar-empresa" value="Salvar" >
+                    </div>	
                 </form>
             </div>
         </div>
@@ -184,29 +184,47 @@
 
 <script> //Validações
 	
-	$( ".somenteLetras" ).keyup(function() {
-		//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
-		if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
-			var valor = $(this).val().replace(/[^a-zA-ZãÃáÁàÀâÂéÉèÈêÊíÍìÌîÎõÕóÓòÒôÔúÚùÙûÛÇç ]+/g,'');
-			$(this).val(valor);
-		}
-	});
-	
-	$(".btn-novo-topico").click(function(event){
+	$(".btn-nova-empresa").click(function(event){
 		
 		var obrigatorioPendente = 0;
 		
-		if($(".nomeObrigatorio_novo_topico").val() == ""){
+		if($(".nomeObrigatorio_nova_empresa").val() == ""){
 			obrigatorioPendente = 1;
-			$( "#div_nome_novo_topico" ).removeClass("has-success");
-			$( "#icone_nome_novo_topico" ).removeClass("fa-check");
-			$( "#div_nome_novo_topico" ).addClass("has-error");
-			$( "#icone_nome_novo_topico" ).addClass("fa-times-circle-o");
+			$( "#div_nome_nova_empresa" ).removeClass("has-success");
+			$( "#icone_nome_nova_empresa" ).removeClass("fa-check");
+			$( "#div_nome_nova_empresa" ).addClass("has-error");
+			$( "#icone_nome_nova_empresa" ).addClass("fa-times-circle-o");
 		}else{
-			$( "#div_nome_novo_topico" ).removeClass("has-error");
-			$( "#icone_nome_novo_topico" ).removeClass("fa-times-circle-o");
-			$( "#div_nome_novo_topico" ).addClass("has-success");
-			$( "#icone_nome_novo_topico" ).addClass("fa-check");
+			$( "#div_nome_nova_empresa" ).removeClass("has-error");
+			$( "#icone_nome_nova_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_nova_empresa" ).addClass("has-success");
+			$( "#icone_nome_nova_empresa" ).addClass("fa-check");
+		}
+		
+		if($(".razaosocialObrigatoria_nova_empresa").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_razaosocial_nova_empresa" ).removeClass("has-success");
+			$( "#icone_razaosocial_nova_empresa" ).removeClass("fa-check");
+			$( "#div_razaosocial_nova_empresa" ).addClass("has-error");
+			$( "#icone_razaosocial_nova_empresa" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_razaosocial_nova_empresa" ).removeClass("has-error");
+			$( "#icone_razaosocial_nova_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_razaosocial_nova_empresa" ).addClass("has-success");
+			$( "#icone_razaosocial_nova_empresa" ).addClass("fa-check");
+		}
+		
+		if($(".cnpjObrigatorio_nova_empresa").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_cnpj_nova_empresa" ).removeClass("has-success");
+			$( "#icone_cnpj_nova_empresa" ).removeClass("fa-check");
+			$( "#div_cnpj_nova_empresa" ).addClass("has-error");
+			$( "#icone_cnpj_nova_empresa" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_cnpj_nova_empresa" ).removeClass("has-error");
+			$( "#icone_cnpj_nova_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_cnpj_nova_empresa" ).addClass("has-success");
+			$( "#icone_cnpj_nova_empresa" ).addClass("fa-check");
 		}
 		
 		if(obrigatorioPendente == 1){
@@ -216,21 +234,47 @@
 		
 	})
 	
-	$(".btn-editar-topico").click(function(event){
+	$(".btn-editar-empresa").click(function(event){
 		
 		var obrigatorioPendente = 0;
 		
-		if($(".nomeObrigatorio_editar_topico").val() == ""){
+		if($(".nomeObrigatorio_editar_empresa").val() == ""){
 			obrigatorioPendente = 1;
-			$( "#div_nome_editar_topico" ).removeClass("has-success");
-			$( "#icone_nome_editar_topico" ).removeClass("fa-check");
-			$( "#div_nome_editar_topico" ).addClass("has-error");
-			$( "#icone_nome_editar_topico" ).addClass("fa-times-circle-o");
+			$( "#div_nome_editar_empresa" ).removeClass("has-success");
+			$( "#icone_nome_editar_empresa" ).removeClass("fa-check");
+			$( "#div_nome_editar_empresa" ).addClass("has-error");
+			$( "#icone_nome_editar_empresa" ).addClass("fa-times-circle-o");
 		}else{
-			$( "#div_nome_editar_topico" ).removeClass("has-error");
-			$( "#icone_nome_editar_topico" ).removeClass("fa-times-circle-o");
-			$( "#div_nome_editar_topico" ).addClass("has-success");
-			$( "#icone_nome_editar_topico" ).addClass("fa-check");
+			$( "#div_nome_editar_empresa" ).removeClass("has-error");
+			$( "#icone_nome_editar_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_editar_empresa" ).addClass("has-success");
+			$( "#icone_nome_editar_empresa" ).addClass("fa-check");
+		}
+		
+		if($(".razaoSocialObrigatoria_editar_empresa").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_razaosocial_editar_empresa" ).removeClass("has-success");
+			$( "#icone_razaoSocial_editar_empresa" ).removeClass("fa-check");
+			$( "#div_razaosocial_editar_empresa" ).addClass("has-error");
+			$( "#icone_razaoSocial_editar_empresa" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_razaosocial_editar_empresa" ).removeClass("has-error");
+			$( "#icone_razaoSocial_editar_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_razaosocial_editar_empresa" ).addClass("has-success");
+			$( "#icone_razaoSocial_editar_empresa" ).addClass("fa-check");
+		}
+		
+		if($(".cnpjObrigatorio_editar_empresa").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_cnpj_editar_empresa" ).removeClass("has-success");
+			$( "#icone_cnpj_editar_empresa" ).removeClass("fa-check");
+			$( "#div_cnpj_editar_empresa" ).addClass("has-error");
+			$( "#icone_cnpj_editar_empresa" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_cnpj_editar_empresa" ).removeClass("has-error");
+			$( "#icone_cnpj_editar_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_cnpj_editar_empresa" ).addClass("has-success");
+			$( "#icone_cnpj_editar_empresa" ).addClass("fa-check");
 		}
 		
 		if(obrigatorioPendente == 1){
@@ -240,36 +284,84 @@
 		
 	})
 	
-	function fcn_recarregaCoresNovoTopico(){
+	function fcn_recarregaCoresNovaEmpresa(){
 		
-		if($(".nomeObrigatorio_novo_topico").val() == ""){
-			$( "#div_nome_novo_topico" ).removeClass("has-success");
-			$( "#icone_nome_novo_topico" ).removeClass("fa-check");
-			$( "#div_nome_novo_topico" ).addClass("has-error");
-			$( "#icone_nome_novo_topico" ).addClass("fa-times-circle-o");
+		if($(".nomeObrigatorio_nova_empresa").val() == ""){
+			$( "#div_nome_nova_empresa" ).removeClass("has-success");
+			$( "#icone_nome_nova_empresa" ).removeClass("fa-check");
+			$( "#div_nome_nova_empresa" ).addClass("has-error");
+			$( "#icone_nome_nova_empresa" ).addClass("fa-times-circle-o");
 		}else{
-			$( "#div_nome_novo_topico" ).removeClass("has-error");
-			$( "#icone_nome_novo_topico" ).removeClass("fa-times-circle-o");
-			$( "#div_nome_novo_topico" ).addClass("has-success");
-			$( "#icone_nome_novo_topico" ).addClass("fa-check");
+			$( "#div_nome_nova_empresa" ).removeClass("has-error");
+			$( "#icone_nome_nova_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_nova_empresa" ).addClass("has-success");
+			$( "#icone_nome_nova_empresa" ).addClass("fa-check");
+		}
+		
+		if($(".razaosocialObrigatoria_nova_empresa").val() == ""){
+			$( "#div_razaosocial_nova_empresa" ).removeClass("has-success");
+			$( "#icone_razaosocial_nova_empresa" ).removeClass("fa-check");
+			$( "#div_razaosocial_nova_empresa" ).addClass("has-error");
+			$( "#icone_razaosocial_nova_empresa" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_razaosocial_nova_empresa" ).removeClass("has-error");
+			$( "#icone_razaosocial_nova_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_razaosocial_nova_empresa" ).addClass("has-success");
+			$( "#icone_razaosocial_nova_empresa" ).addClass("fa-check");
+		}
+		
+		if($(".cnpjObrigatorio_nova_empresa").val() == ""){
+			$( "#div_cnpj_nova_empresa" ).removeClass("has-success");
+			$( "#icone_cnpj_nova_empresa" ).removeClass("fa-check");
+			$( "#div_cnpj_nova_empresa" ).addClass("has-error");
+			$( "#icone_cnpj_nova_empresa" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_cnpj_nova_empresa" ).removeClass("has-error");
+			$( "#icone_cnpj_nova_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_cnpj_nova_empresa" ).addClass("has-success");
+			$( "#icone_cnpj_nova_empresa" ).addClass("fa-check");
 		}
 		
 	}
 	
-	function fcn_recarregaCoresEditarTopico(){
+	function fcn_recarregaCoresEditarEmpresa(){
 		
-		if($(".nomeObrigatorio_editar_topico").val() == ""){
-			$( "#div_nome_editar_topico" ).removeClass("has-success");
-			$( "#icone_nome_editar_topico" ).removeClass("fa-check");
-			$( "#div_nome_editar_topico" ).addClass("has-error");
-			$( "#icone_nome_editar_topico" ).addClass("fa-times-circle-o");
+		if($(".nomeObrigatorio_editar_empresa").val() == ""){
+			$( "#div_nome_editar_empresa" ).removeClass("has-success");
+			$( "#icone_nome_editar_empresa" ).removeClass("fa-check");
+			$( "#div_nome_editar_empresa" ).addClass("has-error");
+			$( "#icone_nome_editar_empresa" ).addClass("fa-times-circle-o");
 		}else{
-			$( "#div_nome_editar_topico" ).removeClass("has-error");
-			$( "#icone_nome_editar_topico" ).removeClass("fa-times-circle-o");
-			$( "#div_nome_editar_topico" ).addClass("has-success");
-			$( "#icone_nome_editar_topico" ).addClass("fa-check");
+			$( "#div_nome_editar_empresa" ).removeClass("has-error");
+			$( "#icone_nome_editar_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_nome_editar_empresa" ).addClass("has-success");
+			$( "#icone_nome_editar_empresa" ).addClass("fa-check");
 		}
 		
+		if($(".razaoSocialObrigatoria_editar_empresa").val() == ""){
+			$( "#div_razaosocial_editar_empresa" ).removeClass("has-success");
+			$( "#icone_razaoSocial_editar_empresa" ).removeClass("fa-check");
+			$( "#div_razaosocial_editar_empresa" ).addClass("has-error");
+			$( "#icone_razaoSocial_editar_empresa" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_razaosocial_editar_empresa" ).removeClass("has-error");
+			$( "#icone_razaoSocial_editar_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_razaosocial_editar_empresa" ).addClass("has-success");
+			$( "#icone_razaoSocial_editar_empresa" ).addClass("fa-check");
+		}
+		
+		if($(".cnpjObrigatorio_editar_empresa").val() == ""){
+			$( "#div_cnpj_editar_empresa" ).removeClass("has-success");
+			$( "#icone_cnpj_editar_empresa" ).removeClass("fa-check");
+			$( "#div_cnpj_editar_empresa" ).addClass("has-error");
+			$( "#icone_cnpj_editar_empresa" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_cnpj_editar_empresa" ).removeClass("has-error");
+			$( "#icone_cnpj_editar_empresa" ).removeClass("fa-times-circle-o");
+			$( "#div_cnpj_editar_empresa" ).addClass("has-success");
+			$( "#icone_cnpj_editar_empresa" ).addClass("fa-check");
+		}
+				
 	}
 	
 </script>
