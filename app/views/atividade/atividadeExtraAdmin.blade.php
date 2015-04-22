@@ -155,7 +155,7 @@
 <section class="content-header">
     <h1>Atividades Extras</h1>
     <ol class="breadcrumb">
-        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/home" ><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Atividades Extras</li>
     </ol>
 </section>
@@ -272,8 +272,8 @@
                                         
                                     </div>
 
-                                <a href="#" class="small-box-footer">
-                                    Detalhes <i class="fa fa-arrow-circle-right"></i>
+                                <a href="/admin/atividade/{{$atividade->id}}/editar" class="small-box-footer">
+                                    Gerenciar Exercícios <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div>
