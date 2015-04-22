@@ -292,7 +292,7 @@
                 <div class="box box-solid">
                     <div class="box-header">
                         <h3 class="box-title">Módulos</h3>
-                        <div class="box-tools pull-right" style="padding: 10px 20px 5px 5px;" data-toggle="tooltip" data-placement="left" title="Criar Módulo">
+                        <div class="box-tools pull-right" style="padding: 3px 20px 5px 5px;" data-toggle="tooltip" data-placement="left" title="Criar Módulo">
                             <button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarmodulo" data-idcurso="{{$curso->id}}"><i class="fa fa-plus"></i></button>
                         </div>
                     </div><!-- /.box-header -->
@@ -305,7 +305,7 @@
                                 <div class="box-header">
                                     <h4 class="box-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#Modulo{{$modulo->id}}">
-                                            {{$modulo->nome}}
+                                            {{$modulo->nome}}  <small style="padding-left:5px;">({{$modulo->turmas->count()}} Turmas)</small>
                                         </a>
                                     </h4>
                                     <div class="box-tools pull-right">

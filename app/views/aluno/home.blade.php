@@ -85,7 +85,7 @@
 	<section class="content">
 	    <div class="row">
 	        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 fix-grupo-left">
-	        	<h2 class="page-header center" style="border-bottom:1px solid #000;">Meus Cursos</h2>
+	        	<h2 class="page-header center" style="border-bottom:1px solid #000;">Meu Curso</h2>
 
                 <div class="row">
 
@@ -100,7 +100,7 @@
 	                                        <p style="">{{$turma->modulo->descricao}}</p>
 	                                    </div>
 	                                    <div class="icon">
-	                                        <i class="ion ion-paper-airplane"></i>
+	                                        <i class="fa fa-book"></i>
 	                                    </div>
 	                                    <a href="" class="small-box-footer">
 	                                        Detalhes <i class="fa fa-arrow-circle-right"></i>
@@ -120,7 +120,7 @@
 										</span>
 									</div>
 									<div class="icon">
-										<i class="fa fa-calendar"></i>
+										<i class="fa fa-mail-reply"></i>
 									</div>
 								</a> 
 								<a href="javascript:void(0);" class="small-box-footer">
@@ -144,7 +144,7 @@
 										</span>
 									</div>
 									<div class="icon">
-										<i class="fa fa-gift"></i>
+										<i class="fa fa-star-o"></i>
 									</div>
 								</a>
 								<a href="/aluno/atividades/extra" class="small-box-footer">
@@ -192,7 +192,7 @@
 										</span>
 									</div>
 									<div class="icon">
-										<i class="fa fa-gift"></i>
+										<i class="fa fa-envelope-o"></i>
 									</div>
 								</a>
 								<a href="#" class="small-box-footer">
@@ -205,7 +205,7 @@
 							<div id="div_card_{{++$aux}}" class="box" >
 								<a href="javascript:void(0);" >
 									<div class="inner" style="height: 122px;">
-										<span style="color:#FFF;font-size:30px;"><b>Agenda</b></span><br>
+										<span style="color:#FFF;font-size:30px;"><b>Avisos</b></span><br>
 										<span style="color:#FFF;">
 											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 											Sed placerat tempus lectus id consectetur. 
@@ -213,7 +213,7 @@
 										</span>
 									</div>
 									<div class="icon">
-										<i class="fa fa-bar-chart-o"></i>
+										<i class="fa fa-bell-o"></i>
 									</div>
 								</a>
 								<a href="javascript:void(0);" class="small-box-footer">
@@ -234,7 +234,7 @@
 										</span>
 									</div>
 									<div class="icon">
-										<i class="fa fa-gift"></i>
+										<i class="fa fa-user"></i>
 									</div>
 								</a>
 								<a href="#" class="small-box-footer">
@@ -253,7 +253,7 @@
 										</span>
 									</div>
 									<div class="icon">
-										<i class="fa fa-bar-chart-o"></i>
+										<i class="fa fa-send-o"></i>
 									</div>
 								</a>
 								<a href="javascript:void(0);" class="small-box-footer">
