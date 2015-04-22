@@ -222,8 +222,8 @@
     <section class="content-header">
         <h1>Gerenciar Aulas</h1>
         <ol class="breadcrumb">
-            <li><i class="fa fa-dashboard"></i> Home</li>
-            <li class="active">Gerenciar Cursos</li>
+            <li><a href="/admin/home" ><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active"><a href="{{URL::previous()}}" >Gerenciar Cursos</a></li>
 			<li class="active">Gerenciar Aulas</li>
         </ol>
     </section>
