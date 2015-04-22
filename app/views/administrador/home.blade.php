@@ -215,7 +215,7 @@
 <section class="content-header">
     <h1>Gerenciar Cursos</h1>
     <ol class="breadcrumb">
-        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="/admin/home" ><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Gerenciar Cursos</li>
     </ol>
 </section>
@@ -334,7 +334,7 @@
                                                         </a>
                                                     </div>
 
-                                                    <a href="#" class="small-box-footer">Mais informações <i class="fa fa-arrow-circle-right"></i></a>
+                                                    <a href="/admin/turma/{{$turma->id}}" class="small-box-footer">Gerenciar Turmas <i class="fa fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
