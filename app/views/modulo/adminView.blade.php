@@ -784,7 +784,7 @@
 		function fcn_validaArquivo(formulario, arquivo) { 
 		   
 			if(arquivo != ""){
-				extensoes_permitidas = new Array(".pdf"); 
+				extensoes_permitidas = new Array(".pdf", ".odt", ".ods", ".odp"); 
 				meuerro = ""; 
 				 
 				extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase(); 
