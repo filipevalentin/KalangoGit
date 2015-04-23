@@ -561,6 +561,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		});
 
 	//Mensagens
+
 		Route::get('mensagens/entrada', function(){
 			$mensagens = Mensagem::where('idUsuarioDestino', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
 			return View::make('mensagem/professorInbox')->with('mensagens', $mensagens);
@@ -596,6 +597,26 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			$mensagem->lida = 0;
 			$mensagem->save();
+
+			return Redirect::back();
+			
+		});
+
+		Route::post('mensagem/turma/enviar', function(){
+			$alunos = Turma::find(Input::get('idTurma'))->alunos;
+
+			foreach($alunos as $aluno){
+				$mensagem = new Mensagem;
+				$mensagem->idUsuarioOrigem = Auth::user()->id;
+				$mensagem->titulo = Input::get('titulo');
+				$mensagem->conteudo = Input::get('conteudo');
+				$mensagem->data = date('d-m-Y H:i:s');
+				$mensagem->lida = 0;
+				$mensagem->idUsuarioDestino = $aluno->id;
+				$mensagem->save();
+			}
+			
+			Session::flash('info','Mensagem enviada com sucesso!');
 
 			return Redirect::back();
 			

@@ -35,6 +35,39 @@
     </div> 
 </div>
 
+<div class="modal fade" id="compose-modal-turma" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title"><i class="fa fa-envelope-o"> </i> Nova Mensagem </h4>
+            </div>
+            <form action="/professor/mensagem/turma/enviar" method="post">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon">Para:</span>
+                            <select class="form-control alunoObrigatorio" name="idTurma" id="idTurma">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control tituloObrigatorio" type="text" id="titulo" name="titulo" maxlength="100" placeholder="Titulo">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer clearfix">
+                    <button type="submit" class="btn btn-primary pull-right btn-enviar"><i class="fa fa-envelope"></i> Enviar</button>
+                    <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Descartar</button>
+                </div>
+            </form>
+        </div> 
+    </div> 
+</div>
+
 @endsection
 
 <?php $cont = 1; ?>
@@ -62,6 +95,7 @@
                 <div class="box-header">
                     <h3 class="box-title">Lista de Alunos - Turma {{$turma->nome}} </h3>
                     <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#compose-modal-turma" data-idTurma="{{$turma->id}}" data-nomeDestino="Turma {{$turma->nome}}" style="margin-right:5px;">Mensagem à Turma</button>
                         <button type="button" class="btn btn-info">Relatórios de Turma</button>
                         <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <span class="caret"></span>
@@ -129,6 +163,16 @@
             modal.find('#idUsuarioDestino option').val(idUsuarioDestino);
             modal.find('#idUsuarioDestino option').text(nomeDestino);
         });
+
+        $('#compose-modal-turma').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            var idTurma = button.data('idturma');
+            var nomeDestino = button.data('nomedestino');
+            var modal = $(this);
+
+            modal.find('#idTurma option').val(idTurma);
+            modal.find('#idTurma option').text(nomeDestino);
+        });
            
 
             $('.item').first().addClass("active")
@@ -136,22 +180,19 @@
         </script>
 		
 		<script> //Validações
+
+        //Tentei arrumar a validação mas não consegui... 
 	
 			$(".btn-enviar").click(function(event){
-					
-				if($(".alunoObrigatorio").val() == ""){
-					alert("É necessário preencher o Aluno que deverá receber a mensagem!");
-					$(".alunoObrigatorio").focus();
-					return false;
-				} 
+                var enviar = $(this);
 				
-				if($(".tituloObrigatorio").val() == ""){
+				if(this.prevAll(".tituloObrigatorio").first.val() == ""){
 					alert("É necessário preencher o Título da Mensagem!");
 					$(".tituloObrigatorio").focus();
 					return false;
 				}
 
-				if($(".mensagemObrigatoria").val() == ""){
+				if(this.prevAll(".mensagemObrigatoria").first.val() == ""){
 					alert("É necessário preencher a Mensagem!");
 					$(".mensagemObrigatoria").focus();
 					return false;
