@@ -48,7 +48,7 @@
                         <div class="carousel-inner">
                          @foreach($propagandas as $propaganda)
                             <div class="item" id="divCarousel">
-                                <a href="{{$propaganda->link}}"><img src="/{{$propaganda->imagem}}" alt="{{$propaganda->titulo}}" style="max-height: 400px; margin:auto;"></a>
+                                <a href="{{$propaganda->link}}"><img src="/{{$propaganda->urlImagem}}" alt="{{$propaganda->titulo}}" style="max-height: 400px; margin:auto;"></a>
                                 <div class="carousel-caption">
                                     {{$propaganda->titulo}}
                                 </div>
@@ -103,7 +103,7 @@
 	                                        <i class="fa fa-book"></i>
 	                                    </div>
 	                                    <a href="" class="small-box-footer">
-	                                        Detalhes <i class="fa fa-arrow-circle-right"></i>
+	                                         
 	                                    </a>
 	                              	</div>
 	                            </div>
@@ -124,7 +124,7 @@
 									</div>
 								</a> 
 								<a href="javascript:void(0);" class="small-box-footer">
-									Detalhes <i class="fa fa-arrow-circle-right"></i>
+									 
 								</a>
 							</div>
 						</div>
@@ -148,7 +148,7 @@
 									</div>
 								</a>
 								<a href="/aluno/atividades/extra" class="small-box-footer">
-									Detalhes <i class="fa fa-arrow-circle-right"></i>
+									 
 								</a>
 							</div>
 						</div>
@@ -167,7 +167,7 @@
 									</div>
 								</a>
 								<a href="javascript:void(0);" class="small-box-footer">
-									Detalhes <i class="fa fa-arrow-circle-right"></i>
+									 
 								</a>
 							</div>
 						</div>
@@ -196,7 +196,7 @@
 									</div>
 								</a>
 								<a href="#" class="small-box-footer">
-									Detalhes <i class="fa fa-arrow-circle-right"></i>
+									 
 								</a>
 							</div>
 						</div>
@@ -217,7 +217,7 @@
 									</div>
 								</a>
 								<a href="javascript:void(0);" class="small-box-footer">
-									Detalhes <i class="fa fa-arrow-circle-right"></i>
+									 
 								</a>
 							</div>
 						</div>
@@ -238,7 +238,7 @@
 									</div>
 								</a>
 								<a href="#" class="small-box-footer">
-									Detalhes <i class="fa fa-arrow-circle-right"></i>
+									 
 								</a>
 							</div>
 						</div>
@@ -257,7 +257,7 @@
 									</div>
 								</a>
 								<a href="javascript:void(0);" class="small-box-footer">
-									Detalhes <i class="fa fa-arrow-circle-right"></i>
+									 
 								</a>
 							</div>
 						</div>

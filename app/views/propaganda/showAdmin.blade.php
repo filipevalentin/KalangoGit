@@ -28,7 +28,7 @@
                 	<div id="div_empresa_nova_propaganda" class="form-group">
                         <label class="control-label" for="empresa"><i id="icone_empresa_nova_propaganda" class="fa"></i> Empresa</label>
                         <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresNovaPropaganda();" class="form-control empresaObrigatoria_nova_propaganda">
-                        <option value="" >Selecione</option>
+                        <option value="" disabled="true">Selecione</option>
 						@foreach(Empresa::all() as $empresa)
                             <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
                         @endforeach

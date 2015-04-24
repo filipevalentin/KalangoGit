@@ -67,9 +67,8 @@
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
                             <!-- Messages: style can be found in dropdown.less-->
-                            <?php global $count; $mensagens= Auth::user()->mensagensRecebidas; ?> 
-                            <?php $mensagens->each(function($mensagem){
-                                global $count;
+                            <?php $count=0; $mensagens = Auth::user()->mensagensRecebidas->sortByDesc('id')->take(5); ?>
+                            <?php Auth::user()->mensagensRecebidas->each(function($mensagem) use($count){
                                 if($mensagem->lida!=1){
                                     $count++;
                                 }
@@ -78,10 +77,10 @@
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-envelope-o"></i>
-                                    <span class="label label-success">{{$count}}</span>
+                                    <span class="label label-warning">{{$count}}</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li class="header"><?php ($count != 0) ? "Você tem $count novas mensagens" : "Sem novas mensagens"; ?></li>
+                                    <li class="header"> Você tem {{$count}} mensagens não lidas </li>
                                     <li>
                                         <!-- inner menu: contains the messages -->
                                         <ul class="menu">
@@ -98,10 +97,10 @@
                                                     </div>
                                                     <!-- Message title and timestamp -->
                                                     <h4>                            
-                                                        {{$mensagem->titulo}}
+                                                        {{substr($mensagem->titulo, 0, 15)}}
                                                     </h4>
                                                     <!-- The message -->
-                                                    <p>{{$mensagem->conteudo}}</p>
+                                                    <p>{{substr($mensagem->conteudo,0,30)}}</p>
                                                 </a>
                                             </li><!-- end message -->
                                         @endforeach                   
@@ -112,7 +111,11 @@
                             </li><!-- /.messages-menu -->
 
                             <!-- Notifications Menu -->
-                            <?php $avisos = Aviso::where('dataExpiracao','>', date('Y-m-d'))->orderBy('dataExpiracao')->get(); ?>
+                            <?php $avisos = Aviso::where('dataExpiracao', '>', date('Y-m-d'))->whereHas('turmas', function ($q)
+                                                    {
+                                                    $q->whereIn('turmas.id', Auth::user()->aluno->turmas->lists('id') );
+                                                   })->orderBy('dataExpiracao')->get();
+                            ?>
                             <li class="dropdown notifications-menu">
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -133,7 +136,7 @@
                                         @endforeach
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="#">View all</a></li>
+                                    <li class="footer"></li>
                                 </ul>
                             </li>
                             <!-- User Account Menu -->
@@ -152,13 +155,12 @@
                                         @endif
                                         <p>
                                             {{Auth::user()->nome}} {{" "}} {{Auth::user()->sobrenome}}
-                                            <small>Membro desde Nov/2012</small>
                                         </p>
                                     </li>
                                     <!-- Menu Body -->
                                     <li class="user-body">
                                         <div class="col-xs-4 text-center">
-                                            <a href="#">Cursos</a>
+                                            <a href="/">Home</a>
                                         </div>
                                         <div class="col-xs-4 text-center">
                                             <a href="/aluno/dashboard">Desempenho</a>
@@ -169,9 +171,6 @@
                                     </li>
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
-                                        <div class="pull-left">
-                                            <a href="/aluno/perfil" class="btn btn-default btn-flat">Perfil</a>
-                                        </div>
                                         <div class="pull-right">
                                             <a href="/logout" class="btn btn-default btn-flat">Sair</a>
                                         </div>

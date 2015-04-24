@@ -35,6 +35,23 @@
     </div> 
 </div>
 
+<div class="modal fade" id="video" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Vídeo</h4>
+                </div>
+                <div class="modal-body">
+                    <video class="center-block" width="320" height="240" controls style="max-width:100%; display: block; height:auto;">
+                      <source src="" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 <?php $cont = 1; ?>
@@ -82,7 +99,13 @@
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
                                                     <p style="float:left;">{{$material->nome}}</p>
                                                     <div class="box-tools pull-right">
-                                                        <a href="/Viewer#/{{$material->url}}"><button class="btn btn-primary btn-xs"><i class="fa fa-external-link"></i></button></a>
+                                                        @if($material->tipo == 1)
+                                                            <a href="/Viewer#/{{$material->url}}"><button class="btn btn-primary btn-xs"><i class="fa fa-file-pdf-o"></i></button></a>
+                                                        @elseif($material->tipo == 2)
+                                                            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#video" data-url="{{$material->url}}"><i class="fa fa-film"></i></button>
+                                                        @elseif($material->tipo == 3)
+                                                            <a href="{{$material->url}}" target="_blank"><button class="btn btn-primary btn-xs"><i class="fa fa-external-link"></i></button></a>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -92,7 +115,7 @@
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
                                                     <p style="float:left;">{{$atividade->nome}}</p>
                                                     <div class="box-tools pull-right">
-                                                        <a href="/professor/atividade/turma/{{$atividade->id}}/{{$turma->id}}"><button class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button></a>
+                                                        <a href="/professor/atividade/turma/{{$atividade->id}}/{{$turma->id}}"><button class="btn btn-primary btn-xs"><i class="fa check-square-o"></i></button></a>
                                                     </div>
                                                 </div>
                                             @endforeach

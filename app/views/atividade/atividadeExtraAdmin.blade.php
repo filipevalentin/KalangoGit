@@ -183,8 +183,13 @@
 
                                 <?php
                                     if(get_class($categorias[$j]) == "Modulo"){
-                                        $atividades = Atividade::where('idModulo', '=', $categorias[$j]->id)->get()->lists('id'); 
-                                        $atividades = json_encode($atividades);
+                                        if($categorias[$j]->id == null){
+                                            $atividades = Atividade::where('tipo','=', '2')->get()->lists('id');
+                                            $atividades = json_encode($atividades);
+                                        }else{
+                                            $atividades = Atividade::where('idModulo', '=', $categorias[$j]->id)->get()->lists('id'); 
+                                            $atividades = json_encode($atividades);
+                                        }
                                     }else{
                                         $atividades = Atividade::where('idCategoria', '=', $categorias[$j]->id)->get()->lists('id'); 
                                         $atividades = json_encode($atividades);

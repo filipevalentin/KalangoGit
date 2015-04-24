@@ -32,6 +32,7 @@ Route::get('teste4',function(){
 
 			$a = new Administrador;
 			$a->id = $u3->id;
+			$a->codRegistro = 789;
 			$a->save();
 		});
 
@@ -92,7 +93,14 @@ Route::get('teste4',function(){
 	        $user->confirmation_code = null;
 	        $user->save();
 
-	        return Redirect::to('/');
+	        if($user->tipo == 1){
+				return Redirect::to('/aluno/perfil');	        	
+	        }elseif($user->tipo == 2){
+	        	return Redirect::to('/professor/perfil');
+	        }else{
+	        	return Redirect::to('/admin/perfil');
+	        }
+
 		});
 
 	
@@ -832,7 +840,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			//$categorias = $modulos->combine(Categoria::all());
 
-			$atividadesExtras = Atividade::where('tipo', '=', '2')->where('idUsuario', '=', Auth::user()->id)->get(); // trocar por Auth::User
+			$atividadesExtras = Atividade::where('tipo', '=', '2')->where('idUsuario', '=', Auth::user()->id)->get();
 
 			return View::make('atividade/atividadeExtraProfessor')->with('categorias', $categorias)
 														  ->with('atividadesExtras', $atividadesExtras);
@@ -1525,7 +1533,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$cursos = Curso::all();
 				$cursosArray = $cursos->toArray();
 
-				Session::flash('warning', "Cuidado com o que você vai fazer!!!");
 				return View::make('administrador/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray));	
 			}else{
 				$cursos = Curso::where('idIdioma','=',Idioma::where('nome','=', $idioma)->first()->id)->get();
@@ -1563,6 +1570,20 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::post('criarIdioma', function(){
 			$idioma = new Idioma;
+			$idioma->nome = Input::get('nome');
+			$idioma->save();
+
+			Session::flash('info', "Idioma criado com sucesso!");
+
+			return Redirect::back();
+		});
+
+		Route::post('idioma/deletar/{id}', function($id){
+			$idioma = Idioma->find($id);
+
+			if($idioma != null){
+				$idioma->delete();
+			}
 			$idioma->nome = Input::get('nome');
 			$idioma->save();
 
@@ -1744,23 +1765,33 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Materiais
 
 		Route::post('criarMaterial', function(){
-			$Material = new Materialapoio;
-			$Material->nome = Input::get('nome');
+			$material = new Materialapoio;
+			$material->nome = Input::get('nome');
 			$aula = Aula::find(Input::get('idAula'));
+			$material->tipo = Input::get('tipo');
 
-			$arquivo = Input::file('arquivo');
-			$filename="";
-			if($arquivo!=NULL){
-				$filename = $arquivo->getClientOriginalName();
+			if($material->tipo != 3){
+				$arquivo = Input::file('arquivo');
+				$filename="";
+				if($arquivo!=NULL){
+					$filename = $arquivo->getClientOriginalName();
 
-				$Material->url = 'files/'.$filename;
-				
-				$arquivo->move('files/', $filename);
+					$material->url = 'files/'.$filename;
+					
+					$arquivo->move('files/', $filename);
+				}
+			}else{
+				if(Input::get('arquivo') != null){
+					$material->url = Input::get('arquivo');
+				}else{
+					Session::flash('warning', "Você deve preencher o campo 'Arquivo'");
+					return Redirect::back();
+				}
 			}
 
-			$Material->save();
+			$material->save();
 
-			$aula->materialApoio()->attach($Material->id);
+			$aula->materialApoio()->attach($material->id);
 
 			// redirect
 			Session::flash('info', 'Material criado com sucesso!');
@@ -1768,19 +1799,31 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarMaterial', function(){
-			$Material 			    = MaterialApoio::find(Input::get('id')); 
-			$Material->nome       	= Input::get('nome');
+			$material 			    = MaterialApoio::find(Input::get('id')); 
+			$material->nome       	= Input::get('nome');
 
-			$arquivo = Input::file('arquivo');
+			$material->tipo = Input::get('tipo');
 
-			if($arquivo!=NULL){
-				$filename = $arquivo->getClientOriginalName();
-				$Material->url = 'files/'.$filename;
-				$arquivo->move('files/', $filename);
+			if($material->tipo != 3){
+				$arquivo = Input::file('arquivo');
+				$filename="";
+				if($arquivo!=NULL){
+					$filename = $arquivo->getClientOriginalName();
 
+					$material->url = 'files/'.$filename;
+					
+					$arquivo->move('files/', $filename);
+				}
+			}else{
+				if(Input::get('arquivo') != null){
+					$material->url = Input::get('arquivo');
+				}else{
+					Session::flash('warning', "Você deve preencher o campo 'Arquivo'");
+					return Redirect::back();
+				}
 			}
 			
-			$Material->save();
+			$material->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
@@ -2826,7 +2869,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$propaganda->criadoPor = User::find($propaganda->idUsuario)->nome;
 				$propaganda->empresa = Empresa::find($propaganda->idEmpresa)->nome;
 				$propaganda->linkView = ($propaganda->link != null) ? "<a href='$propaganda->link''>Visitar Link</a>" : 'N/A';
-				$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->imagem' data-link='$propaganda->link' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+				$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' data-link='$propaganda->link' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
 			}
 
 			$response = array(
@@ -2846,11 +2889,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if($imagem!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$propaganda->imagem = 'img/'.$filename;
+				$propaganda->urlImagem = 'img/'.$filename;
 				
 				$imagem->move('img/', $filename);
 			}
 			$propaganda->idUsuario = Auth::user()->id;
+			$propaganda->idEmpresa = Input::get("idEmpresa");
 			$propaganda->save();
 
 			Session::flash('info', "Propaganda criada com sucesso!");
@@ -2867,7 +2911,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if($imagem!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$propaganda->imagem = 'img/'.$filename;
+				$propaganda->urlImagem = 'img/'.$filename;
 				
 				$imagem->move('img/', $filename);
 			}

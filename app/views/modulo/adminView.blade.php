@@ -72,12 +72,20 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="id" name="id">
                         </div>
+                        <div class="form-group">
+                            <label class="control-label" for="tipo"><i id="" class="fa"></i> Tipo</label>
+                            <select type="" class="form-control" id="tipo" name="tipo">
+                                <option value="1">Documento</option>
+                                <option value="2">Vídeo</option>
+                                <option value="3">Link</option>
+                            </select>
+                        </div>
                         <div id="div_nome-editar-material" class="form-group">
                             <label class="control-label" for="nome"><i id="icone_nome-editar-material" class="fa"></i> Nome</label>
                             <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarMaterial();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-material"></input>
                         </div>
                         <div class="form-group">
-                            <label class="control-label" for="arquivo"><i class="fa"></i> Arquivo</label>
+                            <label class="control-label" for="arquivo"><i class="fa"></i> Arquivo/URL</label>
                             <input type="file" id="arquivo" name="arquivo" onblur="fcn_recarregaCoresEditarMaterial();fcn_validaArquivo(this.form, this.form.arquivo.value)" class="form-control"></input>
                         </div>
                         <div class="modal-footer">
@@ -137,19 +145,27 @@
                                 <li><a id="btnCopiarMaterial" href="">Copiar Material</a></li>
                             </ul>
                         </div>
-                        <button class="btn btn-success" type="button" id="btnAtividade">Exercício</button>
+                        <button class="btn btn-success" type="button" id="btnAtividade">Atividade</button>
                     </div>
 
                     <form action="/admin/criarMaterial" method="POST" id="formNovoMaterial" style="display:none;"enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="idaula" name="idAula">
                         </div>
+                        <div class="form-group">
+                            <label class="control-label" for="tipo"><i id="" class="fa"></i> Tipo</label>
+                            <select type="" class="form-control" id="tipo" name="tipo">
+                                <option value="1">Documento</option>
+                                <option value="2">Vídeo</option>
+                                <option value="3">Link</option>
+                            </select>
+                        </div>
                         <div id="div_nome-novoConteudo-material" class="form-group">
                             <label class="control-label" for="nome"><i id="icone_nome-novoConteudo-material" class="fa"></i> Nome</label>
                             <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoConteudoMaterial();" maxlength="100" class="form-control nomeObrigatorio-novoConteudo-material"></input>
                         </div>
                         <div id="div_arquivo-novoConteudo-material" class="form-group">
-                            <label class="control-label" for="arquivo"><i id="icone_arquivo-novoConteudo-material" class="fa"></i> Arquivo</label>
+                            <label class="control-label" for="arquivo"><i id="icone_arquivo-novoConteudo-material" class="fa"></i> Arquivo/URL</label>
                             <input type="file" id="arquivo" name="arquivo" onblur="fcn_recarregaCoresNovoConteudoMaterial();fcn_validaArquivo(this.form, this.form.arquivo.value)" class="form-control arquivoObrigatorio-novoConteudo-material"></input>
                         </div>
                         <div class="modal-footer">
@@ -216,6 +232,24 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="video" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel">Vídeo</h4>
+                </div>
+                <div class="modal-body">
+                    <video class="center-block" width="320" height="240" controls style="max-width:100%; display: block; height:auto;">
+                      <source src="" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('maincontent')
@@ -268,8 +302,14 @@
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
                                                     <p style="float:left;">{{$material->nome}}</p>
                                                     <div class="box-tools pull-right">
-                                                        <a href="/Viewer#/{{$material->url}}"><button class="btn btn-primary btn-xs"><i class="fa fa-file-pdf-o"></i></button></a>
-                                                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarmaterial" data-id="{{$material->id}}" data-nome="{{$material->nome}}"><i class="fa fa-pencil"></i></button>
+                                                        @if($material->tipo == 1)
+                                                            <a href="/Viewer#/{{$material->url}}"><button class="btn btn-primary btn-xs"><i class="fa fa-file-pdf-o"></i></button></a>
+                                                        @elseif($material->tipo == 2)
+                                                            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#video" data-url="{{$material->url}}"><i class="fa fa-film"></i></button>
+                                                        @elseif($material->tipo == 3)
+                                                            <a href="{{$material->url}}" target="_blank"><button class="btn btn-primary btn-xs"><i class="fa fa-external-link"></i></button></a>
+                                                        @endif
+                                                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarmaterial" data-id="{{$material->id}}" data-nome="{{$material->nome}}" data-tipo="{{$material->tipo}}"><i class="fa fa-pencil"></i></button>
                                                         <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
                                                     </div>
                                                 </div>
@@ -371,19 +411,6 @@
             }
         } );
         
-        // $('#example').on( 'init.dt', function () {
-        //  var materiais = [];
-        //  $('input.check').on('click', function(){
-        //      if($(this).is(":checked")){
-        //          materiais.push($(this).data('id'));
-        //          console.log('adicionado '+$(this).data('id'));
-        //      }else{
-        //          materiais.splice(materiais.indexOf($(this).data('id')),1);
-        //          console.log('removido '+$(this).data('id'));
-        //      }
-        //  });
-     //    } ).dataTable();
-
     </script>
 
     <script>
@@ -414,13 +441,14 @@
             var button = $(event.relatedTarget) // Button that triggered the modal
             var dataid = button.data('id')
             var datanome = button.data('nome')
-            var dataarquivo = button.data('arquivo') // Extract info from data-* attributes
-            // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-            // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+            var dataarquivo = button.data('arquivo')
+            var datatipo = button.data('tipo')
+
             var modal = $(this)
             modal.find('#id').val(dataid)
             modal.find('#nome').val(datanome)
             modal.find('#arquivo').val(dataarquivo)
+            modal.find('#tipo').val(datatipo)
         })
 
         $('#criaraula').on('show.bs.modal', function (event) {
@@ -464,12 +492,21 @@
              $('#formCopiarMaterial').show();
          })
 
-         $('#btnAtividade').on('click', function(event) {
+        $('#btnAtividade').on('click', function(event) {
              event.preventDefault();
              $('#formNovoMaterial').hide();
              $('#formCopiarMaterial').hide();
              $('#formAtividade').show();
-         })
+        })
+
+        $('select#tipo').on('change', function (event){
+            if($(this).val()!=3){
+                $(this).parents('.modal-body').find('input#arquivo').attr("type", "file")
+            }
+            else{
+                $(this).parents('.modal-body').find('input#arquivo').attr("type", "text")
+            }
+        })
 
     </script>
 	
