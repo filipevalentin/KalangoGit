@@ -59,52 +59,6 @@
                     <!-- Navbar Right Menu -->
                     <div class="navbar-custom-menu">
                         <ul class="nav navbar-nav">
-                        @if(Auth::user()->tipo == 2)
-                            <!-- Messages: style can be found in dropdown.less-->
-                            <?php global $count; $mensagens= Auth::user()->mensagensRecebidas; ?> 
-                            <?php $mensagens->each(function($mensagem){
-                                global $count;
-                                if($mensagem->lida!=1){
-                                    $count++;
-                                }
-                            }) ?>
-                            <li class="dropdown messages-menu">
-                                <!-- Menu toggle button -->
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-envelope-o"></i>
-                                    <span class="label label-success">{{$count}}</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li class="header"><?php ($count != 0) ? "Você tem $count novas mensagens" : "Sem novas mensagens"; ?></li>
-                                    <li>
-                                        <!-- inner menu: contains the messages -->
-                                        <ul class="menu">
-                                        @foreach($mensagens as $mensagem)
-                                            <li><!-- start message -->
-                                                <a href="/admin/mensagem/{{$mensagem->id}}">
-                                                    <div class="pull-left">
-                                                        <!-- User Image -->
-                                                        @if($mensagem->usuarioOrigem->urlImagem != null)
-                                                            <img src="/{{$mensagem->usuarioOrigem->urlImagem}}" class="img-circle" alt="User Image"/>
-                                                        @else
-                                                            <img src="/images/default.png" class="img-circle" alt="User Image"/>
-                                                        @endif
-                                                    </div>
-                                                    <!-- Message title and timestamp -->
-                                                    <h4>                            
-                                                        {{$mensagem->titulo}}
-                                                    </h4>
-                                                    <!-- The message -->
-                                                    <p>{{$mensagem->conteudo}}</p>
-                                                </a>
-                                            </li><!-- end message -->
-                                        @endforeach                   
-                                        </ul><!-- /.menu -->
-                                    </li>
-                                    <li class="footer"><a href="/professor/mensagens">Ir para Mensagens</a></li>
-                                </ul>
-                            </li><!-- /.messages-menu -->
-                        @endif
 
                             <!-- Notifications Menu -->
                             <?php $avisos = Aviso::where('dataExpiracao','>', date('Y-m-d'))->orderBy('dataExpiracao')->get(); ?>

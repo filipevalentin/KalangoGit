@@ -1579,7 +1579,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('idioma/deletar/{id}', function($id){
-			$idioma = Idioma->find($id);
+			$idioma = Idioma::find($id);
 
 			if($idioma != null){
 				$idioma->delete();
@@ -1952,14 +1952,16 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$atividadeExtra = Atividade::find(Input::get('id'));
 			$atividadeExtra->nome = Input::get('nome');
 			$idModulo = Input::get('idModulo');
-			$idCategoria = Input::get('idCategoria');
+			
+
+			if(Input::get('idCategoria') != null){
+				$atividadeExtra->idCategoria = Input::get('idCategoria');
+			}
+
 			$atividadeExtra->status = Input::get('status');
 
 			if(isset($idModulo)){
 				$atividadeExtra->idModulo = Input::get('idModulo');
-			}
-			if(isset($idCategoria)){
-				$atividadeExtra->idCategoria = Input::get('idCategoria');
 			}
 
 			$atividadeExtra->save();
