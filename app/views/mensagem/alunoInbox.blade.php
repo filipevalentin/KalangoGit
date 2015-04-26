@@ -77,14 +77,12 @@
 @section('content-header')
 	<!-- Content Header (Page header) -->
     <h1>
-	        Mensagens
-			<small>Inbox</small>
-	    </h1>
-	    <ol class="breadcrumb">
-	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Comunicação</li>
-			<li class="active">Mensagens</li>
-	    </ol>
+		Mensagens
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="/aluno/home" ><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">Mensagens</li>
+	</ol>
 @stop
 
 @section('maincontent')
