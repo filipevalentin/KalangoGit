@@ -83,10 +83,9 @@
 	<section class="content-header no-margin">
 		<h1>
 	        Mensagens
-			<small>Inbox</small>
-	    </h1>
+		</h1>
 	    <ol class="breadcrumb">
-	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+	        <li><a href="/professor/home" ><i class="fa fa-dashboard"></i> Home</a></li>
 	        <li class="active">Mensagens</li>
 	    </ol>
 	</section>
