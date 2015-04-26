@@ -10,10 +10,10 @@
 @section('maincontent')
 
 <section class="content-header">
-    <h1>Gerenciar Turmas</h1>
+    <h1>Gerenciar Cursos</h1>
     <ol class="breadcrumb">
-        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Gerenciar Turmas</li>
+        <li><a href="/professor/home" ><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Gerenciar Cursos</li>
     </ol>
 </section>
 
@@ -113,7 +113,7 @@
                                                         </a>
                                                     </div>
 
-                                                    <a href="/professor/turma/{{$turma->id}}" class="small-box-footer">Ver lista de Alunos <i class="fa fa-arrow-circle-right"></i></a>
+                                                    <a href="/professor/turma/{{$turma->id}}" class="small-box-footer">Gerenciar Turmas <i class="fa fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
