@@ -1,5 +1,9 @@
-<?php 
+<?php
+	use Illuminate\Database\Eloquent\SoftDeletingTrait; 
 	class Aula extends Eloquent{
+
+		use SoftDeletingTrait;
+		protected $dates = ['deleted_at'];
 
 		public $timestamps = false;
 

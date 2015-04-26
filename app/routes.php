@@ -3,7 +3,8 @@
 $layout = 'layouts.master';
 
 Route::get('teste5',function(){
-	return DB::table('usuarios')->where('id','=','1')->get();
+	//Turma::find(1)->delete();
+	return Modulo::find(1)->turmas;//User::find(25)->aluno->turmas;
 });
 
 
@@ -1557,7 +1558,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::get('listarIdiomas', function(){
 			$idiomas = Idioma::all();
 			foreach ($idiomas as $idioma) {
-				$idioma->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarIdioma' data-id='$idioma->id' data-nome='$idioma->nome'><i class='fa fa-pencil'></i></button></a><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+				$idioma->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarIdioma' data-id='$idioma->id' data-nome='$idioma->nome'><i class='fa fa-pencil'></i></button></a><a href='/admin/idioma/deletar/$idioma->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 			}
 
 			$response = array(
@@ -1578,16 +1579,20 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
-		Route::post('idioma/deletar/{id}', function($id){
+		Route::get('idioma/deletar/{id}', function($id){
 			$idioma = Idioma::find($id);
 
 			if($idioma != null){
+				foreach ($idioma->modulos as $modulo) {
+					if($modulo->turmas()->count() != 0){
+						Session::flash('warning', "<p>Existem turmas atreladas a cursos desse Idioma!</p> <p>Exclua todas as turmas relacionadas a este idioma para poder excluí-lo</p>");
+						return Redirect::back();
+					}
+				}
 				$idioma->delete();
 			}
-			$idioma->nome = Input::get('nome');
-			$idioma->save();
-
-			Session::flash('info', "Idioma criado com sucesso!");
+			
+			Session::flash('info', "Idioma excluído com sucesso!");
 
 			return Redirect::back();
 		});
@@ -1612,6 +1617,24 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Curso->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
+			return Redirect::back();
+		});
+
+		Route::get('curso/deletar/{id}', function($id){
+			$curso = Curso::find($id);
+
+			if($curso != null){
+				foreach ($curso->modulos as $modulo) {
+					if($modulo->turmas()->count() != 0){
+						Session::flash('warning', "<p>Existem turmas atreladas a este curso!</p> <p>Exclua todas as turmas relacionadas a este curso para poder excluí-lo</p>");
+						return Redirect::back();
+					}
+				}
+				$curso->delete();
+			}
+			
+			Session::flash('info', "Curso excluído com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -1648,6 +1671,22 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Modulo->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
+			return Redirect::back();
+		});
+
+		Route::get('modulo/deletar/{id}', function($id){
+			$modulo = Modulo::find($id);
+
+			if($modulo != null){
+				if($modulo->turmas()->count() != 0){
+					Session::flash('warning', "<p>Existem turmas atreladas a este Módulo!</p> <p>Exclua todas as turmas relacionadas a este módulo para poder excluí-lo</p>");
+					return Redirect::back();
+				}
+				$modulo->delete();
+			}
+			
+			Session::flash('info', "Módulo excluído com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -1723,7 +1762,17 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			    array('idCurso' => $turma->modulo->curso->id, 'idTurma' => $turma->id, 'idAluno' => $aluno->id, 'dtContratacao' => $dtContratacao )
 			);
 
-			$turma->alunos()->save($aluno);
+			if($turma != null && $aluno != null){
+				if($turma->status != 0){
+					$turma->alunos()->save($aluno);
+				}else{
+					Session::flash('warning', '<p> Não é possivel matricular alunos em uma turma que já foi concluída </p>');
+					return Redirect::back();
+				}
+			}
+			else{
+				Session::flash('warning','Turma ou aluno inexistente');
+			}
 
 			Session::flash('info', "Aluno matriculado com sucesso!");
 			return Redirect::back();
@@ -1733,9 +1782,55 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$turma = Turma::find($idTurma);
 			$aluno = Aluno::find($idAluno);
 
-			$turma->alunos()->detach($aluno);
+			if($turma != null && $aluno != null){
+				if($turma->status != 0){
+
+					//Checar interação do aluno com as atividades da turma/módulo
+					if($aluno->acessos->intersect($turma->modulo->atividades) == null){
+						$turma->alunos()->detach($aluno);
+					}else{
+						Session::flash('warning', '<p> Não é possivel desmatricular alunos que já responderam atividades do módulo relacionado a turma </p>');
+						return Redirect::back();
+					}
+
+				}else{
+					Session::flash('warning', '<p> Não é possivel desmatricular alunos de uma turma que já foi concluída </p>');
+					return Redirect::back();
+				}
+			}else{
+				Session::flash('warning','Turma ou aluno inexistente');
+			}
 
 			Session::flash('info', "Aluno desmatriculado com sucesso!");
+			return Redirect::back();
+		});
+
+		Route::get('turma/deletar/{id}', function($id){
+			$turma = Turma::find($id);
+
+			if($turma != null){
+				//Loop entre todos alunos da turma para ver se ao menos 1 já acessou algo
+				// Caso algum aluno tenha acessado, a turma é soft-deleted e os alunos NÃO SÃO DESMATRICULADOS
+				foreach ($turma->alunos as $aluno) {
+					if($aluno->acessos->intersect($turma->modulo->atividades) != null){
+						$turma->delete();
+						Session::flash('warning', '<p> Atenção! </p> <p> A turma foi excluída, porém, devido aos alunos já terem acessado as atividades da aula, nenhum aluno foi desmatriculado. </p>');
+						return Redirect::back();
+					}
+				}
+
+				// Caso tenha passado pelo looping anterior, nenhum aluno acessou as aulas, portanto podemos desmatricular os alunos antes de excluir a turma
+				foreach ($turma->alunos as $aluno) {
+					$aluno->turmas()->detach($turma);
+				}
+
+				$turma->forceDelete();
+				Session::flash('info', '<p>A turma foi excluída definitivamente</p> <p>Como os alunos não haviam acessado as atividades, eles também foram desmatriculados</p>');
+				return Redirect::back();
+			}
+			
+			Session::flash('warning', "Turma inexistente");
+
 			return Redirect::back();
 		});
 
@@ -1759,6 +1854,23 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Aula->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
+			return Redirect::back();
+		});
+
+		Route::get('aula/deletar/{id}', function($id){
+			$aula = Aula::find($id);
+
+			if($aula != null){
+				$modulo = $aula->modulo;
+				if($modulo->turmas()->count() != 0){
+					Session::flash('warning', "<p>Existem turmas atreladas ao módulo desta aula!</p> <p>Exclua todas as turmas relacionadas ao módulo desta aula para poder excluí-la</p>");
+					return Redirect::back();
+				}
+			}
+			$aula->delete();
+			
+			Session::flash('info', "Aula excluída com sucesso!");
+
 			return Redirect::back();
 		});
 

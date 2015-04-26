@@ -1,7 +1,11 @@
-<?php 
+<?php
+	
+	use Illuminate\Database\Eloquent\SoftDeletingTrait; 
 	
 	class Atividade extends Eloquent{
 
+		use SoftDeletingTrait;
+		protected $dates = ['deleted_at'];
 		public $timestamps = false;
 		protected $table = 'atividades';
 
