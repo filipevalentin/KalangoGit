@@ -4,13 +4,12 @@
 @section('content-header')
     <!-- Content Header (Page header) -->
     <h1>
-            Perfil
-        </h1>
-        <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Comunicação</li>
-            <li class="active">Perfil</li>
-        </ol>
+		Perfil
+	</h1>
+	<ol class="breadcrumb">
+		<li><a href="/aluno/home" ><i class="fa fa-dashboard"></i> Home</a></li>
+		<li class="active">Perfil</li>
+	</ol>
 @stop
 
 @section('maincontent')
