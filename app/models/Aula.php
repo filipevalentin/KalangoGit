@@ -11,8 +11,12 @@
 			return $this->belongsTo('Modulo', "idModulo");
 		}
 
+		// public function materialApoio(){
+		// 	return $this->belongsToMany('MaterialApoio', 'materialapoioaula', 'idAula', 'idMaterialApoio');
+		// }
+
 		public function materialApoio(){
-			return $this->belongsToMany('MaterialApoio', 'materialapoioaula', 'idAula', 'idMaterialApoio');
+			return $this->hasMany('MaterialApoio','idAula');
 		}
 
 		public function atividades(){

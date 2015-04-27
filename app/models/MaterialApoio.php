@@ -5,7 +5,7 @@
 		public $timestamps = false;
 
 		public function aula(){
-			return $this->belongsToMany('Aula', 'materialapoioaula', 'idMaterialApoio', 'idAula');
+			return $this->belongsTo('Aula','idAula');
 		}
 
 	}

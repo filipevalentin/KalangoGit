@@ -29,6 +29,10 @@
 			return $this-> hasMany('Questao','idAtividade');
 		}
 
+		public function acessos(){
+            return $this->belongsToMany('Aluno', 'AcessosAtividades', 'idAtividade', 'idAluno');
+        }
+
 
 	}
 
