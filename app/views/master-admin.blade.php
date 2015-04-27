@@ -139,16 +139,11 @@
 
                     <!-- Sidebar Menu -->
                     <ul class="sidebar-menu">
-                        <li>
-                            <a href="/admin/home">
-                                <i class="fa fa-dashboard"></i> <span>Home</span>
-                            </a>
-                        </li>
-                        
+
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-graduation-cap"></i>
-                                <span>Gerenciar Cursos</span>
+                                <i class="fa fa-dashboard"></i>
+                                <span>Dashboard de Cursos</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
@@ -156,6 +151,60 @@
                                 <li><a href="/admin/home/{{$idioma->nome}}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> {{$idioma->nome}}</a></li>
                             @endforeach 
                             </ul>
+                        </li>
+
+                        <li>
+                            <a href="/admin/idiomas">
+                                <i class="fa fa-quote-right"></i> <span>Idiomas</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/cursos">
+                                <i class="fa fa-graduation-cap"></i> <span>Cursos</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/modulos">
+                                <i class="fa fa-sitemap"></i> <span>Módulos</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/aulas">
+                                <i class="fa fa-book"></i> <span>Aulas</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/atividades">
+                                <i class="fa fa-pencil-square-o"></i> <span>Atividades</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/categorias">
+                                <i class="fa fa-bookmark-o"></i> <span>Categorias de Ativ. Extras</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/atividadesExtras">
+                                <i class="fa fa-star"></i> <span>Atividades Extras</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/questoes">
+                                <i class="fa fa-question-circle"></i> <span>Questões</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="/admin/topicos">
+                                <i class="fa fa-th"></i> <span>Tópicos de Questões</span>
+                            </a>
                         </li>
 
                         <li>
@@ -178,30 +227,6 @@
                         </li>
 
                         <li>
-                            <a href="/admin/idiomas">
-                                <i class="fa fa-quote-right"></i> <span>Gerenciar Idiomas</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/atividadesExtras">
-                                <i class="fa fa-star"></i> <span>Atividades Extras</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/topicos">
-                                <i class="fa fa-th"></i> <span>Tópicos de Questões</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="/admin/avisos">
-                                <i class="fa fa-bell-o"></i> <span>Avisos</span>
-                            </a>
-                        </li>
-                        
-                        <li>
                             <a href="/admin/empresas">
                                 <i class="fa fa-building-o"></i> <span>Empresas</span>
                             </a>
@@ -212,6 +237,14 @@
                                 <i class="fa fa-bullhorn"></i> <span>Propagandas</span>
                             </a>
                         </li>
+
+                        <li>
+                            <a href="/admin/avisos">
+                                <i class="fa fa-bell-o"></i> <span>Avisos</span>
+                            </a>
+                        </li>
+                        
+
 
                     </ul><!-- /.sidebar-menu -->
                 </section>

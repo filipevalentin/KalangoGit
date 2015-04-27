@@ -261,7 +261,7 @@
         var datatitulo = button.data('titulo');
         var datadescricao = button.data('descricao')
         var datadataexpiracao = button.data('dataexpiracao')
-        var dataidturma = button.data('idturma')
+        var dataidturma = String(button.data('idturma'));
 
 
         var modal = $(this)

@@ -111,10 +111,14 @@
                             </li><!-- /.messages-menu -->
 
                             <!-- Notifications Menu -->
-                            <?php $avisos = Aviso::where('dataExpiracao', '>', date('Y-m-d'))->whereHas('turmas', function ($q)
-                                                    {
-                                                    $q->whereIn('turmas.id', Auth::user()->aluno->turmas->lists('id') );
-                                                   })->orderBy('dataExpiracao')->get();
+                            <?php
+                                $avisos = new \Illuminate\Database\Eloquent\Collection;
+                                foreach (Auth::user()->aluno->turmas as $turma) {
+                                    foreach ($turma->avisos as $aviso) {
+                                        $avisos->push($aviso);   
+                                    }
+                                }
+                                
                             ?>
                             <li class="dropdown notifications-menu">
                                 <!-- Menu toggle button -->

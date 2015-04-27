@@ -1,5 +1,9 @@
-<?php 
+<?php
+	use Illuminate\Database\Eloquent\SoftDeletingTrait; 
 	class Aula extends Eloquent{
+
+		use SoftDeletingTrait;
+		protected $dates = ['deleted_at'];
 
 		public $timestamps = false;
 
@@ -7,8 +11,12 @@
 			return $this->belongsTo('Modulo', "idModulo");
 		}
 
+		// public function materialApoio(){
+		// 	return $this->belongsToMany('MaterialApoio', 'materialapoioaula', 'idAula', 'idMaterialApoio');
+		// }
+
 		public function materialApoio(){
-			return $this->belongsToMany('MaterialApoio', 'materialapoioaula', 'idAula', 'idMaterialApoio');
+			return $this->hasMany('MaterialApoio','idAula');
 		}
 
 		public function atividades(){

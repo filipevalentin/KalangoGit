@@ -9,9 +9,8 @@
 <section class="content-header">
     <h1>Desempenho</h1>
     <ol class="breadcrumb">
-        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Meus Cursos</li>
-		<li class="active">Desempenho</li>
+        <li><a href="/aluno/home" ><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Desempenho</li>
     </ol>
 </section>
 

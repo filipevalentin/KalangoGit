@@ -1,11 +1,13 @@
 <?php 
-	
+	use Illuminate\Database\Eloquent\SoftDeletingTrait;
 	class Questao extends Eloquent{
+		use SoftDeletingTrait;
 
+    	protected $dates = ['deleted_at'];
 		protected $table = 'questoes';
 		public $timestamps = false;
 
-	public function atividade(){
+		public function atividade(){
 	       return $this->belongsTo('Atividade', 'idAtividade');
         }
 

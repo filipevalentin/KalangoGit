@@ -1,6 +1,11 @@
 <?php 
 	
+	use Illuminate\Database\Eloquent\SoftDeletingTrait;
+	
 	class Turma extends Eloquent{
+
+		use SoftDeletingTrait;
+		protected $dates = ['deleted_at'];
 
 		public $timestamps = false;
 

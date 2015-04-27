@@ -53,14 +53,14 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input class="form-control tituloObrigatorio" type="text" id="titulo" name="titulo" maxlength="100" placeholder="Titulo">
+                        <input class="form-control tituloObrigatorio_turma" type="text" id="titulo" name="titulo" maxlength="100" placeholder="Titulo">
                     </div>
                     <div class="form-group">
-                        <textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
+                        <textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria_turma" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer clearfix">
-                    <button type="submit" class="btn btn-primary pull-right btn-enviar"><i class="fa fa-envelope"></i> Enviar</button>
+                    <button type="submit" class="btn btn-primary pull-right btn-enviar_turma"><i class="fa fa-envelope"></i> Enviar</button>
                     <button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Descartar</button>
                 </div>
             </form>
@@ -76,11 +76,11 @@
 @section('maincontent')
 
 <section class="content-header">
-    <h1>Enviar Mensagem</h1>
+    <h1>Gerenciar Turmas</h1>
     <ol class="breadcrumb">
-        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Gerenciar Turmas</li>
-		<li class="active">Enviar Mensagem</li>
+        <li><a href="/professor/home" ><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active"><a href="{{URL::previous()}}" >Gerenciar Cursos</a></li>
+		<li class="active">Gerenciar Turmas</li>
     </ol>
 </section>
 
@@ -181,24 +181,37 @@
 		
 		<script> //Validações
 
-        //Tentei arrumar a validação mas não consegui... 
-	
-			$(".btn-enviar").click(function(event){
-                var enviar = $(this);
-				
-				if(this.prevAll(".tituloObrigatorio").first.val() == ""){
-					alert("É necessário preencher o Título da Mensagem!");
-					$(".tituloObrigatorio").focus();
-					return false;
-				}
+		$(".btn-enviar").click(function(event){
+			
+			if($(".tituloObrigatorio").val() == ""){
+				alert("É necessário preencher o Título da Mensagem!");
+				$(".tituloObrigatorio").focus();
+				return false;
+			}
 
-				if(this.prevAll(".mensagemObrigatoria").first.val() == ""){
-					alert("É necessário preencher a Mensagem!");
-					$(".mensagemObrigatoria").focus();
-					return false;
-				}			
-				
-			})
+			if($(".mensagemObrigatoria").val() == ""){
+				alert("É necessário preencher a Mensagem!");
+				$(".mensagemObrigatoria").focus();
+				return false;
+			}			
+			
+		})
+		
+		$(".btn-enviar_turma").click(function(event){
+			
+			if($(".tituloObrigatorio_turma").val() == ""){
+				alert("É necessário preencher o Título da Mensagem!");
+				$(".tituloObrigatorio_turma").focus();
+				return false;
+			}
+
+			if($(".mensagemObrigatoria_turma").val() == ""){
+				alert("É necessário preencher a Mensagem!");
+				$(".mensagemObrigatoria_turma").focus();
+				return false;
+			}			
+			
+		})
 					
 		</script>
     @endsection

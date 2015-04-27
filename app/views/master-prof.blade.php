@@ -184,7 +184,7 @@
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-graduation-cap"></i>
-                                <span>Gerenciar Turmas</span>
+                                <span>Gerenciar Cursos</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">

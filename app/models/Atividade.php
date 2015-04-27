@@ -1,7 +1,11 @@
-<?php 
+<?php
+	
+	use Illuminate\Database\Eloquent\SoftDeletingTrait; 
 	
 	class Atividade extends Eloquent{
 
+		use SoftDeletingTrait;
+		protected $dates = ['deleted_at'];
 		public $timestamps = false;
 		protected $table = 'atividades';
 
@@ -24,6 +28,10 @@
         public function questoes(){
 			return $this-> hasMany('Questao','idAtividade');
 		}
+
+		public function acessos(){
+            return $this->belongsToMany('Aluno', 'AcessosAtividades', 'idAtividade', 'idAluno');
+        }
 
 
 	}

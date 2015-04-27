@@ -23,8 +23,8 @@
     <section class="content-header">
         <h1>Visualizar Aulas</h1>
         <ol class="breadcrumb">
-            <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Gerenciar Turmas</li>
+            <li><a href="/professor/home" ><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active"><a href="{{URL::previous()}}" >Gerenciar Cursos</a></li>
 			<li class="active">Visualizar Aulas</li>
         </ol>
     </section>
@@ -78,7 +78,7 @@
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
                                                     <p style="float:left;">{{$atividade->nome}}</p>
                                                     <div class="box-tools pull-right">
-                                                        <a href="/professor/atividade/{{$atividade->id}}"><button class="btn btn-primary btn-xs"><i class="fa fa-question"></i></button></a>
+                                                        <a href="/professor/atividade/{{$atividade->id}}"><button class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button></a>
                                                     </div>
                                                 </div>
                                             @endforeach
