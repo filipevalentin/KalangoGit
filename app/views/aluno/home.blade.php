@@ -138,9 +138,7 @@
 									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Atividades Extras</b></span><br>
 										<span style="color:#FFF;">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-											Sed placerat tempus lectus id consectetur. 
-											Praesent in metus nisl.
+											Realize Atividades Extras para melhorar seus conhecimentos, e assim ganhar pontos para subir no Ranking!
 										</span>
 									</div>
 									<div class="icon">
@@ -159,7 +157,7 @@
 									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Desempenho</b></span><br>
 										<span style="color:#FFF;">
-											Veja seus pontos, acertos e erros das atividades respondidas
+											Veja seus pontos, sua posição no Ranking, seus acertos e erros das atividades respondidas
 										</span>
 									</div>
 									<div class="icon">
@@ -186,9 +184,7 @@
 									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Mensagens</b></span><br>
 										<span style="color:#FFF;">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-											Sed placerat tempus lectus id consectetur. 
-											Praesent in metus nisl.
+											Envie e Responda Mensagens para seus professores. Tire suas dúvidas!
 										</span>
 									</div>
 									<div class="icon">
@@ -207,9 +203,7 @@
 									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Avisos</b></span><br>
 										<span style="color:#FFF;">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-											Sed placerat tempus lectus id consectetur. 
-											Praesent in metus nisl.
+											Veja os próximos acontecimentos e avisos
 										</span>
 									</div>
 									<div class="icon">
@@ -228,9 +222,7 @@
 									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Perfil</b></span><br>
 										<span style="color:#FFF;">
-											Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-											Sed placerat tempus lectus id consectetur. 
-											Praesent in metus nisl.
+											Gerencie as informações relativas ao seu perfil ou altere sua senha
 										</span>
 									</div>
 									<div class="icon">
@@ -249,7 +241,7 @@
 									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Contato</b></span><br>
 										<span style="color:#FFF;">
-											Fazer uma rotina para que a mensagem do aluno vá para o e-mail da escola
+											Dúvidas ou algum problema com o sistema? Entre em contato diretamente com os adminstradores.
 										</span>
 									</div>
 									<div class="icon">
