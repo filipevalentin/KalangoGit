@@ -1569,6 +1569,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('criarIdioma', function(){
+			if( Idioma::where('nome','=',Input::get('nome')->first() == null) ){
+				Session::flash('warning','Já existe um Idioma com o mesmo nome')
+			}
 			$idioma = new Idioma;
 			$idioma->nome = Input::get('nome');
 			$idioma->save();
@@ -1584,10 +1587,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if($idioma != null){
 				$idioma->delete();
 			}
-			$idioma->nome = Input::get('nome');
-			$idioma->save();
 
-			Session::flash('info', "Idioma criado com sucesso!");
+			Session::flash('info', "Idioma excluido com sucesso!");
 
 			return Redirect::back();
 		});
@@ -1612,6 +1613,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Curso->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
+			return Redirect::back();
+		});
+
+		Route::post('curso/deletar/{id}', function($id){
+			$curso = Curso::find($id);
+
+			if($curso != null){
+				$curso->delete();
+			}
+
+			Session::flash('info', "curso excluido com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -1648,6 +1661,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Modulo->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
+			return Redirect::back();
+		});
+
+		Route::post('modulo/deletar/{id}', function($id){
+			$modulo = Modulo::find($id);
+
+			if($modulo != null){
+				$modulo->delete();
+			}
+
+			Session::flash('info', "modulo excluido com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -1714,6 +1739,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
+		Route::post('turma/deletar/{id}', function($id){
+			$turma = Turma::find($id);
+
+			if($turma != null){
+				$turma->delete();
+			}
+
+			Session::flash('info', "Turma excluido com sucesso!");
+
+			return Redirect::back();
+		});
+
 		Route::post('matricularAluno', function(){
 			$turma = Turma::find(Input::get('idTurma'));
 			$aluno = Aluno::find(Input::get('idAluno'));
@@ -1759,6 +1796,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Aula->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
+			return Redirect::back();
+		});
+
+		Route::post('aula/deletar/{id}', function($id){
+			$aula = Aula::find($id);
+
+			if($aula != null){
+				$aula->delete();
+			}
+
+			Session::flash('info', "Aula excluido com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -1826,6 +1875,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$material->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
+			return Redirect::back();
+		});
+
+		Route::post('material/deletar/{id}', function($id){
+			$material = MaterialApoio::find($id);
+
+			if($material != null){
+				$material->delete();
+			}
+
+			Session::flash('info', "material excluido com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -2002,6 +2063,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
+		Route::post('atividade/deletar/{id}', function($id){
+			$atividade = Atividade::find($id);
+
+			if($atividade != null){
+				$atividade->delete();
+			}
+
+			Session::flash('info', "Atividade excluido com sucesso!");
+
+			return Redirect::back();
+		});
+
 		Route::post('alterarOrdem', function(){
 			
 			$atividade = Atividade::find(Input::get('0'));
@@ -2043,6 +2116,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			// redirect
 			Session::flash('info', 'Alterações salvas com sucesso!');
+			return Redirect::back();
+		});
+
+		Route::post('categoria/deletar/{id}', function($id){
+			$categoria = Categoria::find($id);
+
+			if($categoria != null){
+				$categoria->delete();
+			}
+
+			Session::flash('info', "Categoria excluido com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -2179,6 +2264,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$questao->save();
 
 			Session::flash('info', 'Alterações salvas com sucesso!');
+			return Redirect::back();
+		});
+
+		Route::post('questao/deletar/{id}', function($id){
+			$questao = Questao::find($id);
+
+			if($questao != null){
+				$questao->delete();
+			}
+
+			Session::flash('info', "Questao excluido com sucesso!");
+
 			return Redirect::back();
 		});
 
@@ -2401,6 +2498,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
+		Route::post('aluno/deletar/{id}', function($id){
+			$aluno = Aluno::find($id);
+
+			if($aluno != null){
+				$aluno->delete();
+				User::find($id)->delete();
+			}
+
+			Session::flash('info', "aluno excluido com sucesso!");
+
+			return Redirect::back();
+		});
+
 	//Professores
 		Route::get('professores', function(){
 
@@ -2524,6 +2634,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
+		Route::post('professor/deletar/{id}', function($id){
+			$professor = Professor::find($id);
+
+			if($professor != null){
+				$professor->delete();
+				User::find($id)->delete();
+			}
+
+			Session::flash('info', "professor excluido com sucesso!");
+
+			return Redirect::back();
+		});
+
 	//Administradores
 		Route::get('administradores', function(){
 
@@ -2630,6 +2753,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$administrador->save();
 			
 			Session::flash('info', "Alterações salvas com sucesso!");			
+			return Redirect::back();
+		});
+
+		Route::post('administrador/deletar/{id}', function($id){
+			$administrador = Administrador::find($id);
+
+			if($administrador != null){
+				$administrador->delete();
+				User::find($id)->delete();
+			}
+
+			Session::flash('info', "Administrador excluido com sucesso!");
+
 			return Redirect::back();
 		});
 
