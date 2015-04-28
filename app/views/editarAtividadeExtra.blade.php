@@ -249,7 +249,7 @@
                         <input type="file" id="arquivo" name="arquivo" class="form-control"></input>
                     </div>
                     
-                    <h3>Resposta Correta</h3><hr>
+                    <h3>Resposta</h3><hr>
 
                     <div class="form-group">
                         <label for="respostaCerta" class="control-label">Resposta Correta</label>

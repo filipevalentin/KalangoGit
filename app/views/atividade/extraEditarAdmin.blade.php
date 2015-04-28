@@ -323,7 +323,7 @@
                         </select>
                     </div>
                     
-                    <h3>Resposta Correta</h3><hr>
+                    <h3>Resposta</h3><hr>
 
                     <div class="form-group">
                         <select id="resposta" name="resposta" onblur="" class="form-control">

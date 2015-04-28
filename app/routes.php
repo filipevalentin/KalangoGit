@@ -3,12 +3,16 @@
 $layout = 'layouts.master';
 
 Route::get('teste5',function(){
-	$avisos = array();
-    foreach (Auth::user()->aluno->turmas as $turma) {
-        $avisos[] = $turmas->avisos->all();      
-    }
 
-    return $avisos;
+	// $c = Curso::withTrashed()->find(1);
+
+	// $c->restore();
+
+	$as = User::withTrashed()->get();
+	foreach ($as as $a) {
+		$a->restore();
+		//$a->save();
+	}
 });	
 
 
@@ -1603,6 +1607,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 	//Cursos
 
+		Route::get('cursos', function(){
+			return View::make('curso/adminView');
+		});
+
 		Route::post('criarCurso', function(){
 			$Curso = new Curso;
 			$Curso->nome = Input::get('nome');
@@ -1611,6 +1619,43 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Curso->save();
 			Session::flash('info', "Curso criado com sucesso!");
 			return Redirect::back();
+		});
+
+		Route::get('listarCursos',function(){
+
+			$data = array();
+
+			$cursos = Curso::withTrashed()->all();
+
+			foreach ($cursos as $key => $curso) {
+
+				if($curso->trashed()){
+					$curso->action = "N/A";
+					$curso->excluido = "Excluído em: ".$curso->deleted_at->day."/".$curso->deleted_at->month."/".$curso->deleted_at->year;
+				}else{
+					$curso->action = 
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarCurso' data-id='$curso->id' data-nome='$curso->nome'>
+					 	<i class='fa fa-pencil'></i>
+					 </button>
+					 <a href='/admin/curso/deletar/$curso->id'>
+						<button class='btn btn-xs btn-danger'>
+							<i class='fa fa-times'></i>
+						</button>
+					 </a>";
+					 $curso->excluído = "Ativo";
+				}
+				
+				
+				array_push($data, $curso);
+			}
+			//dd($data);
+
+			$response = array(
+					"data" => $data,
+					"iTotalRecords" => count($data),
+					"iTotalDisplayRecords" => count($data)
+				);
+			return Response::json($response);
 		});
 
 		Route::post('atualizarCurso', function(){
@@ -1644,6 +1689,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 
 	//Modulos
+
+		Route::get('modulos', function(){
+			return View::make('modulo/adminView2');
+		});
+
 		Route::get('modulo/{id}', function($id){
 			$modulo = Modulo::find($id);
 			return View::make('modulo/adminView')->with('modulo',$modulo);
@@ -1666,6 +1716,47 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			return Response::json($modulos);
 
+		});
+
+		//modificar nome
+		Route::get('listarModulos2',function(){
+
+			$data = array();
+
+			$modulos = Modulo::withTrashed()->get();
+
+			foreach ($modulos as $key => $modulo) {
+
+				if($modulo->trashed()){
+					$modulo->action = "N/A";
+					$modulo->excluido = "Excluído em: ".$modulo->deleted_at->day."/".$modulo->deleted_at->month."/".$modulo->deleted_at->year;
+				}else{
+					$modulo->action = 
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarModulo' data-id='$modulo->id' data-nome='$modulo->nome'>
+					 	<i class='fa fa-pencil'></i>
+					 </button>
+					 <a href='/admin/modulo/deletar/$modulo->id'>
+						<button class='btn btn-xs btn-danger'>
+							<i class='fa fa-times'></i>
+						</button>
+					 </a>";
+					 $modulo->excluído = "Ativo";
+				}
+				
+				$modulo->idioma2 = $modulo->curso->idioma->nome;
+				$modulo->curso2 = $modulo->curso->nome;
+				$modulo->turmas2 = $modulo->turmas->count();
+				
+				array_push($data, $modulo);
+			}
+			//dd($data);
+
+			$response = array(
+					"data" => $data,
+					"iTotalRecords" => count($data),
+					"iTotalDisplayRecords" => count($data)
+				);
+			return Response::json($response);
 		});
 
 		Route::post('atualizarModulo', function(){
@@ -1720,8 +1811,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				array_push($data, $turma);
 			}
 			//dd($data);
-
-
 
 			$response = array(
 					"data" => $data,
@@ -1844,6 +1933,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 	//Aulas
+
+		Route::get('aulas', function(){
+			return View::make('aula/adminView');
+		});
+
 		Route::post('criarAula', function(){
 			$Aula = new Aula;
 			$Aula->titulo = Input::get('nome');
@@ -1864,6 +1958,43 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
+		});
+
+		Route::get('listarAula',function(){
+
+			$data = array();
+
+			$aulas = Aula::withTrashed()->all();
+
+			foreach ($aulas as $key => $aula) {
+
+				if($aula->trashed()){
+					$aula->action = "N/A";
+					$aula->excluido = "Excluído em: ".$aula->deleted_at->day."/".$aula->deleted_at->month."/".$aula->deleted_at->year;
+				}else{
+					$aula->action = 
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarAula' data-id='$aula->id' data-nome='$aula->nome'>
+					 	<i class='fa fa-pencil'></i>
+					 </button>
+					 <a href='/admin/aula/deletar/$aula->id'>
+						<button class='btn btn-xs btn-danger'>
+							<i class='fa fa-times'></i>
+						</button>
+					 </a>";
+					 $aula->excluído = "Ativo";
+				}
+				
+				
+				array_push($data, $aula);
+			}
+			//dd($data);
+
+			$response = array(
+					"data" => $data,
+					"iTotalRecords" => count($data),
+					"iTotalDisplayRecords" => count($data)
+				);
+			return Response::json($response);
 		});
 
 		Route::get('aula/deletar/{id}', function($id){
@@ -1897,6 +2028,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 	//Materiais
+
+		Route::get('materiais', function(){
+			return View::make('materialApoio/adminView');
+		});
 
 		Route::post('criarMaterial', function(){
 			$material = new Materialapoio;
@@ -2006,6 +2141,44 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				);
 			return Response::json($response);
 		});
+		
+		//mudar nome
+		Route::get('listarMateriais2',function(){
+
+			$data = array();
+
+			$materiais = MaterialApoio::withTrashed()->all();
+
+			foreach ($materiais as $key => $material) {
+
+				if($material->trashed()){
+					$material->action = "N/A";
+					$material->excluido = "Excluído em: ".$material->deleted_at->day."/".$material->deleted_at->month."/".$material->deleted_at->year;
+				}else{
+					$material->action = 
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarMaterialApoio' data-id='$material->id' data-nome='$material->nome'>
+					 	<i class='fa fa-pencil'></i>
+					 </button>
+					 <a href='/admin/material/deletar/$material->id'>
+						<button class='btn btn-xs btn-danger'>
+							<i class='fa fa-times'></i>
+						</button>
+					 </a>";
+					 $material->excluído = "Ativo";
+				}
+				
+				
+				array_push($data, $material);
+			}
+			//dd($data);
+
+			$response = array(
+					"data" => $data,
+					"iTotalRecords" => count($data),
+					"iTotalDisplayRecords" => count($data)
+				);
+			return Response::json($response);
+		});
 
 		Route::post('copiarMaterial', function(){
 			$materiais = Input::get('materiais');
@@ -2037,6 +2210,47 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 	//Atividades
+
+		Route::get('atividades', function(){
+			return View::make('atividade/adminView');
+		});
+
+		Route::get('listarAtividades',function(){
+
+			$data = array();
+
+			$atividades = Atividade::withTrashed()->all();
+
+			foreach ($atividades as $key => $atividade) {
+
+				if($atividade->trashed()){
+					$atividade->action = "N/A";
+					$atividade->excluido = "Excluído em: ".$atividade->deleted_at->day."/".$atividade->deleted_at->month."/".$atividade->deleted_at->year;
+				}else{
+					$atividade->action = 
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarAtividade' data-id='$atividade->id' data-nome='$atividade->nome'>
+					 	<i class='fa fa-pencil'></i>
+					 </button>
+					 <a href='/admin/atividade/deletar/$atividade->id'>
+						<button class='btn btn-xs btn-danger'>
+							<i class='fa fa-times'></i>
+						</button>
+					 </a>";
+					 $atividade->excluído = "Ativo";
+				}
+				
+				
+				array_push($data, $atividade);
+			}
+			//dd($data);
+
+			$response = array(
+					"data" => $data,
+					"iTotalRecords" => count($data),
+					"iTotalDisplayRecords" => count($data)
+				);
+			return Response::json($response);
+		});
 
 		Route::get('atividadesExtras', function(){
 			$modulos = Modulo::all();
@@ -2201,7 +2415,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
-		//Categoria
+	//Categoria
+
+		Route::get('categorias', function(){
+			return View::make('categoria/adminView');
+		});
+
 		Route::post('criarCategoria', function(){
 			$categoria = new Categoria;
 			$categoria->nome = Input::get('nome');
@@ -2222,6 +2441,43 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			// redirect
 			Session::flash('info', 'Alterações salvas com sucesso!');
 			return Redirect::back();
+		});
+
+		Route::get('listarCategorias',function(){
+
+			$data = array();
+
+			$categorias = Categoria::withTrashed()->all();
+
+			foreach ($categorias as $key => $categoria) {
+
+				if($categoria->trashed()){
+					$categoria->action = "N/A";
+					$categoria->excluido = "Excluído em: ".$categoria->deleted_at->day."/".$categoria->deleted_at->month."/".$categoria->deleted_at->year;
+				}else{
+					$categoria->action = 
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarCategoria' data-id='$categoria->id' data-nome='$categoria->nome'>
+					 	<i class='fa fa-pencil'></i>
+					 </button>
+					 <a href='/admin/categoria/deletar/$categoria->id'>
+						<button class='btn btn-xs btn-danger'>
+							<i class='fa fa-times'></i>
+						</button>
+					 </a>";
+					 $categoria->excluído = "Ativo";
+				}
+				
+				
+				array_push($data, $categoria);
+			}
+			//dd($data);
+
+			$response = array(
+					"data" => $data,
+					"iTotalRecords" => count($data),
+					"iTotalDisplayRecords" => count($data)
+				);
+			return Response::json($response);
 		});
 
 		Route::get('categoria/deletar/{id}', function($id){
@@ -2252,6 +2508,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 	//Questoes
+
+		Route::get('questoes', function(){
+			return View::make('questao/adminView');
+		});
 
 		Route::post('criarQuestaoRU', function(){
 
@@ -2384,6 +2644,43 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			// redirect
 			Session::flash('info', 'Questão criada com sucesso!');
 			return Redirect::back();
+		});
+
+		Route::get('listarQuestoes',function(){
+
+			$data = array();
+
+			$questoes = Questao::withTrashed()->all();
+
+			foreach ($questoes as $key => $questao) {
+
+				if($questao->trashed()){
+					$questao->action = "N/A";
+					$questao->excluido = "Excluído em: ".$questao->deleted_at->day."/".$questao->deleted_at->month."/".$questao->deleted_at->year;
+				}else{
+					$questao->action = 
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarQuestao' data-id='$questao->id' data-nome='$questao->nome'>
+					 	<i class='fa fa-pencil'></i>
+					 </button>
+					 <a href='/admin/questao/deletar/$questao->id'>
+						<button class='btn btn-xs btn-danger'>
+							<i class='fa fa-times'></i>
+						</button>
+					 </a>";
+					 $questao->excluído = "Ativo";
+				}
+				
+				
+				array_push($data, $questao);
+			}
+			//dd($data);
+
+			$response = array(
+					"data" => $data,
+					"iTotalRecords" => count($data),
+					"iTotalDisplayRecords" => count($data)
+				);
+			return Response::json($response);
 		});
 
 		Route::post('atualizarRespostaUnica', function(){

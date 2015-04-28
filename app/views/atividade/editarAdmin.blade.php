@@ -322,6 +322,8 @@
                           <option id="texto" value="400"> difícil</option>
                         </select>
                     </div>
+
+                    <h3>Resposta</h3><hr>
 						
                     <div id="div_tipoResposta-dissertativa-nova-questao" class="form-group">
                         <label class="control-label" for="tipoResposta"><i id="icone_tipoResposta-dissertativa-nova-questao" class="fa"></i> Tipo</label>

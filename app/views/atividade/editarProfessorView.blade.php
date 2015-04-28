@@ -322,6 +322,8 @@
                         </select>
                     </div>
                     
+                    <h3>Resposta</h3><hr>
+
                     <div id="div_tipoResposta-dissertativa-nova-questao" class="form-group">
                         <label class="control-label" for="tipoResposta"><i id="icone_tipoResposta-dissertativa-nova-questao" class="fa"></i> Tipo</label>
 						<select id="resposta" name="resposta" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control tipoRespostaObrigatoria-dissertativa-nova-questao">
