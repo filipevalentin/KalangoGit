@@ -8,7 +8,7 @@ Route::get('teste5',function(){
 
 	// $c->restore();
 
-	$as = User::withTrashed()->get();
+	$as = Turma::withTrashed()->get();
 	foreach ($as as $a) {
 		$a->restore();
 		//$a->save();
@@ -1566,7 +1566,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::get('listarIdiomas', function(){
 			$idiomas = Idioma::all();
 			foreach ($idiomas as $idioma) {
-				$idioma->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarIdioma' data-id='$idioma->id' data-nome='$idioma->nome'><i class='fa fa-pencil'></i></button></a><a href='/admin/idioma/deletar/$idioma->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+				if($idioma->trashed()){
+					$idioma->action = "N/A";
+					$idioma->excluido = "Excluído em: ".$idioma->deleted_at->day."/".$idioma->deleted_at->month."/".$idioma->deleted_at->year;
+				}else{
+					$idioma->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarIdioma' data-id='$idioma->id' data-nome='$idioma->nome'><i class='fa fa-pencil'></i></button></a><a href='/admin/idioma/deletar/$idioma->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$idioma->excluido = "Ativo";
+				} 
 			}
 
 			$response = array(
@@ -1625,7 +1631,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data = array();
 
-			$cursos = Curso::withTrashed()->all();
+			$cursos = Curso::withTrashed()->get();
 
 			foreach ($cursos as $key => $curso) {
 
@@ -1634,7 +1640,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$curso->excluido = "Excluído em: ".$curso->deleted_at->day."/".$curso->deleted_at->month."/".$curso->deleted_at->year;
 				}else{
 					$curso->action = 
-					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarCurso' data-id='$curso->id' data-nome='$curso->nome'>
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarCurso' data-id='$curso->id' data-idioma='$curso->idIdioma' data-nome='$curso->nome'>
 					 	<i class='fa fa-pencil'></i>
 					 </button>
 					 <a href='/admin/curso/deletar/$curso->id'>
@@ -1642,9 +1648,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 							<i class='fa fa-times'></i>
 						</button>
 					 </a>";
-					 $curso->excluído = "Ativo";
+					 $curso->excluido = "Ativo";
 				}
 				
+				$curso->idioma2 = $curso->idioma->nome;
+				$curso->curso2 = $curso->nome;
+				$curso->turmas2 = $curso->turmas->count();
 				
 				array_push($data, $curso);
 			}
@@ -1740,7 +1749,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 							<i class='fa fa-times'></i>
 						</button>
 					 </a>";
-					 $modulo->excluído = "Ativo";
+					 $modulo->excluido = "Ativo";
 				}
 				
 				$modulo->idioma2 = $modulo->curso->idioma->nome;
