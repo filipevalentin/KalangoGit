@@ -44,10 +44,10 @@
                             <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarExercicio();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-exercicio"></input>
                         </div>
                         <div id="div_status_editar-exercicio" class="form-group">
-                            <label class="control-label" for="status"><i id="icone_status-editar-exercicio" class="fa"></i> Status</label>
+                            <label class="control-label" for="status"><i id="icone_status-editar-exercicio" class="fa"></i> Visibilidade</label>
                             <select type="text" onblur="fcn_recarregaCoresEditarExercicio();" id="status" name="status" class="form-control statusObrigatorio-editar-exercicio">
-                                <option value="0"> Desativado</option>
-                                <option value="1"> Ativado</option>
+                                <option value="0"> Oculto</option>
+                                <option value="1"> Visível</option>
                             </select>
                         </div>
                         <div class="modal-footer">
@@ -318,7 +318,7 @@
                                             @foreach ($aula->atividades as $atividade)
                                                 @if($atividade->status == '0')
                                                     <div class="alert bg-primary alert-dismissable" style="min-height: 55px; background-color: rgb(103, 103, 103);">
-                                                    <b style="color: red;">&nbsp;(Inativa)</b>
+                                                    <b style="color: red;">&nbsp;(Oculta)</b>
                                                 @else
                                                 <div class="alert bg-primary alert-dismissable" style="min-height: 55px;">
                                                 @endif

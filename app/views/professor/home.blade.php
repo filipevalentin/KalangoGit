@@ -113,7 +113,7 @@
                                                         </a>
                                                     </div>
 
-                                                    <a href="/professor/turma/{{$turma->id}}" class="small-box-footer">Gerenciar Turmas <i class="fa fa-arrow-circle-right"></i></a>
+                                                    <a href="/professor/turma/{{$turma->id}}" class="small-box-footer">Ver Alunos <i class="fa fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>

@@ -71,6 +71,7 @@
 			                <th>#</th>
 			                <th>Nome</th>
 			                <th>Nº de Questões</th>
+			                <th>Status</th>
 			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarTopico" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </thead>
@@ -80,6 +81,7 @@
 			                <th>#</th>
 			                <th>Nome</th>
 			                <th>Nº de Questões</th>
+			                <th>Status</th>
 			                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarTopico" ><i class="fa fa-plus"></i></button></th>
 			            </tr>
 			        </tfoot>
@@ -114,13 +116,14 @@
 	        { data: 'id' },
 	        { data: 'nome' },
 	        { data: 'numQuestoes' },
+	        { data: 'excluido' },
 	        { data: 'action' }
 	    ],
 
 	    "scrollX": true,
 
 		"columnDefs": [ {
-		      "targets": 3,
+		      "targets": 4,
 		      "orderable": false,
 		      "searchable": false
 		    } ],

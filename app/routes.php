@@ -1652,7 +1652,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				}
 				
 				$curso->idioma2 = $curso->idioma->nome;
-				$curso->curso2 = $curso->nome;
 				$curso->turmas2 = $curso->turmas->count();
 				
 				array_push($data, $curso);
@@ -1969,11 +1968,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
-		Route::get('listarAula',function(){
+		Route::get('listarAulas',function(){
 
 			$data = array();
 
-			$aulas = Aula::withTrashed()->all();
+			$aulas = Aula::withTrashed()->get();
 
 			foreach ($aulas as $key => $aula) {
 
@@ -1982,7 +1981,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$aula->excluido = "Excluído em: ".$aula->deleted_at->day."/".$aula->deleted_at->month."/".$aula->deleted_at->year;
 				}else{
 					$aula->action = 
-					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarAula' data-id='$aula->id' data-nome='$aula->nome'>
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarAula' data-id='$aula->id' data-nome='$aula->titulo'>
 					 	<i class='fa fa-pencil'></i>
 					 </button>
 					 <a href='/admin/aula/deletar/$aula->id'>
@@ -1990,9 +1989,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 							<i class='fa fa-times'></i>
 						</button>
 					 </a>";
-					 $aula->excluído = "Ativo";
+					 $aula->excluido = "Ativo";
 				}
-				
+				$aula->modulo2 = $aula->modulo->nome;
+				$aula->curso = $aula->modulo->curso->nome;
+				$aula->idioma = $aula->modulo->curso->idioma->nome;
+				$aula->atividades2 = $aula->atividades->count();
+				$aula->materiais = $aula->materialApoio->count();
 				
 				array_push($data, $aula);
 			}
@@ -2112,7 +2115,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$aula = ($idAula != null) ? Aula::find($idAula) : null;
 			//dd($aula->materialApoio);
 
-			$materiais = ($idAula != null) ? MaterialApoio::all()->diff($aula->materialApoio) : array();
+			$materiais = ($idAula != null) ? MaterialApoio::all()->diff($aula->materialApoio) : MaterialApoio::all();
 			//dd($materiais);
 			foreach ($materiais as $key => $material) {
 				switch (pathinfo($material->url, PATHINFO_EXTENSION)) {
@@ -2142,44 +2145,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$material->action = "<input type='checkbox' name='materiais[]' class='check' data-id='$material->id' value='$material->id'>";
 				array_push($data, $material);
 			}
-
-			$response = array(
-					"data" => $data,
-					"iTotalRecords" => count($data),
-					"iTotalDisplayRecords" => count($data)
-				);
-			return Response::json($response);
-		});
-		
-		//mudar nome
-		Route::get('listarMateriais2',function(){
-
-			$data = array();
-
-			$materiais = MaterialApoio::withTrashed()->all();
-
-			foreach ($materiais as $key => $material) {
-
-				if($material->trashed()){
-					$material->action = "N/A";
-					$material->excluido = "Excluído em: ".$material->deleted_at->day."/".$material->deleted_at->month."/".$material->deleted_at->year;
-				}else{
-					$material->action = 
-					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarMaterialApoio' data-id='$material->id' data-nome='$material->nome'>
-					 	<i class='fa fa-pencil'></i>
-					 </button>
-					 <a href='/admin/material/deletar/$material->id'>
-						<button class='btn btn-xs btn-danger'>
-							<i class='fa fa-times'></i>
-						</button>
-					 </a>";
-					 $material->excluído = "Ativo";
-				}
-				
-				
-				array_push($data, $material);
-			}
-			//dd($data);
 
 			$response = array(
 					"data" => $data,
@@ -2228,7 +2193,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data = array();
 
-			$atividades = Atividade::withTrashed()->all();
+			$atividades = Atividade::withTrashed()->get();
 
 			foreach ($atividades as $key => $atividade) {
 
@@ -2237,7 +2202,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$atividade->excluido = "Excluído em: ".$atividade->deleted_at->day."/".$atividade->deleted_at->month."/".$atividade->deleted_at->year;
 				}else{
 					$atividade->action = 
-					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarAtividade' data-id='$atividade->id' data-nome='$atividade->nome'>
+					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editaratividade' data-id='$atividade->id' data-nome='$atividade->nome' data-status='$atividade->status'>
 					 	<i class='fa fa-pencil'></i>
 					 </button>
 					 <a href='/admin/atividade/deletar/$atividade->id'>
@@ -2245,9 +2210,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 							<i class='fa fa-times'></i>
 						</button>
 					 </a>";
-					 $atividade->excluído = "Ativo";
+					 $atividade->excluido = "Ativo";
 				}
-				
+				$atividade->aula2 = ($atividade->aula != null) ? $atividade->aula->titulo : 'N/A' ;
+				$atividade->modulo2 = $atividade->aula->modulo->nome;
+				$atividade->curso = $atividade->aula->modulo->curso->nome;
+				$atividade->idioma = $atividade->aula->modulo->curso->idioma->nome;
+				$atividade->tipo2 = ($atividade->tipo == 1) ? 'Conteúdo de Aula' : 'Ativ. Extra';
 				
 				array_push($data, $atividade);
 			}
@@ -2397,7 +2366,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Response::json("alterado");
 		});
 
-		//Tanto para atividade extra quando para atividade de Aula
 		Route::get('atividade/deletar/{id}', function($id){
 			$atividade = Atividade::find($id);
 
@@ -2456,7 +2424,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data = array();
 
-			$categorias = Categoria::withTrashed()->all();
+			$categorias = Categoria::withTrashed()->get();
 
 			foreach ($categorias as $key => $categoria) {
 
@@ -2476,6 +2444,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					 $categoria->excluído = "Ativo";
 				}
 				
+				$categoria->atividades2 = $categoria->atividades->count();
 				
 				array_push($data, $categoria);
 			}
@@ -2659,7 +2628,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data = array();
 
-			$questoes = Questao::withTrashed()->all();
+			$questoes = Questao::withTrashed()->get();
 
 			foreach ($questoes as $key => $questao) {
 
@@ -2668,10 +2637,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$questao->excluido = "Excluído em: ".$questao->deleted_at->day."/".$questao->deleted_at->month."/".$questao->deleted_at->year;
 				}else{
 					$questao->action = 
-					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarQuestao' data-id='$questao->id' data-nome='$questao->nome'>
-					 	<i class='fa fa-pencil'></i>
-					 </button>
-					 <a href='/admin/questao/deletar/$questao->id'>
+					"<a href='/admin/questao/deletar/$questao->id'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
@@ -2679,6 +2645,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					 $questao->excluído = "Ativo";
 				}
 				
+				$questao->atividade2 = $questao->atividade->nome;
+				$questao->aula2 = $questao->atividade->aula->titulo;
+				$questao->modulo2 = $questao->atividade->aula->modulo->nome;
+				$questao->curso = $questao->atividade->aula->modulo->curso->nome;
+				$questao->idioma = $questao->atividade->aula->modulo->curso->idioma->nome;
+				$questao->tipo2 = ($questao->tipo == 1) ? 'Múltipla Escolha' : 'Dissertativa';
 				
 				array_push($data, $questao);
 			}
@@ -3256,6 +3228,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					});
 					$idAvisos = implode(",", $idAvisos->all());
 				}
+
 				$aviso->action = "<a style='color:white;' href='/admin/aviso/$aviso->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-external-link'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$aviso->id' data-titulo='$aviso->titulo' data-descricao='$aviso->descricao' data-urlImagem='$aviso->urlImagem' data-dataExpiracao='$aviso->dataExpiracao' data-idTurma='$idAvisos' data-toggle='modal' data-target='#editarAviso'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
 			}
 
@@ -3356,10 +3329,24 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		//ajax - tabela
 		Route::get('listarTopicos', function(){
-			$topicos = Topico::all();
+			$topicos = Topico::withTrashed()->get();
 
 			foreach ($topicos as $topico) {
 				$topico->numQuestoes = $topico->questoes->count();
+
+				if($topico->trashed()){
+					$topico->action = "N/A";
+					$topico->excluido = "Excluído em: ".$topico->deleted_at->day."/".$topico->deleted_at->month."/".$topico->deleted_at->year;
+				}else{
+					$topico->action = 
+					"<a href='/admin/topico/deletar/$topico->id'>
+						<button class='btn btn-xs btn-danger'>
+							<i class='fa fa-times'></i>
+						</button>
+					 </a>";
+					 $topico->excluido = "Ativo";
+				}
+
 				$topico->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$topico->id' data-nome='$topico->nome' data-toggle='modal' data-target='#editarTopico'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
 			}
 

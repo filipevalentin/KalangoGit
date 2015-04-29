@@ -81,10 +81,10 @@
                         </select>
                     </div>
                     <div id="div_status-editar-atividadeExtra" class="form-group">
-                        <label class="control-label" for="status"><i id="icone_status-editar-atividadeExtra" class="fa"></i> Status</label>
+                        <label class="control-label" for="status"><i id="icone_status-editar-atividadeExtra" class="fa"></i> Visibilidade</label>
                         <select type="text" autocomplete="off" id="status" name="status" onblur="fcn_recarregaCoresEditarAtividadeExtra();" class="form-control statusObrigatorio-editar-atividadeExtra">
-                            <option value="0"> Desativado</option>
-                            <option value="1"> Ativado</option>
+                            <option value="0"> Oculto</option>
+                            <option value="1"> Visível</option>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -200,7 +200,7 @@
                         @foreach($atividadesExtras as $atividade)
                          @if($atividade->status == '0')
                             <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="background-color: white; margin:10px;">
-                            <b style="color: red;"> Inativa</b>
+                            <b style="color: red;"> Oculta</b>
                         @else
                             <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="margin:10px;">
                         @endif

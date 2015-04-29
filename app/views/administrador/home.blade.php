@@ -59,10 +59,10 @@
                         </select>
                     </div>
                     <div id="div_status-editar-turma" class="form-group">
-                        <label class="control-label" for="status"><i id="icone_status-editar-turma" class="fa"></i> Status</label>
+                        <label class="control-label" for="status"><i id="icone_status-editar-turma" class="fa"></i> Andamento</label>
                         <select autocomplete="off" id="status" name="status" maxlength="50" onblur="fcn_recarregaCoresEditarTurma()" class="form-control statusObrigatorio-editar-turma">
-                            <option value="1">Aberta (em andamento)</option>
-                            <option value="0">Fechada (concluída)</option>
+                            <option value="1">Em andamento</option>
+                            <option value="0">Concluída</option>
                         </select>
                     </div>
                     <div class="modal-footer">
@@ -334,7 +334,7 @@
                                                         </a>
                                                     </div>
 
-                                                    <a href="/admin/turma/{{$turma->id}}" class="small-box-footer">Gerenciar Turmas <i class="fa fa-arrow-circle-right"></i></a>
+                                                    <a href="/admin/turma/{{$turma->id}}" class="small-box-footer">Ver Alunos <i class="fa fa-arrow-circle-right"></i></a>
                                                 </div>
                                             </div>
                                         </div>
