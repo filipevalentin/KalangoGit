@@ -1729,7 +1729,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 					foreach($modulo->atividades as $atividade){
 
-						if($atividade->acessos != null){
+						if($atividade->acessos->count() != null){
 							$flag = "soft";
 						}
 					}
@@ -1812,13 +1812,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::get('curso/deletar/{id}', function($id){
 			$curso = Curso::find($id);
+			$flag = "hard";
 
 			if($curso != null){
 				foreach ($curso->modulos as $modulo) {
 
 					foreach($modulo->atividades as $atividade){
 
-						if($atividade->acessos != null){
+						if($atividade->acessos->count() != null){
 							$flag = "soft";
 						}
 					}
@@ -1917,12 +1918,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::get('modulo/deletar/{id}', function($id){
 			$modulo = Modulo::find($id);
+			$flag = "hard";
 
 			if($modulo != null){
 
 				foreach($modulo->atividades as $atividade){
 
-					if($atividade->acessos != null){
+					if($atividade->acessos->count() != null){
 						$flag = "soft";
 					}
 				}
