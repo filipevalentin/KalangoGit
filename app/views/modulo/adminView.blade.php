@@ -290,7 +290,7 @@
                                         </h4>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editaraula" data-id="{{$aula->id}}" data-nome="{{$aula->titulo}}"><i class="fa fa-pencil"></i></button>
-                                            <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
+                                            <a href="/admin/aula/deletar/{{$aula->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                         </div>
                                     </div>
                                     <div id="{{$aula->id}}" class="panel-collapse collapse" style="height: 0px;">
@@ -310,7 +310,7 @@
                                                             <a href="{{$material->url}}" target="_blank"><button class="btn btn-primary btn-xs"><i class="fa fa-external-link"></i></button></a>
                                                         @endif
                                                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarmaterial" data-id="{{$material->id}}" data-nome="{{$material->nome}}" data-tipo="{{$material->tipo}}"><i class="fa fa-pencil"></i></button>
-                                                        <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+                                                        <a href="/admin/material/deletar/{{$material->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -327,7 +327,7 @@
                                                     <div class="box-tools pull-right">
                                                         <a href="/admin/atividade/{{$atividade->id}}/editar"><button class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button></a>
                                                         <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editaratividade" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" data-status="{{$atividade->status}}" ><i class="fa fa-pencil"></i></button>
-                                                        <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+                                                        <a href="/admin/atividade/deletar/{{$atividade->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                                     </div>
                                                 </div>
                                             @endforeach

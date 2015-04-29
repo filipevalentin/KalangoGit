@@ -8,6 +8,8 @@ Route::get('teste5',function(){
 
 	// $c->restore();
 
+	return Modulo::find(1)->turmas()->where('status','=', 0)->get();
+
 	$as = Turma::withTrashed()->get();
 	foreach ($as as $a) {
 		$a->restore();
@@ -22,6 +24,122 @@ Route::get('teste4',function(){
 
 });
 
+// ===============================================
+// FUNÇÕES SECTION ===============================
+// ===============================================
+	
+	function deletarMaterial($material){
+		if( !$MaterialApoio::all()->lists('url')->contains($material->url) ){
+			unlink($material->url);
+		}
+
+		$material->delete();
+	}
+
+	function deletarQuestao($questao, $metodo){
+
+		if($metodo == "soft"){
+			$questao->delete();
+		}else{
+
+			$questao->forceDelete();
+		}
+
+	}
+
+	function deletarAtividade($atividade, $metodo = "soft"){
+
+		foreach ($atividade->questoes as $questao) {
+			deletarQuestao($questao, $metodo);
+		}
+
+		if($metodo == "soft"){
+
+			$atividade->delete();
+		}else{
+
+			$atividade->forceDelete();
+		}
+	}
+
+	function deletarAula($aula, $metodo = "soft"){
+
+		foreach ($aula->atividades as $atividade) {
+			deletarAtividade($atividade, $metodo);
+		}
+
+		foreach ($aula->materialApoio as $material ) {
+			deletarMaterial($material, $metodo);
+		}
+
+		if($metodo == "soft"){
+			$aula->delete();
+		}else{
+			$aula->forceDelete();
+		}
+	}
+
+	function deletarTurma($turma, $metodo = "soft"){
+
+		if($metodo == "soft"){
+			$turma->delete();
+		}else{
+			$turma->alunos()->sync(array());
+			$turma->forceDelete();
+		}
+	}
+
+	function deletarModulo($modulo, $metodo = "soft"){
+
+		foreach ($modulo->aulas as $aula) {
+			deletarAula($aula, $metodo);
+		}
+
+		foreach ($modulo->turmas as $turma) {
+			deletarTurma($turma, $metodo);
+		}
+
+		if($metodo == "soft"){
+			$modulo->delete();
+		}else{
+			$atividadesExtras = Atividade::withTrashed()->where('idModulo','=', $modulo->id)->get();
+
+			if($atividadesExtras != null){
+				foreach ($atividadesExtras as $atividade) {
+					$atividade->idModulo = null;
+					$atividade->save();
+				}
+			}
+			$modulo->forceDelete();
+		}
+	}
+
+	function deletarCurso($curso, $metodo = "soft"){
+
+		foreach ($curso->modulos as $modulo) {
+			deletarModulo($modulo, $metodo);
+		}
+
+		if($metodo == "soft"){
+			$curso->delete();
+		}else{
+			$curso->forceDelete();
+		}
+	}
+
+	function deletarIdioma($idioma, $metodo = "soft"){
+
+		foreach ($idioma->cursos as $curso) {
+			deletarCurso($curso, $metodo);
+		}
+
+		if($metodo == "soft"){
+			$idioma->delete();
+		}else{
+			$idioma->forceDelete();
+		}
+	}
+	
 
 // ===============================================
 // COMMON SECTION ================================
@@ -222,6 +340,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			}
 
 			if($atividade->status == '0'){
+				Session::flash('warning','Acesso Proibido!');
 				return Redirect::back();
 			}
 
@@ -421,7 +540,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				foreach($turma->questoes as $resposta){
 					//se o topico ainda não está na lista, add ele na lista, com sua chave sendo seu id, e inicia seu attr "pontos" como 0.
 					if (!(@in_array($resposta->idTopico, $topicos)) ){
-						$topico = Topico::find($resposta->idTopico);
+						$topico = Topico::withTrashed()->find($resposta->idTopico);
 						$topico->pontos = 0;
 						$topicos[$resposta->idTopico] = $topico;
 					}
@@ -1584,8 +1703,15 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('criarIdioma', function(){
+			
+			if(Idioma::all()->lists('nome')->contains(Input::get('nome'))){
+				Session::flash('warning', "Esse idioma já existe");
+				return Redirect::back();
+			}
+
 			$idioma = new Idioma;
 			$idioma->nome = Input::get('nome');
+
 			$idioma->save();
 
 			Session::flash('info', "Idioma criado com sucesso!");
@@ -1596,17 +1722,24 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::get('idioma/deletar/{id}', function($id){
 			$idioma = Idioma::find($id);
 
+			$flag = "hard";
+
 			if($idioma != null){
 				foreach ($idioma->modulos as $modulo) {
-					if($modulo->turmas()->count() != 0){
-						Session::flash('warning', "<p>Existem turmas atreladas a cursos desse Idioma!</p> <p>Exclua todas as turmas relacionadas a este idioma para poder excluí-lo</p>");
-						return Redirect::back();
+
+					foreach($modulo->atividades as $atividade){
+
+						if($atividade->acessos != null){
+							$flag = "soft";
+						}
 					}
 				}
-				$idioma->delete();
+				deletarIdioma($idioma, $flag);
+				Session::flash('info', "O Idioma e todos os registros relacionados foram excluídos com sucesso!");
+				return Redirect::back();
 			}
 			
-			Session::flash('info', "Idioma excluído com sucesso!");
+			Session::flash('warning', "Idioma inexistente");
 
 			return Redirect::back();
 		});
@@ -1682,17 +1815,23 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			if($curso != null){
 				foreach ($curso->modulos as $modulo) {
-					if($modulo->turmas()->count() != 0){
-						Session::flash('warning', "<p>Existem turmas atreladas a este curso!</p> <p>Exclua todas as turmas relacionadas a este curso para poder excluí-lo</p>");
-						return Redirect::back();
+
+					foreach($modulo->atividades as $atividade){
+
+						if($atividade->acessos != null){
+							$flag = "soft";
+						}
 					}
 				}
-				$curso->delete();
+				deletarCurso($curso, $flag);
+				Session::flash('info', "O Curso e todos os registros relacionados foram excluídos com sucesso!");
+				return Redirect::back();
 			}
 			
-			Session::flash('info', "Curso excluído com sucesso!");
+			Session::flash('warning', "Curso inexistente");
 
 			return Redirect::back();
+				
 		});
 
 
@@ -1726,7 +1865,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		});
 
-		//modificar nome
 		Route::get('listarModulos2',function(){
 
 			$data = array();
@@ -1781,19 +1919,20 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$modulo = Modulo::find($id);
 
 			if($modulo != null){
-				if($modulo->turmas()->count() != 0){
-					Session::flash('warning', "<p>Existem turmas atreladas a este Módulo!</p> <p>Exclua todas as turmas relacionadas a este módulo para poder excluí-lo</p>");
-					return Redirect::back();
+
+				foreach($modulo->atividades as $atividade){
+
+					if($atividade->acessos != null){
+						$flag = "soft";
+					}
 				}
-				//Retira as FKs das atividades extras que apontam pra esse módulo - Isso só é necessário caso a deleção mude para hard-delete, caso seja soft delete isso faz perder o historico caso alguem restaure esse modulo
-				foreach(DB::table('Atividades')->where('tipo','=','2')->where('idModulo','=', $modulo->id)->get() as $atividade){
-					$atividade->idModulo = Null;
-					$atividade->save();
-				}
-				$modulo->delete();
+
+				deletarModulo($modulo, $flag);
+				Session::flash('info', "O Módulo e todos os registros relacionados foram excluídos com sucesso!");
+				return Redirect::back();
 			}
 			
-			Session::flash('info', "Módulo excluído com sucesso!");
+			Session::flash('warning', "Curso inexistente");
 
 			return Redirect::back();
 		});
@@ -1913,25 +2052,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::get('turma/deletar/{id}', function($id){
 			$turma = Turma::find($id);
+			$flag = "soft";
 
 			if($turma != null){
 				//Loop entre todos alunos da turma para ver se ao menos 1 já acessou algo
 				// Caso algum aluno tenha acessado, a turma é soft-deleted e os alunos NÃO SÃO DESMATRICULADOS
 				foreach ($turma->alunos as $aluno) {
-					if($aluno->acessos->intersect($turma->modulo->atividades) != null){
-						$turma->delete();
-						Session::flash('warning', '<p> Atenção! </p> <p> A turma foi excluída, porém, devido aos alunos já terem acessado as atividades da aula, seu histórico será mantido. </p>');
-						return Redirect::back();
+					if($aluno->acessos->intersect($turma->modulo->atividades) == null){
+						$flag = "hard";
 					}
 				}
 
-				// Caso tenha passado pelo looping anterior, nenhum aluno acessou as aulas, portanto podemos desmatricular os alunos antes de excluir a turma
-				foreach ($turma->alunos as $aluno) {
-					$aluno->turmas()->detach($turma);
-				}
-
-				$turma->forceDelete();
-				Session::flash('info', '<p>A turma foi excluída definitivamente</p> <p>Como os alunos não haviam acessado as atividades, eles também foram desmatriculados</p>');
+				deletarTurma($turma, $flag);
+				Session::flash('info', 'Turma excluída com sucesso');
 				return Redirect::back();
 			}
 			
@@ -1947,6 +2080,21 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('criarAula', function(){
+			$modulo = Modulo::find(Input::get('idModulo'));
+			$flag = true;
+
+			//Se já existe alguma turma fechada neste módulo, não podemos adicionar aulas 
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					$flag = false;
+				}
+			}
+
+			if(!$flag){
+				Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas aulas </p>');
+				return Redirect::back();
+			}
+
 			$Aula = new Aula;
 			$Aula->titulo = Input::get('nome');
 			$Aula->idModulo = Input::get('idModulo');
@@ -2011,22 +2159,25 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::get('aula/deletar/{id}', function($id){
 			$aula = Aula::find($id);
+			$modulo = $aula->modulo;
 
 			if($aula != null){
-				$modulo = $aula->modulo;
-				if($modulo->turmas->count() != 0){
-					Session::flash('warning', "<p>Existem turmas atreladas ao módulo desta aula!</p> <p>Exclua todas as turmas relacionadas ao módulo desta aula para poder excluí-la</p>");
-					return Redirect::back();
+				//Se já existe alguma turma fechada neste módulo, não podemos adicionar aulas 
+				foreach ($modulo->turmas as $turma) {
+					if($turma->status == 0){
+						Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura excluindo suas aulas </p>');
+						return Redirect::back();
+					}
 				}
 
 				foreach ($aula->atividades as $atividade) {
-					$atividade->delete();
-				}
-				foreach ($aula->materialApoio as $material) {
-					$material->delete();
+					if($atividade->acessos != null){
+						Session::flash('warning','<p> Esta aula já foi acessada por outros alunos</p> <p>Não é possível excluí-la</p>');
+						return Redirect::back();
+					}
 				}
 
-				$aula->delete();
+				deletarAula($aula, "hard");
 			
 				Session::flash('info', "Aula excluída com sucesso!");
 
@@ -2046,9 +2197,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('criarMaterial', function(){
+			$aula = Aula::find(Input::get('idAula'));
+			$modulo = $aula->modulo;
+
+			//Se já existe alguma turma fechada neste módulo, não podemos add novos materiais 
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novos Materiais de Apoio </p>');
+					return Redirect::back();
+				}
+			}
+
 			$material = new Materialapoio;
 			$material->nome = Input::get('nome');
-			$aula = Aula::find(Input::get('idAula'));
 			$material->tipo = Input::get('tipo');
 
 			if($material->tipo != 3){
@@ -2157,6 +2318,17 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('copiarMaterial', function(){
 			$materiais = Input::get('materiais');
 			$aula = Aula::find(Input::get('idAula'));
+
+			$modulo = $aula->modulo;
+
+			//Se já existe alguma turma fechada neste módulo, não podemos add novos materiais 
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novos Materiais de Apoio </p>');
+					return Redirect::back();
+				}
+			}
+
 			if(Input::get('materiais')!=null){
 				foreach ($materiais as $material) {
 					$aula->materialApoio()->attach($material);
@@ -2168,9 +2340,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::get('material/deletar/{id}', function($id){
 			$material = Material::find($id);
+			$modulo = $material->aula->modulo;
 
 			if($material != null){
-				$material->delete();
+
+				//Se já existe alguma turma fechada neste módulo, não podemos excluír materiais 
+				foreach ($modulo->turmas as $turma) {
+					if($turma->status == 0){
+						Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura excluindo seus Materiais de Apoio </p>');
+						return Redirect::back();
+					}
+				}
+
+				deletarMaterial($material);
 			
 				Session::flash('info', "Material excluído com sucesso!");
 
@@ -2261,7 +2443,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$atividade = Atividade::find($id);
 
 			if($atividade->status == '1'){
-				Session::flash('message', 'Primeiro inative a Atividade para poder editá-la!');
+				Session::flash('warning', 'Primeiro inative a Atividade para poder editá-la!');
 				return Redirect::back();
 			}
 
@@ -2321,6 +2503,17 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('criarAtividade', function(){
+			$aula = Aula::find(Input::get('idAula'));
+			$modulo = $aula->modulo;
+
+			//Se já existe alguma turma fechada neste módulo, não podemos add novas atividades 
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas Atividades </p>');
+					return Redirect::back();
+				}
+			}
+
 			$Atividade = new Atividade;
 			$Atividade->nome = Input::get('nome');
 			$Atividade->status = 0;
@@ -2370,18 +2563,28 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$atividade = Atividade::find($id);
 
 			if($atividade != null){
+
+				if($atividade->tipo == 1){
+					$modulo = $atividade->aula->modulo;
+
+					//Se já existe alguma turma fechada neste módulo, não podemos add novas atividades 
+					foreach ($modulo->turmas as $turma) {
+						if($turma->status == 0){
+							Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura excluindo Atividades </p>');
+							return Redirect::back();
+						}
+					}
+				}
 				
 				if($atividade->acessos->count() == null){
 
-					foreach ($atividade->questoes as $questao) {
-						$questao->delete();
-					}
-
-					$atividade->delete();
-					Session::flash('info', '<p> A atividade foi e as suas questões foram excluídas </p>');
+					deletarAtividade($atividade, "hard");
+					Session::flash('info', '<p> A atividade e as suas questões foram excluídas </p>');
 					return Redirect::back();
 				}else{
-					Session::flash('warning','Esta atividade não pode ser excluída... Os alunos já enviaram respostas de suas questões.');
+
+					deletarAtividade($atividade);
+					Session::flash('info', '<p> A atividade e as suas questões foram excluídas </p>');
 					return Redirect::back();
 				}
 				
@@ -2462,15 +2665,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$categoria = Categoria::find($id);
 
 			if($categoria != null){
-				if($categoria->atividades()->count() != 0){
-					Session::flash('warning', "<p>Existem atividades atreladas a esta Categoria!</p> <p>Exclua todas as atividades relacionadas a esta categoria para poder excluí-la</p>");
-					return Redirect::back();
-				}
+				if($categoria->atividades->count() != 0){
 
-				//Atualiza as atividades extras com fk dessa categoria -- Só é necessário caso haja hard delete - Então não será necessário o codigo acima
-				foreach(DB::table('Atividades')->where('tipo','=','2')->where('idCategoria','=', $categoria->id)->get() as $atividade){
-					$atividade->idCategoria = Null;
-					$atividade->save();
+					$categoria->forceDelete();	
+
+					Session::flash('info', "Categoria excluída com sucesso!");
+					return Redirect::back();
 				}
 				
 				$categoria->delete();
@@ -2494,6 +2694,16 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('criarQuestaoRU', function(){
 
 			$atividade = Atividade::find(Input::get('idatividade'));
+
+			$modulo = $atividade->aula->modulo;
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+					return Redirect::back();
+				}
+			}
 
 			if($atividade->status == 1){
 				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
@@ -2542,8 +2752,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$atividade = Atividade::find(Input::get('idatividade'));
 
+			$modulo = $atividade->aula->modulo;
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+					return Redirect::back();
+				}
+			}
+
 			if($atividade->status == 1){
-				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o status da atividade para inativo.');
+				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
 				return Redirect::back();
 			}else {
 				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->get() != null){
@@ -2665,20 +2885,29 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarRespostaUnica', function(){
-
 			$questao = Questao::find(Input::get('id'));
-
 			$atividade = Atividade::find($questao->idAtividade);
 
+			$modulo = $atividade->aula->modulo;
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+					return Redirect::back();
+				}
+			}
+
 			if($atividade->status == 1){
-				Session::flash('warning','A atividade está ativa, para modificar uma questão primeiro mude o status da atividade para inativo.');
+				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
 				return Redirect::back();
 			}else {
 				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->get() != null){
-					Session::flash('warning','A atividade já foi acessada por alunos, não será possível modificar questões');
+					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
 					return Redirect::back();
 				}
-			} 
+			}
+
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
@@ -2705,20 +2934,28 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarMultiplaEscolha', function(){
-
 			$questao = Questao::find(Input::get('id'));
-
 			$atividade = Atividade::find($questao->idAtividade);
 
+			$modulo = $atividade->aula->modulo;
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+					return Redirect::back();
+				}
+			}
+
 			if($atividade->status == 1){
-				Session::flash('warning','A atividade está ativa, para modificar uma questão primeiro mude o status da atividade para inativo.');
+				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
 				return Redirect::back();
 			}else {
 				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->get() != null){
-					Session::flash('warning','A atividade já foi acessada por alunos, não será possível modificar questões');
+					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
 					return Redirect::back();
 				}
-			} 
+			}
 
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
@@ -2803,6 +3040,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 	
 	//Alunos
+
 		Route::get('alunos', function(){
 
 			return View::make('aluno/showAdmin');
@@ -2812,12 +3050,20 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data = array();
 
-			$users = User::where('tipo', '=', 1)->get();
+			$users = User::withTrashed()->where('tipo', '=', 1)->get();
 
 			foreach ($users as $key => $user) {
 				$user->matricula = Aluno::find($user->id)->matricula;
 				$user->dataNascimento = Aluno::find($user->id)->dataNascimento;
-				$user->action = "<a style='color:white;' href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+
+				if($user->trashed()){
+					$user->action = "N/A";
+					$user->excluido = "Excluído em: ".$user->deleted_at->day."/".$user->deleted_at->month."/".$user->deleted_at->year;
+				}else{
+					$user->action = "<a style='color:white;' href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/aluno/deletar/$user->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$user->excluido = "Ativo";
+				}
+
 				array_push($data, $user);
 			}
 
@@ -2935,9 +3181,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::get('aluno/deletar/{id}', function($id){
 			$aluno = Aluno::find($id);
 
-			//$aluno->turmas()->sync(array());
+			if($aluno->acessos->count() != null ){ 
+				$aluno->turmas()->sync(array());
+			}
 
 			$aluno->usuario->delete();
+			$aluno->delete();
 
 			Session::flash('info','Aluno excluído com sucesso!');
 			return Redirect::back();
@@ -2954,12 +3203,20 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data = array();
 
-			$users = User::where('tipo', '=', 2)->get();
+			$users = User::withTrashed()->where('tipo', '=', 2)->get();
 			//dd($users);
 			foreach ($users as $key => $user) {
 				$user->codRegistro = Professor::find($user->id)->codRegistro;
 				$user->formacaoAcademica = Professor::find($user->id)->formacaoAcademica;
-				$user->action = "<a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></button></a><a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+				
+				if($user->trashed()){
+					$user->action = "N/A";
+					$user->excluido = "Excluído em: ".$user->deleted_at->day."/".$user->deleted_at->month."/".$user->deleted_at->year;
+				}else{
+					$user->action = "<a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></button></a><a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/professor/deletar/$user->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$user->excluido = "Ativo";
+				}
+
 				array_push($data, $user);
 			}
 
@@ -3071,6 +3328,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$professor = Professor::find($id);
 
 			$professor->usuario->delete();
+			$professor->delete();
 
 			Session::flash('info','Professor excluído com sucesso!');
 			return Redirect::back();
@@ -3087,16 +3345,22 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data = array();
 
-			$users = User::where('tipo', '=', 3)->get();
+			$users = User::withTrashed()->where('tipo', '=', 3)->get();
 			//dd($users);
 			foreach ($users as $key => $user) {
 				$user->codRegistro = Administrador::find($user->id)->codRegistro;
-				$user->action = "<a style='color: white;' href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+
+				if($user->trashed()){
+					$user->action = "N/A";
+					$user->excluido = "Excluído em: ".$user->deleted_at->day."/".$user->deleted_at->month."/".$user->deleted_at->year;
+				}else{
+					$user->action = "<a style='color: white;' href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/administrador/deletar/$user->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$user->excluido = "Ativo";
+				}
+
 				array_push($data, $user);
 			}
 			//dd($data);
-
-
 
 			$response = array(
 					"data" => $data,
@@ -3190,6 +3454,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$administrador = Administrador::find($id);
 
 			$administrador->usuario->delete();
+			$administrador->delete();
 
 			Session::flash('info','Administrador excluído com sucesso!');
 			return Redirect::back();

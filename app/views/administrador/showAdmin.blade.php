@@ -72,6 +72,7 @@
 		                <th>Login</th>
 		                <th>E-mail</th>
 		                <th>Código de Registro</th>
+		                <th>Status</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAdministrador" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
 		        </thead>
@@ -83,6 +84,7 @@
 		                <th>Login</th>
 		                <th>E-mail</th>
 		                <th>Código de Registro</th>
+		                <th>Status</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAdministrador" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
 		        </tfoot>
@@ -111,13 +113,14 @@
 	        { data: 'login' },
 	        { data: 'email' },
 	        { data: 'codRegistro' },
+	        { data: 'excluido' },
 	        { data: 'action'}
 	    ],
 
 	    "scrollX": true,
 
 	    "columnDefs": [ {
-		      "targets": 5,
+		      "targets": 6,
 		      "orderable": false,
 		      "searchable": false
 		    } ],

@@ -81,6 +81,7 @@
 		                <th>E-mail</th>
 		                <th>Código de Registro</th>
 		                <th>Formação Acadêmica</th>
+		                <th>Status</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarProfessor" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
 		        </thead>
@@ -93,6 +94,7 @@
 		                <th>E-mail</th>
 		                <th>Código de Registro</th>
 		                <th>Formação Acadêmica</th>
+		                <th>Status</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarProfessor" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
 		        </tfoot>
@@ -122,13 +124,14 @@
 	        { data: 'email' },
 	        { data: 'codRegistro' },
 	        { data: 'formacaoAcademica' },
+	        { data: 'excluido' },
 	        { data: 'action'}
 	    ],
 
 	    "scrollX": true,
 
 	    "columnDefs": [ {
-		      "targets": 6,
+		      "targets": 7,
 		      "orderable": false,
 		      "searchable": false
 		    } ],

@@ -22,6 +22,13 @@
 	    <div class="row">
 	        <div class="col-xs-12">
 	        	<div class="row">
+        			@if($turmas->count() == 0)
+	        			<div class="col-lg-12 center">
+	        				<div class="callout center callout-danger ui-sortable-handle">
+	                            <h4>Você ainda não concluiu nenhum curso</h4>
+	                        </div>
+	        			</div>
+                    @endif
 
 					<div class="col-lg-3" style="padding: 0;"> <!-- Coluna de cursos -->
 	                    @foreach ( $turmas as $turma)

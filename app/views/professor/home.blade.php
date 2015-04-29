@@ -48,7 +48,7 @@
                                             <div class="inner">
                                                 <div class="curso" style="cursor:pointer;" id="{{$cursosArray[$j]['id']}}">
                                                     <h4 style="font-size: 20px;">{{$cursos[$j]['nome']}}</h4>
-                                                    <p style="margin:0px;">{{$cursos[$j]->numTurmas}} Turmas</p>
+                                                    <p style="margin:0px;">{{$cursos[$j]->numTurmas}} Turmas em andamento</p>
                                                 </div>
                                             </div>
 
@@ -101,7 +101,7 @@
                                 <div id="Modulo{{$modulo->id}}" class="panel-collapse collapse">
                                     <div class="row">
 
-                                    @foreach($modulo->turmas as $turma)
+                                    @foreach($modulo->turmas()->where('status','=', 1)->get() as $turma)
                                         <div class="col-md-3">
                                             <div class="box-body">
                                                 <div class="small-box bg-green">

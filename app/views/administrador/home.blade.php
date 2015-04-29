@@ -255,11 +255,12 @@
                                                 <div class="box-tools pull-right">
                                 
                                                     <button class="btn btn-success btn-xs" data-toggle="modal" rel="tooltip" data-placement="left" title="Editar Curso" data-target="#editarcurso" data-id="{{$cursosArray[$j]['id']}}" data-nome="{{$cursosArray[$j]['nome']}}" data-idioma="{{$cursosArray[$j]['idIdioma']}}"><i class="fa fa-pencil"></i></button>
-                                                    <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+                                                    <a href="/admin/curso/deletar/{{$cursosArray[$j]['id']}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                                 </div>
                                                 <div class="curso" style="cursor:pointer;" id="{{$cursosArray[$j]['id']}}">
                                                     <h4 style="font-size: 20px;">{{$cursosArray[$j]['nome']}}</h4>
-                                                    <p style="margin:0px;">{{$cursos->find($cursosArray[$j]['id'])->turmas->count()}} Turmas</p>
+                                                    <p style="margin:0px;">{{$cursos->find($cursosArray[$j]['id'])->turmas()->where('status','=',1)->count()}} Turmas <span style="font-size: 12px; margin-left:2px;" >(em andamento)</span></p>
+                                                    <p style="margin:5px 0px 0px 0px; font-size: 12px;">(Total: {{$cursos->find($cursosArray[$j]['id'])->turmas->count()}} Turmas)</p>
                                                 </div>
                                             </div>
 
@@ -311,13 +312,13 @@
                                     <div class="box-tools pull-right">
                                         <a href="/admin/modulo/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
                                         <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarmodulo" data-id="{{$modulo->id}}" data-nome="{{$modulo->nome}}"><i class="fa fa-pencil"></i></button>
-                                        <button class="btn btn-danger btn-sm" ><i class="fa fa-times"></i></button>
+                                        <a href="/admin/modulo/deletar/{{$modulo->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                     </div>
                                 </div>
                                 <div id="Modulo{{$modulo->id}}" class="panel-collapse collapse">
                                     <div class="row">
 
-                                    @foreach($modulo->turmas as $turma)
+                                    @foreach($modulo->turmas()->where('status','=',1)->get() as $turma)
                                         <div class="col-md-3">
                                             <div class="box-body">
                                                 <div class="small-box bg-green">
@@ -325,7 +326,7 @@
                                                         <div class="box-tools pull-right">
                                         
                                                             <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarturma" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" data-professor="{{User::find($turma->professor->id)->nome}}" data-idprofessor="{{$turma->professor->id}}" data-status="{{$turma->status}}"><i class="fa fa-pencil"></i></button>
-                                                            <button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button>
+                                                            <a href="/admin/turma/deletar/{{$turma->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                                         </div>
                                                         <a href="/admin/turma/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">
                                                             <h4 style="font-size: 20px;">{{$turma->nome}}</h4>

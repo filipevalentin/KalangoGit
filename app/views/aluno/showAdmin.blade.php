@@ -132,6 +132,7 @@
 		                <th>E-mail</th>
 		                <th>Matrícula</th>
 		                <th>Data de Nascimento</th>
+		                <th>Status</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAluno" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
 		        </thead>
@@ -144,6 +145,7 @@
 		                <th>E-mail</th>
 		                <th>Matrícula</th>
 		                <th>Data de Nascimento</th>
+		                <th>Status</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarAluno" ><i class="fa fa-plus"></i></button></th>
 		            </tr>
 		        </tfoot>
@@ -173,13 +175,14 @@
 	        { data: 'email' },
 	        { data: 'matricula' },
 	        { data: 'dataNascimento' },
+	        { data: 'excluido' },
 	        { data: 'action'}
 	    ],
 
 	    "scrollX": true,
 
 		"columnDefs": [ {
-		      "targets": 6,
+		      "targets": 7,
 		      "orderable": false,
 		      "searchable": false
 		    } ],
