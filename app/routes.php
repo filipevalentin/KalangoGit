@@ -14,7 +14,99 @@ Route::get('teste5',function(){
 
 
 	
+});
+
+Route::get('truncateKalango', function(){
+
+	try {
+		DB::table('contrata')->delete();
+		DB::statement("alter table contrata auto_increment = 1");
+		DB::table('respostas')->delete();
+		DB::statement("alter table respostas auto_increment = 1");
+		DB::table('turmasalunos')->delete();
+		DB::statement("alter table turmasalunos auto_increment = 1");
+		DB::table('acessosatividades')->delete();
+		DB::statement("alter table acessosatividades auto_increment = 1");
+		DB::table('avisosturmas')->delete();
+		DB::statement("alter table avisosturmas auto_increment = 1");
+		DB::table('materialapoio')->delete();
+		DB::statement("alter table materialapoio auto_increment = 1");
+		DB::table('propagandas')->delete();
+		DB::statement("alter table propagandas auto_increment = 1");
+		DB::table('avisos')->delete();
+		DB::statement("alter table avisos auto_increment = 1");
+		DB::table('mensagens')->delete();
+		DB::statement("alter table mensagens auto_increment = 1");
+		DB::table('questoes')->delete();
+		DB::statement("alter table questoes auto_increment = 1");
+		DB::table('topicos')->delete();
+		DB::statement("alter table topicos auto_increment = 1");
+		DB::table('atividades')->delete();
+		DB::statement("alter table atividades auto_increment = 1");
+		DB::table('aulas')->delete();
+		DB::statement("alter table aulas auto_increment = 1");
+		DB::table('turmas')->delete();
+		DB::statement("alter table turmas auto_increment = 1");
+		DB::table('modulos')->delete();
+		DB::statement("alter table modulos auto_increment = 1");
+		DB::table('cursos')->delete();
+		DB::statement("alter table cursos auto_increment = 1");
+		DB::table('professores')->delete();
+		DB::statement("alter table professores auto_increment = 1");
+		DB::table('administradores')->delete();
+		DB::statement("alter table administradores auto_increment = 1");
+		DB::table('alunos')->delete();
+		DB::statement("alter table alunos auto_increment = 1");
+		DB::table('empresas')->delete();
+		DB::statement("alter table empresas auto_increment = 1");
+		DB::table('categorias')->delete();
+		DB::statement("alter table categorias auto_increment = 1");
+		DB::table('idiomas')->delete();
+		DB::statement("alter table idiomas auto_increment = 1");
+		DB::table('usuarios')->delete();
+		DB::statement("alter table usuarios auto_increment = 1");
+
+		$u3 = new User;
+		$u3->nome = "Administrador 1";
+		$u3->login = 789;
+		$u3->tipo = "3";
+		$u3->password= Hash::make('789');
+		$u3->confirmed = '1';
+		$u3->save();
+
+		$a = new Administrador;
+		$a->id = $u3->id;
+		$a->codRegistro = 789;
+		$a->save();
+
+		return "<p><h1>Todas as tabelas foram limpas!!</h1></p> <p><h1>Acesse o Kalango com o usuário admin: 789 / 789</h1></p>";
+	} catch (Exception $e) {
+		return "Algo de errado aconteceu...: \n".$e;
+	}
+	
 });	
+
+Route::get('truncate/{table}', function($tabela){
+
+	try {
+		DB::table($tabela)->delete();
+		DB::statement("alter table $tabela auto_increment = 1");
+		
+		return "<p><h1>A tabela '$tabela' foi limpa!!</h1></p>";
+	} catch (Exception $e) {
+		return "Algo de errado aconteceu...: \n".$e;
+	}
+	
+});
+
+Route::get('seedKalango', function(){
+	try {
+		Artisan::call('db:seed');
+		return "Os registros foram criados!";
+	} catch (Exception $e) {
+		return $e;
+	}
+});
 
 
 Route::get('teste4',function(){ 
