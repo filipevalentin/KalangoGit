@@ -114,7 +114,7 @@
                             <?php
                                 $avisos = new \Illuminate\Database\Eloquent\Collection;
                                 foreach (Auth::user()->aluno->turmas as $turma) {
-                                    foreach ($turma->avisos as $aviso) {
+                                    foreach ($turma->avisos()->where('dataExpiracao','>', date('Y-m-d'))->orderBy('dataExpiracao')->get() as $aviso) {
                                         $avisos->push($aviso);   
                                     }
                                 }
@@ -133,14 +133,14 @@
                                         <ul class="menu">
                                         @foreach($avisos as $aviso)
                                             <li><!-- start notification -->
-                                                <a href="aluno/">
+                                                <a href="/aluno/aviso/{{$aviso->id}}">
                                                     <i class="fa fa-check"></i>{{$aviso->titulo}}
                                                 </a>
                                             </li><!-- end notification -->                      
                                         @endforeach
                                         </ul>
                                     </li>
-                                    <li class="footer"></li>
+                                    <li class="footer"><a href="/aluno/avisos">Ver todos</a></li>
                                 </ul>
                             </li>
                             <!-- User Account Menu -->

@@ -118,7 +118,7 @@
                                         <ul class="menu">
                                         @foreach($avisos as $aviso)
                                             <li><!-- start notification -->
-                                                <a href="#">
+                                                <a href="/professor/aviso/{{$aviso->id}}">
                                                     <i class="fa fa-check"></i>{{$aviso->titulo}}
                                                 </a>
                                             </li><!-- end notification -->                      

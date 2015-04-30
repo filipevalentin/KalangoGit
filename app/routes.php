@@ -8,13 +8,12 @@ Route::get('teste5',function(){
 
 	// $c->restore();
 
-	return Modulo::find(1)->turmas()->where('status','=', 0)->get();
+	Session::put("cursos", Curso::all());
 
-	$as = Turma::withTrashed()->get();
-	foreach ($as as $a) {
-		$a->restore();
-		//$a->save();
-	}
+	return Session::get("cursos");
+
+
+	
 });	
 
 
@@ -313,6 +312,18 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			return Redirect::back();
 			
+		});
+
+	//Avisos
+
+		Route::get('avisos', function(){
+			$avisos = Aviso::all();
+			return View::make('aviso/viewAluno')->with('avisos',$avisos);
+		});
+
+		Route::get('aviso/{id}', function($id){
+			$aviso = Aviso::find($id);
+			return View::make('aviso/showAluno')->with('aviso',$aviso);
 		});
 
 	//Atividade e Ativ.Extra - Responder/VerificarAcesso/RegistrarAcesso/Conclusão
@@ -772,6 +783,13 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			return Redirect::back();
 			
+		});
+
+	//Avisos
+
+		Route::get('aviso/{id}', function($id){
+			$aviso = Aviso::find($id);
+			return View::make('aviso/showProfessor')->with('aviso',$aviso);
 		});
 
 	//Perfil - Senha
@@ -2283,23 +2301,23 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			foreach ($materiais as $key => $material) {
 				switch (pathinfo($material->url, PATHINFO_EXTENSION)) {
 					case 'txt':
-						$material->tipo = "Texto";
+						$material->tipo2 = "Texto";
 						break;
 
 					case 'pdf':
-						$material->tipo = "PDF";
+						$material->tipo2 = "PDF";
 						break;
 
 					case 'odt':
-						$material->tipo = "Documento de Texto";
+						$material->tipo2 = "Documento de Texto";
 						break;
 
 					case 'opd':
-						$material->tipo = "Apresentação";
+						$material->tipo2 = "Apresentação";
 						break;
 					
 					default:
-						$material->tipo = "Desconhecido";
+						$material->tipo2 = "Desconhecido";
 						break;
 				}
 				$material->curso2 = $material->aula->first()->modulo->curso->nome;
@@ -3551,7 +3569,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$aviso->descricao = Input::get('descricao');
 			$data = explode('/', Input::get('dataExpiracao'));
 			$aviso->dataExpiracao = date('Y-m-d', mktime(0,0,0,$data[1],$data[0],$data[2]));
-			dd($aviso->dataExpiracao);
 			$aviso->idAdmin = Auth::user()->id;
 
 			$imagem = Input::file('urlImagem');

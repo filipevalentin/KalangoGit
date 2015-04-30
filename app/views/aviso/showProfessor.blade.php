@@ -1,15 +1,12 @@
-@extends('master')
-
-@section('modals')
-@endsection
+@extends('master-prof')
 
 @section('maincontent')
 
 	<section class="content-header">
-		<h1>Aviso - {{$aviso->titulo}}</h1>
+		<h1>Avisos - {{$aviso->titulo}}</h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Avisos</li>
+	        <li class="active">Avisos - {{$aviso->titulo}}</li>
 	    </ol>
 	</section>
 
@@ -30,6 +27,7 @@
 			</div>
 		</div>
 	</section>
+
 @endsection
 
 @section('scripts')

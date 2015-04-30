@@ -75,14 +75,14 @@
                                         <ul class="menu">
                                         @foreach($avisos as $aviso)
                                             <li><!-- start notification -->
-                                                <a href="#">
+                                                <a href="/admin/aviso/{{$aviso->id}}">
                                                     <i class="fa fa-check"></i>{{$aviso->titulo}}
                                                 </a>
                                             </li><!-- end notification -->                      
                                         @endforeach
                                         </ul>
                                     </li>
-                                    <li class="footer"><a href="#">View all</a></li>
+                                    <li class="footer"><a href="/admin/avisos">Ver todos</a></li>
                                 </ul>
                             </li>
                             <!-- User Account Menu -->

@@ -1,12 +1,9 @@
 @extends('master')
 
-@section('modals')
-@endsection
-
 @section('maincontent')
 
 	<section class="content-header">
-		<h1>Aviso - {{$aviso->titulo}}</h1>
+		<h1>Avisos</h1>
 	    <ol class="breadcrumb">
 	        <li><a href="#" ><i class="fa fa-dashboard"></i> Home</a></li>
 	        <li class="active">Avisos</li>
@@ -15,8 +12,16 @@
 
 	<section class="content">
 		<div class="row">
-			<div class="col-md-12">        
-                <div class="box text-center">
+			<div class="col-md-12">
+			@if($avisos->count() == 0)
+    			<div class="col-lg-12 center">
+    				<div class="callout center callout-danger ui-sortable-handle">
+                        <h4>Não Existem Avisos...</h4>
+                    </div>
+    			</div>
+            @endif
+			@foreach($avisos as $aviso)        
+                <div class="box text-center" style="margin-bottom: 20px;">
                     <div class="box-header">
                         <h3 class="box-title center" style="float: none;">{{$aviso->titulo}}</h3>
                     </div>
@@ -27,9 +32,11 @@
                         @endif
                     </div>
 				</div>
+			@endforeach
 			</div>
 		</div>
 	</section>
+
 @endsection
 
 @section('scripts')

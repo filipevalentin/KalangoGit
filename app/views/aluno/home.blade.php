@@ -199,7 +199,7 @@
 
 						<div class="col-lg-6 fix-espacos-right">
 							<div id="div_card_{{++$aux}}" class="box" >
-								<a href="javascript:void(0);" >
+								<a href="/aluno/avisos" >
 									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Avisos</b></span><br>
 										<span style="color:#FFF;">

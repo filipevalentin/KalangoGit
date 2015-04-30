@@ -318,7 +318,7 @@
           "ajax":"/admin/listarMateriais" ,
             "columns": [
                 { data: 'nome' },
-                { data: 'tipo' },
+                { data: 'tipo2' },
                 { data: 'curso2' },
                 { data: 'modulo2' },
                 { data: 'aula2' },
