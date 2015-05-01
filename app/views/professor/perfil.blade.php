@@ -105,6 +105,14 @@
                                                 </div>
                                             </div>
 
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name">Experiência Profissional</div>
+
+                                                <div class="profile-info-value">
+                                                    <span>{{$professor->ExperienciaProfissional}}</span>
+                                                </div>
+                                            </div>
+
                                         </div>                              <!-- Fim Conjunto de Info do Usuário -->
 
                                         <div class="hr hr-8 dotted"></div> </br>
@@ -176,6 +184,13 @@
                                                         <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Formação Acadêmica</b>
                                                         <input type="text" name="formacaoAcademica" class="form-control" required="" value="{{Auth::user()->professor->formacaoAcademica}}">
                                                     </div>
+
+                                                    <div class="form-group margin">
+                                                        <label class="control-label" for="dataNascimento"><b> Experiência Profissional</b></label>
+                                                        <input type="text" name="ExperienciaProfissional" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" value="{{$professor->ExperienciaProfissional}}">
+                                                    </div>
+
+                                                    
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Código Registro</b>
                                                         <input type="text" name="codRegistro" class="form-control" required="" value="{{Auth::user()->professor->codRegistro}}">

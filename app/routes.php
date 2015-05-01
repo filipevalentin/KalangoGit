@@ -584,9 +584,17 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			$user = User::find(Input::get('id'));
 
-			$user->password = Hash::make(Input::get('senha'));
-			$user->save();
-			return Redirect::to('aluno/perfil')->with('mensagem', 'Sua senha foi alterada!');
+			if( Hash::check(Input::get('senhaAtual'),$user->password) ){
+				$user->password = Hash::make(Input::get('senha'));
+				$user->save();
+				Session::flash('info','Sua senha foi alterada!');
+				return Redirect::to('aluno/perfil');
+			}else{
+				Session::flash('warning','A senha atual está incorreta!');
+				return Redirect::to('aluno/perfil');
+			}
+
+			
 
 		});
 
@@ -610,7 +618,8 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$user->save();
 
 			$aluno= Aluno::find($user->id);
-			$aluno->dataNascimento = Input::get('dataNascimento');
+			$data = explode('/', Input::get('dataNascimento'));
+			$aluno->dataNascimento = date('Y-m-d', mktime(0,0,0,$data[1],$data[0],$data[2]));
 			$aluno->sobreMim = Input::get('sobreMim');
 
 			$aluno->save();
@@ -903,9 +912,15 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			$user = User::find(Input::get('id'));
 
-			$user->password = Hash::make(Input::get('senha'));
-			$user->save();
-			return Redirect::to('professor/perfil')->with('mensagem', 'Sua senha foi alterada!');
+			if(Hash::check(Input::get('senhaAtual'), $user->password)){
+				$user->password = Hash::make(Input::get('senha'));
+				$user->save();
+				Session::flash('info','Sua senha foi alterada!');
+				return Redirect::to('professor/perfil');
+			}else{
+				Session::flash('warning','A senha atual está incorreta!');
+				return Redirect::to('professor/perfil');
+			}
 
 		});
 
@@ -932,8 +947,9 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$user->save();
 
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
-			$professor->sobreMim = Input::get('sobreMim');
-			$professor->codRegistro       = Input::get('codRegistro');
+			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
+			$professor->sobreMim = Input::get('sobremim');
+			$professor->REProf       = Input::get('codRegistro');
 
 			$professor->save();
 
@@ -1768,7 +1784,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
-	//Home e Perfil
+	//Home e Perfil e Senha
 
 		Route::get('home/{idioma?}', function($idioma = null){
 			if($idioma == null){
@@ -1788,6 +1804,17 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			return Redirect::to('admin/administrador/'.Auth::user()->id);
 			
+		});
+
+		Route::post('atualizaSenha', function(){
+
+			$user = User::find(Input::get('id'));
+
+			$user->password = Hash::make(Input::get('senha'));
+			$user->save();
+			Session::flash('info','Sua senha foi alterada!');
+			return Redirect::back();
+
 		});
 
 	//Idiomas
@@ -3283,10 +3310,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$user->save();
 
-			$aluno->dataNascimento = Input::get('dataNascimento');
+			$aluno= Aluno::find($user->id);
+			$data = explode('/', Input::get('dataNascimento'));
+			$aluno->dataNascimento = date('Y-m-d', mktime(0,0,0,$data[1],$data[0],$data[2]));
 			$aluno->sobreMim = Input::get('sobreMim');
-			$aluno->matricula       = Input::get('matricula');
-			$aluno->dataVencimentoBoleto       = Input::get('dataVencimentoBoleto');
 
 			$aluno->save();
 
@@ -3322,7 +3349,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$users = User::withTrashed()->where('tipo', '=', 2)->get();
 			//dd($users);
 			foreach ($users as $key => $user) {
-				$user->codRegistro = Professor::find($user->id)->codRegistro;
+				$user->codRegistro = Professor::find($user->id)->REProf;
 				$user->formacaoAcademica = Professor::find($user->id)->formacaoAcademica;
 				
 				if($user->trashed()){
@@ -3395,6 +3422,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$professor->id= $user->id;
 
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
+			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
 
 			$professor->save();
 
@@ -3431,8 +3459,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->save();
 
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
+			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
 			$professor->sobreMim = Input::get('sobremim');
-			$professor->codRegistro       = Input::get('codRegistro');
+			$professor->REProf       = Input::get('codRegistro');
 
 			$professor->save();
 
@@ -3463,7 +3492,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$users = User::withTrashed()->where('tipo', '=', 3)->get();
 			//dd($users);
-			foreach ($users as $key => $user) {
+			foreach ($users as $user) {
 				$user->codRegistro = Administrador::find($user->id)->codRegistro;
 
 				if($user->trashed()){

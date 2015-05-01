@@ -165,10 +165,6 @@
                                                 </div>
                                             </div>
 											<div class="col-md-9 col-sm-9 col-xs-12">
-												<div id="div_senhaAtual" class="form-group margin">
-													<label class="control-label" for="inputSuccess"><i id="icone_senhaAtual" class="fa"></i><b> Senha Atual</b></label>
-													<input type="password" maxlength="12" class="form-control senhaAtualObrigatoria" name="senhaAtual" id="senhaAtual" onblur="fcn_recarregaCoresSenha();fcn_validaSenhaAtual(6, 12, this.value);" >
-												</div>
 												<div id="div_novaSenha" class="form-group margin">
 													<label class="control-label" for="inputSuccess"><i id="icone_novaSenha" class="fa"></i><b> Nova Senha</b></label>
 													<input type="password" maxlength="12" class="form-control novaSenhaObrigatoria" name="senha" id="senha" onblur="fcn_recarregaCoresSenha();fcn_validaNovaSenha(6, 12, this.value);" >

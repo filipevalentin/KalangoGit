@@ -26,12 +26,16 @@
                          <label class="control-label" for="formacaoAcademica"> Formação Acadêmica</label>
                         <textarea id="formacaoAcademica" name="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" rows="3"></textarea>
                     </div>
+                    <div class="form-group">
+                         <label class="control-label" for="formacaoAcademica"> Experiência Profissional</label>
+                        <textarea id="formacaoAcademica" name="ExperienciaProfissional" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" rows="3"></textarea>
+                    </div>
                     <div id="div_email" class="form-group">
                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
                         <input type="text" autocomplete="off" id="email" name="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" >
                     </div>
                     <div id="div_codigoRegistro" class="form-group">
-                        <label class="control-label" for="codRegistro"><i id="icone_codigoRegistro" class="fa"></i> Código de Registro</label>
+                        <label class="control-label" for="codRegistro"><i id="icone_codigoRegistro" class="fa"></i> Registro (RE)</label>
                         <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" onblur="fcn_recarregaCores();" maxlength="10" class="form-control somenteNumeros codigoRegistroObrigatorio">
                     </div>
                     <div id="div_senha" class="form-group">
@@ -79,7 +83,7 @@
 		                <th>Sobrenome</th>
 		                <th>Login</th>
 		                <th>E-mail</th>
-		                <th>Código de Registro</th>
+		                <th>Registro (RE)</th>
 		                <th>Formação Acadêmica</th>
 		                <th>Status</th>
 		                <th><button class="btn btn-primary btn-md" style="border-radius: 50px;" data-toggle="modal" data-target="#criarProfessor" ><i class="fa fa-plus"></i></button></th>

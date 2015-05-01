@@ -83,6 +83,14 @@
                                                     <span>{{$professor->formacaoAcademica}}</span>
                                                 </div>
                                             </div>
+
+                                            <div class="profile-info-row">
+                                                <div class="profile-info-name">Experiência Profissional</div>
+
+                                                <div class="profile-info-value">
+                                                    <span>{{$professor->ExperienciaProfissional}}</span>
+                                                </div>
+                                            </div>
 											
 											<div class="profile-info-row">
                                                 <div class="profile-info-name">E-mail</div>
@@ -93,7 +101,7 @@
                                             </div>
 											
                                             <div class="profile-info-row">
-                                                <div class="profile-info-name">Código Registro</div>
+                                                <div class="profile-info-name">Registro (RE)</div>
 
                                                 <div class="profile-info-value">
                                                     <span>{{$professor->codRegistro}}</span>
@@ -167,13 +175,19 @@
                                                         <label class="control-label" for="dataNascimento"><b> Formação Acadêmica</b></label>
                                                         <textarea name="formacaoAcademica" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" rows="3" >{{$professor->formacaoAcademica}}</textarea>
                                                     </div>
+
+                                                    <div class="form-group margin">
+                                                        <label class="control-label" for="dataNascimento"><b> Experiência Profissional</b></label>
+                                                        <input type="text" name="ExperienciaProfissional" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" value="{{$professor->ExperienciaProfissional}}">
+                                                    </div>
+
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i><b> E-mail</b></label>
                                                         <input type="text" autocomplete="off" name="email" id="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$professor->email}}>
                                                     </div>
 													<div id="div_codigoRegistro" class="form-group margin">
-                                                        <label class="control-label" for="dataNascimento"><i id="icone_codigoRegistro" class="fa "></i><b> Código Registro</b></label>
-                                                        <input type="text" autocomplete="off" name="codRegistro" id="codRegistro" onblur="fcn_recarregaCores();" maxlength="10" class="form-control somenteNumeros codigoRegistroObrigatorio" value={{$professor->codRegistro}}>
+                                                        <label class="control-label" for="dataNascimento"><i id="icone_codigoRegistro" class="fa "></i><b> Registro (RE)</b></label>
+                                                        <input type="text" autocomplete="off" name="REProf" id="codRegistro" onblur="fcn_recarregaCores();" maxlength="10" class="form-control somenteNumeros codigoRegistroObrigatorio" value={{$professor->REprof}}>
                                                     </div>
 													<div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block btn-salvar-dados">Salvar</button>
@@ -183,7 +197,7 @@
                                         </div>
                                     {{Form::close()}}
                                     
-                                    <form action="atualizaSenha" method="POST" role="form">
+                                    <form action="/admin/atualizaSenha" method="POST" role="form">
                                         <input type="text" name="id" class="form-control" style="display:none;" value={{$professor}}>
                                         <h4 class="header">Acesso</h4>
                                         <hr>
@@ -199,10 +213,6 @@
                                                 </div>
                                             </div>
                                                 <div class="col-md-9 col-sm-9 col-xs-12">
-                                                    <div id="div_senhaAtual" class="form-group margin">
-                                                        <label class="control-label" for="inputSuccess"><i id="icone_senhaAtual" class="fa"></i><b> Senha Atual</b></label>
-                                                        <input type="password" maxlength="12" class="form-control senhaAtualObrigatoria" name="senhaAtual" id="senhaAtual" onblur="fcn_recarregaCoresSenha();fcn_validaSenhaAtual(6, 12, this.value);" >
-                                                    </div>
                                                     <div id="div_novaSenha" class="form-group margin">
                                                         <label class="control-label" for="inputSuccess"><i id="icone_novaSenha" class="fa"></i><b> Nova Senha</b></label>
                                                         <input type="password" maxlength="12" class="form-control novaSenhaObrigatoria" name="senha" id="senha" onblur="fcn_recarregaCoresSenha();fcn_validaNovaSenha(6, 12, this.value);" >
