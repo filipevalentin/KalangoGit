@@ -316,7 +316,7 @@
                                         </h4>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-titulo="{{$questao->titulo}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me"><i class="fa fa-pencil"></i></button>
-                                            <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                            <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button></a>
                                         </div>
                                     </div>
                                     <div id="ME{{$questao->id}}" class="panel-collapse collapse">
@@ -383,7 +383,7 @@
                                         </h4>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-titulo="{{$questao->titulo}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru"><i class="fa fa-pencil"></i></button>
-                                            <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                            <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button></a>
                                         </div>
                                     </div>
                                     <div id="RU{{$questao->id}}" class="panel-collapse collapse">

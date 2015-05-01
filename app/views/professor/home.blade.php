@@ -95,7 +95,7 @@
                                         </a>
                                     </h4>
                                     <div class="box-tools pull-right">
-                                        <a href="/professor/modulo/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
+                                        <a href="/professor/modulo/{{$modulo->id}}"><button rel="tooltip" data-placement="left" title="Ver Aulas do Módulo" class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
                                     </div>
                                 </div>
                                 <div id="Modulo{{$modulo->id}}" class="panel-collapse collapse">

@@ -81,8 +81,8 @@
                                 <td>{{User::find($aluno->id)->email}}</td>
                                 <td>
                                     <div class="box-tools" style="padding:0px">
-                                        <a href="/perfilAluno/{{$aluno->id}}"><button class="btn btn-success btn-xs"><i class="fa fa-external-link"></i></button></a>
-                                        <a href="/desmatricularAluno/{{$aluno->id}}/{{$turma->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                        <a href="/perfilAluno/{{$aluno->id}}"><button rel="tooltip" data-placement="left" title="Ver Perfil do Aluno" class="btn btn-success btn-xs"><i class="fa fa-external-link"></i></button></a>
+                                        <a href="/desmatricularAluno/{{$aluno->id}}/{{$turma->id}}"><button rel="tooltip" data-placement="left" title="Desmatricular Aluno" class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                     </div>
                                 </td> 
                             </tr>

@@ -310,9 +310,9 @@
                                         </a>
                                     </h4>
                                     <div class="box-tools pull-right">
-                                        <a href="/admin/modulo/{{$modulo->id}}"><button class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
-                                        <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarmodulo" data-id="{{$modulo->id}}" data-nome="{{$modulo->nome}}"><i class="fa fa-pencil"></i></button>
-                                        <a href="/admin/modulo/deletar/{{$modulo->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                        <a href="/admin/modulo/{{$modulo->id}}"><button rel="tooltip" data-placement="right" title="Ver Aulas do Módulo" class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
+                                        <button class="btn btn-success btn-sm" rel="tooltip" data-placement="left" title="Editar Módulo" data-toggle="modal" data-target="#editarmodulo" data-id="{{$modulo->id}}" data-nome="{{$modulo->nome}}"><i class="fa fa-pencil"></i></button>
+                                        <a href="/admin/modulo/deletar/{{$modulo->id}}"><button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button></a>
                                     </div>
                                 </div>
                                 <div id="Modulo{{$modulo->id}}" class="panel-collapse collapse">
@@ -325,7 +325,7 @@
                                                     <div class="inner">
                                                         <div class="box-tools pull-right">
                                         
-                                                            <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarturma" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" data-professor="{{User::find($turma->professor->id)->nome}}" data-idprofessor="{{$turma->professor->id}}" data-status="{{$turma->status}}"><i class="fa fa-pencil"></i></button>
+                                                            <button class="btn btn-success btn-xs" rel="tooltip" data-placement="left" title="Editar Turma" data-toggle="modal" data-target="#editarturma" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" data-professor="{{User::find($turma->professor->id)->nome}}" data-idprofessor="{{$turma->professor->id}}" data-status="{{$turma->status}}"><i class="fa fa-pencil"></i></button>
                                                             <a href="/admin/turma/deletar/{{$turma->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                                         </div>
                                                         <a href="/admin/turma/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">

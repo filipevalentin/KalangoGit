@@ -208,7 +208,7 @@
                                                 </div>
                                                 @else
                                                 <div class="box-tools pull-right">
-                                                    <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarCategoria" data-id="{{$categorias[$j]->id}}" data-nome="{{$categorias[$j]->nome}}" data-tipo="{{get_class($categorias[$j])}}"><i class="fa fa-pencil"></i></button>
+                                                    <button class="btn btn-success btn-xs" rel="tooltip" data-placement="left" title="Editar Categoria" data-toggle="modal" data-target="#editarCategoria" data-id="{{$categorias[$j]->id}}" data-nome="{{$categorias[$j]->nome}}" data-tipo="{{get_class($categorias[$j])}}"><i class="fa fa-pencil"></i></button>
                                                     <a href="/admin/categoria/deletar/{{$categorias[$j]->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                                 </div>
                                                 <div class="curso" style="cursor:pointer;" id="{{$categorias[$j]->id}}" data-tipo="{{get_class($categorias[$j])}}" data-atividades="{{$atividades}}">
@@ -267,7 +267,7 @@
                                     <div style="padding: 10px;" class="inner">
 
                                     <div class="box-tools pull-right">
-                                        <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#editarAtividadeExtra" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" data-idModulo="{{$atividade->idModulo}}" data-idCategoria="{{$atividade->idCategoria}}" data-status="{{$atividade->status}}"><i class="fa fa-pencil"></i></button>
+                                        <button class="btn btn-success btn-xs" rel="tooltip" data-placement="left" title="Editar Atividade" data-toggle="modal" data-target="#editarAtividadeExtra" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" data-idModulo="{{$atividade->idModulo}}" data-idCategoria="{{$atividade->idCategoria}}" data-status="{{$atividade->status}}"><i class="fa fa-pencil"></i></button>
                                         <a href="/admin/atividade/deletar/{{atividade->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
                                     </div>
                                     <a href="/admin/atividade/{{$atividade->id}}/editar">
