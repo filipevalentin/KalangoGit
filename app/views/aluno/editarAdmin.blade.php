@@ -62,7 +62,7 @@
                                             @if(Auth::user()->urlImagem != null)
                                                 <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="{{$aluno->urlImagem}}">
                                             @else
-                                                 <img class="editable img-circle" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
+                                                 <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
                                             @endif
                                         </span>
 
@@ -172,7 +172,7 @@
                                                      @if(Auth::user()->urlImagem != null)
                                                         <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="{{$aluno->urlImagem}}">
                                                     @else
-                                                         <img class="editable img-circle" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
+                                                         <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
                                                     @endif
                                                         
                                                     </span>
