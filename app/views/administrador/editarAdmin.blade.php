@@ -157,9 +157,9 @@
                                                         <label class="control-label" for="cargo"><i id="icone_cargo" class="fa"></i><b> Cargo</b></label>
                                                         <input type="text" autocomplete="off" name="cargo" onblur="fcn_recarregaCores();" maxlength="50" class="form-control" value={{$administrador->cargo}}>
                                                     </div>
-                                                    <div id="div_sobrenome" class="form-group margin">
-                                                        <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i><b> Código de Registro</b></label>
-                                                        <input type="text" autocomplete="off" name="codRegistro" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio" value={{$administrador->codRegistro}}>
+                                                    <div id="div_codRegistro" class="form-group margin">
+                                                        <label class="control-label" for="codRegistro"><i id="icone_codRegistro" class="fa"></i><b> Código de Registro</b></label>
+                                                        <input type="text" autocomplete="off" name="codRegistro" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteNumeros codRegistroObrigatorio" value={{$administrador->codRegistro}}>
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i><b> E-mail</b></label>
@@ -256,6 +256,19 @@
 				$( "#icone_sobrenome" ).removeClass("fa-times-circle-o");
 				$( "#div_sobrenome" ).addClass("has-success");
 				$( "#icone_sobrenome" ).addClass("fa-check");
+			}
+			
+			if($(".codRegistroObrigatorio").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_codRegistro " ).removeClass("has-success");
+				$( "#icone_codRegistro" ).removeClass("fa-check");
+				$( "#div_codRegistro " ).addClass("has-error");
+				$( "#icone_codRegistro" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_codRegistro " ).removeClass("has-error");
+				$( "#icone_codRegistro" ).removeClass("fa-times-circle-o");
+				$( "#div_codRegistro " ).addClass("has-success");
+				$( "#icone_codRegistro" ).addClass("fa-check");
 			}
 			
 			if($(".emailObrigatorio").val() == ""){
@@ -356,7 +369,7 @@
 				$( "#div_nome" ).addClass("has-success");
 				$( "#icone_nome" ).addClass("fa-check");
 			}
-			
+			 
 			if($(".sobrenomeObrigatorio").val() == ""){
 				$( "#div_sobrenome" ).removeClass("has-success");
 				$( "#icone_sobrenome" ).removeClass("fa-check");
@@ -367,6 +380,18 @@
 				$( "#icone_sobrenome" ).removeClass("fa-times-circle-o");
 				$( "#div_sobrenome" ).addClass("has-success");
 				$( "#icone_sobrenome" ).addClass("fa-check");
+			}
+			
+			if($(".codRegistroObrigatorio").val() == ""){
+				$( "#div_codRegistro " ).removeClass("has-success");
+				$( "#icone_codRegistro" ).removeClass("fa-check");
+				$( "#div_codRegistro " ).addClass("has-error");
+				$( "#icone_codRegistro" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_codRegistro " ).removeClass("has-error");
+				$( "#icone_codRegistro" ).removeClass("fa-times-circle-o");
+				$( "#div_codRegistro " ).addClass("has-success");
+				$( "#icone_codRegistro" ).addClass("fa-check");
 			}
 			
 			if($(".emailObrigatorio").val() == ""){
