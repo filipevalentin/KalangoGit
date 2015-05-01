@@ -187,7 +187,7 @@
                                                     </div>
 													<div id="div_codigoRegistro" class="form-group margin">
                                                         <label class="control-label" for="dataNascimento"><i id="icone_codigoRegistro" class="fa "></i><b> Registro (RE)</b></label>
-                                                        <input type="text" autocomplete="off" name="REProf" id="codRegistro" onblur="fcn_recarregaCores();" maxlength="10" class="form-control somenteNumeros codigoRegistroObrigatorio" value={{$professor->REprof}}>
+                                                        <input type="text" autocomplete="off" name="REProf" id="codRegistro" onblur="fcn_recarregaCores();" maxlength="10" class="form-control somenteNumeros codigoRegistroObrigatorio" value={{$professor->REProf}}>
                                                     </div>
 													<div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block btn-salvar-dados">Salvar</button>
