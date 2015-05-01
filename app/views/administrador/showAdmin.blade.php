@@ -22,7 +22,11 @@
                         <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i> Sobrenome</label>
                         <input type="text" autocomplete="off" id="sobrenome" name="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio">
                     </div>
-                    <div id="div_codRegistro" class="form-group">
+                    <div class="form-group">
+                        <label class="control-label" for="cargo"> Cargo</label>
+                        <input type="text" autocomplete="off" id="cargo" name="cargo" maxlength="50" class="form-control" onblur="fcn_recarregaCores();" >
+                    </div>
+					<div id="div_codRegistro" class="form-group">
                         <label class="control-label" for="codRegistro"><i id="icone_codRegistro" class="fa"></i> Código de Registro</label>
                         <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" maxlength="50" class="form-control somenteNumeros codRegistroObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" >
                     </div>
