@@ -33,10 +33,10 @@
 
 @section('maincontent')
 	<section class="content-header">
-	    <h1>Gerenciar Módulos</h1>
+	    <h1>Módulos</h1>
 	    <ol class="breadcrumb">
 	        <li><a href="/admin/home" ><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Tópicos de Questões</li>
+	        <li class="active">Módulos</li>
 	    </ol>
 	</section>
 
