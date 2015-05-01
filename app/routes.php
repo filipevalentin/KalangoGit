@@ -174,8 +174,10 @@ Route::get('teste4',function(){
 
 		if($metodo == "soft"){
 			$turma->delete();
+			$turma->avisos()->sync(array());
 		}else{
 			$turma->alunos()->sync(array());
+			$turma->avisos()->sync(array());
 			$turma->forceDelete();
 		}
 	}
@@ -207,9 +209,11 @@ Route::get('teste4',function(){
 
 	function deletarCurso($curso, $metodo = "soft"){
 
+		Contrata::where("idCurso","=",$curso->id)->delete();
+
 		foreach ($curso->modulos as $modulo) {
 			deletarModulo($modulo, $metodo);
-		}
+		}	
 
 		if($metodo == "soft"){
 			$curso->delete();
