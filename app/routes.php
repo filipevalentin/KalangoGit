@@ -2855,7 +2855,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
 				return Redirect::back();
 			}else {
-				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->get() != null){
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
 					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
 					return Redirect::back();
 				}
@@ -2912,7 +2912,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
 				return Redirect::back();
 			}else {
-				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->get() != null){
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
 					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
 					return Redirect::back();
 				}
@@ -3048,7 +3048,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
 				return Redirect::back();
 			}else {
-				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->get() != null){
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
 					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
 					return Redirect::back();
 				}
@@ -3097,7 +3097,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
 				return Redirect::back();
 			}else {
-				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->get() != null){
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
 					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
 					return Redirect::back();
 				}
