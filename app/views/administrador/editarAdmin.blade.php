@@ -137,6 +137,11 @@
                                                         <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i><b> Sobrenome</b></label>
                                                         <input type="text" autocomplete="off" name="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio" value={{$administrador->sobrenome}}>
                                                     </div>
+
+                                                    <div id="div_sobrenome" class="form-group margin">
+                                                        <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i><b> Código de Registro</b></label>
+                                                        <input type="text" autocomplete="off" name="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio" value={{$administrador->codRegistro}}>
+                                                    </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i><b> E-mail</b></label>
                                                         <input type="text" autocomplete="off" maxlength="50" name="email" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$administrador->email}}>

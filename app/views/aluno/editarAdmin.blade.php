@@ -59,7 +59,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-3 center" style="text-align: center">  <!-- FotoPerfil+Botões -->
                                         <span class="profile-picture">
-                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="height: 200px;" {{'src="'.$aluno->urlImagem.'"'}} >
+                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{$aluno->urlImagem}}" >
                                         </span>
 
                                         <div class="space space-4"></div></br>
@@ -165,7 +165,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-3 center" style="text-align: center; padding: 30px 0 0 30px;">  <!-- FotoPerfil+Botões -->
                                                     <span class="profile-picture">
-                                                        <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" {{'src="'.$aluno->urlImagem.'"'}}>
+                                                        <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{$aluno->urlImagem}}">
                                                     </span>
 
                                                     <div class="space space-4"></div><br>

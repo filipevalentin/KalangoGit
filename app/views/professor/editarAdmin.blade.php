@@ -41,7 +41,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-3 center" style="text-align: center">  <!-- FotoPerfil+Botões -->
                                         <span class="profile-picture">
-                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="height: 200px;" {{'src="'.$professor->urlImagem.'"'}} >
+                                            <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{$professor->url}}" >
                                         </span>
 
                                         <div class="space space-4"></div></br>
@@ -104,7 +104,7 @@
                                                 <div class="profile-info-name">Registro (RE)</div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{$professor->codRegistro}}</span>
+                                                    <span>{{$professor->REProf}}</span>
                                                 </div>
                                             </div>
 
