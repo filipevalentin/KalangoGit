@@ -42,8 +42,8 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-3 center" style="text-align: center">  <!-- FotoPerfil+Botões -->
                                         <span class="profile-picture">
-                                            @if(Auth::user()->urlImagem != null)
-                                                <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{Auth::user()->urlImagem}}">                                                        
+                                            @if($administrador->urlImagem != null)
+                                                <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{$administrador->urlImagem}}">                                                        
                                             @else
                                                  <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
                                             @endif
@@ -128,8 +128,8 @@
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-3 center" style="text-align: center; padding: 30px 0 0 30px;">  <!-- FotoPerfil+Botões -->
                                                     <span class="profile-picture">
-                                                       @if(Auth::user()->urlImagem != null)
-		                                                    <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{Auth::user()->urlImagem}}">                                                        
+                                                       @if($administrador->urlImagem != null)
+		                                                    <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{$administrador->urlImagem}}">                                                        
 		                                                @else
 		                                                     <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
 		                                                @endif
