@@ -13,11 +13,11 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">        
-                <div class="box text-center">
+                <div class="box text-center" >
                     <div class="box-header">
                         <h3 class="box-title center" style="float: none;">{{$aviso->titulo}}</h3>
                     </div>
-                    <div class="box-body">
+                    <div class="box-body" style="text-align:justify;">
                     	<p>{{$aviso->descricao}}</p>
                         @if($aviso->urlMidia != null)
                             <img src="/{{$aviso->urlMidia}}" class="img-responsive center" alt="Responsive image" style="display: initial; max-height: 800px;">
