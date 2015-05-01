@@ -1845,9 +1845,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::post('criarIdioma', function(){
 			
-			if(Idioma::all()->lists('nome')->contains(Input::get('nome'))){
-				Session::flash('warning', "Esse idioma já existe");
-				return Redirect::back();
+			if(Idioma::all()->lists('nome')->count() != null){
+				if(Idioma::all()->lists('nome')->contains(Input::get('nome'))){
+					Session::flash('warning', "Esse idioma já existe");
+					return Redirect::back();
+				}
+				
 			}
 
 			$idioma = new Idioma;
