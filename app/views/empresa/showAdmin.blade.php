@@ -21,7 +21,7 @@
                     </div>
                     <div id="div_cnpj_nova_empresa" class="form-group">
                         <label class="control-label" for="cnpj"><i id="icone_cnpj_nova_empresa" class="fa"></i> CNPJ</label>
-                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="fcn_recarregaCoresNovaEmpresa();" maxlength="100" class="form-control cnpjObrigatorio_nova_empresa" >
+                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="fcn_recarregaCoresNovaEmpresa();validacpfCnpj_pwb(this);" maxlength="100" class="form-control somenteNumeros cnpjObrigatorio_nova_empresa" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -55,7 +55,7 @@
                     </div>
                     <div id="div_cnpj_editar_empresa" class="form-group">
                         <label class="control-label" for="cnpj"><i id="icone_cnpj_editar_empresa" class="fa"></i> CNPJ</label>
-                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="fcn_recarregaCoresEditarEmpresa();" maxlength="100" class="form-control cnpjObrigatorio_editar_empresa" >
+                        <input type="text" autocomplete="off" id="cnpj" name="cnpj" onblur="fcn_recarregaCoresEditarEmpresa();validacpfCnpj_pwb(this);" maxlength="100" class="form-control somenteNumeros cnpjObrigatorio_editar_empresa" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -183,6 +183,132 @@
 </script>
 
 <script> //Validações
+	
+	$( ".somenteNumeros" ).keyup(function() {
+		//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
+		if(event.keyCode != 37 && event.keyCode != 39 && event.keyCode != 46 && event.keyCode != 8){
+			var valor = $(this).val().replace(/[^0-9]+/g,'');
+			$(this).val(valor);
+		}
+	});
+	
+	function validacpfCnpj_pwb(s) {
+		
+		if (s.value == "") {
+			return (false);
+		}
+
+		if (((s.value.length == 11) && (s.value == "11111111111") || (s.value == "22222222222") || (s.value == "33333333333") || (s.value == "44444444444") || (s.value == "55555555555") || (s.value == "66666666666") || (s.value == "77777777777") || (s.value == "88888888888") || (s.value == "99999999999") || (s.value == "00000000000") || (s.value == "00000000191"))) {
+			alert("CNPJ inválido!");
+			s.value = "";
+			s.focus();
+			return (false);
+		}
+
+
+		if (!((s.value.length == 11) || (s.value.length == 14))) {
+			alert("CNPJ inválido!");
+			s.value = "";
+			s.focus();
+			return (false);
+		}
+
+		var checkOK = "0123456789";
+		var checkStr = s.value;
+		var allValid = true;
+		var allNum = "";
+		for (i = 0; i < checkStr.length; i++) {
+			ch = checkStr.charAt(i);
+			for (j = 0; j < checkOK.length; j++)
+				if (ch == checkOK.charAt(j))
+				break;
+			if (j == checkOK.length) {
+				allValid = false;
+				break;
+			}
+			allNum += ch;
+		}
+		if (!allValid) {
+			alert("Favor preencher somente com dígitos o campo CNPJ!");
+			s.value = "";
+			s.focus();
+			return (false);
+		}
+
+		var chkVal = allNum;
+		var prsVal = parseFloat(allNum);
+		if (chkVal != "" && !(prsVal > "0")) {
+			alert("CNPJ zerado !");
+			s.value = "";
+			s.focus();
+			return (false);
+		}
+
+		if (s.value.length == 11) {
+			var tot = 0;
+
+			for (i = 2; i <= 10; i++)
+				tot += i * parseInt(checkStr.charAt(10 - i));
+
+			if ((tot * 10 % 11 % 10) != parseInt(checkStr.charAt(9))) {
+				alert("CNPJ inválido!");
+				s.value = "";
+				s.focus();
+				return (false);
+			}
+
+			tot = 0;
+
+			for (i = 2; i <= 11; i++)
+				tot += i * parseInt(checkStr.charAt(11 - i));
+
+			if ((tot * 10 % 11 % 10) != parseInt(checkStr.charAt(10))) {
+				alert("CNPJ inválido!");
+				s.value = "";
+				s.focus();
+				return (false);
+			}
+		}
+		else {
+			var tot = 0;
+			var peso = 2;
+
+			for (i = 0; i <= 11; i++) {
+				tot += peso * parseInt(checkStr.charAt(11 - i));
+				peso++;
+				if (peso == 10) {
+					peso = 2;
+				}
+			}
+
+			if ((tot * 10 % 11 % 10) != parseInt(checkStr.charAt(12))) {
+				alert("CNPJ inválido!");
+				s.value = "";
+				s.focus();
+				return (false);
+			}
+
+			tot = 0;
+			peso = 2;
+
+			for (i = 0; i <= 12; i++) {
+				tot += peso * parseInt(checkStr.charAt(12 - i));
+				peso++;
+				if (peso == 10) {
+					peso = 2;
+				}
+			}
+
+			if ((tot * 10 % 11 % 10) != parseInt(checkStr.charAt(13))) {
+				alert("CNPJ inválido!");
+				s.value = "";
+				s.focus();
+				return (false);
+			}
+		}
+		return (true);
+
+	}
 	
 	$(".btn-nova-empresa").click(function(event){
 		
