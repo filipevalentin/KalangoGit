@@ -267,8 +267,6 @@
         <div class="row">
             <div class="col-md-12">
 
-                <h2 class="page-header">Inglês - Teens - Módulo 1</h2>
-
                 <div class="col-md-8">
                     <div class="box box-solid">
                         <div class="box-header">
