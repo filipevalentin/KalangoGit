@@ -95,7 +95,7 @@
                                     <!-- User image -->
                                     <li class="user-header">
                                         @if(Auth::user()->urlImagem != null)
-                                            <img class="editable img-circle" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="Auth::user()->urlImagem">
+                                        <img class="editable img-circle" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/{{Auth::user()->urlImagem}}">
                                         @else
                                              <img class="editable img-circle" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
                                         @endif
