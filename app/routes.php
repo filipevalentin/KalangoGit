@@ -3424,6 +3424,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$professor = new Professor;
 			$professor->id= $user->id;
 
+			$professor->REProf = Input::get('codRegistro');
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
 			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
 
