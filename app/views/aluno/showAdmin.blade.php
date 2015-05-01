@@ -41,7 +41,7 @@
                     </div>
                     <div id="div_dataNascimento" class="form-group">
                         <label class="control-label" for="dataNascimento"><i id="icone_dataNascimento" class="fa"></i> Data de Nascimento</label>
-                        <input type="text" autocomplete="off" id="dataNascimento" name="dataNascimento" onblur="fcn_recarregaCores();" class="form-control dataNascimentoObrigatorio">
+                        <input type="text" readonly autocomplete="off" id="dataNascimento" name="dataNascimento" onblur="fcn_recarregaCores();" class="form-control dataNascimentoObrigatorio">
 					</div>
 					<div id="div_email" class="form-group">
                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
