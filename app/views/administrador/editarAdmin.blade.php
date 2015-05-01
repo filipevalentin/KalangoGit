@@ -80,6 +80,14 @@
                                                     <span>{{$administrador->sobrenome}}</span>
                                                 </div>
                                             </div>
+											
+											<div class="profile-info-row">
+                                                <div class="profile-info-name">Cargo</div>
+
+                                                <div class="profile-info-value">
+                                                    <span>{{$administrador->cargo}}</span> 
+                                                </div>
+                                            </div>
 
                                             <div class="profile-info-row">
 
@@ -145,7 +153,10 @@
                                                         <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i><b> Sobrenome</b></label>
                                                         <input type="text" autocomplete="off" name="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio" value={{$administrador->sobrenome}}>
                                                     </div>
-
+													<div id="div_cargo" class="form-group margin">
+                                                        <label class="control-label" for="cargo"><i id="icone_cargo" class="fa"></i><b> Cargo</b></label>
+                                                        <input type="text" autocomplete="off" name="cargo" onblur="fcn_recarregaCores();" maxlength="50" class="form-control" value={{$administrador->cargo}}>
+                                                    </div>
                                                     <div id="div_sobrenome" class="form-group margin">
                                                         <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i><b> Código de Registro</b></label>
                                                         <input type="text" autocomplete="off" name="codRegistro" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio" value={{$administrador->codRegistro}}>
