@@ -271,11 +271,11 @@
                                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                                     <div id="div_novaSenha" class="form-group margin">
                                                         <label class="control-label" for="inputSuccess"><i id="icone_novaSenha" class="fa"></i><b> Nova Senha</b></label>
-                                                        <input type="password" maxlength="12" class="form-control novaSenhaObrigatoria" name="senha" id="senha" onblur="fcn_recarregaCoresSenha();fcn_validaNovaSenha(6, 12, this.value);" >
+                                                        <input autocomplete="off" type="password" maxlength="12" class="form-control novaSenhaObrigatoria" name="senha" id="senha" onblur="fcn_recarregaCoresSenha();fcn_validaNovaSenha(6, 12, this.value);" >
                                                     </div>
                                                     <div id="div_confirmarNovaSenha" class="form-group margin">
                                                         <label class="control-label" for="inputSuccess"><i id="icone_confirmarNovaSenha" class="fa"></i><b> Confirmar Nova Senha</b></label>
-                                                        <input type="password" maxlength="12" class="form-control confirmaNovaSenhaObrigatoria" name="novaSenha" id="novaSenha" onblur="fcn_recarregaCoresSenha();fcn_validaConfirmaNovaSenha(6, 12, this.value);" >
+                                                        <input autocomplete="off" type="password" maxlength="12" class="form-control confirmaNovaSenhaObrigatoria" name="novaSenha" id="novaSenha" onblur="fcn_recarregaCoresSenha();fcn_validaConfirmaNovaSenha(6, 12, this.value);" >
                                                     </div>
                                                     <div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block btn-alterar-senha">Alterar Senha</button>
