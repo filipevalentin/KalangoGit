@@ -28,7 +28,7 @@
                     </div>
 					<div id="div_codRegistro" class="form-group">
                         <label class="control-label" for="codRegistro"><i id="icone_codRegistro" class="fa"></i> Código de Registro</label>
-                        <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" maxlength="50" class="form-control somenteNumeros codRegistroObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" >
+                        <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" maxlength="50" class="form-control somenteNumeros codRegistroObrigatorio" onblur="fcn_recarregaCores();" >
                     </div>
                     <div id="div_email" class="form-group">
                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
