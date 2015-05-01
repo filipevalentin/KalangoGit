@@ -43,7 +43,7 @@
                                     <div class="col-xs-12 col-sm-3 center" style="text-align: center">  <!-- FotoPerfil+Botões -->
                                         <span class="profile-picture">
                                             @if(Auth::user()->urlImagem != null)
-                                                <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{$administrador->urlImagem}}">                                                        
+                                                <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{Auth::user()->urlImagem}}">                                                        
                                             @else
                                                  <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
                                             @endif
@@ -121,7 +121,7 @@
                                                 <div class="col-xs-12 col-sm-3 center" style="text-align: center; padding: 30px 0 0 30px;">  <!-- FotoPerfil+Botões -->
                                                     <span class="profile-picture">
                                                        @if(Auth::user()->urlImagem != null)
-		                                                    <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{$administrador->urlImagem}}">                                                        
+		                                                    <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/{{Auth::user()->urlImagem}}">                                                        
 		                                                @else
 		                                                     <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
 		                                                @endif
@@ -148,7 +148,7 @@
 
                                                     <div id="div_sobrenome" class="form-group margin">
                                                         <label class="control-label" for="sobrenome"><i id="icone_sobrenome" class="fa"></i><b> Código de Registro</b></label>
-                                                        <input type="text" autocomplete="off" name="sobrenome" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio" value={{$administrador->codRegistro}}>
+                                                        <input type="text" autocomplete="off" name="codRegistro" onblur="fcn_recarregaCores();" maxlength="50" class="form-control somenteLetras sobrenomeObrigatorio" value={{$administrador->codRegistro}}>
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i><b> E-mail</b></label>
