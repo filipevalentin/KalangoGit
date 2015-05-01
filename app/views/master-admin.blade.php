@@ -118,9 +118,9 @@
                                     </li>-->
                                     <!-- Menu Footer-->
                                     <li class="user-footer">
-                                        <!--<div class="pull-left">
+                                        <div class="pull-left">
                                             <a href="/admin/perfil" class="btn btn-default btn-flat">Perfil</a>
-                                        </div>-->
+                                        </div>
                                         <div class="pull-right">
                                             <a href="/logout" class="btn btn-default btn-flat">Sair</a>
                                         </div>
