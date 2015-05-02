@@ -3255,6 +3255,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$aluno->respostaSecreta = $user->respostaSecreta;
 			$aluno->nome = $user->nome;
 			$aluno->urlImagem = $user->urlImagem;
+			$data = explode('-', $aluno->dataNascimento);
+			$aluno->dataNascimento = $data[2].'/'.$data[1].'/'.$data[0]; //hora, min, seg, mes, dia, ano;
 			return View::make('aluno/editarAdmin')->with('aluno', $aluno)
 											->with('mensagem', $mensagem);
 			
