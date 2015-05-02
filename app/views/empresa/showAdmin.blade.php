@@ -2,6 +2,7 @@
 
 @section('modals')
 
+
 <div class="modal fade" id="criarEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
