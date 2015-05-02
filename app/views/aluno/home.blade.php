@@ -48,7 +48,7 @@
                         <div class="carousel-inner">
                          @foreach($propagandas as $propaganda)
                             <div class="item" id="divCarousel">
-                                <a href="{{$propaganda->link}}"><img src="/{{$propaganda->urlImagem}}" alt="{{$propaganda->titulo}}" style="max-height: 400px; margin:auto;"></a>
+                                <a target="_blank" href="{{$propaganda->link}}"><img src="/{{$propaganda->urlImagem}}" alt="{{$propaganda->titulo}}" style="max-height: 400px; margin:auto;"></a>
                                 <div class="carousel-caption">
                                     {{$propaganda->titulo}}
                                 </div>

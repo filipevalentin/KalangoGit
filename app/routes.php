@@ -2150,7 +2150,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$turma->save();
 
 			// redirect
-			Session::flash('info', 'Turma criado com sucesso!');
+			Session::flash('info', 'Turma criada com sucesso!');
 			return Redirect::back();
 		});
 
@@ -3935,7 +3935,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			foreach ($propagandas as $propaganda) {
 				$propaganda->criadoPor = User::find($propaganda->idUsuario)->nome;
 				$propaganda->empresa = Empresa::find($propaganda->idEmpresa)->nome;
-				$propaganda->linkView = ($propaganda->link != null) ? "<a href='$propaganda->link''>Visitar Link</a>" : 'N/A';
+				$propaganda->linkView = ($propaganda->link != null) ? "<a href='$propaganda->link' target='_blank'>Visitar Link</a>" : 'N/A';
 				$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
 			}
 
@@ -3983,7 +3983,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				
 				$imagem->move('img/', $filename);
 			}
-
+			$propaganda->link = Input::get('link');
 			$propaganda->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
