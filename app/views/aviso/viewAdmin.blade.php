@@ -64,7 +64,7 @@
                     </div>
                     <div id="div_dataExpiracao_novo_aviso" class="form-group">
                         <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_novo_aviso" class="fa"></i> Data de Expiração</label>
-                        <input type="text" autocomplete="off" id="dataExpiracao" name="dataExpiracao" onblur="fcn_recarregaCores_novo_aviso();" class="form-control dataExpiracaoObrigatoria_novo_aviso">
+                        <input type="text" readonly autocomplete="off" id="dataExpiracao" name="dataExpiracao" onblur="fcn_recarregaCores_novo_aviso();" class="form-control dataExpiracaoObrigatoria_novo_aviso">
 					</div>
 					<div class="form-group">
                         <label class="control-label" for="enviarPara">Enviar para:</label>
@@ -115,7 +115,7 @@
                     </div>
                     <div id="div_dataExpiracao_editar_aviso" class="form-group">
                         <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_editar_aviso" class="fa"></i> Data de Expiração</label>
-                        <input type="text" autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="dataExpiracaoEditar" name="dataExpiracao" class="form-control dataExpiracaoObrigatoria_editar_aviso">
+                        <input type="text" readonly autocomplete="off" onblur="fcn_recarregaCores_editar_aviso();" id="dataExpiracaoEditar" name="dataExpiracao" class="form-control dataExpiracaoObrigatoria_editar_aviso">
 					</div>
 					<div class="form-group">
                         <label class="control-label" for="enviarPara">Enviar para:</label>
