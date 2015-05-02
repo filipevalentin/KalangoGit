@@ -3744,9 +3744,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$aviso->idAdmin = Auth::user()->id;
 			$aviso->save();
 
-			if(Input::get('idTurma') != "todos"){
-				foreach(Turma::find(Input::get('idTurma')) as $turma){
-					Turma::find($turma)->avisos()->attach($aviso->id);
+			if(Input::get('idTurma')[0] != "todos"){
+				foreach(Input::get('idTurma') as $turma){
+					Turma::find($turma)->avisos()->attach($aviso->id, array('dataAviso'=>date("Y-m-d")));
 				}
 			}else{
 				foreach (Turma::all() as $turma) {

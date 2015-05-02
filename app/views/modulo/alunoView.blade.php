@@ -74,7 +74,7 @@
 				                                    </div>
 			                                	@endforeach
 
-			                                	@foreach (Atividade::where('status','=','1')->whereIn('id',$aula->atividades->lists('id'))->get() as $atividade)
+			                                	@foreach ($aula->atividades()->where('status','=','1')->get() as $atividade)
 			                                		<div class="alert bg-primary alert-dismissable" style="min-height: 55px;">
 				                                        <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
 				                                        <p style="float:left;">{{$atividade->nome}}</p>

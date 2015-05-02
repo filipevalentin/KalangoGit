@@ -82,10 +82,10 @@
                                             </div>
 
                                             <div class="profile-info-row">
-                                                <div class="profile-info-name">Código Registro</div>
+                                                <div class="profile-info-name">Registro (RE)</div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{Auth::user()->professor->codRegistro}}</span>
+                                                    <span>{{Auth::user()->professor->REProf}}</span>
                                                 </div>
                                             </div>
 
@@ -109,7 +109,7 @@
                                                 <div class="profile-info-name">Experiência Profissional</div>
 
                                                 <div class="profile-info-value">
-                                                    <span>{{$professor->ExperienciaProfissional}}</span>
+                                                    <span>{{Auth::user()->professor->ExperienciaProfissional}}</span>
                                                 </div>
                                             </div>
 
@@ -155,7 +155,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12 col-sm-3 center" style="text-align: center; padding: 30px 0 0 30px;">  <!-- FotoPerfil+Botões -->
                                                     <span class="profile-picture">
-                                                        <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/<?php (Auth::user()->urlImagem != null) Auth::user()->urlImagem : '/images/default.png' ?>">
+                                                        <img class="editable img-responsive" style="height: 200px;" alt="Alex's Avatar" id="avatar2" style="height: 200px;" src="/<?php (Auth::user()->urlImagem != null)? Auth::user()->urlImagem : '/images/default.png' ?>">
                                                     </span>
 
                                                     <div class="space space-4"></div><br>
@@ -187,13 +187,13 @@
 
                                                     <div class="form-group margin">
                                                         <label class="control-label" for="dataNascimento"><b> Experiência Profissional</b></label>
-                                                        <input type="text" name="ExperienciaProfissional" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" value="{{$professor->ExperienciaProfissional}}">
+                                                        <input type="text" name="ExperienciaProfissional" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" value="{{Auth::user()->professor->ExperienciaProfissional}}">
                                                     </div>
 
                                                     
                                                     <div class="form-group has-success margin">
-                                                        <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Código Registro</b>
-                                                        <input type="text" name="codRegistro" class="form-control" required="" value="{{Auth::user()->professor->codRegistro}}">
+                                                        <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Registro (RE)</b>
+                                                        <input type="text" name="codRegistro" class="form-control" required="" value="{{Auth::user()->professor->REProf}}">
                                                     </div>
                                                     <div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block">Salvar</button>
