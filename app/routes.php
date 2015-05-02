@@ -3615,6 +3615,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->save();
 			$administrador= new Administrador;
 			$administrador->id = $user->id;
+			$administrador->cargo = Input::get('cargo');
 			$administrador->codRegistro = Input::get('codRegistro');
 
 			$administrador->save();
