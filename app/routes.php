@@ -2132,7 +2132,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$turma->save();
 
 			// redirect
-			Session::flash('info', 'Módulo criado com sucesso!');
+			Session::flash('info', 'Turma criado com sucesso!');
 			return Redirect::back();
 		});
 
