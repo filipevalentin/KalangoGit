@@ -33,7 +33,7 @@
                 <h4 class="modal-title" id="exampleModalLabel">Editar Idioma</h4>
             </div>
             <div class="modal-body">
-                 <form method="POST" action="/admin/criarIdioma" enctype="multipart/form-data">
+                 <form method="POST" action="/admin/atualizarIdioma" enctype="multipart/form-data">
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>

@@ -1848,7 +1848,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('criarIdioma', function(){
 			
 			if(Idioma::all()->count() != null){
-				if(Idioma::all()->lists('nome')->contains(Input::get('nome'))){
+				if(in_array(Input::get('nome'), Idioma::all()->lists('nome')) ){
 					Session::flash('warning', "Esse idioma já existe");
 					return Redirect::back();
 				}
@@ -1862,6 +1862,24 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			Session::flash('info', "Idioma criado com sucesso!");
 
+			return Redirect::back();
+		});
+
+		Route::post('atualizarIdioma', function(){
+			$idioma 			    = Idioma::find(Input::get('id')); 
+			$idioma->nome       	= Input::get('nome');
+
+			if(Idioma::all()->count() != null){
+				if(in_array(Input::get('nome'), Idioma::where('id','!=',$idioma->id)->lists('nome')) ){
+					Session::flash('warning', "Esse idioma já existe");
+					return Redirect::back();
+				}
+				
+			}
+			
+			$idioma->save();
+
+			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
 		});
 
@@ -3306,7 +3324,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->login = Input::get('matricula');
 
 			if(User::where('id','!=',$user->id)->count() !=null ){
-				if(in_array($user->email, User::all()->lists('email')) ){
+				if(in_array($user->email, User::where('id','!=', $user->id)->lists('email')) ){
 					Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
 					return Redirect::back();
 				}
@@ -3471,7 +3489,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->login = Input::get('codRegistro');
 
 			if(User::where('id','!=',$user->id)->count() !=null ){
-				if(in_array($user->email, User::all()->lists('email')) ){
+				if(in_array($user->email, User::where('id','!=', $user->id)->lists('email')) ){
 					Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
 					return Redirect::back();
 				}
@@ -3611,7 +3629,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->login = Input::get('codRegistro');
 
 			if(User::where('id','!=',$user->id)->count() !=null ){
-				if(in_array($user->email, User::all()->lists('email')) ){
+				if(in_array($user->email, User::where('id','!=', $user->id)->lists('email')) ){
 					Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
 					return Redirect::back();
 				}
