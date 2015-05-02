@@ -68,9 +68,9 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id" value="">
                     </div>
-                    <div id="div_professor-editar-turma" class="form-group">
-                        <label class="control-label" for="empresa"><i id="icone_empresa-editar-turma" class="fa"></i> Empresa</label>
-                        <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresEditarTurma();" class="form-control">
+                    <div id="div_empresa-editar-propaganda" class="form-group">
+                        <label class="control-label" for="empresa"><i id="icone_empresa-editar-propaganda" class="fa"></i> Empresa</label>
+                        <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresEditarTurma();" class="form-control empresaObrigatoria_editar_propaganda">
                         <option value="" >Selecione</option>
 						@foreach(Empresa::all() as $empresa)
                             <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
@@ -296,6 +296,19 @@
 	
 		var obrigatorioPendente = 0;
 		
+		if($(".empresaObrigatoria_editar_propaganda").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_empresa-editar-propaganda" ).removeClass("has-success");
+			$( "#icone_empresa-editar-propaganda" ).removeClass("fa-check");
+			$( "#div_empresa-editar-propaganda" ).addClass("has-error");
+			$( "#icone_empresa-editar-propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_empresa-editar-propaganda" ).removeClass("has-error");
+			$( "#icone_empresa-editar-propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_empresa-editar-propaganda" ).addClass("has-success");
+			$( "#icone_empresa-editar-propaganda" ).addClass("fa-check");
+		}
+		
 		if($(".tituloObrigatorio_editar_propaganda").val() == ""){
 			obrigatorioPendente = 1;
 			$( "#div_titulo_editar_propaganda" ).removeClass("has-success");
@@ -320,19 +333,6 @@
 			$( "#icone_link_editar_propaganda" ).removeClass("fa-times-circle-o");
 			$( "#div_link_editar_propaganda" ).addClass("has-success");
 			$( "#icone_link_editar_propaganda" ).addClass("fa-check");
-		}
-		
-		if($(".imagemObrigatoria_nova_propaganda").val() == ""){
-			obrigatorioPendente = 1;
-			$( "#div_imagem_editar_propaganda" ).removeClass("has-success");
-			$( "#icone_imagem_editar_propaganda" ).removeClass("fa-check");
-			$( "#div_imagem_editar_propaganda" ).addClass("has-error");
-			$( "#icone_imagem_editar_propaganda" ).addClass("fa-times-circle-o");
-		}else{
-			$( "#div_imagem_editar_propaganda" ).removeClass("has-error");
-			$( "#icone_imagem_editar_propaganda" ).removeClass("fa-times-circle-o");
-			$( "#div_imagem_editar_propaganda" ).addClass("has-success");
-			$( "#icone_imagem_editar_propaganda" ).addClass("fa-check");
 		}
 		
 		if(obrigatorioPendente == 1){
@@ -395,6 +395,18 @@
 	}
 	
 	function fcn_recarregaCoresEditarPropaganda(){
+		
+		if($(".empresaObrigatoria_editar_propaganda").val() == ""){
+			$( "#div_empresa-editar-propaganda" ).removeClass("has-success");
+			$( "#icone_empresa-editar-propaganda" ).removeClass("fa-check");
+			$( "#div_empresa-editar-propaganda" ).addClass("has-error");
+			$( "#icone_empresa-editar-propaganda" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_empresa-editar-propaganda" ).removeClass("has-error");
+			$( "#icone_empresa-editar-propaganda" ).removeClass("fa-times-circle-o");
+			$( "#div_empresa-editar-propaganda" ).addClass("has-success");
+			$( "#icone_empresa-editar-propaganda" ).addClass("fa-check");
+		}
 		
 		if($(".tituloObrigatorio_editar_propaganda").val() == ""){
 			$( "#div_titulo_editar_propaganda" ).removeClass("has-success");
