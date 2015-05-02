@@ -123,7 +123,7 @@
         var modal = $(this)
         modal.find('#id').val(dataid)
         modal.find('#nome').val(datanome)
-        modal.find('#razaosocial').val(datarazaosocial)
+        modal.find('#razaoSocial').val(datarazaosocial)
         modal.find('#cnpj').val(datacnpj)
 
     });

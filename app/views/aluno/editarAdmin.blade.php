@@ -205,36 +205,36 @@
                                                     </div>
 													<div id="div_diaVencimentoBoleto" class="form-group margin">
                                                         <label class="control-label" for="dataVencimentoBoleto"><i id="icone_diaVencimentoBoleto" class="fa"></i> Dia do Vencimento do Boleto</label>
-														<select name="diaVencimentoBoleto" id="diaVencimentoBoleto" onblur="fcn_recarregaCores();" class="form-control diaVencimentoObrigatorio">
+														<select name="dataVencimentoBoleto" id="diaVencimentoBoleto" onblur="fcn_recarregaCores();" class="form-control diaVencimentoObrigatorio">
 															<option value="" >Selecione</option>
-															<option value="1" >1</option>
-															<option value="2" >2</option>
-															<option value="3" >3</option>
-															<option value="4" >4</option>
-															<option value="5" >5</option>
-															<option value="6" >6</option>
-															<option value="7" >7</option>
-															<option value="8" >8</option>
-															<option value="9" >9</option>
-															<option value="10" >10</option>
-															<option value="11" >11</option>
-															<option value="12" >12</option>
-															<option value="13" >13</option>
-															<option value="14" >14</option>
-															<option value="15" >15</option>
-															<option value="16" >16</option>
-															<option value="17" >17</option>
-															<option value="18" >18</option>
-															<option value="19" >19</option>
-															<option value="20" >20</option>
-															<option value="21" >21</option>
-															<option value="22" >22</option>
-															<option value="23" >23</option>
-															<option value="24" >24</option>
-															<option value="25" >25</option>
-															<option value="26" >26</option>
-															<option value="27" >27</option>
-															<option value="28" >28</option>
+															<option value="1" <?php if($aluno->dataVencimentoBoleto == '1') echo ' selected="selected"'?> >1</option>
+															<option value="2" <?php if($aluno->dataVencimentoBoleto == '2') echo ' selected="selected"'?>>2</option>
+															<option value="3" <?php if($aluno->dataVencimentoBoleto == '3') echo ' selected="selected"'?>>3</option>
+															<option value="4" <?php if($aluno->dataVencimentoBoleto == '4') echo ' selected="selected"'?>>4</option>
+															<option value="5" <?php if($aluno->dataVencimentoBoleto == '5') echo ' selected="selected"'?>>5</option>
+															<option value="6" <?php if($aluno->dataVencimentoBoleto == '6') echo ' selected="selected"'?>>6</option>
+															<option value="7" <?php if($aluno->dataVencimentoBoleto == '7') echo ' selected="selected"'?>>7</option>
+															<option value="8" <?php if($aluno->dataVencimentoBoleto == '8') echo ' selected="selected"'?>>8</option>
+															<option value="9" <?php if($aluno->dataVencimentoBoleto == '9') echo ' selected="selected"'?>>9</option>
+															<option value="10" <?php if($aluno->dataVencimentoBoleto == '10') echo ' selected="selected"'?>>10</option>
+															<option value="11" <?php if($aluno->dataVencimentoBoleto == '11') echo ' selected="selected"'?>>11</option>
+															<option value="12" <?php if($aluno->dataVencimentoBoleto == '12') echo ' selected="selected"'?>>12</option>
+															<option value="13" <?php if($aluno->dataVencimentoBoleto == '13') echo ' selected="selected"'?>>13</option>
+															<option value="14" <?php if($aluno->dataVencimentoBoleto == '14') echo ' selected="selected"'?>>14</option>
+															<option value="15" <?php if($aluno->dataVencimentoBoleto == '15') echo ' selected="selected"'?>>15</option>
+															<option value="16" <?php if($aluno->dataVencimentoBoleto == '16') echo ' selected="selected"'?>>16</option>
+															<option value="17" <?php if($aluno->dataVencimentoBoleto == '17') echo ' selected="selected"'?>>17</option>
+															<option value="18" <?php if($aluno->dataVencimentoBoleto == '18') echo ' selected="selected"'?>>18</option>
+															<option value="19" <?php if($aluno->dataVencimentoBoleto == '19') echo ' selected="selected"'?>>19</option>
+															<option value="20" <?php if($aluno->dataVencimentoBoleto == '20') echo ' selected="selected"'?>>20</option>
+															<option value="21" <?php if($aluno->dataVencimentoBoleto == '21') echo ' selected="selected"'?>>21</option>
+															<option value="22" <?php if($aluno->dataVencimentoBoleto == '22') echo ' selected="selected"'?>>22</option>
+															<option value="23" <?php if($aluno->dataVencimentoBoleto == '23') echo ' selected="selected"'?>>23</option>
+															<option value="24" <?php if($aluno->dataVencimentoBoleto == '24') echo ' selected="selected"'?>>24</option>
+															<option value="25" <?php if($aluno->dataVencimentoBoleto == '25') echo ' selected="selected"'?>>25</option>
+															<option value="26" <?php if($aluno->dataVencimentoBoleto == '26') echo ' selected="selected"'?>>26</option>
+															<option value="27" <?php if($aluno->dataVencimentoBoleto == '27') echo ' selected="selected"'?>>27</option>
+															<option value="28" <?php if($aluno->dataVencimentoBoleto == '28') echo ' selected="selected"'?>>28</option>
 														</select>
                                                     </div>
                                                     <div id="div_matricula" class="form-group margin">

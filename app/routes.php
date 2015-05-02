@@ -3280,7 +3280,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$aluno->id = $user->id;
 
-			$aluno->dataNascimento = Input::get('dataNascimento');
+			$data = explode('/', Input::get('dataNascimento'));
+			$aluno->dataNascimento = date('Y-m-d', mktime(0,0,0,$data[1],$data[0],$data[2])); //hora, min, seg, mes, dia, ano;
 			$aluno->sobreMim = Input::get('sobreMim');
 			$aluno->matricula       = Input::get('matricula');
 			$aluno->dataVencimentoBoleto       = Input::get('dataVencimentoBoleto');
@@ -3723,7 +3724,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$aviso->save();
 
 			if(Input::get('idTurma') != "todos"){
-				foreach(Input::get('idTurma') as $turma){
+				foreach(Turma::find(Input::get('idTurma')) as $turma){
 					Turma::find($turma)->avisos()->attach($aviso->id);
 				}
 			}else{
@@ -3915,7 +3916,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$propaganda->criadoPor = User::find($propaganda->idUsuario)->nome;
 				$propaganda->empresa = Empresa::find($propaganda->idEmpresa)->nome;
 				$propaganda->linkView = ($propaganda->link != null) ? "<a href='$propaganda->link''>Visitar Link</a>" : 'N/A';
-				$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' data-link='$propaganda->link' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+				$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
 			}
 
 			$response = array(
@@ -3939,6 +3940,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				
 				$imagem->move('img/', $filename);
 			}
+			$propaganda->link = Input::get("link");
 			$propaganda->idUsuario = Auth::user()->id;
 			$propaganda->idEmpresa = Input::get("idEmpresa");
 			$propaganda->save();
