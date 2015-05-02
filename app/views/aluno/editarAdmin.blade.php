@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" href="../../plugins/jQueryUI/calendario/jquery-ui.css">
 <script src="../../plugins/jQuery/jQuery-2.1.3.min.js"></script>
+
 <script>
   $(function() {
     $( "#dataNascimento" ).datepicker({
@@ -197,7 +198,7 @@
                                                     </div>
                                                     <div id="div_dataNascimento" class="form-group margin">
                                                          <label class="control-label" for="dataNascimento"><i id="icone_dataNascimento" class="fa"></i> Data de Nascimento</label>
-                                                        <input type="text" readonly autocomplete="off" name="dataNascimento" id="dataNascimento" onblur="fcn_recarregaCores();" class="form-control dataNascimentoObrigatorio" value={{$aluno->dataNascimento}}>
+                                                        <input type="text" autocomplete="off" name="dataNascimento" id="dataNascimento" onblur="fcn_recarregaCores();" class="form-control validaData dataNascimentoObrigatorio" value={{$aluno->dataNascimento}}>
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
@@ -299,6 +300,7 @@
 
 @section('scripts')
 	
+	<script src="../../js/jquery.maskedinput.min.js"></script>
 	<script> //Validações
 		$( ".somenteLetras" ).keyup(function() {
 			//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
@@ -315,6 +317,8 @@
 				$(this).val(valor);
 			}
 		});
+		
+		$(".validaData").mask("99/99/9999");
 		
 		$(".btn-salvar-dados").click(function(event){
 			
