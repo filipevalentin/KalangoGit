@@ -101,7 +101,8 @@
                                 <div id="Modulo{{$modulo->id}}" class="panel-collapse collapse">
                                     <div class="row">
 
-                                    @foreach($modulo->turmas()->where('status','=', 1)->get() as $turma)
+                                    @foreach($modulo->turmas as $turma)
+                                    @if($turma->status != 0)
                                         <div class="col-md-3">
                                             <div class="box-body">
                                                 <div class="small-box bg-green">
@@ -117,6 +118,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    @endif
                                     @endforeach
 
                                     </div>

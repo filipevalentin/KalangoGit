@@ -813,10 +813,8 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 						}
 						
 					}
+					
 				}
-
-				
-
 
 				$cursosArray = $cursos->toArray();
 
