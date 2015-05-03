@@ -165,7 +165,7 @@
                     <div id="div_professor-nova-turma" class="form-group">
                         <label class="control-label" for="professor"><i id="icone_professor-nova-turma" class="fa"></i> Professor</label>
                         <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresNovaTurma();" class="form-control professorObrigatorio-nova-turma">
-                            <option value="" disabled>Selecione um Professor</option>
+                            <option value="" >Selecione um Professor</option>
                         @foreach(Professor::all() as $professor)
                             <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
                         @endforeach
