@@ -796,7 +796,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				}else{
 					$cursos = Curso::whereHas('turmas', function($q) use ($turmas)
 						{
-							$q->whereIn('tur	mas.id', $turmas->lists('id'));
+							$q->whereIn('turmas.id', $turmas->lists('id'));
 						})->get();
 
 					foreach ($cursos as $curso) {
