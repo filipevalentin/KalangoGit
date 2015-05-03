@@ -20,9 +20,10 @@
                         <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAtividadeExtra();" maxlength="50" class="form-control somenteLetrasENumeros nomeObrigatorio-nova-atividadeExtra"></textarea>
                     </div>
                     <div id="div_curso-nova-atividadeExtra" class="form-group">
-                        <label class="control-label" for="idModulo"><i id="icone_curso-nova-atividadeExtra" class="fa"></i>Selecione o Módulo</label>
+                        <label class="control-label" for="idModulo"><i id="icone_curso-nova-atividadeExtra" class="fa"></i> Selecione o Módulo</label>
                         <select id="idModulo" name="idModulo" onblur="fcn_recarregaCoresNovaAtividadeExtra();" class="form-control cursoObrigatorio-nova-atividadeExtra">
-                            @foreach(Modulo::all() as $modulo)
+                            <option value="">Selecione</option>
+							@foreach(Modulo::all() as $modulo)
                                 <option value="{{$modulo->id}}">{{$modulo->nome}}-{{$modulo->curso->nome}}</option>
                             @endforeach
                         </select>
