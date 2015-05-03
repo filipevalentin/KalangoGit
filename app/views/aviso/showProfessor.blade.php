@@ -19,8 +19,8 @@
                     </div>
                     <div class="box-body">
                     	<p>{{$aviso->descricao}}</p>
-                        @if($aviso->urlMidia != null)
-                            <img src="/{{$aviso->urlMidia}}" class="img-responsive center" alt="Responsive image" style="display: initial; max-height: 800px;">
+                        @if($aviso->urlImagem != null)
+                            <img src="/{{$aviso->urlImagem}}" class="img-responsive center" alt="Responsive image" style="display: initial; max-height: 800px;">
                         @endif
                     </div>
 				</div>

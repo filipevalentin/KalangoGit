@@ -760,51 +760,62 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				//Turmas do professor, de todos os idiomas (será interseccionado mais tarde)
 				$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->where('status','=','1')->get();
 
-				//Pega os cursos do idioma
-				$cursos = Curso::where('idIdioma','=',$idioma->id)->whereHas('turmas', function($q) use ($turmas)
-					{
-						$q->whereIn('turmas.id', $turmas->lists('id'));
-					})->get();
+				if($turmas->count() == null){
+					$cursos = Curso::where('nome','=',"jq")->get();
+				}else{
+					//Pega os cursos do idioma
+					$cursos = Curso::where('idIdioma','=',$idioma->id)->whereHas('turmas', function($q) use ($turmas)
+						{
+							$q->whereIn('turmas.id', $turmas->lists('id'));
+						})->get();
 
-				foreach ($cursos as $curso) {
-					//Pega só os modulos que haja uma turma relacionada ao professor
-					$curso->modulos = Modulo::where('idCurso','=',$curso->id)->whereHas('turmas', function($q) use ($turmas){
-										$q->whereIn('id',$turmas->lists('id'));
-									})->get();
+					foreach ($cursos as $curso) {
+						//Pega só os modulos que haja uma turma relacionada ao professor
+						$curso->modulos = Modulo::where('idCurso','=',$curso->id)->whereHas('turmas', function($q) use ($turmas){
+											$q->whereIn('id',$turmas->lists('id'));
+										})->get();
 
-					$curso->numTurmas = 0;
+						$curso->numTurmas = 0;
 
-					foreach ($curso->modulos as $modulo) {
-						$modulo->turmas = $modulo->turmas->intersect($turmas);
-						$curso->numTurmas += $modulo->turmas->count();
+						foreach ($curso->modulos as $modulo) {
+							$modulo->turmas = $modulo->turmas->intersect($turmas);
+							$curso->numTurmas += $modulo->turmas->count();
+						}
+						
 					}
-					
-				}
+				}	
 
 				$cursosArray = $cursos->toArray();
 
 				return View::make('professor/home')->with(array('cursos'=>$cursos, 'cursosArray'=>$cursosArray));
 			}else{
 				$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->where('status','=','1')->get();
-				$cursos = Curso::whereHas('turmas', function($q) use ($turmas)
-					{
-						$q->whereIn('turmas.id', $turmas->lists('id'));
-					})->get();
 
-				foreach ($cursos as $curso) {
-					//Pega só os modulos que haja uma turma relacionada ao professor
-					$curso->modulos = Modulo::where('idCurso','=',$curso->id)->whereHas('turmas', function($q) use ($turmas){
-										$q->whereIn('id',$turmas->lists('id'));
-									})->get();
+				if($turmas->count() == null){
+					$cursos = Curso::where('nome','=',"jq")->get();
+				}else{
+					$cursos = Curso::whereHas('turmas', function($q) use ($turmas)
+						{
+							$q->whereIn('tur	mas.id', $turmas->lists('id'));
+						})->get();
 
-					$curso->numTurmas = 0;
+					foreach ($cursos as $curso) {
+						//Pega só os modulos que haja uma turma relacionada ao professor
+						$curso->modulos = Modulo::where('idCurso','=',$curso->id)->whereHas('turmas', function($q) use ($turmas){
+											$q->whereIn('id',$turmas->lists('id'));
+										})->get();
 
-					foreach ($curso->modulos as $modulo) {
-						$modulo->turmas = $modulo->turmas->intersect($turmas);
-						$curso->numTurmas += $modulo->turmas->count();
+						$curso->numTurmas = 0;
+
+						foreach ($curso->modulos as $modulo) {
+							$modulo->turmas = $modulo->turmas->intersect($turmas);
+							$curso->numTurmas += $modulo->turmas->count();
+						}
+						
 					}
-					
 				}
+
+				
 
 
 				$cursosArray = $cursos->toArray();
@@ -2810,7 +2821,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 							<i class='fa fa-times'></i>
 						</button>
 					 </a>";
-					 $categoria->excluído = "Ativo";
+					 $categoria->excluido = "Ativo";
 				}
 				
 				$categoria->atividades2 = $categoria->atividades->count();
@@ -3340,9 +3351,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 
 			if(Input::file('urlImagem')!=NULL){
-				$user->urlImagem = 'img/'.$filename;
 				$filename = $imagem->getClientOriginalName();
-
+				$user->urlImagem = 'img/'.$filename;
+				
 				$aluno->urlImagem = 'img/'.$filename;
 				
 				$imagem->move('img/', $filename);
@@ -3354,6 +3365,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$data = explode('/', Input::get('dataNascimento'));
 			$aluno->dataNascimento = date('Y-m-d', mktime(0,0,0,$data[1],$data[0],$data[2]));
 			$aluno->sobreMim = Input::get('sobreMim');
+			$aluno->dataVencimentoBoleto       = Input::get('dataVencimentoBoleto');
 
 			$aluno->save();
 
