@@ -279,7 +279,7 @@
                                                     </div>
 													<div id="div_sobreMim" class="form-group margin">
                                                         <label class="control-label" for="sobreMim"><i id="icone_sobreMim" class="fa"></i></label> <b>Sobre mim</b>
-                                                        <textarea id="sobreMim" name="sobreMim" id="sobreMim" maxlength="8000" onblur="fcn_recarregaCores();" class="form-control sobreMimObrigatorio" rows="3">{{'value="'.Aluno::find(Auth::user()->id)->sobreMim.'"'}}</textarea>
+                                                        <textarea id="sobreMim" name="sobreMim" maxlength="8000" onblur="fcn_recarregaCores();" class="form-control sobreMimObrigatorio" rows="3">{{Aluno::find(Auth::user()->id)->sobreMim}}</textarea>
                                                     </div>
                                                     <div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block btn-salvar-dados">Salvar</button>
