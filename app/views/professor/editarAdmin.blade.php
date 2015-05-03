@@ -183,13 +183,11 @@
                                                         <label class="control-label" for="dataNascimento"><b> Formação Acadêmica</b></label>
                                                         <textarea name="formacaoAcademica" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" rows="3" >{{$professor->formacaoAcademica}}</textarea>
                                                     </div>
-
-                                                    <div class="form-group margin">
+													<div class="form-group margin">
                                                         <label class="control-label" for="dataNascimento"><b> Experiência Profissional</b></label>
-                                                        <input type="text" name="ExperienciaProfissional" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" value="{{$professor->ExperienciaProfissional}}">
+                                                        <textarea name="ExperienciaProfissional" id="formacaoAcademica" onblur="fcn_recarregaCores();" maxlength="8000" class="form-control" rows="3" >{{$professor->ExperienciaProfissional}}</textarea>
                                                     </div>
-
-                                                    <div id="div_email" class="form-group margin">
+													<div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i><b> E-mail</b></label>
                                                         <input type="text" autocomplete="off" name="email" id="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$professor->email}}>
                                                     </div>
