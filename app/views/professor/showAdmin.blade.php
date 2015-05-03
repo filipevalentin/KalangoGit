@@ -43,10 +43,6 @@
 						<input type="password" autocomplete="off" id="senha" name="password" maxlength="12" class="form-control senhaObrigatoria" onblur="fcn_recarregaCores();fcn_validaSenha(6, 12, this.value);" >
 					</div>	
                     <div class="form-group">
-                        <label class="control-label" for="sobreMim"> Sobre Mim</label>
-                        <textarea id="sobreMim" name="sobreMim" maxlength="8000" onblur="fcn_recarregaCores();" class="form-control" rows="3"></textarea>
-                    </div>
-					<div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem Perfil</label>
                         <input type="file" id="urlImagem" name="urlImagem" class="form-control" onblur="fcn_validaArquivo(this.form, this.form.urlImagem.value)">
                     </div>
