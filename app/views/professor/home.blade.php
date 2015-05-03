@@ -140,69 +140,6 @@
     @section('scripts')
 
         <script>
-            $('#editarmodulo').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var dataid = button.data('id')
-                var datanome = button.data('nome')
-                var datadescricao = button.data('descricao') // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                var modal = $(this)
-                modal.find('.modal-title').text('Editar Módulo ' + dataid)
-                modal.find('#id').val(dataid)
-                modal.find('#nome').val(datanome)
-                modal.find('#descricao').val(datadescricao)
-                })
-
-            $('#editarturma').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var dataid = button.data('id')
-                var datanome = button.data('nome')
-                var dataidprofessor = button.data('idprofessor') // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                var modal = $(this)
-                modal.find('.modal-title').text('Editar Turma ' + datanome)
-                modal.find('#id').val(dataid)
-                modal.find('#nome').val(datanome)
-                modal.find('#idprofessor').val(dataidprofessor)
-                })
-
-            $('#editarcurso').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var dataid = button.data('id')
-                var datanome = button.data('nome')
-                var datadescricao = button.data('descricao')
-                var dataidioma = button.data('idioma') // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                var modal = $(this)
-                modal.find('.modal-title').text('Editar Curso ' + datanome)
-                modal.find('#id').val(dataid)
-                modal.find('#nome').val(datanome)
-                modal.find('#descricao').val(datadescricao)
-                modal.find('#idioma').val(dataidioma)
-                })
-
-            $('#criarmodulo').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var dataidcurso = button.data('idcurso')
-                // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                var modal = $(this)
-                modal.find('#idcurso').val(dataidcurso)
-                })
-
-             $('#criarturma').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget) // Button that triggered the modal
-                var dataidmodulo = button.data('idmodulo')
-                // Extract info from data-* attributes
-                // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-                // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-                var modal = $(this)
-                modal.find('#idmodulo').val(dataidmodulo)
-                })
 
             $('div.curso').on('click', (function(event) {
                 var id = $(this).attr('id');
