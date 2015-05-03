@@ -206,7 +206,7 @@
                                     {{Form::close()}}
                                     
                                     <form action="/admin/atualizaSenha" method="POST" role="form">
-                                        <input type="text" name="id" class="form-control" style="display:none;" value={{$professor}}>
+                                        <input type="text" name="id" class="form-control" style="display:none;" value={{$professor->id}}>
                                         <h4 class="header">Acesso</h4>
                                         <hr>
                                         <div class="box box-primary">
