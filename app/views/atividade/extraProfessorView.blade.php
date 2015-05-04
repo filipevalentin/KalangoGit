@@ -7,11 +7,11 @@
 
 @section('maincontent')
 <section class="content-header">
-    <h1>Gerenciar Exercícios</h1>
+    <h1>Gerenciar Atividade</h1>
     <ol class="breadcrumb">
         <li><a href="/professor/home" ><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active"><a href="{{URL::previous()}}" >Atividades Extras</a></li>
-		<li class="active">Gerenciar Exercícios </li>
+		<li class="active">Gerenciar Atividade </li>
     </ol>
 </section>
 
@@ -65,7 +65,7 @@
                 </div> <!-- /.box-body -->
             </div>
 
-            <h2 class="page-header">Inglês - Teens - Módulo 1 - Aula 2</h2>
+            <h2 class="page-header">{{$exercicio->modulo->curso->idioma->nome}} - {{$exercicio->modulo->curso->nome}} - {{$exercicio->modulo->nome}} - {{$exercicio->nome}}</h2>
 
             <div class="col-md-8">
                 <div class="box box-solid">

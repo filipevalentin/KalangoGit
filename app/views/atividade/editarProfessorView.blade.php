@@ -351,11 +351,11 @@
 
 @section('maincontent')
 <section class="content-header">
-    <h1>Gerenciar Exercícios</h1>
+    <h1>Gerenciar Atividade</h1>
     <ol class="breadcrumb">
         <li><a href="/professor/home" ><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active"><a href="{{URL::previous()}}" >Atividades Extras</a></li>
-		<li class="active">Gerenciar Exercícios</li>
+		<li class="active">Gerenciar Atividade</li>
     </ol>
 </section>
 
