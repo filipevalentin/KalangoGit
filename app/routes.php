@@ -604,7 +604,6 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$user = User::find(Input::get('id'));
 			$user->nome       = Input::get('nome');
 			$user->sobrenome       = Input::get('sobrenome');
-			$user->email       = Input::get('email');
 
 			$imagem = Input::file('urlImagem');
 			$filename="";
@@ -939,8 +938,6 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$user = User::find(Input::get('id'));
 			$user->nome       = Input::get('nome');
 			$user->sobrenome       = Input::get('sobrenome');
-			$user->email       = Input::get('email');
-			$user->login = Input::get('codRegistro');
 
 			$professor= Professor::find($user->id);
 
@@ -2549,7 +2546,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data = array();
 
-			$atividades = Atividade::withTrashed()->get();
+			$atividades = Atividade::withTrashed()->where('tipo','=', 1)->get();
 
 			foreach ($atividades as $key => $atividade) {
 
@@ -3444,7 +3441,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->nome       = Input::get('nome');
 			$user->sobrenome       = Input::get('sobrenome');
 			$user->email       = Input::get('email');
-			$user->login = Input::get('codRegistro');
+			$user->login = Input::get('email');
 			$user->tipo = '2';
 			$user->password = Hash::make(Input::get('password'));
 
@@ -3497,7 +3494,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->nome       = Input::get('nome');
 			$user->sobrenome       = Input::get('sobrenome');
 			$user->email       = Input::get('email');
-			$user->login = Input::get('codRegistro');
+			$user->login = Input::get('email');
 
 			if(User::where('id','!=',$user->id)->count() !=null ){
 				if(in_array($user->email, User::where('id','!=', $user->id)->lists('email')) ){
@@ -3602,7 +3599,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->nome       = Input::get('nome');
 			$user->sobrenome       = Input::get('sobrenome');
 			$user->email       = Input::get('email');
-			$user->login = Input::get('codRegistro');
+			$user->login = Input::get('email');
 			$user->tipo = '3';
 			$user->password = Hash::make(Input::get('password'));
 
@@ -3638,7 +3635,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->nome       = Input::get('nome');
 			$user->sobrenome       = Input::get('sobrenome');
 			$user->email       = Input::get('email');
-			$user->login = Input::get('codRegistro');
+			$user->login = Input::get('email');
 
 			if(User::where('id','!=',$user->id)->count() !=null ){
 				if(in_array($user->email, User::where('id','!=', $user->id)->lists('email')) ){
