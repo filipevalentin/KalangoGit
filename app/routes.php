@@ -3033,7 +3033,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 							<i class='fa fa-times'></i>
 						</button>
 					 </a>";
-					 $questao->excluído = "Ativo";
+					 $questao->excluido = "Ativo";
 				}
 				
 				$questao->atividade2 = $questao->atividade->nome;
