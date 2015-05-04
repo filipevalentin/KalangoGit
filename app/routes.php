@@ -3037,11 +3037,20 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				}
 				
 				$questao->atividade2 = $questao->atividade->nome;
-				$questao->aula2 = $questao->atividade->aula->titulo;
-				$questao->modulo2 = $questao->atividade->aula->modulo->nome;
-				$questao->curso = $questao->atividade->aula->modulo->curso->nome;
-				$questao->idioma = $questao->atividade->aula->modulo->curso->idioma->nome;
-				$questao->tipo2 = ($questao->tipo == 1) ? 'Múltipla Escolha' : 'Dissertativa';
+				if($questao->atividade->tipo == 1){
+					$questao->aula2 = $questao->atividade->aula->titulo;
+					$questao->modulo2 = $questao->atividade->aula->modulo->nome;
+					$questao->curso = $questao->atividade->aula->modulo->curso->nome;
+					$questao->idioma = $questao->atividade->aula->modulo->curso->idioma->nome;
+					$questao->tipo2 = ($questao->tipo == 1) ? 'Múltipla Escolha' : 'Dissertativa';
+				}else{
+					$questao->aula2 = "Atividade Extra";
+					$questao->modulo2 = "Atividade Extra";
+					$questao->curso = "Atividade Extra";
+					$questao->idioma = "Atividade Extra";
+					$questao->tipo2 = "Atividade Extra";
+				}
+				
 				
 				array_push($data, $questao);
 			}
