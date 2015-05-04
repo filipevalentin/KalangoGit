@@ -534,7 +534,6 @@
                                             <a data-toggle="collapse" data-parent="#accordion" href="#RU{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
                                         <div class="box-tools pull-right" >
-                                            {{dd($questao)}}
                                             <button class="btn btn-success btn-sm" rel="tooltip" data-placement="left" title="Editar Questão" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-enunciado="{{$questao->enunciado}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
                                             <a href="/professor/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button></a>
                                         </div>
