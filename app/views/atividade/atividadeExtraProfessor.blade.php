@@ -19,10 +19,10 @@
                         <label class="control-label" for="nome"><i id="icone_nome-nova-atividadeExtra" class="fa"></i> Nome</label>
                         <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAtividadeExtra();" maxlength="50" class="form-control somenteLetrasENumeros nomeObrigatorio-nova-atividadeExtra"></textarea>
                     </div>
-                    <div id="div_curso-nova-atividadeExtra" class="form-group">
-                        <label class="control-label" for="idModulo"><i id="icone_curso-nova-atividadeExtra" class="fa"></i> Selecione o Módulo</label>
-                        <select id="idModulo" name="idModulo" onblur="fcn_recarregaCoresNovaAtividadeExtra();" class="form-control cursoObrigatorio-nova-atividadeExtra">
-                            <option value="">Selecione</option>
+                    <div class="form-group">
+                        <label class="control-label" for="idModulo">Módulo</label>
+                        <select id="idModulo" name="idModulo" onblur="fcn_recarregaCoresNovaAtividadeExtra();" class="form-control">
+                            <option value="">Sem módulo</option>
 							@foreach(Modulo::all() as $modulo)
                                 <option value="{{$modulo->id}}">{{$modulo->nome}}-{{$modulo->curso->nome}}</option>
                             @endforeach
@@ -64,9 +64,9 @@
                         <label class="control-label" for="nome"><i id="icone_nome-editar-atividadeExtra" class="fa"></i> Nome</label>
                         <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAtividadeExtra();" maxlength="50" class="form-control somenteLetrasENumeros nomeObrigatorio-editar-atividadeExtra"></textarea>
                     </div>
-                    <div id="div_curso-editar-atividadeExtra" class="form-group">
-                        <label class="control-label" for="idModulo"><i id="icone_curso-editar-atividadeExtra" class="fa"></i>Selecione o Módulo</label>
-                        <select id="idModulo" name="idModulo" onblur="fcn_recarregaCoresEditarAtividadeExtra();" class="form-control cursoObrigatorio-editar-atividadeExtra">
+                    <div class="form-group">
+                        <label class="control-label" for="idModulo">Módulo</label>
+                        <select id="idModulo" name="idModulo" onblur="fcn_recarregaCoresEditarAtividadeExtra();" class="form-control">
                             @foreach(Modulo::all() as $modulo)
                                 <option value="{{$modulo->id}}">{{$modulo->nome}}-{{$modulo->curso->nome}}</option>
                             @endforeach
@@ -317,19 +317,6 @@
 					$( "#icone_nome-nova-atividadeExtra" ).addClass("fa-check");
 				}
 				
-				if($(".cursoObrigatorio-nova-atividadeExtra").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_curso-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_curso-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_curso-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_curso-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_curso-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_curso-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
 				if(obrigatorioPendente == 1){
 					alert("É necessário preencher todos os campos obrigatórios!");
 					return false;
@@ -352,19 +339,6 @@
 					$( "#icone_nome-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
 					$( "#div_nome-editar-atividadeExtra" ).addClass("has-success");
 					$( "#icone_nome-editar-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".cursoObrigatorio-editar-atividadeExtra").val() == ""){
-					obrigatorioPendente = 1;
-					$( "#div_curso-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_curso-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_curso-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_curso-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_curso-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_curso-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-check");
 				}
 				
 				if($(".statusObrigatorio-editar-atividadeExtra").val() == ""){
@@ -401,18 +375,6 @@
 					$( "#icone_nome-nova-atividadeExtra" ).addClass("fa-check");
 				}
 				
-				if($(".cursoObrigatorio-nova-atividadeExtra").val() == ""){
-					$( "#div_curso-nova-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_curso-nova-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_curso-nova-atividadeExtra" ).addClass("has-error");
-					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_curso-nova-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_curso-nova-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_curso-nova-atividadeExtra" ).addClass("has-success");
-					$( "#icone_curso-nova-atividadeExtra" ).addClass("fa-check");
-				}
-				
 			}
 			
 			function fcn_recarregaCoresEditarAtividadeExtra(){
@@ -427,18 +389,6 @@
 					$( "#icone_nome-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
 					$( "#div_nome-editar-atividadeExtra" ).addClass("has-success");
 					$( "#icone_nome-editar-atividadeExtra" ).addClass("fa-check");
-				}
-				
-				if($(".cursoObrigatorio-editar-atividadeExtra").val() == ""){
-					$( "#div_curso-editar-atividadeExtra" ).removeClass("has-success");
-					$( "#icone_curso-editar-atividadeExtra" ).removeClass("fa-check");
-					$( "#div_curso-editar-atividadeExtra" ).addClass("has-error");
-					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-times-circle-o");
-				}else{
-					$( "#div_curso-editar-atividadeExtra" ).removeClass("has-error");
-					$( "#icone_curso-editar-atividadeExtra" ).removeClass("fa-times-circle-o");
-					$( "#div_curso-editar-atividadeExtra" ).addClass("has-success");
-					$( "#icone_curso-editar-atividadeExtra" ).addClass("fa-check");
 				}
 				
 				if($(".statusObrigatorio-editar-atividadeExtra").val() == ""){
