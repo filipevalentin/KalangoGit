@@ -20,7 +20,7 @@
 			        <thead>
 			            <tr>
 			                <th>#</th>
-			                <th>Nome</th>
+			                <th>Título</th>
 			                <th>Atividade</th>
 			                <th>Aula</th>
 			                <th>Módulo</th>
@@ -35,7 +35,7 @@
 			        <tfoot>
 			            <tr>
 			                <th>#</th>
-			                <th>Nome</th>
+			                <th>Título</th>
 			                <th>Atividade</th>
 			                <th>Aula</th>
 			                <th>Módulo</th>
@@ -64,7 +64,7 @@
 	  "ajax":"/admin/listarQuestoes" ,
 	    "columns": [
 	        { data: 'id' },
-	        { data: 'nome' },
+	        { data: 'titulo' },
 	        { data: 'atividade2' },
 	        { data: 'aula2' },
 	        { data: 'modulo2' },
