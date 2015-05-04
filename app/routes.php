@@ -959,7 +959,6 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
 			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
-			$professor->sobreMim = Input::get('sobremim');
 			$professor->REProf       = Input::get('codRegistro');
 
 			$professor->save();

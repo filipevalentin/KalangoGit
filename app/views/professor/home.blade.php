@@ -86,6 +86,12 @@
                         <div class="box-group" id="accordion">
                             <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
 
+                        @if($curso->modulos->count() == 0)
+                            <div class="callout callout-danger" style="max-width:50%; margin:auto;">
+                                <h4 class="center">Nenhum Módulo</h4>
+                            </div>
+                         @endif
+
                         @foreach($curso->modulos as $modulo)    
                             <div class="panel box box-primary">
                                 <div class="box-header">
@@ -100,6 +106,12 @@
                                 </div>
                                 <div id="Modulo{{$modulo->id}}" class="panel-collapse collapse">
                                     <div class="row">
+
+                                    @if($modulo->turmas->count() == 0)
+                                        <div class="callout callout-danger" style="max-width:50%; margin:auto;">
+                                            <h4 class="center">Nenhuma Turma</h4>
+                                        </div>
+                                     @endif
 
                                     @foreach($modulo->turmas as $turma)
                                     @if($turma->status != 0)

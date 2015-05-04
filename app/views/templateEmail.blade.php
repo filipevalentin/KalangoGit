@@ -8,7 +8,7 @@
 
 		<p>Para habilitar seu acesso ao KalanGO! você precisa confirmar seu endereço de e-mail usando o link abaixo:</p>
 
-		<p>{{ URL::to('registro/verificar/' . $confirmation_code) }}.</p>
+		<p> <a href="{{ URL::to('registro/verificar/' . $confirmation_code) }}"></a> REGISTRAR</p>
 
 
 		<div>Att</div>
