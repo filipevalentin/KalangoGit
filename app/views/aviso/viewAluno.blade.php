@@ -23,10 +23,10 @@
 			@foreach($avisos as $aviso)        
                 <div class="box text-center" style="margin-bottom: 20px;">
                     <div class="box-header">
-                        <h3 class="box-title center" style="float: none;">{{$aviso->titulo}}</h3>
+                        <h2 class="box-title center" style="float: none;">{{$aviso->titulo}}</h2>
                     </div>
-                    <div class="box-body">
-                    	<p>{{$aviso->descricao}}</p>
+                    <div class="box-body center">
+                    	<h3>{{$aviso->descricao}}</h3>
                         @if($aviso->urlMidia != null)
                             <img src="/{{$aviso->urlMidia}}" class="img-responsive center" alt="Responsive image" style="display: initial; max-height: 800px;">
                         @endif

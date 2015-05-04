@@ -35,7 +35,7 @@
 @section('maincontent')
 
 	<section class="content">
-		<h2 class="page-header">Inglês - Teens 1</h2>
+		<h2 class="page-header">{{$modulo->curso->idioma->nome}} - {{$modulo->curso->nome}}</h2>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box box-solid">

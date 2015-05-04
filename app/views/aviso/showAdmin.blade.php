@@ -17,8 +17,8 @@
                     <div class="box-header">
                         <h3 class="box-title center" style="float: none;">{{$aviso->titulo}}</h3>
                     </div>
-                    <div class="box-body" style="text-align:justify;">
-                    	<p>{{$aviso->descricao}}</p>
+                    <div class="box-body center">
+                    	<h3>{{$aviso->descricao}}</h3>
                         @if($aviso->urlImagem != null)
                             <img src="/{{$aviso->urlImagem}}" class="img-responsive center" alt="Responsive image" style="display: initial; max-height: 800px;">
                         @endif

@@ -61,7 +61,7 @@
                                 <div class="row">
                                     <div class="col-xs-12 col-sm-3 center" style="text-align: center">  <!-- FotoPerfil+Botões -->
                                         <span class="profile-picture">
-                                        @if(Auth::user()->urlImagem != null)
+                                        @if(Auth::user()->urlImagem != null) 
                                             <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/{{Auth::user()->urlImagem}}">
                                         @else
                                              <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">

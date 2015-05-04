@@ -85,12 +85,12 @@
                         @foreach($atividadesExtras as $atividade)
                          @if($atividade->status != '0')
                             <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="margin:10px;">
-                                <div id="div_card_4" class="small-box bg-fuchsia card">
+                                <div id="div_card_4" class="small-box bg-olive card">
                                     <div style="padding: 10px;" class="inner">
                                     <a href="/aluno/atividade/{{$atividade->id}}">
                                         <span style="color:#FFF;font-size:30px;"><b>{{$atividade->nome}}</b></span><br>
                                     </a>
-                                                        
+                                    <p>{{$atividade->questoes->count()}} Questões</p>              
                                     </div>
                                 </div>
                             </div>

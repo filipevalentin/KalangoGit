@@ -188,7 +188,7 @@
                     <div class="row">
                         @foreach($atividadesExtras as $atividade)
                         <div class="col-lg-3 atividade" id="{{$atividade->id}}"> <!-- usar o id da ativ para apagar o card, ao selecionar uma categoria-->
-                            <div id="div_card_4" class="small-box bg-fuchsia card">
+                            <div id="div_card_4" class="small-box bg-olive card">
                                 <div style="padding: 10px;" class="inner">
 
                                 <div class="box-tools pull-right">

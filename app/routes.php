@@ -7,6 +7,14 @@ Route::get('teste5',function(){
 	// $c = Curso::withTrashed()->find(1);
 
 	// $c->restore();
+	// $confirmation_code = "00XgHv1zdNGxCvr8QP3m6X3szxuIgZ";
+
+	// Mail::send('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+	//             $message->to("filipethesnake2@gmail.com", "Filipe")
+	//                 ->subject('KalanGO! - Verifique sua conta');
+	        // });
+
+	return View::make('templateEmail')->with('confirmation_code','asdlkasdiashdasho');
 
 	return User::where('id','!=',1)->get()->lists('email');
 
@@ -122,7 +130,7 @@ Route::get('teste4',function(){
 // ===============================================
 	
 	function deletarMaterial($material){
-		if( !in_array($material->url, $MaterialApoio::all()->lists('url'))){
+		if( !in_array($material->url, MaterialApoio::all()->lists('url'))){
 			unlink($material->url);
 		}
 
@@ -1143,6 +1151,34 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		});
 
 		Route::post('criarQuestaoRU', function(){
+
+			$atividade = Atividade::find(Input::get('idatividade'));
+
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
+			
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+					return Redirect::back();
+				}
+			}
+
+			if($atividade->status == 1){
+				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
+				return Redirect::back();
+			}else {
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
+					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
+					return Redirect::back();
+				}
+			}
+
 			$questao = new Questao;
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
@@ -1161,7 +1197,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 	        $questao->idAtividade = Input::get('idatividade');
 
-			$questao->idTopico = Input::get('topico');
+	        $questao->idTopico = Input::get('topico');
 			$questao->pontos = Input::get('dificuldade');
 
 			$questao->tipo=2;
@@ -1172,12 +1208,38 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$questao->numero = $questao->id;
 			$questao->save();
 
-			Session::flash('message', 'Questao criada com sucesso!');
+			Session::flash('info', 'Questão criada com sucesso!');
 			return Redirect::back();
-
 		});
 
 		Route::post('criarQuestaoME', function(){
+
+			$atividade = Atividade::find(Input::get('idatividade'));
+
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+					return Redirect::back();
+				}
+			}
+
+			if($atividade->status == 1){
+				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
+				return Redirect::back();
+			}else {
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
+					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
+					return Redirect::back();
+				}
+			}
+
 			$questao = new Questao;
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
@@ -1234,6 +1296,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			$questao->respostaCerta = Input::get('respostaCerta');
 			$questao->idAtividade = Input::get('idatividade');
+
 			$questao->idTopico = Input::get('topico');
 			$questao->pontos = Input::get('dificuldade');
 
@@ -1245,12 +1308,38 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$questao->save();
 
 			// redirect
-			Session::flash('message', 'Questao criada com sucesso!');
+			Session::flash('info', 'Questão criada com sucesso!');
 			return Redirect::back();
 		});
 	
 		Route::post('atualizarRespostaUnica', function(){
-			$questao 			    = Questao::find(Input::get('id')); 
+			$questao = Questao::find(Input::get('id'));
+			$atividade = Atividade::find($questao->idAtividade);
+
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+					return Redirect::back();
+				}
+			}
+
+			if($atividade->status == 1){
+				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
+				return Redirect::back();
+			}else {
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
+					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
+					return Redirect::back();
+				}
+			}
+
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 			$questao->categoria = (Input::get('pergunta')).(Input::get('resposta'));
@@ -1272,12 +1361,38 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$questao->respostaCerta = Input::get('respostaCerta');
 			$questao->save();
 
-			Session::flash('message', 'Questao atualizada com sucesso!');
+			Session::flash('info', 'Alterações salvas com sucesso!');
 			return Redirect::back();
 		});
 
 		Route::post('atualizarMultiplaEscolha', function(){
-			$questao = Questao::find(Input::get('id')); 
+			$questao = Questao::find(Input::get('id'));
+			$atividade = Atividade::find($questao->idAtividade);
+
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+					return Redirect::back();
+				}
+			}
+
+			if($atividade->status == 1){
+				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
+				return Redirect::back();
+			}else {
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
+					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
+					return Redirect::back();
+				}
+			}
+
 			$pergunta = Input::get('pergunta');
 			$resposta = Input::get('resposta');
 
@@ -1356,7 +1471,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$questao->save();
 
 			// redirect
-			Session::flash('message', 'Alterações salvas com sucesso!');
+			Session::flash('info', 'Alterações salvas com sucesso!');
 			return Redirect::back();
 		});
 
@@ -1385,7 +1500,29 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			
 			$atividade = Atividade::find(Input::get('0'));
 			$key=1;
-			//return Response::json(Input::all());
+			
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					return Response::json('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura alterando a ordem das questões</p>');
+				}
+			}
+
+			if($atividade->status == 1){
+				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
+				return Redirect::back();
+			}else {
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
+					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
+					return Redirect::back();
+				}
+			}
 
 
 			$questoes = $atividade->questoes->sortBy('numero');
@@ -2383,6 +2520,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$material->nome = Input::get('nome');
 			$material->tipo = Input::get('tipo');
 
+			$material->idAula = $aula->id;
+
 			if($material->tipo != 3){
 				$arquivo = Input::file('arquivo');
 				$filename="";
@@ -2404,7 +2543,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$material->save();
 
-			$aula->materialApoio()->attach($material->id);
 
 			// redirect
 			Session::flash('info', 'Material criado com sucesso!');
@@ -2449,7 +2587,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$materiais = ($idAula != null) ? MaterialApoio::all()->diff($aula->materialApoio) : MaterialApoio::all();
 			//dd($materiais);
-			foreach ($materiais as $key => $material) {
+			foreach ($materiais as $material) {
 				switch (pathinfo($material->url, PATHINFO_EXTENSION)) {
 					case 'txt':
 						$material->tipo2 = "Texto";
@@ -2471,8 +2609,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 						$material->tipo2 = "Desconhecido";
 						break;
 				}
-				$material->curso2 = $material->aula->first()->modulo->curso->nome;
-				$material->modulo2 = $material->aula->first()->modulo->nome;
+				$material->curso2 = $material->aula->modulo->curso->nome;
+				$material->modulo2 = $material->aula->modulo->nome;
 				$material->aula2 = $material->aula->first()->nome;
 				$material->action = "<input type='checkbox' name='materiais[]' class='check' data-id='$material->id' value='$material->id'>";
 				array_push($data, $material);
@@ -2502,7 +2640,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			if(Input::get('materiais')!=null){
 				foreach ($materiais as $material) {
-					$aula->materialApoio()->attach($material);
+					$mat = new MaterialApoio;
+					$mat = MaterialApoio::find($material);
+					$mat->id = null;
+					$mat->idAula = $aula->id;
+					$mat->save();
 				}
 			}
 			Session::flash('info', "Material copiado com sucesso!");
@@ -2510,7 +2652,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('material/deletar/{id}', function($id){
-			$material = Material::find($id);
+			$material = MaterialApoio::find($id);
 			$modulo = $material->aula->modulo;
 
 			if($material != null){
@@ -2866,7 +3008,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$atividade = Atividade::find(Input::get('idatividade'));
 
-			$modulo = $atividade->aula->modulo;
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
+			
 
 			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
 			foreach ($modulo->turmas as $turma) {
@@ -2923,7 +3070,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$atividade = Atividade::find(Input::get('idatividade'));
 
-			$modulo = $atividade->aula->modulo;
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
 
 			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
 			foreach ($modulo->turmas as $turma) {
@@ -3068,7 +3219,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$questao = Questao::find(Input::get('id'));
 			$atividade = Atividade::find($questao->idAtividade);
 
-			$modulo = $atividade->aula->modulo;
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
 
 			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
 			foreach ($modulo->turmas as $turma) {
@@ -3117,7 +3272,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$questao = Questao::find(Input::get('id'));
 			$atividade = Atividade::find($questao->idAtividade);
 
-			$modulo = $atividade->aula->modulo;
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
 
 			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
 			foreach ($modulo->turmas as $turma) {

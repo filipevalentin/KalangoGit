@@ -755,12 +755,9 @@
         var dataid = button.data('id')
         var dataenunciado = button.data('enunciado')
         var datacategoria = button.data('categoria')
-        var pergunta = datacategoria
-        if(pergunta.length>1){
-            pergunta = String(datacategoria).substring(0,1);
-            var resposta = String(datacategoria).substring(1,2);
-            modal.find(resposta).val(resposta);
-        }
+        var pergunta = String(datacategoria).substring(0,1)
+        var resposta = String(datacategoria).substring(1,2)
+
         var respostaCerta = button.data('respostacerta')
         var topico = button.data('topico');
         var dificuldade = button.data('dificuldade');
@@ -771,10 +768,10 @@
         modal.find('#enunciado').val(dataenunciado)
         modal.find('#categoria').val(datacategoria)
         modal.find('#pergunta').val(pergunta)
+        modal.find('#resposta').val(resposta)
         modal.find('#respostaCerta').val(respostaCerta)
         modal.find('#topico').val(topico);
         modal.find('#dificuldade').val(dificuldade);
-
 
         if(modal.find('select#pergunta').val()==1){
             modal.find('#arquivo').fadeOut().siblings().fadeOut();

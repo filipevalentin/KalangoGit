@@ -264,7 +264,7 @@
                         @else
                             <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="margin:10px;">
                         @endif
-                            <div id="div_card_4" class="small-box bg-fuchsia card">
+                            <div id="div_card_4" class="small-box bg-olive card">
                                     <div style="padding: 10px;" class="inner">
 
                                     <div class="box-tools pull-right">
@@ -275,6 +275,7 @@
 
                                         <span style="color:#FFF;font-size:30px;"><b>{{$atividade->nome}}</b></span><br>
                                     </a>
+                                    <p>{{$atividade->questoes->count()}} Questões</p>
                                         
                                     </div>
 

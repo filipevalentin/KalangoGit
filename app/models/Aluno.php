@@ -1,8 +1,10 @@
 <?php 
-	
+	use Illuminate\Database\Eloquent\SoftDeletingTrait;
 	class Aluno extends Eloquent{
 
 		public $timestamps = false;
+                use SoftDeletingTrait;
+                protected $dates = ['deleted_at'];
 
 		public function turmas(){
         	       return $this->belongsToMany('Turma', 'turmasalunos', 'idAluno', 'idTurma')->withPivot('pontuacao');	

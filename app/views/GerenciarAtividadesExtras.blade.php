@@ -249,7 +249,7 @@
                     <div class="row">
                         @foreach($atividadesExtras as $atividade)
                         <div class="col-lg-3 atividade" id="{{$atividade->id}}">
-                            <div id="div_card_4" class="small-box bg-fuchsia card">
+                            <div id="div_card_4" class="small-box bg-olive card">
                                     <div style="padding: 10px;" class="inner">
 
                                     <div class="box-tools pull-right">
@@ -259,11 +259,8 @@
                                     <a href="/editarAtividadeExtra/{{$atividade->id}}">
 
                                         <span style="color:#FFF;font-size:30px;"><b>{{$atividade->titulo}}</b></span><br>
-                                        <span style="color:#FFF;">
-                                            {{$atividade->descricao}}
-                                        </span>
                                     </a>
-                                        
+                                    <p>{{$atividade->questoes->count()}} Questões</p>
                                     </div>
 
                                 <a href="#" class="small-box-footer">
