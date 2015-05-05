@@ -163,7 +163,7 @@
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i><b> E-mail</b></label>
-                                                        <input type="text" autocomplete="off" maxlength="50" name="email" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$administrador->email}}>
+                                                        <input readonly title="E-mail não pode ser alterado" type="text" autocomplete="off" maxlength="50" name="email" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$administrador->email}}>
                                                     </div>
 													<div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block btn-salvar-dados">Salvar</button>
