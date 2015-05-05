@@ -2832,6 +2832,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Atividade->status = 0;
 			$Atividade->idAula = Input::get('idAula');
 			$Atividade->idUsuario = Auth::user()->id;
+			$Atividade->tipo = 1;
+
 
 			$Atividade->save();
 
@@ -3014,7 +3016,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$modulo = $atividade->modulo;
 			}
 			
-
 			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
 			foreach ($modulo->turmas as $turma) {
 				if($turma->status == 0){
