@@ -190,12 +190,6 @@
                 </div>
 
                 <div class="box-body">
-                    <div class="input-group" style="padding-bottom: 20px;">
-                        <input type="text" name="q" class="form-control" placeholder="Procurar... NÂO FUNCIONA AINDA">
-                        <span class="input-group-btn">
-                            <button type="submit" name="seach" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                        </span>
-                    </div>
 
                     <div class="row">
                         @foreach($atividadesExtras as $atividade)

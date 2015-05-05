@@ -3564,8 +3564,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$users = User::withTrashed()->where('tipo', '=', 2)->get();
 			//dd($users);
 			foreach ($users as $key => $user) {
-				$user->codRegistro = Professor::find($user->id)->REProf;
-				$user->formacaoAcademica = Professor::find($user->id)->formacaoAcademica;
+				$user->codRegistro = Professor::withTrashed()->find($user->id)->REProf;
+				$user->formacaoAcademica = Professor::withTrashed()->find($user->id)->formacaoAcademica;
 				
 				if($user->trashed()){
 					$user->action = "N/A";
@@ -3722,7 +3722,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$users = User::withTrashed()->where('tipo', '=', 3)->get();
 			//dd($users);
 			foreach ($users as $user) {
-				$user->codRegistro = Administrador::find($user->id)->codRegistro;
+				$user->codRegistro = Administrador::withTrashed()->find($user->id)->codRegistro;
 
 				if($user->trashed()){
 					$user->action = "N/A";

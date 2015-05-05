@@ -23,8 +23,9 @@
         @endforeach
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="{{$turma->id}}">
+
             @foreach($turmas as $turma)
+            <div class="tab-pane active" id="{{$turma->id}}">
 
                 <!-- Dados Gerais -->
                 <div class="row">
@@ -320,8 +321,8 @@
                     </div>
                 </div>
 
+            </div>
             @endforeach
-            </div> 
         </div> 
     </div>
 
