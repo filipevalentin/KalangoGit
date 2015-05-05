@@ -581,6 +581,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 
 	//Perfil - Senha - Dashborad
+
 		Route::get('perfil', function(){
 			if(Session::has('mensagem')){
 				$mensagem = Session::get('mensagem');
@@ -603,8 +604,6 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				Session::flash('warning','A senha atual está incorreta!');
 				return Redirect::to('aluno/perfil');
 			}
-
-			
 
 		});
 
@@ -648,14 +647,14 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			// aqui separamos as informações do dashboard relativa a cada modulo/turma que o aluno cursa. Ex: respostas certas/erradas de atividades do curso inglês(turma A) e outro de espanhol(turmaB)
 			foreach ($turmas as $turma) {
 								//pega todas as questoes de atividades extras, ou seja, que são relativas a um modulo (FK-IdModulo != null)
-				$aux = Questao::whereIn('idAtividade', array_merge($turma->modulo->atividadesExtras->lists('id'),$turma->modulo->atividades->lists('id')))->
+				$aux = Questao::withTrashed()->whereIn('idAtividade', array_merge($turma->modulo->atividadesExtras()->withTrashed()->get()->lists('id'),$turma->modulo->atividades()->withTrashed()->get()->lists('id')))->
 								// pega todas as questoes de atividades de aula, ou seja, que são relativas a Aula (FK-IdAula != null)
 								// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
-								whereIn('id',(Auth::user()->aluno->respostas->lists('id') != null)?(Auth::user()->aluno->respostas->lists('id')):array('null'))->
+								whereIn('id',(Auth::user()->aluno->respostas()->withTrashed()->get()->lists('id') != null)?(Auth::user()->aluno->respostas()->withTrashed()->get()->lists('id')):array('null'))->
 								get();
 				//$turma->modulo->questoes;
 				//filtra só as questoes do modulo que o aluno já respondeu, atraves de intersecção entre as funções aluno->questoes e $aux
-				$aux = Auth::user()->aluno->respostas->intersect($aux);
+				$aux = Auth::user()->aluno->respostas()->withTrashed()->get()->intersect($aux);
 
 				// adiciona a coleção de questoes que o aluno já respondeu para a turma/modulo correspondende da questão
 				$turma->questoes = $aux;
