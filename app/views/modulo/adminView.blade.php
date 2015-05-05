@@ -301,14 +301,6 @@
                                                 </div>
                                             @endif
 
-                                            
-                                            
-                                            @if($aula->materialApoio->count() == 0 && $aula->atividades->count() == 0 )
-                                                <div class="callout callout-danger" style="max-width:50%; margin:auto;">
-                                                    <h4 class="center">Nenhum conteúdo de aula</h4>
-                                                </div>
-                                            @endif
-
                                             @foreach ($aula->materialApoio as $material)
                                                 <div class="alert alert-success alert-dismissable" style="min-height: 55px;">
                                                     <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
