@@ -311,14 +311,14 @@ Route::get('teste4',function(){
 			Auth::logout();
 			if( ! $codigo)
 	        {	
-	        	return Redirect::to('/');
+	        	return Redirect::to('/')->with('mensagem', 'Código Inválido');
 	        }
 
 	        $user = User::whereConfirmationCode($codigo)->first();
 
 	        if ( ! $user)
 	        {
-	           return Redirect::to('/'); 
+	           return Redirect::to('/')->with('mensagem', 'Usuário não existe mais');
 	        }
 
 	        $user->confirmed = 1;
@@ -326,11 +326,11 @@ Route::get('teste4',function(){
 	        $user->save();
 
 	        if($user->tipo == 1){
-				return Redirect::to('/aluno/perfil');	        	
+				return Redirect::to('/aluno/perfil')->with('mensagem', 'E-mail Confirmado!');	        	
 	        }elseif($user->tipo == 2){
-	        	return Redirect::to('/professor/perfil');
+	        	return Redirect::to('/professor/perfil')->with('mensagem', 'E-mail Confirmado!');;
 	        }else{
-	        	return Redirect::to('/admin/perfil');
+	        	return Redirect::to('/admin/perfil')->with('mensagem', 'E-mail Confirmado!');;
 	        }
 
 		});
