@@ -282,7 +282,7 @@
                                                     </div>
                                                     <div id="div_dataNascimento" class="form-group margin">
                                                         <label class="control-label" for="dataNascimento"><i id="icone_dataNascimento" class="fa"></i></label> <b>Data de nascimento</b>
-                                                        <input type="text" autocomplete="off" name="dataNascimento" id="dataNascimento" onblur="fcn_recarregaCores();" class="form-control dataNascimentoObrigatorio" value={{Auth::user()->aluno->dataNascimento}}>
+                                                        <input readonly type="text" autocomplete="off" name="dataNascimento" id="dataNascimento" onblur="fcn_recarregaCores();" class="form-control dataNascimentoObrigatorio" value={{Auth::user()->aluno->dataNascimento}}>
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i></label> <b>E-mail</b>
