@@ -1189,7 +1189,7 @@
 		var filePergunta = $( ".arquivoPerguntaObrigatoria-dissertativa-nova-questao" ).val();
 		extensaoPergunta = (filePergunta.substring(filePergunta.lastIndexOf("."))).toLowerCase();
 		
-		if(extensaoPergunta == ".wav" || extensaoPergunta == ".ogg" || extensaoAlternativaA == ".wav" || extensaoAlternativaA == ".ogg" || extensaoAlternativaB == ".wav" || extensaoAlternativaB == ".ogg" || extensaoAlternativaC == ".wav" || extensaoAlternativaC == ".ogg" || extensaoAlternativaD == ".wav" || extensaoAlternativaD == ".ogg"){
+		if(extensaoPergunta == ".wav" || extensaoPergunta == ".ogg"){
 			
 			if(confirm("Arquivos com extensão 'wav' ou 'ogg' não funcionam corretamente em todos navegadores.\nRecomendamos sempre a utilização de arquivos com extensão 'mp3'.\n\nDeseja continuar?")){
 				
@@ -1753,7 +1753,7 @@
 		var filePergunta = $( ".arquivoPerguntaObrigatoria-dissertativa-editar-questao" ).val();
 		extensaoPergunta = (filePergunta.substring(filePergunta.lastIndexOf("."))).toLowerCase();
 		
-		if(extensaoPergunta == ".wav" || extensaoPergunta == ".ogg" || extensaoAlternativaA == ".wav" || extensaoAlternativaA == ".ogg" || extensaoAlternativaB == ".wav" || extensaoAlternativaB == ".ogg" || extensaoAlternativaC == ".wav" || extensaoAlternativaC == ".ogg" || extensaoAlternativaD == ".wav" || extensaoAlternativaD == ".ogg"){
+		if(extensaoPergunta == ".wav" || extensaoPergunta == ".ogg"){
 			
 			if(confirm("Arquivos com extensão 'wav' ou 'ogg' não funcionam corretamente em todos navegadores.\nRecomendamos sempre a utilização de arquivos com extensão 'mp3'.\n\nDeseja continuar?")){
 				
