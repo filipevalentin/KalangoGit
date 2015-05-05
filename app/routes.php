@@ -2060,6 +2060,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Curso->nome = Input::get('nome');
 			$Curso->idIdioma = Input::get('idioma');
 
+			if(Idioma::find($Curso->idIdioma) != null){
+				if(in_array(Input::get('nome'), Idioma::find($Curso->idIdioma)->cursos->lists('nome')) ){
+					Session::flash('warning', "Esse curso já existe");
+					return Redirect::back();
+				}
+				
+			}
+
 			$Curso->save();
 			Session::flash('info', "Curso criado com sucesso!");
 			return Redirect::back();
@@ -2108,6 +2116,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Curso 			    = Curso::find(Input::get('id')); 
 			$Curso->nome       	= Input::get('nome');
 			$Curso->idIdioma      = Input::get('idioma');
+
+			if(Idioma::find($Curso->idIdioma) != null){
+				if(in_array(Input::get('nome'), Idioma::find($Curso->idIdioma)->cursos->lists('nome')) ){
+					Session::flash('warning', "Esse curso já existe");
+					return Redirect::back();
+				}
+				
+			}
 			
 			$Curso->save();
 
@@ -2156,6 +2172,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$modulos = new Modulo;
 			$modulos->nome = Input::get('nome');
 			$modulos->idCurso = Input::get('idCurso');
+
+			if(Curso::find($modulos->idCurso) != null){
+				if(in_array(Input::get('nome'), Curso::find($modulos->idCurso)->modulos->lists('nome')) ){
+					Session::flash('warning', "Já existe um módulo com o mesmo nome neste curso");
+					return Redirect::back();
+				}
+				
+			}
 
 			$modulos->save();
 
@@ -2214,6 +2238,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('atualizarModulo', function(){
 			$Modulo 			    = Modulo::find(Input::get('id')); 
 			$Modulo->nome       	= Input::get('nome');
+
+			if(Curso::find($Modulo->idCurso) != null){
+				if(in_array(Input::get('nome'), Curso::find($Modulo->idCurso)->modulos->lists('nome')) ){
+					Session::flash('warning', "Já existe um módulo com o mesmo nome neste curso");
+					return Redirect::back();
+				}
+				
+			}
 			
 			$Modulo->save();
 
@@ -2288,6 +2320,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$turma->idModulo = Input::get('idModulo');
 			$turma->status = 1;
 
+			if(Modulo::find($turma->idModulo) != null){
+				if(in_array(Input::get('nome'), Modulo::find($turma->idModulo)->turmas->lists('nome')) ){
+					Session::flash('warning', "Já existe uma turma com esse nome neste módulo");
+					return Redirect::back();
+				}
+				
+			}
+
 			$turma->save();
 
 			// redirect
@@ -2298,6 +2338,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('atualizarTurma', function(){
 			$Turma 			    = Turma::find(Input::get('id')); 
 			$Turma->nome       	= Input::get('nome');
+
+			if(Modulo::find($Turma->idModulo) != null){
+				if(in_array(Input::get('nome'), Modulo::find($Turma->idModulo)->turmas->lists('nome')) ){
+					Session::flash('warning', "Já existe uma turma com esse nome neste módulo");
+					return Redirect::back();
+				}
+				
+			}
 			
 			$Turma->save();
 
@@ -2406,6 +2454,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Aula->titulo = Input::get('nome');
 			$Aula->idModulo = Input::get('idModulo');
 
+			if(Modulo::find($Aula->idModulo) != null){
+				if(in_array(Input::get('nome'), Modulo::find($Aula->idModulo)->aulas->lists('titulo')) ){
+					Session::flash('warning', "Já existe uma aula com esse nome neste módulo");
+					return Redirect::back();
+				}
+				
+			}
+
 			$Aula->save();
 
 			// redirect
@@ -2416,6 +2472,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('atualizarAula', function(){
 			$Aula 			    = Aula::find(Input::get('id')); 
 			$Aula->titulo       	= Input::get('nome');
+
+			if(Modulo::find($Aula->idModulo) != null){
+				if(in_array(Input::get('nome'), Modulo::find($Aula->idModulo)->aulas->lists('nome')) ){
+					Session::flash('warning', "Já existe uma aula com esse nome neste módulo");
+					return Redirect::back();
+				}
+				
+			}
 			
 			$Aula->save();
 
@@ -2773,10 +2837,30 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			if($idModulo!=""){
 				$atividadeExtra->idModulo = Input::get('idModulo');
+
+				//Checa se existe atividades extras direcionada para este modulo como o mesmo nome
+				if(Modulo::find($atividadeExtra->idModulo) != null){
+					if(in_array(Input::get('nome'), Modulo::find($atividadeExtra->idModulo)->atividadesExtras->lists('nome')) ){
+						Session::flash('warning', "Já existe uma atividade com esse nome relacionada ao módulo escolhido");
+						return Redirect::back();
+					}
+					
+				}
 			}
+
+			//Checa se existe atividades extras livres com o mesmo nome
+			if(Atividades::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
+				if(in_array(Input::get('nome'), Atividades::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
+					Session::flash('warning', "Já existe uma atividade com esse nome");
+					return Redirect::back();
+				}
+				
+			}
+
 			if($idCategoria!=""){
 				$atividadeExtra->idCategoria = Input::get('idCategoria');
 			}
+
 
 			$atividadeExtra->save();
 
@@ -2799,6 +2883,23 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			if(isset($idModulo)){
 				$atividadeExtra->idModulo = Input::get('idModulo');
+
+				if(Modulo::find($atividadeExtra->idModulo) != null){
+					if(in_array(Input::get('nome'), Modulo::find($atividadeExtra->idModulo)->atividadesExtras->lists('nome')) ){
+						Session::flash('warning', "Já existe uma atividade com esse nome relacionada ao módulo escolhido");
+						return Redirect::back();
+					}
+					
+				}
+			}
+
+			//Checa se existe atividades extras livres com o mesmo nome
+			if(Atividades::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
+				if(in_array(Input::get('nome'), Atividades::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
+					Session::flash('warning', "Já existe uma atividade com esse nome");
+					return Redirect::back();
+				}
+				
 			}
 
 			$atividadeExtra->save();
@@ -2833,6 +2934,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Atividade->idUsuario = Auth::user()->id;
 			$Atividade->tipo = 1;
 
+			if(Aula::find($Atividade->idAula) != null){
+				if(in_array(Input::get('nome'), Aula::find($Atividade->idAula)->atividades->lists('nome')) ){
+					Session::flash('warning', "Já existe uma atividade com esse nome nesta aula");
+					return Redirect::back();
+				}
+				
+			}
+
 
 			$Atividade->save();
 
@@ -2845,6 +2954,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Atividade 			    = Atividade::find(Input::get('id')); 
 			$Atividade->nome       	= Input::get('nome');
 			$Atividade->status 		= Input::get('status');
+
+			if(Aula::find($Atividade->idAula) != null){
+				if(in_array(Input::get('nome'), Aula::find($Atividade->idAula)->atividades->lists('nome')) ){
+					Session::flash('warning', "Já existe uma atividade com esse nome nesta aula");
+					return Redirect::back();
+				}
+				
+			}
 			
 			$Atividade->save();
 
@@ -3375,6 +3492,43 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			// redirect
 			Session::flash('info', 'Alterações salvas com sucesso!');
+			return Redirect::back();
+		});
+
+		Route::get('questao/deletar/{id}', function($id){
+			$questao = Questao::find($id);
+
+			$atividade = $questao->atividade;
+
+			if($atividade != null){
+
+				if($atividade->tipo == 1){
+					$modulo = $atividade->aula->modulo;
+
+					//Se já existe alguma turma fechada neste módulo, não podemos excluir questoes
+					foreach ($modulo->turmas as $turma) {
+						if($turma->status == 0){
+							Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura excluindo Questões </p>');
+							return Redirect::back();
+						}
+					}
+				}
+				
+				if($atividade->acessos->count() == null){
+
+					deletarQuestao($questao, "hard");
+					Session::flash('info', '<p> A questão foi excluída </p>');
+					return Redirect::back();
+				}else{
+
+					Session::flash('warning', '<p> A atividade relacionada a esta questão já foi acessada por alunos </p> <p> Não é possível alterar a estrutura da atividade excluindo suas questões </p>');
+					return Redirect::back();
+				}
+				
+			}
+			
+			Session::flash('warning', "Atividade inexistente");
+
 			return Redirect::back();
 		});
 	
