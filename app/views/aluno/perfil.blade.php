@@ -105,9 +105,13 @@
 											
 											<div class="profile-info-row">
                                                 <div class="profile-info-name">Data de Nascimento</div>
-
+                                                <?php  
+                                                    $data = explode('-', Auth::user()->aluno->dataNascimento);
+                                                    Auth::user()->aluno->dataNascimento = $data[2].'/'.$data[1].'/'.$data[0];
+                                                ?>
+                                        
                                                 <div class="profile-info-value">
-                                                    <span>{{Aluno::find(Auth::user()->id)->dataNascimento}}</span>
+                                                    <span>{{Auth::user()->aluno->dataNascimento}}</span>
                                                 </div>
                                             </div>
 											
@@ -278,7 +282,7 @@
                                                     </div>
                                                     <div id="div_dataNascimento" class="form-group margin">
                                                         <label class="control-label" for="dataNascimento"><i id="icone_dataNascimento" class="fa"></i></label> <b>Data de nascimento</b>
-                                                        <input type="text" autocomplete="off" name="dataNascimento" id="dataNascimento" onblur="fcn_recarregaCores();" class="form-control dataNascimentoObrigatorio" value={{Aluno::find(Auth::user()->id)->dataNascimento}}>
+                                                        <input type="text" autocomplete="off" name="dataNascimento" id="dataNascimento" onblur="fcn_recarregaCores();" class="form-control dataNascimentoObrigatorio" value={{Auth::user()->aluno->dataNascimento}}>
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i></label> <b>E-mail</b>
