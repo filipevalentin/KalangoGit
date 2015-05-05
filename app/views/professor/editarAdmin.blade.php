@@ -189,7 +189,7 @@
                                                     </div>
 													<div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i><b> E-mail</b></label>
-                                                        <input type="text" autocomplete="off" name="email" id="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$professor->email}}>
+                                                        <input readonly title="E-mail não pode ser alterado" type="text" autocomplete="off" name="email" id="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$professor->email}}>
                                                     </div>
 													<div id="div_codigoRegistro" class="form-group margin">
                                                         <label class="control-label" for="dataNascimento"><i id="icone_codigoRegistro" class="fa "></i><b> Registro (RE)</b></label>
