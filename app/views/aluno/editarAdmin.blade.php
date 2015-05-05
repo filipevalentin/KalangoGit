@@ -204,7 +204,7 @@
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i> E-mail</label>
-                                                        <input type="text" autocomplete="off" name="email" id="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$aluno->email}}>
+                                                        <input readonly title="E-mail não pode ser alterado" type="text" autocomplete="off" name="email" id="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{$aluno->email}}>
                                                     </div>
 													<div id="div_diaVencimentoBoleto" class="form-group margin">
                                                         <label class="control-label" for="dataVencimentoBoleto"><i id="icone_diaVencimentoBoleto" class="fa"></i> Dia do Vencimento do Boleto</label>
