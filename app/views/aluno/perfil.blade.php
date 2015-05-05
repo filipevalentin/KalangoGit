@@ -279,7 +279,7 @@
                                                     </div>
                                                     <div id="div_email" class="form-group margin">
                                                         <label class="control-label" for="email"><i id="icone_email" class="fa"></i></label> <b>E-mail</b>
-                                                        <input type="text" autocomplete="off" name="email" id="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{Auth::user()->email}}>
+                                                        <input readonly title="E-mail não pode ser alterado" type="text" autocomplete="off" name="email" id="email" maxlength="50" class="form-control emailObrigatorio" onblur="fcn_recarregaCores();fcn_validaEmail(this);" value={{Auth::user()->email}}>
                                                     </div>
 													<div id="div_sobreMim" class="form-group margin">
                                                         <label class="control-label" for="sobreMim"><i id="icone_sobreMim" class="fa"></i></label> <b>Sobre mim</b>
