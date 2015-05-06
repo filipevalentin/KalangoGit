@@ -9,10 +9,12 @@ Route::get('teste5',function(){
 	// $c->restore();
 	// $confirmation_code = "00XgHv1zdNGxCvr8QP3m6X3szxuIgZ";
 
-	// Mail::send('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+	// Mail::queue                    ('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
 	//             $message->to("filipethesnake2@gmail.com", "Filipe")
 	//                 ->subject('KalanGO! - Verifique sua conta');
 	        // });
+
+	return (Hash::check('99559955.', User::find(4)->password)) ? "ok" : "nao bate";
 
 	return View::make('templateEmail')->with('confirmation_code','asdlkasdiashdasho');
 
@@ -3635,7 +3637,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$aluno->save();
 
-			Mail::send('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+			Mail::queue                    ('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
 	            $message->to(Input::get('email'), Input::get('nome'))
 	                ->subject('KalanGO! - Verifique sua conta');
 	        });
@@ -3801,7 +3803,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$professor->save();
 
-			Mail::send('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+			Mail::queue('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
 	            $message->to(Input::get('email'), Input::get('nome'))
 	                ->subject('KalanGO! - Verifique sua conta');
 	        });
