@@ -152,9 +152,9 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="idaula" name="idAula">
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="tipo"><i id="" class="fa"></i> Tipo</label>
-                            <select type="" class="form-control" id="tipo" name="tipo">
+                        <div div="div_tipo-novoConteudo-material" class="form-group">
+                            <label class="control-label" for="tipo"><i id="icone_tipo_novoConteudo-material" class="fa"></i> xxTipo</label>
+                            <select class="form-control tipoObrigatorio-novoConteudo-material" id="tipo" name="tipo" onblur="fcn_recarregaCoresNovoConteudoMaterial();">
                                 <option value="1">Documento</option>
                                 <option value="2">Vídeo</option>
                                 <option value="3">Link</option>
@@ -584,6 +584,19 @@
 			
 			var obrigatorioPendente = 0;
 		
+			if($(".tipoObrigatorio-novoConteudo-material").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_tipo-novoConteudo-material" ).removeClass("has-success");
+				$( "#icone_tipo_novoConteudo-material" ).removeClass("fa-check");
+				$( "#div_tipo-novoConteudo-material" ).addClass("has-error");
+				$( "#icone_tipo_novoConteudo-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_tipo-novoConteudo-material" ).removeClass("has-error");
+				$( "#icone_tipo_novoConteudo-material" ).removeClass("fa-times-circle-o");
+				$( "#div_tipo-novoConteudo-material" ).addClass("has-success");
+				$( "#icone_tipo_novoConteudo-material" ).addClass("fa-check");
+			}
+		
 			if($(".nomeObrigatorio-novoConteudo-material").val() == ""){
 				obrigatorioPendente = 1;
 				$( "#div_nome-novoConteudo-material" ).removeClass("has-success");
@@ -735,6 +748,18 @@
 		}
 		
 		function fcn_recarregaCoresNovoConteudoMaterial(){
+			
+			if($(".tipoObrigatorio-novoConteudo-material").val() == ""){
+				$( "#div_tipo-novoConteudo-material" ).removeClass("has-success");
+				$( "#icone_tipo_novoConteudo-material" ).removeClass("fa-check");
+				$( "#div_tipo-novoConteudo-material" ).addClass("has-error");
+				$( "#icone_tipo_novoConteudo-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_tipo-novoConteudo-material" ).removeClass("has-error");
+				$( "#icone_tipo_novoConteudo-material" ).removeClass("fa-times-circle-o");
+				$( "#div_tipo-novoConteudo-material" ).addClass("has-success");
+				$( "#icone_tipo_novoConteudo-material" ).addClass("fa-check");
+			}
 			
 			if($(".nomeObrigatorio-novoConteudo-material").val() == ""){
 				$( "#div_nome-novoConteudo-material" ).removeClass("has-success");
