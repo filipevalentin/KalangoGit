@@ -22,11 +22,11 @@
 @section('maincontent')
     <section class="content-header">
         <h1>Visualizar Aulas</h1>
-        <ol class="breadcrumb">
+        <!--<ol class="breadcrumb">
             <li><a href="/professor/home" ><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active"><a href="{{URL::previous()}}" >Gerenciar Cursos</a></li>
 			<li class="active">Visualizar Aulas</li>
-        </ol>
+        </ol>-->
     </section>
 
     <section class="content">
