@@ -8,10 +8,10 @@
 
 <section class="content-header">
     <h1>Desempenho</h1>
-    <!--<ol class="breadcrumb">
+    <ol class="breadcrumb">
         <li><a href="/aluno/home" ><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Desempenho</li>
-    </ol>-->
+    </ol>
 </section>
 
 <section class="content">

@@ -345,6 +345,10 @@ Route::get('teste4',function(){
 Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 		Route::get('home', function(){
+			$bc = array();
+
+			Session::put('bc',$bc);
+
 			$turmas = Auth::user()->aluno->turmas->filter(function($turma){
 				if($turma->status != 0){
 					return true;
@@ -758,6 +762,10 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	//Home
 
 		Route::get('home/{idioma?}', function($idioma = null){
+
+			$bc = array();
+
+			Session::put('bc',$bc);
 			// fazer a busca com o idioma
 
 			//Pega o objeto idioma
@@ -1932,7 +1940,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Home e Perfil e Senha
 
 		Route::get('home/{idioma?}', function($idioma = null){
-			//Session::flash('info',URL::previous());
+
+			$bc = array();
+
+			Session::put('bc',$bc);
+
+			dd(Request::url());
+
 			if($idioma == null){
 				$cursos = Curso::all();
 				$cursosArray = $cursos->toArray();
@@ -1947,6 +1961,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('perfil', function(){
+
+			$bc = Session::get('bc');
+
+			$bc[] = URL::previous();
+
+			Session::put('bc',$bc);
 
 			return Redirect::to('admin/administrador/'.Auth::user()->id);
 			

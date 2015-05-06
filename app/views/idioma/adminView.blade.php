@@ -56,10 +56,10 @@
 @section('maincontent')
 	<section class="content-header">
 	    <h1>Idiomas</h1>
-	    <!--<ol class="breadcrumb">
+	    <ol class="breadcrumb">
 	        <li><a href="/admin/home" ><i class="fa fa-dashboard"></i> Home</a></li>
 	        <li class="active">Idiomas</li>
-	    </ol>-->
+	    </ol>
 	</section>
 
 	<section class="content">

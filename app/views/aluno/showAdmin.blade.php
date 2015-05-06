@@ -117,10 +117,10 @@
 
 <section class="content-header">
     <h1>Gerenciar Alunos</h1>
-    <!--<ol class="breadcrumb">
+    <ol class="breadcrumb">
         <li><a href="/admin/home" ><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">Gerenciar Alunos</li>
-    </ol>-->
+    </ol>
 </section>
 
 <section class="content">
