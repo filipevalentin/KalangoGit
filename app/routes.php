@@ -2886,7 +2886,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$atividadeExtra->status = Input::get('status');
 
-			if($atividadeExtra->nome != Input::get('nome');){
+			if($atividadeExtra->nome != Input::get('nome')){
 
 				if(isset($idModulo)){
 					$atividadeExtra->idModulo = Input::get('idModulo');
