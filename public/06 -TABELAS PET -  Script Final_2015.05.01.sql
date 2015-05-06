@@ -36,7 +36,7 @@ create table categorias(
 create table empresas(
 	id							int(11)						auto_increment,
 	constraint PK_idEmpresa		primary key(id),
-	cnpj						int(15),
+	cnpj						varchar(20),
 	constraint UK_Cnpj			unique(cnpj),		
 	nome						varchar(255)				not null,
 	razaoSocial					varchar(255)				not null,

@@ -1932,6 +1932,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Home e Perfil e Senha
 
 		Route::get('home/{idioma?}', function($idioma = null){
+			//Session::flash('info',URL::previous());
 			if($idioma == null){
 				$cursos = Curso::all();
 				$cursosArray = $cursos->toArray();
@@ -2791,6 +2792,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('atividadesExtras', function(){
+
+			//return Redirect::back();
+
 			$modulos = Modulo::all();
 
 			$categorias = Categoria::all();
@@ -2873,7 +2877,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::post('atualizarAtividadeExtra', function(){
 			$atividadeExtra = Atividade::find(Input::get('id'));
-			$atividadeExtra->nome = Input::get('nome');
 			$idModulo = Input::get('idModulo');
 			
 
@@ -2883,25 +2886,28 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$atividadeExtra->status = Input::get('status');
 
-			if(isset($idModulo)){
-				$atividadeExtra->idModulo = Input::get('idModulo');
+			if($atividadeExtra->nome != Input::get('nome');){
 
-				if(Modulo::find($atividadeExtra->idModulo) != null){
-					if(in_array(Input::get('nome'), Modulo::find($atividadeExtra->idModulo)->atividadesExtras->lists('nome')) ){
-						Session::flash('warning', "Já existe uma atividade com esse nome relacionada ao módulo escolhido");
+				if(isset($idModulo)){
+					$atividadeExtra->idModulo = Input::get('idModulo');
+
+					if(Modulo::find($atividadeExtra->idModulo) != null){
+						if(in_array(Input::get('nome'), Modulo::find($atividadeExtra->idModulo)->atividadesExtras->lists('nome')) ){
+							Session::flash('warning', "Já existe uma atividade com esse nome relacionada ao módulo escolhido");
+							return Redirect::back();
+						}
+						
+					}
+				}
+
+				//Checa se existe atividades extras livres com o mesmo nome
+				if(Atividades::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
+					if(in_array(Input::get('nome'), Atividades::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
+						Session::flash('warning', "Já existe uma atividade com esse nome");
 						return Redirect::back();
 					}
 					
 				}
-			}
-
-			//Checa se existe atividades extras livres com o mesmo nome
-			if(Atividades::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
-				if(in_array(Input::get('nome'), Atividades::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
-					Session::flash('warning', "Já existe uma atividade com esse nome");
-					return Redirect::back();
-				}
-				
 			}
 
 			$atividadeExtra->save();
@@ -2953,17 +2959,21 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarAtividade', function(){
-			$Atividade 			    = Atividade::find(Input::get('id')); 
-			$Atividade->nome       	= Input::get('nome');
+			$Atividade 			    = Atividade::find(Input::get('id'));
 			$Atividade->status 		= Input::get('status');
 
-			if(Aula::find($Atividade->idAula) != null){
-				if(in_array(Input::get('nome'), Aula::find($Atividade->idAula)->atividades->lists('nome')) ){
-					Session::flash('warning', "Já existe uma atividade com esse nome nesta aula");
-					return Redirect::back();
+			if($Atividade->nome != Input::get('nome')){
+
+				if(Aula::find($Atividade->idAula) != null){
+					if(in_array(Input::get('nome'), Aula::find($Atividade->idAula)->atividades->lists('nome')) ){
+						Session::flash('warning', "Já existe uma atividade com esse nome nesta aula");
+						return Redirect::back();
+					}
+					
 				}
-				
 			}
+
+			$Atividade->nome = Input::get('nome');
 			
 			$Atividade->save();
 
@@ -3306,12 +3316,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					 $questao->excluido = "Ativo";
 				}
 				
-				$questao->atividade2 = $questao->atividade->nome;
-				if($questao->atividade->tipo == 1){
-					$questao->aula2 = $questao->atividade->aula->titulo;
-					$questao->modulo2 = $questao->atividade->aula->modulo->nome;
-					$questao->curso = $questao->atividade->aula->modulo->curso->nome;
-					$questao->idioma = $questao->atividade->aula->modulo->curso->idioma->nome;
+				$questao->atividade2 = $questao->atividade()->withTrashed()->first()->nome;
+
+				if($questao->atividade()->withTrashed()->first()->tipo == 1){
+					$questao->aula2 = $questao->atividade()->withTrashed()->first()->aula->titulo;
+					$questao->modulo2 = $questao->atividade()->withTrashed()->first()->aula->modulo->nome;
+					$questao->curso = $questao->atividade()->withTrashed()->first()->aula->modulo->curso->nome;
+					$questao->idioma = $questao->atividade()->withTrashed()->first()->aula->modulo->curso->idioma->nome;
 					$questao->tipo2 = ($questao->tipo == 1) ? 'Múltipla Escolha' : 'Dissertativa';
 				}else{
 					$questao->aula2 = "Atividade Extra";
