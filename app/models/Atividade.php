@@ -30,7 +30,7 @@
 		}
 
 		public function acessos(){
-            return $this->belongsToMany('Aluno', 'AcessosAtividades', 'idAtividade', 'idAluno');
+            return $this->belongsToMany('Aluno', 'acessosatividades', 'idAtividade', 'idAluno');
         }
 
 

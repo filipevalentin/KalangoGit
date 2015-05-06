@@ -1563,7 +1563,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$aluno->turma = $turma;
 
 			//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
-			$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id') : array('null'))->get();
+			$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') : array('null'))->get();
 
 			//Add as aulas ao objeto aluno
 			$aluno->aulasAluno = $turma->modulo->aulas;
@@ -1661,7 +1661,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$aluno->turma = $turma;
 
 			//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
-			$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id') : array('null'))->get();
+			$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') : array('null'))->get();
 
 			//Add as aulas ao objeto aluno
 			$aluno->categoriasAluno = Categoria::all();
@@ -1747,7 +1747,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				$aluno->turma = $turma;
 				
 				//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
-				$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id') : array('null'))->get();
+				$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') : array('null'))->get();
 
 				//Add as aulas ao objeto aluno
 				$aluno->aulasAluno = $turma->modulo->aulas;
@@ -1845,7 +1845,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				$aluno->turma = $turma;
 
 				//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
-				$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('AcessosAtividades.status','=',1)->get()->lists('id') : array('null'))->get();
+				$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') : array('null'))->get();
 
 				//Add as aulas ao objeto aluno
 				$aluno->categoriasAluno = Categoria::all();
