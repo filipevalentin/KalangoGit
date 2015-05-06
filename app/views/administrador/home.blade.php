@@ -94,8 +94,9 @@
                     </div>
                     <div id="div_idioma-editar-curso" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_idioma-editar-curso" class="fa"></i> Idioma</label>
-                        <select id="idioma" name="idioma" class="form-control">
-                            @foreach(Idioma::all() as $idioma)
+                        <select id="idioma" name="idioma" class="form-control idiomaObrigatorio-editar-idioma">
+                             <option value="" >Selecione</option>
+							@foreach(Idioma::all() as $idioma)
                                 <option value={{$idioma->id}}>{{$idioma->nome}}</option>
                             @endforeach
                         </select>
@@ -129,8 +130,9 @@
                     </div>
                     <div id="div_idioma-novo-curso" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_idioma-novo-curso" class="fa"></i> Idioma</label>
-                        <select id="idioma" name="idioma" class="form-control">
-                          @foreach(Idioma::all() as $idioma)
+                        <select id="idioma" name="idioma" class="form-control idiomaObrigatorio-novo-curso">
+                          <option value="" >Selecione</option>
+						  @foreach(Idioma::all() as $idioma)
                             <option value={{$idioma->id}}>{{$idioma->nome}}</option>
                           @endforeach
                         </select>
