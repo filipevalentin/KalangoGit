@@ -2011,15 +2011,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::post('atualizarIdioma', function(){
 			$idioma 			    = Idioma::find(Input::get('id')); 
-			$idioma->nome       	= Input::get('nome');
-
-			if(Idioma::all()->count() != null){
-				if(in_array(Input::get('nome'), Idioma::where('id','!=',$idioma->id)->lists('nome')) ){
-					Session::flash('warning', "Esse idioma já existe");
-					return Redirect::back();
+			
+			if($idioma->nome != Input::get('nome')){
+				if(Idioma::all()->count() != null){
+					if(in_array(Input::get('nome'), Idioma::where('id','!=',$idioma->id)->lists('nome')) ){
+						Session::flash('warning', "Esse idioma já existe");
+						return Redirect::back();
+					}
+					
 				}
-				
 			}
+
+			$idioma->nome = Input::get('nome');
 			
 			$idioma->save();
 
@@ -2117,16 +2120,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::post('atualizarCurso', function(){
 			$Curso 			    = Curso::find(Input::get('id')); 
-			$Curso->nome       	= Input::get('nome');
 			$Curso->idIdioma      = Input::get('idioma');
 
-			if(Idioma::find($Curso->idIdioma) != null){
-				if(in_array(Input::get('nome'), Idioma::find($Curso->idIdioma)->cursos->lists('nome')) ){
-					Session::flash('warning', "Esse curso já existe");
-					return Redirect::back();
+			if($Curso->nome != Input::get('nome')){
+				if(Idioma::find($Curso->idIdioma) != null){
+					if(in_array(Input::get('nome'), Idioma::find($Curso->idIdioma)->cursos->lists('nome')) ){
+						Session::flash('warning', "Esse curso já existe");
+						return Redirect::back();
+					}
+					
 				}
-				
 			}
+			
+			$Curso->nome = Input::get('nome');
 			
 			$Curso->save();
 
@@ -2240,15 +2246,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::post('atualizarModulo', function(){
 			$Modulo 			    = Modulo::find(Input::get('id')); 
-			$Modulo->nome       	= Input::get('nome');
-
-			if(Curso::find($Modulo->idCurso) != null){
-				if(in_array(Input::get('nome'), Curso::find($Modulo->idCurso)->modulos->lists('nome')) ){
-					Session::flash('warning', "Já existe um módulo com o mesmo nome neste curso");
-					return Redirect::back();
+			
+			if($Modulo->nome != Input::get('nome')){
+				if(Curso::find($Modulo->idCurso) != null){
+					if(in_array(Input::get('nome'), Curso::find($Modulo->idCurso)->modulos->lists('nome')) ){
+						Session::flash('warning', "Já existe um módulo com o mesmo nome neste curso");
+						return Redirect::back();
+					}
+					
 				}
-				
 			}
+
+			$Modulo->nome = Input::get('nome');
 			
 			$Modulo->save();
 
@@ -2339,16 +2348,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarTurma', function(){
-			$Turma 			    = Turma::find(Input::get('id')); 
-			$Turma->nome       	= Input::get('nome');
-
-			if(Modulo::find($Turma->idModulo) != null){
-				if(in_array(Input::get('nome'), Modulo::find($Turma->idModulo)->turmas->lists('nome')) ){
-					Session::flash('warning', "Já existe uma turma com esse nome neste módulo");
-					return Redirect::back();
+			$Turma = Turma::find(Input::get('id')); 
+			
+			if($Turma->nome != Input::get('nome')){
+				if(Modulo::find($Turma->idModulo) != null){
+					if(in_array(Input::get('nome'), Modulo::find($Turma->idModulo)->turmas->lists('nome')) ){
+						Session::flash('warning', "Já existe uma turma com esse nome neste módulo");
+						return Redirect::back();
+					}
+					
 				}
-				
 			}
+			
+			$Turma->nome = Input::get('nome');
 			
 			$Turma->save();
 
@@ -2473,17 +2485,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarAula', function(){
-			$Aula 			    = Aula::find(Input::get('id')); 
-			$Aula->titulo       	= Input::get('nome');
-
-			if(Modulo::find($Aula->idModulo) != null){
-				if(in_array(Input::get('nome'), Modulo::find($Aula->idModulo)->aulas->lists('nome')) ){
-					Session::flash('warning', "Já existe uma aula com esse nome neste módulo");
-					return Redirect::back();
-				}
-				
-			}
+			$Aula = Aula::find(Input::get('id')); 
 			
+			if($Aula->titulo != Input::get('nome')){
+				if(Modulo::find($Aula->idModulo) != null){
+					if(in_array(Input::get('nome'), Modulo::find($Aula->idModulo)->aulas->lists('titulo')) ){
+						Session::flash('warning', "Já existe uma aula com esse nome neste módulo");
+						return Redirect::back();
+					}
+					
+				}
+			}
+				
 			$Aula->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
@@ -2910,6 +2923,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				}
 			}
 
+			$atividadeExtra->nome = Input::get('nome');
 			$atividadeExtra->save();
 
 			// redirect
