@@ -246,6 +246,33 @@ Route::get('teste4',function(){
 			$idioma->forceDelete();
 		}
 	}
+
+	function addBreadCrumb($nome){
+
+		$bc = Session::get('bc');
+		$test = true;
+		foreach ($bc as $b) {
+			if( in_array(URL::current(), $b) ){
+				$test = false;
+			}
+		}
+		if($test){
+			$bc[] = array('nome'=>$nome, 'link'=>URL::current());
+
+			Session::put('bc',$bc);
+		}
+
+	}
+
+	function addBreadCrumbHome($nome){
+		$bc = array();
+
+		$bc[] = array('nome'=>"Home", 'link'=> URL::current());
+		$bc[] = array('nome'=>$nome, 'link'=>URL::current());
+
+		Session::put('bc',$bc);
+
+	}
 	
 
 // ===============================================
@@ -343,9 +370,12 @@ Route::get('teste4',function(){
 // ===============================================
 
 Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
+	
+	//home
 
 		Route::get('home', function(){
 			$bc = array();
+			$bc[] = array('nome'=>"Home", 'link'=> URL::current());
 
 			Session::put('bc',$bc);
 
@@ -359,6 +389,8 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 	//Cursos Anteriores
 		Route::get('cursos/anteriores', function(){
+			addBreadCrumbHome("Cursos Anteriores");
+
 			$turmas = Auth::user()->aluno->turmas->filter(function($turma){
 				if($turma->status != 1){
 					return true;
@@ -371,18 +403,21 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 	//Mensagens
 
 		Route::get('mensagens/entrada', function(){
+			addBreadCrumbHome("Mensagens");
 			$mensagens = Mensagem::where('idUsuarioDestino', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
 			return View::make('mensagem/alunoInbox')->with('mensagens', $mensagens);
 			
 		});
 
 		Route::get('mensagens/enviados', function(){
+			addBreadCrumb("Enviados");
 			$mensagens = Mensagem::where('idUsuarioOrigem', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
 			return View::make('mensagem/alunoEnviados')->with('mensagens', $mensagens);
 			
 		});
 
 		Route::get('mensagem/{id}', function($id){
+			addBreadCrumb("Ver Mensagem");
 			$mensagem = Mensagem::find($id);
 			if(strpos(URL::previous(), 'enviados') != false){
 
@@ -429,11 +464,13 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 	//Avisos
 
 		Route::get('avisos', function(){
+			addBreadCrumbHome("Avisos");
 			$avisos = Aviso::all();
 			return View::make('aviso/viewAluno')->with('avisos',$avisos);
 		});
 
 		Route::get('aviso/{id}', function($id){
+			addBreadCrumb("Ver Aviso");
 			$aviso = Aviso::find($id);
 			return View::make('aviso/showAluno')->with('aviso',$aviso);
 		});
@@ -441,6 +478,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 	//Atividade e Ativ.Extra - Responder/VerificarAcesso/RegistrarAcesso/Conclusão
 
 		Route::get('atividade/{idAtividade}', function($idAtividade){  // ### APLICAR LOGICA PARA IR NO RESULTADO DAS RESPOSTAS CASO JA TENHA FEITO A ATIVIDADE
+			addBreadCrumb("Atividade");
 			$atividade = Atividade::find($idAtividade);
 
 			//Checa se o aluno está habilitado a responder a atividade - No caso dele estar vendo um curso que já fez no passado
@@ -563,6 +601,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 	//Listar Atividades Extras
 
 		Route::get('atividades/extra', function(){
+			addBreadCrumbHome("Atividades Extras");
 			$turmas = Auth::user()->aluno->turmas;
 
 			$categorias = Categoria::all();
@@ -582,6 +621,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 	// Ver Conteudos do Módulo - Aulas
 		Route::get('modulo/{id}', function($id){
 			$modulo = Modulo::find($id);
+			addBreadCrumbHome($modulo->curso->nome.'-'.$modulo->nome);
 			return View::make('modulo/alunoView')->with('modulo',$modulo);
 		});
 
@@ -589,6 +629,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 	//Perfil - Senha - Dashborad
 
 		Route::get('perfil', function(){
+			addBreadCrumbHome("Perfil");
 			if(Session::has('mensagem')){
 				$mensagem = Session::get('mensagem');
 				return View::make('perfil')->with('mensagem', $mensagem);
@@ -642,6 +683,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 		});
 
 		Route::get('dashboard', function(){
+			addBreadCrumbHome("Dashborad");
 			$turmas = Auth::user()->aluno->turmas->filter(function($turma){
 			    return ($turma->status == "1"); // filtra só os com status ativo;
 			});
@@ -764,6 +806,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		Route::get('home/{idioma?}', function($idioma = null){
 
 			$bc = array();
+			$bc[] = array('nome'=>"Home", 'link'=> URL::current());
 
 			Session::put('bc',$bc);
 			// fazer a busca com o idioma
@@ -842,18 +885,22 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	//Mensagens
 
 		Route::get('mensagens/entrada', function(){
+			addBreadCrumbHome('Mensagens');
+
 			$mensagens = Mensagem::where('idUsuarioDestino', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
 			return View::make('mensagem/professorInbox')->with('mensagens', $mensagens);
 			
 		});
 
 		Route::get('mensagens/enviados', function(){
+			addBreadCrumb('Enviados');
 			$mensagens = Mensagem::where('idUsuarioOrigem', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
 			return View::make('mensagem/professorEnviados')->with('mensagens', $mensagens);
 			
 		});
 
 		Route::get('mensagem/{id}', function($id){
+			addBreadCrumb('Ver Mensagem');
 			$mensagem = Mensagem::find($id);
 			if(strpos(URL::previous(), 'enviados') != false){
 
@@ -920,6 +967,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	//Avisos
 
 		Route::get('aviso/{id}', function($id){
+			addBreadCrumbHome('Ver Aviso');
 			$aviso = Aviso::find($id);
 			return View::make('aviso/showProfessor')->with('aviso',$aviso);
 		});
@@ -927,6 +975,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	//Perfil - Senha
 
 		Route::get('perfil', function(){
+			addBreadCrumbHome('Perfil');
 			if(Session::has('mensagem')){
 				$mensagem = Session::get('mensagem');
 				return View::make('professor/perfil')->with('mensagem', $mensagem);
@@ -984,11 +1033,13 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		Route::get('modulo/{id}', function($id){
 			$modulo = Modulo::find($id);
+			addBreadCrumbHome($modulo->curso->nome.' - '.$modulo->nome);
 			return View::make('modulo/professorView')->with('modulo',$modulo);
 		});
 
 		Route::get('modulo/{idModulo}/{idTurma}', function($idModulo, $idTurma){
 			$modulo = Modulo::find($idModulo);
+			addBreadCrumbHome($modulo->nome.' - Acessos da Turma');
 			$turma = Turma::find($idTurma);
 			$alunos = $turma->alunos;
 
@@ -1008,6 +1059,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		Route::get('turma/{id}', function($id){
 			$turma = Turma::find($id);
+			addBreadCrumbHome('Turma: '.$turma->nome);
 			$alunos = $turma->alunos;
 			return View::make('turma/professorView')->with('turma',$turma)
 										           ->with('alunos',$alunos);
@@ -1017,12 +1069,14 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	//Atividades
 
 		Route::get('atividade/{id}', function($id){
+			addBreadCrumb('Atividade');
 			$atividade = Atividade::find($id);
 
 			return View::make('atividade/professorView')->with('atividades',$atividade);
 		});
 
 		Route::get('atividade/turma/{idAtividade}/{idTurma}', function($idAtividade, $idTurma){
+			addBreadCrumb('Atividade - Resultados da Turma');
 			$atividade = Atividade::find($idAtividade);
 			$turma = Turma::find($idTurma);
 			$alunos = $turma->alunos;
@@ -1057,6 +1111,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		});
 		
 		Route::get('atividade/extra/{idAtividade}', function($idAtividade){
+			addBreadCrumb('Ver Atividade');
 			$atividade = Atividade::find($idAtividade);
 			$turmas = Turma::where('idProfessor', '=', Auth::user()->id)->get();
 			foreach ($turmas as $turma) {
@@ -1103,6 +1158,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		});
 
 		Route::get('atividadesExtras', function(){
+			addBreadCrumbHome('Atividades Extras');
 			$modulos = Modulo::all();
 
 			$categorias = Categoria::all();
@@ -1129,6 +1185,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		});
 
 		Route::get('atividade/{id}/editar', function($id){
+			addBreadCrumb('Editar Atividade');
 			$atividade = Atividade::find($id);
 
 			return View::make('atividade/editarProfessorView')->with('atividade',$atividade);
@@ -1552,11 +1609,10 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	//Relatórios Individuais
 
 		Route::get('relatorios/aula/aluno/{idAluno}/{idTurma}',function($idAluno, $idTurma){ 
-			// Função para relatório individual: input-> id aluno, id turma
-			// Função para relatório de turma:	 input-> id Turma
 
 			// Lógica função individual
 			$aluno = Aluno::find($idAluno); //idAluno como parametro 196
+			addBreadCrumb('Relatório de Aula - Aluno: '.$aluno->nome);
 			$turma = $aluno->turmas->find($idTurma); //idTurma como parametro 41
 
 			//Segurança - Verifica se esse aluno é de alguma turma do professor em questao, e se essa turma é do professor
@@ -1572,6 +1628,8 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
 			$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') : array('null'))->get();
+
+			//dd($atividadesAluno);
 
 			//Add as aulas ao objeto aluno
 			$aluno->aulasAluno = $turma->modulo->aulas;
@@ -1663,6 +1721,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			// Lógica função individual
 			$aluno = Aluno::find($idAluno); //idAluno como parametro
+			addBreadCrumb('Relatório de Ativ. Extras - Aluno: '.$aluno->nome);
 			$turma = $aluno->turmas->find($idTurma); //idTurma como parametro
 
 			// Add o objeto turma que está sendo gerado o relatório, no objeto aluno
@@ -1747,6 +1806,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		Route::get('relatorios/aula/turma/{idTurma}',function($idTurma){ 
 			$turma = Turma::find($idTurma);
+			addBreadCrumb('Relatório de Aula - Turma: '.$turma->nome);
 			$alunos = $turma->alunos;
 
 			foreach ($alunos as $aluno) {
@@ -1759,6 +1819,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 				//Add as aulas ao objeto aluno
 				$aluno->aulasAluno = $turma->modulo->aulas;
+
 
 				//Cria o attr mediaGeral e presençaGeral ao objeto aluno
 				$aluno->mediaGeral = 0;
@@ -1807,6 +1868,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 							$countMediaGeral += $atividade->nota;
 
 						}else{
+							
 							//crava como: 0 =  "Não Concluiu"
 							$atividade->nota = 0;
 						}
@@ -1840,12 +1902,15 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			//return $aluno->aulasAluno;
 
+			dd($aluno->aulasAluno[0]);
+
 			return View::make('testeRelatorioTurma')->with('alunos', $alunos);
 			
 		});
 
 		Route::get('relatorios/atividadesExtras/turma/{idTurma}',function($idTurma){ 
 			$turma = Turma::find($idTurma);
+			addBreadCrumb('Relatório de Ativ. Extras - Turma: '.$turma->nome);
 			$alunos = $turma->alunos;
 
 			foreach($alunos as $aluno){
@@ -1940,13 +2005,16 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Home e Perfil e Senha
 
 		Route::get('home/{idioma?}', function($idioma = null){
-
 			$bc = array();
+			$bc[] = array('nome'=>"Home", 'link'=> URL::current());
 
 			Session::put('bc',$bc);
 
+<<<<<<< HEAD
 			//dd(Request::url());
 
+=======
+>>>>>>> origin/master
 			if($idioma == null){
 				$cursos = Curso::all();
 				$cursosArray = $cursos->toArray();
@@ -1961,12 +2029,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('perfil', function(){
-
-			$bc = Session::get('bc');
-
-			$bc[] = URL::previous();
-
-			Session::put('bc',$bc);
+			addBreadCrumbHome("Perfil");
+			//(implode(" ", Session::get('bc')));
 
 			dd(Session::get('bc'));
 
@@ -1988,10 +2052,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Idiomas
 
 		Route::get('idiomas', function(){
+			addBreadCrumbHome("Idiomas");
 			return View::make('idioma/adminView');
 		});
 
 		Route::get('listarIdiomas', function(){
+			
 			$idiomas = Idioma::all();
 			foreach ($idiomas as $idioma) {
 				if($idioma->trashed()){
@@ -2080,6 +2146,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Cursos
 
 		Route::get('cursos', function(){
+			addBreadCrumbHome("Cursos");
 			return View::make('curso/adminView');
 		});
 
@@ -2102,6 +2169,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('listarCursos',function(){
+			
 
 			$data = array();
 
@@ -2191,10 +2259,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Modulos
 
 		Route::get('modulos', function(){
+			addBreadCrumbHome("Módulos");
 			return View::make('modulo/adminView2');
 		});
 
 		Route::get('modulo/{id}', function($id){
+			addBreadCrumb(Modulo::find($id)->nome);
 			$modulo = Modulo::find($id);
 			return View::make('modulo/adminView')->with('modulo',$modulo);
 		});
@@ -2220,6 +2290,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('listarModulos/{idCurso?}', function($idCurso = null){
+			
 			$modulos = Curso::find($idCurso)->modulos;
 
 			return Response::json($modulos);
@@ -2313,10 +2384,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Turmas
 
 		Route::get('turmas', function(){
+			addBreadCrumbHome('Turmas');
+
 			return View::make('turma/adminShow');
 		});
 
 		Route::get('listarTurmas',function(){
+			
 
 			$data = array();
 
@@ -2341,6 +2415,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('turma/{id}', function($id){
+			addBreadCrumb(Turma::find($id)->nome);
+
 			$turma = Turma::find($id);
 			$alunos = $turma->alunos;
 			return View::make('turma/adminView')->with('turma',$turma)
@@ -2468,6 +2544,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Aulas
 
 		Route::get('aulas', function(){
+			addBreadCrumbHome('Aulas');
 			return View::make('aula/adminView');
 		});
 
@@ -2526,6 +2603,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('listarAulas',function(){
+			
 
 			$data = array();
 
@@ -2602,6 +2680,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Materiais
 
 		Route::get('materiais', function(){
+			addBreadCrumbHome('Materiais');
 			return View::make('materialApoio/adminView');
 		});
 
@@ -2782,10 +2861,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Atividades
 
 		Route::get('atividades', function(){
+			addBreadCrumbHome('Atividades');
 			return View::make('atividade/adminView');
 		});
 
 		Route::get('listarAtividades',function(){
+			
 
 			$data = array();
 
@@ -2827,6 +2908,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('atividadesExtras', function(){
+			addBreadCrumbHome('Atividades Extras');
 
 			//return Redirect::back();
 
@@ -2857,6 +2939,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('atividade/{id}/editar', function($id){
+			addBreadCrumb("Editar Ativdade");
 			$atividade = Atividade::find($id);
 
 			if($atividade->status == '1'){
@@ -2954,6 +3037,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('atividadeExtra/{id}/editar', function($id){
+			addBreadCrumb("Editar Atividade Extra");
 			$atividadeExtra = Atividade::find($id);
 
 			return View::make('atividade/extraEditarAdmin')->with('atividade',$atividadeExtra);
@@ -3077,6 +3161,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Categoria
 
 		Route::get('categorias', function(){
+			addBreadCrumbHome("Categorias");
 			return View::make('categoria/adminView');
 		});
 
@@ -3167,6 +3252,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Questoes
 
 		Route::get('questoes', function(){
+			addBreadCrumbHome('Questões');
 			return View::make('questao/adminView');
 		});
 
@@ -3332,6 +3418,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('listarQuestoes',function(){
+			
 
 			$data = array();
 
@@ -3584,11 +3671,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Alunos
 
 		Route::get('alunos', function(){
+			addBreadCrumbHome('Alunos');
 
 			return View::make('aluno/showAdmin');
 		});
 
 		Route::get('listarAlunos', function(){
+			
 
 			$data = array();
 
@@ -3618,6 +3707,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('aluno/{id}', function($id){
+			addBreadCrumb(User::find($id)->nome);
 			$mensagem=NULL;
 			if(Session::has('mensagem')){
 				$mensagem = Session::get('mensagem');
@@ -3755,6 +3845,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Professores
 
 		Route::get('professores', function(){
+			addBreadCrumbHome('Professores');
 
 			return View::make('professor/showAdmin');
 		});
@@ -3789,6 +3880,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('professor/{id}', function($id){
+			addBreadCrumb(User::find($id)->nome);
 			$mensagem =NULL;
 			if(Session::has('mensagem')){
 				$mensagem = Session::get('mensagem');
@@ -3913,11 +4005,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Administradores
 		
 		Route::get('administradores', function(){
+			addBreadCrumbHome('Administradores');
 
 			return View::make('administrador/showAdmin');
 		});
 
 		Route::get('listarAdministradores', function(){
+			
 
 			$data = array();
 
@@ -3947,6 +4041,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('administrador/{id}', function($id){
+			addBreadCrumb(User::find($id)->nome);
 			$mensagem =NULL;
 			if(Session::has('mensagem')){
 				$mensagem = Session::get('mensagem');
@@ -4055,6 +4150,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Avisos
 
 		Route::get('avisos', function(){
+			addBreadCrumbHome('Avisos');
 			$categorias = Turma::all();
 			$all = new Turma;
 			$all->id = null;
@@ -4066,6 +4162,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		//ajax - tabela
 		Route::get('listarAvisos/{idTurma?}', function($idTurma = null){
+			
 			$avisos;
 			if($idTurma != null){
 				$avisos = Turma::find($idTurma)->avisos;
@@ -4098,6 +4195,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::get('aviso/{id}', function($id){
+			addBreadCrumb("Ver Aviso");
 			$aviso = Aviso::find($id);
 			return View::make('aviso/showAdmin')->with('aviso',$aviso);
 		});
@@ -4180,11 +4278,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Tópicos
 
 		Route::get('topicos', function(){
+			addBreadCrumbHome('Tópicos');
 			return View::make('topico/showAdmin');
 		});
 
 		//ajax - tabela
 		Route::get('listarTopicos', function(){
+			
 			$topicos = Topico::withTrashed()->get();
 
 			foreach ($topicos as $topico) {
@@ -4245,6 +4345,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	//Empresas
 
 		Route::get('empresas',function(){
+			addBreadCrumbHome('Empresas');
 			return View::make('empresa/showAdmin');
 		});
 
@@ -4303,11 +4404,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 	// Propagandas
 
 		Route::get('propagandas', function(){
+			addBreadCrumbHome('Propagandas');
 			return View::make('propaganda/showAdmin');
 		});
 
 		//Ajax - Tabela
 		Route::get('listarPropagandas', function(){
+			
 			$propagandas = Propaganda::all();
 
 			foreach ($propagandas as $propaganda) {

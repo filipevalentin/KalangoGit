@@ -72,9 +72,9 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="id" name="id">
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="tipo"><i id="" class="fa"></i> Tipo</label>
-                            <select type="" class="form-control" id="tipo" name="tipo">
+                        <div id="div_tipo-editar-material" class="form-group">
+                            <label class="control-label" for="tipo"><i id="icone_tipo-editar-material" class="fa"></i> Tipo</label>
+                            <select class="form-control tipoObrigatorio-editar-material" onblur="fcn_recarregaCoresEditarMaterial();" id="tipo" name="tipo">
                                 <option value="1">Documento</option>
                                 <option value="2">Vídeo</option>
                                 <option value="3">Link</option>
@@ -84,9 +84,9 @@
                             <label class="control-label" for="nome"><i id="icone_nome-editar-material" class="fa"></i> Nome</label>
                             <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarMaterial();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-material"></input>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label" for="arquivo"><i class="fa"></i> Arquivo/URL</label>
-                            <input type="file" id="arquivo" name="arquivo" onblur="fcn_recarregaCoresEditarMaterial();fcn_validaArquivo(this.form, this.form.arquivo.value)" class="form-control"></input>
+                        <div id="div_arquivo-editar-material" class="form-group">
+                            <label class="control-label" for="arquivo"><i id="icone_arquivo-editar-material" class="fa"></i> Arquivo/URL</label>
+                            <input type="file" id="arquivo" name="arquivo" onblur="fcn_recarregaCoresEditarMaterial();fcn_validaArquivo(this.form, this.form.arquivo.value)" class="form-control arquivoObrigatorio-editar-material"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -152,8 +152,8 @@
                         <div class="form-group">
                             <input type="hidden" class="form-control" id="idaula" name="idAula">
                         </div>
-                        <div div="div_tipo-novoConteudo-material" class="form-group">
-                            <label class="control-label" for="tipo"><i id="icone_tipo_novoConteudo-material" class="fa"></i> xxTipo</label>
+                        <div id="div_tipo_novoConteudo_material" class="form-group">
+                            <label class="control-label" for="tipo"><i id="icone_tipo_novoConteudo-material" class="fa"></i> Tipo</label>
                             <select class="form-control tipoObrigatorio-novoConteudo-material" id="tipo" name="tipo" onblur="fcn_recarregaCoresNovoConteudoMaterial();">
                                 <option value="1">Documento</option>
                                 <option value="2">Vídeo</option>
@@ -256,9 +256,12 @@
     <section class="content-header">
         <h1>Gerenciar Aulas</h1>
         <ol class="breadcrumb">
-            <li><a href="/admin/home" ><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active"><a href="{{URL::previous()}}" >Gerenciar Cursos</a></li>
-			<li class="active">Gerenciar Aulas</li>
+            <?php
+                $aux = Session::get('bc');
+            ?>
+            @foreach($aux as $b)
+                <li><a href="{{$b['link']}}" >{{$b['nome']}}</a></li>
+            @endforeach
         </ol>
     </section>
 
@@ -508,7 +511,7 @@
                 $(this).parents('.modal-body').find('input#arquivo').attr("type", "file")
             }
             else{
-                $(this).parents('.modal-body').find('input#arquivo').attr("type", "text")
+                $(this).parents('.modal-body').find('input#arquivo').attr("type", "text").attr("value", "http://")
             }
         })
 
@@ -586,14 +589,14 @@
 		
 			if($(".tipoObrigatorio-novoConteudo-material").val() == ""){
 				obrigatorioPendente = 1;
-				$( "#div_tipo-novoConteudo-material" ).removeClass("has-success");
+				$( "#div_tipo_novoConteudo_material" ).removeClass("has-success");
 				$( "#icone_tipo_novoConteudo-material" ).removeClass("fa-check");
-				$( "#div_tipo-novoConteudo-material" ).addClass("has-error");
+				$( "#div_tipo_novoConteudo_material" ).addClass("has-error");
 				$( "#icone_tipo_novoConteudo-material" ).addClass("fa-times-circle-o");
 			}else{
-				$( "#div_tipo-novoConteudo-material" ).removeClass("has-error");
+				$( "#div_tipo_novoConteudo_material" ).removeClass("has-error");
 				$( "#icone_tipo_novoConteudo-material" ).removeClass("fa-times-circle-o");
-				$( "#div_tipo-novoConteudo-material" ).addClass("has-success");
+				$( "#div_tipo_novoConteudo_material" ).addClass("has-success");
 				$( "#icone_tipo_novoConteudo-material" ).addClass("fa-check");
 			}
 		
@@ -657,7 +660,20 @@
 		$(".btn-salvar-editar-material").click(function(event){
 			
 			var obrigatorioPendente = 0;
-		
+			
+			if($(".tipoObrigatorio-editar-material").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_tipo-editar-material" ).removeClass("has-success");
+				$( "#icone_tipo-editar-material" ).removeClass("fa-check");
+				$( "#div_tipo-editar-material" ).addClass("has-error");
+				$( "#icone_tipo-editar-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_tipo-editar-material" ).removeClass("has-error");
+				$( "#icone_tipo-editar-material" ).removeClass("fa-times-circle-o");
+				$( "#div_tipo-editar-material" ).addClass("has-success");
+				$( "#icone_tipo-editar-material" ).addClass("fa-check");
+			}
+			
 			if($(".nomeObrigatorio-editar-material").val() == ""){
 				obrigatorioPendente = 1;
 				$( "#div_nome-editar-material" ).removeClass("has-success");
@@ -669,6 +685,19 @@
 				$( "#icone_nome-editar-material" ).removeClass("fa-times-circle-o");
 				$( "#div_nome-editar-material" ).addClass("has-success");
 				$( "#icone_nome-editar-material" ).addClass("fa-check");
+			}
+			
+			if($(".arquivoObrigatorio-editar-material").val() == ""){
+				obrigatorioPendente = 1;
+				$( "#div_arquivo-editar-material" ).removeClass("has-success");
+				$( "#icone_arquivo-editar-material" ).removeClass("fa-check");
+				$( "#div_arquivo-editar-material" ).addClass("has-error");
+				$( "#icone_arquivo-editar-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_arquivo-editar-material" ).removeClass("has-error");
+				$( "#icone_arquivo-editar-material" ).removeClass("fa-times-circle-o");
+				$( "#div_arquivo-editar-material" ).addClass("has-success");
+				$( "#icone_arquivo-editar-material" ).addClass("fa-check");
 			}
 			
 			if(obrigatorioPendente == 1){
@@ -750,14 +779,14 @@
 		function fcn_recarregaCoresNovoConteudoMaterial(){
 			
 			if($(".tipoObrigatorio-novoConteudo-material").val() == ""){
-				$( "#div_tipo-novoConteudo-material" ).removeClass("has-success");
+				$( "#div_tipo_novoConteudo_material" ).removeClass("has-success");
 				$( "#icone_tipo_novoConteudo-material" ).removeClass("fa-check");
-				$( "#div_tipo-novoConteudo-material" ).addClass("has-error");
+				$( "#div_tipo_novoConteudo_material" ).addClass("has-error");
 				$( "#icone_tipo_novoConteudo-material" ).addClass("fa-times-circle-o");
 			}else{
-				$( "#div_tipo-novoConteudo-material" ).removeClass("has-error");
+				$( "#div_tipo_novoConteudo_material" ).removeClass("has-error");
 				$( "#icone_tipo_novoConteudo-material" ).removeClass("fa-times-circle-o");
-				$( "#div_tipo-novoConteudo-material" ).addClass("has-success");
+				$( "#div_tipo_novoConteudo_material" ).addClass("has-success");
 				$( "#icone_tipo_novoConteudo-material" ).addClass("fa-check");
 			}
 			
@@ -805,6 +834,18 @@
 		
 		function fcn_recarregaCoresEditarMaterial(){
 			
+			if($(".tipoObrigatorio-editar-material").val() == ""){
+				$( "#div_tipo-editar-material" ).removeClass("has-success");
+				$( "#icone_tipo-editar-material" ).removeClass("fa-check");
+				$( "#div_tipo-editar-material" ).addClass("has-error");
+				$( "#icone_tipo-editar-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_tipo-editar-material" ).removeClass("has-error");
+				$( "#icone_tipo-editar-material" ).removeClass("fa-times-circle-o");
+				$( "#div_tipo-editar-material" ).addClass("has-success");
+				$( "#icone_tipo-editar-material" ).addClass("fa-check");
+			}
+			
 			if($(".nomeObrigatorio-editar-material").val() == ""){
 				$( "#div_nome-editar-material" ).removeClass("has-success");
 				$( "#icone_nome-editar-material" ).removeClass("fa-check");
@@ -815,6 +856,18 @@
 				$( "#icone_nome-editar-material" ).removeClass("fa-times-circle-o");
 				$( "#div_nome-editar-material" ).addClass("has-success");
 				$( "#icone_nome-editar-material" ).addClass("fa-check");
+			}
+			
+			if($(".arquivoObrigatorio-editar-material").val() == ""){
+				$( "#div_arquivo-editar-material" ).removeClass("has-success");
+				$( "#icone_arquivo-editar-material" ).removeClass("fa-check");
+				$( "#div_arquivo-editar-material" ).addClass("has-error");
+				$( "#icone_arquivo-editar-material" ).addClass("fa-times-circle-o");
+			}else{
+				$( "#div_arquivo-editar-material" ).removeClass("has-error");
+				$( "#icone_arquivo-editar-material" ).removeClass("fa-times-circle-o");
+				$( "#div_arquivo-editar-material" ).addClass("has-success");
+				$( "#icone_arquivo-editar-material" ).addClass("fa-check");
 			}
 			
 		}
@@ -849,27 +902,38 @@
 		
 		function fcn_validaArquivo(formulario, arquivo) { 
 		   
-			if(arquivo != ""){
-				extensoes_permitidas = new Array(".pdf", ".odt", ".ods", ".odp"); 
-				meuerro = ""; 
-				 
-				extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase(); 
-				permitida = false; 
-				for (var i = 0; i < extensoes_permitidas.length; i++) { 
-					if (extensoes_permitidas[i] == extensao) { 
-						permitida = true; 
-						break; 
+			if($(".tipoObrigatorio-novoConteudo-material").val() == 1 || $(".tipoObrigatorio-novoConteudo-material").val() == 2){
+		   
+				if(arquivo != ""){
+					
+					if($(".tipoObrigatorio-novoConteudo-material").val() == 1){
+						extensoes_permitidas = new Array(".pdf", ".odt", ".ods", ".odp"); 
+						meuerro = ""; 
+					}else{
+						extensoes_permitidas = new Array(".mp4"); 
+						meuerro = ""; 
+					}
+					
+					extensao = (arquivo.substring(arquivo.lastIndexOf("."))).toLowerCase(); 
+					permitida = false; 
+					for (var i = 0; i < extensoes_permitidas.length; i++) { 
+						if (extensoes_permitidas[i] == extensao) { 
+							permitida = true; 
+							break; 
+						} 
 					} 
-				} 
-				
-				if (permitida == false) { 
-					alert("Verifique a extensão do arquivo anexado. \n\nAs extensões permitidas são: " + extensoes_permitidas.join()); 
-					document.getElementById('arquivo').value = "";
-					return 1;
+					
+					if (permitida == false) { 
+						alert("Verifique a extensão do arquivo anexado. \n\nAs extensões permitidas são: " + extensoes_permitidas.join()); 
+						$(".arquivoObrigatorio-novoConteudo-material").val("");
+						return 1;
+					}
+					 
+					return 0; 
 				}
-				 
-				return 0; 
+		
 			}
+		
 		}
 		
 	</script>

@@ -8,8 +8,12 @@
 	        <small>Meus Cursos</small>
 	    </h1>
 	    <ol class="breadcrumb">
-	        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Meus Cursos</li>
+		    <?php
+		    	$aux = Session::get('bc');
+		    ?>
+	    	@foreach($aux as $b)
+	        	<li><a href="{{$b['link']}}" >{{$b['nome']}}</a></li>
+			@endforeach
 	    </ol>
 	</section>
 

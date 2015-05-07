@@ -57,8 +57,12 @@
 	<section class="content-header">
 	    <h1>Tópicos de Questões</h1>
 	    <ol class="breadcrumb">
-	        <li><a href="/admin/home" ><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Tópicos de Questões</li>
+		    <?php
+		    	$aux = Session::get('bc');
+		    ?>
+	    	@foreach($aux as $b)
+	        	<li><a href="{{$b['link']}}" >{{$b['nome']}}</a></li>
+			@endforeach
 	    </ol>
 	</section>
 

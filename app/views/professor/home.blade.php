@@ -12,9 +12,13 @@
 <section class="content-header">
     <h1>Gerenciar Cursos</h1>
     <ol class="breadcrumb">
-        <li><a href="/professor/home" ><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Gerenciar Cursos</li>
-    </ol>
+            <?php
+                $aux = Session::get('bc');
+            ?>
+            @foreach($aux as $b)
+                <li><a href="{{$b['link']}}" >{{$b['nome']}}</a></li>
+            @endforeach
+        </ol>
 </section>
 
 <section class="content">

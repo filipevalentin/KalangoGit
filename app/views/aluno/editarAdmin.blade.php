@@ -28,8 +28,12 @@
             Gerenciar Alunos
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Gerenciar Alunos</li>
+            <?php
+                $aux = Session::get('bc');
+            ?>
+            @foreach($aux as $b)
+                <li><a href="{{$b['link']}}" >{{$b['nome']}}</a></li>
+            @endforeach
         </ol>
     </section>
 

@@ -35,8 +35,12 @@
 	<section class="content-header">
 	    <h1>Categorias de Ativ. Extras</h1>
 	    <ol class="breadcrumb">
-	        <li><a href="/admin/home" ><i class="fa fa-dashboard"></i> Home</a></li>
-	        <li class="active">Categorias de Ativ. Extras</li>
+		    <?php
+		    	$aux = Session::get('bc');
+		    ?>
+	    	@foreach($aux as $b)
+	        	<li><a href="{{$b['link']}}" >{{$b['nome']}}</a></li>
+			@endforeach
 	    </ol>
 	</section>
 
