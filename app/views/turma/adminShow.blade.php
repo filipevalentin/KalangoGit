@@ -76,7 +76,7 @@
 
                     <div id="div_modulo_nova_turma" class="form-group">
                         <label class="control-label" for="curso"><i id="icone_modulo_nova_turma" class="fa"></i> Modulo</label>
-                        <select name="curso" id="modulo" onblur="fcn_recarregaCoresNovaTurma();" class="form-control moduloObrigatorio_nova_turma">
+                        <select name="idModulo" id="modulo" onblur="fcn_recarregaCoresNovaTurma();" class="form-control moduloObrigatorio_nova_turma">
 	                        
                         </select>
                     </div>
@@ -163,7 +163,7 @@
 			$.get('/admin/listarModulos/'+idCurso, function( data ) {
 				$('select#modulo').children().remove();
 				$.each(data, function(key, val){
-					$('select#modulo').append("<option val="+val.id+">"+val.nome+"</option>");
+					$('select#modulo').append("<option value="+val.id+">"+val.nome+"</option>");
 				})
 			});
     })
@@ -174,7 +174,7 @@
 		$.get('/admin/listarModulos/'+idCurso, function( data ) {
 			$('select#modulo').children().remove();
 			$.each(data, function(key, val){
-				$('select#modulo').append("<option val="+val.id+">"+val.nome+"</option>");
+				$('select#modulo').append("<option value="+val.id+">"+val.nome+"</option>");
 			})
 		});
 

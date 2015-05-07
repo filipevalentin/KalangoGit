@@ -1945,7 +1945,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			Session::put('bc',$bc);
 
-			dd(Request::url());
+			//dd(Request::url());
 
 			if($idioma == null){
 				$cursos = Curso::all();
@@ -1967,6 +1967,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$bc[] = URL::previous();
 
 			Session::put('bc',$bc);
+
+			dd(Session::get('bc'));
 
 			return Redirect::to('admin/administrador/'.Auth::user()->id);
 			
