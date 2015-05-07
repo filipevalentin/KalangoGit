@@ -975,7 +975,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 	//Perfil - Senha
 
 		Route::get('perfil', function(){
-			addBreadCrumbHome('Acessos da Turma');
+			addBreadCrumbHome('Perfil');
 			if(Session::has('mensagem')){
 				$mensagem = Session::get('mensagem');
 				return View::make('professor/perfil')->with('mensagem', $mensagem);
