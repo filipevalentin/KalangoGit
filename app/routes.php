@@ -1629,6 +1629,8 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
 			$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') : array('null'))->get();
 
+			//dd($atividadesAluno);
+
 			//Add as aulas ao objeto aluno
 			$aluno->aulasAluno = $turma->modulo->aulas;
 
@@ -1818,6 +1820,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				//Add as aulas ao objeto aluno
 				$aluno->aulasAluno = $turma->modulo->aulas;
 
+
 				//Cria o attr mediaGeral e presençaGeral ao objeto aluno
 				$aluno->mediaGeral = 0;
 				$aluno->presencaGeral = 0;
@@ -1865,6 +1868,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 							$countMediaGeral += $atividade->nota;
 
 						}else{
+							
 							//crava como: 0 =  "Não Concluiu"
 							$atividade->nota = 0;
 						}
@@ -1897,6 +1901,8 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				//Nota do aluno muma Atividade:	$atividade->nota
 
 			//return $aluno->aulasAluno;
+
+			dd($aluno->aulasAluno[0]);
 
 			return View::make('testeRelatorioTurma')->with('alunos', $alunos);
 			

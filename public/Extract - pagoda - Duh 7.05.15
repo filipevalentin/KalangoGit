@@ -1,0 +1,544 @@
+CREATE TABLE usuarios (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL,
+  sobrenome varchar(255) NOT NULL,
+  login varchar(50) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  email varchar(255) NOT NULL,
+  urlImagem varchar(500) DEFAULT NULL,
+  confirmed int(1) NOT NULL COMMENT 'Indica se o usuario confirmou o registro atraves do email enviado',
+  confirmation_code varchar(255) NOT NULL COMMENT 'Codigo enviado por email ao se cadastrar um novo usuario',
+  remember_token varchar(255) NOT NULL COMMENT 'Funcao "manter conectado"',
+  tipo int(11) NOT NULL COMMENT '1:Aluno  2:Professor  3:Admin',
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+--
+-- Dumping data for table `usuarios`
+--
+
+INSERT INTO usuarios VALUES (1,'Administrador 1','','789','$2y$10$xHG6vtNDwihUTWHpAOUPaOAltMjs796HibPpDsghqIVB/DJ80zY9G','',NULL,1,'','Z0DBUavLZFZNoBNcfVXRBh4eO6X7hCF0CMsF2RTjZmvKxChEgDRXtYEukJTS',3,NULL);
+INSERT INTO usuarios VALUES (2,'Kesuke','Miyagi','eduardo.verga@gmail.com','$2y$10$GoZYBtgydiJSS4JztZxtouPZkuYP1PbmIGuO04gfpp68CiO1ccBym','eduardo.verga@gmail.com','img/pat-morita-myagi.jpg',1,'','vT5qomHy346inoEzf5ILd2bvIyqpOgxZruKo2TP1aFyM7LgaSgJpIlT3eiBM',2,NULL);
+INSERT INTO usuarios VALUES (3,'Daniel','San','10','$2y$10$s.PAZbdPT.z48nCuS94WWecUjrG45.jUY3Zs85TtRlMU.XMqhNPHW','psychoduh@live.com','img/Dan.jpg',1,'','',1,NULL);
+INSERT INTO usuarios VALUES (4,'Son','Goku','11','$2y$10$BmIcVDb3qvB8flR4jalPCeJTYkvvc7rSACLSipbYNxhT8tnDbq03G','songoku@gmail.com','img/goku.png',0,'EjJRdwKNBZJqxirHaQm6TWD9Go5Dqo','',1,NULL);
+INSERT INTO usuarios VALUES (5,'Seiya','de Pegasus','12','$2y$10$htIC3zluAFhFuldr2OvNkO8QX9xufaK9byCX3lh4cAZKwQ.R6MKwa','pegasusfantasy@gmail.com	','img/Seiya.jpg',0,'Qo1e1otgFNo3TizgKWIPSezFXYlmLs','',1,NULL);
+INSERT INTO usuarios VALUES (6,'Yusuke','Uramechi','13','$2y$10$Ib.7mz8CoWmQs.A2o8RwVeXNHKkCEC9n9ZlRZ/eKLFE8nywbeWj42','leiganmaroto@hotmail.com','img/Yusuke.jpg',0,'mIhnTfPCCEbVrHHhfVfqXpTEJEsrvs','',1,NULL);
+INSERT INTO usuarios VALUES (7,'Ranger','Vermelho','14','$2y$10$LsZJXTV73NgjoSyrols4sOtTMmqU6RL/CbTZnr.Xxfvjoc33mBqAi','GoGoPowerRanger@gmail.com','img/Ranger Vermelho.jpg',0,'zZmqDxwe46mrRfxSVYOix8g43J4X1Q','',1,NULL);
+INSERT INTO usuarios VALUES (8,'Oliver','Tsubasa','1','$2y$10$M.SNhDA5hgNoYTyQI/buROz0hKcZrLXz0jQnkfU95SLxelAO1w0i6','peterson.sr@hotmail.com','img/unnamed.jpg',1,'','rw6sUfGDJAgORl4ZdbYTtJapDKdgTROqZL9lIxhc8JJ1PkX4KLlWuXNsszps',1,NULL);
+INSERT INTO usuarios VALUES (9,'Liu','Kang','2','$2y$10$XJ3rb2FXEWq9o36pPgqcduAh32VhZ/Vp1mle1lIZs4sBtn9cJxG82','pet-peu@hotmail.com','img/unnamed (1).jpg',1,'','',1,NULL);
+
+
+--
+-- Table structure for table `idiomas`
+--
+
+DROP TABLE IF EXISTS idiomas;
+
+CREATE TABLE idiomas (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+--
+-- Dumping data for table `idiomas`
+--
+
+INSERT INTO idiomas VALUES (1,'Inglês',NULL);
+INSERT INTO idiomas VALUES (2,'Mandarim',NULL);
+INSERT INTO idiomas VALUES (4,'Alemão',NULL);
+
+--
+-- Table structure for table `categorias`
+--
+
+DROP TABLE IF EXISTS categorias;
+
+CREATE TABLE categorias (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL COMMENT 'Categoria serve para separar as Atividades Extras em grupos, como Atividades de: Reforço, Halloween, Past Perfect, etc...',
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+
+--
+-- Table structure for table `empresas`
+--
+
+DROP TABLE IF EXISTS empresas;
+
+CREATE TABLE empresas (
+  id int(11) NOT NULL,
+  cnpj varchar(20) DEFAULT NULL,
+  nome varchar(255) NOT NULL,
+  razaoSocial varchar(255) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY UK_razaoSocial (razaoSocial),
+  UNIQUE KEY UK_Cnpj (cnpj)
+);
+
+--
+-- Dumping data for table `empresas`
+--
+
+INSERT INTO empresas VALUES (1,'2147483647','EF','Empresa Ficticia');
+
+
+--
+-- Table structure for table `topicos`
+--
+
+DROP TABLE IF EXISTS topicos;
+
+CREATE TABLE topicos (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY UK_nomeTopico (nome)
+);
+
+--
+-- Dumping data for table `topicos`
+--
+
+INSERT INTO topicos VALUES (1,'Ali Express',NULL);
+
+--
+-- Table structure for table `alunos`
+--
+
+DROP TABLE IF EXISTS alunos;
+
+CREATE TABLE alunos (
+  id int(11) NOT NULL DEFAULT '0',
+  matricula int(11) NOT NULL,
+  sobreMim varchar(1000) DEFAULT NULL,
+  dataNascimento date NOT NULL,
+  dataVencimentoBoleto varchar(10) NOT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+
+--
+-- Table structure for table `administradores`
+--
+
+DROP TABLE IF EXISTS administradores;
+
+CREATE TABLE administradores (
+  id int(11) NOT NULL DEFAULT '0',
+  codRegistro int(11) NOT NULL,
+  cargo varchar(100) DEFAULT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+--
+-- Dumping data for table `administradores`
+--
+
+INSERT INTO administradores VALUES (1,789,NULL,NULL);
+
+
+--
+-- Table structure for table `professores`
+--
+
+DROP TABLE IF EXISTS professores;
+
+CREATE TABLE professores (
+  id int(11) NOT NULL DEFAULT '0',
+  REProf int(11) NOT NULL,
+  ExperienciaProfissional varchar(1000) DEFAULT NULL,
+  formacaoAcademica varchar(255) DEFAULT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id)
+);
+
+--
+-- Dumping data for table `professores`
+--
+
+INSERT INTO professores VALUES (2,0,'Ensinou Daniel San a lutar Karatê','Mestre de artes Marciais',NULL);
+
+
+--
+-- Table structure for table `cursos`
+--
+
+DROP TABLE IF EXISTS cursos;
+
+CREATE TABLE cursos (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL,
+  idIdioma int(11) DEFAULT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY FK_idIdiomaCurso (idIdioma),
+  CONSTRAINT FK_idIdiomaCurso FOREIGN KEY (idIdioma) REFERENCES idiomas (id)
+);
+
+--
+-- Dumping data for table `cursos`
+--
+
+INSERT INTO cursos VALUES (1,'Kids',1,NULL);
+INSERT INTO cursos VALUES (2,'Xing Ling',2,NULL);
+
+--
+-- Table structure for table `modulos`
+--
+
+DROP TABLE IF EXISTS modulos;
+
+CREATE TABLE modulos (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL,
+  idCurso int(11) DEFAULT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY FK_idCurso (idCurso),
+  CONSTRAINT FK_idCurso FOREIGN KEY (idCurso) REFERENCES cursos (id)
+);
+
+--
+-- Dumping data for table `modulos`
+--
+
+INSERT INTO modulos VALUES (1,'Módulo 1',1,NULL);
+INSERT INTO modulos VALUES (2,'Um leal',2,NULL);
+
+--
+-- Table structure for table `turmas`
+--
+
+DROP TABLE IF EXISTS turmas;
+
+CREATE TABLE turmas (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL,
+  `status` int(1) NOT NULL COMMENT '0:Turma fechada/modulo concluido  1: Turma ativa/Alunos com aula',
+  idModulo int(11) DEFAULT NULL,
+  idProfessor int(11) DEFAULT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY FK_idModuloTurma (idModulo),
+  KEY FK_idProfessor (idProfessor),
+  CONSTRAINT FK_idModuloTurma FOREIGN KEY (idModulo) REFERENCES modulos (id),
+  CONSTRAINT FK_idProfessor FOREIGN KEY (idProfessor) REFERENCES professores (id)
+);
+
+--
+-- Dumping data for table `turmas`
+--
+
+INSERT INTO turmas VALUES (1,'Sem galantia',1,2,2,NULL);
+INSERT INTO turmas VALUES (2,'Turma 1',1,1,2,NULL);
+
+
+--
+-- Table structure for table `aulas`
+--
+
+DROP TABLE IF EXISTS aulas;
+
+CREATE TABLE aulas (
+  id int(11) NOT NULL,
+  titulo varchar(255) NOT NULL,
+  idModulo int(11) DEFAULT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY FK_idModuloAula (idModulo),
+  CONSTRAINT FK_idModuloAula FOREIGN KEY (idModulo) REFERENCES modulos (id)
+);
+
+--
+-- Dumping data for table `aulas`
+--
+
+INSERT INTO aulas VALUES (1,'Aula 1',1,NULL);
+INSERT INTO aulas VALUES (2,'Pastel',2,NULL);
+
+--
+-- Table structure for table `atividades`
+--
+
+DROP TABLE IF EXISTS atividades;
+
+CREATE TABLE atividades (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL,
+  tipo int(1) NOT NULL COMMENT '1: Conteudo de aula, 2: ativ. extra',
+  idAula int(11) DEFAULT NULL COMMENT 'Só haverá valor nesse atributo caso a atividade seja do tipo 1 - Conteudo de aula, do contrário será null',
+  idCategoria int(11) DEFAULT NULL,
+  idModulo int(11) DEFAULT NULL COMMENT 'Só haverá valor nesse atributo caso a atividade seja do tipo 2 - ativ extra, do contrário será null',
+  idUsuario int(11) DEFAULT NULL COMMENT 'Professor (apenas atividades extras) ou admin que criou a atividade',
+  DataElaboracao date NOT NULL,
+  `status` int(1) DEFAULT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY FK_idAulaAtiv (idAula),
+  KEY FK_idCategAtiv (idCategoria),
+  KEY FK_idModuloAtiv (idModulo),
+  KEY FK_idUsuarioAtiv (idUsuario),
+  CONSTRAINT FK_idAulaAtiv FOREIGN KEY (idAula) REFERENCES aulas (id),
+  CONSTRAINT FK_idCategAtiv FOREIGN KEY (idCategoria) REFERENCES categorias (id),
+  CONSTRAINT FK_idModuloAtiv FOREIGN KEY (idModulo) REFERENCES modulos (id),
+  CONSTRAINT FK_idUsuarioAtiv FOREIGN KEY (idUsuario) REFERENCES usuarios (id)
+);
+
+--
+-- Dumping data for table `atividades`
+--
+
+INSERT INTO atividades VALUES (1,'Atividade 1',1,1,NULL,NULL,1,'0000-00-00',0,NULL);
+INSERT INTO atividades VALUES (2,'Saboles básicos que todo blasilêro gosta',1,2,NULL,NULL,1,'0000-00-00',1,NULL);
+INSERT INTO atividades VALUES (3,'Catão? Só de débito!',1,2,NULL,NULL,1,'0000-00-00',1,NULL);
+
+--
+-- Table structure for table `questoes`
+--
+
+DROP TABLE IF EXISTS questoes;
+
+CREATE TABLE questoes (
+  id int(11) NOT NULL,
+  enunciado varchar(255) NOT NULL,
+  urlMidia varchar(255) DEFAULT NULL,
+  numero int(10) DEFAULT NULL COMMENT 'indica a posicao/ordem da questao dentro de uma atividade',
+  tipo int(1) DEFAULT NULL COMMENT '1-Multipla Escolha, 2-Dissertativa',
+  categoria int(2) DEFAULT NULL COMMENT '1:texto, 2:imagem, 3:audio - 2 digitos (pergunta/resposta: 12 = texto/imagem) Dissertativa: 3 = reconhecimento de voz',
+  alternativaA varchar(255) DEFAULT NULL,
+  alternativaB varchar(255) DEFAULT NULL,
+  alternativaC varchar(255) DEFAULT NULL,
+  alternativaD varchar(255) DEFAULT NULL,
+  respostaCerta varchar(255) DEFAULT NULL,
+  pontos int(10) DEFAULT NULL,
+  idAtividade int(11) DEFAULT NULL,
+  idTopico int(11) DEFAULT NULL,
+  deleted_at date DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY FK_idAtivQuestao (idAtividade),
+  KEY FK_idTopicoQuest (idTopico),
+  CONSTRAINT FK_idAtivQuestao FOREIGN KEY (idAtividade) REFERENCES atividades (id),
+  CONSTRAINT FK_idTopicoQuest FOREIGN KEY (idTopico) REFERENCES topicos (id)
+);
+
+--
+-- Dumping data for table `questoes`
+--
+
+INSERT INTO questoes VALUES (1,'Do que é feito o pastel de cáne?',NULL,1,1,11,'Cáne','Caçolo','Queso','Flango','a',200,2,1,NULL);
+INSERT INTO questoes VALUES (2,'Do que é feito o pastel de queso?',NULL,2,2,11,NULL,NULL,NULL,NULL,'Queso',200,2,1,NULL);
+INSERT INTO questoes VALUES (3,'Do que é feito o pastel de pombo... Digo, flango?',NULL,3,1,12,'files/Gato.jpg','files/Cachorro.jpg','files/Pombo.jpg','files/Criança.jpg','c',200,2,1,NULL);
+INSERT INTO questoes VALUES (4,'Quanto coblá pa tlocá botão do Nexus 5?',NULL,4,2,11,NULL,NULL,NULL,NULL,'Cem leais poque cliente é tlouxa',200,3,1,NULL);
+INSERT INTO questoes VALUES (5,'Complete a flase: É englaçado poque ele é ________!',NULL,5,1,11,'Feio','Bonito','Godo','Baixo','c',300,3,1,NULL);
+
+
+--
+-- Table structure for table `mensagens`
+--
+
+DROP TABLE IF EXISTS mensagens;
+
+CREATE TABLE mensagens (
+  id int(11) NOT NULL,
+  titulo varchar(255) DEFAULT NULL,
+  conteudo varchar(1500) DEFAULT NULL,
+  lida int(1) DEFAULT NULL,
+  `data` date NOT NULL,
+  idUsuarioOrigem int(11) DEFAULT NULL,
+  idUsuarioDestino int(11) DEFAULT NULL,
+  idRE int(11) DEFAULT NULL COMMENT 'Indica o id da mensagem em resposta, caso exista',
+  PRIMARY KEY (id),
+  KEY FK_idUsuarOrig (idUsuarioOrigem),
+  KEY FK_idUsuarDest (idUsuarioDestino),
+  KEY FK_idRE (idRE),
+  CONSTRAINT FK_idRE FOREIGN KEY (idRE) REFERENCES mensagens (id),
+  CONSTRAINT FK_idUsuarDest FOREIGN KEY (idUsuarioDestino) REFERENCES usuarios (id),
+  CONSTRAINT FK_idUsuarOrig FOREIGN KEY (idUsuarioOrigem) REFERENCES usuarios (id)
+);
+
+
+--
+-- Table structure for table `avisos`
+--
+
+DROP TABLE IF EXISTS avisos;
+
+CREATE TABLE avisos (
+  id int(11) NOT NULL,
+  titulo varchar(100) NOT NULL,
+  descricao varchar(500) NOT NULL,
+  urlImagem varchar(255) DEFAULT NULL,
+  dataExpiracao date NOT NULL,
+  idAdmin int(11) NOT NULL,
+  PRIMARY KEY (id),
+  KEY FK_idAdminAviso (idAdmin),
+  CONSTRAINT FK_idAdminAviso FOREIGN KEY (idAdmin) REFERENCES administradores (id)
+);
+
+--
+-- Dumping data for table `avisos`
+--
+
+INSERT INTO avisos VALUES (1,'Aviso 1','Teste de Aviso','img/About.png','2015-05-06',1);
+INSERT INTO avisos VALUES (2,'Oi, eu sou o Dollynho, seu amiguinho!','Dolly, Dolly guaraná Dolly! (Aprovadoo!!!) Dolly dolly dolly dooooolly!',NULL,'2015-05-08',1);
+
+CREATE TABLE propagandas (
+  id int(11) NOT NULL,
+  titulo varchar(100) NOT NULL,
+  urlImagem varchar(255) NOT NULL,
+  link varchar(350) DEFAULT NULL,
+  idEmpresa int(11) DEFAULT NULL,
+  idUsuario int(11) DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY FK_cnpjEmpresa (idEmpresa),
+  KEY FK_idUsuarProp (idUsuario),
+  CONSTRAINT FK_cnpjEmpresa FOREIGN KEY (idEmpresa) REFERENCES empresas (id),
+  CONSTRAINT FK_idUsuarProp FOREIGN KEY (idUsuario) REFERENCES administradores (id)
+);
+
+--
+-- Dumping data for table `propagandas`
+--
+
+INSERT INTO propagandas VALUES (1,'Propaganda 1','img/Apps gimp.png','http://',1,1);
+
+
+CREATE TABLE materialapoio (
+  id int(11) NOT NULL,
+  nome varchar(255) NOT NULL,
+  url varchar(255) DEFAULT NULL,
+  tipo int(1) DEFAULT NULL,
+  idAula int(11) DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY FK_idAulaMat (idAula),
+  CONSTRAINT FK_idAulaMat FOREIGN KEY (idAula) REFERENCES aulas (id)
+);
+
+--
+-- Dumping data for table `materialapoio`
+--
+
+CREATE TABLE avisosturmas (
+  id int(11) NOT NULL,
+  idAviso int(11) DEFAULT NULL,
+  idTurma int(11) DEFAULT NULL,
+  dataAviso date NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY UK_idAvisoTurmas (idAviso,idTurma),
+  KEY FK_idTurmaAviso (idTurma),
+  CONSTRAINT FK_idAvisoTurma FOREIGN KEY (idAviso) REFERENCES avisos (id),
+  CONSTRAINT FK_idTurmaAviso FOREIGN KEY (idTurma) REFERENCES turmas (id)
+);
+
+--
+-- Dumping data for table `avisosturmas`
+--
+
+INSERT INTO avisosturmas VALUES (1,2,1,'2015-05-05');
+
+CREATE TABLE acessosatividades (
+  id int(11) NOT NULL auto_increment,
+  idAluno int(11) DEFAULT NULL,
+  idAtividade int(11) DEFAULT NULL,
+  idQuestao int(11) NOT NULL COMMENT 'Indica qual questao o aluno parou, não é FK, pois ela indica o número da posição da questao',
+  `status` int(1) NOT NULL COMMENT '0: Iniciado, 1: Concluído',
+  DataAcesso date NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE KEY UK_AcessoAtivi (idAluno,idAtividade),
+  KEY FK_idAtiviAcesso (idAtividade),
+  CONSTRAINT FK_idAlunoAcesso FOREIGN KEY (idAluno) REFERENCES alunos (id),
+  CONSTRAINT FK_idAtiviAcesso FOREIGN KEY (idAtividade) REFERENCES atividades (id)
+);
+
+--
+-- Dumping data for table `acessosatividades`
+--
+
+INSERT INTO acessosatividades VALUES (1,3,2,1,1,'0000-00-00');
+INSERT INTO acessosatividades VALUES (2,3,3,0,1,'0000-00-00');
+
+CREATE TABLE turmasalunos (
+  id int(11) NOT NULL,
+  idTurma int(11) DEFAULT NULL,
+  idAluno int(11) DEFAULT NULL,
+  pontuacao int(10) NOT NULL COMMENT 'contabiliza os pontos adquiridos pelo aluno numa turma, é necessário para fazer o ranking do dashboard, e evitar que seja calculado o total de pontos toda vez que alguem acessar o dashboard, melhorando o desempenho',
+  PRIMARY KEY (id),
+  UNIQUE KEY UK_TurmasAlunos (idTurma,idAluno),
+  KEY FK_idAlunoTurma (idAluno),
+  CONSTRAINT FK_idAlunoTurma FOREIGN KEY (idAluno) REFERENCES alunos (id),
+  CONSTRAINT FK_idTurmaAluno FOREIGN KEY (idTurma) REFERENCES turmas (id)
+);
+
+--
+-- Dumping data for table `turmasalunos`
+--
+
+INSERT INTO turmasalunos VALUES (1,1,3,700);
+INSERT INTO turmasalunos VALUES (2,1,4,0);
+INSERT INTO turmasalunos VALUES (3,1,5,0);
+INSERT INTO turmasalunos VALUES (4,1,6,0);
+INSERT INTO turmasalunos VALUES (5,1,7,0);
+INSERT INTO turmasalunos VALUES (6,2,4,0);
+
+CREATE TABLE respostas (
+  id int(11) NOT NULL,
+  idAluno int(11) DEFAULT NULL,
+  idQuestao int(11) DEFAULT NULL,
+  respostaAluno varchar(100) DEFAULT NULL,
+  correcao int(1) NOT NULL COMMENT '0: errou, 1: acertou',
+  PRIMARY KEY (id),
+  UNIQUE KEY UK_Respostas (idAluno,idQuestao),
+  KEY FK_idQuestResp (idQuestao),
+  CONSTRAINT FK_idAlunoResp FOREIGN KEY (idAluno) REFERENCES alunos (id),
+  CONSTRAINT FK_idQuestResp FOREIGN KEY (idQuestao) REFERENCES questoes (id)
+);
+
+--
+-- Dumping data for table `respostas`
+--
+
+INSERT INTO respostas VALUES (1,3,1,'a',1);
+INSERT INTO respostas VALUES (2,3,2,'Queijo',0);
+INSERT INTO respostas VALUES (3,3,3,'c',1);
+INSERT INTO respostas VALUES (4,3,4,'Cem leais poque cliente ',0);
+INSERT INTO respostas VALUES (5,3,5,'c',1);
+
+CREATE TABLE contrata (
+  idCurso int(11) NOT NULL DEFAULT '0',
+  idTurma int(11) NOT NULL DEFAULT '0',
+  idAluno int(11) NOT NULL DEFAULT '0',
+  dtContratacao date NOT NULL,
+  PRIMARY KEY (idCurso,idTurma,idAluno),
+  KEY FK_idTurmaCtrata (idTurma),
+  KEY FK_idAlunoCtrata (idAluno),
+  CONSTRAINT FK_idAlunoCtrata FOREIGN KEY (idAluno) REFERENCES alunos (id),
+  CONSTRAINT FK_idTCursoCtrata FOREIGN KEY (idCurso) REFERENCES cursos (id),
+  CONSTRAINT FK_idTurmaCtrata FOREIGN KEY (idTurma) REFERENCES turmas (id)
+);
+
+--
+-- Dumping data for table `contrata`
+--
+
+INSERT INTO contrata VALUES (1,2,4,'1999-11-30');
+INSERT INTO contrata VALUES (2,1,3,'1999-11-30');
+INSERT INTO contrata VALUES (2,1,4,'1999-11-30');
+INSERT INTO contrata VALUES (2,1,5,'1999-11-30');
+INSERT INTO contrata VALUES (2,1,6,'1999-11-30');
+INSERT INTO contrata VALUES (2,1,7,'1999-11-30');
+
+CREATE TABLE password_reminders (
+  email varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  token varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  created_at timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  KEY password_reminders_email_index (email),
+  KEY password_reminders_token_index (token)
+);
