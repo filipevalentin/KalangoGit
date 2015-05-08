@@ -307,8 +307,8 @@
                     <div class="box-header">
                         <h3 class="box-title">Relatório de Acesso - Turma {{$turma->nome}} </h3>
                     </div><!-- /.box-header -->
-                    <div class="box-body no-padding">
-                        <table class="table table">
+                    <div class="box-body no-padding table-responsive">
+                        <table class="table">
                             <tbody>
                                 <tr>
                                     <th style="/* width: 10px */ display:none;">#</th>
@@ -325,7 +325,7 @@
                                  ?>">
                                     <td style="display: none;">{{$aluno->matricula}}</td>
                                     <td>{{User::find($aluno->id)->nome}} {{User::find($aluno->id)->sobrenome}}</td>
-                                    <td>{{$aluno->desempenho*100}}%</td>
+                                    <td>{{round($aluno->desempenho*100, 0)}}%</td>
                                     <td>
                                         <div class="box-tools" style="padding:0px">
                                             <button class="btn btn-success" data-toggle="modal" data-target="#compose-modal" data-idUsuarioDestino="{{$aluno->id}}" data-nomeDestino="{{$aluno->usuario->nome}}">Enviar feedback</button>

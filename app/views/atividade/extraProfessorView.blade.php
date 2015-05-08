@@ -324,8 +324,8 @@
                         <div class="box-header">
                             <h3 class="box-title">Relatório de Acesso - Turma {{$turma->nome}} </h3>
                         </div><!-- /.box-header -->
-                        <div class="box-body no-padding">
-                            <table class="table table">
+                        <div class="box-body no-padding table-responsive">
+                            <table class="table">
                                 <tbody>
                                     <tr>
                                         <th style="/* width: 10px */ display:none;">#</th>
