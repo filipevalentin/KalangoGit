@@ -123,6 +123,15 @@ CREATE TABLE alunos (
   PRIMARY KEY (id)
 );
 
+INSERT INTO alunos VALUES (3,10,'Ha ya!!!','1997-05-01','5',NULL);
+INSERT INTO alunos VALUES (4,11,'\\o/ Me ajude, povo da Terra!!!','1991-02-15','10',NULL);
+INSERT INTO alunos VALUES (5,12,'Me dê sua força Pégasus........ METEORO DE PEGASUS!!!!','1997-07-02','9',NULL);
+INSERT INTO alunos VALUES (6,13,'Você nunca irá me vencer, Toguro! LEIGAN!!!','1990-03-03','20',NULL);
+INSERT INTO alunos VALUES (7,14,'Está na hora de morfar... Tiranossauro Rex!','1996-12-24','14',NULL);
+INSERT INTO alunos VALUES (8,1,'Super Campeões','1990-06-12','10',NULL);
+INSERT INTO alunos VALUES (9,1,'Mortal Kombat 10','1984-05-08','7',NULL);
+
+
 
 --
 -- Table structure for table `administradores`

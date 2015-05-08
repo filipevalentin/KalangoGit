@@ -1022,7 +1022,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
 			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
-			$professor->REProf       = Input::get('codRegistro');
+			$professor->REProf       = Input::get('REProf');
 
 			$professor->save();
 
@@ -3960,7 +3960,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$professor = new Professor;
 			$professor->id= $user->id;
 
-			$professor->REProf = Input::get('codRegistro');
+			$professor->REProf = Input::get('REProf');
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
 			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
 
@@ -4008,7 +4008,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
 			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
-			$professor->REProf       = Input::get('codRegistro');
+			$professor->REProf       = Input::get('REProf');
 
 			$professor->save();
 

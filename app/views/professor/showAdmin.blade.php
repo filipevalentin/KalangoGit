@@ -36,7 +36,7 @@
                     </div>
                     <div id="div_codigoRegistro" class="form-group">
                         <label class="control-label" for="codRegistro"><i id="icone_codigoRegistro" class="fa"></i> Registro (RE)</label>
-                        <input type="text" autocomplete="off" id="codRegistro" name="codRegistro" onblur="fcn_recarregaCores();" maxlength="10" class="form-control somenteNumeros codigoRegistroObrigatorio">
+                        <input type="text" autocomplete="off" id="codRegistro" name="REProf" onblur="fcn_recarregaCores();" maxlength="10" class="form-control somenteNumeros codigoRegistroObrigatorio">
                     </div>
                     <div id="div_senha" class="form-group">
 						<label class="control-label" for="senha"><i id="icone_senha" class="fa"></i> Senha</label>

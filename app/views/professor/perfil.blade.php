@@ -201,7 +201,7 @@
                                                     
                                                     <div class="form-group has-success margin">
                                                         <label class="control-label" for="dataNascimento"><i class="fa fa-check"></i></label> <b>Registro (RE)</b>
-                                                        <input type="text" name="codRegistro" class="form-control" required="" value="{{Auth::user()->professor->REProf}}">
+                                                        <input type="text" name="REProf" class="form-control" required="" value="{{Auth::user()->professor->REProf}}">
                                                     </div>
                                                     <div class="margin" style="padding-bottom:10px;">
                                                         <button type="submit" class="btn btn-primary btn-block">Salvar</button>
