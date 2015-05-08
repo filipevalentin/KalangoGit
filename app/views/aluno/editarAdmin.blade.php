@@ -147,25 +147,6 @@
 
                                 </br>
 
-                                <div class="row">                                       
-                                    <div class="col-xs-12 col-sm-6">        <!-- Texto do Usuário -->
-                                        <div class="widget-box transparent">
-                                            <div class="widget-header widget-header-small">
-                                                <h4 class="widget-title smaller">
-                                                    <i class="ace-icon fa fa-check-square-o bigger-110"></i>
-                                                    Sobre Mim
-                                                </h4>
-                                            </div>
-
-                                            <div class="widget-body">
-                                                <div class="widget-main">
-                                                    <p>{{$aluno->sobreMim}}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                  <!-- Fim Texto do Usuário -->
-                                               <!-- Fim Habilidades -->
-                                </div>
                             </div><!-- /#home -->
                             
                             <div id="editar" class="tab-pane"> <!-- Aba "editar" -->

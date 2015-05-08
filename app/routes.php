@@ -2056,8 +2056,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			addBreadCrumbHome("Perfil");
 			//(implode(" ", Session::get('bc')));
 
-			dd(Session::get('bc'));
-
 			return Redirect::to('admin/administrador/'.Auth::user()->id);
 			
 		});
