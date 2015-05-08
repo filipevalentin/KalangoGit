@@ -77,9 +77,9 @@
     </h1>
     <ol class="breadcrumb">
 	    <?php
-	    	$aux = Session::get('bc');
+	    	$aux2 = Session::get('bc');
 	    ?>
-    	@foreach($aux as $b)
+    	@foreach($aux2 as $b)
         	<li><a href="{{$b['link']}}" >{{$b['nome']}}</a></li>
 		@endforeach
     </ol>
@@ -95,6 +95,7 @@
                 <div class="row">
 
 					<div class="col-lg-6" style="padding: 0;"> <!-- Coluna de cursos -->
+
 	                    @foreach ( $turmas as $turma)
 	                    	<a {{'href=modulo/'.$turma->modulo->id}}>
 	                            <div class="col-md-12 fix-espacos-left">

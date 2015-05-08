@@ -224,7 +224,7 @@
         <h1>Gerenciar Turmas - Inglês Kids</h1>
         <ol class="breadcrumb">
             <?php
-                $aux = Session::get('bc');
+                $aux2 = Session::get('bc');
             ?>
             @foreach($aux as $b)
                 <li><a href="{{$b['link']}}" >{{$b['nome']}}</a></li>
