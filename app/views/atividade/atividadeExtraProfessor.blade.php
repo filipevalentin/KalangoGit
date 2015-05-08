@@ -259,12 +259,6 @@
 
             });
 
-            $('div.curso').on('click', (function(event) {
-                var id = $(this).attr('id');
-                $("div.conteudocurso").fadeOut();
-                
-                $("div.conteudocurso[id="+id+"]").delay(401).fadeIn();
-            }));
 
             $('div.curso').on('click', (function(event) {
                 var atividades = $(this).data('atividades');
