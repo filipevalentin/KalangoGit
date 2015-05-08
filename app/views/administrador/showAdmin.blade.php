@@ -62,7 +62,7 @@
 	    <?php
 	    	$aux2 = Session::get('bc');
 	    ?>
-    	@foreach($aux as $b)
+    	@foreach($aux2 as $b)
         	<li><a href="{{$b['link']}}" >{{$b['nome']}}</a></li>
 		@endforeach
     </ol>
