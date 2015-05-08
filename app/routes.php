@@ -747,7 +747,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			    });
 
 				//ranking turma
-				$rankingTurma = $turma->alunos;
+				$rankingTurma = $turma->alunos()->get();
 
 				 $rankingTurma->sort(function($a, $b){
 			        $a = $a->pivot->pontuacao;
@@ -1809,7 +1809,17 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			addBreadCrumb('Relatório de Aula - Turma: '.$turma->nome);
 			$alunos = $turma->alunos;
 
+			$b = array();
+
+			$count = array();
+
 			foreach ($alunos as $aluno) {
+
+				if(sizeof($b)>1){
+					$pop = $alunos;
+				}
+
+				$a = array();
 
 				// Add o objeto turma que está sendo gerado o relatório, no objeto aluno
 				$aluno->turma = $turma;
@@ -1818,8 +1828,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') : array('null'))->get();
 
 				//Add as aulas ao objeto aluno
-				$aluno->aulasAluno = $turma->modulo->aulas;
-
+				$aluno->aulasAluno = $turma->modulo->aulas()->get();
 
 				//Cria o attr mediaGeral e presençaGeral ao objeto aluno
 				$aluno->mediaGeral = 0;
@@ -1830,21 +1839,25 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				$countMediaGeral = 0;
 
 				foreach($aluno->aulasAluno as $aula){
+
 					// Cria os attr media e presença, para o objeto aula
 					$aula->presenca = 0;
 					$aula->media = 0;
 
 					//Cria o attr atividadesAluno e add ao obejto aula
-					$aula->atividadesAluno = $aula->atividades;
+					$aula->atividadesAluno = $aula->atividades()->get();
 
 					//Contadores parciais para media e presença da Aula
 					$countPresencaAula = 0;
 					$countMediaAula = 0;
 					foreach($aula->atividadesAluno as $atividade){
+
 						//cria o attr nota para o objeto atividade
 						$atividade->nota = 0;
 						//Se essa atividade está na lista das ativ que o aluno concluiu
+
 						if($atividadesAluno->contains($atividade)){
+
 							//pega a % de acerto
 							$questoes = Questao::where('idAtividade', $atividade->id)->
 									 		// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
@@ -1859,6 +1872,10 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 							//Add a nota (% de acerto) ao objeto atividade
 							$atividade->nota = ($atividade->nota == 0) ? "0" : $atividade->nota/$atividade->questoes->count();
 
+							$a[] = "Add nota ".$atividade->nota." na atividade '".$atividade->nome."' do aluno ".$aluno->usuario->nome;
+
+							$b[] = $aluno;
+
 							//Adiciona +1 no contador de presença (Aula e Geral)
 							$countPresencaAula++;
 							$countPresencaGeral++;
@@ -1868,9 +1885,10 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 							$countMediaGeral += $atividade->nota;
 
 						}else{
-							
 							//crava como: 0 =  "Não Concluiu"
 							$atividade->nota = 0;
+							$b[] = $aluno;
+							$a[] = "Add nota ".$atividade->nota." na atividade '".$atividade->nome."' do aluno ".$aluno->usuario->nome;
 						}
 
 					}
@@ -1882,15 +1900,28 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 					//Calcula a média da nota das atividades CONCLUIDAS pelo aluno nesta Aula (MediaAula)
 					$aula->media = (0 == $countMediaAula) ? 0 : ($countMediaAula/$aula->atividades->count());
+
 				}
+
+				$count[] = $a;
 
 				//Calcula a media geral do Nº de atividades concluidas em TODAS as Aulas do Módulo cursado
 				$aluno->presencaGeral = (0 == $countPresencaGeral) ? 0 : ($countPresencaGeral/$turma->modulo->atividades->count());
 
 				//Calcula a media geral da nota das atividades concluidas em TODAS as Aulas do Módulo cursado
 				$aluno->mediaGeral = (0 == $countMediaGeral) ? 0 : ($countMediaGeral/$turma->modulo->atividades->count());
+
+				//dd($count);
+
+				if(sizeof($b)>2){
+					//dd($alunos);
+				}
+
 			}
 
+			//dd($b, $count, $alunos);
+			//dd($count);
+			
 			//Como acessar as informações:
 				//Média Geral do aluno: 		$aluno->mediaGeral
 				//Presença Geral do aluno: 		$aluno->presencaGeral
@@ -1899,10 +1930,6 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				//Média do aluno numa Aula:		$aula->media
 				//Array de atividades da Aula:	$aula->atividadesAluno
 				//Nota do aluno muma Atividade:	$atividade->nota
-
-			//return $aluno->aulasAluno;
-
-			dd($aluno->aulasAluno[0]);
 
 			return View::make('testeRelatorioTurma')->with('alunos', $alunos);
 			
@@ -1920,7 +1947,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				//Pega as atvidades que o aluno concluiu - Intersecciona as atividades de aula com as atividades que o aluno já concluiu
 				$atividadesAluno = Atividade::whereIn('id',($aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') != null)?$aluno->acessos()->where('acessosatividades.status','=',1)->get()->lists('id') : array('null'))->get();
 
-				//Add as aulas ao objeto aluno
+				//Add as categorias ao objeto aluno
 				$aluno->categoriasAluno = Categoria::all();
 
 				foreach($aluno->categoriasAluno as $categoria){
