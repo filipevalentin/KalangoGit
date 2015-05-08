@@ -31,6 +31,43 @@
 	
 @endsection
 
+@section('modals')
+
+<div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h4 class="modal-title"><i class="fa fa-envelope-o"> </i> Enviar Mensagem</h4>
+			</div>
+			<form action="/aluno/contatoEmail" method="post">
+				<div class="modal-body">
+					<div class="form-group">
+						<div class="input-group">
+							<span class="input-group-addon">Para:</span>
+							<select class="form-control alunoObrigatorio" disabled="true" name="idUsuarioDestino" id="idUsuarioDestino">
+								<option value="" disabled="true">Equipe KalanGO!</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" name="titulo" placeholder="Assunto">
+					</div>
+					<div class="form-group">
+						<textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer clearfix">
+					<button type="submit" class="btn btn-primary pull-right btn-enviar"><i class="fa fa-envelope"></i> Enviar</button>
+					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Descartar</button>
+				</div>
+			</form>
+		</div> 
+	</div> 
+</div>
+
+@endsection
+
 @section('carrossel')
 	<div class="row">
         <div class="col-md-12">
@@ -242,7 +279,7 @@
 						</div>
 
 						<div class="col-lg-6 fix-espacos-right">
-							<div id="div_card_{{++$aux}}" class="box" >
+							<div id="div_card_{{++$aux}}" data-toggle="modal" data-target="#compose-modal" class="box" >
 								<a href="javascript:void(0);" >
 									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Contato</b></span><br>

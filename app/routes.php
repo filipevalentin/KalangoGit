@@ -387,6 +387,22 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			return View::make('aluno/home')->with('turmas', $turmas);
 		});
 
+		Route::post('contatoEmail', function(){
+			$titulo = Input::get('titulo');
+			$conteudo = Input::get('conteudo');
+			$aluno = Auth::user();
+
+			Mail::queue('contatoEmail', array('aluno'=>$aluno, 'conteudo'=>$conteudo), function($message) {
+	            $message->to('kalangogame@gmail.com', 'Contato Kalango')
+	                ->subject('Contato Aluno - '.Input::get('titulo'));
+	        });
+
+	        Session::flash('info', "Aluno criado com sucesso!");
+
+			return Redirect::back();
+
+		});
+
 	//Cursos Anteriores
 		Route::get('cursos/anteriores', function(){
 			addBreadCrumbHome("Cursos Anteriores");
