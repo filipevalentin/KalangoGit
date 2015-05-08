@@ -2995,8 +2995,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 
 			//Checa se existe atividades extras livres com o mesmo nome
-			if(Atividades::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
-				if(in_array(Input::get('nome'), Atividades::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
+			if(Atividade::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
+				if(in_array(Input::get('nome'), Atividade::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
 					Session::flash('warning', "Já existe uma atividade com esse nome");
 					return Redirect::back();
 				}
@@ -3041,8 +3041,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				}
 
 				//Checa se existe atividades extras livres com o mesmo nome
-				if(Atividades::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
-					if(in_array(Input::get('nome'), Atividades::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
+				if(Atividade::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
+					if(in_array(Input::get('nome'), Atividade::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
 						Session::flash('warning', "Já existe uma atividade com esse nome");
 						return Redirect::back();
 					}
