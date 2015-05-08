@@ -2010,11 +2010,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			Session::put('bc',$bc);
 
-<<<<<<< HEAD
 			//dd(Request::url());
 
-=======
->>>>>>> origin/master
 			if($idioma == null){
 				$cursos = Curso::all();
 				$cursosArray = $cursos->toArray();
