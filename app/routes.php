@@ -3916,8 +3916,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$users = User::withTrashed()->where('tipo', '=', 1)->get();
 
 			foreach ($users as $key => $user) {
-				$user->matricula = Aluno::find($user->id)->matricula;
-				$user->dataNascimento = Aluno::find($user->id)->dataNascimento;
+				$user->matricula = Aluno::withTrashed()->find($user->id)->matricula;
+				$user->dataNascimento = Aluno::withTrashed()->find($user->id)->dataNascimento;
 
 				if($user->trashed()){
 					$user->action = "N/A";
