@@ -3974,6 +3974,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				return Redirect::back();
 			}
 
+			if(in_array($user->login, User::where('tipo','=','1')->lists('login')) ){
+				Session::flash('warning','Já existe um aluno com essa matrícula, por favor insira outra.');
+				return Redirect::back();
+			}
+
 			$confirmation_code = str_random(30);
 			foreach(User::all() as $u){
 				if($u->confirmation_code = $confirmation_code){
