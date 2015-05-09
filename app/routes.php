@@ -281,7 +281,7 @@ Route::get('teste4',function(){
 
 	function emailNovasAtividades($modulo = null){
 		if($modulo == null){
-			foreach (Aluno::all()->whereRaw('datediff(now(), emailAtividade) > 15 or(emailAtividade is null)')->get() as $aluno) {
+			foreach (Aluno::all()->whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() as $aluno) {
 				//checa se o último acesso do aluno a uma atividade foi a mais de 15 dias
 				if(AcessosAtividade::where('idAluno','=', $aluno->id)->whereRaw('datediff(now(), DataAcesso) > 15')->get() != null){
 					Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) {
@@ -294,7 +294,7 @@ Route::get('teste4',function(){
 		}else{
 			foreach ($modulo->turmas as $turma) {
 				//Pegas os alunos que não foi enviado email de lembrete ou que o último email enviado já tem mais de 15 dias
-				foreach ($turma->alunos()->whereRaw('datediff(now(), emailAtividade) > 15 or(emailAtividade is null)')->get() as $aluno) {
+				foreach ($turma->alunos()->whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() as $aluno) {
 					//checa se o último acesso do aluno a uma atividade foi a mais de 15 dias
 					if(AcessosAtividade::where('idAluno','=', $aluno->id)->whereRaw('datediff(now(), DataAcesso) > 15')->get() != null){
 						Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) {
