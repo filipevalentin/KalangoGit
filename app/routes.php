@@ -2538,7 +2538,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				if($turma->status != 0){
 
 					//Checar interação do aluno com as atividades da turma/módulo
-					if($aluno->acessos->intersect($turma->modulo->atividades) == null){
+					if($aluno->acessos->intersect($turma->modulo->atividades)->count() == null){
 						$turma->alunos()->detach($aluno);
 						Session::flash('info', "Aluno desmatriculado com sucesso!");
 						return Redirect::back();
@@ -2565,7 +2565,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				//Loop entre todos alunos da turma para ver se ao menos 1 já acessou algo
 				// Caso algum aluno tenha acessado, a turma é soft-deleted e os alunos NÃO SÃO DESMATRICULADOS
 				foreach ($turma->alunos as $aluno) {
-					if($aluno->acessos->intersect($turma->modulo->atividades) == null){
+					if($aluno->acessos->intersect($turma->modulo->atividades)->count() == null){
 						$flag = "hard";
 					}
 				}
