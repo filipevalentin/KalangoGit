@@ -130,7 +130,7 @@
                     </div>
                     <div id="div_idioma-novo-curso" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_idioma-novo-curso" class="fa"></i> Idioma</label>
-                        <select id="idioma" name="idioma" class="form-control idiomaObrigatorio-novo-curso">
+                        <select id="idioma" name="idioma" onblur="fcn_recarregaCoresNovoCurso();" class="form-control idiomaObrigatorio-novo-curso">
                           <option value="" >Selecione</option>
 						  @foreach(Idioma::all() as $idioma)
                             <option value={{$idioma->id}}>{{$idioma->nome}}</option>
@@ -261,7 +261,7 @@
                                                 <div class="box-tools pull-right">
                                 
                                                     <button class="btn btn-success btn-xs" data-toggle="modal" rel="tooltip" data-placement="left" title="Editar Curso" data-target="#editarcurso" data-id="{{$cursosArray[$j]['id']}}" data-nome="{{$cursosArray[$j]['nome']}}" data-idioma="{{$cursosArray[$j]['idIdioma']}}"><i class="fa fa-pencil"></i></button>
-                                                    <a href="/admin/curso/deletar/{{$cursosArray[$j]['id']}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                                    <a href="/admin/curso/deletar/{{$cursosArray[$j]['id']}}"><button class="btn btn-danger btn-xs btn_deleta_curso"><i class="fa fa-times"></i></button></a>
                                                 </div>
                                                 <div class="curso" style="cursor:pointer;" id="{{$cursosArray[$j]['id']}}">
                                                     <h4 style="font-size: 20px;">{{$cursosArray[$j]['nome']}}</h4>
@@ -324,7 +324,7 @@
                                     <div class="box-tools pull-right">
                                         <a href="/admin/modulo/{{$modulo->id}}"><button rel="tooltip" data-placement="right" title="Ver Aulas do Módulo" class="btn btn-primary btn-sm" ><i class="fa fa-book"></i></button></a>
                                         <button class="btn btn-success btn-sm" rel="tooltip" data-placement="left" title="Editar Módulo" data-toggle="modal" data-target="#editarmodulo" data-id="{{$modulo->id}}" data-nome="{{$modulo->nome}}"><i class="fa fa-pencil"></i></button>
-                                        <a href="/admin/modulo/deletar/{{$modulo->id}}"><button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button></a>
+                                        <a href="/admin/modulo/deletar/{{$modulo->id}}"><button class="btn btn-danger btn-sm btn_deleta_modulo"><i class="fa fa-times"></i></button></a>
                                     </div>
                                 </div>
                                 <div id="Modulo{{$modulo->id}}" class="panel-collapse collapse">
@@ -344,7 +344,7 @@
                                                         <div class="box-tools pull-right">
                                         
                                                             <button class="btn btn-success btn-xs" rel="tooltip" data-placement="left" title="Editar Turma" data-toggle="modal" data-target="#editarturma" data-id="{{$turma->id}}" data-nome="{{$turma->nome}}" data-professor="{{User::find($turma->professor->id)->nome}}" data-idprofessor="{{$turma->professor->id}}" data-status="{{$turma->status}}"><i class="fa fa-pencil"></i></button>
-                                                            <a href="/admin/turma/deletar/{{$turma->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                                            <a href="/admin/turma/deletar/{{$turma->id}}"><button class="btn btn-danger btn-xs btn_deleta_turma"><i class="fa fa-times"></i></button></a>
                                                         </div>
                                                         <a href="/admin/turma/{{$turma->id}}" style="color: inherit;" class="turma" id="{{$turma->id}}">
                                                             <h4 style="font-size: 20px;">{{$turma->nome}}</h4>
@@ -839,6 +839,31 @@
 				}
 				
 			}
+			
+			
+			$(".btn_deleta_curso").click(function(event){
+				
+				if(!(confirm("Deseja realmente apagar este curso?"))){
+					return false
+				}
+				
+			})
+			
+			$(".btn_deleta_modulo").click(function(event){
+				
+				if(!(confirm("Deseja realmente apagar este módulo?"))){
+					return false
+				}
+				
+			})
+			
+			$(".btn_deleta_turma").click(function(event){
+				
+				if(!(confirm("Deseja realmente apagar esta turma?"))){
+					return false
+				}
+				
+			})
 			
 		</script>
     @endsection
