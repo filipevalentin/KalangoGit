@@ -284,7 +284,7 @@ Route::get('teste4',function(){
 			foreach (Aluno::whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() as $aluno) {
 				//checa se o último acesso do aluno a uma atividade foi a mais de 15 dias
 				if(AcessosAtividade::where('idAluno','=', $aluno->id)->whereRaw('datediff(now(), DataAcesso) > 15')->get() != null){
-					Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) {
+					Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) use($aluno) {
 			            $message->to($aluno->usuario->email, $aluno->usuario->nome)
 			                ->subject('KalanGO! - Verifique sua conta');
 			        });
@@ -297,7 +297,7 @@ Route::get('teste4',function(){
 				foreach ($turma->alunos()->whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() as $aluno) {
 					//checa se o último acesso do aluno a uma atividade foi a mais de 15 dias
 					if(AcessosAtividade::where('idAluno','=', $aluno->id)->whereRaw('datediff(now(), DataAcesso) > 15')->get() != null){
-						Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) {
+						Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) use($aluno) {
 				            $message->to($aluno->usuario->email, $aluno->usuario->nome)
 				                ->subject('KalanGO! - Verifique sua conta');
 				        });

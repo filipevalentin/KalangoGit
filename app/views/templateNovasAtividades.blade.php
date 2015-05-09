@@ -4,6 +4,7 @@
         <meta charset="utf-8">
     </head>
     <body>
+
 		<h2>Novas Atividades no KalanGO!</h2>
 
 		<p>Olá {{$aluno}},</p>
