@@ -390,14 +390,14 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 		Route::post('contatoEmail', function(){
 			$titulo = Input::get('titulo');
 			$conteudo = Input::get('conteudo');
-			$aluno = Auth::user();
+			$aluno = Auth::user()->aluno;
 
 			Mail::queue('contatoEmail', array('aluno'=>$aluno, 'conteudo'=>$conteudo), function($message) {
 	            $message->to('kalangogame@gmail.com', 'Contato Kalango')
 	                ->subject('Contato Aluno - '.Input::get('titulo'));
 	        });
 
-	        Session::flash('info', "Aluno criado com sucesso!");
+	        Session::flash('info', "Mensagem enviada com sucesso!");
 
 			return Redirect::back();
 
@@ -553,6 +553,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$acesso->idAtividade = $idAtividade;
 			$acesso->idQuestao = $idQuestao;
 			$acesso->status = '0';
+			$acesso->DataAcesso = date('Y-mm-dd');
 
 			$acesso->save();
 

@@ -5,7 +5,7 @@
     </head>
     <body>
 		<p>Contato Aluno:</p>
-		<p>Nome: {{$aluno->nome}} {{$aluno->sobrenome}}</p>
+		<p>Nome: {{Auth::user()->nome}} {{Auth::user()->sobrenome}}</p>
 		<p>Mensagem:</p>
 		<p>{{$conteudo}}</p>
 	</body>
