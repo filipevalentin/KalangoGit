@@ -30,7 +30,7 @@
 		}
 
 		public function acessos(){
-            return $this->belongsToMany('Aluno', 'acessosatividades', 'idAtividade', 'idAluno');
+            return $this->belongsToMany('Aluno', 'acessosatividades', 'idAtividade', 'idAluno')->withPivot('idQuestao', 'status', 'DataAcesso');
         }
 
 

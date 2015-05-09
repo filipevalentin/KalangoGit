@@ -19,7 +19,7 @@
 	foreach ($alunos as $aluno) {
 		$count += $aluno->mediaGeral;
 	}
-	$count = $count/$alunos->count();
+	$count = $count/($alunos->count() == 0) ? 1 : $alunos->count();
 	
  ?>
 

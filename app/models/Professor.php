@@ -10,6 +10,10 @@
 			return $this->hasMany('Turma', "idProfessor");
 		}
 
+		public function atividadesExtras(){
+			return $this->hasMany('Atividade', "idUsuario");
+		}
+
 		public function usuario(){
         	return $this->belongsTo('User', 'id');
         }

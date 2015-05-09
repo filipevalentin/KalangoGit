@@ -9,10 +9,15 @@ Route::get('teste5',function(){
 	// $c->restore();
 	// $confirmation_code = "00XgHv1zdNGxCvr8QP3m6X3szxuIgZ";
 
-	// Mail::queue                    ('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+	// Mail::queue('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
 	//             $message->to("filipethesnake2@gmail.com", "Filipe")
 	//                 ->subject('KalanGO! - Verifique sua conta');
 	        // });
+
+	return Modulo::find(2)->alunos;//whereRaw('datediff(now(), emailAtividade) > 15 or(emailAtividade is null)')->get() ;
+	return AcessosAtividade::where('idAluno','=', 3)->whereRaw('datediff(now(), DataAcesso) > 1')->get();
+
+	return dd(date_diff(date_create(Aluno::find(3)->acessos()->orderBy('DataAcesso','desc')->first()->pivot->DataAcesso) , date_create(date('Y-m-d'))));
 
 	return (Hash::check('99559955.', User::find(4)->password)) ? "ok" : "nao bate";
 
@@ -273,6 +278,38 @@ Route::get('teste4',function(){
 		Session::put('bc',$bc);
 
 	}
+
+	function emailNovasAtividades($modulo = null){
+		if($modulo == null){
+			foreach (Aluno::all()->whereRaw('datediff(now(), emailAtividade) > 15 or(emailAtividade is null)')->get() as $aluno) {
+				//checa se o último acesso do aluno a uma atividade foi a mais de 15 dias
+				if(AcessosAtividade::where('idAluno','=', $aluno->id)->whereRaw('datediff(now(), DataAcesso) > 15')->get() != null){
+					Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) {
+			            $message->to($aluno->usuario->email, $aluno->usuario->nome)
+			                ->subject('KalanGO! - Verifique sua conta');
+			        });
+				}
+			}
+
+		}else{
+			foreach ($modulo->turmas as $turma) {
+				//Pegas os alunos que não foi enviado email de lembrete ou que o último email enviado já tem mais de 15 dias
+				foreach ($turma->alunos()->whereRaw('datediff(now(), emailAtividade) > 15 or(emailAtividade is null)')->get() as $aluno) {
+					//checa se o último acesso do aluno a uma atividade foi a mais de 15 dias
+					if(AcessosAtividade::where('idAluno','=', $aluno->id)->whereRaw('datediff(now(), DataAcesso) > 15')->get() != null){
+						Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) {
+				            $message->to($aluno->usuario->email, $aluno->usuario->nome)
+				                ->subject('KalanGO! - Verifique sua conta');
+				        });
+					}
+				}
+				
+			}
+		}
+
+	}
+
+
 	
 
 // ===============================================
@@ -568,7 +605,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				$acesso->idAluno = Auth::user()->id;
 			}
 			$acesso->status = '1';
-
+			$acesso->DataAcesso = date('Y-mm-dd');
 			$acesso->save();
 
 			return Response::json("registro feito!");
@@ -1094,10 +1131,17 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		Route::get('atividade/turma/{idAtividade}/{idTurma}', function($idAtividade, $idTurma){
 			addBreadCrumb('Atividade - Resultados da Turma');
+
 			$atividade = Atividade::find($idAtividade);
 			$turma = Turma::find($idTurma);
 			$alunos = $turma->alunos;
 			$questoes = $atividade->questoes->sortBy('numero');
+
+			//Segurança - Verifica se esse aluno é de alguma turma do professor em questao, e se essa turma é do professor
+			if(!(Auth::user()->professor->turmas->contains($turma) )){
+				Session::flash('warning','Acesso Proibido!');
+				return Redirect::back();
+			}
 
 			$i;
 			$j;
@@ -1134,6 +1178,12 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			foreach ($turmas as $turma) {
 				$turma->alunosTurma = $turma->alunos;
 			}
+
+			if($atividade->idUsuario != Auth::user()->id){
+				Session::flash('warning','Acesso Proibido!');
+				return Redirect::back();
+			}
+			
 			$alunos;
 			$questoes = $atividade->questoes->sortBy('numero');
 
@@ -1205,6 +1255,11 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			addBreadCrumb('Editar Atividade');
 			$atividade = Atividade::find($id);
 
+			if($atividade->status == '1'){
+				Session::flash('warning', 'Primeiro inative a Atividade para poder editá-la!');
+				return Redirect::back();
+			}
+
 			return View::make('atividade/editarProfessorView')->with('atividade',$atividade);
 		});
 
@@ -1215,15 +1270,43 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$atividadeExtra->nome = Input::get('nome');
 			$atividadeExtra->tipo = 2;
 			$atividadeExtra->status = 0;
+			$atividadeExtra->DataElaboracao = date('Y-m-d');
 			$idModulo = Input::get('idModulo');
 			$idCategoria = Input::get('idCategoria');
 			$atividadeExtra->idUsuario = Auth::user()->id;
 
 			if($idModulo!=""){
 				$atividadeExtra->idModulo = Input::get('idModulo');
+
+				//Checa se existe atividades extras direcionada para este modulo como o mesmo nome
+				if(Modulo::find($atividadeExtra->idModulo) != null){
+					if(in_array(Input::get('nome'), Modulo::find($atividadeExtra->idModulo)->atividadesExtras->lists('nome')) ){
+						Session::flash('warning', "Já existe uma atividade com esse nome relacionada ao módulo escolhido");
+						return Redirect::back();
+					}
+					
+				}
 			}
+
+			//Checa se existe atividades extras livres com o mesmo nome
+			if(Atividade::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
+				if(in_array(Input::get('nome'), Atividade::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
+					Session::flash('warning', "Já existe uma atividade com esse nome");
+					return Redirect::back();
+				}
+				
+			}
+
 			if($idCategoria!=""){
 				$atividadeExtra->idCategoria = Input::get('idCategoria');
+			}
+
+			//Envia email de lembrete - Para os alunos ha mais de 15 dias sem acessar o sistema
+			$m = Modulo::find($idModulo);
+			if($m != null){
+				emailNovasAtividades($m);
+			}else{
+				emailNovasAtividades();
 			}
 
 			$atividadeExtra->save();
@@ -1560,22 +1643,44 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 		Route::post('atualizarAtividadeExtra', function(){
 			$atividadeExtra = Atividade::find(Input::get('id'));
-			$atividadeExtra->nome = Input::get('nome');
 			$idModulo = Input::get('idModulo');
-			$idCategoria = Input::get('idCategoria');
-			$atividadeExtra->status = Input::get('status');
+			
 
-			if(isset($idModulo)){
-				$atividadeExtra->idModulo = Input::get('idModulo');
-			}
-			if(isset($idCategoria)){
+			if(Input::get('idCategoria') != null){
 				$atividadeExtra->idCategoria = Input::get('idCategoria');
 			}
 
+			$atividadeExtra->status = Input::get('status');
+
+			if($atividadeExtra->nome != Input::get('nome')){
+
+				if(isset($idModulo)){
+					$atividadeExtra->idModulo = Input::get('idModulo');
+
+					if(Modulo::find($atividadeExtra->idModulo) != null){
+						if(in_array(Input::get('nome'), Modulo::find($atividadeExtra->idModulo)->atividadesExtras->lists('nome')) ){
+							Session::flash('warning', "Já existe uma atividade com esse nome relacionada ao módulo escolhido");
+							return Redirect::back();
+						}
+						
+					}
+				}
+
+				//Checa se existe atividades extras livres com o mesmo nome
+				if(Atividade::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
+					if(in_array(Input::get('nome'), Atividade::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome')) ){
+						Session::flash('warning', "Já existe uma atividade com esse nome");
+						return Redirect::back();
+					}
+					
+				}
+			}
+
+			$atividadeExtra->nome = Input::get('nome');
 			$atividadeExtra->save();
 
 			// redirect
-			Session::flash('message', 'Atividade Extra atualizada com sucesso!');
+			Session::flash('info', 'Alterações salvas com sucesso!');
 			return Redirect::back();
 		});
 
@@ -1593,17 +1698,15 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
 			foreach ($modulo->turmas as $turma) {
 				if($turma->status == 0){
-					return Response::json('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura alterando a ordem das questões</p>');
+					return Response::json('<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura alterando a ordem das questões</p>');
 				}
 			}
 
 			if($atividade->status == 1){
-				Session::flash('warning','A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
-				return Redirect::back();
+				return Response::json('A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
 			}else {
 				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
-					Session::flash('warning','A atividade já foi acessada por alunos, não será possível adicionar novas questões');
-					return Redirect::back();
+					return Response::json('A atividade já foi acessada por alunos, não será possível adicionar novas questões');
 				}
 			}
 
@@ -1621,6 +1724,42 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			return Response::json("alterado");
 
+		});
+
+		Route::get('atividade/deletar/{id}', function($id){
+			$atividade = Atividade::find($id);
+
+			if($atividade != null){
+
+				if($atividade->tipo == 1){
+					$modulo = $atividade->aula->modulo;
+
+					//Se já existe alguma turma fechada neste módulo, não podemos add novas atividades 
+					foreach ($modulo->turmas as $turma) {
+						if($turma->status == 0){
+							Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura excluindo Atividades </p>');
+							return Redirect::back();
+						}
+					}
+				}
+				
+				if($atividade->acessos->count() == null){
+
+					deletarAtividade($atividade, "hard");
+					Session::flash('info', '<p> A atividade e as suas questões foram excluídas </p>');
+					return Redirect::back();
+				}else{
+
+					deletarAtividade($atividade);
+					Session::flash('info', '<p> A atividade e as suas questões foram excluídas </p>');
+					return Redirect::back();
+				}
+				
+			}
+			
+			Session::flash('warning', "Atividade inexistente");
+
+			return Redirect::back();
 		});
 
 	//Relatórios Individuais
@@ -1741,6 +1880,14 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			addBreadCrumb('Relatório de Ativ. Extras - Aluno: '.$aluno->nome);
 			$turma = $aluno->turmas->find($idTurma); //idTurma como parametro
 
+			//Segurança - Verifica se esse aluno é de alguma turma do professor em questao, e se essa turma é do professor
+			if(!(Auth::user()->professor->turmas->contains($turma) )){
+				return Redirect::back();
+				
+			}elseif( !(Auth::user()->professor->turmas->find($turma->id)->alunos->contains($aluno)) ){
+				return Redirect::back();		
+			}
+
 			// Add o objeto turma que está sendo gerado o relatório, no objeto aluno
 			$aluno->turma = $turma;
 
@@ -1825,6 +1972,12 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$turma = Turma::find($idTurma);
 			addBreadCrumb('Relatório de Aula - Turma: '.$turma->nome);
 			$alunos = $turma->alunos;
+
+			//Segurança - Verifica se esse aluno é de alguma turma do professor em questao, e se essa turma é do professor
+			if(!(Auth::user()->professor->turmas->contains($turma) )){
+				Session::flash('warning','Acesso Proibido!');
+				return Redirect::back();
+			}
 
 			$b = array();
 
@@ -1955,6 +2108,13 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 		Route::get('relatorios/atividadesExtras/turma/{idTurma}',function($idTurma){ 
 			$turma = Turma::find($idTurma);
 			addBreadCrumb('Relatório de Ativ. Extras - Turma: '.$turma->nome);
+
+			//Segurança - Verifica se esse aluno é de alguma turma do professor em questao, e se essa turma é do professor
+			if(!(Auth::user()->professor->turmas->contains($turma) )){
+				Session::flash('warning','Acesso Proibido!');
+				return Redirect::back();
+			}
+
 			$alunos = $turma->alunos;
 
 			foreach($alunos as $aluno){
@@ -2994,6 +3154,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$atividadeExtra->nome = Input::get('nome');
 			$atividadeExtra->tipo = 2;
 			$atividadeExtra->status = 0;
+			$atividadeExtra->DataElaboracao = date('Y-m-d');
 			$idModulo = Input::get('idModulo');
 			$idCategoria = Input::get('idCategoria');
 			$atividadeExtra->idUsuario = Auth::user()->id;
@@ -3024,6 +3185,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$atividadeExtra->idCategoria = Input::get('idCategoria');
 			}
 
+			//Envia email de lembrete - Para os alunos ha mais de 15 dias sem acessar o sistema
+			$m = Modulo::find($idModulo);
+			if($m != null){
+				emailNovasAtividades($m);
+			}else{
+				emailNovasAtividades();
+			}
 
 			$atividadeExtra->save();
 
@@ -3100,6 +3268,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Atividade->idAula = Input::get('idAula');
 			$Atividade->idUsuario = Auth::user()->id;
 			$Atividade->tipo = 1;
+			$Atividade->DataElaboracao = date('Y-m-d');
 
 			if(Aula::find($Atividade->idAula) != null){
 				if(in_array(Input::get('nome'), Aula::find($Atividade->idAula)->atividades->lists('nome')) ){
@@ -3111,6 +3280,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 
 			$Atividade->save();
+
+			//Dispara email para os alunos que estão mais de 15 dias sem acessar o kalango
+			emailNovasAtividades($modulo);
 
 			// redirect
 			Session::flash('info', 'Atividade criada com sucesso!');
@@ -3144,7 +3316,27 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			
 			$atividade = Atividade::find(Input::get('0'));
 			$key=1;
-			//return Response::json(Input::all());
+			
+			if($atividade->tipo == 1){
+				$modulo = $atividade->aula->modulo;
+			}else{
+				$modulo = $atividade->modulo;
+			}
+
+			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
+			foreach ($modulo->turmas as $turma) {
+				if($turma->status == 0){
+					return Response::json('<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura alterando a ordem das questões</p>');
+				}
+			}
+
+			if($atividade->status == 1){
+				return Response::json('A atividade está ativa, para adicionar uma questão primeiro mude o seu status para inativo.');
+			}else {
+				if (AcessosAtividade::where('idAtividade','=',$atividade->id)->count() != null){
+					return Response::json('A atividade já foi acessada por alunos, não será possível adicionar novas questões');
+				}
+			}
 
 
 			$questoes = $atividade->questoes->sortBy('numero');
@@ -3159,6 +3351,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 
 			return Response::json("alterado");
+
 		});
 
 		Route::get('atividade/deletar/{id}', function($id){
