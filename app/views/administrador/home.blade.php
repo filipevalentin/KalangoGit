@@ -843,7 +843,7 @@
 			
 			$(".btn_deleta_curso").click(function(event){
 				
-				if(!(confirm("Deseja realmente apagar este curso?"))){
+				if(!(confirm("Deseja realmente apagar este curso e todos os registros relacionados a ele?"))){
 					return false
 				}
 				
@@ -851,7 +851,7 @@
 			
 			$(".btn_deleta_modulo").click(function(event){
 				
-				if(!(confirm("Deseja realmente apagar este módulo?"))){
+				if(!(confirm("Deseja realmente apagar este módulo e todos os registros relacionados a ele?"))){
 					return false
 				}
 				
@@ -859,7 +859,7 @@
 			
 			$(".btn_deleta_turma").click(function(event){
 				
-				if(!(confirm("Deseja realmente apagar esta turma?"))){
+				if(!(confirm("Deseja realmente apagar esta turma e todos os registros relacionados a ela?"))){
 					return false
 				}
 				
