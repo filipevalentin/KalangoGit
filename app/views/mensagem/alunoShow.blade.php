@@ -47,14 +47,14 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" id="titulo" placeholder="Titulo">
+						<input autocomplete="off" class="form-control tituloObrigatorio" type="text" id="titulo" placeholder="Titulo">
 					</div>
 					<div class="form-group">
-						<textarea name="conteudo" id="email_message" class="form-control" placeholder="Mensagem" style="height: 120px;"></textarea>
+						<textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" placeholder="Mensagem" style="height: 120px;"></textarea>
 					</div>
 				</div>
 				<div class="modal-footer clearfix">
-					<button type="submit" class="btn btn-primary pull-right"><i class="fa fa-envelope"></i> Enviar</button>
+					<button type="submit" class="btn btn-primary pull-right btn-enviar"><i class="fa fa-envelope"></i> Enviar</button>
 					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Descartar</button>
 				</div>
 			</form>
@@ -80,17 +80,17 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<input class="form-control" type="text" id="titulo" name="titulo" placeholder="">
+						<input autocomplete="off" class="form-control tituloObrigatorio" type="text" id="titulo" name="titulo" placeholder="">
 					</div>
 					<div class="form-group">
-						<textarea name="conteudo" id="email_message" class="form-control" placeholder="Mensagem" style="height: 120px;"></textarea>
+						<textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" placeholder="Mensagem" style="height: 120px;"></textarea>
 					</div>
 					<div class="form-group">
 						<input name="idRE" type="hidden" id="idRE" class="form-control" style="height: 120px;">
 					</div>
 				</div>
 				<div class="modal-footer clearfix">
-					<button type="submit" class="btn btn-primary pull-right"><i class="fa fa-envelope"></i> Enviar</button>
+					<button type="submit" class="btn btn-primary pull-right btn-enviarResposta"><i class="fa fa-envelope"></i> Enviar</button>
 					<button type="button" class="btn btn-danger pull-left" data-dismiss="modal"><i class="fa fa-times"></i> Descartar</button>
 				</div>
 			</form>
@@ -222,6 +222,52 @@
         modal.find('#nomeDestino').val(nomeDestino);
     });
 
+</script>
+
+<script>
+	
+	$(".btn-enviar").click(function(event){
+			
+		if($(".alunoObrigatorio").val() == ""){
+			alert("É necessário preencher o Aluno que deverá receber a mensagem!");
+			$(".alunoObrigatorio").focus();
+			return false;
+		} 
+		
+		if($(".tituloObrigatorio").val() == ""){
+			alert("É necessário preencher o Título da Mensagem!");
+			$(".tituloObrigatorio").focus();
+			return false;
+		}
+
+		if($(".mensagemObrigatoria").val() == ""){
+			alert("É necessário preencher a Mensagem!");
+			$(".mensagemObrigatoria").focus();
+			return false;
+		}
+
+		alert("Mensagem enviada com sucesso!");
+		
+	})
+	
+	$(".btn-enviarResposta").click(function(event){
+			
+		if($(".tituloRespostaObrigatorio").val() == ""){
+			alert("É necessário preencher o Título da Mensagem!");
+			$(".tituloRespostaObrigatorio").focus();
+			return false;
+		}
+
+		if($(".mensagemRespostaObrigatoria").val() == ""){
+			alert("É necessário preencher a Mensagem!");
+			$(".mensagemRespostaObrigatoria").focus();
+			return false;
+		}			
+		
+		alert("Mensagem enviada com sucesso!");
+		
+	})
+			
 </script>
 
 @endsection
