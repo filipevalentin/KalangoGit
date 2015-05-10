@@ -42,7 +42,8 @@
                     <div id="div_topico-multipla-editar-questao" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_topico-multipla-editar-questao" class="fa"></i> Tópico</label>
                         <select id="topico" name="topico" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control topicoObrigatorio-multipla-editar-questao">
-                        @foreach(Topico::all() as $topico)
+                        <option value=""></option>
+						@foreach(Topico::all() as $topico)
                           <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
                         @endforeach
                         </select>
@@ -138,7 +139,8 @@
                     <div id="div_topico-dissertativa-editar-questao" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_topico-dissertativa-editar-questao" class="fa"></i> Tópico</label>
                         <select id="topico" name="topico" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control topicoObrigatorio-dissertativa-editar-questao">
-                        @foreach(Topico::all() as $topico)
+                        <option value=""></option>
+						@foreach(Topico::all() as $topico)
                           <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
                         @endforeach
                         </select>
@@ -221,7 +223,8 @@
                     <div id="div_topico-multipla-nova-questao" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_topico-multipla-nova-questao" class="fa"></i> Tópico</label>
                         <select id="topico" name="topico" onblur="fcn_recarregaCoresMultiplaNovaQuestao();" class="form-control topicoObrigatorio-multipla-nova-questao">
-                        @foreach(Topico::all() as $topico)
+                        <option value=""></option>
+						@foreach(Topico::all() as $topico)
                           <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
                         @endforeach
                         </select>
@@ -309,7 +312,8 @@
                     <div id="div_topico-dissertativa-nova-questao" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_topico-dissertativa-nova-questao" class="fa"></i> Tópico</label>
                         <select id="topico" name="topico" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" class="form-control topicoObrigatorio-dissertativa-nova-questao">
-                        @foreach(Topico::all() as $topico)
+                        <option value=""></option>
+						@foreach(Topico::all() as $topico)
                           <option id="texto" value="{{$topico->id}}">{{$topico->nome}}</option>
                         @endforeach
                         </select>
