@@ -168,7 +168,70 @@
 
 <script> //Validações
 	
-
+	$(".btn-salvar-editar-exercicio").click(function(event){
+		
+		var obrigatorioPendente = 0;
+		
+		if($(".nomeObrigatorio-editar-exercicio").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_nome-editar-exercicio" ).removeClass("has-success");
+			$( "#icone_nome-editar-exercicio" ).removeClass("fa-check");
+			$( "#div_nome-editar-exercicio" ).addClass("has-error");
+			$( "#icone_nome-editar-exercicio" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome-editar-exercicio" ).removeClass("has-error");
+			$( "#icone_nome-editar-exercicio" ).removeClass("fa-times-circle-o");
+			$( "#div_nome-editar-exercicio" ).addClass("has-success");
+			$( "#icone_nome-editar-exercicio" ).addClass("fa-check");
+		}
+		
+		if($(".statusObrigatorio-editar-exercicio").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_status_editar-exercicio" ).removeClass("has-success");
+			$( "#icone_status-editar-exercicio" ).removeClass("fa-check");
+			$( "#div_status_editar-exercicio" ).addClass("has-error");
+			$( "#icone_status-editar-exercicio" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_status_editar-exercicio" ).removeClass("has-error");
+			$( "#icone_status-editar-exercicio" ).removeClass("fa-times-circle-o");
+			$( "#div_status_editar-exercicio" ).addClass("has-success");
+			$( "#icone_status-editar-exercicio" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
+	
+	function fcn_recarregaCoresEditarExercicio(){
+		
+		if($(".nomeObrigatorio-editar-exercicio").val() == ""){
+			$( "#div_nome-editar-exercicio" ).removeClass("has-success");
+			$( "#icone_nome-editar-exercicio" ).removeClass("fa-check");
+			$( "#div_nome-editar-exercicio" ).addClass("has-error");
+			$( "#icone_nome-editar-exercicio" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome-editar-exercicio" ).removeClass("has-error");
+			$( "#icone_nome-editar-exercicio" ).removeClass("fa-times-circle-o");
+			$( "#div_nome-editar-exercicio" ).addClass("has-success");
+			$( "#icone_nome-editar-exercicio" ).addClass("fa-check");
+		}
+		
+		if($(".statusObrigatorio-editar-exercicio").val() == ""){
+			$( "#div_status_editar-exercicio" ).removeClass("has-success");
+			$( "#icone_status-editar-exercicio" ).removeClass("fa-check");
+			$( "#div_status_editar-exercicio" ).addClass("has-error");
+			$( "#icone_status-editar-exercicio" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_status_editar-exercicio" ).removeClass("has-error");
+			$( "#icone_status-editar-exercicio" ).removeClass("fa-times-circle-o");
+			$( "#div_status_editar-exercicio" ).addClass("has-success");
+			$( "#icone_status-editar-exercicio" ).addClass("fa-check");
+		}
+		
+	}
 	
 </script>
 
