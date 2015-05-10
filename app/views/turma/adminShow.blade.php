@@ -24,7 +24,8 @@
                     <div id="div_professor_editar_turma" class="form-group">
                         <label class="control-label" for="professor"><i id="icone_professor_editar_turma" class="fa"></i> Professor</label>
                         <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresEditarTurma();" class="form-control professorObrigatorio_editar_turma">
-                        @foreach(Professor::all() as $professor)
+                        <option value="">Selecione</option>
+						@foreach(Professor::all() as $professor)
                             <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
                         @endforeach
                         </select>
@@ -88,7 +89,7 @@
                     <div id="div_professor_nova_turma" class="form-group">
                         <label class="control-label" for="professor"><i id="icone_professor_nova_turma" class="fa"></i> Professor</label>
                         <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresNovaTurma();" class="form-control professorObrigatorio_nova_turma">
-                            <option value="" disabled>Selecione um Professor</option>
+						<option value="" >Selecione</option>
                         @foreach(Professor::all() as $professor)
                             <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
                         @endforeach
