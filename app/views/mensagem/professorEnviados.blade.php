@@ -26,7 +26,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo">
+						<input autocomplete="off" class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo">
 					</div>
 					<div class="form-group">
 						<textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
@@ -58,7 +58,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<input class="form-control tituloRespostaObrigatorio" type="text" id="titulo" name="titulo" maxlength="100" placeholder="">
+						<input autocomplete="off" class="form-control tituloRespostaObrigatorio" type="text" id="titulo" name="titulo" maxlength="100" placeholder="">
 					</div>
 					<div class="form-group">
 						<textarea name="conteudo" id="email_message" class="form-control mensagemRespostaObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
@@ -244,7 +244,9 @@
 				alert("É necessário preencher a Mensagem!");
 				$(".mensagemObrigatoria").focus();
 				return false;
-			}			
+			}
+
+			alert("Mensagem enviada com sucesso!");
 			
 		})
 		
@@ -261,6 +263,8 @@
 				$(".mensagemRespostaObrigatoria").focus();
 				return false;
 			}			
+			
+			alert("Mensagem enviada com sucesso!");
 			
 		})
 				
