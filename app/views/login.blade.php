@@ -155,6 +155,8 @@ $( document ).ready(function() {
 			return false;
 		} 
 		
+		alert("E-mail disparado com sucesso!");
+		
 	})
 	
 	function fcn_validaEmail(pstr_email){
