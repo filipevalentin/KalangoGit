@@ -147,7 +147,45 @@
 
 <script> //Validações
 	
-
+	$(".btn-salvar-editar-categoria").click(function(event){
+		
+		var obrigatorioPendente = 0;
+		
+		if($(".nomeObrigatorio-editar-categoria").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_nome-editar-categoria" ).removeClass("has-success");
+			$( "#icone_nome-editar-categoria" ).removeClass("fa-check");
+			$( "#div_nome-editar-categoria" ).addClass("has-error");
+			$( "#icone_nome-editar-categoria" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome-editar-categoria" ).removeClass("has-error");
+			$( "#icone_nome-editar-categoria" ).removeClass("fa-times-circle-o");
+			$( "#div_nome-editar-categoria" ).addClass("has-success");
+			$( "#icone_nome-editar-categoria" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
+	
+	function fcn_recarregaCoresEditarCategoria(){
+		
+		if($(".nomeObrigatorio-editar-categoria").val() == ""){
+			$( "#div_nome-editar-categoria" ).removeClass("has-success");
+			$( "#icone_nome-editar-categoria" ).removeClass("fa-check");
+			$( "#div_nome-editar-categoria" ).addClass("has-error");
+			$( "#icone_nome-editar-categoria" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome-editar-categoria" ).removeClass("has-error");
+			$( "#icone_nome-editar-categoria" ).removeClass("fa-times-circle-o");
+			$( "#div_nome-editar-categoria" ).addClass("has-success");
+			$( "#icone_nome-editar-categoria" ).addClass("fa-check");
+		}
+		
+	}
 	
 </script>
 
