@@ -214,7 +214,7 @@
                                                 @else
                                                 <div class="box-tools pull-right">
                                                     <button class="btn btn-success btn-xs" rel="tooltip" data-placement="left" title="Editar Categoria" data-toggle="modal" data-target="#editarCategoria" data-id="{{$categorias[$j]->id}}" data-nome="{{$categorias[$j]->nome}}" data-tipo="{{get_class($categorias[$j])}}"><i class="fa fa-pencil"></i></button>
-                                                    <a href="/admin/categoria/deletar/{{$categorias[$j]->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                                    <a href="/admin/categoria/deletar/{{$categorias[$j]->id}}"><button class="btn btn-danger btn-xs btn_deletar_categoria"><i class="fa fa-times"></i></button></a>
                                                 </div>
                                                 <div class="curso" style="cursor:pointer;" id="{{$categorias[$j]->id}}" data-tipo="{{get_class($categorias[$j])}}" data-atividades="{{$atividades}}">
                                                     <h4 style="font-size: 20px;">{{$categorias[$j]->nome}}</h4>
@@ -573,6 +573,14 @@
 				}
 				
 			}
+			
+			$(".btn_deletar_categoria").click(function(event){
+				
+				if(!(confirm("Deseja realmente apagar esta categoria e todos os registros relacionados a ela?"))){
+					return false
+				}
+				
+			})
 			
 		</script>
     @endsection
