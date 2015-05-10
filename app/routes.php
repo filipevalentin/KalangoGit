@@ -14,7 +14,7 @@ Route::get('teste5',function(){
 	//                 ->subject('KalanGO! - Verifique sua conta');
 	        // });
 
-	return Modulo::find(2)->alunos;//whereRaw('datediff(now(), emailAtividade) > 15 or(emailAtividade is null)')->get() ;
+	return Modulo::find(2)->alunos;//whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() ;
 	return AcessosAtividade::where('idAluno','=', 3)->whereRaw('datediff(now(), DataAcesso) > 1')->get();
 
 	return dd(date_diff(date_create(Aluno::find(3)->acessos()->orderBy('DataAcesso','desc')->first()->pivot->DataAcesso) , date_create(date('Y-m-d'))));
