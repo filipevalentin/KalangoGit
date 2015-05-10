@@ -403,7 +403,7 @@
                                         </h4>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-success btn-sm" data-toggle="modal" rel="tooltip" data-placement="left" title="Editar Questão" data-target="#editarme" data-id="{{$questao->id}}" data-enunciado="{{$questao->enunciado}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
-                                           <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button></a>
+                                           <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-sm btn_deletar_questao"><i class="fa fa-times"></i></button></a>
                                         </div>
                                         <small class="badge pull-right bg-green" style="margin: 0px 76px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
                                     </div>
@@ -570,7 +570,7 @@
                                         </h4>
                                         <div class="box-tools pull-right">
                                             <button class="btn btn-success btn-sm" rel="tooltip" data-placement="left" title="Editar Questão" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-enunciado="{{$questao->enunciado}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru" data-topico="{{$questao->topico->id}}" data-dificuldade="{{$questao->pontos}}"><i class="fa fa-pencil"></i></button>
-                                            <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button></a>
+                                            <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-sm btn_deletar_questao"><i class="fa fa-times"></i></button></a>
                                         </div>
                                         @if(substr($questao->categoria,1) == "4")
                                             <small class="badge pull-right bg-red" style="margin: 0px 76px 0px 5px;"><i class="fa fa-microphone"></i>Rec. de Voz</small>
@@ -2629,6 +2629,14 @@
 			 
 		}
 	}
+	
+	$(".btn_deletar_questao").click(function(event){
+				
+		if(!(confirm("Deseja realmente apagar esta questão e todos os registros relacionados a ela?"))){
+			return false
+		}
+		
+	})
 	
 </script>
 @endsection
