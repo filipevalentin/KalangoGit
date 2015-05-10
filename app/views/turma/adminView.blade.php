@@ -103,7 +103,7 @@
                                 <td>
                                     <div class="box-tools" style="padding:0px">
                                         <a href="/admin/aluno/{{$aluno->id}}"><button class="btn btn-primary btn-xs"><i class="fa fa-user"></i></button></a>
-                                        <a href="/admin/desmatricularAluno/{{$aluno->id}}/{{$turma->id}}"><button class="btn btn-danger btn-xs"><i class="fa fa-times"></i></button></a>
+                                        <a href="/admin/desmatricularAluno/{{$aluno->id}}/{{$turma->id}}"><button class="btn btn-danger btn-xs btn_desmatricular_aluno"><i class="fa fa-times"></i></button></a>
                                     </div>
                                 </td> 
                             </tr>
@@ -167,6 +167,14 @@
 				}
 				
 			}
+			
+			$(".btn_desmatricular_aluno").click(function(event){
+				
+				if(!(confirm("Deseja realmente apagar esta aluno e todos os registros relacionados a ele?"))){
+					return false
+				}
+				
+			})
 			
 		</script>
     @endsection
