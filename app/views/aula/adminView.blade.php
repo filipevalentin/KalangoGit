@@ -16,7 +16,7 @@
                     </div>
                     <div id="div_nome-editar-aula" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-aula" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAula();" maxlength="100" class="form-control somenteLetrasENumeros nomeObrigatorio-editar-aula"></input>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAula();" maxlength="100" class="form-control somenteLetraseNumeros nomeObrigatorio-editar-aula"></input>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -158,7 +158,45 @@
 
 <script> //Validações
 	
-
+	$(".btn-salvar-editar-aula").click(function(event){
+		
+		var obrigatorioPendente = 0;
+		
+		if($(".nomeObrigatorio-editar-aula").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_nome-editar-aula" ).removeClass("has-success");
+			$( "#icone_nome-editar-aula" ).removeClass("fa-check");
+			$( "#div_nome-editar-aula" ).addClass("has-error");
+			$( "#icone_nome-editar-aula" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome-editar-aula" ).removeClass("has-error");
+			$( "#icone_nome-editar-aula" ).removeClass("fa-times-circle-o");
+			$( "#div_nome-editar-aula" ).addClass("has-success");
+			$( "#icone_nome-editar-aula" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
+	
+	function fcn_recarregaCoresEditarAula(){
+		
+		if($(".nomeObrigatorio-editar-aula").val() == ""){
+			$( "#div_nome-editar-aula" ).removeClass("has-success");
+			$( "#icone_nome-editar-aula" ).removeClass("fa-check");
+			$( "#div_nome-editar-aula" ).addClass("has-error");
+			$( "#icone_nome-editar-aula" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome-editar-aula" ).removeClass("has-error");
+			$( "#icone_nome-editar-aula" ).removeClass("fa-times-circle-o");
+			$( "#div_nome-editar-aula" ).addClass("has-success");
+			$( "#icone_nome-editar-aula" ).addClass("fa-check");
+		}
+					
+	}
 	
 </script>
 
