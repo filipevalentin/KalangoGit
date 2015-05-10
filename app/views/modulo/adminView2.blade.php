@@ -16,7 +16,7 @@
                     </div>
                     <div id="div_nome-editar-modulo" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-modulo" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" maxlength="50" id="nome" name="nome" onblur="fcn_recarregaCoresEditarModulo();" class="form-control somenteLetrasENumeros nomeObrigatorio-editar-modulo" onblur="fcn_recarregaCoresEditarModulo();" >
+                        <input type="text" autocomplete="off" maxlength="50" id="nome" name="nome" onblur="fcn_recarregaCoresEditarModulo();" class="form-control nomeObrigatorio-editar-modulo" onblur="fcn_recarregaCoresEditarModulo();" >
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -154,8 +154,46 @@
 
 <script> //Validações
 	
-
+	$(".btn-salvar-editar-modulo").click(function(event){
+		
+		var obrigatorioPendente = 0;
+		
+		if($(".nomeObrigatorio-editar-modulo").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_nome-editar-modulo" ).removeClass("has-success");
+			$( "#icone_nome-editar-modulo" ).removeClass("fa-check");
+			$( "#div_nome-editar-modulo" ).addClass("has-error");
+			$( "#icone_nome-editar-modulo" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome-editar-modulo" ).removeClass("has-error");
+			$( "#icone_nome-editar-modulo" ).removeClass("fa-times-circle-o");
+			$( "#div_nome-editar-modulo" ).addClass("has-success");
+			$( "#icone_nome-editar-modulo" ).addClass("fa-check");
+		}
+		
+		if(obrigatorioPendente == 1){
+			alert("É necessário preencher todos os campos obrigatórios!");
+			return false;
+		}
+		
+	})
 	
+	function fcn_recarregaCoresEditarModulo(){
+		
+		if($(".nomeObrigatorio-editar-modulo").val() == ""){
+			$( "#div_nome-editar-modulo" ).removeClass("has-success");
+			$( "#icone_nome-editar-modulo" ).removeClass("fa-check");
+			$( "#div_nome-editar-modulo" ).addClass("has-error");
+			$( "#icone_nome-editar-modulo" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_nome-editar-modulo" ).removeClass("has-error");
+			$( "#icone_nome-editar-modulo" ).removeClass("fa-times-circle-o");
+			$( "#div_nome-editar-modulo" ).addClass("has-success");
+			$( "#icone_nome-editar-modulo" ).addClass("fa-check");
+		}
+					
+	}
+		
 </script>
 
 @endsection
