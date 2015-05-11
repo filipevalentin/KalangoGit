@@ -2645,7 +2645,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarTurma', function(){
-			$Turma = Turma::find(Input::get('id')); 
+			$Turma = Turma::find(Input::get('id'));
+			$Turma->idProfessor = Input::get('idprofessor'); 
 			
 			if($Turma->nome != Input::get('nome')){
 				if(Modulo::find($Turma->idModulo) != null){
@@ -2670,6 +2671,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$aluno = Aluno::find(Input::get('idAluno'));
 			$data = time();
 			$dtContratacao = date('Y-m-d', mktime(0,0,0,$data[1],$data[0],$data[2]));
+
+			//Checa se o aluno já está em uma turma do mesmo módulo
+			if($aluno->turmas()->where('id','=',$turma->idModulo)->count() != null){
+				Session::flash('warning','Este aluno já está matriculado em uma turma deste Módulo');
+			}
+
 			DB::table('contrata')->insert(
 			    array('idCurso' => $turma->modulo->curso->id, 'idTurma' => $turma->id, 'idAluno' => $aluno->id, 'dtContratacao' => $dtContratacao )
 			);
