@@ -2675,6 +2675,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			//Checa se o aluno já está em uma turma do mesmo módulo
 			if($aluno->turmas()->where('turmas.idModulo','=',$turma->idModulo)->count() != null){
 				Session::flash('warning','Este aluno já está matriculado em uma turma deste Módulo');
+				return Redirect::back();
 			}
 
 			DB::table('contrata')->insert(
