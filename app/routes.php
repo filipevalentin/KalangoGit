@@ -2600,7 +2600,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$turma->modulo2 = $turma->modulo->nome;
 				$turma->professor2 = $turma->professor->usuario->nome ." ". $turma->professor->usuario->sobrenome;
 				$turma->status2 = ($turma->status == 0) ? "Fechada" : "Em Andamento";
-				$turma->action = "<a style='color:white;' href='/admin/turma/$turma->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-group'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarTurma' data-id='$turma->id' data-nome='$turma->nome' data-idprofessor='$turma->idProfessor' data-status='$turma->status'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+				$turma->action = "<a style='color:white;' href='/admin/turma/$turma->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-group'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarTurma' data-id='{{$turma->id}}' data-nome='{{$turma->nome}}' data-professor='{{User::find($turma->professor->id)->nome}}' data-idprofessor='{{$turma->professor->id}}' data-status='{{$turma->status}}'><i class='fa fa-pencil'></i></button><a href='/admin/turma/deletar/$turma->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 				array_push($data, $turma);
 			}
 			//dd($data);
@@ -2673,7 +2673,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$dtContratacao = date('Y-m-d', mktime(0,0,0,$data[1],$data[0],$data[2]));
 
 			//Checa se o aluno já está em uma turma do mesmo módulo
-			if($aluno->turmas()->where('id','=',$turma->idModulo)->count() != null){
+			if($aluno->turmas()->where('turmas.idModulo','=',$turma->idModulo)->count() != null){
 				Session::flash('warning','Este aluno já está matriculado em uma turma deste Módulo');
 			}
 
@@ -4427,7 +4427,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$idAvisos = implode(",", $idAvisos->all());
 				}
 
-				$aviso->action = "<a style='color:white;' href='/admin/aviso/$aviso->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-external-link'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$aviso->id' data-titulo='$aviso->titulo' data-descricao='$aviso->descricao' data-urlImagem='$aviso->urlImagem' data-dataExpiracao='$aviso->dataExpiracao' data-idTurma='$idAvisos' data-toggle='modal' data-target='#editarAviso'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+				$aviso->action = "<a style='color:white;' href='/admin/aviso/$aviso->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-external-link'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$aviso->id' data-titulo='$aviso->titulo' data-descricao='$aviso->descricao' data-urlImagem='$aviso->urlImagem' data-dataExpiracao='$aviso->dataExpiracao' data-idTurma='$idAvisos' data-toggle='modal' data-target='#editarAviso'><i class='fa fa-pencil'></i></button><a href='/admin/avisos/deletar/$aviso->id'> <button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 			}
 
 			$response = array(
@@ -4539,7 +4539,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$topico->excluido = "Excluído em: ".$topico->deleted_at->day."/".$topico->deleted_at->month."/".$topico->deleted_at->year;
 				}else{
 					$topico->action = 
-					"<a href='/admin/topico/deletar/$topico->id'>
+					"<a href='/admin/topicos/deletar/$topico->id'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
@@ -4598,7 +4598,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			foreach ($empresas as $empresa) {
 				$empresa->numPropagandas = $empresa->propagandas->count();
-				$empresa->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$empresa->id' data-cnpj='$empresa->cnpj' data-nome='$empresa->nome' data-razaosocial='$empresa->razaoSocial' data-toggle='modal' data-target='#editarEmpresa'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+				$empresa->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$empresa->id' data-cnpj='$empresa->cnpj' data-nome='$empresa->nome' data-razaosocial='$empresa->razaoSocial' data-toggle='modal' data-target='#editarEmpresa'><i class='fa fa-pencil'></i></button><a href='/admin/empresas/deletar/$empresa->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 			}
 
 			$response = array(
@@ -4661,7 +4661,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$propaganda->criadoPor = User::find($propaganda->idUsuario)->nome;
 				$propaganda->empresa = Empresa::find($propaganda->idEmpresa)->nome;
 				$propaganda->linkView = ($propaganda->link != null) ? "<a href='$propaganda->link' target='_blank'>Visitar Link</a>" : 'N/A';
-				$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
+				$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><a href='/admin/propagandas/deletar/$propaganda->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 			}
 
 			$response = array(
