@@ -9,15 +9,23 @@
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 				<h4 class="modal-title"><i class="fa fa-envelope-o"> </i> Nova Mensagem</h4>
 			</div>
-			<form action="/professor/mensagem/enviar" method="post">
+			<form action="/aluno/mensagem/enviar" method="post">
 				<div class="modal-body">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon">Para:</span>
 							<select class="form-control alunoObrigatorio" name="idUsuarioDestino" id="idUsuarioDestino">
 								<option disabled>Selecionar Professor</option>
-								@foreach(Auth::user()->aluno->turmas as $turma)
-									<option value="{{$turma->idProfessor}}">{{User::find($turma->idProfessor)->nome}}</option>
+								<?php
+									$profs = array();
+									foreach(Auth::user()->aluno->turmas as $turma){
+										if(!in_array($turma->professor, $profs)){
+											$profs[] = $turma->professor;
+										}
+									}	
+								 ?>
+								@foreach($profs as $prof)
+									<option value="{{$prof->id}}">{{User::find($prof->id)->nome}}</option>
 								@endforeach
 							</select>
 						</div>
@@ -198,7 +206,7 @@
 	<script>
 		$('textarea').wysihtml5({
 	        "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
-			"useLineBreaks:" false,
+			"useLineBreaks": false,
 	        "emphasis": true, //Italics, bold, etc. Default true
 	        "lists": false, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
 	        "html": false, //Button which allows you to edit the generated HTML. Default false
@@ -245,7 +253,7 @@
 				return false;
 			}	
 
-			alert("Mensagem enviada com sucesso!");
+			
 			
 		})
 		
@@ -263,7 +271,7 @@
 				return false;
 			}	
 
-			alert("Mensagem enviada com sucesso!");
+			
 			
 		})
 				

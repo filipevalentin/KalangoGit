@@ -23,14 +23,12 @@
     <div class="nav-tabs-custom">
         <ul class="nav nav-tabs">
         @foreach($turmas as $turma)
-            <li class="active"><a href="#{{$turma->id}}" data-toggle="tab">{{$turma->nome}}</a></li>
+            <li class="tab"><a href="#{{$turma->id}}" data-toggle="tab">{{$turma->nome}}</a></li>
         @endforeach
         </ul>
         <div class="tab-content">
-
-            @foreach($turmas as $turma)
-            <div class="tab-pane active" id="{{$turma->id}}">
-
+        @foreach($turmas as $turma)
+            <div class="tab-pane" id="{{$turma->id}}">
                 <!-- Dados Gerais -->
                 <div class="row">
                     <div class="col-lg-6">
@@ -116,17 +114,17 @@
                             </div> 
                             <div class="box-body" style="background: rgb(236, 236, 236)">
                                 <div class="row">
-                                    <div class="col-xs-4 center">
+                                    <div class="col-xs-12 col-sm-4 center">
                                         <p> Respostas Corretas </p>
-                                        <input type="text" class="knob" data-fgColor="green" data-bgColor="white" data-inputColor="black" data-width="96" data-height="96" data-skin="tron" value="{{$turma->acertos}}" data-max="{{$turma->questoes->count()}}" data-readOnly="true">
+                                        <input type="text" class="knob" data-fgColor="green" data-bgColor="white" data-inputColor="black" data-width="95" data-height="95" data-skin="tron" value="{{$turma->acertos}}" data-max="{{$turma->questoes->count()}}" data-readOnly="true">
                                     </div>
-                                    <div class="col-xs-4 center">
+                                    <div class="col-xs-12 col-sm-4 center">
                                         <p> Respostas Erradas </p>
-                                        <input type="text" class="knob" data-fgColor="tomato" data-bgColor="white" data-inputColor="black" data-width="96" data-height="96" data-skin="tron" value="{{$turma->erros}}" data-max="{{$turma->questoes->count()}}" data-readOnly="true">
+                                        <input type="text" class="knob" data-fgColor="tomato" data-bgColor="white" data-inputColor="black" data-width="95" data-height="95" data-skin="tron" value="{{$turma->erros}}" data-max="{{$turma->questoes->count()}}" data-readOnly="true">
                                     </div>
-                                    <div class="col-xs-4 center">
+                                    <div class="col-xs-12 col-sm-4 center">
                                         <p> Respostas Total </p>
-                                        <input type="text" class="knob" data-fgColor="orange" data-bgColor="white" data-inputColor="black" data-width="96" data-height="96" data-skin="tron" value="{{$turma->questoes->count()}}" data-max="{{$turma->questoes->count()}}" data-readOnly="true">
+                                        <input type="text" class="knob" data-fgColor="orange" data-bgColor="white" data-inputColor="black" data-width="95" data-height="95" data-skin="tron" value="{{$turma->questoes->count()}}" data-max="{{$turma->questoes->count()}}" data-readOnly="true">
                                     </div>
                                 </div>
                             </div> 
@@ -326,7 +324,7 @@
                 </div>
 
             </div>
-            @endforeach
+        @endforeach
         </div> 
     </div>
 
@@ -338,6 +336,8 @@
 
 <script>
 	$(".knob").knob();
+    $(".tab-pane:first").addClass('active');
+    $("li.tab:first").addClass('active');
 </script>
 
 @endsection

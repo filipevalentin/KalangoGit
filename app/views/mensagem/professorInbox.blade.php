@@ -201,7 +201,7 @@
 	<script>
 		$('textarea').wysihtml5({
 	        "font-styles": true, //Font styling, e.g. h1, h2, etc. Default true
-			"useLineBreaks:" false,
+			"useLineBreaks": false,
 	        "emphasis": true, //Italics, bold, etc. Default true
 	        "lists": false, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
 	        "html": false, //Button which allows you to edit the generated HTML. Default false
@@ -248,7 +248,7 @@
 				return false;
 			}	
 
-			alert("Mensagem enviada com sucesso!");
+			
 			
 		})
 		
@@ -266,7 +266,7 @@
 				return false;
 			}			
 			
-			alert("Mensagem enviada com sucesso!");
+			
 			
 		})
 				

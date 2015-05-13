@@ -68,11 +68,13 @@
                         <ul class="nav navbar-nav">
                             <!-- Messages: style can be found in dropdown.less-->
                             <?php $count=0; $mensagens = Auth::user()->mensagensRecebidas->sortByDesc('id')->take(5); ?>
-                            <?php Auth::user()->mensagensRecebidas->each(function($mensagem) use($count){
-                                if($mensagem->lida!=1){
-                                    $count++;
+                            <?php 
+                                foreach(Auth::user()->mensagensRecebidas as $mensagem){
+                                    if($mensagem->lida!=1){
+                                        $count++;
+                                    }
                                 }
-                            }) ?>
+                            ?>
                             <li class="dropdown messages-menu">
                                 <!-- Menu toggle button -->
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
