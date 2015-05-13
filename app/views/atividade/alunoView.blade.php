@@ -290,7 +290,7 @@
                                             @if($respostas->find($questao->id)->pivot->correcao == 1)
                                                 <i class="fa fa-check" style="color:green;"> Resposta Correta</i>
                                             @else
-                                                <i class="fa fa-times" style="color:green;"> Resposta Errada</i>
+                                                <i class="fa fa-times" style="color:red;"> Resposta Errada</i>
                                             @endif
                                         @else
                                             <i>Nenhuma resposta registrada</i>
