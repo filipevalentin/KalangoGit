@@ -534,12 +534,35 @@
 					alert("Você já concluiu essa atividade.\nVocê será redirecionado para a página inicial");
 					window.location.href = '/aluno/home';
 				}else{
+					
+					//Validação da resposta certa //
+					var retorno = respostaCerta.split(";");
+					var certo = 0;
+					
+					for (i = 0; i <= 10; i++){
+						if(typeof retorno[i] != "undefined"){
+							
+							if(resposta == retorno[i]){
+								certo = 1;
+							}
+							
+						}
+					}
+					// ============================= //
+					
 					// corrigir a questão e dar feedback: colorir a TAB conforme a correção
-					if(resposta == respostaCerta){
+					//if(resposta == respostaCerta){
+					//	alert('Parabéns, Resposta Certa!')
+					//}else{
+					//	alert('Opa, você errou :/')
+					//}
+					
+					if(certo == 1){
 						alert('Parabéns, Resposta Certa!')
 					}else{
 						alert('Opa, você errou :/')
 					}
+					
 					if(atual != total){
 						console.log('Questao numero '+'atual');
 						// atualiza a última questao respondida
