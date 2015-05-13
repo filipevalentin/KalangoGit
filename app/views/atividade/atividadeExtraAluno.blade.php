@@ -119,7 +119,7 @@
                 console.log("Mostar atividades: "+atividades);
                 $('div.atividade').fadeOut();
                 $.each(atividades, function(index, val) {
-                    $('div.atividade#'+val).delay(900).fadeIn();
+                    $('#'+val+'.atividade').delay(900).fadeIn();
                 });
                 var tipo = $(this).data('tipo');
                 if(tipo == "Modulo"){

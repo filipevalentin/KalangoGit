@@ -4498,7 +4498,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$aviso->save();
 
-			if(!in_array("todos", Input::get('idTurma'))){
+			if(!in_array("todos", (Input::get('idTurma') == null) ? array() : Input::get('idTurma'))){
 				foreach(Input::get('idTurma') as $turma){
 					Turma::find($turma)->avisos()->sync(array($aviso->id));
 				}
@@ -4514,6 +4514,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::get('avisos/deletar/{id}', function($id){
 			$aviso = Aviso::find($id);
+			$aviso->turmas()->sync(array());
 			$aviso->delete();
 
 			Session::flash('info','Aviso excluído com sucesso!');
@@ -4548,7 +4549,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					 $topico->excluido = "Ativo";
 				}
 
-				$topico->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$topico->id' data-nome='$topico->nome' data-toggle='modal' data-target='#editarTopico'><i class='fa fa-pencil'></i></button><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button>";
 			}
 
 			$response = array(
@@ -4581,6 +4581,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::get('topicos/deletar/{id}', function($id){
 			$topico = Topico::find($id);
+
+			if($topico->questoes->count() == null){
+				$topico->forceDelete();
+			}
 			$topico->delete();
 
 			Session::flash('info','Tópico excluído com sucesso!');
@@ -4642,7 +4646,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 
 			$empresa->delete();
-			Session::flash('info','Aviso excluído com sucesso!');
+			Session::flash('info','Empresa excluída com sucesso!');
 			return Redirect::back();
 		});
 
