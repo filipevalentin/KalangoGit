@@ -4229,6 +4229,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
 			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
 
+			if(in_array($user->REProf, Professor::all()->lists('REProf')) ){
+				Session::flash('warning','Já existe uma conta com esse RE, por favor insira outro');
+				return Redirect::back();
+			}
+
 			$professor->save();
 
 			Mail::queue('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
@@ -4378,6 +4383,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$administrador->id = $user->id;
 			$administrador->cargo = Input::get('cargo');
 			$administrador->codRegistro = Input::get('codRegistro');
+
+			if(in_array($user->codRegistro, Administrador::all()->lists('codRegistro')) ){
+				Session::flash('warning','Já existe uma conta com esse registro, por favor insira outro');
+				return Redirect::back();
+			}
 
 			$administrador->save();
 
