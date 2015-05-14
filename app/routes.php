@@ -2317,14 +2317,16 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('atualizarIdioma', function(){
 			$idioma 			    = Idioma::find(Input::get('id')); 
 			
-			if($idioma->nome != Input::get('nome')){
-				if(Idioma::all()->count() != null){
-					if(in_array(Input::get('nome'), Idioma::where('id','!=',$idioma->id)->lists('nome')) ){
-						Session::flash('warning', "Esse idioma já existe");
-						return Redirect::back();
-					}
-					
+			if(Idioma::all()->count() != null){
+				$idiomas = Idioma::all()->lists('nome');
+				foreach ($idiomas as $idioma) {
+					$idioma = strtolower($idioma);
 				}
+				if(in_array(strtolower(Input::get('nome')), Idioma::all()->lists('nome')) ){
+					Session::flash('warning', "Esse idioma já existe");
+					return Redirect::back();
+				}
+				
 			}
 
 			$idioma->nome = Input::get('nome');
