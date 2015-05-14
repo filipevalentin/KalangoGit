@@ -352,7 +352,7 @@ Route::get('teste4',function(){
 		});
 
 		Route::post('/', function(){
-			if (Auth::attempt(array('login' => Input::get('usuario') , 'password' => Input::get('senha'), 'confirmed' => 1 ))){
+			if (Auth::attempt(array('login' => Input::get('usuario2') , 'password' => Input::get('senha2'), 'confirmed' => 1 ))){
 		    	return Redirect::to('/');
 			}
 			else{
