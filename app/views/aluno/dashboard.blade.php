@@ -51,7 +51,7 @@
                                         <ul style="padding:0px; list-style: none;">
                                             <li style="font-size: x-large;font-weight: 600;">{{Auth::user()->nome}} {{Auth::user()->sobrenome}}</li>
                                             <li style="font-size: large;font-weight: 500;">{{Auth::user()->aluno->turmas->first()->nome}}</li>
-                                            <li style="font-size: large;font-weight: 500;">Ranking: Turma: {{$turma->meuRanking['turma']+1}}º   Módulo: {{$turma->meuRanking['modulo']+1}}º</li>
+                                            <li style="font-size: large;font-weight: 500;">Ranking Turma: {{$turma->meuRanking['turma']+1}}º  - Ranking Módulo: {{$turma->meuRanking['modulo']+1}}º</li>
                                             <li style="font-size: large;font-weight: 500;">Pontuação: {{$turma->pivot->pontuacao}} Pontos
                                                 <?php
                                                     $pontos = $turma->pivot->pontuacao;
