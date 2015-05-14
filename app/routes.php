@@ -2293,7 +2293,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('criarIdioma', function(){
 			
 			if(Idioma::all()->count() != null){
-				if(in_array(Input::get('nome'), Idioma::all()->lists('nome')) ){
+				$idiomas = Idioma::all()->lists('nome');
+				foreach ($idiomas as $idioma) {
+					$idioma = strtolower($idioma);
+				}
+				if(in_array(strtolower(Input::get('nome')), Idioma::all()->lists('nome')) ){
 					Session::flash('warning', "Esse idioma já existe");
 					return Redirect::back();
 				}
