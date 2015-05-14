@@ -177,7 +177,7 @@
                                         </div>
                                     {{Form::close()}}
                                     
-                                    <form action="atualizaSenha" method="POST" role="form">
+                                    <form action="/admin/atualizaSenha" method="POST" role="form">
                                         <input type="text" name="id" class="form-control" style="display:none;" value={{$administrador->id}}>
                                         <h4 class="header">Acesso</h4>
                                         <hr>

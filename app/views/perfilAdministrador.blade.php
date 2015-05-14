@@ -108,7 +108,7 @@
                             
                             <div id="editar" class="tab-pane"> <!-- Aba "editar" -->
                                 <div id="edit-basic" class="tab-pane active">
-                                    {{ Form::open(array('url'=>'atualizarAdministrador', 'files'=>true)) }}
+                                    {{ Form::open(array('url'=>'/admin/atualizarAdministrador', 'files'=>true)) }}
                                         <h4 class="header">Perfil</h4>
                                         <hr>
                                         <div class="box box-primary">
@@ -156,7 +156,7 @@
                                         </div>
                                     {{Form::close()}}
                                     
-                                    <form action="atualizaSenha" method="POST" role="form">
+                                    <form action="/admin/atualizaSenha" method="POST" role="form">
                                         <input type="text" name="id" class="form-control" style="display:none;" value={{$administrador->id}}>
                                         <h4 class="header">Acesso</h4>
                                         <hr>
