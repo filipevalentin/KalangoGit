@@ -292,6 +292,12 @@
 
     });
 
+    function confirmar(){
+		if(!(confirm("Deseja realmente apagar este aviso?"))){
+			return false
+		}
+	}
+
 	$('.item').first().addClass("active");
 
 	$(document).ready(function() {

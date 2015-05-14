@@ -133,6 +133,12 @@
 
     });
 
+    function confirmar(){
+		if(!(confirm("Deseja realmente apagar esta empresa e todos os registros relacionados a ela?"))){
+			return false
+		}
+	}
+
 
 	$('#example').DataTable( {
 	  "ajax":"/admin/listarEmpresas" ,

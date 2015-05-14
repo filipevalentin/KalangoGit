@@ -121,6 +121,12 @@
 		console.log(data);
 	});
 
+	function confirmar(){
+		if(!(confirm("Deseja realmente apagar este professor ?"))){
+			return false
+		}
+	}
+
 	$('#example').DataTable( {
 	  "ajax":"/listarProfessores" ,
 	    "columns": [

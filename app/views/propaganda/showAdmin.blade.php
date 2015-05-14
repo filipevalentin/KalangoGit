@@ -177,6 +177,12 @@
 
 	$('.item').first().addClass("active");
 
+	function confirmar(){
+		if(!(confirm("Deseja realmente apagar esta propaganda ?"))){
+			return false
+		}
+	}
+
 	$('#example').DataTable( {
 	  "ajax":"/admin/listarPropagandas" ,
 	    "columns": [

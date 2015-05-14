@@ -2277,7 +2277,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$idioma->action = "N/A";
 					$idioma->excluido = "Excluído em: ".$idioma->deleted_at->day."/".$idioma->deleted_at->month."/".$idioma->deleted_at->year;
 				}else{
-					$idioma->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarIdioma' data-id='$idioma->id' data-nome='$idioma->nome'><i class='fa fa-pencil'></i></button></a><a href='/admin/idioma/deletar/$idioma->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$idioma->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarIdioma' data-id='$idioma->id' data-nome='$idioma->nome'><i class='fa fa-pencil'></i></button></a><a href='/admin/idioma/deletar/$idioma->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 					$idioma->excluido = "Ativo";
 				} 
 			}
@@ -2398,7 +2398,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarCurso' data-id='$curso->id' data-idioma='$curso->idIdioma' data-nome='$curso->nome'>
 					 	<i class='fa fa-pencil'></i>
 					 </button>
-					 <a href='/admin/curso/deletar/$curso->id'>
+					 <a href='/admin/curso/deletar/$curso->id' onclick='return confirmar()'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
@@ -2526,7 +2526,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarModulo' data-id='$modulo->id' data-nome='$modulo->nome'>
 					 	<i class='fa fa-pencil'></i>
 					 </button>
-					 <a href='/admin/modulo/deletar/$modulo->id'>
+					 <a href='/admin/modulo/deletar/$modulo->id' onclick='return confirmar()'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
@@ -2614,7 +2614,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$turma->modulo2 = $turma->modulo->nome;
 				$turma->professor2 = $turma->professor->usuario->nome ." ". $turma->professor->usuario->sobrenome;
 				$turma->status2 = ($turma->status == 0) ? "Fechada" : "Em Andamento";
-				$turma->action = "<a style='color:white;' href='/admin/turma/$turma->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-group'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarTurma' data-id='{{$turma->id}}' data-nome='{{$turma->nome}}' data-professor='{{User::find($turma->professor->id)->nome}}' data-idprofessor='{{$turma->professor->id}}' data-status='{{$turma->status}}'><i class='fa fa-pencil'></i></button><a href='/admin/turma/deletar/$turma->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+				$turma->action = "<a style='color:white;' href='/admin/turma/$turma->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-group'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarTurma' data-id='{{$turma->id}}' data-nome='{{$turma->nome}}' data-professor='{{User::find($turma->professor->id)->nome}}' data-idprofessor='{{$turma->professor->id}}' data-status='{{$turma->status}}'><i class='fa fa-pencil'></i></button><a href='/admin/turma/deletar/$turma->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 				array_push($data, $turma);
 			}
 			//dd($data);
@@ -2842,7 +2842,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarAula' data-id='$aula->id' data-nome='$aula->titulo'>
 					 	<i class='fa fa-pencil'></i>
 					 </button>
-					 <a href='/admin/aula/deletar/$aula->id'>
+					 <a href='/admin/aula/deletar/$aula->id' onclick='return confirmar()'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
@@ -3113,7 +3113,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editaratividade' data-id='$atividade->id' data-nome='$atividade->nome' data-status='$atividade->status'>
 					 	<i class='fa fa-pencil'></i>
 					 </button>
-					 <a href='/admin/atividade/deletar/$atividade->id'>
+					 <a href='/admin/atividade/deletar/$atividade->id' onclick='return confirmar()'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
@@ -3473,7 +3473,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					"<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarCategoria' data-id='$categoria->id' data-nome='$categoria->nome'>
 					 	<i class='fa fa-pencil'></i>
 					 </button>
-					 <a href='/admin/categoria/deletar/$categoria->id'>
+					 <a href='/admin/categoria/deletar/$categoria->id' onclick='return confirmar()'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
@@ -3705,7 +3705,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$questao->excluido = "Excluído em: ".$questao->deleted_at->day."/".$questao->deleted_at->month."/".$questao->deleted_at->year;
 				}else{
 					$questao->action = 
-					"<a href='/admin/questao/deletar/$questao->id'>
+					"<a href='/admin/questao/deletar/$questao->id' onclick='return confirmar()'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
@@ -3971,7 +3971,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$user->action = "N/A";
 					$user->excluido = "Excluído em: ".$user->deleted_at->day."/".$user->deleted_at->month."/".$user->deleted_at->year;
 				}else{
-					$user->action = "<a style='color:white;' href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/aluno/deletar/$user->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$user->action = "<a style='color:white;' href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/aluno/deletar/$user->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 					$user->excluido = "Ativo";
 				}
 
@@ -4149,7 +4149,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$user->action = "N/A";
 					$user->excluido = "Excluído em: ".$user->deleted_at->day."/".$user->deleted_at->month."/".$user->deleted_at->year;
 				}else{
-					$user->action = "<a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></button></a><a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/professor/deletar/$user->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$user->action = "<a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></button></a><a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/professor/deletar/$user->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 					$user->excluido = "Ativo";
 				}
 
@@ -4309,7 +4309,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$user->action = "N/A";
 					$user->excluido = "Excluído em: ".$user->deleted_at->day."/".$user->deleted_at->month."/".$user->deleted_at->year;
 				}else{
-					$user->action = "<a style='color: white;' href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/administrador/deletar/$user->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$user->action = "<a style='color: white;' href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/administrador/deletar/$user->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 					$user->excluido = "Ativo";
 				}
 
@@ -4468,7 +4468,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$idAvisos = implode(",", $idAvisos->all());
 				}
 
-				$aviso->action = "<a style='color:white;' href='/admin/aviso/$aviso->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-external-link'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$aviso->id' data-titulo='$aviso->titulo' data-descricao='$aviso->descricao' data-urlImagem='$aviso->urlImagem' data-dataExpiracao='$aviso->dataExpiracao' data-idTurma='$idAvisos' data-toggle='modal' data-target='#editarAviso'><i class='fa fa-pencil'></i></button><a href='/admin/avisos/deletar/$aviso->id'> <button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+				$aviso->action = "<a style='color:white;' href='/admin/aviso/$aviso->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-external-link'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$aviso->id' data-titulo='$aviso->titulo' data-descricao='$aviso->descricao' data-urlImagem='$aviso->urlImagem' data-dataExpiracao='$aviso->dataExpiracao' data-idTurma='$idAvisos' data-toggle='modal' data-target='#editarAviso'><i class='fa fa-pencil'></i></button><a href='/admin/avisos/deletar/$aviso->id' onclick='return confirmar()'> <button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 			}
 
 			$response = array(
@@ -4581,7 +4581,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$topico->excluido = "Excluído em: ".$topico->deleted_at->day."/".$topico->deleted_at->month."/".$topico->deleted_at->year;
 				}else{
 					$topico->action = 
-					"<a href='/admin/topicos/deletar/$topico->id'>
+					"<a href='/admin/topicos/deletar/$topico->id' onclick='return confirmar()'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
@@ -4643,7 +4643,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			foreach ($empresas as $empresa) {
 				$empresa->numPropagandas = $empresa->propagandas->count();
-				$empresa->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$empresa->id' data-cnpj='$empresa->cnpj' data-nome='$empresa->nome' data-razaosocial='$empresa->razaoSocial' data-toggle='modal' data-target='#editarEmpresa'><i class='fa fa-pencil'></i></button><a href='/admin/empresas/deletar/$empresa->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+				$empresa->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$empresa->id' data-cnpj='$empresa->cnpj' data-nome='$empresa->nome' data-razaosocial='$empresa->razaoSocial' data-toggle='modal' data-target='#editarEmpresa'><i class='fa fa-pencil'></i></button><a href='/admin/empresas/deletar/$empresa->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 			}
 
 			$response = array(
@@ -4706,7 +4706,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$propaganda->criadoPor = User::find($propaganda->idUsuario)->nome;
 				$propaganda->empresa = Empresa::find($propaganda->idEmpresa)->nome;
 				$propaganda->linkView = ($propaganda->link != null) ? "<a href='$propaganda->link' target='_blank'>Visitar Link</a>" : 'N/A';
-				$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><a href='/admin/propagandas/deletar/$propaganda->id'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+				$propaganda->action = "<button style='margin-right: 5px;' class='btn btn-xs btn-primary' data-toggle='modal' data-target='#verImagem' data-src='/$propaganda->urlImagem' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' ><i class='fa fa-picture-o'></i></buton><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-id='$propaganda->id' data-titulo='$propaganda->titulo' data-link='$propaganda->link' data-idempresa='$propaganda->idEmpresa' data-toggle='modal' data-target='#editarPropaganda'><i class='fa fa-pencil'></i></button><a href='/admin/propagandas/deletar/$propaganda->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 			}
 
 			$response = array(

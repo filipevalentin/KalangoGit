@@ -187,6 +187,11 @@
 
 	});
 	
+	function confirmar(){
+		if(!(confirm("Deseja realmente apagar esta turma e todos os registros relacionados a ela?"))){
+			return false
+		}
+	}	
 
 	$('#example').DataTable( {
 	  "ajax":"/admin/listarTurmas" ,

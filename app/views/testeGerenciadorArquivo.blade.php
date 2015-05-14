@@ -133,6 +133,12 @@
 
 	<script>
 
+	function confirmar(){
+		if(!(confirm("Deseja realmente apagar este material de apoio ?"))){
+			return false
+		}
+	}
+
 		$('#example').DataTable( {
 		  "ajax":"/admin/listarMateriais" ,
 		    "columns": [

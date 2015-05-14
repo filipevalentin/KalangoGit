@@ -105,6 +105,12 @@
 
 	$('.item').first().addClass("active");
 
+	function confirmar(){
+		if(!(confirm("Deseja realmente apagar este curso e todos os registros relacionados a ele?"))){
+			return false
+		}
+	}
+
 	$('#example').DataTable( {
 	  "ajax":"/admin/listarCursos" ,
 	    "columns": [

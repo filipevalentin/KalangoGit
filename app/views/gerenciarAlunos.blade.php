@@ -125,6 +125,12 @@
 		console.log(data);
 	});
 
+    function confirmar(){
+        if(!(confirm("Deseja realmente apagar este aluno e todos os registros relacionados a ele?"))){
+            return false
+        }
+    }
+
 	$('#example').DataTable( {
 	  "ajax":"/listarAlunos" ,
 	    "columns": [

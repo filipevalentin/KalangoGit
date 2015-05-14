@@ -98,6 +98,12 @@
 
 	$('.item').first().addClass("active");
 
+	function confirmar(){
+		if(!(confirm("Deseja realmente apagar esta aula e todos os registros relacionados a ela?"))){
+			return false
+		}
+	}
+
 	$('#example').DataTable( {
 	  "ajax":"/admin/listarAulas" ,
 	    "columns": [

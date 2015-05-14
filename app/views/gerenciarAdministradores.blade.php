@@ -111,6 +111,12 @@
 		console.log(data);
 	});
 
+	function confirmar(){
+		if(!(confirm("Deseja realmente apagar este usuário ?"))){
+			return false
+		}
+	}
+
 	$('#example').DataTable( {
 	  "ajax":"/listarAdministradores" ,
 	    "columns": [

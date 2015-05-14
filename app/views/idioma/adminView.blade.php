@@ -112,6 +112,7 @@
 
 	$('.item').first().addClass("active");
 
+
 	$('#example').DataTable( {
 	  "ajax":"/admin/listarIdiomas" ,
 	    "columns": [
@@ -173,6 +174,14 @@
 			$(this).val(valor);
 		}
 	});
+
+
+	function confirmar(){
+		if(!(confirm("Deseja realmente apagar este idioma e todos os registros relacionados a ele?"))){
+			return false
+		}
+	}
+
 	
 	$(".btn-criar-idioma").click(function(event){
 		
