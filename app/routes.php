@@ -2939,7 +2939,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				}
 			}
 
-			$material = new Materialapoio;
+			$material = new MaterialApoio;
 			$material->nome = Input::get('nome');
 			$material->tipo = Input::get('tipo');
 
