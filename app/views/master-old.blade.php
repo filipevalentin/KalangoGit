@@ -72,7 +72,6 @@
                                         @endif
                                         <p>
                                             {{Auth::user()->nome}} {{" "}} {{Auth::user()->sobrenome}}
-                                            <small>Membro desde Nov/2012</small>
                                         </p>
                                     </li>
                                     <!-- Menu Body -->
