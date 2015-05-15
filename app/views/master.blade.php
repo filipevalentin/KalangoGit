@@ -120,6 +120,7 @@
                                         $avisos->push($aviso);   
                                     }
                                 }
+                                $avisos = $avisos->unique();
                                 
                             ?>
                             <li class="dropdown notifications-menu">
