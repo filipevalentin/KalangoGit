@@ -9,7 +9,7 @@
 		<div class="">
 			<div class="mailbox-read-info" style="padding:10px;">
 				<h3>{{$re->titulo}}</h3>
-				<h5>De: {{$re->usuarioOrigem->nome}}<span class="mailbox-read-time pull-right">{{$re->data}}</span></h5><hr>
+				<h5>De: {{$re->usuarioOrigem->nome}} {{$re->usuarioOrigem->sobrenome}}<span class="mailbox-read-time pull-right">{{$re->data}}</span></h5><hr>
 			</div><!-- /.mailbox-read-info -->
 			<!-- /.mailbox-controls -->
 			<div class="mailbox-read-message" style="padding:10px;">
@@ -164,7 +164,7 @@
 							<div class="col-md-9 col-sm-8">
 								<div class="mailbox-read-info" style="padding:10px;">
 									<h3>{{$mensagem->titulo}}</h3>
-									<h5>De: {{$mensagem->usuarioOrigem->nome}}<span class="mailbox-read-time pull-right">{{$mensagem->data}}</span></h5><hr>
+									<h5>De: {{$mensagem->usuarioOrigem->nome}} {{$re->usuarioOrigem->sobrenome}}<span class="mailbox-read-time pull-right">{{$mensagem->data}}</span></h5><hr>
 								</div><!-- /.mailbox-read-info -->
 								<!-- /.mailbox-controls -->
 								<div class="mailbox-read-message" style="padding:10px;">
