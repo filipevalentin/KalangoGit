@@ -61,8 +61,7 @@
                     <div id="div_curso_nova_turma" class="form-group">
                         <label class="control-label" for="curso"><i id="icone_curso_nova_turma" class="fa"></i> Curso</label>
                         <select name="curso" id="curso" class="form-control cursoObrigatorio_nova_turma" onblur="fcn_recarregaCoresNovaTurma();">
-                        <option value="" >Selecione</option>
-						@foreach(Idioma::all() as $idioma)
+                        @foreach(Idioma::all() as $idioma)
 	                        <optgroup label="{{$idioma->nome}}">
 	                        	@foreach($idioma->cursos as $curso)
 	                        		<option value="{{$curso->id}}">{{$curso->nome}}</option>
@@ -76,7 +75,7 @@
                     <div id="div_modulo_nova_turma" class="form-group">
                         <label class="control-label" for="curso"><i id="icone_modulo_nova_turma" class="fa"></i> Modulo</label>
                         <select name="idModulo" id="modulo" onblur="fcn_recarregaCoresNovaTurma();" class="form-control moduloObrigatorio_nova_turma">
-	                        <option value="" >Selecione</option>
+	                        
                         </select>
                     </div>
 
