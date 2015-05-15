@@ -252,6 +252,11 @@
                                                             <p>{{$questao->respostaCerta}}</p>
                                                         </div>
 
+                                                        <div class="col-md-10" style="padding-bottom: 5px;">
+                                                            <label for="repostaCorreta" class="control-label">Resposta Correta</label>
+                                                            <p>{{Auth::user()->aluno->respostas()->where('questoes.id','=',$questao->id)->first()->pivot->respostaAluno}}</p>
+                                                        </div>
+
                                                     </div>
                                                     <br>
                                                 </div>
