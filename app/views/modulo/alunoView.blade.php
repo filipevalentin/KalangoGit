@@ -25,7 +25,7 @@
                     <h4 class="modal-title" id="exampleModalLabel">Vídeo</h4>
                 </div>
                 <div class="modal-body">
-                    <video class="center-block" width="320" height="240" controls style="max-width:100%; display: block; height:auto;">
+                    <video class="center-block" width="320" height="240" id="videoplayer" controls style="max-width:100%; display: block; height:auto;">
                       <source src="" type="video/mp4">
                       Your browser does not support the video tag.
                     </video>
@@ -109,4 +109,25 @@
 		</div>
 	</section>
 
+@endsection
+
+@section('scripts')
+	<script>
+		$('#video').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget) // Button that triggered the modal
+            var datasrc = "http://tcc.git/";
+            var src = button.data('url');
+            datasrc = datasrc.concat(src);
+            var modal = $(this)
+
+            modal.find('source').attr('src', datasrc);
+            modal.find('video').load();
+            })
+
+        $('#video').on('hidden.bs.modal', function () {
+            var modal = $(this)
+            var vid = document.getElementById('videoplayer')
+            vid.pause();
+        })
+	</script>
 @endsection

@@ -43,7 +43,8 @@ web1:
   before_deploy:
 
   php_upload_max_filesize: "80M"
-  php_date_timezone: "America/Brasilia"
+  php_post_max_size: "80M"
+  php_date_timezone: "Brazil/West"
   
   after_deploy:
     - 'php artisan -n cache:clear'
