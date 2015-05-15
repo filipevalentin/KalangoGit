@@ -4739,7 +4739,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$empresa->nome = Input::get('nome');
 			$empresa->razaoSocial = Input::get('razaoSocial');
 
-			foreach (Empresa::all() as $empresa2) {
+			foreach (Empresa::where('id','!=',$empresa->id)->get() as $empresa2) {
 				if($empresa2->cnpj == $empresa->cnpj){
 					Session::flash('warning','Já existe uma emrpesa com esse cnpj');
 					return Redirect::back();
