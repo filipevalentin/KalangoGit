@@ -19,7 +19,7 @@
 			<div class="col-md-12">        
                 <div class="box text-center">
                     <div class="box-header">
-                        <h3 class="box-title center" style="float: none;">{{$aviso->titulo}}</h3>
+                        <h3 class="center" style="float: none; font-weight: 600;">{{$aviso->titulo}}</h3>
                     </div>
                     <div class="box-body center">
                     	<h3>{{$aviso->descricao}}</h3>
