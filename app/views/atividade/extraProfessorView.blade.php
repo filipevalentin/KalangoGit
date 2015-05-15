@@ -22,9 +22,9 @@
                     </div>
                     <div class="form-group">
                     @if($exercicio->modulo != null)
-                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" value="{{$exercicio->modulo->curso->nome}} - {{$exercicio->nome}} - {{$exercicio->nome}}" readonly>
+                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" value="{{$exercicio->modulo->curso->nome}} - {{$exercicio->nome}} - {{$exercicio->nome}}" name="titulo" readonly>
                     @else
-                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" value="{{$exercicio->nome}}" readonly>
+                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" value="{{$exercicio->nome}}" name="titulo" readonly>
                     @endif
                     </div>
                     <div class="form-group">

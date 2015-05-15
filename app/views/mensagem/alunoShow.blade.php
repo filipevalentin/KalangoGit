@@ -55,7 +55,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<input autocomplete="off" class="form-control tituloObrigatorio" type="text" id="titulo" placeholder="Titulo">
+						<input autocomplete="off" class="form-control tituloObrigatorio" type="text" id="titulo" name="titulo" placeholder="Titulo">
 					</div>
 					<div class="form-group">
 						<textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" placeholder="Mensagem" style="height: 120px;"></textarea>

@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" value="{{$atividade->aula->modulo->curso->nome}} - {{$atividade->aula->titulo}} - {{$atividade->nome}}" readonly>
+                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" value="{{$atividade->aula->modulo->curso->nome}} - {{$atividade->aula->titulo}} - {{$atividade->nome}}" name="titulo" readonly>
                     </div>
                     <div class="form-group">
                         <textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>

@@ -31,7 +31,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<input autocomplete="off" class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo">
+						<input autocomplete="off" class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" name="titulo">
 					</div>
 					<div class="form-group">
 						<textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
