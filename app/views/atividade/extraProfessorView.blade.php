@@ -2,6 +2,7 @@
 
 @section('modals')
 
+
 <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -20,7 +21,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" value="{{$atividade->aula->modulo->curso->nome}} - {{$atividade->aula->titulo}} - {{$atividade->nome}}" readonly>
+                    @if($exercicio->modulo != null)
+                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" value="{{$exercicio->modulo->curso->nome}} - {{$exercicio->nome}} - {{$exercicio->nome}}" readonly>
+                    @else
+                        <input class="form-control tituloObrigatorio" type="text" id="titulo" maxlength="100" placeholder="Titulo" value="{{$exercicio->nome}}" readonly>
+                    @endif
                     </div>
                     <div class="form-group">
                         <textarea name="conteudo" id="email_message" class="form-control mensagemObrigatoria" maxlength="8000" placeholder="Mensagem" style="height: 120px;"></textarea>
@@ -99,8 +104,11 @@
                     </div>
                 </div> <!-- /.box-body -->
             </div>
-
+            @if($exercicio->modulo != null)
             <h2 class="page-header">{{$exercicio->modulo->curso->idioma->nome}} - {{$exercicio->modulo->curso->nome}} - {{$exercicio->modulo->nome}} - {{$exercicio->nome}}</h2>
+            @else
+             <h2 class="page-header">{{$exercicio->nome}}</h2>
+            @endif
 
             <div class="col-md-8">
                 <div class="box box-solid">

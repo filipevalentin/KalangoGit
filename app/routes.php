@@ -272,7 +272,7 @@ Route::get('teste4',function(){
 	function addBreadCrumbHome($nome){
 		$bc = array();
 
-		$bc[] = array('nome'=>"Home", 'link'=> URL::current());
+		$bc[] = array('nome'=>"Home", 'link'=> '/');
 		$bc[] = array('nome'=>$nome, 'link'=>URL::current());
 
 		Session::put('bc',$bc);
@@ -511,6 +511,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$mensagem->lida = 0;
 			$mensagem->save();
 
+			Session::flash("info", "Mensagem enviada com sucesso");
 			return Redirect::back();
 			
 		});
@@ -1016,6 +1017,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$mensagem->lida = 0;
 			$mensagem->save();
 
+			Session::flash("info", "Mensagem enviada com sucesso");
 			return Redirect::back();
 			
 		});
@@ -2620,7 +2622,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$turma->modulo2 = $turma->modulo->nome;
 				$turma->professor2 = $turma->professor->usuario->nome ." ". $turma->professor->usuario->sobrenome;
 				$turma->status2 = ($turma->status == 0) ? "Fechada" : "Em Andamento";
-				$turma->action = "<a style='color:white;' href='/admin/turma/$turma->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-group'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarTurma' data-id='{{$turma->id}}' data-nome='{{$turma->nome}}' data-professor='{{User::find($turma->professor->id)->nome}}' data-idprofessor='{{$turma->professor->id}}' data-status='{{$turma->status}}'><i class='fa fa-pencil'></i></button><a href='/admin/turma/deletar/$turma->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+				$turma->action = "<a style='color:white;' href='/admin/turma/$turma->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-group'></i></buton></a><button style='margin-right: 5px;' class='btn btn-xs btn-success' data-toggle='modal' data-target='#editarTurma' data-id='$turma->id' data-nome='$turma->nome' data-professor='$turma->professor2' data-idprofessor='$turma->idProfessor' data-status='$turma->status'><i class='fa fa-pencil'></i></button><a href='/admin/turma/deletar/$turma->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 				array_push($data, $turma);
 			}
 			//dd($data);
@@ -4676,6 +4678,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$empresa->nome = Input::get('nome');
 			$empresa->razaoSocial = Input::get('razaoSocial');
 
+			foreach (Empresa::all() as $empresa2) {
+				if($empresa2->cnpj == $empresa->cnpj){
+					Session::flash('warning','Já existe uma emrpesa com esse cnpj');
+					return Redirect::back();
+				}
+			}
+
 			$empresa->save();
 
 			Session::flash('info', "Empresa criada com sucesso!");
@@ -4687,6 +4696,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$empresa->cnpj = Input::get('cnpj');
 			$empresa->nome = Input::get('nome');
 			$empresa->razaoSocial = Input::get('razaoSocial');
+
+			foreach (Empresa::all() as $empresa2) {
+				if($empresa2->cnpj == $empresa->cnpj){
+					Session::flash('warning','Já existe uma emrpesa com esse cnpj');
+					return Redirect::back();
+				}
+			}
 
 			$empresa->save();
 

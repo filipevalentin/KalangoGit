@@ -14,9 +14,6 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="idprofessor" name="idprofessor">
-                    </div>
                     <div id="div_nome_editar_turma" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome_editar_turma" class="fa"></i> Nome</label>
                         <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresEditarTurma();" class="form-control nomeObrigatorio_editar_turma">
@@ -256,7 +253,8 @@
         modal.find('.modal-title').text('Editar Turma ' + datanome)
         modal.find('#id').val(dataid)
         modal.find('#nome').val(datanome)
-        modal.find('#idprofessor').val(dataidprofessor)
+        modal.find('#idprofessor').val(dataidprofessor);
+        console.log(modal.find('#idprofessor'))
         modal.find('#status').val(datastatus);
         })
 

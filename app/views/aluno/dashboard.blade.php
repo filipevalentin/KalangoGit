@@ -28,7 +28,7 @@
         </ul>
         <div class="tab-content">
         @foreach($turmas as $turma)
-            <div class="tab-pane" id="{{$turma->id}}">
+            <div class="tab-pane fade" id="{{$turma->id}}">
                 <!-- Dados Gerais -->
                 <div class="row">
                     <div class="col-lg-6">
@@ -41,7 +41,7 @@
                                     <div class="col-xs-12 col-sm-3 center" style="text-align: center">
                                         <span class="profile-picture">
                                              @if(Auth::user()->urlImagem != null)
-                                                <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="Auth::user()->urlImagem">
+                                                <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/{{Auth::user()->urlImagem}}">
                                             @else
                                                  <img class="editable img-responsive" alt="Alex's Avatar" id="avatar2" style="max-height: 200px;" src="/images/default.png">
                                             @endif
