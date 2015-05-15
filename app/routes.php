@@ -592,7 +592,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$acesso->idAtividade = $idAtividade;
 			$acesso->idQuestao = $idQuestao;
 			$acesso->status = '0';
-			$acesso->DataAcesso = date('Y-mm-dd');
+			$acesso->DataAcesso = date('Y-m-d');
 
 			$acesso->save();
 
@@ -607,7 +607,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				$acesso->idAluno = Auth::user()->id;
 			}
 			$acesso->status = '1';
-			$acesso->DataAcesso = date('Y-mm-dd');
+			$acesso->DataAcesso = date('Y-m-d');
 			$acesso->save();
 
 			return Response::json("registro feito!");
