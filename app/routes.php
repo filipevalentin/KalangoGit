@@ -489,7 +489,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
 			$mensagem->titulo = Input::get('titulo');
 			$mensagem->conteudo = Input::get('conteudo');
-			$mensagem->data = date('d-m-Y h:i:s');
+			$mensagem->data = date('Y-m-d h:i:s');
 
 			$mensagem->lida = 0;
 			$mensagem->save();
@@ -505,7 +505,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
 			$mensagem->titulo = Input::get('titulo');
 			$mensagem->conteudo = Input::get('conteudo');
-			$mensagem->data = date('d-m-Y H:i:s');
+			$mensagem->data = date('Y-m-d h:i:s');
 			$mensagem->idRE = Input::get('idRE');
 
 			$mensagem->lida = 0;
@@ -975,7 +975,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
 			$mensagem->titulo = Input::get('titulo');
 			$mensagem->conteudo = Input::get('conteudo');
-			$mensagem->data = date('d-m-Y H:i:s');
+			$mensagem->data = date('Y-m-d h:i:s');
 
 			$mensagem->lida = 0;
 			$mensagem->save();
@@ -1011,7 +1011,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			$mensagem->idUsuarioDestino = Input::get('idUsuarioDestino');
 			$mensagem->titulo = Input::get('titulo');
 			$mensagem->conteudo = Input::get('conteudo');
-			$mensagem->data = date('d-m-Y H:i:s');
+			$mensagem->data = date('Y-m-d h:i:s');
 			$mensagem->idRE = Input::get('idRE');
 
 			$mensagem->lida = 0;

@@ -147,7 +147,7 @@
 							<div class="col-md-9 col-sm-8">
 								<div class="mailbox-read-info" style="padding:10px;">
 									<h3>{{$mensagem->titulo}}</h3>
-									<h5>De: {{$mensagem->usuarioOrigem->nome}} {{$mensagem->usuarioOrigem->sobrenome}}<span class="mailbox-read-time pull-right">{{$mensagem->data}}</span></h5><hr>
+									<h5>De: {{$mensagem->usuarioOrigem->nome}} {{$mensagem->usuarioOrigem->sobrenome}}<span class="mailbox-read-time pull-right">{{ date('d/m/Y h:i', strtotime(str_replace('-','/', $mensagem->data)))}}</span></h5><hr>
 								</div><!-- /.mailbox-read-info -->
 								<!-- /.mailbox-controls -->
 								<div class="mailbox-read-message" style="padding:10px;">
