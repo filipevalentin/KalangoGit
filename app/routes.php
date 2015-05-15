@@ -2681,6 +2681,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 			
 			$Turma->nome = Input::get('nome');
+
+			$Turma->status = Input::get('status');
 			
 			$Turma->save();
 
