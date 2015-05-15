@@ -319,7 +319,7 @@
                                             <a data-toggle="collapse" data-parent="#accordion" href="#ME{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
                                         <div class="box-tools pull-right">
-                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-titulo="{{$questao->titulo}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarme" data-id="{{$questao->id}}" data-titulo="{{$questao->enunciado}}" data-categoria="{{$questao->categoria}}" data-a="{{$questao->alternativaA}}" data-b="{{$questao->alternativaB}}" data-c="{{$questao->alternativaC}}" data-d="{{$questao->alternativaD}}" data-respostacerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="me"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
@@ -328,7 +328,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->titulo}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->enunciado}}</h3>
                                                     </div>
                                                     <div class="box-body">
                                                     <?php $categoria = (string)($questao->categoria);?>
@@ -485,7 +485,7 @@
                                             <a data-toggle="collapse" data-parent="#accordion" href="#RU{{$questao->id}}" class="">Questão {{$aux++}}</a>
                                         </h4>
                                         <div class="box-tools pull-right">
-                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-titulo="{{$questao->titulo}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editarru" data-id="{{$questao->id}}" data-titulo="{{$questao->enunciado}}" data-categoria="{{$questao->categoria}}" data-respostaCerta="{{$questao->respostaCerta}}" data-numero="{{$questao->numero}}" data-tipo="ru"><i class="fa fa-pencil"></i></button>
                                             <button class="btn btn-danger btn-sm"><i class="fa fa-times"></i></button>
                                         </div>
                                     </div>
@@ -494,7 +494,7 @@
                                             <div class="row" style="margin:0px;">
                                                 <div class="box text-center">
                                                     <div class="box-header">
-                                                        <h3 class="box-title center" style="float: none;">{{$questao->titulo}}</h3>
+                                                        <h3 class="box-title center" style="float: none;">{{$questao->enunciado}}</h3>
                                                     </div>
                                                     <div class="box-body">
 
