@@ -336,7 +336,7 @@
 
 <script>
 	$(".knob").knob();
-    $(".tab-pane:first").addClass('active');
+    $(".tab-pane:first").addClass('active in');
     $("li.tab:first").addClass('active');
 </script>
 
