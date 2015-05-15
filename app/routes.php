@@ -2700,7 +2700,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$turma = Turma::find(Input::get('idTurma'));
 			$aluno = Aluno::find(Input::get('idAluno'));
 			$data = time();
-			$dtContratacao = date('Y-m-d', mktime(0,0,0,$data[1],$data[0],$data[2]));
+			$dtContratacao = date('Y-m-d');
 
 			//Checa se o aluno já está em uma turma do mesmo módulo
 			if($aluno->turmas()->where('turmas.idModulo','=',$turma->idModulo)->count() != null){
