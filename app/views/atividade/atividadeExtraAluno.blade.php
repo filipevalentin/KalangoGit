@@ -34,6 +34,12 @@
                     <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
 
+                        @if($categorias->count() == 0)
+                            <div class="callout callout-danger" style="max-width:50%; margin:auto;">
+                                <h4 class="center">Nenhuma Categoria</h4>
+                            </div>
+                        @endif
+
                         @for($i=0; $i <= (int)($categorias->count()/5); $i++)
         
                             <div class="item">
@@ -86,6 +92,13 @@
                 <div class="box-body">
 
                     <div class="row">
+
+                        @if($atividadesExtras->count() == 0)
+                            <div class="callout callout-danger" style="max-width:50%; margin:auto;">
+                                <h4 class="center">Nenhuma Atividade Extra</h4>
+                            </div>
+                        @endif
+
                         @foreach($atividadesExtras as $atividade)
                          @if($atividade->status != '0')
                             <div class="col-lg-3 atividade" id="{{$atividade->id}}" style="margin:10px;">

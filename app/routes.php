@@ -662,13 +662,19 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			$categorias = Categoria::all();
 
-			global $atividadesExtras;
-			$atividadesExtras = array();
+			$atividadesExtras = new \Illuminate\Database\Eloquent\Collection;
 
-			$turmas->each(function($turma){
-				global $atividadesExtras;
-				$atividadesExtras = array_merge($turma->modulo->atividadesExtras->all());
-			});
+			foreach ($turmas as $turma) {
+				foreach ($turma->modulo->atividadesExtras()->where('status','=','1') as $atividade) {
+					$atividadesExtras->push($atividade);
+				}
+			}
+
+			foreach (Atividade::where('idModulo','=', null)->where('status','=','1')->get() as $atividade) {
+				$atividadesExtras->push($atividade);
+			}
+		
+			$atividadesExtras = $atividadesExtras->unique();
 
 
 			return View::make('atividade/atividadeExtraAluno')->with('atividadesExtras', $atividadesExtras)->with('categorias',$categorias);
