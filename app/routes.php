@@ -721,7 +721,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			if(Input::file('urlImagem')!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$user->urlImagem = 'img/'.$filename;
+				$user->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -1071,7 +1071,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			if(Input::file('urlImagem')!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$user->urlImagem = 'img/'.$filename;
+				$user->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -1362,7 +1362,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				$arquivo = Input::file('arquivo');
 				$filename = $arquivo->getClientOriginalName();
 
-				$questao->urlMidia = 'files/'.$filename;
+				$questao->urlMidia = 'files/'.str_random(30).$filename;
 				
 				$arquivo->move('files/', $filename);
 			}
@@ -1426,7 +1426,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				$arquivo = Input::file('arquivo');
 				$filename = $arquivo->getClientOriginalName();
 
-				$questao->urlMidia = 'files/'.$filename;
+				$questao->urlMidia = 'files/'.str_random(30).$filename;
 				
 				$arquivo->move('files/', $filename);
 			}
@@ -1526,7 +1526,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				$arquivo = Input::file('arquivo');
 				$filename = $arquivo->getClientOriginalName();
 
-				$questao->urlMidia = 'files/'.$filename;
+				$questao->urlMidia = 'files/'.str_random(30).$filename;
 				
 				$arquivo->move('files/', $filename);
 			}
@@ -1582,7 +1582,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 				if($arquivo != null){
 					$filename = $arquivo->getClientOriginalName();
 
-					$questao->urlMidia = 'files/'.$filename;
+					$questao->urlMidia = 'files/'.str_random(30).$filename;
 					
 					$arquivo->move('files/', $filename);
 				}
@@ -2943,7 +2943,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				if($arquivo!=NULL){
 					$filename = $arquivo->getClientOriginalName();
 
-					$material->url = 'files/'.$filename;
+					$material->url = 'files/'.str_random(30).$filename;
 					
 					$arquivo->move('files/', $filename);
 				}
@@ -2976,7 +2976,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				if($arquivo!=NULL){
 					$filename = $arquivo->getClientOriginalName();
 
-					$material->url = 'files/'.$filename;
+					$material->url = 'files/'.str_random(30).$filename;
 					
 					$arquivo->move('files/', $filename);
 				}
@@ -3575,7 +3575,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$arquivo = Input::file('arquivo');
 				$filename = $arquivo->getClientOriginalName();
 
-				$questao->urlMidia = 'files/'.$filename;
+				$questao->urlMidia = 'files/'.str_random(30).$filename;
 				
 				$arquivo->move('files/', $filename);
 			}
@@ -3639,7 +3639,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$arquivo = Input::file('arquivo');
 				$filename = $arquivo->getClientOriginalName();
 
-				$questao->urlMidia = 'files/'.$filename;
+				$questao->urlMidia = 'files/'.str_random(30).$filename;
 				
 				$arquivo->move('files/', $filename);
 			}
@@ -3790,7 +3790,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$arquivo = Input::file('arquivo');
 				$filename = $arquivo->getClientOriginalName();
 
-				$questao->urlMidia = 'files/'.$filename;
+				$questao->urlMidia = 'files/'.str_random(30).$filename;
 				
 				$arquivo->move('files/', $filename);
 			}
@@ -3846,7 +3846,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				if($arquivo != null){
 					$filename = $arquivo->getClientOriginalName();
 
-					$questao->urlMidia = 'files/'.$filename;
+					$questao->urlMidia = 'files/'.str_random(30).$filename;
 					
 					$arquivo->move('files/', $filename);
 				}
@@ -4048,7 +4048,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			if(Input::file('urlImagem')!=NULL){
 				$filename = $imagem->getClientOriginalName();
-				$user->urlImagem = 'img/'.$filename;
+				$user->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -4100,9 +4100,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			if(Input::file('urlImagem')!=NULL){
 				$filename = $imagem->getClientOriginalName();
-				$user->urlImagem = 'img/'.$filename;
+				$user->urlImagem = 'img/'.str_random(30).$filename;
 				
-				$aluno->urlImagem = 'img/'.$filename;
+				$aluno->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -4220,7 +4220,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if(Input::file('urlImagem')!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$user->urlImagem = 'img/'.$filename;
+				$user->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -4273,7 +4273,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if(Input::file('urlImagem')!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$user->urlImagem = 'img/'.$filename;
+				$user->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -4375,9 +4375,17 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$imagem = Input::file('urlImagem');
 			$filename="";
 
+			$confirmation_code = str_random(30);
+			foreach(User::all() as $u){
+				if($u->confirmation_code = $confirmation_code){
+					$confirmation_code = str_random(30);
+				}
+			}
+			$user->confirmation_code = $confirmation_code;
+
 			if(Input::file('urlImagem')!=NULL){
 				$filename = $imagem->getClientOriginalName();
-				$user->urlImagem = 'img/'.$filename;
+				$user->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -4394,6 +4402,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 
 			$administrador->save();
+
+			Mail::queue                    ('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+	            $message->to(Input::get('email'), Input::get('nome'))
+	                ->subject('KalanGO! - Verifique sua conta');
+	        });
 
 			Session::flash('info', "Administrador criado com sucesso!");
 			return Redirect::back();
@@ -4421,9 +4434,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			if(Input::file('urlImagem')!=NULL){
 				$filename = $imagem->getClientOriginalName();
-				$user->urlImagem = 'img/'.$filename;
+				$user->urlImagem = 'img/'.str_random(30).$filename;
 
-				$administrador->urlImagem = 'img/'.$filename;
+				$administrador->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -4513,7 +4526,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if($imagem!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$aviso->urlImagem = 'img/'.$filename;
+				$aviso->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -4549,7 +4562,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if($imagem!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$aviso->urlImagem = 'img/'.$filename;
+				$aviso->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -4758,7 +4771,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if($imagem!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$propaganda->urlImagem = 'img/'.$filename;
+				$propaganda->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
@@ -4781,7 +4794,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			if($imagem!=NULL){
 				$filename = $imagem->getClientOriginalName();
 
-				$propaganda->urlImagem = 'img/'.$filename;
+				$propaganda->urlImagem = 'img/'.str_random(30).$filename;
 				
 				$imagem->move('img/', $filename);
 			}
