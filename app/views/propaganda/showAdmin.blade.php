@@ -510,9 +510,9 @@
 	
 	function fcn_validaLink(pstr_link, pint_entrada){
 		if(pstr_link != ""){
-			if (pstr_link.substring(0, 7) != "http://"){
+			if (pstr_link.substring(0, 7) != "http://" && pstr_link.substring(0, 8) != "https://"){
 				
-				alert("Link deverá começar sempre com 'http://'"); 
+				alert("Link deverá começar sempre com 'http://' ou 'https://'"); 
 				
 				if(pint_entrada == "1"){
 					$('.linkObrigatorio_nova_propaganda').focus();
