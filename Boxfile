@@ -41,6 +41,9 @@ web1:
       - app/storage/sessions
       - app/storage/views
   before_deploy:
+
+  php_upload_max_filesize: "80M"
+  php_date_timezone: "America/Brasilia"
   
   after_deploy:
     - 'php artisan -n cache:clear'
