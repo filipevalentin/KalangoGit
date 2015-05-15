@@ -68,13 +68,14 @@
                         <label for="urlImagem" class="control-label">Imagem</label>
                         <input type="file" id="urlImagem" name="urlImagem" maxlength="200" onblur="fcn_validaArquivoNovoAviso(this.form, this.form.urlImagem.value);" class="form-control campo_imagem_novo_aviso">
                     </div>
+					
                     <div id="div_dataExpiracao_novo_aviso" class="form-group">
                         <label class="control-label" for="dataExpiracao"><i id="icone_dataExpiracao_novo_aviso" class="fa"></i> Data de Expiração</label>
                         <input type="text" readonly autocomplete="off" id="dataExpiracao" name="dataExpiracao" onblur="fcn_recarregaCores_novo_aviso();" class="form-control dataExpiracaoObrigatoria_novo_aviso">
 					</div>
-					<div class="form-group">
-                        <label class="control-label" for="enviarPara">Enviar para:</label>
-                        <select type="text" id="idTurma" name="idTurma[]" data-live-search="true" data-selected-text-format="count > 5" data-size="5"onblur="fcn_recarregaCores_novo_aviso();" class="form-control selectjs" multiple title='Escolha as turmas...'>
+					<div id="div_enviarPara_novo_aviso" class="form-group">
+                        <label class="control-label" for="enviarPara"><i id="icone_enviarPara_novo_aviso" class="fa"></i> Enviar para:</label>
+                        <select type="text" onblur="fcn_recarregaCores_novo_aviso();" id="idTurma" name="idTurma[]" data-live-search="true" data-selected-text-format="count > 5" data-size="5" onblur="fcn_recarregaCores_novo_aviso();" class="form-control enviarParaObrigatoria_novo_aviso selectjs" multiple title='Escolha as turmas...'>
                         	<option value="todos">Todas as turmas</option>
 							@foreach(Curso::all() as $curso)
 							<optgroup label="{{$curso->idioma->nome}} - {{$curso->nome}}">
@@ -409,6 +410,19 @@
 			$( "#icone_dataExpiracao_novo_aviso" ).addClass("fa-check");
 		}
 		
+		if($(".enviarParaObrigatoria_novo_aviso").val() == ""){
+			obrigatorioPendente = 1;
+			$( "#div_enviarPara_novo_aviso" ).removeClass("has-success");
+			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-check");
+			$( "#div_enviarPara_novo_aviso" ).addClass("has-error");
+			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_enviarPara_novo_aviso" ).removeClass("has-error");
+			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_enviarPara_novo_aviso" ).addClass("has-success");
+			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-check");
+		}
+		
 		if(obrigatorioPendente == 1){
 			alert("É necessário preencher todos os campos obrigatórios!");
 			return false;
@@ -504,6 +518,18 @@
 			$( "#icone_dataExpiracao_novo_aviso" ).removeClass("fa-times-circle-o");
 			$( "#div_dataExpiracao_novo_aviso" ).addClass("has-success");
 			$( "#icone_dataExpiracao_novo_aviso" ).addClass("fa-check");
+		}
+		
+		if($(".enviarParaObrigatoria_novo_aviso").val() == ""){
+			$( "#div_enviarPara_novo_aviso" ).removeClass("has-success");
+			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-check");
+			$( "#div_enviarPara_novo_aviso" ).addClass("has-error");
+			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-times-circle-o");
+		}else{
+			$( "#div_enviarPara_novo_aviso" ).removeClass("has-error");
+			$( "#icone_enviarPara_novo_aviso" ).removeClass("fa-times-circle-o");
+			$( "#div_enviarPara_novo_aviso" ).addClass("has-success");
+			$( "#icone_enviarPara_novo_aviso" ).addClass("fa-check");
 		}
 		
 	};
