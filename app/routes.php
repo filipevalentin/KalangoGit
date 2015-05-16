@@ -2393,8 +2393,15 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Curso->nome = Input::get('nome');
 			$Curso->idIdioma = Input::get('idioma');
 
-			if(Idioma::find($Curso->idIdioma) != null){
-				if(in_array(Input::get('nome'), Idioma::find($Curso->idIdioma)->cursos->lists('nome')) ){
+			$idioma = Idioma::find(Input::get('idioma'));
+			
+			if($idioma->cursos()->count() != null){
+				$cursos = array();
+				foreach ($idioma->cursos()->lists('nome') as $c) {
+					$cursos[] = strtolower($c);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $cursos) ){
 					Session::flash('warning', "Esse curso já existe");
 					return Redirect::back();
 				}
@@ -2450,14 +2457,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Curso 			    = Curso::find(Input::get('id')); 
 			$Curso->idIdioma      = Input::get('idioma');
 
-			if($Curso->nome != Input::get('nome')){
-				if(Idioma::find($Curso->idIdioma) != null){
-					if(in_array(Input::get('nome'), Idioma::find($Curso->idIdioma)->cursos->lists('nome')) ){
-						Session::flash('warning', "Esse curso já existe");
-						return Redirect::back();
-					}
-					
+			$idioma = Idioma::find(Input::get('idioma'));
+			
+			if($idioma->cursos()->count() != null){
+				$cursos = array();
+				foreach ($idioma->cursos()->where('id','!=',$Curso->id)->lists('nome') as $c) {
+					$cursos[] = strtolower($c);
 				}
+
+				if(in_array(strtolower(Input::get('nome')), $cursos) ){
+					Session::flash('warning', "Esse curso já existe");
+					return Redirect::back();
+				}
+				
 			}
 			
 			$Curso->nome = Input::get('nome');
