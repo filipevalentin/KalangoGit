@@ -14,6 +14,8 @@ Route::get('teste5',function(){
 	//                 ->subject('KalanGO! - Verifique sua conta');
 	        // });
 
+	//return Topico::orderBy('nome')->get();
+
 	return Modulo::find(2)->alunos;//whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() ;
 	return AcessosAtividade::where('idAluno','=', 3)->whereRaw('datediff(now(), DataAcesso) > 1')->get();
 
