@@ -15,6 +15,7 @@ Route::get('teste5',function(){
 	        // });
 
 	//return Topico::orderBy('nome')->get();
+	return User::lists('email');
 
 	return Modulo::find(2)->alunos;//whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() ;
 	return AcessosAtividade::where('idAluno','=', 3)->whereRaw('datediff(now(), DataAcesso) > 1')->get();
@@ -2520,19 +2521,26 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('criarModulo', function(){
-			$modulos = new Modulo;
-			$modulos->nome = Input::get('nome');
-			$modulos->idCurso = Input::get('idCurso');
+			$modulo = new Modulo;
+			$modulo->nome = Input::get('nome');
+			$modulo->idCurso = Input::get('idCurso');
 
-			if(Curso::find($modulos->idCurso) != null){
-				if(in_array(Input::get('nome'), Curso::find($modulos->idCurso)->modulos->lists('nome')) ){
+			$curso = Idioma::find(Input::get('idCurso'));
+			
+			if($curso->modulos()->count() != null){
+				$modulos = array();
+				foreach ($curso->modulos()->lists('nome') as $m) {
+					$modulos[] = strtolower($m);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $modulos) ){
 					Session::flash('warning', "Já existe um módulo com o mesmo nome neste curso");
 					return Redirect::back();
 				}
 				
 			}
 
-			$modulos->save();
+			$modulo->save();
 
 			// redirect
 			Session::flash('info', 'Módulo criado com sucesso!');
@@ -2588,17 +2596,22 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarModulo', function(){
-			$Modulo 			    = Modulo::find(Input::get('id')); 
-			
-			if($Modulo->nome != Input::get('nome')){
-				if(Curso::find($Modulo->idCurso) != null){
-					if(in_array(Input::get('nome'), Curso::find($Modulo->idCurso)->modulos->lists('nome')) ){
-						Session::flash('warning', "Já existe um módulo com o mesmo nome neste curso");
-						return Redirect::back();
-					}
-					
+			$Modulo = Modulo::find(Input::get('id'));
+
+			$curso = $Modulo->curso;
+
+			if($curso->modulos()->count() != null){
+				$modulos = array();
+				foreach ($curso->modulos()->where('id','!=',$Modulo->id)->lists('nome') as $m) {
+					$modulos[] = strtolower($m);
 				}
-			}
+
+				if(in_array(strtolower(Input::get('nome')), $modulos) ){
+					Session::flash('warning', "Já existe um módulo com o mesmo nome neste curso");
+					return Redirect::back();
+				}
+				
+			} 
 
 			$Modulo->nome = Input::get('nome');
 			
@@ -2680,8 +2693,15 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$turma->idModulo = Input::get('idModulo');
 			$turma->status = 1;
 
-			if(Modulo::find($turma->idModulo) != null){
-				if(in_array(Input::get('nome'), Modulo::find($turma->idModulo)->turmas->lists('nome')) ){
+			$modulo = $turma->modulo;
+
+			if($modulo->turmas()->count() != null){
+				$turmas = array();
+				foreach ($modulo->turmas()->lists('nome') as $m) {
+					$turmas[] = strtolower($m);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $turmas) ){
 					Session::flash('warning', "Já existe uma turma com esse nome neste módulo");
 					return Redirect::back();
 				}
@@ -2696,24 +2716,29 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarTurma', function(){
-			$Turma = Turma::find(Input::get('id'));
-			$Turma->idProfessor = Input::get('idprofessor'); 
-			
-			if($Turma->nome != Input::get('nome')){
-				if(Modulo::find($Turma->idModulo) != null){
-					if(in_array(Input::get('nome'), Modulo::find($Turma->idModulo)->turmas->lists('nome')) ){
-						Session::flash('warning', "Já existe uma turma com esse nome neste módulo");
-						return Redirect::back();
-					}
-					
-				}
-			}
-			
-			$Turma->nome = Input::get('nome');
+			$turma = Turma::find(Input::get('id'));
+			$turma->idProfessor = Input::get('idprofessor');
 
-			$Turma->status = Input::get('status');
+			$modulo = $turma->modulo;
+
+			if($modulo->turmas()->count() != null){
+				$turmas = array();
+				foreach ($modulo->turmas()->where('id','!=',$turma->id)->lists('nome') as $m) {
+					$turmas[] = strtolower($m);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $turmas) ){
+					Session::flash('warning', "Já existe uma turma com esse nome neste módulo");
+					return Redirect::back();
+				}
+				
+			} 
 			
-			$Turma->save();
+			$turma->nome = Input::get('nome');
+
+			$turma->status = Input::get('status');
+			
+			$turma->save();
 
 			Session::flash('info', "Alterações salvas com sucesso!");
 			return Redirect::back();
@@ -2962,6 +2987,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				}
 			}
 
+			if($aula->materialApoio()->count() != null){
+				$materiais = array();
+				foreach ($aula->materialApoio()->lists('nome') as $m) {
+					$materiais[] = strtolower($m);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $materiais) ){
+					Session::flash('warning', "Já existe um material com esse nome");
+					return Redirect::back();
+				}
+				
+			} 
+
 			$material = new MaterialApoio;
 			$material->nome = Input::get('nome');
 			$material->tipo = Input::get('tipo');
@@ -3001,6 +3039,21 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$material->nome       	= Input::get('nome');
 
 			$material->tipo = Input::get('tipo');
+
+			$aula = $material->aula;
+
+			if($aula->materialApoio()->count() != null){
+				$materiais = array();
+				foreach ($aula->materialApoio()->where('id','!=',$material->id)->lists('nome') as $m) {
+					$materiais[] = strtolower($m);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $materiais) ){
+					Session::flash('warning', "Já existe um material com esse nome");
+					return Redirect::back();
+				}
+				
+			} 
 
 			if($material->tipo != 3){
 				$arquivo = Input::file('arquivo');
@@ -3480,6 +3533,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$categoria = new Categoria;
 			$categoria->nome = Input::get('nome');
 
+			if(Categoria::count() != null){
+				$categorias = array();
+				foreach (Categoria::lists('nome') as $m) {
+					$categorias[] = strtolower($m);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $categorias) ){
+					Session::flash('warning', "Já existe uma categoria com esse nome");
+					return Redirect::back();
+				}
+				
+			} 
+
 			$categoria->save();
 
 			// redirect
@@ -3490,6 +3556,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('atualizarCategoria', function(){
 			$categoria = Categoria::find(Input::get('id'));
 			$categoria->nome = Input::get('nome');
+
+			if(Categoria::count() != null){
+				$categorias = array();
+				foreach (Categoria::where('id','!=',$categoria->id)->lists('nome') as $m) {
+					$categorias[] = strtolower($m);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $categorias) ){
+					Session::flash('warning', "Já existe uma categoria com esse nome");
+					return Redirect::back();
+				}
+				
+			} 
 
 			$categoria->save();
 
@@ -4414,6 +4493,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				return Redirect::back();
 			}
 
+			if(in_array(Input::get('codRegistro'), Administrador::all()->lists('email')) ){
+				Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
+				return Redirect::back();
+			}
+
 			$imagem = Input::file('urlImagem');
 			$filename="";
 
@@ -4680,6 +4764,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$topico = new Topico;
 			$topico->nome = Input::get('nome');
 
+			if(Topico::count() != null){
+				$topicos = array();
+				foreach (Topico::lists('nome') as $m) {
+					$topicos[] = strtolower($m);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $topicos) ){
+					Session::flash('warning', "Já existe uma tópico com esse nome");
+					return Redirect::back();
+				}
+				
+			} 
+
 			$topico->save();
 
 			Session::flash('info', "Tópico criado com sucesso!");
@@ -4689,6 +4786,19 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('atualizarTopico', function(){
 			$topico = Topico::find(Input::get('id'));
 			$topico->nome = Input::get('nome');
+
+			if(Topico::count() != null){
+				$topicos = array();
+				foreach (Topico::where('id','!=',$topico->id)->lists('nome') as $m) {
+					$topicos[] = strtolower($m);
+				}
+
+				if(in_array(strtolower(Input::get('nome')), $topicos) ){
+					Session::flash('warning', "Já existe uma tópico com esse nome");
+					return Redirect::back();
+				}
+				
+			} 
 
 			$topico->save();
 
