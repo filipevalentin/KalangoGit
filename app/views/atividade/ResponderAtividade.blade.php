@@ -508,6 +508,7 @@
 
 		$('button.resposta').click(function() {
 
+			var respostaNoBanco;
 			var atual = $('#rootwizard').bootstrapWizard('currentIndex');
 			var total = $('#rootwizard').bootstrapWizard('navigationLength');
 
@@ -539,10 +540,16 @@
 					var retorno = respostaCerta.split(";");
 					var certo = 0;
 					
+					//Converte para minusculo
+					resposta = resposta.toLowerCase();
+					
 					for (i = 0; i <= 10; i++){
 						if(typeof retorno[i] != "undefined"){
 							
-							if(resposta == retorno[i]){
+							//Converte para minusculo
+							respostaNoBanco = retorno[i].toLowerCase();
+
+							if(resposta == respostaNoBanco){
 								certo = 1;
 							}
 							
