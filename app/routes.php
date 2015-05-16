@@ -2332,14 +2332,16 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 		Route::post('atualizarIdioma', function(){
-			$idioma 			    = Idioma::find(Input::get('id')); 
+
+			$idioma = Idioma::find(Input::get('id'));
 			
 			if(Idioma::all()->count() != null){
-				$idiomas = Idioma::all()->lists('nome');
-				foreach ($idiomas as $idioma) {
-					$idioma = strtolower($idioma);
+				$idiomas = array();
+				foreach (Idioma::all()->lists('nome') as $idi) {
+					$idiomas[] = strtolower($idi);
 				}
-				if(in_array(strtolower(Input::get('nome')), Idioma::all()->lists('nome')) ){
+
+				if(in_array(strtolower(Input::get('nome')), $idiomas) ){
 					Session::flash('warning', "Esse idioma já existe");
 					return Redirect::back();
 				}
