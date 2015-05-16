@@ -18,7 +18,7 @@
 								<option value="">Selecionar Professor</option>
 								<?php
 									$profs = array();
-									foreach(Auth::user()->aluno->turmas as $turma){
+									foreach(Auth::user()->aluno->turmas()->where('status','=',1)->get() as $turma){
 										if(!in_array($turma->professor, $profs)){
 											$profs[] = $turma->professor;
 										}
