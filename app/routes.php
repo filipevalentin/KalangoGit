@@ -4725,7 +4725,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			foreach (Empresa::all() as $empresa2) {
 				if($empresa2->cnpj == $empresa->cnpj){
-					Session::flash('warning','Já existe uma emrpesa com esse cnpj');
+					Session::flash('warning','CNPJ já existente');
 					return Redirect::back();
 				}
 			}
@@ -4744,7 +4744,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			foreach (Empresa::where('id','!=',$empresa->id)->get() as $empresa2) {
 				if($empresa2->cnpj == $empresa->cnpj){
-					Session::flash('warning','Já existe uma emrpesa com esse cnpj');
+					Session::flash('warning','CNPJ já existente');
 					return Redirect::back();
 				}
 			}
