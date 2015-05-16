@@ -2309,11 +2309,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		Route::post('criarIdioma', function(){
 			
 			if(Idioma::all()->count() != null){
-				$idiomas = Idioma::all()->lists('nome');
-				foreach ($idiomas as $idioma) {
-					$idioma = strtolower($idioma);
+				$idiomas = array();
+				foreach (Idioma::all()->lists('nome') as $idioma) {
+					$idiomas[] = strtolower($idioma);
 				}
-				if(in_array(strtolower(Input::get('nome')), Idioma::all()->lists('nome')) ){
+
+				if(in_array(strtolower(Input::get('nome')), $idiomas) ){
 					Session::flash('warning', "Esse idioma já existe");
 					return Redirect::back();
 				}
@@ -4001,7 +4002,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$user->action = "N/A";
 					$user->excluido = "Excluído em: ".$user->deleted_at->day."/".$user->deleted_at->month."/".$user->deleted_at->year;
 				}else{
-					$user->action = "<a style='color:white;' href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/aluno/deletar/$user->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$user->action = "<a href='aluno/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/aluno/deletar/$user->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 					$user->excluido = "Ativo";
 				}
 
