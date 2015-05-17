@@ -768,7 +768,8 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			$aluno->save();
 
-			return Redirect::to('aluno/perfil')->with('mensagem', 'Os dados foram atualizados!');
+			Session::flash('info','Os dados foram atualizados');
+			return Redirect::back();
 		});
 
 		Route::get('dashboard', function(){
@@ -1118,7 +1119,8 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 
 			$professor->save();
 
-			return Redirect::back()->with('mensagem', 'Os dados foram atualizados!');
+			Session::flash('info','Os dados foram atualizados');
+			return Redirect::back();
 		});
 
 	// Módulos - Aulas
