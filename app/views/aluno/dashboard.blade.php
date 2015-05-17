@@ -186,28 +186,6 @@
                                         </li>
                                     @endif
                                 @endforeach
-                                Conteudo não dinamico abaixo
-                                    <li style="font-size:larger; font-weight: 500;">Adjetivos:
-                                        <small class="pull-right">90%</small>
-                                        <div class="progress" style="margin-top:5px; height: 15px;background: white;">
-                                            <div class="progress-bar" style="width: 70%;background-color: darkgoldenrod;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li style="font-size:larger; font-weight: 500;">Present Perfect:
-                                        <small class="pull-right">90%</small>
-                                        <div class="progress" style="margin-top:5px; height: 15px;background: white;">
-                                            <div class="progress-bar" style="width: 50%;background-color: gold;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li style="font-size:larger; font-weight: 500;">Vocabulário:
-                                        <small class="pull-right">90%</small>
-                                        <div class="progress" style="margin-top:5px; height: 15px;background: white;">
-                                            <div class="progress-bar" style="width: 86%;background-color: silver;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
-                                            </div>
-                                        </div>
-                                    </li>
                                 </ul>
                             </div> 
                         </div>
