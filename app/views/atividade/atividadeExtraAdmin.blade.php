@@ -266,7 +266,7 @@
                                     <div style="padding: 10px;" class="inner">
 
                                     <div class="box-tools pull-right">
-                                        <button class="btn btn-success btn-xs" rel="tooltip" data-placement="left" title="Editar Atividade" data-toggle="modal" data-target="#editarAtividadeExtra" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" data-idModulo="{{$atividade->idModulo}}" data-idCategoria="{{$atividade->idCategoria}}" data-status="{{$atividade->status}}"><i class="fa fa-pencil"></i></button>
+                                        <button class="btn btn-success btn-xs" rel="tooltip" data-placement="left" title="Editar Atividade" data-toggle="modal" data-target="#editarAtividadeExtra" data-id="{{$atividade->id}}" data-nome="{{$atividade->nome}}" data-idmodulo="{{$atividade->idModulo}}" data-idCategoria="{{$atividade->idCategoria}}" data-status="{{$atividade->status}}"><i class="fa fa-pencil"></i></button>
                                         <a href="/admin/atividade/deletar/{{$atividade->id}}"><button class="btn btn-danger btn-xs btn_deletar_atvidade"><i class="fa fa-times"></i></button></a>
                                     </div>
                                     <a href="/admin/atividade/{{$atividade->id}}/editar">
@@ -301,6 +301,7 @@
                 var datanome = button.data('nome')
                 var datadescricao = button.data('descricao')
                 var dataidModulo = button.data('idmodulo')
+                console.log(dataidModulo);
                 var dataidCategoria = button.data('idcategoria')
                 var datastatus = button.data('status') // Extract info from data-* attributes
                 // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).

@@ -1729,6 +1729,7 @@ Route::group(array('prefix' => 'professor', 'before'=>'professor'), function(){
 			}
 
 			$atividadeExtra->nome = Input::get('nome');
+			$atividadeExtra->idModulo = $idModulo;
 			$atividadeExtra->save();
 
 			// redirect
@@ -3394,6 +3395,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 
 			$atividadeExtra->nome = Input::get('nome');
+			$atividadeExtra->idModulo = $idModulo;
 			$atividadeExtra->save();
 
 			// redirect
