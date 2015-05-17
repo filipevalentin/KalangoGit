@@ -41,7 +41,11 @@
                     <div id="div_senha" class="form-group">
 						<label class="control-label" for="senha"><i id="icone_senha" class="fa"></i> Senha</label>
 						<input type="password" autocomplete="off" id="senha" name="password" maxlength="12" class="form-control senhaObrigatoria" onblur="fcn_recarregaCores();fcn_validaSenha(6, 12, this.value);" >
-					</div>	
+					</div>
+					<div id="div_confirmaSenha" class="form-group">
+						<label class="control-label" for="confirmaSenha"><i id="icone_confirmaSenha" class="fa"></i> Confirmar Senha</label>
+						<input type="password" autocomplete="off" id="confirmaSenha" name="confirmaSenha" maxlength="12" class="form-control confirmaSenhaObrigatoria" onblur="fcn_recarregaCores();fcn_validaConfirmaSenha(6, 12, this.value);" >
+					</div>					
                     <div class="form-group">
                         <label for="urlImagem" class="control-label">Imagem Perfil</label>
                         <input type="file" id="urlImagem" name="urlImagem" class="form-control" onblur="fcn_validaArquivo(this.form, this.form.urlImagem.value)">
@@ -279,8 +283,36 @@ $(".btn-salvar").click(function(event){
 		$( "#icone_senha" ).addClass("fa-check");
 	}
 	
+	if($(".confirmaSenhaObrigatoria").val() == ""){
+		obrigatorioPendente = 1;
+		$( "#div_confirmaSenha" ).removeClass("has-success");
+		$( "#icone_confirmaSenha" ).removeClass("fa-check");
+		$( "#div_confirmaSenha" ).addClass("has-error");
+		$( "#icone_confirmaSenha" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_confirmaSenha" ).removeClass("has-error");
+		$( "#icone_confirmaSenha" ).removeClass("fa-times-circle-o");
+		$( "#div_confirmaSenha" ).addClass("has-success");
+		$( "#icone_confirmaSenha" ).addClass("fa-check");
+	}
+	
 	if(obrigatorioPendente == 1){
 		alert("É necessário preencher todos os campos obrigatórios!");
+		return false;
+	}
+	
+	if(document.getElementById('senha').value != document.getElementById('confirmaSenha').value){
+				
+		$( "#div_senha" ).removeClass("has-success");
+		$( "#icone_senha" ).removeClass("fa-check");
+		$( "#div_senha" ).addClass("has-error");
+		$( "#icone_senha" ).addClass("fa-times-circle-o");
+		$( "#div_confirmaSenha" ).removeClass("has-success");
+		$( "#icone_confirmaSenha" ).removeClass("fa-check");
+		$( "#div_confirmaSenha" ).addClass("has-error");
+		$( "#icone_confirmaSenha" ).addClass("fa-times-circle-o");
+		
+		alert("O campo Confirmar Senha está diferente do campo Senha!");
 		return false;
 	}
 	
@@ -359,6 +391,18 @@ function fcn_recarregaCores(){
 		$( "#div_senha" ).addClass("has-success");
 		$( "#icone_senha" ).addClass("fa-check");
 	}
+	
+	if($(".confirmaSenhaObrigatoria").val() == ""){
+		$( "#div_confirmaSenha" ).removeClass("has-success");
+		$( "#icone_confirmaSenha" ).removeClass("fa-check");
+		$( "#div_confirmaSenha" ).addClass("has-error");
+		$( "#icone_confirmaSenha" ).addClass("fa-times-circle-o");
+	}else{
+		$( "#div_confirmaSenha" ).removeClass("has-error");
+		$( "#icone_confirmaSenha" ).removeClass("fa-times-circle-o");
+		$( "#div_confirmaSenha" ).addClass("has-success");
+		$( "#icone_confirmaSenha" ).addClass("fa-check");
+	}
 				
 }
 
@@ -424,6 +468,57 @@ function fcn_validaSenha(minimo, maximo, pstr_valor){
 			
 			alert("A senha deve ter pelo menos 1 caracter especial.");
 			document.getElementById('senha').focus();
+			return false;
+		}
+		
+	}
+	
+}
+
+function fcn_validaConfirmaSenha(minimo, maximo, pstr_valor){
+		
+	var senha = document.getElementById('confirmaSenha').value;
+	var str = pstr_valor;
+	
+	if(senha != ""){
+	
+		if (senha.length > maximo) {
+			document.getElementById('confirmaSenha').value = senha.substring(0, maximo);
+		} else {
+			
+			if(senha.length < minimo){
+				
+				$( "#div_confirmaSenha" ).removeClass("has-success");
+				$( "#icone_confirmaSenha" ).removeClass("fa-check");
+				$( "#div_confirmaSenha" ).addClass("has-error");
+				$( "#icone_confirmaSenha" ).addClass("fa-times-circle-o");
+				
+				alert("A senha deve ter entre 6 e 12 caracteres.");
+				document.getElementById('confirmaSenha').focus();
+				return false;
+			}
+			
+		}
+		
+		//Caracteres especiais
+		if (!(
+				str.indexOf('"') > 0 || str.indexOf('!') > 0 || str.indexOf('@') > 0 || str.indexOf('#') > 0 || str.indexOf('$') > 0 || 
+				str.indexOf('%') > 0 || str.indexOf('¨') > 0 || str.indexOf('&') > 0 || str.indexOf('*') > 0 ||	str.indexOf('(') > 0 || 
+				str.indexOf(')') > 0 || str.indexOf('-') > 0 ||	str.indexOf('_') > 0 || str.indexOf('=') > 0 || str.indexOf('+') > 0 || 
+				str.indexOf('¹') > 0 || str.indexOf('²') > 0 || str.indexOf('³') > 0 || str.indexOf('£') > 0 || str.indexOf('¢') > 0 || 
+				str.indexOf('¬') > 0 || str.indexOf(',') > 0 || str.indexOf('.') > 0 || str.indexOf(';') > 0 || str.indexOf('/') > 0 || 
+				str.indexOf('<') > 0 || str.indexOf('>') > 0 || str.indexOf(':') > 0 || str.indexOf('?') > 0 || str.indexOf('~') > 0 || 
+				str.indexOf('^') > 0 || str.indexOf(']') > 0 || str.indexOf('}') > 0 || str.indexOf('{') > 0 || str.indexOf('[') > 0 || 
+				str.indexOf('º') > 0 || str.indexOf('ª') > 0 || str.indexOf('§') > 0 || str.indexOf('*') > 0 || str.indexOf('°') > 0
+			)) {
+			
+			$( "#div_confirmaSenha" ).removeClass("has-success");
+			$( "#icone_confirmaSenha" ).removeClass("fa-check");
+			$( "#div_confirmaSenha" ).addClass("has-error");
+			$( "#icone_confirmaSenha" ).addClass("fa-times-circle-o");
+			
+			alert("A senha deve ter pelo menos 1 caracter especial.");
+			document.getElementById('confirmaSenha').focus();
 			return false;
 		}
 		
