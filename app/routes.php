@@ -648,7 +648,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 					$resposta->correcao = '1';
 				}
 				else{
-					$respsota->correcao = '0';
+					$resposta->correcao = '0';
 				}
 			}
 			
