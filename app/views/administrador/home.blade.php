@@ -318,7 +318,7 @@
                                 <div class="box-header">
                                     <h4 class="box-title">
                                         <a data-toggle="collapse" data-parent="#accordion" href="#Modulo{{$modulo->id}}">
-                                            {{$modulo->nome}}  <small style="padding-left:5px;">({{$modulo->turmas->count()}} Turmas)</small>
+                                            {{$modulo->nome}}  <small style="padding-left:5px;">({{$modulo->turmas()->where('status','=',1)->count()}} Turmas)</small>
                                         </a>
                                     </h4>
                                     <div class="box-tools pull-right">

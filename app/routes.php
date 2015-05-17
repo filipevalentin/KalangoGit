@@ -2975,7 +2975,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::post('criarMaterial', function(){
 			$aula = Aula::find(Input::get('idAula'));
-			$modulo = $aula->modulo;
+
+			if($aula != null){
+				$modulo = $aula->modulo;
+			}else{
+				Session::flash('warning','<p> Algo deu errado </p> <p> Não foi possível encontrar a Aula para inserir o material...</p>');
+				return Redirect::back();
+			}
+			
 
 			//Se já existe alguma turma fechada neste módulo, não podemos add novos materiais
 			if($modulo->turmas->count() != null){ 
