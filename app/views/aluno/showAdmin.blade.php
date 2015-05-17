@@ -19,8 +19,10 @@
 		changeMonth: true,
 		changeYear: true,
 		yearRange: "-100:+0"
+	}).focus(function(){
+		$(this).blur()
 	});
-  });
+  })
 </script>
 
 <div class="modal fade" id="criarAluno" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
