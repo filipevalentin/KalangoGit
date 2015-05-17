@@ -543,12 +543,26 @@
 					//Converte para minusculo
 					resposta = resposta.toLowerCase();
 					
+					//Retira acentuação
+					resposta = removeAcento(resposta);
+					
+					//Retira acentuação
+					resposta = resposta.replace("ã","a");
+					
+					//alert("Resposta= " + resposta);
+					
 					for (i = 0; i <= 10; i++){
 						if(typeof retorno[i] != "undefined"){
 							
+							
 							//Converte para minusculo
 							respostaNoBanco = retorno[i].toLowerCase();
+							
+							//Retira acentuação
+							respostaNoBanco = removeAcento(respostaNoBanco);
 
+							//alert("Resposta Banco= " + respostaNoBanco);
+							
 							if(resposta == respostaNoBanco){
 								certo = 1;
 							}
@@ -589,6 +603,19 @@
 
 		});
 
+		function removeAcento(strToReplace) {
+			str_acento = "áàãâäéèêëíìîïóòõôöúùûüçÁÀÃÂÄÉÈÊËÍÌÎÏÓÒÕÖÔÚÙÛÜÇ";
+			str_sem_acento = "aaaaaeeeeiiiiooooouuuucAAAAAEEEEIIIIOOOOOUUUUC";
+			var nova = "";
+			for (var i = 0; i < strToReplace.length; i++) {
+				if (str_acento.indexOf(strToReplace.charAt(i)) != -1) {
+					nova += str_sem_acento.substr(str_acento.search(strToReplace.substr(i, 1)), 1);
+				} else {
+					nova += strToReplace.substr(i, 1);
+				}
+			}
+			return nova;
+		}
 		
 	</script>
 	
