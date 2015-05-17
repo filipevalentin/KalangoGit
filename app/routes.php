@@ -3689,11 +3689,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 			
 			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
-			if($modulo->turmas->count() != null){
-				foreach ($modulo->turmas as $turma) {
-					if($turma->status == 0){
-						Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
-						return Redirect::back();
+			if($atividade->idModulo != null){
+				if($modulo->turmas->count() != null){
+					foreach ($modulo->turmas as $turma) {
+						if($turma->status == 0){
+							Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+							return Redirect::back();
+						}
 					}
 				}
 			}
@@ -3753,11 +3755,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			}
 
 			//Se já existe alguma turma fechada neste módulo, não podemos alterar as atividaes adding novas questoes
-			if($modulo->turmas->count() != null){
-				foreach ($modulo->turmas as $turma) {
-					if($turma->status == 0){
-						Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
-						return Redirect::back();
+			if($atividade->modulo != null){
+				if($modulo->turmas->count() != null){
+					foreach ($modulo->turmas as $turma) {
+						if($turma->status == 0){
+							Session::flash('warning','<p> Existem turmas que já concluíram esse Módulo</p> <p> Devido ao histórico do aluno, não é possível mudar a sua estrutura adicionando novas questões às suas Atividades </p>');
+							return Redirect::back();
+						}
 					}
 				}
 			}
