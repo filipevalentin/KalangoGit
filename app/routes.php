@@ -466,7 +466,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 		});
 
 		Route::get('mensagens/enviados', function(){
-			addBreadCrumb("Enviados");
+			addBreadCrumbHome("Enviados");
 			$mensagens = Mensagem::where('idUsuarioOrigem', '=', Auth::user()->id)->orderBy('id', 'desc')->paginate(10);
 			return View::make('mensagem/alunoEnviados')->with('mensagens', $mensagens);
 			
@@ -629,7 +629,30 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$resposta->idQuestao = $idQuestao;
 			$resposta->idAluno = Auth::user()->id;
 			$resposta->respostaAluno = $respostaAluno;
-			$resposta->correcao = ($respostaAluno == Questao::find($idQuestao)->respostaCerta) ? '1':'0';
+
+			$questao = Questao::find($idQuestao);
+
+			$respostasCorretas = explode(";", $questao->respostaCerta);
+
+			if(strpos($respostaAluno, ";") !== false){
+				foreach ($respostasCorretas as $r) {
+					if(strtolower($r) == strtolower($respostaAluno)){
+						$resposta->correcao = '1';
+					}
+					else{
+						$respsota->correcao = '0';
+					}
+				}
+			}else{
+				if(strtolower($questao->respostaCerta) == strtolower($respostaAluno)){
+					$resposta->correcao = '1';
+				}
+				else{
+					$respsota->correcao = '0';
+				}
+			}
+			
+
 			$resposta->save();
 
 			//Adiciona os pontos na contagem geral caso tenha acertado a questao
