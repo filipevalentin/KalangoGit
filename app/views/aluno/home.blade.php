@@ -284,7 +284,7 @@
 									<div class="inner" style="height: 122px;">
 										<span style="color:#FFF;font-size:30px;"><b>Contato</b></span><br>
 										<span style="color:#FFF;">
-											Dúvidas ou algum problema com o sistema? Entre em contato diretamente com os adminstradores.
+											Dúvidas ou algum problema com o sistema? Entre em contato diretamente com os administradores.
 										</span>
 									</div>
 									<div class="icon">
