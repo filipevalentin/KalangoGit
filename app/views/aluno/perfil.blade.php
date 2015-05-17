@@ -155,7 +155,7 @@
                                 </br>
 
                                 <div class="row">                                       
-                                    <div class="col-xs-12 col-sm-6">        <!-- Texto do Usuário -->
+                                    <div class="col-xs-12 col-sm-12">        <!-- Texto do Usuário -->
                                         <div class="widget-box transparent">
                                             <div class="widget-header widget-header-small">
                                                 <h4 class="widget-title smaller">
@@ -173,80 +173,6 @@
                                         </div>
                                     </div>                                  <!-- Fim Texto do Usuário -->
 
-                                    <div class="col-xs-12 col-sm-6">        <!-- Habilidades -->
-                                        <div class="widget-box transparent">
-                                            <div class="widget-header widget-header-small header-color-blue2">
-                                                <h4 class="widget-title smaller">
-                                                    <i class="ace-icon fa fa-lightbulb-o bigger-120"></i>
-                                                    Habilidades
-                                                </h4>
-                                            </div>
-
-                                            <div class="widget-body">
-                                                <div class="widget-main padding-16">
-                                                    <div class="clearfix">
-                                                        <div class="grid3 center">
-                                                            <div style="display: inline; width: 90px; height: 90px;"><input type="text" class="knob" value="30" data-width="90" data-height="90" data-fgcolor="#3c8dbc" data-readonly="true" readonly="readonly" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Arial; text-align: center; color: rgb(60, 141, 188); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                                                            <div class="knob-label">Respostas Corretas</div>
-                                                        </div>
-
-                                                        <div class="grid3 center">
-                                                            <div style="display: inline; width: 90px; height: 90px;"><input type="text" class="knob" value="30" data-width="90" data-height="90" data-fgcolor="#3c8dbc" data-readonly="true" readonly="readonly" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Arial; text-align: center; color: rgb(60, 141, 188); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                                                            <div class="knob-label">Respostas Erradas</div>
-                                                        </div>
-
-                                                        <div class="grid3 center">
-                                                            <div style="display: inline; width: 90px; height: 90px;"><input type="text" class="knob" value="30" data-width="90" data-height="90" data-fgcolor="#3c8dbc" data-readonly="true" readonly="readonly" style="width: 49px; height: 30px; position: absolute; vertical-align: middle; margin-top: 30px; margin-left: -69px; border: 0px; font-weight: bold; font-style: normal; font-variant: normal; font-stretch: normal; font-size: 18px; line-height: normal; font-family: Arial; text-align: center; color: rgb(60, 141, 188); padding: 0px; -webkit-appearance: none; background: none;"></div>
-                                                            <div class="knob-label">Atividades Extras</div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="hr hr-16"></div>
-
-                                                    <div class="profile-skills">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" style="width:80%">
-                                                                <span class="pull-left">HTML5 &amp; CSS3</span>
-                                                                <span class="pull-right">80%</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-success" style="width:72%">
-                                                                <span class="pull-left">Javascript &amp; jQuery</span>
-
-                                                                <span class="pull-right">72%</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-purple" style="width:70%">
-                                                                <span class="pull-left">PHP &amp; MySQL</span>
-
-                                                                <span class="pull-right">70%</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-warning" style="width:50%">
-                                                                <span class="pull-left">Wordpress</span>
-
-                                                                <span class="pull-right">50%</span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="progress">
-                                                            <div class="progress-bar progress-bar-danger" style="width:38%">
-                                                                <span class="pull-left">Photoshop</span>
-
-                                                                <span class="pull-right">38%</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>                                  <!-- Fim Habilidades -->
                                 </div>
                             </div><!-- /#home -->
                             
