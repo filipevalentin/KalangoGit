@@ -4313,7 +4313,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$user->action = "N/A";
 					$user->excluido = "Excluído em: ".$user->deleted_at->day."/".$user->deleted_at->month."/".$user->deleted_at->year;
 				}else{
-					$user->action = "<a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></button></a><a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/professor/deletar/$user->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$user->action = "<a href='professor/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/professor/deletar/$user->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 					$user->excluido = "Ativo";
 				}
 
@@ -4485,7 +4485,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$user->action = "N/A";
 					$user->excluido = "Excluído em: ".$user->deleted_at->day."/".$user->deleted_at->month."/".$user->deleted_at->year;
 				}else{
-					$user->action = "<a style='color: white;' href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-primary'><i class='fa fa-user'></i></buton></a><a href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/administrador/deletar/$user->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
+					$user->action = "<a href='administrador/$user->id'><button style='margin-right: 5px;' class='btn btn-xs btn-success'><i class='fa fa-pencil'></i></button></a><a href='/admin/administrador/deletar/$user->id' onclick='return confirmar()'><button class='btn btn-xs btn-danger'><i class='fa fa-times'></i></button></a>";
 					$user->excluido = "Ativo";
 				}
 
