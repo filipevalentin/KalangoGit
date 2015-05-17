@@ -4209,6 +4209,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				
 			}
 
+			if(in_array($user->login, Aluno::where('id','!=',$user->id)->lists('login')) ){
+				Session::flash('warning','Já existe um aluno com essa matrícula, por favor insira outra.');
+				return Redirect::back();
+			}
+
 			$aluno= Aluno::find($user->id);
 
 			$imagem = Input::file('urlImagem');
@@ -4325,6 +4330,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				return Redirect::back();
 			}
 
+			if(in_array(Input::get('REProf'), Professor::all()->lists('REProf')) ){
+				Session::flash('warning','Já existe uma conta com esse RE, por favor insira outro');
+				return Redirect::back();
+			}
+
 			$confirmation_code = str_random(30);
 			foreach(User::all() as $u){
 				if($u->confirmation_code = $confirmation_code){
@@ -4353,11 +4363,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$professor->formacaoAcademica = Input::get('formacaoAcademica');
 			$professor->ExperienciaProfissional = Input::get('ExperienciaProfissional');
 
-			if(in_array($user->REProf, Professor::all()->lists('REProf')) ){
-				Session::flash('warning','Já existe uma conta com esse RE, por favor insira outro');
-				return Redirect::back();
-			}
-
 			$professor->save();
 
 			Mail::queue('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
@@ -4383,6 +4388,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					return Redirect::back();
 				}
 				
+			}
+
+			if(in_array(Input::get('REProf'), Professor::where('id','!=',$user->id)->lists('REProf')) ){
+				Session::flash('warning','Já existe uma conta com esse RE, por favor insira outro');
+				return Redirect::back();
 			}
 
 			$professor= Professor::find($user->id);
@@ -4489,11 +4499,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->password = Hash::make(Input::get('password'));
 
 			if(in_array($user->email, User::all()->lists('email')) ){
-				Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
+				Session::flash('warning','Já existe uma conta com esse registro, por favor insira outro');
 				return Redirect::back();
 			}
 
-			if(in_array(Input::get('codRegistro'), Administrador::all()->lists('email')) ){
+			if(in_array(Input::get('codRegistro'), Administrador::all()->lists('codRegistro')) ){
 				Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
 				return Redirect::back();
 			}
@@ -4545,6 +4555,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->sobrenome       = Input::get('sobrenome');
 			$user->email       = Input::get('email');
 			$user->login = Input::get('email');
+
+			if(in_array(Input::get('codRegistro'), Administrador::where('id','!=',$user->id)->lists('codRegistro')) ){
+				Session::flash('warning','Já existe uma conta com esse registro, por favor insira outro');
+				return Redirect::back();
+			}
 
 			if(User::where('id','!=',$user->id)->count() !=null ){
 				if(in_array($user->email, User::where('id','!=', $user->id)->lists('email')) ){
