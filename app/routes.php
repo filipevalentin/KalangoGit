@@ -691,7 +691,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			$atividadesExtras = new \Illuminate\Database\Eloquent\Collection;
 
 			foreach ($turmas as $turma) {
-				foreach ($turma->modulo->atividadesExtras()->where('status','=','1') as $atividade) {
+				foreach ($turma->modulo->atividadesExtras()->where('status','=','1')->get() as $atividade) {
 					$atividadesExtras->push($atividade);
 				}
 			}
