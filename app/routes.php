@@ -2718,16 +2718,16 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$turma->idModulo = Input::get('idModulo');
 			$turma->status = 1;
 
-			$modulo = $turma->modulo;
+			$curso = $turma->modulo->curso;
 
-			if($modulo->turmas()->count() != null){
+			if($curso->turmas()->count() != null){
 				$turmas = array();
-				foreach ($modulo->turmas()->lists('nome') as $m) {
+				foreach ($curso->turmas()->lists('nome') as $m) {
 					$turmas[] = strtolower($m);
 				}
 
 				if(in_array(strtolower(Input::get('nome')), $turmas) ){
-					Session::flash('warning', "Já existe uma turma com esse nome neste módulo");
+					Session::flash('warning', "Já existe uma turma com esse nome neste curso");
 					return Redirect::back();
 				}
 				
