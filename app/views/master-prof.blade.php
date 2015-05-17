@@ -255,7 +255,7 @@
         <script src="/dist/js/app.min.js" type="text/javascript"></script>
 
          @if (Session::has('warning'))
-            <div class="WI" style="position: absolute; width: 100%; top:55px; border-radius: 5px 0px 0px 5px; z-index: 99999">
+            <div class="WIwarn" style="position: absolute; width: 100%; top:55px; border-radius: 5px 0px 0px 5px; z-index: 99999">
                 <div class="alert alert-danger alert-dismissable" style="width: 80%; max-width:500px; margin: auto; box-shadow: rgba(0, 0, 0, 0.55) 0px 14px 27px;">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                     <h4><i class="icon fa fa-warning"></i> Opps...</h4>
@@ -279,6 +279,8 @@
             })
 
              $('.WI').delay(2000).fadeOut();
+
+             $('.WIwarn').delay(10000).fadeOut();
 
         </script>
 
