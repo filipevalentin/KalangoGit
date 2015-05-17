@@ -25,7 +25,7 @@
 		}
 
 		public function atividadesExtras(){
-			return $this-> hasMany('Atividade','idModulo');
+			return $this->hasMany('Atividade','idModulo');
 		}
 
 		//Categorias das atividades Extras

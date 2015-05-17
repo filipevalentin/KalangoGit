@@ -696,7 +696,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				}
 			}
 
-			foreach (Atividade::where('idModulo','=', null)->where('status','=','1')->get() as $atividade) {
+			foreach (Atividade::where('idModulo','=', null)->where('tipo','=','2')->where('status','=','1')->get() as $atividade) {
 				$atividadesExtras->push($atividade);
 			}
 		
