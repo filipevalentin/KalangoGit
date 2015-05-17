@@ -2299,7 +2299,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$user->password = Hash::make(Input::get('senha'));
 			$user->save();
-			Session::flash('info','Sua senha foi alterada!');
+			Session::flash('info','A senha foi alterada com sucesso!');
 			return Redirect::back();
 
 		});
