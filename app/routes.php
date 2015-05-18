@@ -4551,12 +4551,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->password = Hash::make(Input::get('password'));
 
 			if(in_array($user->email, User::lists('email')) ){
-				Session::flash('warning','Já existe uma conta com esse registro, por favor insira outro');
+				Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
 				return Redirect::back();
 			}
 
 			if(in_array(Input::get('codRegistro'), Administrador::lists('codRegistro')) ){
-				Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
+				Session::flash('warning','Já existe uma conta com esse registro, por favor insira outro');
 				return Redirect::back();
 			}
 
