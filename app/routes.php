@@ -4261,7 +4261,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				
 			}
 
-			if(in_array($user->login, Aluno::where('id','!=',$user->id)->lists('login')) ){
+			if(in_array($user->login, Aluno::where('id','!=',$user->id)->lists('matricula')) ){
 				Session::flash('warning','Já existe um aluno com essa matrícula, por favor insira outra.');
 				return Redirect::back();
 			}
