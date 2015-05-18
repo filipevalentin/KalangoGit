@@ -37,7 +37,7 @@
 								
 								<!-- Campo fake para enganar o autocomplete do chrome -->
                                 <input type="text" name="usuario2" style="display:none;" >
-								<!------------------------------------------------------->
+								<!-- -->
 								
 								<input type="text" autocomplete="off" class="form-control usuarioObrigatorio" maxlength="50" placeholder="Usuário" name="usuario2" >
                                 <input type="password" autocomplete="off" class="form-control senhaObrigatoria" maxlength="12" placeholder="Senha" name="senha2" >
