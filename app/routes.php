@@ -2551,11 +2551,11 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$modulo->nome = Input::get('nome');
 			$modulo->idCurso = Input::get('idCurso');
 
-			$curso = Idioma::find(Input::get('idCurso'));
+			$curso = Curso::find(Input::get('idCurso'));
 			
 			if($curso->modulos()->count() != null){
 				$modulos = array();
-				foreach ($curso->modulos()->lists('nome') as $m) {
+				foreach ($curso->modulos()->lists('modulos.nome') as $m) {
 					$modulos[] = strtolower($m);
 				}
 
@@ -2723,7 +2723,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			if($curso->turmas()->count() != null){
 				$turmas = array();
-				foreach ($curso->turmas()->lists('nome') as $m) {
+				foreach ($curso->turmas()->lists('turmas.nome') as $m) {
 					$turmas[] = strtolower($m);
 				}
 
@@ -3022,7 +3022,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			if($aula->materialApoio()->count() != null){
 				$materiais = array();
-				foreach ($aula->materialApoio()->lists('nome') as $m) {
+				foreach ($aula->materialApoio()->lists('materialapoio.nome') as $m) {
 					$materiais[] = strtolower($m);
 				}
 
