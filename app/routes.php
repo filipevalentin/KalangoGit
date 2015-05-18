@@ -199,7 +199,7 @@ Route::get('teste4',function(){
 		}else{
 			$turma->alunos()->sync(array());
 			$turma->avisos()->sync(array());
-			//Contrata::where('idTurma','=',$turma->id)->delete();
+			Contrata::where('idTurma','=',$turma->id)->delete();
 			$turma->forceDelete();
 		}
 	}
@@ -2845,14 +2845,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				foreach ($turma->alunos as $aluno) {
 					if($aluno->acessos()->count() != null){
 						if($aluno->acessos->intersect($turma->modulo->atividades)->count() != null){
-							dd($aluno->acessos->intersect($turma->modulo->atividades)->count());
 							$flag = "soft";
 						}
 					}
 				}
 
 				deletarTurma($turma, $flag);
-				Session::flash('info', 'Turma excluída com sucesso');
+				Session::flash('info', 'Turma excluída com sucesso'.$flag);
 				return Redirect::back();
 			}
 			
