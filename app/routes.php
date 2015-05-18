@@ -15,7 +15,8 @@ Route::get('teste5',function(){
 	        // });
 
 	//return Topico::orderBy('nome')->get();
-	return User::lists('email');
+
+	return strtolower(removeAcento("Oi aqui é o mané do cauê!"));
 
 	return Modulo::find(2)->alunos;//whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() ;
 	return AcessosAtividade::where('idAluno','=', 3)->whereRaw('datediff(now(), DataAcesso) > 1')->get();
@@ -310,6 +311,10 @@ Route::get('teste4',function(){
 			}
 		}
 
+	}
+
+	function removeAcento($string){
+		return preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $string ) );
 	}
 
 
@@ -636,7 +641,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			if(strpos($respostaAluno, ";") !== false){
 				foreach ($respostasCorretas as $r) {
-					if(strtolower($r) == strtolower($respostaAluno)){
+					if(strtolower(removeAcento($r)) == strtolower(removeAcento($respostaAluno)) ) {
 						$resposta->correcao = '1';
 					}
 					else{
