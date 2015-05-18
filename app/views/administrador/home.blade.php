@@ -43,9 +43,6 @@
                     <div class="form-group">
                         <input type="hidden" class="form-control" id="id" name="id">
                     </div>
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" id="idprofessor" name="idprofessor">
-                    </div>
                     <div id="div_nome-editar-turma" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-turma" class="fa"></i> Nome</label>
                         <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50" onblur="fcn_recarregaCoresEditarTurma();" class="form-control nomeObrigatorio-editar-turma">
