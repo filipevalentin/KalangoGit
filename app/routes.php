@@ -199,6 +199,7 @@ Route::get('teste4',function(){
 		}else{
 			$turma->alunos()->sync(array());
 			$turma->avisos()->sync(array());
+			//Contrata::where('idTurma','=',$turma->id)->delete();
 			$turma->forceDelete();
 		}
 	}
@@ -2836,14 +2837,17 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		Route::get('turma/deletar/{id}', function($id){
 			$turma = Turma::find($id);
-			$flag = "soft";
+			$flag = "hard";
 
 			if($turma != null){
 				//Loop entre todos alunos da turma para ver se ao menos 1 já acessou algo
 				// Caso algum aluno tenha acessado, a turma é soft-deleted e os alunos NÃO SÃO DESMATRICULADOS
 				foreach ($turma->alunos as $aluno) {
-					if($aluno->acessos->intersect($turma->modulo->atividades)->count() == null){
-						$flag = "hard";
+					if($aluno->acessos()->count() != null){
+						if($aluno->acessos->intersect($turma->modulo->atividades)->count() != null){
+							dd($aluno->acessos->intersect($turma->modulo->atividades)->count());
+							$flag = "soft";
+						}
 					}
 				}
 
