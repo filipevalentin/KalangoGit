@@ -3378,36 +3378,35 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$atividadeExtra->status = Input::get('status');
 
-			if($atividadeExtra->nome != Input::get('nome')){
 
-				if(isset($idModulo)){
-					$atividadeExtra->idModulo = Input::get('idModulo');
+			if(isset($idModulo)){
+				$atividadeExtra->idModulo = Input::get('idModulo');
 
-					if(Modulo::find($atividadeExtra->idModulo) != null){
-						$atividades = array();
-						foreach(Modulo::find($atividadeExtra->idModulo)->atividadesExtras->lists('nome') as $a){
-							$atividades[] = strtolower($a);
-						}
-						if(in_array(Input::get('nome'), $atividades) ){
-							Session::flash('warning', "Já existe uma atividade com esse nome relacionada ao módulo escolhido");
-							return Redirect::back();
-						}
-						
-					}
-				}
-
-				//Checa se existe atividades extras livres com o mesmo nome
-				if(Atividade::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
+				if(Modulo::find($atividadeExtra->idModulo) != null){
 					$atividades = array();
-					foreach(Atividade::where('tipo','=','2')->where('idModulo','=', null)->get()->lists('nome') as $a){
+					foreach(Modulo::find($atividadeExtra->idModulo)->atividadesExtras()->where('id','!=',$atividadeExtra->id)->lists('nome') as $a){
 						$atividades[] = strtolower($a);
 					}
-					if(in_array(Input::get('nome'), $atividades ) ){
-						Session::flash('warning', "Já existe uma atividade com esse nome");
+					if(in_array(Input::get('nome'), $atividades) ){
+						Session::flash('warning', "Já existe uma atividade com esse nome relacionada ao módulo escolhido");
 						return Redirect::back();
 					}
+					
 				}
 			}
+
+			//Checa se existe atividades extras livres com o mesmo nome
+			if(Atividade::where('tipo','=','2')->where('idModulo','=', null)->get() != null){
+				$atividades = array();
+				foreach(Atividade::where('tipo','=','2')->where('idModulo','=', null)->where('id','!=',$atividadeExtra->id)->lists('nome') as $a){
+					$atividades[] = strtolower($a);
+				}
+				if(in_array(Input::get('nome'), $atividades ) ){
+					Session::flash('warning', "Já existe uma atividade com esse nome");
+					return Redirect::back();
+				}
+			}
+			
 
 			$atividadeExtra->nome = Input::get('nome');
 			$atividadeExtra->idModulo = $idModulo;
