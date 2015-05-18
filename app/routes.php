@@ -4377,12 +4377,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->tipo = '2';
 			$user->password = Hash::make(Input::get('password'));
 
-			if(in_array($user->email, User::all()->lists('email')) ){
+			if(in_array($user->email, User::lists('email')) ){
 				Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
 				return Redirect::back();
 			}
 
-			if(in_array(Input::get('REProf'), Professor::all()->lists('REProf')) ){
+			if(in_array(Input::get('REProf'), Professor::lists('REProf')) ){
 				Session::flash('warning','Já existe uma conta com esse RE, por favor insira outro');
 				return Redirect::back();
 			}
@@ -4550,12 +4550,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$user->tipo = '3';
 			$user->password = Hash::make(Input::get('password'));
 
-			if(in_array($user->email, User::all()->lists('email')) ){
+			if(in_array($user->email, User::lists('email')) ){
 				Session::flash('warning','Já existe uma conta com esse registro, por favor insira outro');
 				return Redirect::back();
 			}
 
-			if(in_array(Input::get('codRegistro'), Administrador::all()->lists('codRegistro')) ){
+			if(in_array(Input::get('codRegistro'), Administrador::lists('codRegistro')) ){
 				Session::flash('warning','Já existe uma conta com esse email, por favor insira outro email');
 				return Redirect::back();
 			}
@@ -4585,14 +4585,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$administrador->cargo = Input::get('cargo');
 			$administrador->codRegistro = Input::get('codRegistro');
 
-			if(in_array($user->codRegistro, Administrador::all()->lists('codRegistro')) ){
-				Session::flash('warning','Já existe uma conta com esse registro, por favor insira outro');
-				return Redirect::back();
-			}
-
 			$administrador->save();
 
-			Mail::queue                    ('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
+			Mail::queue('templateEmail', array('confirmation_code' => $confirmation_code), function($message) {
 	            $message->to(Input::get('email'), Input::get('nome'))
 	                ->subject('KalanGO! - Verifique sua conta');
 	        });

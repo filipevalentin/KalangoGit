@@ -39,7 +39,7 @@
 						
 						<!-- Campo fake para enganar o autocomplete do chrome -->
 						<input type="password" name="password" style="display:none;" >
-						<!------------------------------------------------------->
+						<!-- -->
 						
 						<input type="password" autocomplete="off" id="senha" name="password" maxlength="12" class="form-control senhaObrigatoria" onblur="fcn_recarregaCores();fcn_validaSenha(6, 12, this.value);" >
 					</div>	
@@ -184,6 +184,12 @@ $( ".somenteLetras" ).keyup(function() {
 		$(this).val(valor);
 	}
 });
+
+	function confirmar(){
+	    if(!(confirm("Deseja realmente apagar este aluno e todos os registros relacionados a ele?"))){
+	        return false
+	    }
+	}
 
 $( ".somenteNumeros" ).keyup(function() {
 	//Não ativa função ao clicar tecla direção esquerda e direito, botão apagar e botão deletar
