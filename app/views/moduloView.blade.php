@@ -147,7 +147,7 @@
                         </div>
                         <div id="div_nome-novoConteudo-material" class="form-group">
                             <label class="control-label" for="nome"><i id="icone_nome-novoConteudo-material" class="fa"></i> Nome</label>
-                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoConteudoMaterial();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-novoConteudo-material"></input>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoConteudoMaterial();" maxlength="100" class="form-control nomeObrigatorio-novoConteudo-material"></input>
                         </div>
                         <div id="div_arquivo-novoConteudo-material" class="form-group">
                             <label class="control-label" for="arquivo"><i id="icone_arquivo-novoConteudo-material" class="fa"></i> Arquivo</label>
@@ -205,7 +205,7 @@
                         </div>
                         <div id="div_nome-novoConteudo-exercicio" class="form-group">
                             <label class="control-label" for="nome"><i id="icone_nome-novoConteudo-exercicio" class="fa"></i> Nome</label>
-                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoConteudoExercicio();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-novoConteudo-exercicio"></input>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoConteudoExercicio();" maxlength="100" class="form-control nomeObrigatorio-novoConteudo-exercicio"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
