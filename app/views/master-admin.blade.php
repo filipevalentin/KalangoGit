@@ -146,7 +146,7 @@
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
-                            @foreach(Idioma::all() as $idioma)
+                            @foreach(Idioma::orderBy('nome')->get() as $idioma)
                                 <li><a href="/admin/home/{{$idioma->nome}}" style="margin-left: 10px;"><i class="fa fa-angle-double-right"></i> {{$idioma->nome}}</a></li>
                             @endforeach 
                             </ul>

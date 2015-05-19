@@ -21,7 +21,7 @@
                     <div id="div_idioma-editar-curso" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_idioma-editar-curso" class="fa"></i> Idioma</label>
                         <select id="idioma" name="idioma" class="form-control">
-                            @foreach(Idioma::all() as $idioma)
+                            @foreach(Idioma::orderBy('nome')->get() as $idioma)
                                 <option value={{$idioma->id}}>{{$idioma->nome}}</option>
                             @endforeach
                         </select>

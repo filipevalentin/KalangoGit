@@ -50,8 +50,8 @@
                     <div id="div_professor-editar-turma" class="form-group">
                         <label class="control-label" for="professor"><i id="icone_professor-editar-turma" class="fa"></i> Professor</label>
                         <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresEditarTurma();" class="form-control professorObrigatorio-editar-turma">
-                        @foreach(Professor::all() as $professor)
-                            <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
+                        @foreach(User::where('tipo','=',2)->orderBy('nome')->get() as $professor)
+                            <option value="{{$professor->id}}">{{$professor->nome . " " .$professor->sobrenome }}</option>
                         @endforeach
                         </select>
                     </div>
@@ -93,7 +93,7 @@
                         <label class="control-label" for="idioma"><i id="icone_idioma-editar-curso" class="fa"></i> Idioma</label>
                         <select id="idioma" name="idioma" class="form-control idiomaObrigatorio-editar-idioma">
                              <option value="" >Selecione</option>
-							@foreach(Idioma::all() as $idioma)
+							@foreach(Idioma::orderBy('nome')->get() as $idioma)
                                 <option value={{$idioma->id}}>{{$idioma->nome}}</option>
                             @endforeach
                         </select>
@@ -129,7 +129,7 @@
                         <label class="control-label" for="idioma"><i id="icone_idioma-novo-curso" class="fa"></i> Idioma</label>
                         <select id="idioma" name="idioma" onblur="fcn_recarregaCoresNovoCurso();" class="form-control idiomaObrigatorio-novo-curso">
                           <option value="" >Selecione</option>
-						  @foreach(Idioma::all() as $idioma)
+						  @foreach(Idioma::orderBy('nome')->get() as $idioma)
                             <option value={{$idioma->id}}>{{$idioma->nome}}</option>
                           @endforeach
                         </select>
@@ -165,8 +165,8 @@
                         <label class="control-label" for="professor"><i id="icone_professor-nova-turma" class="fa"></i> Professor</label>
                         <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresNovaTurma();" class="form-control professorObrigatorio-nova-turma">
                             <option value="" >Selecione um Professor</option>
-                        @foreach(Professor::all() as $professor)
-                            <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
+                        @foreach(User::where('tipo','=',2)->orderBy('nome')->get() as $professor)
+                            <option value="{{$professor->id}}">{{$professor->nome . " " .$professor->sobrenome }}</option>
                         @endforeach
                         </select>
                     </div>

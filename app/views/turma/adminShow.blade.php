@@ -23,8 +23,8 @@
                         <label class="control-label" for="professor"><i id="icone_professor_editar_turma" class="fa"></i> Professor</label>
                         <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresEditarTurma();" class="form-control professorObrigatorio_editar_turma">
                         <option value="">Selecione</option>
-						@foreach(Professor::all() as $professor)
-                            <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
+						@foreach(User::where('tipo','=',2)->orderBy('nome')->get() as $professor)
+                            <option value="{{$professor->id}}">{{$professor->nome . " " .$professor->sobrenome }}</option>
                         @endforeach
                         </select>
                     </div>
@@ -62,7 +62,7 @@
                     <div id="div_curso_nova_turma" class="form-group">
                         <label class="control-label" for="curso"><i id="icone_curso_nova_turma" class="fa"></i> Curso</label>
                         <select name="curso" id="curso" class="form-control cursoObrigatorio_nova_turma" onblur="fcn_recarregaCoresNovaTurma();">
-                        @foreach(Idioma::all() as $idioma)
+                        @foreach(Idioma::orderBy('nome')->get() as $idioma)
 	                        <optgroup label="{{$idioma->nome}}">
 	                        	@foreach($idioma->cursos as $curso)
 	                        		<option value="{{$curso->id}}">{{$curso->nome}}</option>
@@ -88,8 +88,8 @@
                         <label class="control-label" for="professor"><i id="icone_professor_nova_turma" class="fa"></i> Professor</label>
                         <select id="idprofessor" name="idprofessor" onblur="fcn_recarregaCoresNovaTurma();" class="form-control professorObrigatorio_nova_turma">
 						<option value="" >Selecione</option>
-                        @foreach(Professor::all() as $professor)
-                            <option value="{{$professor->id}}">{{User::find($professor->id)->nome . " " . User::find($professor->id)->sobrenome }}</option>
+                        @foreach(User::where('tipo','=',2)->orderBy('nome')->get() as $professor)
+                            <option value="{{$professor->id}}">{{$professor->nome . " " .$professor->sobrenome }}</option>
                         @endforeach
                         </select>
                     </div>
