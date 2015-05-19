@@ -25,6 +25,12 @@
   })
 </script>
 
+<style>
+	#dataNascimento {
+		z-index: 100;
+	}
+</style>
+
 <div class="modal fade" id="criarAluno" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
