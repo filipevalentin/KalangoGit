@@ -638,15 +638,14 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			$questao = Questao::find($idQuestao);
 
+			$resposta->correcao = '0';
+
 			$respostasCorretas = explode(";", $questao->respostaCerta);
 
 			if(strpos($respostaAluno, ";") !== false){
 				foreach ($respostasCorretas as $r) {
 					if(strtolower(removeAcento($r)) == strtolower(removeAcento($respostaAluno)) ) {
 						$resposta->correcao = '1';
-					}
-					else{
-						$respsota->correcao = '0';
 					}
 				}
 			}else{
