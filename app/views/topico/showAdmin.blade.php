@@ -13,7 +13,7 @@
                 <form method="POST" action="/admin/criarTopico" enctype="multipart/form-data">
                     <div id="div_nome_novo_topico" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome_novo_topico" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_novo_topico" >
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoTopico();" maxlength="100" class="form-control nomeObrigatorio_novo_topico" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -39,7 +39,7 @@
                     </div>
                     <div id="div_nome_editar_topico" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome_editar_topico" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarTopico();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_editar_topico" >
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarTopico();" maxlength="100" class="form-control nomeObrigatorio_editar_topico" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
