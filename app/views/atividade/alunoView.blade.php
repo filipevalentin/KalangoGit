@@ -174,27 +174,50 @@
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-md-1"></div>
-
-                                                        <div class="col-md-10" style="padding-bottom: 5px;">
+                                                        <div class="col-md-12" style="padding-bottom: 5px;">
                                                             <label for="repostaCorreta" class="control-label">Resposta Correta</label>
                                                            <?php
                                                                 switch($questao->respostaCerta)
                                                                 {
                                                                     case 'a':
-                                                                        echo '<p class="bg-aqua"> A)</p>';
+                                                                        echo '<div class="col-md-12"><p class="bg-aqua"> A)</p></div>';
                                                                         break;
 
                                                                     case 'b':
-                                                                        echo '<p class="bg-red"> B)</p>';
+                                                                        echo '<div class="col-md-12"><p class="bg-red"> B)</p></div>';
                                                                         break;
 
                                                                     case 'c':
-                                                                        echo '<p class="bg-green"> C)</p>';
+                                                                        echo '<div class="col-md-12"><p class="bg-green"> C)</p></div>';
                                                                         break;
                                                                         
                                                                     case 'd':
-                                                                        echo '<p class="bg-orange"> D)</p>';
+                                                                        echo '<div class="col-md-12"><p class="bg-orange"> D)</p></div>';
+                                                                        break;
+
+                                                                }
+                                                            ?>
+                                                        </div>
+
+                                                        <div class="col-md-12" style="padding-bottom: 5px;">
+                                                            <label for="repostaCorreta" class="control-label">Resposta Enviada</label>
+                                                            <?php
+                                                                switch(Auth::user()->aluno->respostas()->where('questoes.id','=',$questao->id)->first()->pivot->respostaAluno)
+                                                                {
+                                                                    case 'a':
+                                                                        echo '<div class="col-md-12"><p class="bg-aqua"> A)</p></div>';
+                                                                        break;
+
+                                                                    case 'b':
+                                                                        echo '<div class="col-md-12"><p class="bg-red"> B)</p></div>';
+                                                                        break;
+
+                                                                    case 'c':
+                                                                        echo '<div class="col-md-12"><p class="bg-green"> C)</p></div>';
+                                                                        break;
+                                                                        
+                                                                    case 'd':
+                                                                        echo '<div class="col-md-12"><p class="bg-orange"> D)</p></div>';
                                                                         break;
 
                                                                 }
