@@ -15,7 +15,7 @@
                         </div>
                         <div id="div_nome-editar-aula" class="form-group">
                             <label class="control-label" for="nome"><i id="icone_nome-editar-aula" class="fa"></i> Nome</label>
-                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAula();" maxlength="100" class="form-control somenteLetrasENumeros nomeObrigatorio-editar-aula"></input>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAula();" maxlength="100" class="form-control nomeObrigatorio-editar-aula"></input>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -41,7 +41,7 @@
                         </div>
                         <div id="div_nome-editar-exercicio" class="form-group">
                             <label class="control-label" for="nome"><i id="icone_nome-editar-exercicio" class="fa"></i> Título</label>
-                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarExercicio();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-exercicio"></input>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarExercicio();" maxlength="100" class="form-control nomeObrigatorio-editar-exercicio"></input>
                         </div>
                         <div id="div_status_editar-exercicio" class="form-group">
                             <label class="control-label" for="status"><i id="icone_status-editar-exercicio" class="fa"></i> Visibilidade</label>
@@ -82,7 +82,7 @@
                         </div>
                         <div id="div_nome-editar-material" class="form-group">
                             <label class="control-label" for="nome"><i id="icone_nome-editar-material" class="fa"></i> Nome</label>
-                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarMaterial();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-material"></input>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarMaterial();" maxlength="100" class="form-control nomeObrigatorio-editar-material"></input>
                         </div>
                         <div id="div_arquivo-editar-material" class="form-group">
                             <label class="control-label" for="arquivo"><i id="icone_arquivo-editar-material" class="fa"></i> Arquivo/URL</label>
@@ -112,7 +112,7 @@
                         </div>
                         <div id="div_nome-nova-aula" class="form-group">
                             <label class="control-label" for="nome"><i id="icone_nome-nova-aula" class="fa"></i> Nome</label>
-                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAula();" maxlength="100" class="form-control somenteLetrasENumeros nomeObrigatorio-nova-aula"></textarea>
+                            <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAula();" maxlength="100" class="form-control nomeObrigatorio-nova-aula"></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
