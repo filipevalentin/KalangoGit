@@ -2889,7 +2889,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$Aula->titulo = Input::get('nome');
 			$Aula->idModulo = Input::get('idModulo');
 
-			if(Modulo::find($Aula->idModulo) != null){
+			if(Modulo::find($Aula->idModulo)->aulas()->count() != null){
 				if(in_array(Input::get('nome'), Modulo::find($Aula->idModulo)->aulas->lists('titulo')) ){
 					Session::flash('warning', "Já existe uma aula com esse nome neste módulo");
 					return Redirect::back();
@@ -2916,6 +2916,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					
 				}
 			}
+
+			$Aula->titulo = Input::get('nome');
 				
 			$Aula->save();
 
