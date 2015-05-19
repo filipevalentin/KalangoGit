@@ -34,11 +34,6 @@
                             <!-- LOGIN -->
                             <!-- Pode colocar #Id's nos elementosque ainda não tem um para funcionar no seu código, se já tiver um id é melhor mudar o seu para não dar erro no form aqui-->
                             <form class="form-signin" action="" method="POST">
-								
-								<!-- Campo fake para enganar o autocomplete do chrome -->
-                                <input type="text" name="usuario2" style="display:none;" >
-								<!-- -->
-								
 								<input type="text" autocomplete="off" class="form-control usuarioObrigatorio" maxlength="50" placeholder="Usuário" name="usuario2" >
                                 <input type="password" autocomplete="off" class="form-control senhaObrigatoria" maxlength="12" placeholder="Senha" name="senha2" >
                                 <input type="submit" class="btn btn-lg btn-default btn-block btn-entrar" value="Entrar">
