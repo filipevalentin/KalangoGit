@@ -165,7 +165,7 @@
 
                     <div id="div_resposta-dissertativa-editar-questao" class="form-group">
                         <label class="control-label" for="respostaCerta"><i id="icone_resposta-dissertativa-editar-questao" class="fa"></i> Resposta Correta</label>
-                        <input type="text" autocomplete="off" id="respostaCerta" name="respostaCerta" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" maxlength="100" class="form-control respostaObrigatoria-dissertativa-editar-questao"></input>
+                        <input type="text" autocomplete="off" id="respostaCerta" name="respostaCerta" data-toggle="tooltip" title="Para cadastrar várias respostas corretas insira um &nbsp;; &nbsp;entre as repostas. Ex: plane;airplane;aircraft" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" maxlength="100" class="form-control respostaObrigatoria-dissertativa-editar-questao"></input>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -339,7 +339,7 @@
 
                     <div id="div_resposta-dissertativa-nova-questao" class="form-group">
                         <label class="control-label" for="respostaCerta"><i id="icone_resposta-dissertativa-nova-questao" class="fa"></i> Resposta Correta</label>
-                        <input type="text" autocomplete="off" id="respostaCerta" name="respostaCerta" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" maxlength="100" class="form-control respostaObrigatoria-dissertativa-nova-questao"></input>
+                        <input type="text" autocomplete="off" id="respostaCerta" name="respostaCerta" data-toggle="tooltip" title="Para cadastrar várias respostas corretas insira um &nbsp;; &nbsp;entre as repostas. Ex: plane;airplane;aircraft" onblur="fcn_recarregaCoresDissertativaNovaQuestao();" maxlength="100" class="form-control respostaObrigatoria-dissertativa-nova-questao"></input>
                     </div>
 
                     <div class="modal-footer">

@@ -123,7 +123,7 @@
 
                     <div class="form-group">
                         <label for="respostaCerta" class="control-label">Resposta Correta</label>
-                        <input type="text" id="respostaCerta" name="respostaCerta" class="form-control"></input>
+                        <input type="text" id="respostaCerta" name="respostaCerta" data-toggle="tooltip" title="Para cadastrar várias respostas corretas insira um &nbsp;; &nbsp;entre as repostas. Ex: plane;airplane;aircraft" class="form-control"></input>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -253,7 +253,7 @@
 
                     <div class="form-group">
                         <label for="respostaCerta" class="control-label">Resposta Correta</label>
-                        <input type="text" id="respostaCerta" name="respostaCerta" class="form-control"></input>
+                        <input type="text" id="respostaCerta" name="respostaCerta" data-toggle="tooltip" title="Para cadastrar várias respostas corretas insira um &nbsp;; &nbsp;entre as repostas. Ex: plane;airplane;aircraft" class="form-control"></input>
                     </div>
 
                     <div class="modal-footer">
