@@ -3063,8 +3063,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$arquivo = Input::file('arquivo');
 				$filename="";
 				if($arquivo!=NULL){
-					$filename = $arquivo->getClientOriginalName();
-					$filename = str_random(30).$filename;
+					$filename = $arquivo->getClientOriginalExtension();
+					$filename = str_random(20).'.'.$filename;
 					
 					$material->url = 'files/'.$filename;
 					
@@ -3112,8 +3112,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$arquivo = Input::file('arquivo');
 				$filename="";
 				if($arquivo!=NULL){
-					$filename = $arquivo->getClientOriginalName();
-					$filename = str_random(30).$filename;
+					$filename = $arquivo->getClientOriginalExtension();
+					$filename = str_random(20).'.'.$filename;
 
 					$material->url = 'files/'.$filename;
 					
