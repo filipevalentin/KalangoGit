@@ -16,7 +16,7 @@
                     </div>
                     <div id="div_nome-editar-curso" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-curso" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarCurso();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-editar-curso" ></textarea>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarCurso();" maxlength="50" class="form-control nomeObrigatorio-editar-curso" ></textarea>
                     </div>
                     <div id="div_idioma-editar-curso" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_idioma-editar-curso" class="fa"></i> Idioma</label>
