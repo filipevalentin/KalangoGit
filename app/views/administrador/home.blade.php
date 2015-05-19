@@ -18,7 +18,7 @@
                     </div>
                     <div id="div_nome-editar-modulo" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-modulo" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" maxlength="50" id="nome" name="nome" onblur="fcn_recarregaCoresEditarModulo();" class="form-control somenteLetrasENumeros nomeObrigatorio-editar-modulo" onblur="fcn_recarregaCoresEditarModulo();" >
+                        <input type="text" autocomplete="off" maxlength="50" id="nome" name="nome" onblur="fcn_recarregaCoresEditarModulo();" class="form-control nomeObrigatorio-editar-modulo" onblur="fcn_recarregaCoresEditarModulo();" >
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -87,7 +87,7 @@
                     </div>
                     <div id="div_nome-editar-curso" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-curso" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarCurso();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-editar-curso" ></textarea>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarCurso();" maxlength="50" class="form-control nomeObrigatorio-editar-curso" ></textarea>
                     </div>
                     <div id="div_idioma-editar-curso" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_idioma-editar-curso" class="fa"></i> Idioma</label>
@@ -123,7 +123,7 @@
                     </div>
                     <div id="div_nome-novo-curso" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-novo-curso" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoCurso();" maxlength="50" class="form-control somenteLetras nomeObrigatorio-novo-curso">
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovoCurso();" maxlength="50" class="form-control nomeObrigatorio-novo-curso">
                     </div>
                     <div id="div_idioma-novo-curso" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_idioma-novo-curso" class="fa"></i> Idioma</label>
@@ -194,7 +194,7 @@
                     </div>
                     <div id="div_nome-novo-modulo" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-novo-modulo" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50"onblur="fcn_recarregaCoresNovoModulo();" class="form-control somenteLetrasENumeros nomeObrigatorio-novo-modulo"></textarea>
+                        <input type="text" autocomplete="off" id="nome" name="nome" maxlength="50"onblur="fcn_recarregaCoresNovoModulo();" class="form-control nomeObrigatorio-novo-modulo"></textarea>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
