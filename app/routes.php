@@ -640,9 +640,8 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 			$resposta->correcao = '0';
 
-			$respostasCorretas = explode(";", $questao->respostaCerta);
-
-			if(strpos($respostaAluno, ";") !== false){
+			if(strpos($questao->respostaCerta, ";") !== false){
+				$respostasCorretas = explode(";", $questao->respostaCerta);
 				foreach ($respostasCorretas as $r) {
 					if(strtolower(removeAcento($r)) == strtolower(removeAcento($respostaAluno)) ) {
 						$resposta->correcao = '1';
