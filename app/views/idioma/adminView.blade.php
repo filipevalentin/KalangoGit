@@ -13,7 +13,7 @@
                 <form method="POST" action="/admin/criarIdioma" enctype="multipart/form-data">
                     <div id="div_nome_criar_idioma" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome_criar_idioma" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresCriarIdioma();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_criar_idioma" >
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresCriarIdioma();" maxlength="100" class="form-control nomeObrigatorio_criar_idioma" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -39,7 +39,7 @@
                     </div>
                     <div id="div_nome_editar_idioma" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome_editar_idioma" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarIdioma();" maxlength="100" class="form-control somenteLetras nomeObrigatorio_editar_idioma" >
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarIdioma();" maxlength="100" class="form-control nomeObrigatorio_editar_idioma" >
                     </div>
 					<div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
