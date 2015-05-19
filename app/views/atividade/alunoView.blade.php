@@ -253,7 +253,7 @@
                                                         </div>
 
                                                         <div class="col-md-10" style="padding-bottom: 5px;">
-                                                            <label for="repostaCorreta" class="control-label">Resposta enviada</label>
+                                                            <label for="repostaCorreta" class="control-label">Resposta Enviada</label>
                                                             <p>{{Auth::user()->aluno->respostas()->where('questoes.id','=',$questao->id)->first()->pivot->respostaAluno}}</p>
                                                         </div>
 
