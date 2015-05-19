@@ -16,7 +16,7 @@
                     </div>
                     <div id="div_nome-editar-aula" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-aula" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAula();" maxlength="100" class="form-control somenteLetraseNumeros nomeObrigatorio-editar-aula"></input>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAula();" maxlength="100" class="form-control nomeObrigatorio-editar-aula"></input>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
