@@ -16,7 +16,7 @@
                     </div>
                     <div id="div_nome-editar-exercicio" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-exercicio" class="fa"></i> Título</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarExercicio();" maxlength="100" class="form-control somenteLetras nomeObrigatorio-editar-exercicio"></input>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarExercicio();" maxlength="100" class="form-control nomeObrigatorio-editar-exercicio"></input>
                     </div>
                     <div id="div_status_editar-exercicio" class="form-group">
                         <label class="control-label" for="status"><i id="icone_status-editar-exercicio" class="fa"></i> Visibilidade</label>
