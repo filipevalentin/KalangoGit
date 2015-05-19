@@ -17,7 +17,7 @@
                 <form method="POST" action="/professor/criarAtividadeExtra">
                     <div id="div_nome-nova-atividadeExtra" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-nova-atividadeExtra" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAtividadeExtra();" maxlength="50" class="form-control somenteLetrasENumeros nomeObrigatorio-nova-atividadeExtra"></textarea>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresNovaAtividadeExtra();" maxlength="50" class="form-control nomeObrigatorio-nova-atividadeExtra"></textarea>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="idModulo">Módulo</label>
@@ -62,7 +62,7 @@
 
                     <div id="div_nome-editar-atividadeExtra" class="form-group">
                         <label class="control-label" for="nome"><i id="icone_nome-editar-atividadeExtra" class="fa"></i> Nome</label>
-                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAtividadeExtra();" maxlength="50" class="form-control somenteLetrasENumeros nomeObrigatorio-editar-atividadeExtra"></textarea>
+                        <input type="text" autocomplete="off" id="nome" name="nome" onblur="fcn_recarregaCoresEditarAtividadeExtra();" maxlength="50" class="form-control nomeObrigatorio-editar-atividadeExtra"></textarea>
                     </div>
                     <div class="form-group">
                         <label class="control-label" for="idModulo">Módulo</label>
