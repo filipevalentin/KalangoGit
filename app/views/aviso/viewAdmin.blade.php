@@ -77,7 +77,7 @@
                         <label class="control-label" for="enviarPara"><i id="icone_enviarPara_novo_aviso" class="fa"></i> Enviar para:</label>
                         <select type="text" onblur="fcn_recarregaCores_novo_aviso();" id="idTurma" name="idTurma[]" data-live-search="true" data-selected-text-format="count > 5" data-size="5" onblur="fcn_recarregaCores_novo_aviso();" class="form-control enviarParaObrigatoria_novo_aviso selectjs" multiple title='Escolha as turmas...'>
                         	<option value="todos">Todas as turmas</option>
-							@foreach(Curso::all() as $curso)
+							@foreach(Curso::orderBy('nome') as $curso)
 							<optgroup label="{{$curso->idioma->nome}} - {{$curso->nome}}">
 								@foreach($curso->turmas as $turma)
                         		<option value="{{$turma->id}}">{{$turma->modulo->nome}} - {{$turma->nome}}</option>
@@ -128,7 +128,7 @@
                         <label class="control-label" for="enviarPara">Enviar para:</label>
                         <select type="text" id="idTurma" name="idTurma[]" data-live-search="true" data-selected-text-format="count > 5" data-size="5"onblur="fcn_recarregaCores_novo_aviso();" class="form-control selectjs" multiple title='Escolha as turmas...'>
                         	<option value="todos">Todas as turmas</option>
-							@foreach(Curso::all() as $curso)
+							@foreach(Curso::orderBy('nome') as $curso)
 							<optgroup label="{{$curso->idioma->nome}} - {{$curso->nome}}">
 								@foreach($curso->turmas as $turma)
                         		<option value="{{$turma->id}}">{{$turma->modulo->nome}} - {{$turma->nome}}</option>
