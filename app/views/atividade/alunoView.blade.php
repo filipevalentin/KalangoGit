@@ -245,14 +245,24 @@
                                                     </div>
 
                                                     <div class="row">
-                                                        <div class="col-md-1"></div>
 
-                                                        <div class="col-md-10" style="padding-bottom: 5px;">
+                                                        <div class="col-md-12" style="padding-bottom: 5px;">
                                                             <label for="repostaCorreta" class="control-label">Resposta Correta</label>
-                                                            <p>{{$questao->respostaCerta}}</p>
+                                                            <?php
+                                                                if(strpos($questao->respostaCerta, ";") !== false){
+                                                                    $respostasCorretas = explode(";", $questao->respostaCerta);
+                                                                    echo '<p>';
+                                                                    foreach ($respostasCorretas as $r) {
+                                                                        echo $r.' / ';
+                                                                    }
+                                                                    echo '</p>';
+                                                                }else{
+                                                                    echo '<p>'.$questao->respostaCerta.'</p>';
+                                                                }
+                                                            ?>
                                                         </div>
 
-                                                        <div class="col-md-10" style="padding-bottom: 5px;">
+                                                        <div class="col-md-12" style="padding-bottom: 5px;">
                                                             <label for="repostaCorreta" class="control-label">Resposta Enviada</label>
                                                             <p>{{Auth::user()->aluno->respostas()->where('questoes.id','=',$questao->id)->first()->pivot->respostaAluno}}</p>
                                                         </div>
