@@ -16,6 +16,36 @@ Route::get('teste5',function(){
 
 	//return Topico::orderBy('nome')->get();
 
+	setlocale (LC_ALL, 'pt_BR','ptb');
+	DB::statement('SET lc_time_names = "pt_BR"');
+
+	$result =  DB::select("SELECT concat( monthname(dtContratacao), ' ', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
+	return dd($result);
+	foreach (TurmasAluno::all() as $reg) {
+		$curso = Turma::find($reg->idTurma)->modulo->curso->id;
+		$turma = $reg->idTurma;
+		$aluno = $reg->idAluno;
+
+		// Convert to timetamps
+	    $min = strtotime('2014-06-25');
+	    $max = strtotime('2015-05-19');
+
+	    // Generate random number using above bounds
+	    $val = rand($min, $max);
+
+	    // Convert back to desired date format
+		$data = date('Y-m-d', $val);
+
+		$c = new Contrata;
+		$c->idCurso = $curso;
+		$c->idTurma = $turma;
+		$c->idAluno = $aluno;
+		$c->dtContratacao = $data;
+		$c->save();
+	}
+
+	return "ok";
+
 	return strtolower(removeAcento("Oi aqui é o mané do cauê!"));
 
 	return Modulo::find(2)->alunos;//whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() ;
