@@ -283,6 +283,8 @@
         <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>    
         <!-- jQuery Knob Chart -->
         <script src="/plugins/knob/jquery.knob.js" type="text/javascript"></script>
+        <!-- ChartJS 1.0.1 -->
+        <script src="/plugins/chartjs/Chart.min.js" type="text/javascript"></script>
         <!-- Bootstrap WYSIHTML5 -->
         <script src="/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js" type="text/javascript"></script>
         <!-- Data Tables -->
