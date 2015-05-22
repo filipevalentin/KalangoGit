@@ -16,11 +16,15 @@ Route::get('teste5',function(){
 
 	//return Topico::orderBy('nome')->get();
 
+	return View::make('testeGrafico');
+
 	setlocale (LC_ALL, 'pt_BR','ptb');
 	DB::statement('SET lc_time_names = "pt_BR"');
 
 	$result =  DB::select("SELECT concat( monthname(dtContratacao), ' ', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
 	return dd($result);
+
+
 	foreach (TurmasAluno::all() as $reg) {
 		$curso = Turma::find($reg->idTurma)->modulo->curso->id;
 		$turma = $reg->idTurma;
@@ -2474,6 +2478,14 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
+		Route::get('listarCursos/{idCurso?}', function($idIdioma = null){
+			
+			$cursos = Idioma::find($idIdioma)->cursos;
+
+			return Response::json($cursos);
+
+		});
+
 		Route::get('listarCursos',function(){
 			
 
@@ -2705,6 +2717,22 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 	//Turmas
+
+		Route::get('contratacoes', function(){
+
+			//Query de contratações por data
+			DB::statement('SET lc_time_names = "pt_BR"');
+			$result =  DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
+			
+			$curso = Curso::find(1);
+			$curso->modulos = $curso->modulos;
+			foreach ($curso->modulos as $modulo) {
+				$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
+				$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." group by month(dtContratacao) order by (dtContratacao)");	
+			}
+			return View::make('testeGrafico');
+
+		});
 
 		Route::get('turmas', function(){
 			addBreadCrumbHome('Turmas');

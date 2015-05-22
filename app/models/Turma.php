@@ -26,6 +26,10 @@
         	return $this->belongsToMany('Aviso', 'avisosturmas', 'idTurma', 'idAviso')->withPivot('dataAviso');
         }
 
+        public function contratacoes(){
+        	return $this->hasMany('Contrata', "idModulo");
+        }
+
         //foreach ($turma->alunos as $aluno)
 		// {
 		//     echo $aluno->pivot->pontuacao;

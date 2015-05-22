@@ -15,6 +15,9 @@
 	        return $this->hasManyThrough('Turma', 'Modulo', 'idCurso', 'idModulo');
 	    }
 
+	    public function contratacoes(){
+        	return $this->hasMany('Contrata', "idCurso");
+        }
 
 		public function idioma(){
 			return $this->belongsTo('Idioma',"idIdioma");

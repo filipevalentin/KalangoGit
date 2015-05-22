@@ -19,6 +19,10 @@
 			return $this-> hasMany('Aula','idModulo');
 		}
 
+		public function contratacoes(){
+        	return $this->hasManyThrough('Contrata', "Turma", "idModulo", "idTurma");
+        }
+
 		//Só atividades De aula
 		public function atividades(){
 			return $this-> hasManyThrough('Atividade','Aula', 'idModulo', 'idAula');

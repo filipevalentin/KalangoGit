@@ -14,6 +14,10 @@ use Illuminate\Database\Eloquent\SoftDeletingTrait;
 		public function modulos(){
 			return $this-> hasManyThrough('Modulo','Curso', 'idIdioma','idCurso');
 		}
+
+		public function contratacoes(){
+        	return $this->hasManyThrough('Contrata', "Turma", "idIdioma", "idCurso");
+        }
 		
 	}
 
