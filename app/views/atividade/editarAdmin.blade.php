@@ -51,9 +51,9 @@
                     <div id="div_dificuldade-multipla-editar-questao" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_dificuldade-multipla-editar-questao" class="fa"></i> Dificuldade</label>
                         <select id="dificuldade" name="dificuldade" onblur="fcn_recarregaCoresMultiplaEditarQuestao();" class="form-control dificuldadeObrigatoria-multipla-editar-questao">
-                          <option id="texto" value="200"> fácil</option>
-                          <option id="texto" value="300"> médio</option>
-                          <option id="texto" value="400"> difícil</option>
+                          <option id="texto" value="200"> fácil (200 pontos)</option>
+                          <option id="texto" value="300"> médio (300 pontos)</option>
+                          <option id="texto" value="400"> difícil (400 pontos)</option>
                         </select>
                     </div>
                     
@@ -149,9 +149,9 @@
                     <div id="div_dificuldade-dissertativa-editar-questao" class="form-group">
                         <label class="control-label" for="idioma"><i id="icone_dificuldade-dissertativa-editar-questao" class="fa"></i> Dificuldade</label>
                         <select id="dificuldade" name="dificuldade" onblur="fcn_recarregaCoresDissertativaEditarQuestao();" class="form-control dificuldadeObrigatoria-dissertativa-editar-questao">
-                          <option id="texto" value="200"> fácil</option>
-                          <option id="texto" value="300"> médio</option>
-                          <option id="texto" value="400"> difícil</option>
+                          <option id="texto" value="200"> fácil (200 pontos)</option>
+                          <option id="texto" value="300"> médio (300 pontos)</option>
+                          <option id="texto" value="400"> difícil (400 pontos)</option>
                         </select>
                     </div>
                     
