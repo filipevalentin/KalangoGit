@@ -27,7 +27,9 @@
 
 <style>
 	#dataNascimento {
-		z-index: 100;
+		z-index: 100000;
+		position: relative;
+		border:solid 1px red;
 	}
 </style>
 
