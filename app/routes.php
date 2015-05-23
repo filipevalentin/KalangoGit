@@ -2391,7 +2391,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				foreach ($idioma->cursos as $curso) {
 					$curso->modulos = $curso->modulos;
 					foreach ($curso->modulos as $modulo) {
-						$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
+						$turmas = "('".implode(',', $modulo->turmas()->lists('id'))."')";
 						$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
 						foreach ($modulo->contratacoes as $contrata) {
 							if(! $idioma->contratacoes->has($contrata->mes)){
@@ -2434,46 +2434,141 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data->datasets = $datasets;
 
-			// $info = new stdClass;
-			// $info->data = $idioma->contratacoes->values();
-			// $info->label = $idioma->nome;
-			// $color = random_color();
-			// $info->fillColor = 'rgba('.$color.',0.5)';
-			// $info->strokeColor = 'rgba('.$color.',0.8)';
-			// $info->highlightFill = 'rgba('.$color.',0.75)';
-			// $info->highlightStroke = 'rgba('.$color.',1)';
-
-			// $data->datasets[] = $info;
-
 			return Response::JSon($data);
 			
 		});
 
 		Route::get('contratacoes/curso/{idCurso}/{inicio}/{fim}', function($idCurso, $inicio, $fim){
-
-
-
-
-			
 			DB::statement('SET lc_time_names = "pt_BR"');
-			$curso = Curso::find($idCurso);
-			$inicio = Input::get('inicio');
-			$fim = Input::get('fim');
-			$curso->modulos = $curso->modulos;
-			foreach ($curso->modulos as $modulo) {
-				$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
-				$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");	
+			
+			if(strpos($idCurso,'todos!') !== false){
+				$id = explode('!', $idCurso);
+				$cursos = Curso::where('idIdioma','=',$id[1])->orderBy('nome')->get();
+			}else{
+				$cursos = new \Illuminate\Database\Eloquent\Collection;
+				$cursos->push(Curso::find($idCurso));
 			}
-			return View::make('testeGrafico');
+
+			$data = new stdClass;
+
+			$cursos->labels = array();
+
+			foreach ($cursos as $curso) {
+				$curso->modulos = $curso->modulos;
+
+				$curso->contratacoes =  new \Illuminate\Database\Eloquent\Collection;
+
+				foreach ($curso->modulos as $modulo) {
+					$turmas = "('".implode(',', $modulo->turmas()->lists('id'))."')";
+					//dd($turmas);
+					$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+					foreach ($modulo->contratacoes as $contrata) {
+						if(! $curso->contratacoes->has($contrata->mes)){
+							$curso->contratacoes[$contrata->mes] = 0;
+						}
+						if(! in_array($contrata->mes,$cursos->labels) ){
+							$cursos->labels[] = $contrata->mes ;
+						}
+						$curso->contratacoes[$contrata->mes] += $contrata->contratações;
+					}
+				}
+			}
+
+			$data->labels = $cursos->labels;
+			$datasets = array();
+
+			foreach ($cursos as $curso) {
+				$data2 = array();
+				foreach ($cursos->labels as $month) {
+					if($curso->contratacoes->has($month)){
+						if($curso->contratacoes[$month] != 0){
+							$data2[] = $curso->contratacoes[$month];
+						}
+					}else{
+						$data2[] = 0;
+					}
+				}
+
+				$curso->data = $data2;
+				$curso->label = $curso->nome;
+				$color = random_color();
+				$curso->fillColor = 'rgba('.$color.',0.5)';
+				$curso->strokeColor = 'rgba('.$color.',0.8)';
+				$curso->highlightFill = 'rgba('.$color.',0.75)';
+				$curso->highlightStroke = 'rgba('.$color.',1)';
+
+				$datasets[] = $curso;
+			}
+
+			$data->datasets = $datasets;
+
+			return Response::JSon($data);
+
 		});
 
-		Route::get('contratacoes/modulo/{idModulo}', function($idModulo){
+		Route::get('contratacoes/modulo/{idModulo}/{inicio}/{fim}', function($idModulo, $inicio, $fim){
 			DB::statement('SET lc_time_names = "pt_BR"');
-			$modulo = Modulo::find($idModulo);
-			$inicio = Input::get('inicio');
-			$fim = Input::get('fim');
-			$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
-			$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+			
+			if(strpos($idModulo,'todos!') !== false){
+				$id = explode('!', $idModulo);
+				$modulos = Modulo::where('idCurso','=',$id[1])->orderBy('nome')->get();
+			}else{
+				$modulos = new \Illuminate\Database\Eloquent\Collection;
+				$modulos->push(Modulo::find($idModulo));
+			}
+
+			$data = new stdClass;
+
+			$modulos->labels = array();
+
+			$modulos->contratacoes =  new \Illuminate\Database\Eloquent\Collection;
+
+			foreach ($modulos as $modulo) {
+				$turmas = "('".implode(',', $modulo->turmas()->lists('id'))."')";
+				if(strlen($turmas) < 1){
+					$turmas = array('null');
+				}
+				$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+				foreach ($modulo->contratacoes as $contrata) {
+					if(! $modulos->contratacoes->has($contrata->mes)){
+						$modulos->contratacoes[$contrata->mes] = 0;
+					}
+					if(! in_array($contrata->mes,$modulos->labels) ){
+						$modulos->labels[] = $contrata->mes ;
+					}
+					$modulos->contratacoes[$contrata->mes] += $contrata->contratações;
+				}
+			}
+
+			$data->labels = $modulos->labels;
+			$datasets = array();
+
+			foreach ($modulos as $modulo) {
+				$data2 = array();
+				foreach ($modulos->labels as $month) {
+					if($modulos->contratacoes->has($month)){
+						if($modulos->contratacoes[$month] != 0){
+							$data2[] = $modulos->contratacoes[$month];
+						}
+					}else{
+						$data2[] = 0;
+					}
+				}
+
+				$modulo->data = $data2;
+				$modulo->label = $modulo->nome;
+				$color = random_color();
+				$modulo->fillColor = 'rgba('.$color.',0.5)';
+				$modulo->strokeColor = 'rgba('.$color.',0.8)';
+				$modulo->highlightFill = 'rgba('.$color.',0.75)';
+				$modulo->highlightStroke = 'rgba('.$color.',1)';
+
+				$datasets[] = $modulo;
+			}
+
+			$data->datasets = $datasets;
+
+			return Response::JSon($data);
 		});
 
 

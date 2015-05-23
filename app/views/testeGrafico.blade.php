@@ -113,15 +113,65 @@
 			}
 
 			var idIdioma = $('#idioma').val();
+			var idCurso = $('#curso').val();
+			var idModulo = $('#modulo').val();
+
+
 			var inicio = $('#inicio').val();
 			var fim = $('#fim').val();
 
-			$.get('/admin/contratacoes/idioma/'+idIdioma+'/'+inicio+'/'+fim, function(data){
-				console.log('/admin/contratacoes/idioma/'+idIdioma+'/'+inicio+'/'+fim);
-				canvas = document.getElementById('grafico2').getContext("2d");
-				grafico = new Chart(canvas).Bar(data, {responsive:true, maintainAspectRatio: false});
-				document.getElementById('js-legend').innerHTML = grafico.generateLegend();
-			});
+			if(inicio.length < 1){
+				alert('Insira uma data de inicio');
+				return;
+			}
+
+			if(fim.length < 1){
+				var d = new Date();
+				fim = d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();
+			}
+
+			console.log(idIdioma, idCurso, idModulo, inicio, fim);
+
+			if(idModulo != null && idModulo != 'null'){
+				if(idModulo == 'todos'){
+					idModulo = 'todos!'+idCurso;
+				}
+				$.get('/admin/contratacoes/modulo/'+idModulo+'/'+inicio+'/'+fim, function(data){
+					canvas = document.getElementById('grafico2').getContext("2d");
+					grafico = new Chart(canvas).Bar(data, {responsive:true, maintainAspectRatio: false});
+					document.getElementById('js-legend').innerHTML = grafico.generateLegend();
+				});
+			}else{
+				if(idCurso != null && idCurso != 'null'){
+					if(idCurso == 'todos'){
+						idCurso = 'todos!'+ idIdioma;
+					}
+					$.get('/admin/contratacoes/curso/'+idCurso+'/'+inicio+'/'+fim, function(data){
+						console.log('/admin/contratacoes/curso/'+idCurso+'/'+inicio+'/'+fim)
+						canvas = document.getElementById('grafico2').getContext("2d");
+						grafico = new Chart(canvas).Bar(data, {responsive:true, maintainAspectRatio: false});
+						document.getElementById('js-legend').innerHTML = grafico.generateLegend();
+					});
+				}
+				else{
+					if(idIdioma != null && idIdioma != 'null'){
+						$.get('/admin/contratacoes/idioma/'+idIdioma+'/'+inicio+'/'+fim, function(data){
+							if(data.datasets.length == 1){
+								console.log("datasets tamanho 1")
+								if(data.datasets[0].data.length == 0){
+									console.log("datasets[0].data tamanho 0")
+									data.datasets[0].data = [10];
+								}
+							}
+							canvas = document.getElementById('grafico2').getContext("2d");
+							grafico = new Chart(canvas).Bar(data, {responsive:true, maintainAspectRatio: false});
+							document.getElementById('js-legend').innerHTML = grafico.generateLegend();
+						});
+					}
+				}
+			}
+
+					
 
 
 		});
