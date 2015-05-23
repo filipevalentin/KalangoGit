@@ -352,6 +352,14 @@ Route::get('teste4',function(){
 		return preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $string ) );
 	}
 
+	function random_color_part() {
+	    return str_pad( mt_rand( 0, 255 ), 2, '0', STR_PAD_LEFT);
+	}
+
+	function random_color() {
+	    return random_color_part() .', '. random_color_part() .', '. random_color_part();
+	}
+
 
 	
 
@@ -2343,6 +2351,132 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 		});
 
+	// Relatório de Contratações
+
+		Route::get('contratacoes', function(){
+
+			//Query de contratações por data
+			DB::statement('SET lc_time_names = "pt_BR"');
+			$result =  DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
+			
+			$curso = Curso::find(1);
+			$curso->modulos = $curso->modulos;
+			foreach ($curso->modulos as $modulo) {
+				$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
+				$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." group by month(dtContratacao) order by (dtContratacao)");	
+			}
+			return View::make('testeGrafico');
+
+		});
+
+		Route::get('contratacoes/idioma/{idIdioma}/{inicio}/{fim}', function($idIdioma, $inicio, $fim){
+			DB::statement('SET lc_time_names = "pt_BR"');
+			
+			if($idIdioma == 'todos'){
+				$idiomas = Idioma::orderBy('nome')->get();
+			}else{
+				$idiomas = new \Illuminate\Database\Eloquent\Collection;
+				$idiomas->push(Idioma::find($idIdioma));
+			}
+
+			$data = new stdClass;
+
+			$idiomas->labels = array();
+
+			foreach ($idiomas as $idioma) {
+				$idioma->cursos = $idioma->cursos;
+
+				$idioma->contratacoes =  new \Illuminate\Database\Eloquent\Collection;
+
+				foreach ($idioma->cursos as $curso) {
+					$curso->modulos = $curso->modulos;
+					foreach ($curso->modulos as $modulo) {
+						$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
+						$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+						foreach ($modulo->contratacoes as $contrata) {
+							if(! $idioma->contratacoes->has($contrata->mes)){
+								$idioma->contratacoes[$contrata->mes] = 0;
+							}
+							if(! in_array($contrata->mes,$idiomas->labels) ){
+								$idiomas->labels[] = $contrata->mes ;
+							}
+							$idioma->contratacoes[$contrata->mes] += $contrata->contratações;
+						}
+					}
+				}
+			}
+
+			$data->labels = $idiomas->labels;
+			$datasets = array();
+
+			foreach ($idiomas as $idioma) {
+				$data2 = array();
+				foreach ($idiomas->labels as $month) {
+					if($idioma->contratacoes->has($month)){
+						if($idioma->contratacoes[$month] != 0){
+							$data2[] = $idioma->contratacoes[$month];
+						}
+					}else{
+						$data2[] = 0;
+					}
+				}
+
+				$idioma->data = $data2;
+				$idioma->label = $idioma->nome;
+				$color = random_color();
+				$idioma->fillColor = 'rgba('.$color.',0.5)';
+				$idioma->strokeColor = 'rgba('.$color.',0.8)';
+				$idioma->highlightFill = 'rgba('.$color.',0.75)';
+				$idioma->highlightStroke = 'rgba('.$color.',1)';
+
+				$datasets[] = $idioma;
+			}
+
+			$data->datasets = $datasets;
+
+			// $info = new stdClass;
+			// $info->data = $idioma->contratacoes->values();
+			// $info->label = $idioma->nome;
+			// $color = random_color();
+			// $info->fillColor = 'rgba('.$color.',0.5)';
+			// $info->strokeColor = 'rgba('.$color.',0.8)';
+			// $info->highlightFill = 'rgba('.$color.',0.75)';
+			// $info->highlightStroke = 'rgba('.$color.',1)';
+
+			// $data->datasets[] = $info;
+
+			return Response::JSon($data);
+			
+		});
+
+		Route::get('contratacoes/curso/{idCurso}/{inicio}/{fim}', function($idCurso, $inicio, $fim){
+
+
+
+
+			
+			DB::statement('SET lc_time_names = "pt_BR"');
+			$curso = Curso::find($idCurso);
+			$inicio = Input::get('inicio');
+			$fim = Input::get('fim');
+			$curso->modulos = $curso->modulos;
+			foreach ($curso->modulos as $modulo) {
+				$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
+				$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");	
+			}
+			return View::make('testeGrafico');
+		});
+
+		Route::get('contratacoes/modulo/{idModulo}', function($idModulo){
+			DB::statement('SET lc_time_names = "pt_BR"');
+			$modulo = Modulo::find($idModulo);
+			$inicio = Input::get('inicio');
+			$fim = Input::get('fim');
+			$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
+			$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+		});
+
+
 	//Idiomas
 
 		Route::get('idiomas', function(){
@@ -2478,7 +2612,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			return Redirect::back();
 		});
 
-		Route::get('listarCursos/{idCurso?}', function($idIdioma = null){
+		Route::get('listarCursos2/{idCurso?}', function($idIdioma = null){
 			
 			$cursos = Idioma::find($idIdioma)->cursos;
 
@@ -2717,22 +2851,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 		});
 
 	//Turmas
-
-		Route::get('contratacoes', function(){
-
-			//Query de contratações por data
-			DB::statement('SET lc_time_names = "pt_BR"');
-			$result =  DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
-			
-			$curso = Curso::find(1);
-			$curso->modulos = $curso->modulos;
-			foreach ($curso->modulos as $modulo) {
-				$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
-				$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." group by month(dtContratacao) order by (dtContratacao)");	
-			}
-			return View::make('testeGrafico');
-
-		});
 
 		Route::get('turmas', function(){
 			addBreadCrumbHome('Turmas');
