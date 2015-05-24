@@ -16,12 +16,14 @@ Route::get('teste5',function(){
 
 	//return Topico::orderBy('nome')->get();
 
+	return dd(strtotime("julho2015"));
+
 	return View::make('testeGrafico');
 
 	setlocale (LC_ALL, 'pt_BR','ptb');
 	DB::statement('SET lc_time_names = "pt_BR"');
 
-	$result =  DB::select("SELECT concat( monthname(dtContratacao), ' ', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
+	$result =  DB::select("SELECT concat( month(dtContratacao), ' ', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
 	return dd($result);
 
 
@@ -360,6 +362,12 @@ Route::get('teste4',function(){
 	    return random_color_part() .', '. random_color_part() .', '. random_color_part();
 	}
 
+	function ordenaData($data){
+		foreach ($data as $d) {
+			$array = implode("/", $d);
+
+		}
+	}
 
 	
 
@@ -2357,13 +2365,13 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			//Query de contratações por data
 			DB::statement('SET lc_time_names = "pt_BR"');
-			$result =  DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
+			$result =  DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
 			
 			$curso = Curso::find(1);
 			$curso->modulos = $curso->modulos;
 			foreach ($curso->modulos as $modulo) {
 				$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
-				$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." group by month(dtContratacao) order by (dtContratacao)");	
+				$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." group by month(dtContratacao) order by (dtContratacao)");	
 			}
 			return View::make('testeGrafico');
 
@@ -2392,7 +2400,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$curso->modulos = $curso->modulos;
 					foreach ($curso->modulos as $modulo) {
 						$turmas = "('".implode(',', $modulo->turmas()->lists('id'))."')";
-						$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+						$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
 						foreach ($modulo->contratacoes as $contrata) {
 							if(! $idioma->contratacoes->has($contrata->mes)){
 								$idioma->contratacoes[$contrata->mes] = 0;
@@ -2408,6 +2416,12 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$data->labels = $idiomas->labels;
 			$datasets = array();
+
+			$aux = $data->labels;
+			natcasesort($aux);
+			$data->labels = array();
+			$data->labels = $aux;
+			//dd($data->labels);
 
 			foreach ($idiomas as $idioma) {
 				$data2 = array();
@@ -2432,6 +2446,8 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$datasets[] = $idioma;
 			}
 
+			//dd($idiomas->labels);
+
 			$data->datasets = $datasets;
 
 			return Response::JSon($data);
@@ -2449,37 +2465,54 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				$cursos->push(Curso::find($idCurso));
 			}
 
+			//Arquivo passado para o chartJS
 			$data = new stdClass;
 
+			// lables do chartJS
 			$cursos->labels = array();
 
 			foreach ($cursos as $curso) {
 				$curso->modulos = $curso->modulos;
 
+				// Coleção final que guardará o número total de contratações de todos os módulos de um curso
 				$curso->contratacoes =  new \Illuminate\Database\Eloquent\Collection;
 
 				foreach ($curso->modulos as $modulo) {
 					$turmas = "('".implode(',', $modulo->turmas()->lists('id'))."')";
-					//dd($turmas);
-					$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+					$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+
+					// pra cada resultado do banco
 					foreach ($modulo->contratacoes as $contrata) {
+						// se a coleção final de contratações não possui o mês relativo, add ele à coleção final
 						if(! $curso->contratacoes->has($contrata->mes)){
 							$curso->contratacoes[$contrata->mes] = 0;
 						}
+						// se o mês ainda não está no array de lable do chartJS, add ele
 						if(! in_array($contrata->mes,$cursos->labels) ){
 							$cursos->labels[] = $contrata->mes ;
 						}
+						//add o total de contratações desse módulo ao curso relativo, somando com o valor ja existente dos outros módulos
 						$curso->contratacoes[$contrata->mes] += $contrata->contratações;
 					}
 				}
 			}
 
 			$data->labels = $cursos->labels;
+
+			//Cria o array de datasets que guarda as informações do gráfico
 			$datasets = array();
 
+			$aux = $cursos->labels;
+			natsort($aux);
+			$cursos->labels = $aux;
+
 			foreach ($cursos as $curso) {
+				//cria o array de valores para cada ponto no eixo x
 				$data2 = array();
+
+				//insere os valores na posição correta
 				foreach ($cursos->labels as $month) {
+					//se existe um total de contratações nesse mês para esse curso, copiamos o valor para o array de valores do eixo x
 					if($curso->contratacoes->has($month)){
 						if($curso->contratacoes[$month] != 0){
 							$data2[] = $curso->contratacoes[$month];
@@ -2521,34 +2554,39 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			$modulos->labels = array();
 
-			$modulos->contratacoes =  new \Illuminate\Database\Eloquent\Collection;
-
 			foreach ($modulos as $modulo) {
 				$turmas = "('".implode(',', $modulo->turmas()->lists('id'))."')";
+
+				$modulo->contratacoes2 =  new \Illuminate\Database\Eloquent\Collection;
+
 				if(strlen($turmas) < 1){
 					$turmas = array('null');
 				}
-				$modulo->contratacoes = DB::select("SELECT concat( monthname(dtContratacao), '/', year(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+				$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
 				foreach ($modulo->contratacoes as $contrata) {
-					if(! $modulos->contratacoes->has($contrata->mes)){
-						$modulos->contratacoes[$contrata->mes] = 0;
+					if(! $modulo->contratacoes2->has($contrata->mes)){
+						$modulo->contratacoes2[$contrata->mes] = 0;
 					}
 					if(! in_array($contrata->mes,$modulos->labels) ){
 						$modulos->labels[] = $contrata->mes ;
 					}
-					$modulos->contratacoes[$contrata->mes] += $contrata->contratações;
+					$modulo->contratacoes2[$contrata->mes] += $contrata->contratações;
 				}
 			}
 
 			$data->labels = $modulos->labels;
 			$datasets = array();
 
+			$aux = $modulos->labels;
+			natsort($aux);
+			$modulos->labels = $aux;
+
 			foreach ($modulos as $modulo) {
 				$data2 = array();
 				foreach ($modulos->labels as $month) {
-					if($modulos->contratacoes->has($month)){
-						if($modulos->contratacoes[$month] != 0){
-							$data2[] = $modulos->contratacoes[$month];
+					if($modulo->contratacoes2->has($month)){
+						if($modulo->contratacoes2[$month] != 0){
+							$data2[] = $modulo->contratacoes2[$month];
 						}
 					}else{
 						$data2[] = 0;
