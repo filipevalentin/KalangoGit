@@ -278,7 +278,7 @@
                                     </div>
 
                                 <a href="/admin/atividade/{{$atividade->id}}/editar" class="small-box-footer">
-                                    Gerenciar Atividade <i class="fa fa-arrow-circle-right"></i>
+                                    Editar Questões <i class="fa fa-arrow-circle-right"></i>
                                 </a>
                             </div>
                         </div>

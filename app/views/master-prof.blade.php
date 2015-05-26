@@ -177,16 +177,11 @@
 
                     <!-- Sidebar Menu -->
                     <ul class="sidebar-menu">
-                        <li>
-                            <a href="/professor/home/">
-                                <i class="fa fa-dashboard"></i> <span>Home</span>
-                            </a>
-                        </li>
                         
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-graduation-cap"></i>
-                                <span>Gerenciar Cursos</span>
+                                <i class="fa fa-dashboard"></i>
+                                <span>Dashboard de Cursos</span>
                                 <i class="fa fa-angle-left pull-right"></i>
                             </a>
                             <ul class="treeview-menu">
