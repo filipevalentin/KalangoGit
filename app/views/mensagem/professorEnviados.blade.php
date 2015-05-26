@@ -123,9 +123,9 @@
 											}
 										}) ?>
 										@if($count==0)
-										<li class=""><a href="/professor/mensagens/entrada"><i class="fa fa-inbox"></i> Inbox</a></li>
+										<li class=""><a href="/professor/mensagens/entrada"><i class="fa fa-inbox"></i> Entrada</a></li>
 										@else
-										<li class=""><a href="/professor/mensagens/entrada"><i class="fa fa-inbox"></i> Inbox ({{$count}})</a></li>
+										<li class=""><a href="/professor/mensagens/entrada"><i class="fa fa-inbox"></i> Entrada ({{$count}})</a></li>
 										@endif
 										<li class="active"><a href="/professor/mensagens/enviados"><i class="fa fa-mail-forward"></i> Enviados</a></li>
 									</ul>
@@ -139,16 +139,7 @@
 										</label>
 
 									</div>
-									<div class="col-sm-6 search-form">
-										<form action="#" class="text-right">
-											<div class="input-group">
-												<input type="text" class="form-control input-sm" placeholder="Busca">
-												<div class="input-group-btn">
-													<button type="submit" name="q" class="btn btn-sm btn-primary"><i class="fa fa-search"></i></button>
-												</div>
-											</div>
-										</form>
-									</div>
+
 								</div><hr style="margin-top:-5px;">
 								<div class="table-responsive">
 

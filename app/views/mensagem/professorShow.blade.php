@@ -136,9 +136,9 @@
 											}
 										}) ?>
 										@if($count==0)
-										<li class=""><a href="/professor/mensagens/entrada"><i class="fa fa-inbox"></i> Inbox</a></li>
+										<li class=""><a href="/professor/mensagens/entrada"><i class="fa fa-inbox"></i> Entrada</a></li>
 										@else
-										<li class=""><a href="/professor/mensagens/entrada"><i class="fa fa-inbox"></i> Inbox ({{$count}})</a></li>
+										<li class=""><a href="/professor/mensagens/entrada"><i class="fa fa-inbox"></i> Entrada ({{$count}})</a></li>
 										@endif
 										<li class=""><a href="/professor/mensagens/enviados"><i class="fa fa-mail-forward"></i> Enviados</a></li>
 									</ul>

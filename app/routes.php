@@ -906,8 +906,8 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				//topTopicos
 				$topTopicos = $topicos;
 				arsort($topTopicos);
-				$melhorTopico = reset($topTopicos);
-				$piorTopico = end($topTopicos);
+				$melhorTopico = end($topTopicos);
+				$piorTopico = reset($topTopicos);
 				$topTopicos = array();
 				$topTopicos['melhor'] = $melhorTopico;
 				$topTopicos['pior'] = $piorTopico;
