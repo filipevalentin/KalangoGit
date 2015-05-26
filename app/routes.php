@@ -2417,10 +2417,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$data->labels = $idiomas->labels;
 			$datasets = array();
 
-			$aux = $data->labels;
-			natcasesort($aux);
-			$data->labels = array();
-			$data->labels = $aux;
+			// $aux = $data->labels;
+			// natcasesort($aux);
+			// $data->labels = array();
+			// $data->labels = $aux;
 			//dd($data->labels);
 
 			foreach ($idiomas as $idioma) {
@@ -2502,9 +2502,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			//Cria o array de datasets que guarda as informações do gráfico
 			$datasets = array();
 
-			$aux = $cursos->labels;
-			natsort($aux);
-			$cursos->labels = $aux;
+			// $aux = $cursos->labels;
+			// natsort($aux);
+			// $cursos->labels = $aux;
 
 			foreach ($cursos as $curso) {
 				//cria o array de valores para cada ponto no eixo x
@@ -2577,9 +2577,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$data->labels = $modulos->labels;
 			$datasets = array();
 
-			$aux = $modulos->labels;
-			natsort($aux);
-			$modulos->labels = $aux;
+			// $aux = $modulos->labels;
+			// natsort($aux);
+			// $modulos->labels = $aux;
 
 			foreach ($modulos as $modulo) {
 				$data2 = array();
