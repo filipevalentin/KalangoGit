@@ -23,7 +23,7 @@ Route::get('teste5',function(){
 	setlocale (LC_ALL, 'pt_BR','ptb');
 	DB::statement('SET lc_time_names = "pt_BR"');
 
-	$result =  DB::select("SELECT concat( month(dtContratacao), ' ', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
+	$result =  DB::select("SELECT concat( LPAD(month(dtContratacao), 2, 0 ), ' ', year(dtContratacao) ) as mes, count(id) as contratações from contrata group by LPAD(month(dtContratacao), 2, 0 ) order by (dtContratacao)");
 	return dd($result);
 
 
@@ -2358,15 +2358,15 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 			//Query de contratações por data
 			DB::statement('SET lc_time_names = "pt_BR"');
-			$result =  DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata group by month(dtContratacao) order by (dtContratacao)");
+			$result =  DB::select("SELECT concat( year(dtContratacao), '-',LPAD(month(dtContratacao), 2, 0 ) ) as mes, count(id) as contratações from contrata group by LPAD(month(dtContratacao), 2, 0 ) order by (dtContratacao)");
 			
 			$curso = Curso::find(1);
 			$curso->modulos = $curso->modulos;
 			foreach ($curso->modulos as $modulo) {
 				$turmas = "(".implode(',', $modulo->turmas()->lists('id')).")";
-				$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." group by month(dtContratacao) order by (dtContratacao)");	
+				$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), '-',LPAD(month(dtContratacao), 2, 0 ) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." group by LPAD(month(dtContratacao), 2, 0 ) order by (dtContratacao)");	
 			}
-			return View::make('testeGrafico');
+			return View::make('administrador/relatorioContratacoes');
 
 		});
 
@@ -2393,7 +2393,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$curso->modulos = $curso->modulos;
 					foreach ($curso->modulos as $modulo) {
 						$turmas = "('".implode(',', $modulo->turmas()->lists('id'))."')";
-						$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+						$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), ' / ', LPAD(month(dtContratacao), 2, 0 ) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by LPAD(month(dtContratacao), 2, 0 ) order by (dtContratacao)");
 						foreach ($modulo->contratacoes as $contrata) {
 							if(! $idioma->contratacoes->has($contrata->mes)){
 								$idioma->contratacoes[$contrata->mes] = 0;
@@ -2410,11 +2410,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$data->labels = $idiomas->labels;
 			$datasets = array();
 
-			// $aux = $data->labels;
-			// natcasesort($aux);
-			// $data->labels = array();
-			// $data->labels = $aux;
-			//dd($data->labels);
+			$aux = $idiomas->labels;
+			asort($aux);
+			$aux2 = array();
+			foreach ($aux as $a) {
+				//dd($a);
+				$antigo = array("/ 01", "/ 02", "/ 03", "/ 04", "/ 05", "/ 06", "/ 07", "/ 08", "/ 09", "/ 10", "/ 11", "/ 12");
+				$novo = array("/ Janeiro", "/ Fevereiro", "/ Março", "/ Abril", "/ Maio", "/ Junho", "/ Julho", "/ Agosto", "/ Setembro", "/ Outubro", "/ Novembro", "/ Dezembro");
+				$a = str_replace($antigo, $novo, $a);
+				//dd($a);
+				$aux2[] = $a;
+			}
+			$data->labels = $aux2;
 
 			$colors = color_array();
 
@@ -2439,8 +2446,6 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 				$datasets[] = $idioma;
 			}
-
-			//dd($idiomas->labels);
 
 			$data->datasets = $datasets;
 
@@ -2473,7 +2478,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 				foreach ($curso->modulos as $modulo) {
 					$turmas = "('".implode(',', $modulo->turmas()->lists('id'))."')";
-					$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+					$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), ' / ',LPAD(month(dtContratacao), 2, 0 ) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by LPAD(month(dtContratacao), 2, 0 ) order by (dtContratacao)");
 
 					// pra cada resultado do banco
 					foreach ($modulo->contratacoes as $contrata) {
@@ -2496,9 +2501,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			//Cria o array de datasets que guarda as informações do gráfico
 			$datasets = array();
 
-			// $aux = $cursos->labels;
-			// natsort($aux);
-			// $cursos->labels = $aux;
+			$aux = $cursos->labels;
+			asort($aux);
+			$aux2 = array();
+			foreach ($aux as $a) {
+				//dd($a);
+				$antigo = array("/ 01", "/ 02", "/ 03", "/ 04", "/ 05", "/ 06", "/ 07", "/ 08", "/ 09", "/ 10", "/ 11", "/ 12");
+				$novo = array("/ Janeiro", "/ Fevereiro", "/ Março", "/ Abril", "/ Maio", "/ Junho", "/ Julho", "/ Agosto", "/ Setembro", "/ Outubro", "/ Novembro", "/ Dezembro");
+				$a = str_replace($antigo, $novo, $a);
+				//dd($a);
+				$aux2[] = $a;
+			}
+			$data->labels = $aux2;
 
 			$colors = color_array();
 
@@ -2557,7 +2571,7 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 				if(strlen($turmas) < 1){
 					$turmas = array('null');
 				}
-				$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), '/',month(dtContratacao) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by month(dtContratacao) order by (dtContratacao)");
+				$modulo->contratacoes = DB::select("SELECT concat( year(dtContratacao), ' / ',LPAD(month(dtContratacao), 2, 0 ) ) as mes, count(id) as contratações from contrata where idTurma in ".$turmas." and (dtContratacao between '".$inicio." 00:00:00' and '".$fim." 00:00:00') group by LPAD(month(dtContratacao), 2, 0 ) order by (dtContratacao)");
 				foreach ($modulo->contratacoes as $contrata) {
 					if(! $modulo->contratacoes2->has($contrata->mes)){
 						$modulo->contratacoes2[$contrata->mes] = 0;
@@ -2572,9 +2586,18 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			$data->labels = $modulos->labels;
 			$datasets = array();
 
-			// $aux = $modulos->labels;
-			// natsort($aux);
-			// $modulos->labels = $aux;
+			$aux = $modulos->labels;
+			asort($aux);
+			$aux2 = array();
+			foreach ($aux as $a) {
+				//dd($a);
+				$antigo = array("/ 01", "/ 02", "/ 03", "/ 04", "/ 05", "/ 06", "/ 07", "/ 08", "/ 09", "/ 10", "/ 11", "/ 12");
+				$novo = array("/ Janeiro", "/ Fevereiro", "/ Março", "/ Abril", "/ Maio", "/ Junho", "/ Julho", "/ Agosto", "/ Setembro", "/ Outubro", "/ Novembro", "/ Dezembro");
+				$a = str_replace($antigo, $novo, $a);
+				//dd($a);
+				$aux2[] = $a;
+			}
+			$data->labels = $aux2;
 
 			$colors = color_array();
 

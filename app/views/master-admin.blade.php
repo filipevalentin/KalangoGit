@@ -242,6 +242,12 @@
                                 <i class="fa fa-bell-o"></i> <span>Avisos</span>
                             </a>
                         </li>
+
+                         <li>
+                            <a href="/admin/contratacoes">
+                                <i class="fa fa-bar-chart "></i> <span>Relatório de Contratações</span>
+                            </a>
+                        </li>
                         
 
 
