@@ -358,15 +358,8 @@ Route::get('teste4',function(){
 	    return str_pad( mt_rand( 0, 255 ), 2, '0', STR_PAD_LEFT);
 	}
 
-	function random_color() {
-	    return random_color_part() .', '. random_color_part() .', '. random_color_part();
-	}
-
-	function ordenaData($data){
-		foreach ($data as $d) {
-			$array = implode("/", $d);
-
-		}
+	function color_array() {
+		return array("255,0,0", "0,0,255", "0,255,255", "0,255,0", "255,255,0", "0, 131,46", "100,0,158", "255,0,255", "0,0,0");
 	}
 
 	
@@ -2423,7 +2416,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			// $data->labels = $aux;
 			//dd($data->labels);
 
-			foreach ($idiomas as $idioma) {
+			$colors = color_array();
+
+			foreach ($idiomas as $key => $idioma) {
 				$data2 = array();
 				foreach ($idiomas->labels as $month) {
 					if($idioma->contratacoes->has($month)){
@@ -2437,11 +2432,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 				$idioma->data = $data2;
 				$idioma->label = $idioma->nome;
-				$color = random_color();
-				$idioma->fillColor = 'rgba('.$color.',0.5)';
-				$idioma->strokeColor = 'rgba('.$color.',0.8)';
-				$idioma->highlightFill = 'rgba('.$color.',0.75)';
-				$idioma->highlightStroke = 'rgba('.$color.',1)';
+				$idioma->fillColor = 'rgba('.$colors[$key].',0.5)';
+				$idioma->strokeColor = 'rgba('.$colors[$key].',0.8)';
+				$idioma->highlightFill = 'rgba('.$colors[$key].',0.75)';
+				$idioma->highlightStroke = 'rgba('.$colors[$key].',1)';
 
 				$datasets[] = $idioma;
 			}
@@ -2506,7 +2500,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			// natsort($aux);
 			// $cursos->labels = $aux;
 
-			foreach ($cursos as $curso) {
+			$colors = color_array();
+
+			foreach ($cursos as $key => $curso) {
 				//cria o array de valores para cada ponto no eixo x
 				$data2 = array();
 
@@ -2524,11 +2520,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 				$curso->data = $data2;
 				$curso->label = $curso->nome;
-				$color = random_color();
-				$curso->fillColor = 'rgba('.$color.',0.5)';
-				$curso->strokeColor = 'rgba('.$color.',0.8)';
-				$curso->highlightFill = 'rgba('.$color.',0.75)';
-				$curso->highlightStroke = 'rgba('.$color.',1)';
+				$curso->fillColor = 'rgba('.$colors[$key].',0.5)';
+				$curso->strokeColor = 'rgba('.$colors[$key].',0.8)';
+				$curso->highlightFill = 'rgba('.$colors[$key].',0.75)';
+				$curso->highlightStroke = 'rgba('.$colors[$key].',1)';
 
 				$datasets[] = $curso;
 			}
@@ -2581,7 +2576,9 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 			// natsort($aux);
 			// $modulos->labels = $aux;
 
-			foreach ($modulos as $modulo) {
+			$colors = color_array();
+
+			foreach ($modulos as $key => $modulo) {
 				$data2 = array();
 				foreach ($modulos->labels as $month) {
 					if($modulo->contratacoes2->has($month)){
@@ -2595,11 +2592,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 
 				$modulo->data = $data2;
 				$modulo->label = $modulo->nome;
-				$color = random_color();
-				$modulo->fillColor = 'rgba('.$color.',0.5)';
-				$modulo->strokeColor = 'rgba('.$color.',0.8)';
-				$modulo->highlightFill = 'rgba('.$color.',0.75)';
-				$modulo->highlightStroke = 'rgba('.$color.',1)';
+				$modulo->fillColor = 'rgba('.$colors[$key].',0.5)';
+				$modulo->strokeColor = 'rgba('.$colors[$key].',0.8)';
+				$modulo->highlightFill = 'rgba('.$colors[$key].',0.75)';
+				$modulo->highlightStroke = 'rgba('.$colors[$key].',1)';
 
 				$datasets[] = $modulo;
 			}
