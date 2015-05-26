@@ -29,7 +29,7 @@
                         <label class="control-label" for="empresa"><i id="icone_empresa_nova_propaganda" class="fa"></i> Empresa</label>
                         <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresNovaPropaganda();" class="form-control empresaObrigatoria_nova_propaganda">
                         <option value="">Selecione</option>
-						@foreach(Empresa::orderBy('nome') as $empresa)
+						@foreach(Empresa::orderBy('nome')->get() as $empresa)
                             <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
                         @endforeach
                         </select>
@@ -72,7 +72,7 @@
                         <label class="control-label" for="empresa"><i id="icone_empresa-editar-propaganda" class="fa"></i> Empresa</label>
                         <select id="idempresa" name="idEmpresa" onblur="fcn_recarregaCoresEditarTurma();" class="form-control empresaObrigatoria_editar_propaganda">
                         <option value="" >Selecione</option>
-						@foreach(Empresa::orderBy('nome') as $empresa)
+						@foreach(Empresa::orderBy('nome')->get() as $empresa)
                             <option value="{{$empresa->id}}">{{$empresa->nome}}</option>
                         @endforeach
                         </select>
