@@ -37,7 +37,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <h2 class="page-header">Inglês - Teens - Módulo 1</h2>
+                <h2 class="page-header">{{$modulo->curso->idioma->nome}} - {{$modulo->curso->nome}} - {{$modulo->nome}}</h2>
 
                 <div class="col-md-12">
                     <div class="box box-solid">

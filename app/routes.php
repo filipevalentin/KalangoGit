@@ -16,6 +16,9 @@ Route::get('teste5',function(){
 
 	//return Topico::orderBy('nome')->get();
 
+	emailNovasAtividades(Modulo::find());
+
+
 	return dd(strtotime("julho2015"));
 
 	return View::make('testeGrafico');
@@ -329,19 +332,27 @@ Route::get('teste4',function(){
 			            $message->to($aluno->usuario->email, $aluno->usuario->nome)
 			                ->subject('KalanGO! - Novas Atividades');
 			        });
+			        $aluno->EmailAtividade = date('Y-m-d');
+			        $aluno->save();
 				}
 			}
 
 		}else{
 			foreach ($modulo->turmas as $turma) {
+
 				//Pegas os alunos que não foi enviado email de lembrete ou que o último email enviado já tem mais de 15 dias
 				foreach ($turma->alunos()->whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() as $aluno) {
 					//checa se o último acesso do aluno a uma atividade foi a mais de 15 dias
 					if(AcessosAtividade::where('idAluno','=', $aluno->id)->whereRaw('datediff(now(), DataAcesso) > 15')->count() != null){
-						Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) use($aluno) {
-				            $message->to($aluno->usuario->email, $aluno->usuario->nome)
-				                ->subject('KalanGO! - Novas Atividades');
-				        });
+						if($turma->alunos->contains($aluno)){
+							Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) use($aluno) {
+					            $message->to($aluno->usuario->email, $aluno->usuario->nome)
+					                ->subject('KalanGO! - Novas Atividades');
+					        });
+					        $aluno->EmailAtividade = date('Y-m-d');
+				        	$aluno->save();	
+						}
+						
 					}
 				}
 				
@@ -837,6 +848,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 								// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
 								whereIn('id',(Auth::user()->aluno->respostas()->withTrashed()->get()->lists('id') != null)?(Auth::user()->aluno->respostas()->withTrashed()->get()->lists('id')):array('null'))->
 								get();
+				dd($aux);
 				//$turma->modulo->questoes;
 				//filtra só as questoes do modulo que o aluno já respondeu, atraves de intersecção entre as funções aluno->questoes e $aux
 				$aux = Auth::user()->aluno->respostas()->withTrashed()->get()->intersect($aux);

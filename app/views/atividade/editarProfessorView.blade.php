@@ -371,7 +371,11 @@
     <div class="row">
         <div class="col-md-12">
 
-            <h2 class="page-header">Inglês - Teens - Módulo 1 - Aula 2</h2>
+            @if($atividade->idModulo != null)
+            <h2 class="page-header">{{$atividade->modulo->curso->nome}} - {{$atividade->modulo->nome}} - {{$atividade->nome}}</h2>
+            @else
+            <h2 class="page-header">{{$atividade->nome}}</h2>
+            @endif
 
             <div class="col-md-8">
                 <div class="box box-solid">
