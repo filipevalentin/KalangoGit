@@ -848,7 +848,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 								// por fim, pega só as questoes onde o id esta entre os ids das questoes que o aluno já respondeu
 								whereIn('id',(Auth::user()->aluno->respostas()->withTrashed()->get()->lists('id') != null)?(Auth::user()->aluno->respostas()->withTrashed()->get()->lists('id')):array('null'))->
 								get();
-				dd($aux);
+				//dd($aux);
 				//$turma->modulo->questoes;
 				//filtra só as questoes do modulo que o aluno já respondeu, atraves de intersecção entre as funções aluno->questoes e $aux
 				$aux = Auth::user()->aluno->respostas()->withTrashed()->get()->intersect($aux);
