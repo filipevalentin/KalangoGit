@@ -328,10 +328,13 @@ Route::get('teste4',function(){
 			foreach (Aluno::whereRaw('datediff(now(), EmailAtividade) > 15 or(EmailAtividade is null)')->get() as $aluno) {
 				//checa se o último acesso do aluno a uma atividade foi a mais de 15 dias
 				if(AcessosAtividade::where('idAluno','=', $aluno->id)->whereRaw('datediff(now(), DataAcesso) > 15')->count() != null){
-					Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) use($aluno) {
-			            $message->to($aluno->usuario->email, $aluno->usuario->nome)
-			                ->subject('KalanGO! - Novas Atividades');
-			        });
+					if($aluno->EmailAtividade != null ){
+						Mail::queue('templateNovasAtividades', array('aluno' => $aluno->usuario->nome), function($message) use($aluno) {
+				            $message->to($aluno->usuario->email, $aluno->usuario->nome)
+				                ->subject('KalanGO! - Novas Atividades');
+				        });
+					}
+					
 			        $aluno->EmailAtividade = date('Y-m-d');
 			        $aluno->save();
 				}
@@ -5164,7 +5167,10 @@ Route::group(array('prefix' => 'admin', 'before'=>'admin'), function(){
 					$topico->excluido = "Excluído em: ".$topico->deleted_at->day."/".$topico->deleted_at->month."/".$topico->deleted_at->year;
 				}else{
 					$topico->action = 
-					"<a href='/admin/topicos/deletar/$topico->id' onclick='return confirmar()'>
+					"<button data-toggle='modal' data-target='#editarTopico' data-nome='$topico->nome' data-id='$topico->id' class='btn btn-xs btn-success'>
+						<i class='fa fa-pencil'></i>
+					</button>
+					 <a href='/admin/topicos/deletar/$topico->id' onclick='return confirmar()'>
 						<button class='btn btn-xs btn-danger'>
 							<i class='fa fa-times'></i>
 						</button>
