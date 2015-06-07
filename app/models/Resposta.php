@@ -3,7 +3,9 @@
 
 		public $timestamps = false;
 
-		
+		public function topico(){
+        	return $this->belongsTo('Topico', 'idTopico');	
+        }
 		
 	}
 

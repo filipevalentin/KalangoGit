@@ -43,14 +43,14 @@
 			                        
 			                                	@foreach ($aula->materialApoio as $material)
 				                                	<div class="alert alert-success alert-dismissable">
-				                                        <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
+				                                        <!-- <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i> -->
 				                                        <p>{{$material->nome}}</p>
 				                                    </div>
 			                                	@endforeach
 
 			                                	@foreach ($aula->exercicios as $exercicio)
 			                                		<div class="alert alert-info alert-dismissable">
-				                                        <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
+				                                        <!-- <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i> -->
 				                                        <p>{{$exercicio->nome}}</p>
 				                                    </div>
 			                                	@endforeach

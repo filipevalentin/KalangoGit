@@ -70,7 +70,7 @@
 
                                             @foreach ($aula->materialApoio as $material)
                                                 <div class="alert alert-success alert-dismissable" style="min-height: 55px;">
-                                                    <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
+                                                    <!-- <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i> -->
                                                     <p style="float:left;">{{$material->nome}}</p>
                                                     <div class="box-tools pull-right">
                                                         @if($material->tipo == 1)
@@ -86,7 +86,7 @@
 
                                             @foreach ($aula->atividades as $atividade)
                                                 <div class="alert bg-primary alert-dismissable" style="min-height: 55px;">
-                                                    <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i>
+                                                    <!-- <i class="fa  fa-check-circle" style="left: -15px; top: 7px;"></i> -->
                                                     <p style="float:left;">{{$atividade->nome}}</p>
                                                     <div class="box-tools pull-right">
                                                         <a href="/professor/atividade/{{$atividade->id}}"><button class="btn btn-primary btn-xs"><i class="fa fa-eye"></i></button></a>

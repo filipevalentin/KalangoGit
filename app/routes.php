@@ -861,13 +861,15 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 				//Pontos por Topicos
 				$topicos = array();
+				$is = 0;
 				foreach($turma->questoes as $resposta){
 					//se o topico ainda não está na lista, add ele na lista, com sua chave sendo seu id, e inicia seu attr "pontos" como 0.
-					if (!(@in_array($resposta->idTopico, $topicos)) ){
+					if (!(@in_array($resposta->topico->nome, $topicos)) ){
 						$topico = Topico::withTrashed()->find($resposta->idTopico);
 						$topico->pontos = 0;
 						$topicos[$resposta->idTopico] = $topico;
 					}
+					
 					// se a resposta em questao foi acertada pelo aluno, adicionamos os pontos ao topico condizente e incrementamos o contador de acertos
 					// caso contrário só incrementamos o contador de erros
 					if($resposta->pivot->correcao == '1'){
@@ -876,6 +878,7 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 					}else{
 						$erradas++;
 					}
+					$is++;
 
 				};
 
@@ -921,8 +924,8 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				//topTopicos
 				$topTopicos = $topicos;
 				arsort($topTopicos);
-				$melhorTopico = end($topTopicos);
-				$piorTopico = reset($topTopicos);
+				$melhorTopico = reset($topTopicos);
+				$piorTopico = end($topTopicos);
 				$topTopicos = array();
 				$topTopicos['melhor'] = $melhorTopico;
 				$topTopicos['pior'] = $piorTopico;
