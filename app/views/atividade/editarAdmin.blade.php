@@ -406,7 +406,7 @@
                                            <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-sm btn_deletar_questao"><i class="fa fa-times"></i></button></a>
                                         </div>
                                         <small class="badge pull-right bg-green" style="margin: 0px 76px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
-		                                        	<small class="badge pull-right bg-red" style="margin: 0px 76px 0px 5px;"><?php if($questao->pontos != null) echo $questao->pontos ?> pontos</small>
+		                                        	<small class="badge pull-right bg-red" style="margin: 0px 0px 0px 5px;"><?php if($questao->pontos != null) echo $questao->pontos ?> pontos</small>
                                     </div>
                                     <div id="ME{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">
@@ -574,10 +574,10 @@
                                             <a href="/admin/questao/deletar/{{$questao->id}}"><button class="btn btn-danger btn-sm btn_deletar_questao"><i class="fa fa-times"></i></button></a>
                                         </div>
                                         @if(substr($questao->categoria,1) == "4")
-                                            <small class="badge pull-right bg-red" style="margin: 0px 76px 0px 5px;"><i class="fa fa-microphone"></i>Rec. de Voz</small>
+                                            <small class="badge pull-right bg-red" style="margin: 0px 0px 0px 5px;"><i class="fa fa-microphone"></i>Rec. de Voz</small>
                                         @endif
                                         <small class="badge pull-right bg-green" style="margin: 0px 76px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
-		                                        	<small class="badge pull-right bg-red" style="margin: 0px 76px 0px 5px;"><?php if($questao->pontos != null) echo $questao->pontos ?> pontos</small>
+		                                        	<small class="badge pull-right bg-red" style="margin: 0px 0px 0px 5px;"><?php if($questao->pontos != null) echo $questao->pontos ?> pontos</small>
                                     </div>
                                     <div id="RU{{$questao->id}}" class="panel-collapse collapse">
                                         <div class="box-body">
