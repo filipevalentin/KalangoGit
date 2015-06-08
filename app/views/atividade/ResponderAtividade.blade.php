@@ -103,6 +103,7 @@
 		                                    <div class="box text-center">
 		                                        <div class="box-header">
 		                                        	<small class="badge pull-right bg-green" style="margin: 0px 76px 0px 5px;"><?php if($questao->topico->nome != null) echo $questao->topico->nome ?></small>
+		                                        	<small class="badge pull-right bg-red" style="margin: 0px 76px 0px 5px;"><?php if($questao->pontos != null) echo $questao->pontos ?> pontos</small>
 		                                            <h3 class="box-title center" style="float: none;">{{$questao->enunciado}}</h3>
 		                                        </div>
 		                                        <div class="box-body">
@@ -236,6 +237,7 @@
 			                                          <small class="badge pull-right bg-red" style="margin: 0px 5px 0px 5px;"><i class="fa fa-microphone"></i>  Rec. de Voz</small>
 			                                       @endif
                                                 <small class="badge pull-right bg-green" ><?php if($questao->topico != null) echo $questao->topico->nome ?></small>
+                                                <small class="badge pull-right bg-red" ><?php if($questao->pontos != null) echo $questao->pontos ?> pontos</small>
                                                 </div>
                                                 <h3 class="box-title center" style="float: none; ">{{$questao->enunciado}}</h3>
                                                 <div class="box-body">

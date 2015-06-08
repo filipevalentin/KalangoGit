@@ -16,6 +16,32 @@ Route::get('teste5',function(){
 
 	//return Topico::orderBy('nome')->get();
 
+	$ativs = Atividade::whereIn('id', array(3,4,5,6,7,8))->get();
+
+	$questoes = Questao::whereIn('idAtividade', array(1,1))->get();
+
+	foreach ($ativs as $a) {
+		foreach ($questoes as $q) {
+			$x = new Questao;
+			$x->enunciado = $q->enunciado;
+			$x->urlMidia = $q->urlMidia;
+			$x->numero = $q->numero;
+			$x->tipo = $q->tipo;
+			$x->categoria = $q->categoria;
+			$x->alternativaA = $q->alternativaA;
+			$x->alternativaB = $q->alternativaB;
+			$x->alternativaC = $q->alternativaC;
+			$x->alternativaD = $q->alternativaD;
+			$x->respostaCerta = $q->respostaCerta;
+			$x->pontos = $q->pontos;
+			$x->idAtividade = $q->idAtividade;
+			$x->idTopico = $q->idTopico;
+			$x->idAtividade = $a->id;
+			$x->save();
+		}
+	}
+
+	return "Foi";
 	emailNovasAtividades(Modulo::find());
 
 
@@ -681,19 +707,18 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 
 
 		Route::get('responder/{idQuestao}/{resposta}', function($idQuestao, $respostaAluno){
+			$questao = Questao::where('numero','=',$idQuestao)->first();
 			$respostaAluno = urldecode($respostaAluno);
-			$acesso = AcessosAtividade::where('idAluno', '=', Auth::user()->id)->where('idAtividade', '=', Questao::find($idQuestao)->atividade->id)->first();
+			$acesso = AcessosAtividade::where('idAluno', '=', Auth::user()->id)->where('idAtividade', '=', $questao->atividade->id)->first();
 			if($acesso != null){
 				if($acesso->status == 1){
 					return Response::json('negado');
 				}
 			}
 			$resposta = new Resposta();
-			$resposta->idQuestao = $idQuestao;
+			$resposta->idQuestao = $questao->id;
 			$resposta->idAluno = Auth::user()->id;
 			$resposta->respostaAluno = $respostaAluno;
-
-			$questao = Questao::find($idQuestao);
 
 			$resposta->correcao = '0';
 
@@ -719,18 +744,18 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 			//Adiciona os pontos na contagem geral caso tenha acertado a questao
 			//Caso seja atividade de aula
 			if($resposta->correcao == 1){
-				if(Questao::find($idQuestao)->atividade->idModulo == null){
-					Auth::user()->aluno->turmas->each(function($turma) use($idQuestao){
-						if($turma->modulo == Questao::find($idQuestao)->atividade->aula->modulo){
-							$pontos = Questao::find($idQuestao)->pontos + $turma->pivot->pontuacao;
+				if($questao->atividade->idModulo == null){
+					Auth::user()->aluno->turmas->each(function($turma) use($questao){
+						if($turma->modulo == $questao->atividade->aula->modulo){
+							$pontos = $questao->pontos + $turma->pivot->pontuacao;
 							Auth::user()->aluno->turmas()->updateExistingPivot($turma->id, array('pontuacao'=>$pontos));
 						}
 					});
 				//Caso seja atividade extra
 				}else{
-					Auth::user()->aluno->turmas->each(function($turma) use($idQuestao){
-						if($turma->modulo == Questao::find($idQuestao)->atividade->modulo){
-							$pontos = Questao::find($idQuestao)->pontos + $turma->pivot->pontuacao;
+					Auth::user()->aluno->turmas->each(function($turma) use($questao){
+						if($turma->modulo == $questao->atividade->modulo){
+							$pontos = $questao->pontos + $turma->pivot->pontuacao;
 							Auth::user()->aluno->turmas()->updateExistingPivot($turma->id, array('pontuacao'=>$pontos));
 						}
 					});
@@ -862,9 +887,16 @@ Route::group(array('prefix' => 'aluno', 'before'=>'aluno'), function(){
 				//Pontos por Topicos
 				$topicos = array();
 				$is = 0;
+				$count = 0;
 				foreach($turma->questoes as $resposta){
 					//se o topico ainda não está na lista, add ele na lista, com sua chave sendo seu id, e inicia seu attr "pontos" como 0.
-					if (!(@in_array($resposta->topico->nome, $topicos)) ){
+					$b = false;
+					foreach ($topicos as $topico) {
+						if($topico->nome == $resposta->topico->nome){
+							$b = true;
+						}
+					}
+					if (!$b){
 						$topico = Topico::withTrashed()->find($resposta->idTopico);
 						$topico->pontos = 0;
 						$topicos[$resposta->idTopico] = $topico;

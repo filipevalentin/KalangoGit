@@ -154,9 +154,9 @@
                                     @elseif($topico->pontos < 5000)
                                         <li style="font-size:larger; font-weight: 500;">{{$topico->nome}}:
                                             <small><img src="/images/bronze.png" alt="" style="max-height:25px; padding-left:5px"></small>
-                                            <small class="pull-right">{{(($pontos-2500)/2500)*100}}%</small>
+                                            <small class="pull-right">{{(($topico->pontos-2500)/2500)*100}}%</small>
                                             <div class="progress" style="margin-top:5px; height: 15px;background: white;">
-                                                <div class="progress-bar" style="width: {{(($pontos-2500)/2500)*100}}%;background-color: silver; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                <div class="progress-bar" style="width: {{(($topico->pontos-2500)/2500)*100}}%;background-color: silver; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
                                                 {{$topico->pontos}} pontos
                                                 </div>
                                             </div>
@@ -165,9 +165,9 @@
                                         <li style="font-size:larger; font-weight: 500;">{{$topico->nome}}:
                                             <small><img src="/images/bronze.png" alt="" style="max-height:25px; padding-left:5px"></small>
                                             <small><img src="/images/silver.png" alt="" style="max-height:25px; padding-left:5px"></small>
-                                            <small class="pull-right">{{(($pontos-5000)/2500)*100}}%</small>
+                                            <small class="pull-right">{{(($topico->pontos-5000)/2500)*100}}%</small>
                                             <div class="progress" style="margin-top:5px; height: 15px;background: white;">
-                                                <div class="progress-bar" style="width: {{(($pontos-5000)/2500)*100}}%;background-color: gold; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                <div class="progress-bar" style="width: {{(($topico->pontos-5000)/2500)*100}}%;background-color: gold; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
                                                 {{$topico->pontos}} pontos
                                                 </div>
                                             </div>
@@ -177,9 +177,9 @@
                                             <small><img src="/images/bronze.png" alt="" style="max-height:25px; padding-left:5px"></small>
                                             <small><img src="/images/silver.png" alt="" style="max-height:25px; padding-left:5px"></small>
                                             <small><img src="/images/ouro.png" alt="" style="max-height:25px; padding-left:5px"></small>
-                                            <small class="pull-right">{{(($pontos-10000)/2500)*100}}%</small>
+                                            <small class="pull-right">{{(($topico->pontos-10000)/2500)*100}}%</small>
                                             <div class="progress" style="margin-top:5px; height: 15px;background: white;">
-                                                <div class="progress-bar" style="width: {{(($pontos-10000)/2500)*100}}%;background-color: gold; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
+                                                <div class="progress-bar" style="width: {{(($topico->pontos-10000)/2500)*100}}%;background-color: gold; line-height: 15px;"> <!-- Cores: bronze: darkgoldenrod, prata: silver, ouro: gold -->
                                                 {{$topico->pontos}} pontos
                                                 </div>
                                             </div>
